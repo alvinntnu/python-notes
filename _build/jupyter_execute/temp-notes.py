@@ -1,18 +1,7 @@
-## Python Fundamentals
+# Python Fundamentals
 
-- Basic structure
-- Data structure
+- Fundamentals
+- Data Structure
+- Program Structure
+- Input and Output
 - Classes and Objects
-
-## Citation
-
-- In-text citation
-
-An example of in-text citation {cite}`deyne2016`.
-
-- Bibliography
-
-```{bibliography} book.bib
-:style: unsrt
-```
-

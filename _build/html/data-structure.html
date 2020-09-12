@@ -1,0 +1,504 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Data Structure &#8212; Python Notes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Program Structure" href="program-structure.html" />
+    <link rel="prev" title="Jupyer Notebook" href="jupyter-notebook.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/ntnu03.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Python Notes</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Python Notes
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="python-basics.html">
+   Python Basics
+  </a>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="jupyter-notebook.html">
+     Jupyer Notebook
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Data Structure
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="program-structure.html">
+     Program Structure
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="input-output.html">
+     Input and Output
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="productive-tech.html">
+     Phythonic Productivity Techniques
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="temp-notes.html">
+     Python Fundamentals
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="corpus-processing.html">
+   Corpus Processing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/data-structure.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/data-structure.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/data-structure.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="data-structure">
+<h1>Data Structure<a class="headerlink" href="#data-structure" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>An quick overview of important data structures in Python</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Check object types</span>
+<span class="nb">type</span><span class="p">(</span><span class="mi">23</span><span class="p">)</span>
+<span class="nb">type</span><span class="p">(</span><span class="s1">&#39;some texts&#39;</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;some text&#39;</span><span class="p">]</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>list
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Factory functions</span>
+<span class="nb">int</span><span class="p">(</span><span class="mf">4.0</span><span class="p">)</span>
+<span class="nb">str</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="nb">list</span><span class="p">()</span>
+<span class="nb">tuple</span><span class="p">(</span><span class="s1">&#39;international&#39;</span><span class="p">)</span>
+<span class="nb">dict</span><span class="p">(</span><span class="n">one</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">two</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;one&#39;: 1, &#39;two&#39;: 2}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Operations</span>
+
+<span class="c1">## Modulus</span>
+<span class="mi">15</span> <span class="o">%</span> <span class="mi">4</span>
+<span class="c1">## Exponentiation</span>
+<span class="mi">4</span> <span class="o">**</span> <span class="mi">3</span>
+<span class="o">-</span><span class="mi">4</span> <span class="o">**</span> <span class="mi">2</span> <span class="c1"># minus applies to the result</span>
+<span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="c1">## Random numbers</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Sequences</span>
+
+<span class="c1">## Membership</span>
+<span class="s1">&#39;a&#39;</span> <span class="ow">in</span> <span class="s1">&#39;track&#39;</span>
+<span class="mi">9</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="mi">9</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+
+<span class="c1">## Concatenation</span>
+<span class="s1">&#39;this&#39;</span> <span class="o">+</span> <span class="s1">&#39;is&#39;</span>
+<span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;this&#39;</span><span class="p">,</span><span class="s1">&#39;is&#39;</span><span class="p">])</span>
+
+<span class="c1">## Subsetting Sequences</span>
+<span class="n">mylist</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;a word&#39;</span><span class="p">,</span><span class="s1">&#39;e&#39;</span><span class="p">]</span>
+<span class="n">mylist</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">mylist</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">mylist</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">mylist</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">mylist</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">2</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+
+<span class="c1">##Strings</span>
+<span class="n">mystr</span> <span class="o">=</span> <span class="s1">&#39;   This is a seentence sample.  &#39;</span>
+<span class="n">mystr</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span>
+<span class="n">mystr</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
+<span class="n">mystr</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+<span class="n">mystr</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="n">mystr</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+<span class="n">mystr</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()</span>
+<span class="n">mystr</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="n">mystr</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;is&#39;</span><span class="p">)</span>
+<span class="n">mystr</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;is&#39;</span><span class="p">,</span><span class="s1">&#39;was&#39;</span><span class="p">)</span>
+
+<span class="c1">## String Comparison</span>
+<span class="c1">## sapce &gt; num &gt; upper &gt; lower</span>
+<span class="s1">&#39; &#39;</span> <span class="o">&gt;</span> <span class="s1">&#39;0&#39;</span>
+<span class="s1">&#39;0&#39;</span> <span class="o">&gt;</span> <span class="s1">&#39;a&#39;</span>
+<span class="s1">&#39;z&#39;</span> <span class="o">&gt;</span> <span class="s1">&#39;m&#39;</span>
+<span class="s1">&#39;m&#39;</span> <span class="o">&gt;</span> <span class="s1">&#39;M&#39;</span>
+
+<span class="c1">## Special Characters</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;\O&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&quot;</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1">### Triple Quotes</span>
+
+<span class="n">multiline</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;This is the first sentence</span>
+<span class="s2">This is a second.</span>
+<span class="s2">And A third. &quot;&quot;&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">multiline</span><span class="p">)</span>
+
+<span class="c1">### Format Strings</span>
+<span class="c1">##`formatstring % (arguments to format)`</span>
+<span class="n">ntoys</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">myname</span> <span class="o">=</span> <span class="s1">&#39;Alvin&#39;</span>
+<span class="n">length</span> <span class="o">=</span> <span class="mf">1234.5678</span>
+<span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> has </span><span class="si">%d</span><span class="s1"> types&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">myname</span><span class="p">,</span> <span class="n">ntoys</span><span class="p">)</span>
+<span class="s1">&#39;The toy is </span><span class="si">%.3f</span><span class="s1"> meters long&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">length</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>\O
+	
+
+
+&#39;
+&quot;
+\
+This is the first sentence
+This is a second.
+And A third. 
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;The toy is 1234.568 meters long&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Lists</span>
+<span class="n">list_empty</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">list_strings</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Amy&#39;</span><span class="p">,</span> <span class="s1">&#39;Emma&#39;</span><span class="p">,</span><span class="s1">&#39;Jane&#39;</span><span class="p">]</span>
+<span class="n">list_mixed</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Amy&#39;</span><span class="p">,</span><span class="s1">&#39;Emma&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="n">list_embeded</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="p">[</span><span class="mi">99</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">101</span><span class="p">]]</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">list_empty</span><span class="p">)</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">list_mixed</span><span class="p">)</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">list_embeded</span><span class="p">)</span>
+
+<span class="c1">## List operations</span>
+<span class="n">list_empty</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Tom&#39;</span><span class="p">)</span>
+<span class="n">list_empty</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;John&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">list_empty</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">list_empty</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="k">del</span> <span class="n">list_empty</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">list_empty</span><span class="p">)</span>
+<span class="n">list_mixed</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;Amy&#39;</span><span class="p">)</span>
+<span class="c1"># list_mixed.index(&#39;Alvin&#39;)</span>
+
+<span class="c1">## Other functions</span>
+<span class="c1">## max(), min(), sum(), sorted(), reversed()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Tom&#39;, &#39;John&#39;]
+John
+[&#39;Tom&#39;]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Tuples</span>
+
+<span class="n">tuple_numbers</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">tuple_strings</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;mon&#39;</span><span class="p">,</span><span class="s1">&#39;tue&#39;</span><span class="p">,</span><span class="s1">&#39;wed&#39;</span><span class="p">,</span><span class="s1">&#39;thu&#39;</span><span class="p">,</span><span class="s1">&#39;fri&#39;</span><span class="p">,</span><span class="s1">&#39;sat&#39;</span><span class="p">,</span><span class="s1">&#39;sun&#39;</span><span class="p">)</span>
+<span class="n">tuple_mixed</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;mon&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;feb&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tuple_mixed</span><span class="p">)</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">tuple_mixed</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1, &#39;mon&#39;, [&#39;feb&#39;, 2])
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Dictionary</span>
+
+<span class="n">dict_days</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;M&#39;</span><span class="p">:</span> <span class="s1">&#39;Monday&#39;</span><span class="p">,</span> <span class="s1">&#39;T&#39;</span><span class="p">:</span><span class="s1">&#39;Tuesday&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">:</span><span class="s1">&#39;Wednesday&#39;</span><span class="p">}</span>
+<span class="n">dict_days</span><span class="p">[</span><span class="s1">&#39;M&#39;</span><span class="p">]</span>
+<span class="c1">#dict_days[&#39;S&#39;]</span>
+<span class="n">dict_days</span><span class="p">[</span><span class="s1">&#39;S&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;Sunday&#39;</span>
+<span class="n">dict_days</span><span class="p">[</span><span class="s1">&#39;S&#39;</span><span class="p">]</span>
+<span class="s1">&#39;A&#39;</span> <span class="ow">in</span> <span class="n">dict_days</span>
+<span class="n">dict_days</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="n">dict_days</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+<span class="n">dict_days</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;NA&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;NA&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="jupyter-notebook.html" title="previous page">Jupyer Notebook</a>
+    <a class='right-next' id="next-link" href="program-structure.html" title="next page">Program Structure</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alvin Chen<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="_static/js/index.js"></script>
+    
+  </body>
+</html>

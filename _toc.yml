@@ -1,7 +1,11 @@
 - file: intro
 - file: python-basics
   sections:
-    - file: temp-notes
-    - file: productive-tech
     - file: jupyter-notebook
+    - file: data-structure
+    - file: program-structure
+    - file: input-output
+    - file: productive-tech
+    - file: temp-notes
+- file: corpus-processing
 - file: references

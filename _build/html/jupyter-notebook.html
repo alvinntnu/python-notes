@@ -34,8 +34,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="References" href="references.html" />
-    <link rel="prev" title="Phythonic Productivity Techniques" href="productive-tech.html" />
+    <link rel="next" title="Data Structure" href="data-structure.html" />
+    <link rel="prev" title="Python Basics" href="python-basics.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
@@ -81,14 +81,24 @@
    Python Basics
   </a>
   <ul class="current">
-   <li class="toctree-l2">
-    <a class="reference internal" href="temp-notes.html">
-     Python Fundamentals
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Jupyer Notebook
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="temp-notes.html#citation">
-     Citation
+    <a class="reference internal" href="data-structure.html">
+     Data Structure
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="program-structure.html">
+     Program Structure
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="input-output.html">
+     Input and Output
     </a>
    </li>
    <li class="toctree-l2">
@@ -96,17 +106,17 @@
      Phythonic Productivity Techniques
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     Jupyer Notebook
-    </a>
-   </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="#pushes-the-changes-in-your-local-repository-up-to-the-remote-repository-you-specified-as-the-origin">
-     Pushes the changes in your local repository up to the remote repository you specified as the origin
+    <a class="reference internal" href="temp-notes.html">
+     Python Fundamentals
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="corpus-processing.html">
+   Corpus Processing
+  </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="references.html">
@@ -206,8 +216,38 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#keyboard-shortcuts">
+   Keyboard Shortcuts
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#citation">
+   Citation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#build-the-book">
+   Build the book
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#publish-jupyter-book-on-github">
    Publish Jupyter-book on Github
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#publish-the-book-as-github-pages">
+   Publish the book as Github Pages
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#change-notebook-themes">
+   Change Notebook Themes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#use-a-specific-environment-in-notebook">
+   Use a specific environment in notebook
   </a>
  </li>
 </ul>
@@ -222,51 +262,110 @@
                 
   <div class="section" id="jupyer-notebook">
 <h1>Jupyer Notebook<a class="headerlink" href="#jupyer-notebook" title="Permalink to this headline">¶</a></h1>
-<p>This section includes notes relate to Jupyter Notebook (Book).</p>
+<p>This section includes notes relate to <code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Notebook</span></code> as well as <code class="docutils literal notranslate"><span class="pre">jupyter-book</span></code>.</p>
+<div class="section" id="keyboard-shortcuts">
+<h2>Keyboard Shortcuts<a class="headerlink" href="#keyboard-shortcuts" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Cmd</span> <span class="pre">+</span> <span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">P</span></code>: Look up key shortcuts</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Esc</span></code>: Get into command mode</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Enter</span></code>: Get into edit mode</p></li>
+<li><p>While in command mode:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">A</span></code>: insert a new cell above</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">B</span></code>: insert a new cell below</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DD</span></code>: delete the current cell</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">Tab</span></code>: Documentation (Docstring) of the object</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">-</span></code>: Split cells</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Esc</span> <span class="pre">+</span> <span class="pre">F</span></code>: Find and replace</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Esc</span> <span class="pre">+</span> <span class="pre">O</span></code>: Toggle cell outputs</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">UP/DOWN</span></code>: select multiple cells</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">M</span></code>: Merge multiple cells</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Y</span></code>: Change cell to code</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">M</span></code>: Change cell to markdown</p></li>
+</ul>
+</div>
+<div class="section" id="citation">
+<h2>Citation<a class="headerlink" href="#citation" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>In-text citation</p></li>
+</ul>
+<p>An example of in-text citation <a class="bibtex reference internal" href="references.html#deyne2016" id="id1">[1]</a>.</p>
+<ul class="simple">
+<li><p>Bibliography</p></li>
+</ul>
+<p id="bibtex-bibliography-jupyter-notebook-0"><dl class="citation">
+<dt class="bibtex label" id="deyne2016"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Simon De Deyne, Steven Verheyen, and Gert Storms. <em>Structure and organization of the mental lexicon: A network approach derived from syntactic dependency relations and word associations</em>, pages 47–79. Springer, Berlin, Germany, 2016. <a class="reference external" href="https://doi.org/10.1007/978-3-662-47238-5_3">doi:10.1007/978-3-662-47238-5_3</a>.</p>
+</dd>
+</dl>
+</p>
+</div>
+<div class="section" id="build-the-book">
+<h2>Build the book<a class="headerlink" href="#build-the-book" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">terminal</span></code> and set to the root of the book directory</p></li>
+<li><p>Build the book</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ jupyter-book build .
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Push to GitHub</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git add .
+$ git commit -m &quot;XXX&quot;
+$ git push origin master
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Update GitHub Pages html files</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git-ghp -n -p -f _build/html
+</pre></div>
+</div>
+</div>
 <div class="section" id="publish-jupyter-book-on-github">
 <h2>Publish Jupyter-book on Github<a class="headerlink" href="#publish-jupyter-book-on-github" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>Documentations</p>
 <ul>
+<li><p>Documentations</p>
+<ul class="simple">
 <li><p><a class="reference external" href="https://jupyterbook.org/publish/gh-pages.html">Official documentation</a></p></li>
 <li><p><a class="reference external" href="https://docs.github.com/en/github/importing-your-projects-to-github/adding-an-existing-project-to-github-using-the-command-line">Adding existing projects to Github repo</a></p></li>
 </ul>
 </li>
 <li><p>Important Steps</p>
-<ul>
+<ul class="simple">
 <li><p>Create an empty repo on Github</p></li>
 <li><p>Open Terminal.</p></li>
 <li><p>Change the current working directory to your local project.</p></li>
 <li><p>Initialize the local directory as a Git repository: <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">git</span> <span class="pre">init</span></code></p></li>
 <li><p>Add commmits:</p></li>
 </ul>
-</li>
-</ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git add .
 # To unstage a file, use &#39;git reset HEAD YOUR-FILE&#39;.
 $ git commit -m &quot;First commit&quot;
 </pre></div>
 </div>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- Add the Github remote URL to the project local directory 
-</pre></div>
-</div>
+<ul class="simple">
+<li><p>Add the Github remote URL to the project local directory</p></li>
+</ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git remote add origin remote repository URL
 # Sets the new remote
 $ git remote -v
 # Verifies the new remote URL
 </pre></div>
 </div>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- Push changes
-```
-$ git push -u origin master
+<ul class="simple">
+<li><p>Push changes</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git push -u origin master
+# Pushes the changes in your local repository up to the remote repository you specified as the origin
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="pushes-the-changes-in-your-local-repository-up-to-the-remote-repository-you-specified-as-the-origin">
-<h1>Pushes the changes in your local repository up to the remote repository you specified as the origin<a class="headerlink" href="#pushes-the-changes-in-your-local-repository-up-to-the-remote-repository-you-specified-as-the-origin" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>```
-</pre></div>
+</li>
+</ul>
 </div>
 <div class="section" id="publish-the-book-as-github-pages">
 <h2>Publish the book as Github Pages<a class="headerlink" href="#publish-the-book-as-github-pages" title="Permalink to this headline">¶</a></h2>
@@ -289,10 +388,29 @@ $ git push -u origin master
 </div>
 <div class="section" id="change-notebook-themes">
 <h2>Change Notebook Themes<a class="headerlink" href="#change-notebook-themes" title="Permalink to this headline">¶</a></h2>
-<p>The following code runs in the terminal.</p>
+<ul class="simple">
+<li><p>The following code runs in the terminal.</p></li>
+</ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install jupyterthemes
 $ jt -l
 $ jt -t monokai
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>List of theme names</p>
+<ul>
+<li><p>onedork</p></li>
+<li><p>grade3</p></li>
+<li><p>oceans16</p></li>
+<li><p>chesterish</p></li>
+<li><p>monokai</p></li>
+<li><p>solarizedl</p></li>
+<li><p>solarizedd</p></li>
+</ul>
+</li>
+<li><p>Reset to the original default theme:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ jt -r
 </pre></div>
 </div>
 </div>
@@ -360,8 +478,8 @@ $ jt -t monokai
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="productive-tech.html" title="previous page">Phythonic Productivity Techniques</a>
-    <a class='right-next' id="next-link" href="references.html" title="next page">References</a>
+    <a class='left-prev' id="prev-link" href="python-basics.html" title="previous page">Python Basics</a>
+    <a class='right-next' id="next-link" href="data-structure.html" title="next page">Data Structure</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

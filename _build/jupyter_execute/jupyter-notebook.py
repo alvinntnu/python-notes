@@ -1,7 +1,58 @@
 # Jupyer Notebook
 
-This section includes notes relate to Jupyter Notebook (Book).
+This section includes notes relate to `Jupyter Notebook` as well as `jupyter-book`.
 
+
+## Keyboard Shortcuts
+
+- `Cmd + Shift + P`: Look up key shortcuts
+- `Esc`: Get into command mode
+- `Enter`: Get into edit mode
+- While in command mode:
+    - `A`: insert a new cell above
+    - `B`: insert a new cell below
+    - `DD`: delete the current cell
+- `Shift + Tab`: Documentation (Docstring) of the object
+- `Ctrl + Shift + -`: Split cells
+- `Esc + F`: Find and replace
+- `Esc + O`: Toggle cell outputs
+- `Shift + UP/DOWN`: select multiple cells
+
+- `Shift + M`: Merge multiple cells
+- `Y`: Change cell to code
+- `M`: Change cell to markdown
+
+## Citation
+
+- In-text citation
+
+An example of in-text citation {cite}`deyne2016`.
+
+- Bibliography
+
+```{bibliography} book.bib
+:style: unsrt
+```
+
+## Build the book
+
+- Open `terminal` and set to the root of the book directory
+- Build the book
+```
+$ jupyter-book build .
+```
+
+- Push to GitHub
+```
+$ git add .
+$ git commit -m "XXX"
+$ git push origin master
+```
+
+- Update GitHub Pages html files
+```
+$ git-ghp -n -p -f _build/html
+```
 
 ## Publish Jupyter-book on Github
 
@@ -14,23 +65,24 @@ This section includes notes relate to Jupyter Notebook (Book).
     - Change the current working directory to your local project.
     - Initialize the local directory as a Git repository: `$ git init`
     - Add commmits:
-```
-$ git add .
-# To unstage a file, use 'git reset HEAD YOUR-FILE'.
-$ git commit -m "First commit"
-```
+    ```
+    $ git add .
+    # To unstage a file, use 'git reset HEAD YOUR-FILE'.
+    $ git commit -m "First commit"
+    ```
+
     - Add the Github remote URL to the project local directory 
-```
-$ git remote add origin remote repository URL
-# Sets the new remote
-$ git remote -v
-# Verifies the new remote URL
-```
+    ```
+    $ git remote add origin remote repository URL
+    # Sets the new remote
+    $ git remote -v
+    # Verifies the new remote URL
+    ```
 
     - Push changes
     ```
     $ git push -u origin master
-# Pushes the changes in your local repository up to the remote repository you specified as the origin
+    # Pushes the changes in your local repository up to the remote repository you specified as the origin
     ```
 
 
@@ -54,12 +106,24 @@ The `-n` refers to "not Jekyll"
 
 ## Change Notebook Themes
 
-The following code runs in the terminal.
-
+- The following code runs in the terminal.
 ```
 $ pip install jupyterthemes
 $ jt -l
 $ jt -t monokai
+```
+
+- List of theme names
+    - onedork
+    - grade3
+    - oceans16
+    - chesterish
+    - monokai
+    - solarizedl
+    - solarizedd
+- Reset to the original default theme:
+```
+$ jt -r
 ```
 
 ## Use a specific environment in notebook

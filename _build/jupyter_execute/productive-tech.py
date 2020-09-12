@@ -4,6 +4,7 @@
 
 import datetime
 dir(datetime)
+dir
 
 # Check objects with specific keywords
 [_ for _ in dir(datetime) if 'date' in _.lower()]
