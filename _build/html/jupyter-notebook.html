@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>References &#8212; Python Notes</title>
+    <title>Jupyer Notebook &#8212; Python Notes</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="_static/sphinx-book-theme.css" type="text/css" />
@@ -34,7 +34,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Jupyer Notebook" href="jupyter-notebook.html" />
+    <link rel="next" title="References" href="references.html" />
+    <link rel="prev" title="Phythonic Productivity Techniques" href="productive-tech.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
@@ -75,13 +76,40 @@
  </li>
 </ul>
 <ul class="current nav sidenav_l1">
- <li class="toctree-l1">
+ <li class="toctree-l1 current active">
   <a class="reference internal" href="python-basics.html">
    Python Basics
   </a>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="temp-notes.html">
+     Python Fundamentals
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="temp-notes.html#citation">
+     Citation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="productive-tech.html">
+     Phythonic Productivity Techniques
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Jupyer Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#pushes-the-changes-in-your-local-repository-up-to-the-remote-repository-you-specified-as-the-origin">
+     Pushes the changes in your local repository up to the remote repository you specified as the origin
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="references.html">
    References
   </a>
  </li>
@@ -127,7 +155,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/references.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="_sources/jupyter-notebook.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -151,7 +179,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/references.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/jupyter-notebook.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -159,7 +187,7 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/references.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/jupyter-notebook.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -176,7 +204,14 @@
             <i class="fas fa-list"></i> Contents
         </div>
         <nav id="bd-toc-nav">
-            
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#publish-jupyter-book-on-github">
+   Publish Jupyter-book on Github
+  </a>
+ </li>
+</ul>
+
         </nav>
     </div>
 </div>
@@ -185,9 +220,116 @@
         
               <div>
                 
-  <div class="section" id="references">
-<h1>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h1>
-<p id="bibtex-bibliography-references-0"></p>
+  <div class="section" id="jupyer-notebook">
+<h1>Jupyer Notebook<a class="headerlink" href="#jupyer-notebook" title="Permalink to this headline">¶</a></h1>
+<p>This section includes notes relate to Jupyter Notebook (Book).</p>
+<div class="section" id="publish-jupyter-book-on-github">
+<h2>Publish Jupyter-book on Github<a class="headerlink" href="#publish-jupyter-book-on-github" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Documentations</p>
+<ul>
+<li><p><a class="reference external" href="https://jupyterbook.org/publish/gh-pages.html">Official documentation</a></p></li>
+<li><p><a class="reference external" href="https://docs.github.com/en/github/importing-your-projects-to-github/adding-an-existing-project-to-github-using-the-command-line">Adding existing projects to Github repo</a></p></li>
+</ul>
+</li>
+<li><p>Important Steps</p>
+<ul>
+<li><p>Create an empty repo on Github</p></li>
+<li><p>Open Terminal.</p></li>
+<li><p>Change the current working directory to your local project.</p></li>
+<li><p>Initialize the local directory as a Git repository: <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">git</span> <span class="pre">init</span></code></p></li>
+<li><p>Add commmits:</p></li>
+</ul>
+</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git add .
+# To unstage a file, use &#39;git reset HEAD YOUR-FILE&#39;.
+$ git commit -m &quot;First commit&quot;
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- Add the Github remote URL to the project local directory 
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git remote add origin remote repository URL
+# Sets the new remote
+$ git remote -v
+# Verifies the new remote URL
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- Push changes
+```
+$ git push -u origin master
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="pushes-the-changes-in-your-local-repository-up-to-the-remote-repository-you-specified-as-the-origin">
+<h1>Pushes the changes in your local repository up to the remote repository you specified as the origin<a class="headerlink" href="#pushes-the-changes-in-your-local-repository-up-to-the-remote-repository-you-specified-as-the-origin" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>```
+</pre></div>
+</div>
+<div class="section" id="publish-the-book-as-github-pages">
+<h2>Publish the book as Github Pages<a class="headerlink" href="#publish-the-book-as-github-pages" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Install <code class="docutils literal notranslate"><span class="pre">ghp-import</span></code></p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install ghp-import
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Create a branch of the repo called gh-pages and pushes to GitHub</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ghp-import -n -p -f _build/html
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">-n</span></code> refers to “not Jekyll”</p>
+</div>
+</div>
+<div class="section" id="change-notebook-themes">
+<h2>Change Notebook Themes<a class="headerlink" href="#change-notebook-themes" title="Permalink to this headline">¶</a></h2>
+<p>The following code runs in the terminal.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install jupyterthemes
+$ jt -l
+$ jt -t monokai
+</pre></div>
+</div>
+</div>
+<div class="section" id="use-a-specific-environment-in-notebook">
+<h2>Use a specific environment in notebook<a class="headerlink" href="#use-a-specific-environment-in-notebook" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>First, create a new environment</p></li>
+<li><p>Activate the new envrionment</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ source activate ENV_NAME
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>install <code class="docutils literal notranslate"><span class="pre">ipykernal</span></code></p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install --user ipykernel
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Add the environment kernal to Jupyter</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python -m ipykernel install --user --name=myenv
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Check current environment kernels in Jupyter</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ jupyter kernelspec list
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Remove an environment from Jupyter kernel list</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ jupyter kernelspec uninstall myenv
+</pre></div>
+</div>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -218,7 +360,8 @@
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="jupyter-notebook.html" title="previous page">Jupyer Notebook</a>
+    <a class='left-prev' id="prev-link" href="productive-tech.html" title="previous page">Phythonic Productivity Techniques</a>
+    <a class='right-next' id="next-link" href="references.html" title="next page">References</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

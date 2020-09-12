@@ -3,4 +3,5 @@
   sections:
     - file: temp-notes
     - file: productive-tech
+    - file: jupyter-notebook
 - file: references

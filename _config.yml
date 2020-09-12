@@ -2,7 +2,6 @@
 title: Python Notes
 author: Alvin Chen
 logo: ntnu03.png
-output_dir: docs
 latex:
   latex_documents:
     targetname: book.tex

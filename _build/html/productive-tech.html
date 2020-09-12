@@ -25,8 +25,6 @@
     <script src="_static/copybutton.js"></script>
     <script src="_static/sphinx-book-theme.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -36,7 +34,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="References" href="references.html" />
+    <link rel="next" title="Jupyer Notebook" href="jupyter-notebook.html" />
     <link rel="prev" title="Python Fundamentals" href="temp-notes.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -96,6 +94,16 @@
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      Phythonic Productivity Techniques
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="jupyter-notebook.html">
+     Jupyer Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="jupyter-notebook.html#pushes-the-changes-in-your-local-repository-up-to-the-remote-repository-you-specified-as-the-origin">
+     Pushes the changes in your local repository up to the remote repository you specified as the origin
     </a>
    </li>
   </ul>
@@ -207,16 +215,6 @@
    Virtual Environments
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#change-notebook-themes">
-   Change Notebook Themes
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#use-a-specific-environment-in-notebook">
-   Use a specific environment in notebook
-  </a>
- </li>
 </ul>
 
         </nav>
@@ -292,49 +290,6 @@ source deactivate
 </pre></div>
 </div>
 </div>
-<div class="section" id="change-notebook-themes">
-<h2>Change Notebook Themes<a class="headerlink" href="#change-notebook-themes" title="Permalink to this headline">¶</a></h2>
-<p>The following code runs in the terminal.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">jupyterthemes</span>
-<span class="n">jt</span> <span class="o">-</span><span class="n">l</span>
-<span class="n">jt</span> <span class="o">-</span><span class="n">t</span> <span class="n">monokai</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="use-a-specific-environment-in-notebook">
-<h2>Use a specific environment in notebook<a class="headerlink" href="#use-a-specific-environment-in-notebook" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>First, create a new environment</p></li>
-<li><p>Activate the new envrionment</p></li>
-</ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="n">activate</span> <span class="n">ENV_NAME</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>install <code class="docutils literal notranslate"><span class="pre">ipykernal</span></code></p></li>
-</ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">user</span> <span class="n">ipykernel</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Add the environment kernal to Jupyter</p></li>
-</ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">ipykernel</span> <span class="n">install</span> <span class="o">--</span><span class="n">user</span> <span class="o">--</span><span class="n">name</span><span class="o">=</span><span class="n">myenv</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Check current environment kernels in Jupyter</p></li>
-</ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupyter</span> <span class="n">kernelspec</span> <span class="nb">list</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Remove an environment from Jupyter kernel list</p></li>
-</ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupyter</span> <span class="n">kernelspec</span> <span class="n">uninstall</span> <span class="n">myenv</span>
-</pre></div>
-</div>
-</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -366,7 +321,7 @@ source deactivate
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="temp-notes.html" title="previous page">Python Fundamentals</a>
-    <a class='right-next' id="next-link" href="references.html" title="next page">References</a>
+    <a class='right-next' id="next-link" href="jupyter-notebook.html" title="next page">Jupyer Notebook</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
