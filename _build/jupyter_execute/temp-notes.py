@@ -8,10 +8,11 @@
 
 - In-text citation
 
-{cite}`deyne2016`
+An example of in-text citation {cite}`deyne2016`.
 
 - Bibliography
 
 ```{bibliography} book.bib
 :style: unsrt
 ```
+
