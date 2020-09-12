@@ -1,0 +1,8 @@
+# Book settings
+title: Python Notes
+author: Alvin Chen
+logo: ntnu03.png
+
+latex:
+  latex_documents:
+    targetname: book.tex

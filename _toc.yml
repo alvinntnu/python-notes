@@ -1,0 +1,6 @@
+- file: intro
+- file: python-basics
+  sections:
+    - file: temp-notes
+    - file: productive-tech
+- file: references
