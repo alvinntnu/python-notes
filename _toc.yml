@@ -5,6 +5,8 @@
     - file: data-structure
     - file: program-structure
     - file: input-output
+    - file: ggplot
+    - file: dplyr
     - file: productive-tech
     - file: temp-notes
 - file: corpus-processing
