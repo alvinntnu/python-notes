@@ -1,4 +1,4 @@
-Python Notes
+Introduction
 ============================
 
 This is a notebook to keep a learning journal of the Python language.
