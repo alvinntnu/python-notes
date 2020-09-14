@@ -2,6 +2,9 @@
 
 This section includes notes relate to `Jupyter Notebook` as well as `jupyter-book`.
 
+Recommended Readings:
+- [Jupyter Notebook Tips and Tricks](https://www.dataquest.io/blog/jupyter-notebook-tips-tricks-shortcuts/)
+
 
 ## Keyboard Shortcuts
 
@@ -153,3 +156,96 @@ $ jupyter kernelspec list
 ```
 $ jupyter kernelspec uninstall myenv
 ```
+
+## IPython Magic Commands
+
+- Magic commands from IPythhon
+- Useful magic commands:
+    ```
+    # list all env variables
+    %evn
+    # set env variable
+    %env OMP_NUM_THREADS=4
+    ```
+- Run external python codes/files
+    ```
+    %run ./hello-world.py
+    ```
+- Insert code from an external script
+    ```
+    %load SCRIPT_NAME
+    ```
+- Time the process
+    ```
+    ## Time the single run of the code in the cell
+    %%time
+    ## Run a statement 100,000 times by default and provide the mean of the fastest three times
+    %timeit
+    ## Shoe how much time your program spent in each function
+    %prun STATEMENT_NAME
+    ```
+- Write files
+    ```
+    %%writefile FILENAME
+    ## save contents of the cell to an external file
+    %pycat
+    ## show the syntax highlighted contents of an external file
+    ```
+- Debugging `%pdb`
+- Render high-resolution graphs for Retina screens
+    ```
+    %config InlineBackend.figure_format = 'retina'
+    ```
+- Run shell commands
+    ```
+    !ls *.ipynb
+    ```
+- LaTex formula automatic rendering in markdown
+
+    $P(A \mid B) = \frac{P(B \mid A) P(A)}{P(B)}$
+
+
+## Running R  and Python in the Same Notebook
+
+- To do this, first we need to install relevant R packages to make the system default R kernel avaiable to the notebook
+    ```
+    # in the terminal
+    $ R
+    # in R
+    install.package("IRkernel")
+    IRkernel::installspec()
+    ```
+- Then install the python module `pip install rpy2`
+- To use R and Python at the same time, the magic commend
+    ```
+    %load_ext rpy2.ipython
+    %R library(ggplot2)
+    ```
+- Mac users may run into issues when installing `rpy2`. Please see [this solution](https://blog.csdn.net/u010555997/article/details/104078809). General principles:
+    - Install Homebrew
+    - Install ggc with `brew install gcc`
+    - Install rpy2 using the updated gcc `env CC=/usr/local/Cellar/gcc/10.2.0/bin/gcc-10 pip install rpy2`
+
+%run hello-world.ipynb
+
+%%time
+import time
+for _ in range(1000):
+    time.sleep(0.01)
+
+import numpy
+%timeit numpy.random.normal(size=100)
+
+# List all Magic commands
+%lsmagic
+
+!ls *.ipynb
+
+## Run R code chunks in notebook with python codes
+%load_ext rpy2.ipython
+
+%%R 
+library(dplyr)
+library(ggplot2)
+data.frame(x = seq(1,100), y = seq(seq(1,100))) %>%
+ggplot(aes(x,y)) + geom_point()

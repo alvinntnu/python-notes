@@ -7,6 +7,7 @@
     - file: input-output
     - file: ggplot
     - file: dplyr
+    - file: magic-r
     - file: productive-tech
     - file: temp-notes
 - file: corpus-processing

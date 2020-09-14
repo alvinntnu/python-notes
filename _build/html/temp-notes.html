@@ -25,6 +25,8 @@
     <script src="_static/copybutton.js"></script>
     <script src="_static/sphinx-book-theme.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -112,6 +114,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="magic-r.html">
+     Magic R
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="productive-tech.html">
      Phythonic Productivity Techniques
     </a>
@@ -130,7 +137,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="nlp.html">
-   Natural Language Processing
+   Natural Language Processing with Python
   </a>
  </li>
  <li class="toctree-l1">
@@ -247,6 +254,185 @@
 <li><p>Input and Output</p></li>
 <li><p>Classes and Objects</p></li>
 </ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## How to check current object sizes in Notebook</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">a</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">getsizeof</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>48
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Get the docstring</span>
+<span class="o">?</span>sys.getsizeof
+<span class="o">?</span>who
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">who</span>
+<span class="o">%</span><span class="k">whos</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a	 sys	 
+Variable   Type      Data/Info
+------------------------------
+a          range     range(0, 10000)
+sys        module    &lt;module &#39;sys&#39; (built-in)&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">globals</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;__name__&#39;: &#39;__main__&#39;,
+ &#39;__doc__&#39;: &#39;Automatically created module for IPython interactive environment&#39;,
+ &#39;__package__&#39;: None,
+ &#39;__loader__&#39;: None,
+ &#39;__spec__&#39;: None,
+ &#39;__builtin__&#39;: &lt;module &#39;builtins&#39; (built-in)&gt;,
+ &#39;__builtins__&#39;: &lt;module &#39;builtins&#39; (built-in)&gt;,
+ &#39;_ih&#39;: [&#39;&#39;,
+  &#39;## How to check current object sizes in Notebook\nimport sys\na = range(10000)\nprint(sys.getsizeof(a))&#39;,
+  &quot;## Get the docstring\nget_ipython().run_line_magic(&#39;pinfo&#39;, &#39;sys.getsizeof&#39;)\nget_ipython().run_line_magic(&#39;pinfo&#39;, &#39;who&#39;)&quot;,
+  &quot;get_ipython().run_line_magic(&#39;who&#39;, &#39;&#39;)\nget_ipython().run_line_magic(&#39;whos&#39;, &#39;&#39;)&quot;,
+  &#39;globals()&#39;],
+ &#39;_oh&#39;: {},
+ &#39;_dh&#39;: [&#39;/Users/Alvin/Dropbox/Python/PythonTricksTheBook/PythonTricksJupyterBook&#39;],
+ &#39;In&#39;: [&#39;&#39;,
+  &#39;## How to check current object sizes in Notebook\nimport sys\na = range(10000)\nprint(sys.getsizeof(a))&#39;,
+  &quot;## Get the docstring\nget_ipython().run_line_magic(&#39;pinfo&#39;, &#39;sys.getsizeof&#39;)\nget_ipython().run_line_magic(&#39;pinfo&#39;, &#39;who&#39;)&quot;,
+  &quot;get_ipython().run_line_magic(&#39;who&#39;, &#39;&#39;)\nget_ipython().run_line_magic(&#39;whos&#39;, &#39;&#39;)&quot;,
+  &#39;globals()&#39;],
+ &#39;Out&#39;: {},
+ &#39;get_ipython&#39;: &lt;bound method InteractiveShell.get_ipython of &lt;ipykernel.zmqshell.ZMQInteractiveShell object at 0x7f8e28c67940&gt;&gt;,
+ &#39;exit&#39;: &lt;IPython.core.autocall.ZMQExitAutocall at 0x7f8e0844ce48&gt;,
+ &#39;quit&#39;: &lt;IPython.core.autocall.ZMQExitAutocall at 0x7f8e0844ce48&gt;,
+ &#39;_&#39;: &#39;&#39;,
+ &#39;__&#39;: &#39;&#39;,
+ &#39;___&#39;: &#39;&#39;,
+ &#39;_i&#39;: &#39;%who\n%whos&#39;,
+ &#39;_ii&#39;: &#39;## Get the docstring\n?sys.getsizeof\n?who&#39;,
+ &#39;_iii&#39;: &#39;## How to check current object sizes in Notebook\nimport sys\na = range(10000)\nprint(sys.getsizeof(a))&#39;,
+ &#39;_i1&#39;: &#39;## How to check current object sizes in Notebook\nimport sys\na = range(10000)\nprint(sys.getsizeof(a))&#39;,
+ &#39;sys&#39;: &lt;module &#39;sys&#39; (built-in)&gt;,
+ &#39;a&#39;: range(0, 10000),
+ &#39;_i2&#39;: &#39;## Get the docstring\n?sys.getsizeof\n?who&#39;,
+ &#39;_i3&#39;: &#39;%who\n%whos&#39;,
+ &#39;_i4&#39;: &#39;globals()&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">locals</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;__name__&#39;: &#39;__main__&#39;,
+ &#39;__doc__&#39;: &#39;Automatically created module for IPython interactive environment&#39;,
+ &#39;__package__&#39;: None,
+ &#39;__loader__&#39;: None,
+ &#39;__spec__&#39;: None,
+ &#39;__builtin__&#39;: &lt;module &#39;builtins&#39; (built-in)&gt;,
+ &#39;__builtins__&#39;: &lt;module &#39;builtins&#39; (built-in)&gt;,
+ &#39;_ih&#39;: [&#39;&#39;,
+  &#39;## How to check current object sizes in Notebook\nimport sys\na = range(10000)\nprint(sys.getsizeof(a))&#39;,
+  &quot;## Get the docstring\nget_ipython().run_line_magic(&#39;pinfo&#39;, &#39;sys.getsizeof&#39;)\nget_ipython().run_line_magic(&#39;pinfo&#39;, &#39;who&#39;)&quot;,
+  &quot;get_ipython().run_line_magic(&#39;who&#39;, &#39;&#39;)\nget_ipython().run_line_magic(&#39;whos&#39;, &#39;&#39;)&quot;,
+  &#39;globals()&#39;,
+  &#39;locals()&#39;],
+ &#39;_oh&#39;: {4: {...}},
+ &#39;_dh&#39;: [&#39;/Users/Alvin/Dropbox/Python/PythonTricksTheBook/PythonTricksJupyterBook&#39;],
+ &#39;In&#39;: [&#39;&#39;,
+  &#39;## How to check current object sizes in Notebook\nimport sys\na = range(10000)\nprint(sys.getsizeof(a))&#39;,
+  &quot;## Get the docstring\nget_ipython().run_line_magic(&#39;pinfo&#39;, &#39;sys.getsizeof&#39;)\nget_ipython().run_line_magic(&#39;pinfo&#39;, &#39;who&#39;)&quot;,
+  &quot;get_ipython().run_line_magic(&#39;who&#39;, &#39;&#39;)\nget_ipython().run_line_magic(&#39;whos&#39;, &#39;&#39;)&quot;,
+  &#39;globals()&#39;,
+  &#39;locals()&#39;],
+ &#39;Out&#39;: {4: {...}},
+ &#39;get_ipython&#39;: &lt;bound method InteractiveShell.get_ipython of &lt;ipykernel.zmqshell.ZMQInteractiveShell object at 0x7f8e28c67940&gt;&gt;,
+ &#39;exit&#39;: &lt;IPython.core.autocall.ZMQExitAutocall at 0x7f8e0844ce48&gt;,
+ &#39;quit&#39;: &lt;IPython.core.autocall.ZMQExitAutocall at 0x7f8e0844ce48&gt;,
+ &#39;_&#39;: {...},
+ &#39;__&#39;: &#39;&#39;,
+ &#39;___&#39;: &#39;&#39;,
+ &#39;_i&#39;: &#39;globals()&#39;,
+ &#39;_ii&#39;: &#39;%who\n%whos&#39;,
+ &#39;_iii&#39;: &#39;## Get the docstring\n?sys.getsizeof\n?who&#39;,
+ &#39;_i1&#39;: &#39;## How to check current object sizes in Notebook\nimport sys\na = range(10000)\nprint(sys.getsizeof(a))&#39;,
+ &#39;sys&#39;: &lt;module &#39;sys&#39; (built-in)&gt;,
+ &#39;a&#39;: range(0, 10000),
+ &#39;_i2&#39;: &#39;## Get the docstring\n?sys.getsizeof\n?who&#39;,
+ &#39;_i3&#39;: &#39;%who\n%whos&#39;,
+ &#39;_i4&#39;: &#39;globals()&#39;,
+ &#39;_4&#39;: {...},
+ &#39;_i5&#39;: &#39;locals()&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">dir</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;In&#39;,
+ &#39;Out&#39;,
+ &#39;_&#39;,
+ &#39;_4&#39;,
+ &#39;_5&#39;,
+ &#39;__&#39;,
+ &#39;___&#39;,
+ &#39;__builtin__&#39;,
+ &#39;__builtins__&#39;,
+ &#39;__doc__&#39;,
+ &#39;__loader__&#39;,
+ &#39;__name__&#39;,
+ &#39;__package__&#39;,
+ &#39;__spec__&#39;,
+ &#39;_dh&#39;,
+ &#39;_i&#39;,
+ &#39;_i1&#39;,
+ &#39;_i2&#39;,
+ &#39;_i3&#39;,
+ &#39;_i4&#39;,
+ &#39;_i5&#39;,
+ &#39;_i6&#39;,
+ &#39;_ih&#39;,
+ &#39;_ii&#39;,
+ &#39;_iii&#39;,
+ &#39;_oh&#39;,
+ &#39;a&#39;,
+ &#39;exit&#39;,
+ &#39;get_ipython&#39;,
+ &#39;quit&#39;,
+ &#39;sys&#39;]
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
