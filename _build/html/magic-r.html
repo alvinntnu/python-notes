@@ -257,9 +257,10 @@
 <ul>
 <li><p>This is a notebook based on an R kernel.</p></li>
 <li><p>To install the system default R kernel to work with Jupyter Notebook:</p>
-<ul>
+<ul class="simple">
 <li><p>Open the terminal</p></li>
-<li><p>Run the following commands in the terminal (running in RStudio does not work)</p>
+<li><p>Run the following commands in the terminal (running in RStudio does not work)</p></li>
+</ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># intiate R
 $ R
 # install packages
@@ -267,8 +268,27 @@ install.package(&quot;IRkernel&quot;)
 IRkernel::installspec()
 </pre></div>
 </div>
-</li>
+<ul class="simple">
+<li><p>This step is necessary if we want to use the default system R kernel instead of the R provided by Anaconda</p></li>
 </ul>
+</li>
+<li><p>After installing the R packages, we can use the R kernel in a jupyter notebook. And the entire notebook has to use the same R kernel.</p></li>
+<li><p>If we need to combine python and R codes in one notebook, we need to do the following:</p>
+<ul class="simple">
+<li><p>Install the rpy2 module</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">rpy2</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Use magic command to switch to R codes</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">R</span>
+<span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
+
+<span class="o">%%</span> <span class="n">R</span> <span class="o">-</span><span class="n">i</span> <span class="n">DUMP_PYTHON_OBJECTS_FOR_R</span>
+</pre></div>
+</div>
 </li>
 </ul>
 <div class="section" id="running-r-codes-in-notebook">
@@ -286,11 +306,9 @@ IRkernel::installspec()
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message:
-“replacing previous import ‘vctrs::data_frame’ by ‘tibble::data_frame’ when loading ‘dplyr’”
-── <span class=" -Color -Color-Bold">Attaching packages</span> ─────────────────────────────────────── tidyverse 1.3.0 ──
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>── <span class=" -Color -Color-Bold">Attaching packages</span> ─────────────────────────────────────── tidyverse 1.3.0 ──
 
-<span class=" -Color -Color-Green">✔</span> <span class=" -Color -Color-Blue">tibble </span> 3.0.3     <span class=" -Color -Color-Green">✔</span> <span class=" -Color -Color-Blue">dplyr  </span> 1.0.0
+<span class=" -Color -Color-Green">✔</span> <span class=" -Color -Color-Blue">tibble </span> 3.0.1     <span class=" -Color -Color-Green">✔</span> <span class=" -Color -Color-Blue">dplyr  </span> 1.0.0
 <span class=" -Color -Color-Green">✔</span> <span class=" -Color -Color-Blue">tidyr  </span> 1.0.2     <span class=" -Color -Color-Green">✔</span> <span class=" -Color -Color-Blue">stringr</span> 1.4.0
 <span class=" -Color -Color-Green">✔</span> <span class=" -Color -Color-Blue">readr  </span> 1.3.1     <span class=" -Color -Color-Green">✔</span> <span class=" -Color -Color-Blue">forcats</span> 0.5.0
 <span class=" -Color -Color-Green">✔</span> <span class=" -Color -Color-Blue">purrr  </span> 0.3.4     
@@ -301,7 +319,7 @@ IRkernel::installspec()
 
 Package version: 2.0.1
 
-Parallel computing: 2 of 4 threads used.
+Parallel computing: 2 of 16 threads used.
 
 See https://quanteda.io for tutorials and examples.
 
@@ -330,24 +348,24 @@ The following object is masked from ‘package:utils’:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">'/Users/Alvin/Dropbox/Python/PythonTricksTheBook/PythonTricksJupyterBook'</div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>               _                           
+<div class="output text_html">'/Users/alvinchen/Dropbox/Python/PythonTricksTheBook/PythonTricksJupyterBook'</div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>               _                           
 platform       x86_64-apple-darwin15.6.0   
 arch           x86_64                      
 os             darwin15.6.0                
 system         x86_64, darwin15.6.0        
 status                                     
 major          3                           
-minor          6.3                         
-year           2020                        
-month          02                          
-day            29                          
-svn rev        77875                       
+minor          6.2                         
+year           2019                        
+month          12                          
+day            12                          
+svn rev        77560                       
 language       R                           
-version.string R version 3.6.3 (2020-02-29)
-nickname       Holding the Windsock        
+version.string R version 3.6.2 (2019-12-12)
+nickname       Dark and Stormy Night       
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R version 3.6.3 (2020-02-29)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R version 3.6.2 (2019-12-12)
 Platform: x86_64-apple-darwin15.6.0 (64-bit)
 Running under: macOS Catalina 10.15.6
 
@@ -363,26 +381,25 @@ attached base packages:
 
 other attached packages:
  [1] quanteda_2.0.1  forcats_0.5.0   stringr_1.4.0   dplyr_1.0.0    
- [5] purrr_0.3.4     readr_1.3.1     tidyr_1.0.2     tibble_3.0.3   
- [9] tidyverse_1.3.0 ggplot2_3.3.2  
+ [5] purrr_0.3.4     readr_1.3.1     tidyr_1.0.2     tibble_3.0.1   
+ [9] tidyverse_1.3.0 ggplot2_3.3.0  
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.4.6       lubridate_1.7.9    lattice_0.20-41    assertthat_0.2.1  
- [5] digest_0.6.25      IRdisplay_0.7.0    R6_2.4.1           cellranger_1.1.0  
- [9] repr_1.1.0         backports_1.1.9    reprex_0.3.0       evaluate_0.14     
-[13] httr_1.4.1         pillar_1.4.6       rlang_0.4.7        uuid_0.1-4        
-[17] readxl_1.3.1       rstudioapi_0.11    data.table_1.12.8  Matrix_1.2-18     
-[21] labeling_0.3       munsell_0.5.0      broom_0.5.6        compiler_3.6.3    
-[25] modelr_0.1.7       pkgconfig_2.0.3    base64enc_0.1-3    htmltools_0.5.0   
-[29] tidyselect_1.1.0   fansi_0.4.1        crayon_1.3.4       dbplyr_1.4.3      
-[33] withr_2.2.0        grid_3.6.3         nlme_3.1-147       jsonlite_1.7.0    
-[37] gtable_0.3.0       lifecycle_0.2.0    DBI_1.1.0          magrittr_1.5      
-[41] scales_1.1.1       RcppParallel_5.0.1 cli_2.0.2          stringi_1.4.6     
-[45] farver_2.0.3       fs_1.4.1           xml2_1.3.2         stopwords_2.0     
-[49] ellipsis_0.3.1     generics_0.0.2     vctrs_0.3.4        fastmatch_1.1-0   
-[53] IRkernel_1.1.1     tools_3.6.3        Cairo_1.5-12       glue_1.4.2        
-[57] hms_0.5.3          colorspace_1.4-1   rvest_0.3.5        pbdZMQ_0.3-3      
-[61] haven_2.2.0        usethis_1.6.1     
+ [1] pbdZMQ_0.3-3       tidyselect_1.1.0   repr_1.1.0         haven_2.2.0       
+ [5] lattice_0.20-41    colorspace_1.4-1   vctrs_0.3.1        generics_0.0.2    
+ [9] usethis_1.6.0      htmltools_0.4.0    base64enc_0.1-3    rlang_0.4.6       
+[13] pillar_1.4.3       glue_1.4.0         withr_2.2.0        DBI_1.1.0         
+[17] dbplyr_1.4.3       modelr_0.1.6       readxl_1.3.1       uuid_0.1-4        
+[21] lifecycle_0.2.0    munsell_0.5.0      gtable_0.3.0       cellranger_1.1.0  
+[25] rvest_0.3.5        evaluate_0.14      fansi_0.4.1        broom_0.5.6       
+[29] IRdisplay_0.7.0    Rcpp_1.0.4.6       scales_1.1.0       backports_1.1.6   
+[33] IRkernel_1.1.1     RcppParallel_5.0.1 jsonlite_1.6.1     fs_1.4.1          
+[37] fastmatch_1.1-0    stopwords_2.0      hms_0.5.3          digest_0.6.25     
+[41] stringi_1.4.6      getPass_0.2-2      grid_3.6.2         cli_2.0.2         
+[45] tools_3.6.2        magrittr_1.5       crayon_1.3.4       pkgconfig_2.0.3   
+[49] Matrix_1.2-18      ellipsis_0.3.0     data.table_1.12.8  xml2_1.3.2        
+[53] reprex_0.3.0       lubridate_1.7.8    assertthat_0.2.1   httr_1.4.1        
+[57] rstudioapi_0.11    R6_2.4.1           nlme_3.1-147       compiler_3.6.2    
 </pre></div>
 </div>
 </div>

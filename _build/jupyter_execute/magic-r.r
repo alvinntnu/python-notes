@@ -4,13 +4,28 @@
 - To install the system default R kernel to work with Jupyter Notebook:
     - Open the terminal
     - Run the following commands in the terminal (running in RStudio does not work)
-        ```
-        # intiate R
-        $ R
-        # install packages
-        install.package("IRkernel")
-        IRkernel::installspec()
-        ```
+    ```
+    # intiate R
+    $ R
+    # install packages
+    install.package("IRkernel")
+    IRkernel::installspec()
+    ```
+    - This step is necessary if we want to use the default system R kernel instead of the R provided by Anaconda
+ 
+- After installing the R packages, we can use the R kernel in a jupyter notebook. And the entire notebook has to use the same R kernel.
+- If we need to combine python and R codes in one notebook, we need to do the following:
+    - Install the rpy2 module
+    ```
+    pip install rpy2
+    ```
+    - Use magic command to switch to R codes
+    ```
+    %%R
+    library(dplyr)
+    
+    %% R -i DUMP_PYTHON_OBJECTS_FOR_R
+    ```
 
 
 ## Running R codes in Notebook
