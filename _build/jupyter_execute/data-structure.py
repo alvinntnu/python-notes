@@ -1,6 +1,8 @@
 # Data Structure
 
 - An quick overview of important data structures in Python
+- A List is typically a sequence of objects all having the same type, of arbitrary length. 
+- A Tuple is typically a collection of objects of different types, of fixed length.
 
 
 ## Check object types

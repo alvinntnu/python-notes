@@ -8,6 +8,7 @@
     - file: ggplot
     - file: dplyr
     - file: magic-r
+    - file: python-tricks
     - file: productive-tech
     - file: temp-notes
 - file: corpus-processing
