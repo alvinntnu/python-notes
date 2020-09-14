@@ -2,6 +2,7 @@
 title: Python Notes
 author: Alvin Chen
 logo: ntnu03.png
+copyright: "2020 Alvin Chen"
 latex:
   latex_documents:
     targetname: book.tex
