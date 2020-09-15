@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Corpus Linguistics with Python &#8212; Python Notes</title>
+    <title>Web Applications &#8212; Python Notes</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="_static/sphinx-book-theme.css" type="text/css" />
@@ -36,8 +36,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Chinese Word Segmentation (jieba)" href="jieba.html" />
-    <link rel="prev" title="Python Fundamentals" href="temp-notes.html" />
+    <link rel="next" title="Phythonic Productivity Techniques" href="productive-tech.html" />
+    <link rel="prev" title="Python Tricks" href="python-tricks.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
@@ -78,27 +78,72 @@
  </li>
 </ul>
 <ul class="current nav sidenav_l1">
- <li class="toctree-l1">
+ <li class="toctree-l1 current active">
   <a class="reference internal" href="python-basics.html">
    Python Basics
   </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Corpus Linguistics with Python
-  </a>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2">
-    <a class="reference internal" href="jieba.html">
-     Chinese Word Segmentation (jieba)
+    <a class="reference internal" href="jupyter-notebook.html">
+     Jupyer Notebook
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="ckiptagger.html">
-     Chinese Word Segmentation (ckiptagger)
+    <a class="reference internal" href="data-structure.html">
+     Data Structure
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="program-structure.html">
+     Program Structure
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="input-output.html">
+     Input and Output
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ggplot.html">
+     ggplot
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dplyr.html">
+     dplyr
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="magic-r.html">
+     Magic R
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="python-tricks.html">
+     Python Tricks
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Web Applications
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="productive-tech.html">
+     Phythonic Productivity Techniques
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="temp-notes.html">
+     Python Fundamentals
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="corpus-processing.html">
+   Corpus Linguistics with Python
+  </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="nlp.html">
@@ -152,9 +197,9 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/corpus-processing.md"><button type="button"
+        <a class="dropdown-buttons" href="_sources/web-applications.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
+                data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
             onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
@@ -170,6 +215,28 @@
                     class="fas fa-expand"></i></button></a>
 
         <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/web-applications.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/web-applications.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
 
     </div>
 
@@ -188,12 +255,27 @@
         
               <div>
                 
-  <div class="section" id="corpus-linguistics-with-python">
-<h1>Corpus Linguistics with Python<a class="headerlink" href="#corpus-linguistics-with-python" title="Permalink to this headline">¶</a></h1>
-<p>This section includes corpus processing with Python.
-The materials here aim to implement important corpus processing techniques discussed in ENC2036 in Python codes.</p>
-<div class="toctree-wrapper compound">
-</div>
+  <div class="section" id="web-applications">
+<h1>Web Applications<a class="headerlink" href="#web-applications" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Several packages for building and developing web applications</p>
+<ul>
+<li><p>Django</p></li>
+<li><p>Flask</p></li>
+<li><p>Pelican</p></li>
+</ul>
+</li>
+<li><p>Recommended Readings</p>
+<ul>
+<li><p><a class="reference external" href="https://janakiev.com/blog/pelican-jupyter/">How to Create Your Data Science Blog with Pelican and Jupyter Notebooks</a></p></li>
+<li><p><a class="reference external" href="https://juanitorduz.github.io/pelican_to_blogdown/">From Pelican to Blogdown</a></p>
+<ul>
+<li><p>It seems that to accomplishment everything within Rstudio is really a plus for R!!</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 </div>
 
     <script type="text/x-thebe-config">
@@ -224,8 +306,8 @@ The materials here aim to implement important corpus processing techniques discu
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="temp-notes.html" title="previous page">Python Fundamentals</a>
-    <a class='right-next' id="next-link" href="jieba.html" title="next page">Chinese Word Segmentation (jieba)</a>
+    <a class='left-prev' id="prev-link" href="python-tricks.html" title="previous page">Python Tricks</a>
+    <a class='right-next' id="next-link" href="productive-tech.html" title="next page">Phythonic Productivity Techniques</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Phythonic Productivity Techniques &#8212; Python Notes</title>
+    <title>Chinese Word Segmentation (jieba) &#8212; Python Notes</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="_static/sphinx-book-theme.css" type="text/css" />
@@ -36,8 +36,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Python Fundamentals" href="temp-notes.html" />
-    <link rel="prev" title="Web Applications" href="web-applications.html" />
+    <link rel="next" title="Chinese Word Segmentation (ckiptagger)" href="ckiptagger.html" />
+    <link rel="prev" title="Corpus Linguistics with Python" href="corpus-processing.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
@@ -78,72 +78,27 @@
  </li>
 </ul>
 <ul class="current nav sidenav_l1">
- <li class="toctree-l1 current active">
+ <li class="toctree-l1">
   <a class="reference internal" href="python-basics.html">
    Python Basics
   </a>
-  <ul class="current">
-   <li class="toctree-l2">
-    <a class="reference internal" href="jupyter-notebook.html">
-     Jupyer Notebook
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="data-structure.html">
-     Data Structure
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="program-structure.html">
-     Program Structure
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="input-output.html">
-     Input and Output
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="ggplot.html">
-     ggplot
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="dplyr.html">
-     dplyr
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="magic-r.html">
-     Magic R
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="python-tricks.html">
-     Python Tricks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="web-applications.html">
-     Web Applications
-    </a>
-   </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     Phythonic Productivity Techniques
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="temp-notes.html">
-     Python Fundamentals
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 current active">
   <a class="reference internal" href="corpus-processing.html">
    Corpus Linguistics with Python
   </a>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Chinese Word Segmentation (jieba)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ckiptagger.html">
+     Chinese Word Segmentation (ckiptagger)
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="nlp.html">
@@ -197,7 +152,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/productive-tech.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="_sources/jieba.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -221,7 +176,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/productive-tech.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/jieba.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -229,7 +184,7 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/productive-tech.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/jieba.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -246,19 +201,7 @@
             <i class="fas fa-list"></i> Contents
         </div>
         <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#getting-help">
-   Getting Help
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#virtual-environments">
-   Virtual Environments
-  </a>
- </li>
-</ul>
-
+            
         </nav>
     </div>
 </div>
@@ -267,70 +210,139 @@
         
               <div>
                 
-  <div class="section" id="phythonic-productivity-techniques">
-<h1>Phythonic Productivity Techniques<a class="headerlink" href="#phythonic-productivity-techniques" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="getting-help">
-<h2>Getting Help<a class="headerlink" href="#getting-help" title="Permalink to this headline">¶</a></h2>
+  <div class="section" id="chinese-word-segmentation-jieba">
+<h1>Chinese Word Segmentation (jieba)<a class="headerlink" href="#chinese-word-segmentation-jieba" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
-<span class="nb">dir</span><span class="p">(</span><span class="n">datetime</span><span class="p">)</span>
-<span class="nb">dir</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jieba</span>
+<span class="kn">from</span> <span class="nn">jieba</span> <span class="kn">import</span> <span class="n">posseg</span>
+
+<span class="c1"># set dictionary</span>
+
+<span class="c1">#jieba.set_dictionary()</span>
+<span class="c1">#jieba.load_userdict()</span>
+
+<span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;據《日經亞洲評論》網站報導，儘管美國總統川普發起了讓美國製造業回歸的貿易戰，但包括電動汽車製造商特斯拉在內的一些公司反而加大馬力在大陸進行生產。另據高盛近日發布的一份報告指出，半導體設備和材料以及醫療保健領域的大多數公司實際上正擴大在大陸的生產，許多美國製造業拒絕「退出中國」。&#39;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jieba</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">cut_all</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">HMM</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jieba</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">cut_all</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">HMM</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jieba</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">cut_all</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">HMM</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">text_pos</span> <span class="o">=</span> <span class="n">posseg</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="c1">#print(type(text_pos))</span>
+<span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">text_pos</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">tag</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;MAXYEAR&#39;,
- &#39;MINYEAR&#39;,
- &#39;__builtins__&#39;,
- &#39;__cached__&#39;,
- &#39;__doc__&#39;,
- &#39;__file__&#39;,
- &#39;__loader__&#39;,
- &#39;__name__&#39;,
- &#39;__package__&#39;,
- &#39;__spec__&#39;,
- &#39;date&#39;,
- &#39;datetime&#39;,
- &#39;datetime_CAPI&#39;,
- &#39;sys&#39;,
- &#39;time&#39;,
- &#39;timedelta&#39;,
- &#39;timezone&#39;,
- &#39;tzinfo&#39;]
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check objects with specific keywords</span>
-<span class="p">[</span><span class="n">_</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">datetime</span><span class="p">)</span> <span class="k">if</span> <span class="s1">&#39;date&#39;</span> <span class="ow">in</span> <span class="n">_</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;date&#39;, &#39;datetime&#39;, &#39;datetime_CAPI&#39;]
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="virtual-environments">
-<h2>Virtual Environments<a class="headerlink" href="#virtual-environments" title="Permalink to this headline">¶</a></h2>
-<p>The following codes are run under terminal.</p>
-<p>The following codes show how to create a virtual environment in the terminal.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>which pip
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>據 《 日經亞洲 評論 》 網站 報導 ， 儘 管 美 國 總 統 川 普 發 起 了 讓 美 國 製 造 業 回 歸 的 貿 易 戰 ， 但 包括 電動汽 車 製 造 商 特斯拉 在 內 的 一些 公司 反而 加大 馬 力 在 大陸 進行 生產 。 另據 高盛 近日 發布 的 一份 報告 指出 ， 半導體 設備 和 材料 以及 醫療 保健 領域 的 大多 數 公司 實際 上 正 擴大 在 大陸 的 生產 ， 許多美 國 製 造 業 拒 絕 「 退出 中國 」 。
 
-pytho3 -m venv `DIRECTORY`
-ls `DIRECTORY`
+據 《 日 經 亞 洲 評 論 》 網 站 報 導 ， 儘 管 美 國 總 統 川 普 發 起 了 讓 美 國 製 造 業 回 歸 的 貿 易 戰 ， 但 包括 電 動 汽 車 製 造 商 特斯拉 在 內 的 一些 公司 反而 加大 馬 力 在 大 陸 進 行 生 產 。 另 據 高盛 近日 發 布 的 一份 報 告 指出 ， 半 導 體 設 備 和 材料 以及 醫 療 保健 領 域 的 大多 數 公司 實 際 上 正 擴 大 在 大 陸 的 生 產 ， 許 多 美 國 製 造 業 拒 絕 「 退出 中 國 」 。
 
-source activate `DIRECTORY`
-pip list
-pip install `PACKAGE_NAME`
-source deactivate
+據 《 日 經 亞 洲 評 論 》 網 站 報 導 ， 儘 管 美 國 總 統 川 普 發 起 了 讓 美 國 製 造 業 回 歸 的 貿 易 戰 ， 但 包括 電 動 汽 車 製 造 商 特斯 特斯拉 斯拉 在 內 的 一些 公司 反而 加大 馬 力 在 大 陸 進 行 生 產 。 另 據 高盛 近日 發 布 的 一份 報 告 指出 ， 半 導 體 設 備 和 材料 以及 醫 療 保健 領 域 的 大多 數 公司 實 際 上 正 擴 大 在 大 陸 的 生 產 ， 許 多美 國 製 造 業 拒 絕 「 退出 中 國 」。
 
+據/x
+《/x
+日/m
+經/p
+亞洲/ns
+評論/n
+》/x
+網站/n
+報導/n
+，/x
+儘/yg
+管/v
+美/j
+國/n
+總/b
+統/v
+川/j
+普/nr
+發/v
+起/v
+了/ul
+讓/v
+美/j
+國/n
+製/zg
+造/v
+業/ng
+回/v
+歸/v
+的/uj
+貿/vg
+易/a
+戰/vg
+，/x
+但/c
+包括/v
+電動汽/n
+車/n
+製/zg
+造/v
+商/n
+特斯拉/nrt
+在/p
+內/f
+的/uj
+一些/m
+公司/n
+反而/c
+加大/v
+馬力/n
+在/p
+大陸/n
+進行/v
+生產/vn
+。/x
+另/r
+據/p
+高盛/nr
+近日/t
+發布/v
+的/uj
+一份/m
+報告/n
+指出/v
+，/x
+半導體/n
+設備/vn
+和/c
+材料/n
+以及/c
+醫療/n
+保健/nr
+領域/n
+的/uj
+大多/m
+數/zg
+公司/n
+實際/n
+上/f
+正/d
+擴大/v
+在/p
+大陸/n
+的/uj
+生產/vn
+，/x
+許多/m
+美/j
+國/n
+製/zg
+造/v
+業/ng
+拒/vg
+絕/d
+「/x
+退出/v
+中國/ns
+」/x
+。/x
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -344,16 +356,16 @@ source deactivate
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "ckiptagger"
         },
         kernelOptions: {
-            kernelName: "python3",
+            kernelName: "ckiptagger",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'ckiptagger'</script>
 
               </div>
               
@@ -363,8 +375,8 @@ source deactivate
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="web-applications.html" title="previous page">Web Applications</a>
-    <a class='right-next' id="next-link" href="temp-notes.html" title="next page">Python Fundamentals</a>
+    <a class='left-prev' id="prev-link" href="corpus-processing.html" title="previous page">Corpus Linguistics with Python</a>
+    <a class='right-next' id="next-link" href="ckiptagger.html" title="next page">Chinese Word Segmentation (ckiptagger)</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

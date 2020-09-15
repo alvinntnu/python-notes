@@ -124,6 +124,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="web-applications.html">
+     Web Applications
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="productive-tech.html">
      Phythonic Productivity Techniques
     </a>
@@ -459,6 +464,11 @@ $ jt -t monokai
 <h2>Use a specific environment in notebook<a class="headerlink" href="#use-a-specific-environment-in-notebook" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>First, create a new environment</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>! conda create --name ENV_NAME python=3.6
+</pre></div>
+</div>
+<ul class="simple">
 <li><p>Activate the new envrionment</p></li>
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ source activate ENV_NAME
@@ -487,6 +497,10 @@ $ jt -t monokai
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ jupyter kernelspec uninstall myenv
 </pre></div>
+</div>
+<div class="dropdown admonition note">
+<p class="admonition-title">Note</p>
+<p>Sometimes, the pre-existing conda environment does not work properly. An easy solution is to create the environment again after you set up the jupyter notebook.</p>
 </div>
 </div>
 <div class="section" id="ipython-magic-commands">
@@ -594,7 +608,7 @@ IRkernel::installspec()
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 15.3 ms, sys: 15.9 ms, total: 31.3 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 12.7 ms, sys: 18 ms, total: 30.7 ms
 Wall time: 11.6 s
 </pre></div>
 </div>
@@ -608,7 +622,7 @@ Wall time: 11.6 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10.2 µs ± 548 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10 µs ± 17.1 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
 </pre></div>
 </div>
 </div>
@@ -639,10 +653,11 @@ Automagic is ON, % prefix IS NOT needed for line magics.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>data-structure.ipynb    input-output.ipynb      program-structure.ipynb
-dplyr.ipynb             jupyter-notebook.ipynb  python-tricks.ipynb
-ggplot.ipynb            magic-r.ipynb           references.ipynb
-hello-world.ipynb       productive-tech.ipynb   temp-notes.ipynb
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ckiptagger.ipynb        input-output.ipynb      program-structure.ipynb
+data-structure.ipynb    jieba.ipynb             python-tricks.ipynb
+dplyr.ipynb             jupyter-notebook.ipynb  references.ipynb
+ggplot.ipynb            magic-r.ipynb           temp-notes.ipynb
+hello-world.ipynb       productive-tech.ipynb   web-applications.ipynb
 </pre></div>
 </div>
 </div>
@@ -668,19 +683,22 @@ ggplot(aes(x,y)) + geom_point()
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R[write to console]: 
 Attaching package: ‘dplyr’
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R[write to console]: The following objects are masked from ‘package:stats’:
+
+
+R[write to console]: The following objects are masked from ‘package:stats’:
 
     filter, lag
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R[write to console]: The following objects are masked from ‘package:base’:
+
+
+R[write to console]: The following objects are masked from ‘package:base’:
 
     intersect, setdiff, setequal, union
+
+
+R[write to console]: Keep up to date with changes at https://www.tidyverse.org/blog/
 </pre></div>
 </div>
-<img alt="_images/jupyter-notebook_16_3.png" src="_images/jupyter-notebook_16_3.png" />
+<img alt="_images/jupyter-notebook_16_1.png" src="_images/jupyter-notebook_16_1.png" />
 </div>
 </div>
 </div>

@@ -9,8 +9,12 @@
     - file: dplyr
     - file: magic-r
     - file: python-tricks
+    - file: web-applications
     - file: productive-tech
     - file: temp-notes
 - file: corpus-processing
+  sections:
+    - file: jieba
+    - file: ckiptagger
 - file: nlp
 - file: references

@@ -132,6 +132,9 @@ $ jt -r
 ## Use a specific environment in notebook
 
 - First, create a new environment
+```
+! conda create --name ENV_NAME python=3.6
+```
 - Activate the new envrionment
 ```
 $ source activate ENV_NAME
@@ -156,6 +159,14 @@ $ jupyter kernelspec list
 ```
 $ jupyter kernelspec uninstall myenv
 ```
+
+```{note}
+:class: dropdown
+
+Sometimes, the pre-existing conda environment does not work properly. An easy solution is to create the environment again after you set up the jupyter notebook.
+
+```
+
 
 ## IPython Magic Commands
 
