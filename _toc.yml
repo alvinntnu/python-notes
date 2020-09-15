@@ -2,6 +2,7 @@
 - file: python-basics
   sections:
     - file: jupyter-notebook
+    - file: google-colab
     - file: data-structure
     - file: program-structure
     - file: input-output
@@ -17,4 +18,6 @@
     - file: jieba
     - file: ckiptagger
 - file: nlp
+  sections:
+    - file: nlp-spacy
 - file: references

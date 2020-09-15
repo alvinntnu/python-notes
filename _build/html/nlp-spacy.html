@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Web Applications &#8212; Python Notes</title>
+    <title>Natural Language Processing (spaCy) &#8212; Python Notes</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="_static/sphinx-book-theme.css" type="text/css" />
@@ -36,8 +36,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Phythonic Productivity Techniques" href="productive-tech.html" />
-    <link rel="prev" title="Python Tricks" href="python-tricks.html" />
+    <link rel="next" title="References" href="references.html" />
+    <link rel="prev" title="Natural Language Processing with Python" href="nlp.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
@@ -78,82 +78,27 @@
  </li>
 </ul>
 <ul class="current nav sidenav_l1">
- <li class="toctree-l1 current active">
+ <li class="toctree-l1">
   <a class="reference internal" href="python-basics.html">
    Python Basics
   </a>
-  <ul class="current">
-   <li class="toctree-l2">
-    <a class="reference internal" href="jupyter-notebook.html">
-     Jupyer Notebook
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="google-colab.html">
-     Google Colaboratory (Colab)
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="data-structure.html">
-     Data Structure
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="program-structure.html">
-     Program Structure
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="input-output.html">
-     Input and Output
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="ggplot.html">
-     ggplot
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="dplyr.html">
-     dplyr
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="magic-r.html">
-     Magic R
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="python-tricks.html">
-     Python Tricks
-    </a>
-   </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     Web Applications
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="productive-tech.html">
-     Phythonic Productivity Techniques
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="temp-notes.html">
-     Python Fundamentals
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="corpus-processing.html">
    Corpus Linguistics with Python
   </a>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 current active">
   <a class="reference internal" href="nlp.html">
    Natural Language Processing with Python
   </a>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Natural Language Processing (spaCy)
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="references.html">
@@ -202,7 +147,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/web-applications.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="_sources/nlp-spacy.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -226,7 +171,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/web-applications.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/nlp-spacy.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -234,7 +179,7 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/web-applications.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/nlp-spacy.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -251,7 +196,24 @@
             <i class="fas fa-list"></i> Contents
         </div>
         <nav id="bd-toc-nav">
-            
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#installation">
+   Installation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pos-tagging">
+   POS Tagging
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#chunking">
+   Chunking
+  </a>
+ </li>
+</ul>
+
         </nav>
     </div>
 </div>
@@ -260,27 +222,97 @@
         
               <div>
                 
-  <div class="section" id="web-applications">
-<h1>Web Applications<a class="headerlink" href="#web-applications" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><p>Several packages for building and developing web applications</p>
-<ul>
-<li><p>Django</p></li>
-<li><p>Flask</p></li>
-<li><p>Pelican</p></li>
-</ul>
-</li>
-<li><p>Recommended Readings</p>
-<ul>
-<li><p><a class="reference external" href="https://janakiev.com/blog/pelican-jupyter/">How to Create Your Data Science Blog with Pelican and Jupyter Notebooks</a></p></li>
-<li><p><a class="reference external" href="https://juanitorduz.github.io/pelican_to_blogdown/">From Pelican to Blogdown</a></p>
-<ul>
-<li><p>It seems that to accomplishment everything within Rstudio is really a plus for R!!</p></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+  <div class="section" id="natural-language-processing-spacy">
+<h1>Natural Language Processing (spaCy)<a class="headerlink" href="#natural-language-processing-spacy" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Install package
+## In terminal:
+!pip install spacy
+
+## Download language model for Chinese and English
+!spacy download en
+!spacy download zh
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">spacy</span>
+<span class="n">nlp_en</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;en&#39;</span><span class="p">)</span>
+
+<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp_en</span><span class="p">(</span><span class="s1">&#39;This is a sentence&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="pos-tagging">
+<h2>POS Tagging<a class="headerlink" href="#pos-tagging" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># parts of speech tagging</span>
+<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(((</span><span class="n">token</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">pos_</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">tag_</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;This&#39;, &#39;DET&#39;, &#39;DT&#39;)
+(&#39;is&#39;, &#39;AUX&#39;, &#39;VBZ&#39;)
+(&#39;a&#39;, &#39;DET&#39;, &#39;DT&#39;)
+(&#39;sentence&#39;, &#39;NOUN&#39;, &#39;NN&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">token</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">tag_</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This_DT
+is_VBZ
+a_DT
+sentence_NN
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">out</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">:</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">out</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span><span class="o">+</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">token</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">tag_</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> This/DT is/VBZ a/DT sentence/NN
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="chunking">
+<h2>Chunking<a class="headerlink" href="#chunking" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">doc</span><span class="o">.</span><span class="n">noun_chunks</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">dep_</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a sentence sentence attr is
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -292,16 +324,16 @@
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "ckiptagger"
         },
         kernelOptions: {
-            kernelName: "python3",
+            kernelName: "ckiptagger",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'ckiptagger'</script>
 
               </div>
               
@@ -311,8 +343,8 @@
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="python-tricks.html" title="previous page">Python Tricks</a>
-    <a class='right-next' id="next-link" href="productive-tech.html" title="next page">Phythonic Productivity Techniques</a>
+    <a class='left-prev' id="prev-link" href="nlp.html" title="previous page">Natural Language Processing with Python</a>
+    <a class='right-next' id="next-link" href="references.html" title="next page">References</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
