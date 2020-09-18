@@ -4,6 +4,8 @@ This section includes notes relate to `Jupyter Notebook` as well as `jupyter-boo
 
 Recommended Readings:
 - [Jupyter Notebook Tips and Tricks](https://www.dataquest.io/blog/jupyter-notebook-tips-tricks-shortcuts/)
+- [Notebook to slides](https://medium.com/pyradise/jupyter-notebook-tricks-slideshows-a057a39c0a23)
+
 
 
 ## Keyboard Shortcuts
@@ -215,6 +217,10 @@ Sometimes, the pre-existing conda environment does not work properly. An easy so
 
     $P(A \mid B) = \frac{P(B \mid A) P(A)}{P(B)}$
 
+
+## Hide or Remove Content
+
+- See [documentation page](https://jupyterbook.org/interactive/hiding.html)
 
 ## Running R  and Python in the Same Notebook
 

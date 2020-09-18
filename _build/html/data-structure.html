@@ -89,6 +89,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="notebook-to-slides.html">
+     Notebook to Slides
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="google-colab.html">
      Google Colaboratory (Colab)
     </a>
@@ -483,6 +488,46 @@ John
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;NA&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Format strings</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello, </span><span class="si">{}</span><span class="s1">! This is your No.</span><span class="si">{}</span><span class="s1"> book!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;Alvin&#39;</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;An </span><span class="si">{0}</span><span class="s1"> a day keeps the </span><span class="si">{1}</span><span class="s1"> away.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;apple&#39;</span><span class="p">,</span><span class="s1">&#39;doctor&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;An </span><span class="si">{1}</span><span class="s1"> a day keeps the </span><span class="si">{0}</span><span class="s1"> away.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;apple&#39;</span><span class="p">,</span><span class="s1">&#39;doctor&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The </span><span class="si">{noun}</span><span class="s1"> is </span><span class="si">{adj}</span><span class="s1">!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">noun</span><span class="o">=</span><span class="s1">&#39;book&#39;</span><span class="p">,</span><span class="n">adj</span><span class="o">=</span><span class="s1">&#39;difficult&#39;</span><span class="p">))</span>
+
+<span class="c1">## Format strings with Dictionary</span>
+<span class="n">table</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;John&#39;</span><span class="p">:</span> <span class="mi">98</span><span class="p">,</span> <span class="s1">&#39;Mary&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="s1">&#39;Jessica&#39;</span><span class="p">:</span> <span class="mi">78</span><span class="p">,</span> <span class="s1">&#39;Goerge&#39;</span><span class="p">:</span> <span class="mi">89</span><span class="p">,</span> <span class="s1">&#39;Jack&#39;</span><span class="p">:</span> <span class="mi">45</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Jack: </span><span class="si">{0[Jack]:d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Jack: </span><span class="si">{Jack:d}</span><span class="s1">Jessica: </span><span class="si">{Jessica:d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">table</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello, Alvin! This is your No.5 book!
+An apple a day keeps the doctor away.
+An doctor a day keeps the apple away.
+The book is difficult!
+Jack: 45
+Jack: 45Jessica: 78
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Old string formatting</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The value of pi is </span><span class="si">%1.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="c1"># specify number of digits before and after .</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The value of pi is 3.14
 </pre></div>
 </div>
 </div>

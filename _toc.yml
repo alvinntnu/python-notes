@@ -2,6 +2,7 @@
 - file: python-basics
   sections:
     - file: jupyter-notebook
+    - file: notebook-to-slides
     - file: google-colab
     - file: data-structure
     - file: program-structure
@@ -15,9 +16,19 @@
     - file: temp-notes
 - file: corpus-processing
   sections:
+    - file: nltk
+    - file: web-crawler
+    - file: corpus-linguistics-methods
+    - file: tokenization
+    - file: word-cloud
+    - file: patterns-constructions
+    - file: vectorizing-text
     - file: jieba
     - file: ckiptagger
 - file: nlp
   sections:
+    - file: word-embeddings
     - file: nlp-spacy
+    - file: nlp-spacy-zh
+    - file: nlp-ckipnlp
 - file: references

@@ -63,7 +63,21 @@ for eachLine in fp:
 ```
 
 
+with open('temp.txt', 'w') as f:
+    f.write('hello world!\n' + 'This is my first sentence.' )
+    
+with open('temp.txt', 'r') as f:
+    print([l for l in f.readlines()])
+    
+!rm temp.txt
+
 ## Writing Files
+
+- prefered way:
+```
+with open('FILENAME', 'w') as f:
+    f.write('hello world!')
+```
 
 fp = open('temp.txt', 'w')
 while True:
@@ -76,6 +90,16 @@ fp.close()
 
 fp2 = open('temp.txt','r')
 print([line for line in fp2])
+
+:::{admonition, note}
+To access files at specific positions:
+```
+file.seek()
+file.read()
+file.tell()
+```
+
+:::
 
 ## File/Directory Operation
 

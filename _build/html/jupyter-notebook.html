@@ -36,7 +36,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Google Colaboratory (Colab)" href="google-colab.html" />
+    <link rel="next" title="Notebook to Slides" href="notebook-to-slides.html" />
     <link rel="prev" title="Python Basics" href="python-basics.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -86,6 +86,11 @@
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      Jupyer Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="notebook-to-slides.html">
+     Notebook to Slides
     </a>
    </li>
    <li class="toctree-l2">
@@ -293,6 +298,11 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hide-or-remove-content">
+   Hide or Remove Content
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#running-r-and-python-in-the-same-notebook">
    Running R  and Python in the Same Notebook
   </a>
@@ -313,6 +323,7 @@
 <p>Recommended Readings:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.dataquest.io/blog/jupyter-notebook-tips-tricks-shortcuts/">Jupyter Notebook Tips and Tricks</a></p></li>
+<li><p><a class="reference external" href="https://medium.com/pyradise/jupyter-notebook-tricks-slideshows-a057a39c0a23">Notebook to slides</a></p></li>
 </ul>
 <div class="section" id="keyboard-shortcuts">
 <h2>Keyboard Shortcuts<a class="headerlink" href="#keyboard-shortcuts" title="Permalink to this headline">¶</a></h2>
@@ -564,6 +575,12 @@ $ jt -t monokai
 </li>
 </ul>
 </div>
+<div class="section" id="hide-or-remove-content">
+<h2>Hide or Remove Content<a class="headerlink" href="#hide-or-remove-content" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>See <a class="reference external" href="https://jupyterbook.org/interactive/hiding.html">documentation page</a></p></li>
+</ul>
+</div>
 <div class="section" id="running-r-and-python-in-the-same-notebook">
 <h2>Running R  and Python in the Same Notebook<a class="headerlink" href="#running-r-and-python-in-the-same-notebook" title="Permalink to this headline">¶</a></h2>
 <ul>
@@ -598,49 +615,7 @@ IRkernel::installspec()
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">734</span><span class="n">c3212e239</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">run_line_magic</span><span class="p">(</span><span class="s1">&#39;run&#39;</span><span class="p">,</span> <span class="s1">&#39;hello-world.ipynb&#39;</span><span class="p">)</span>
-
-<span class="nn">~/.local/lib/python3.6/site-packages/IPython/core/interactiveshell.py</span> in <span class="ni">run_line_magic</span><span class="nt">(self, magic_name, line, _stack_depth)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2324</span>                 <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;local_ns&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">_getframe</span><span class="p">(</span><span class="n">stack_depth</span><span class="p">)</span><span class="o">.</span><span class="n">f_locals</span>
-<span class="g g-Whitespace">   </span><span class="mi">2325</span>             <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">builtin_trap</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">2326</span>                 <span class="n">result</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2327</span>             <span class="k">return</span> <span class="n">result</span>
-<span class="g g-Whitespace">   </span><span class="mi">2328</span> 
-
-<span class="nn">&lt;decorator-gen-59&gt;</span> in <span class="ni">run</span><span class="nt">(self, parameter_s, runner, file_finder)</span>
-
-<span class="nn">~/.local/lib/python3.6/site-packages/IPython/core/magic.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(f, *a, **k)</span>
-<span class="g g-Whitespace">    </span><span class="mi">185</span>     <span class="c1"># but it&#39;s overkill for just that one bit of state.</span>
-<span class="g g-Whitespace">    </span><span class="mi">186</span>     <span class="k">def</span> <span class="nf">magic_deco</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">187</span>         <span class="n">call</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">f</span><span class="p">,</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">k</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">k</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">188</span> 
-<span class="g g-Whitespace">    </span><span class="mi">189</span>         <span class="k">if</span> <span class="n">callable</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
-
-<span class="nn">~/.local/lib/python3.6/site-packages/IPython/core/magics/execution.py</span> in <span class="ni">run</span><span class="nt">(self, parameter_s, runner, file_finder)</span>
-<span class="g g-Whitespace">    </span><span class="mi">716</span>             <span class="k">with</span> <span class="n">preserve_keys</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">user_ns</span><span class="p">,</span> <span class="s1">&#39;__file__&#39;</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">717</span>                 <span class="bp">self</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">user_ns</span><span class="p">[</span><span class="s1">&#39;__file__&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">filename</span>
-<span class="ne">--&gt; </span><span class="mi">718</span>                 <span class="bp">self</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">safe_execfile_ipy</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">raise_exceptions</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">719</span>             <span class="k">return</span>
-<span class="g g-Whitespace">    </span><span class="mi">720</span> 
-
-<span class="nn">~/.local/lib/python3.6/site-packages/IPython/core/interactiveshell.py</span> in <span class="ni">safe_execfile_ipy</span><span class="nt">(self, fname, shell_futures, raise_exceptions)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2798</span>         <span class="k">with</span> <span class="n">prepended_to_syspath</span><span class="p">(</span><span class="n">dname</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">2799</span>             <span class="k">try</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">2800</span>                 <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">get_cells</span><span class="p">():</span>
-<span class="g g-Whitespace">   </span><span class="mi">2801</span>                     <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_cell</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">shell_futures</span><span class="o">=</span><span class="n">shell_futures</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2802</span>                     <span class="k">if</span> <span class="n">raise_exceptions</span><span class="p">:</span>
-
-<span class="nn">~/.local/lib/python3.6/site-packages/IPython/core/interactiveshell.py</span> in <span class="ni">get_cells</span><span class="nt">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">2785</span>             <span class="sd">&quot;&quot;&quot;generator for sequence of code blocks to run&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">2786</span>             <span class="k">if</span> <span class="n">fname</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.ipynb&#39;</span><span class="p">):</span>
-<span class="ne">-&gt; </span><span class="mi">2787</span>                 <span class="kn">from</span> <span class="nn">nbformat</span> <span class="kn">import</span> <span class="n">read</span>
-<span class="g g-Whitespace">   </span><span class="mi">2788</span>                 <span class="n">nb</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">as_version</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2789</span>                 <span class="k">if</span> <span class="ow">not</span> <span class="n">nb</span><span class="o">.</span><span class="n">cells</span><span class="p">:</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;nbformat&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello Word!
 </pre></div>
 </div>
 </div>
@@ -655,8 +630,8 @@ IRkernel::installspec()
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 14.3 ms, sys: 16.7 ms, total: 30.9 ms
-Wall time: 11.6 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 16.1 ms, sys: 13.4 ms, total: 29.5 ms
+Wall time: 11.2 s
 </pre></div>
 </div>
 </div>
@@ -669,7 +644,7 @@ Wall time: 11.6 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.65 µs ± 65.6 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10.3 µs ± 619 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
 </pre></div>
 </div>
 </div>
@@ -700,10 +675,20 @@ Automagic is ON, % prefix IS NOT needed for line magics.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>data-structure.ipynb    input-output.ipynb      references.ipynb
-dplyr.ipynb             jupyter-notebook.ipynb  temp-notes.ipynb
-ggplot.ipynb            productive-tech.ipynb
-hello-world.ipynb       program-structure.ipynb
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ckiptagger.ipynb                 nltk.ipynb
+corpus-linguistics-methods.ipynb notebook-to-slides.ipynb
+data-structure.ipynb             patterns-constructions.ipynb
+dplyr.ipynb                      productive-tech.ipynb
+ggplot.ipynb                     program-structure.ipynb
+google-colab.ipynb               python-tricks.ipynb
+hello-world.ipynb                references.ipynb
+input-output.ipynb               temp-notes.ipynb
+jieba.ipynb                      tokenization.ipynb
+jupyter-notebook.ipynb           vectorizing-text.ipynb
+magic-r.ipynb                    web-applications.ipynb
+nlp-ckipnlp.ipynb                web-crawler.ipynb
+nlp-spacy-zh.ipynb               word-cloud.ipynb
+nlp-spacy.ipynb                  word-embeddings.ipynb
 </pre></div>
 </div>
 </div>
@@ -729,22 +714,19 @@ ggplot(aes(x,y)) + geom_point()
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R[write to console]: 
 Attaching package: ‘dplyr’
-
-
-R[write to console]: The following objects are masked from ‘package:stats’:
-
-    filter, lag
-
-
-R[write to console]: The following objects are masked from ‘package:base’:
-
-    intersect, setdiff, setequal, union
-
-
-R[write to console]: Keep up to date with changes at https://www.tidyverse.org/blog/
 </pre></div>
 </div>
-<img alt="_images/jupyter-notebook_16_1.png" src="_images/jupyter-notebook_16_1.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R[write to console]: The following objects are masked from ‘package:stats’:
+
+    filter, lag
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R[write to console]: The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+</pre></div>
+</div>
+<img alt="_images/jupyter-notebook_17_3.png" src="_images/jupyter-notebook_17_3.png" />
 </div>
 </div>
 </div>
@@ -759,16 +741,16 @@ R[write to console]: Keep up to date with changes at https://www.tidyverse.org/b
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "ckiptagger"
+            mode: "python"
         },
         kernelOptions: {
-            kernelName: "ckiptagger",
+            kernelName: "python3",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'ckiptagger'</script>
+    <script>kernelName = 'python3'</script>
 
               </div>
               
@@ -779,7 +761,7 @@ R[write to console]: Keep up to date with changes at https://www.tidyverse.org/b
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="python-basics.html" title="previous page">Python Basics</a>
-    <a class='right-next' id="next-link" href="google-colab.html" title="next page">Google Colaboratory (Colab)</a>
+    <a class='right-next' id="next-link" href="notebook-to-slides.html" title="next page">Notebook to Slides</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

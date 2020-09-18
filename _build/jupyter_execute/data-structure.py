@@ -135,3 +135,18 @@ dict_days['S']
 dict_days.keys()
 dict_days.values()
 dict_days.get('A','NA')
+
+## Format strings
+print('Hello, {}! This is your No.{} book!'.format('Alvin',5))
+print('An {0} a day keeps the {1} away.'.format('apple','doctor'))
+print('An {1} a day keeps the {0} away.'.format('apple','doctor'))
+print('The {noun} is {adj}!'.format(noun='book',adj='difficult'))
+
+## Format strings with Dictionary
+table = {'John': 98, 'Mary': 30, 'Jessica': 78, 'Goerge': 89, 'Jack': 45}
+print('Jack: {0[Jack]:d}'.format(table))
+print('Jack: {Jack:d}Jessica: {Jessica:d}'.format(**table))
+
+## Old string formatting
+import math
+print('The value of pi is %1.2f' % math.pi) # specify number of digits before and after .
