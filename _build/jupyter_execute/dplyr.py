@@ -6,12 +6,16 @@
     - [How to get sample datasets in Python](https://stackoverflow.com/questions/28417293/sample-datasets-in-pandas)
 - Alternative methods in Python to deal with data exploration and manipulation
 - These methods are to replicate what `dplyr` in R is capable of
+- The `statsmodels` can download R datasets from https://vincentarelbundock.github.io/Rdatasets/datasets.html
 
 import pandas as pd
 import numpy as np
 import statsmodels.api as sm
+import matplotlib
+%matplotlib inline
 
 iris = sm.datasets.get_rdataset('iris').data
+titanic = pd.read_csv('../../../Corpus/StatsDatasets/titanic-train.csv')
 
 ## Quick way to access R datasets
 pd.DataFrame.head(iris)
@@ -23,6 +27,7 @@ iris.index
 iris.info()
 iris.describe()
 
+
 ## `dplyr` Key Verbs
 
 - `filter()`
@@ -31,6 +36,17 @@ iris.describe()
 - `arrange()`
 - `summarize()`
 - `group_by()`
+
+iris.isnull().sum()
+iris['Species']=iris['Species'].astype('category')
+iris.dtypes
+#iris.value_counts(iris['Species']).plot.bar()
+
+titanic.head()
+titanic.value_counts(titanic['Survived']).plot.bar()
+titanic.columns
+titanic.groupby(['Sex','Pclass']).mean()
+titanic[titanic['Age']<18].groupby(['Sex','Pclass']).mean()
 
 ###  `filter()`
 
@@ -45,6 +61,9 @@ iris[(iris['Sepal.Length']>5) & (iris['Sepal.Width']>4)]
 
 ## select
 iris[['Sepal.Length', 'Species']]
+
+## deselect columns
+iris.drop(['Sepal.Length'], axis=1).head()
 
 iris.filter(['Species','Sepal.Length'])
 

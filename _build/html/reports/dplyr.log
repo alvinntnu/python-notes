@@ -35,5 +35,7 @@ Here is a preview of the cell contents:
 import pandas as pd
 import numpy as np
 import statsmodels.api as sm
+import matplotlib
+%matplotlib inline
 -------------------
 

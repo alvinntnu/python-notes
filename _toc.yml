@@ -22,12 +22,17 @@
     - file: tokenization
     - file: word-cloud
     - file: patterns-constructions
+    - file: bnc
+    - file: childes
+    - file: praat-textgrid
     - file: vectorizing-text
     - file: jieba
     - file: ckiptagger
 - file: nlp
   sections:
     - file: word-embeddings
+    - file: word2vec
+    - file: doc2vec
     - file: nlp-spacy
     - file: nlp-spacy-zh
     - file: nlp-ckipnlp

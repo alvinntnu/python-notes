@@ -1,0 +1,560 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Dov2Vec &#8212; Python Notes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Natural Language Processing (spaCy)" href="nlp-spacy.html" />
+    <link rel="prev" title="Word2Vec" href="word2vec.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/ntnu03.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Python Notes</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="python-basics.html">
+   Python Basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="corpus-processing.html">
+   Corpus Linguistics with Python
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="nlp.html">
+   Natural Language Processing with Python
+  </a>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="word-embeddings.html">
+     Word Embeddings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="word2vec.html">
+     Word2Vec
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Dov2Vec
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="nlp-spacy.html">
+     Natural Language Processing (spaCy)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="nlp-spacy-zh.html">
+     Chinese Natural Language Processing (spaCy)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="nlp-ckipnlp.html">
+     Natural Language Processing (ckipnlp)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/doc2vec.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/doc2vec.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/doc2vec.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#taggeddocument-preparation">
+   TaggedDocument Preparation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#taggeddocument-format">
+   TaggedDocument Format
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-training">
+   Model Training
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#concatenated-model">
+   Concatenated Model
+  </a>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="dov2vec">
+<h1>Dov2Vec<a class="headerlink" href="#dov2vec" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="taggeddocument-preparation">
+<h2>TaggedDocument Preparation<a class="headerlink" href="#taggeddocument-preparation" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">gensim</span>
+<span class="c1"># LEE corpus</span>
+<span class="n">test_data_dir</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">gensim</span><span class="o">.</span><span class="n">__path__</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="s1">&#39;test_data&#39;</span><span class="p">])</span>
+<span class="n">lee_train_file</span> <span class="o">=</span> <span class="n">test_data_dir</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="s1">&#39;lee_background.cor&#39;</span>
+<span class="n">lee_test_file</span> <span class="o">=</span> <span class="n">test_data_dir</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="s1">&#39;lee.cor&#39;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">test_data_dir</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lee_train_file</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lee_test_file</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/gensim/test/test_data
+/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/gensim/test/test_data/lee_background.cor
+/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/gensim/test/test_data/lee.cor
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">smart_open</span>
+
+<span class="k">def</span> <span class="nf">read_corpus</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">tokens_only</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">smart_open</span><span class="o">.</span><span class="n">smart_open</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">tokens_only</span><span class="p">:</span>
+                <span class="k">yield</span> <span class="n">gensim</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">simple_preprocess</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># For training data, add tags</span>
+                <span class="k">yield</span> <span class="n">gensim</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">doc2vec</span><span class="o">.</span><span class="n">TaggedDocument</span><span class="p">(</span><span class="n">gensim</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">simple_preprocess</span><span class="p">(</span><span class="n">line</span><span class="p">),</span> <span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+<span class="n">train_corpus</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">read_corpus</span><span class="p">(</span><span class="n">lee_train_file</span><span class="p">))</span>
+<span class="n">test_corpus</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">read_corpus</span><span class="p">(</span><span class="n">lee_test_file</span><span class="p">,</span> <span class="n">tokens_only</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/smart_open/smart_open_lib.py:254: UserWarning: This function is deprecated, use smart_open.open instead. See the migration notes for details: https://github.com/RaRe-Technologies/smart_open/blob/master/README.rst#migrating-to-the-new-open-function
+  &#39;See the migration notes for details: %s&#39; % _MIGRATION_NOTES_URL
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="taggeddocument-format">
+<h2>TaggedDocument Format<a class="headerlink" href="#taggeddocument-format" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>TaggedDocument(words = List(toke, token,…), tags = int())</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_corpus</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="c1">## A TaggedDocument(List of Word Tokens, Int of Tag)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TaggedDocument(words=[&#39;the&#39;, &#39;national&#39;, &#39;road&#39;, &#39;toll&#39;, &#39;for&#39;, &#39;the&#39;, &#39;christmas&#39;, &#39;new&#39;, &#39;year&#39;, &#39;holiday&#39;, &#39;period&#39;, &#39;stands&#39;, &#39;at&#39;, &#39;eight&#39;, &#39;fewer&#39;, &#39;than&#39;, &#39;for&#39;, &#39;the&#39;, &#39;same&#39;, &#39;time&#39;, &#39;last&#39;, &#39;year&#39;, &#39;people&#39;, &#39;have&#39;, &#39;died&#39;, &#39;on&#39;, &#39;new&#39;, &#39;south&#39;, &#39;wales&#39;, &#39;roads&#39;, &#39;with&#39;, &#39;eight&#39;, &#39;fatalities&#39;, &#39;in&#39;, &#39;both&#39;, &#39;queensland&#39;, &#39;and&#39;, &#39;victoria&#39;, &#39;western&#39;, &#39;australia&#39;, &#39;the&#39;, &#39;northern&#39;, &#39;territory&#39;, &#39;and&#39;, &#39;south&#39;, &#39;australia&#39;, &#39;have&#39;, &#39;each&#39;, &#39;recorded&#39;, &#39;three&#39;, &#39;deaths&#39;, &#39;while&#39;, &#39;the&#39;, &#39;act&#39;, &#39;and&#39;, &#39;tasmania&#39;, &#39;remain&#39;, &#39;fatality&#39;, &#39;free&#39;], tags=[2])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="model-training">
+<h2>Model Training<a class="headerlink" href="#model-training" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="kn">from</span> <span class="nn">gensim.models</span> <span class="kn">import</span> <span class="n">Doc2Vec</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">doc2vec</span><span class="o">.</span><span class="n">Doc2Vec</span><span class="p">(</span><span class="n">vector_size</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">min_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">build_vocab</span><span class="p">(</span><span class="n">train_corpus</span><span class="p">)</span> 
+<span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">train_corpus</span><span class="p">,</span> <span class="n">total_examples</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">corpus_count</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">iter</span><span class="p">)</span>
+
+<span class="n">models</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="c1"># PV-DBOW (Skip-Gram equivalent of Word2Vec)</span>
+    <span class="n">Doc2Vec</span><span class="p">(</span><span class="n">dm</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dbow_words</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">vector_size</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">min_count</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">50</span><span class="p">),</span>
+    
+    <span class="c1"># PV-DM w/average (CBOW equivalent of Word2Vec)</span>
+    <span class="n">Doc2Vec</span><span class="p">(</span><span class="n">dm</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dm_mean</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">vector_size</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">min_count</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">epochs</span> <span class="o">=</span><span class="mi">50</span><span class="p">),</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/Alvin/.local/lib/python3.6/site-packages/ipykernel_launcher.py:4: DeprecationWarning: Call to deprecated `iter` (Attribute will be removed in 4.0.0, use self.epochs instead).
+  after removing the cwd from sys.path.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 10 s, sys: 621 ms, total: 10.7 s
+Wall time: 5.42 s
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="concatenated-model">
+<h2>Concatenated Model<a class="headerlink" href="#concatenated-model" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Train both PV-DBOW and PV-DM and combine the two</span>
+
+<span class="n">documents</span> <span class="o">=</span> <span class="n">train_corpus</span>
+<span class="n">models</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">build_vocab</span><span class="p">(</span><span class="n">documents</span><span class="p">)</span>
+<span class="n">models</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">reset_from</span><span class="p">(</span><span class="n">models</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="p">:</span>
+   <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">documents</span><span class="p">,</span> <span class="n">total_examples</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">corpus_count</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">epochs</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">gensim.test.test_doc2vec</span> <span class="kn">import</span> <span class="n">ConcatenatedDoc2Vec</span>
+<span class="n">new_model</span> <span class="o">=</span> <span class="n">ConcatenatedDoc2Vec</span><span class="p">((</span><span class="n">models</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">models</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inferred_vector</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">infer_vector</span><span class="p">(</span><span class="n">train_corpus</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">words</span><span class="p">)</span>
+<span class="n">sims</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">docvecs</span><span class="o">.</span><span class="n">most_similar</span><span class="p">([</span><span class="n">inferred_vector</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sims</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(0, 0.9342625737190247), (255, 0.8373904228210449), (48, 0.8239532709121704), (40, 0.8107737302780151), (272, 0.7746233940124512), (8, 0.735002875328064), (264, 0.6822834014892578), (33, 0.6701095700263977), (19, 0.6556666493415833), (10, 0.6318578720092773)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A thread on how to use <code class="docutils literal notranslate"><span class="pre">most_similar()</span></code> with <code class="docutils literal notranslate"><span class="pre">ConcatenatedDoc2Vec</span></code>: <a class="reference external" href="https://stackoverflow.com/questions/54186233/doc2vec-infer-most-similar-vector-from-concatenateddocvecs">link</a></p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># model 1</span>
+<span class="n">inferred_vector</span> <span class="o">=</span><span class="n">new_model</span><span class="o">.</span><span class="n">models</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">infer_vector</span><span class="p">(</span><span class="n">train_corpus</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">words</span><span class="p">)</span>
+<span class="n">sims2</span> <span class="o">=</span> <span class="n">new_model</span><span class="o">.</span><span class="n">models</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">docvecs</span><span class="o">.</span><span class="n">most_similar</span><span class="p">([</span><span class="n">inferred_vector</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sims2</span><span class="p">)</span>
+<span class="c1"># model 2</span>
+<span class="n">inferred_vector</span> <span class="o">=</span><span class="n">new_model</span><span class="o">.</span><span class="n">models</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">infer_vector</span><span class="p">(</span><span class="n">train_corpus</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">words</span><span class="p">)</span>
+<span class="n">sims3</span> <span class="o">=</span> <span class="n">new_model</span><span class="o">.</span><span class="n">models</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">docvecs</span><span class="o">.</span><span class="n">most_similar</span><span class="p">([</span><span class="n">inferred_vector</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sims3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(0, 0.938361406326294), (33, 0.5065516829490662), (48, 0.4614024758338928), (40, 0.45015719532966614), (264, 0.3834097981452942), (8, 0.3703063130378723), (189, 0.3661886751651764), (19, 0.34194520115852356), (272, 0.34161144495010376), (52, 0.3334077000617981)]
+[(0, 0.9346953630447388), (255, 0.8473849892616272), (48, 0.8244283199310303), (40, 0.8145112991333008), (272, 0.7762213945388794), (8, 0.7316676378250122), (264, 0.6965383291244507), (33, 0.6619812250137329), (19, 0.6512156128883362), (10, 0.6419538259506226)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Doc 1 seems most similar to Doc 255?</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">train_corpus</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">train_corpus</span><span class="p">[</span><span class="mi">255</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">train_corpus</span><span class="p">[</span><span class="mi">33</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>hundreds of people have been forced to vacate their homes in the southern highlands of new south wales as strong winds today pushed huge bushfire towards the town of hill top new blaze near goulburn south west of sydney has forced the closure of the hume highway at about pm aedt marked deterioration in the weather as storm cell moved east across the blue mountains forced authorities to make decision to evacuate people from homes in outlying streets at hill top in the new south wales southern highlands an estimated residents have left their homes for nearby mittagong the new south wales rural fire service says the weather conditions which caused the fire to burn in finger formation have now eased and about fire units in and around hill top are optimistic of defending all properties as more than blazes burn on new year eve in new south wales fire crews have been called to new fire at gunning south of goulburn while few details are available at this stage fire authorities says it has closed the hume highway in both directions meanwhile new fire in sydney west is no longer threatening properties in the cranebrook area rain has fallen in some parts of the illawarra sydney the hunter valley and the north coast but the bureau of meteorology claire richards says the rain has done little to ease any of the hundred fires still burning across the state the falls have been quite isolated in those areas and generally the falls have been less than about five millimetres she said in some places really not significant at all less than millimetre so there hasn been much relief as far as rain is concerned in fact they ve probably hampered the efforts of the firefighters more because of the wind gusts that are associated with those thunderstorms
+
+the new south wales state emergency service ses says it has now received calls for help in the wake of monday fierce storms natural disaster areas have been declared throughout sydney and surrounding areas and parts of the state north west in sydney more than homes mainly in the northern suburbs remain without power ses spokeswoman laura goodin says several hundred volunteers will be back in the field this morning we ve had about calls for help of which we ve completed about two thirds we ve had about volunteers in the field being helped out by the royal fire service and the new south wales fire brigades and we re expecting to have most jobs completed by about friday ms goodin said the extensive storm damage has prompted warning about people falsely claiming to work for the ses the warning from fair trading minister john aquilina follows reports from the suburb of hornsby that people claiming to work for the ses are asking for payment from the storm victims mr aquilina has reminded householders that the ses is volunteer organisation and does not charge for its work or employ sub contractors he has suggested residents contact the police if they are approached by such people the government is also warning householders against dealing with unlicensed tradespeople
+
+new south wales firefighters are hoping lighter winds will help ease their workload today but are predicting nasty conditions over the weekend while the winds are expected to ease somewhat today the weather bureau says temperatures will be higher more than fires are still burning across new south wales the rural fire service says the change may allow it to concentrate more on preventative action but there is no room for complacency mark sullivan from the rural fire service says while conditions may be little kinder to them today the outlook for the weekend has them worried it certainly appears from the weather forecast with very high temperatures and high winds that it certainly could be nasty couple of days ahead mr sullivan said one of the areas causing greatest concern today is the kilometre long blaze in the lower blue mountains firefighters are also keeping close eye on blaze at spencer north of sydney which yesterday broke through containment lines there are concerns that fire may jump the hawkesbury river backburning continues in the state central west and south of sydney in the shoalhaven in the illawarra firefighters have been able to carry out back burning operations in three areas operations were carried out in parts of mt kembla as well as an area bounded by appin road and the old princes highway at helensburgh an area west of windy gully near cataract dam was also targeted meanwhile illawarra police have arrested three teenagers in relation to bushfires at shellharbour on the south coast of new south wales spokesman says three small fires were extinguished around pm aedt yesterday short time later police arrested three year old boys from shellharbour barrack heights and shell cove all three have been interviewed but no charges have been laid
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Other vector models </span>
+
+<span class="c1"># # glove</span>
+
+<span class="c1"># from gensim.scripts.glove2word2vec import glove2word2vec</span>
+<span class="c1"># glove_input_file = &#39;glove.6B.100d.txt&#39;</span>
+<span class="c1"># word2vec_output_file = &#39;glove.6B.100d.txt.word2vec&#39;</span>
+<span class="c1"># glove2word2vec(glove_input_file, word2vec_output_file)</span>
+
+<span class="c1"># from gensim.models import KeyedVectors</span>
+<span class="c1"># filename = &#39;glove.6B.100d.txt.word2vec&#39;</span>
+<span class="c1"># model = KeyedVectors.load_word2vec_format(filename, binary=False)</span>
+
+<span class="c1"># model.most_similar(positive=[&#39;woman&#39;, &#39;king&#39;], negative=[&#39;man&#39;], topn=1)</span>
+
+<span class="c1"># from gensim.models.fasttext import FastText</span>
+
+<span class="c1"># ft_model = FastText(size=100)</span>
+<span class="c1"># ft_model.build_vocab(data)</span>
+<span class="c1"># model_gensim.train(data, total_examples=ft_model.corpus_count, epochs=ft_model.iter)</span>
+
+
+<span class="c1"># from gensim.models.wrappers.fasttext import FastText</span>
+
+<span class="c1"># # Set FastText home to the path to the FastText executable</span>
+<span class="c1"># ft_home = &#39;/home/bhargav/Gensim/fastText/fasttext&#39;</span>
+<span class="c1"># # train the model</span>
+<span class="c1"># model_wrapper = FastText.train(ft_home, train_file)</span>
+
+<span class="c1"># print(&#39;dog&#39; in model.wv.vocab)</span>
+<span class="c1"># print(&#39;dogs&#39; in model.wv.vocab)</span>
+
+<span class="c1"># print(&#39;dog&#39; in model)</span>
+<span class="c1"># print(&#39;dogs&#39; in model)</span>
+
+<span class="c1"># from gensim.models.wrappers import Wordrank</span>
+
+<span class="c1"># wordrank_path = &#39;wordrank&#39; # path to Wordrank directory</span>
+<span class="c1"># out_dir = &#39;model&#39; # name of output directory to save data to</span>
+<span class="c1"># data = &#39;../../gensim/test/test_data/lee.cor&#39; # sample corpus</span>
+
+<span class="c1"># model = Wordrank.train(wordrank_path, data, out_dir, iter=21, dump_period=10)</span>
+
+
+<span class="c1"># varembed_vectors = &#39;../../gensim/test/test_data/varembed_leecorpus_vectors.pkl&#39;</span>
+<span class="c1"># model = varembed.VarEmbed.load_varembed_format(vectors=varembed_vectors)</span>
+
+
+<span class="c1"># morfessors = &#39;../../gensim/test/test_data/varembed_leecorpus_morfessor.bin&#39;</span>
+<span class="c1"># model = varembed.VarEmbed.load_varembed_format(vectors=varembed_vectors, morfessor_model=morfessors)</span>
+
+<span class="c1"># import os</span>
+
+<span class="c1"># poincare_directory = os.path.join(os.getcwd(), &#39;docs&#39;, &#39;notebooks&#39;, &#39;poincare&#39;)</span>
+<span class="c1"># data_directory = os.path.join(poincare_directory, &#39;data&#39;)</span>
+<span class="c1"># wordnet_mammal_file = os.path.join(data_directory, &#39;wordnet_mammal_hypernyms.tsv&#39;)</span>
+
+<span class="c1"># from gensim.models.poincare import PoincareModel, PoincareKeyedVectors, PoincareRelations</span>
+<span class="c1"># relations = PoincareRelations(file_path=wordnet_mammal_file, delimiter=&#39;\t&#39;)</span>
+<span class="c1"># model = PoincareModel(train_data=relations, size=2, burn_in=0)</span>
+<span class="c1"># model.train(epochs=1, print_every=500)</span>
+
+<span class="c1"># models_directory = os.path.join(poincare_directory, &#39;models&#39;)</span>
+<span class="c1"># test_model_path = os.path.join(models_directory, &#39;gensim_model_batch_size_10_burn_in_0_epochs_50_neg_20_dim_50&#39;)</span>
+<span class="c1"># model = PoincareModel.load(test_model_path)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ckiptagger"
+        },
+        kernelOptions: {
+            kernelName: "ckiptagger",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ckiptagger'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="word2vec.html" title="previous page">Word2Vec</a>
+    <a class='right-next' id="next-link" href="nlp-spacy.html" title="next page">Natural Language Processing (spaCy)</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alvin Chen<br/>
+        
+            &copy; Copyright 2020 Alvin Chen.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="_static/js/index.js"></script>
+    
+  </body>
+</html>

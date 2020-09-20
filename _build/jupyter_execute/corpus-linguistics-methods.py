@@ -112,6 +112,8 @@ type(unigram_dispersion)
 ## Simple Concordances
 brown_text.concordance('American', width=79, lines = 5)
 
+#nltk.app.concordance()
+
 ## Regular Expression Concordances
 import re
 sents = [' '.join(s) for s in brown.sents()]
@@ -145,3 +147,58 @@ brown_df_nouns_df %>%
 filter(freq > 100) %>%
 arrange(word) %>% 
 head(50)
+
+## Conditional Frequency List
+
+
+## Word by POS Frequency Distribution
+
+brown_news_tagged_words = brown.tagged_words(categories='news', tagset='universal')
+brown_news_cfd = nltk.ConditionalFreqDist(brown_news_tagged_words)
+brown_news_cfd['yield']
+
+## POS by Word Frequency Distribution
+brown_news_cfd2 = nltk.ConditionalFreqDist([(t, w) for (w, t) in brown_news_tagged_words])
+brown_news_cfd2['VERB'].most_common(10)
+
+## Word by Genre Frequency Distribution
+brown_genre_cfd = nltk.ConditionalFreqDist(
+    (word, genre)
+    for genre in brown.categories()
+    for word in brown.words(categories=genre)
+)
+
+brown_genre_cfd.conditions()[:50]
+brown_genre_cfd['mysterious']
+
+print(sorted(brown_genre_cfd['mysterious'].items(),key=lambda x:x[1],reverse=True)) # with freq
+
+## Genre by Word Frequency Distribution
+brown_genre_cdf2 = nltk.ConditionalFreqDist(
+    (genre, word)
+    for genre in brown.categories()
+    for word in brown.words(categories=genre)
+)
+
+## Genre by Word Frequency Distribution
+brown_genre_cdf2 = nltk.ConditionalFreqDist(
+    (genre, word)
+    for genre in brown.categories()
+    for word in brown.words(categories=genre)
+)
+
+
+
+
+top_n_word = [word for (word, freq) in brown_fd_words.most_common(20) if word[0].isalpha()]
+
+brown_genre_cdf2.tabulate(conditions=['adventure','editorial','fiction'],
+                         samples=top_n_word[:10])
+
+top_n_word2 = [word for (word, tag) in brown.tagged_words(tagset='universal') 
+               if tag.startswith('NOUN')]
+top_n_word2_fd = nltk.FreqDist(top_n_word2).most_common(10)
+
+print(top_n_word2_fd)
+brown_genre_cdf2.tabulate(conditions=['adventure','editorial','fiction'],
+                         samples=[w for (w, f) in top_n_word2_fd])

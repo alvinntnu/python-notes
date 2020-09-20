@@ -3,6 +3,12 @@
 - This notebook includes useful Python tricks provided by [Dan Bader](https://dbader.org/).
 - All the tricks are cumulated via different sources as well as many trial-and-errors. Not very organized.
 
+## Find module path
+import re, os
+#print(re.__path__[0]) # if the module is a directory
+print(re.__file__)
+path = os.path.abspath(re.__file__)
+
 # convert a int List into str List
 a = [1,5,10]
 type(a)
@@ -75,3 +81,21 @@ tuple_lexicon = [
 print(tuple_lexicon)
 print(tuple_lexicon.sort())
 print(tuple_lexicon)
+
+#!pip list
+import sys
+modulenames = set(sys.modules) & set(globals())
+allmodules = [sys.modules[name] for name in modulenames]
+print(allmodules)
+
+import sys
+import pprint
+
+# pretty print loaded modules
+pprint.pprint(sys.modules)
+
+# from modulefinder import ModuleFinder
+# finder = ModuleFinder()
+# finder.run_script("SCRIPT_ONLY")
+# for name, mod in finder.modules.items():
+#     print(name)

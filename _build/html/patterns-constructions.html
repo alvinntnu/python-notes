@@ -36,7 +36,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Vectorizing Texts" href="vectorizing-text.html" />
+    <link rel="next" title="BNC-XML" href="bnc.html" />
     <link rel="prev" title="Word Cloud" href="word-cloud.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -116,6 +116,21 @@
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      Patterns and Constructions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="bnc.html">
+     BNC-XML
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="childes.html">
+     CHILDES Corpus
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="praat-textgrid.html">
+     Praat TextGrid Data
     </a>
    </li>
    <li class="toctree-l2">
@@ -236,7 +251,14 @@
             <i class="fas fa-list"></i> Contents
         </div>
         <nav id="bd-toc-nav">
-            
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#patterns-from-raw-text-corpus">
+   Patterns from Raw-Text Corpus
+  </a>
+ </li>
+</ul>
+
         </nav>
     </div>
 </div>
@@ -291,7 +313,6 @@
   ./.)
 </pre></div>
 </div>
-<img alt="_images/patterns-constructions_2_1.png" src="_images/patterns-constructions_2_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -424,6 +445,299 @@ label: NP
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nltk</span><span class="o">.</span><span class="n">help</span><span class="o">.</span><span class="n">upenn_tagset</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>$: dollar
+    $ -$ --$ A$ C$ HK$ M$ NZ$ S$ U.S.$ US$
+&#39;&#39;: closing quotation mark
+    &#39; &#39;&#39;
+(: opening parenthesis
+    ( [ {
+): closing parenthesis
+    ) ] }
+,: comma
+    ,
+--: dash
+    --
+.: sentence terminator
+    . ! ?
+:: colon or ellipsis
+    : ; ...
+CC: conjunction, coordinating
+    &amp; &#39;n and both but either et for less minus neither nor or plus so
+    therefore times v. versus vs. whether yet
+CD: numeral, cardinal
+    mid-1890 nine-thirty forty-two one-tenth ten million 0.5 one forty-
+    seven 1987 twenty &#39;79 zero two 78-degrees eighty-four IX &#39;60s .025
+    fifteen 271,124 dozen quintillion DM2,000 ...
+DT: determiner
+    all an another any both del each either every half la many much nary
+    neither no some such that the them these this those
+EX: existential there
+    there
+FW: foreign word
+    gemeinschaft hund ich jeux habeas Haementeria Herr K&#39;ang-si vous
+    lutihaw alai je jour objets salutaris fille quibusdam pas trop Monte
+    terram fiche oui corporis ...
+IN: preposition or conjunction, subordinating
+    astride among uppon whether out inside pro despite on by throughout
+    below within for towards near behind atop around if like until below
+    next into if beside ...
+JJ: adjective or numeral, ordinal
+    third ill-mannered pre-war regrettable oiled calamitous first separable
+    ectoplasmic battery-powered participatory fourth still-to-be-named
+    multilingual multi-disciplinary ...
+JJR: adjective, comparative
+    bleaker braver breezier briefer brighter brisker broader bumper busier
+    calmer cheaper choosier cleaner clearer closer colder commoner costlier
+    cozier creamier crunchier cuter ...
+JJS: adjective, superlative
+    calmest cheapest choicest classiest cleanest clearest closest commonest
+    corniest costliest crassest creepiest crudest cutest darkest deadliest
+    dearest deepest densest dinkiest ...
+LS: list item marker
+    A A. B B. C C. D E F First G H I J K One SP-44001 SP-44002 SP-44005
+    SP-44007 Second Third Three Two * a b c d first five four one six three
+    two
+MD: modal auxiliary
+    can cannot could couldn&#39;t dare may might must need ought shall should
+    shouldn&#39;t will would
+NN: noun, common, singular or mass
+    common-carrier cabbage knuckle-duster Casino afghan shed thermostat
+    investment slide humour falloff slick wind hyena override subhumanity
+    machinist ...
+NNP: noun, proper, singular
+    Motown Venneboerger Czestochwa Ranzer Conchita Trumplane Christos
+    Oceanside Escobar Kreisler Sawyer Cougar Yvette Ervin ODI Darryl CTCA
+    Shannon A.K.C. Meltex Liverpool ...
+NNPS: noun, proper, plural
+    Americans Americas Amharas Amityvilles Amusements Anarcho-Syndicalists
+    Andalusians Andes Andruses Angels Animals Anthony Antilles Antiques
+    Apache Apaches Apocrypha ...
+NNS: noun, common, plural
+    undergraduates scotches bric-a-brac products bodyguards facets coasts
+    divestitures storehouses designs clubs fragrances averages
+    subjectivists apprehensions muses factory-jobs ...
+PDT: pre-determiner
+    all both half many quite such sure this
+POS: genitive marker
+    &#39; &#39;s
+PRP: pronoun, personal
+    hers herself him himself hisself it itself me myself one oneself ours
+    ourselves ownself self she thee theirs them themselves they thou thy us
+PRP$: pronoun, possessive
+    her his mine my our ours their thy your
+RB: adverb
+    occasionally unabatingly maddeningly adventurously professedly
+    stirringly prominently technologically magisterially predominately
+    swiftly fiscally pitilessly ...
+RBR: adverb, comparative
+    further gloomier grander graver greater grimmer harder harsher
+    healthier heavier higher however larger later leaner lengthier less-
+    perfectly lesser lonelier longer louder lower more ...
+RBS: adverb, superlative
+    best biggest bluntest earliest farthest first furthest hardest
+    heartiest highest largest least less most nearest second tightest worst
+RP: particle
+    aboard about across along apart around aside at away back before behind
+    by crop down ever fast for forth from go high i.e. in into just later
+    low more off on open out over per pie raising start teeth that through
+    under unto up up-pp upon whole with you
+SYM: symbol
+    % &amp; &#39; &#39;&#39; &#39;&#39;. ) ). * + ,. &lt; = &gt; @ A[fj] U.S U.S.S.R * ** ***
+TO: &quot;to&quot; as preposition or infinitive marker
+    to
+UH: interjection
+    Goodbye Goody Gosh Wow Jeepers Jee-sus Hubba Hey Kee-reist Oops amen
+    huh howdy uh dammit whammo shucks heck anyways whodunnit honey golly
+    man baby diddle hush sonuvabitch ...
+VB: verb, base form
+    ask assemble assess assign assume atone attention avoid bake balkanize
+    bank begin behold believe bend benefit bevel beware bless boil bomb
+    boost brace break bring broil brush build ...
+VBD: verb, past tense
+    dipped pleaded swiped regummed soaked tidied convened halted registered
+    cushioned exacted snubbed strode aimed adopted belied figgered
+    speculated wore appreciated contemplated ...
+VBG: verb, present participle or gerund
+    telegraphing stirring focusing angering judging stalling lactating
+    hankerin&#39; alleging veering capping approaching traveling besieging
+    encrypting interrupting erasing wincing ...
+VBN: verb, past participle
+    multihulled dilapidated aerosolized chaired languished panelized used
+    experimented flourished imitated reunifed factored condensed sheared
+    unsettled primed dubbed desired ...
+VBP: verb, present tense, not 3rd person singular
+    predominate wrap resort sue twist spill cure lengthen brush terminate
+    appear tend stray glisten obtain comprise detest tease attract
+    emphasize mold postpone sever return wag ...
+VBZ: verb, present tense, 3rd person singular
+    bases reconstructs marks mixes displeases seals carps weaves snatches
+    slumps stretches authorizes smolders pictures emerges stockpiles
+    seduces fizzes uses bolsters slaps speaks pleads ...
+WDT: WH-determiner
+    that what whatever which whichever
+WP: WH-pronoun
+    that what whatever whatsoever which who whom whosoever
+WP$: WH-pronoun, possessive
+    whose
+WRB: Wh-adverb
+    how however whence whenever where whereby whereever wherein whereof why
+``: opening quotation mark
+    ` ``
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="patterns-from-raw-text-corpus">
+<h2>Patterns from Raw-Text Corpus<a class="headerlink" href="#patterns-from-raw-text-corpus" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">gutenberg</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gutenberg</span><span class="o">.</span><span class="n">fileids</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;austen-emma.txt&#39;,
+ &#39;austen-persuasion.txt&#39;,
+ &#39;austen-sense.txt&#39;,
+ &#39;bible-kjv.txt&#39;,
+ &#39;blake-poems.txt&#39;,
+ &#39;bryant-stories.txt&#39;,
+ &#39;burgess-busterbrown.txt&#39;,
+ &#39;carroll-alice.txt&#39;,
+ &#39;chesterton-ball.txt&#39;,
+ &#39;chesterton-brown.txt&#39;,
+ &#39;chesterton-thursday.txt&#39;,
+ &#39;edgeworth-parents.txt&#39;,
+ &#39;melville-moby_dick.txt&#39;,
+ &#39;milton-paradise.txt&#39;,
+ &#39;shakespeare-caesar.txt&#39;,
+ &#39;shakespeare-hamlet.txt&#39;,
+ &#39;shakespeare-macbeth.txt&#39;,
+ &#39;whitman-leaves.txt&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">alice_sents</span> <span class="o">=</span> <span class="p">[</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sent</span><span class="p">)</span> 
+               <span class="k">for</span> <span class="n">sent</span> <span class="ow">in</span> <span class="n">gutenberg</span><span class="o">.</span><span class="n">sents</span><span class="p">(</span><span class="n">fileids</span><span class="o">=</span><span class="s1">&#39;carroll-alice.txt&#39;</span><span class="p">)</span>
+              <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sent</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">alice_sents</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&quot;[ Alice &#39; s Adventures in Wonderland by Lewis Carroll 1865 ]&quot;,
+ &#39;Down the Rabbit - Hole&#39;,
+ &quot;Alice was beginning to get very tired of sitting by her sister on the bank , and of having nothing to do : once or twice she had peeped into the book her sister was reading , but it had no pictures or conversations in it , &#39; and what is the use of a book ,&#39; thought Alice &#39; without pictures or conversation ?&#39;&quot;,
+ &#39;So she was considering in her own mind ( as well as she could , for the hot day made her feel very sleepy and stupid ), whether the pleasure of making a daisy - chain would be worth the trouble of getting up and picking the daisies , when suddenly a White Rabbit with pink eyes ran close by her .&#39;,
+ &quot;There was nothing so VERY remarkable in that ; nor did Alice think it so VERY much out of the way to hear the Rabbit say to itself , &#39; Oh dear !&quot;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+
+<span class="n">all_matches</span><span class="o">=</span> <span class="p">[</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;(?:have|has)(?: [^s]+){0,2}[^\s]+(?:en|ed)&#39;</span><span class="p">,</span> <span class="n">sent</span><span class="p">)</span> <span class="k">for</span> <span class="n">sent</span> <span class="ow">in</span> <span class="n">alice_sents</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">([</span><span class="n">m</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">all_matches</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">!=</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[&#39;have wondered&#39;], [&#39;have been changed&#39;], [&#39;have been changed&#39;], [&#39;have dropped&#39;], [&#39;have changed&#39;], [&#39;have happened&#39;], [&#39;have liked&#39;], [&#39;have been changed&#39;], [&#39;have answered&#39;], [&#39;have got altered&#39;], [&#39;have called&#39;], [&#39;have to beat time when&#39;], [&quot;have done that , you know ,&#39; Alice gently remarked ; &#39; they &#39; d have been&quot;], [&#39;have been&#39;], [&#39;have croqueted the Queen&#39;], [&#39;have everybody executed&#39;], [&#39;have any pepper in my kitchen&#39;], [&#39;have the experiment tried&#39;], [&#39;have been&#39;, &#39;have appeared&#39;], [&#39;have ordered&#39;], [&#39;have wanted&#39;], [&#39;have been&#39;], [&#39;have lived&#39;], [&#39;have no notion how delightful it will be When&#39;], [&#39;have baked&#39;], [&#39;have it explained&#39;], [&#39;have finished&#39;], [&#39;have you executed&#39;], [&#39;have you executed&#39;], [&#39;have you executed&#39;], [&#39;have been&#39;], [&#39;have imitated&#39;]]
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>The grouping parenthsis changes the behavior of <code class="docutils literal notranslate"><span class="pre">re.findall()</span></code></p></li>
+<li><p>With parenthesis, the regex engine automatically captures the matches in all the groups and return the results as a tuple.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">(?:...)</span></code> to create non-capturing gorups</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;(?:is|was) (?:\w+ing)&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">Alice was beginning to get very tired of sitting by her sister on the bank , </span>
+<span class="s1">and of having nothing to do : once or twice she had peeped into the book </span>
+<span class="s1">her sister was reading , but it had no pictures or conversations in it , </span>
+<span class="s1">and what is the use of a book , thought Alice  without pictures or conversation ?</span>
+<span class="s1">&#39;&#39;&#39;</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">match</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">match</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>was beginning
+was reading
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>It seems that when we use <code class="docutils literal notranslate"><span class="pre">re.findall()</span></code>, the matches returned would only be the capturing groups; but when we use <code class="docutils literal notranslate"><span class="pre">re.finditer()</span></code>, it would return the whole match strings as well as every section of the capturing groups.</p>
+<p>I would prefer <code class="docutils literal notranslate"><span class="pre">re.finditer()</span></code>. Otherwise, <code class="docutils literal notranslate"><span class="pre">re.findall()</span></code> may need to specify the non-capturing group <code class="docutils literal notranslate"><span class="pre">(?:...)</span></code>.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pat_perfect</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;(is|was) (\w+ing)&#39;</span><span class="p">)</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">Alice was beginning to get very tired of sitting by her sister on the bank , </span>
+<span class="s1">and of having nothing to do : once or twice she had peeped into the book </span>
+<span class="s1">her sister was reading , but it had no pictures or conversations in it , </span>
+<span class="s1">and what is the use of a book , thought Alice  without pictures or conversation ?</span>
+<span class="s1">&#39;&#39;&#39;</span>
+
+<span class="n">pat_perfect_matches</span> <span class="o">=</span> <span class="n">pat_perfect</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">pat_perfect_matches</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">pat_perfect_matches</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>was beginning
+was reading
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -455,7 +769,7 @@ label: NP
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="word-cloud.html" title="previous page">Word Cloud</a>
-    <a class='right-next' id="next-link" href="vectorizing-text.html" title="next page">Vectorizing Texts</a>
+    <a class='right-next' id="next-link" href="bnc.html" title="next page">BNC-XML</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

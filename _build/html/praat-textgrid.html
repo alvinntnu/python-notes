@@ -1,0 +1,996 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Praat TextGrid Data &#8212; Python Notes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Vectorizing Texts" href="vectorizing-text.html" />
+    <link rel="prev" title="CHILDES Corpus" href="childes.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/ntnu03.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Python Notes</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="python-basics.html">
+   Python Basics
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="corpus-processing.html">
+   Corpus Linguistics with Python
+  </a>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="nltk.html">
+     Natural Language Tool-Kits (NLTK)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="web-crawler.html">
+     Web Crawler
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="corpus-linguistics-methods.html">
+     Corpus Lingustics Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tokenization.html">
+     Tokenization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="word-cloud.html">
+     Word Cloud
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="patterns-constructions.html">
+     Patterns and Constructions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="bnc.html">
+     BNC-XML
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="childes.html">
+     CHILDES Corpus
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Praat TextGrid Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="vectorizing-text.html">
+     Vectorizing Texts
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="jieba.html">
+     Chinese Word Segmentation (jieba)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ckiptagger.html">
+     Chinese Word Segmentation (ckiptagger)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="nlp.html">
+   Natural Language Processing with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/praat-textgrid.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/praat-textgrid.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/praat-textgrid.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="praat-textgrid-data">
+<h1>Praat TextGrid Data<a class="headerlink" href="#praat-textgrid-data" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Module: <a class="reference external" href="https://pypi.org/project/praatio/">praatio</a></p></li>
+<li><p>Tutorial: <a class="reference external" href="https://nbviewer.jupyter.org/github/timmahrt/praatIO/blob/master/tutorials/tutorial1_intro_to_praatio.ipynb">PraatIO-Doing Speech Analysis with Python</a></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">praatio</span> <span class="kn">import</span> <span class="n">tgio</span>
+<span class="n">tg</span> <span class="o">=</span> <span class="n">tgio</span><span class="o">.</span><span class="n">openTextgrid</span><span class="p">(</span><span class="s1">&#39;../../../Projects/MOST-Prosody/data/2014_di702_TextGrid_Alvin/di_001.TextGrid&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tg</span><span class="o">.</span><span class="n">tierDict</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;DU&#39;: &lt;praatio.tgio.IntervalTier at 0x7ff5c87cf400&gt;,
+ &#39;PU&#39;: &lt;praatio.tgio.IntervalTier at 0x7ff5b8a1f8d0&gt;,
+ &#39;Hanzi&#39;: &lt;praatio.tgio.IntervalTier at 0x7ff5b8a0b0f0&gt;,
+ &#39;Word&#39;: &lt;praatio.tgio.IntervalTier at 0x7ff5b8a0b358&gt;,
+ &#39;POS&#39;: &lt;praatio.tgio.IntervalTier at 0x7ff5b8a0b630&gt;,
+ &#39;Syllable&#39;: &lt;praatio.tgio.IntervalTier at 0x7ff5c87cf080&gt;}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get all intervals</span>
+<span class="n">tg</span><span class="o">.</span><span class="n">tierDict</span><span class="p">[</span><span class="s1">&#39;PU&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">entryList</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Interval(start=0.0, end=0.08910100003511151, label=&#39;SILENCE&#39;),
+ Interval(start=0.08910100003511151, end=2.545392639802688, label=&#39;001-01&#39;),
+ Interval(start=2.545392639802688, end=2.827885181500808, label=&#39;INHALE&#39;),
+ Interval(start=2.827885181500808, end=3.796965181500808, label=&#39;001-02&#39;),
+ Interval(start=3.796965181500808, end=4.0534851815008075, label=&#39;001-03&#39;),
+ Interval(start=4.0534851815008075, end=5.667585181500808, label=&#39;001-04&#39;),
+ Interval(start=5.667585181500808, end=6.857576537125045, label=&#39;001-05&#39;),
+ Interval(start=6.857576537125045, end=7.267132404585203, label=&#39;INHALE&#39;),
+ Interval(start=7.267132404585203, end=8.307932404585202, label=&#39;001-06&#39;),
+ Interval(start=8.307932404585202, end=9.189732404585204, label=&#39;001-07&#39;),
+ Interval(start=9.189732404585204, end=9.586900772653916, label=&#39;001-08&#39;),
+ Interval(start=9.586900772653916, end=9.72222249424322, label=&#39;BREAK&#39;),
+ Interval(start=9.72222249424322, end=10.896550071849948, label=&#39;001-09&#39;),
+ Interval(start=10.896550071849948, end=11.253792659155748, label=&#39;INHALE&#39;),
+ Interval(start=11.253792659155748, end=12.072532659155748, label=&#39;001-10&#39;),
+ Interval(start=12.072532659155748, end=12.529592659155748, label=&#39;001-11&#39;),
+ Interval(start=12.529592659155748, end=13.493012631305778, label=&#39;001-12&#39;),
+ Interval(start=13.493012631305778, end=14.002673795348752, label=&#39;INHALE&#39;),
+ Interval(start=14.002673795348752, end=15.546373795348751, label=&#39;001-13&#39;),
+ Interval(start=15.546373795348751, end=16.905172445406897, label=&#39;001-14&#39;),
+ Interval(start=16.905172445406897, end=17.333458754946722, label=&#39;BREAK&#39;),
+ Interval(start=17.333458754946722, end=17.814973694535343, label=&#39;001-15&#39;),
+ Interval(start=17.814973694535343, end=18.6811750044612, label=&#39;001-16&#39;),
+ Interval(start=18.6811750044612, end=18.788004535147394, label=&#39;SILENCE&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tg</span><span class="o">.</span><span class="n">tierDict</span><span class="p">[</span><span class="s1">&#39;Word&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">entryList</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Interval(start=0.0, end=0.08910100003511151, label=&#39;SILENCE&#39;),
+ Interval(start=0.08910100003511151, end=0.8030583475894366, label=&#39;南港&#39;),
+ Interval(start=0.8030583475894366, end=1.4300964566345282, label=&#39;過去&#39;),
+ Interval(start=1.4300964566345282, end=1.6983112476321507, label=&#39;的&#39;),
+ Interval(start=1.6983112476321507, end=2.545392639802688, label=&#39;話&#39;),
+ Interval(start=2.545392639802688, end=2.827885181500808, label=&#39;INHALE&#39;),
+ Interval(start=2.827885181500808, end=2.894020472246423, label=&#39;我&#39;),
+ Interval(start=2.894020472246423, end=3.073005181500808, label=&#39;就&#39;),
+ Interval(start=3.073005181500808, end=3.38547756708703, label=&#39;比較&#39;),
+ Interval(start=3.38547756708703, end=3.4684488581941855, label=&#39;不&#39;),
+ Interval(start=3.4684488581941855, end=3.796965181500808, label=&#39;清楚&#39;),
+ Interval(start=3.796965181500808, end=3.9740698058745503, label=&#39;像&#39;),
+ Interval(start=3.9740698058745503, end=4.0534851815008075, label=&#39;UNCERTAIN&#39;),
+ Interval(start=4.0534851815008075, end=4.260025476170655, label=&#39;我&#39;),
+ Interval(start=4.260025476170655, end=4.455985181500808, label=&#39;每&#39;),
+ Interval(start=4.455985181500808, end=4.6733324608007285, label=&#39;天&#39;),
+ Interval(start=4.6733324608007285, end=5.1662851815008075, label=&#39;上班&#39;),
+ Interval(start=5.1662851815008075, end=5.321504689041388, label=&#39;是&#39;),
+ Interval(start=5.321504689041388, end=5.667585181500808, label=&#39;從&#39;),
+ Interval(start=5.667585181500808, end=6.018412388059074, label=&#39;捷運&#39;),
+ Interval(start=6.018412388059074, end=6.549597723575854, label=&#39;永春&#39;),
+ Interval(start=6.549597723575854, end=6.857576537125045, label=&#39;站&#39;),
+ Interval(start=6.857576537125045, end=7.267132404585203, label=&#39;INHALE&#39;),
+ Interval(start=7.267132404585203, end=7.4823724045852025, label=&#39;搭&#39;),
+ Interval(start=7.4823724045852025, end=8.307932404585202, label=&#39;捷運&#39;),
+ Interval(start=8.307932404585202, end=8.546352955764087, label=&#39;到&#39;),
+ Interval(start=8.546352955764087, end=9.189732404585204, label=&#39;NE GE&#39;),
+ Interval(start=9.189732404585204, end=9.586900772653916, label=&#39;捷運&#39;),
+ Interval(start=9.586900772653916, end=9.72222249424322, label=&#39;BREAK&#39;),
+ Interval(start=9.72222249424322, end=10.066174868235244, label=&#39;忠孝&#39;),
+ Interval(start=10.066174868235244, end=10.62507065477828, label=&#39;復興&#39;),
+ Interval(start=10.62507065477828, end=10.896550071849948, label=&#39;站&#39;),
+ Interval(start=10.896550071849948, end=11.253792659155748, label=&#39;INHALE&#39;),
+ Interval(start=11.253792659155748, end=11.507412659155747, label=&#39;再&#39;),
+ Interval(start=11.507412659155747, end=12.072532659155748, label=&#39;轉&#39;),
+ Interval(start=12.072532659155748, end=12.529592659155748, label=&#39;NE GE&#39;),
+ Interval(start=12.529592659155748, end=13.493012631305778, label=&#39;木柵線&#39;),
+ Interval(start=13.493012631305778, end=14.002673795348752, label=&#39;INHALE&#39;),
+ Interval(start=14.002673795348752, end=14.190468411637928, label=&#39;到&#39;),
+ Interval(start=14.190468411637928, end=14.56504394461461, label=&#39;南京&#39;),
+ Interval(start=14.56504394461461, end=14.761767837630165, label=&#39;站&#39;),
+ Interval(start=14.761767837630165, end=15.546373795348751, label=&#39;下車&#39;),
+ Interval(start=15.546373795348751, end=15.772873795348751, label=&#39;再&#39;),
+ Interval(start=15.772873795348751, end=15.926809885128144, label=&#39;搭&#39;),
+ Interval(start=15.926809885128144, end=16.025073795348753, label=&#39;一&#39;),
+ Interval(start=16.025073795348753, end=16.33847379534875, label=&#39;程&#39;),
+ Interval(start=16.33847379534875, end=16.905172445406897, label=&#39;公車&#39;),
+ Interval(start=16.905172445406897, end=17.333458754946722, label=&#39;BREAK&#39;),
+ Interval(start=17.333458754946722, end=17.498171747880015, label=&#39;到&#39;),
+ Interval(start=17.498171747880015, end=17.814973694535343, label=&#39;NE GE&#39;),
+ Interval(start=17.814973694535343, end=18.415958754946722, label=&#39;建國北路&#39;),
+ Interval(start=18.415958754946722, end=18.6811750044612, label=&#39;口&#39;),
+ Interval(start=18.6811750044612, end=18.788004535147394, label=&#39;SILENCE&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tg</span><span class="o">.</span><span class="n">tierDict</span><span class="p">[</span><span class="s1">&#39;Word&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;我&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[6, 13]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">word_tier</span> <span class="o">=</span> <span class="n">tg</span><span class="o">.</span><span class="n">tierDict</span><span class="p">[</span><span class="s1">&#39;Word&#39;</span><span class="p">]</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span> <span class="ow">in</span> <span class="n">word_tier</span><span class="o">.</span><span class="n">entryList</span><span class="p">],</span>
+            <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;start&#39;</span><span class="p">,</span><span class="s1">&#39;end&#39;</span><span class="p">,</span><span class="s1">&#39;label&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>start</th>
+      <th>end</th>
+      <th>label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.000000</td>
+      <td>0.089101</td>
+      <td>SILENCE</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.089101</td>
+      <td>0.803058</td>
+      <td>南港</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.803058</td>
+      <td>1.430096</td>
+      <td>過去</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.430096</td>
+      <td>1.698311</td>
+      <td>的</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1.698311</td>
+      <td>2.545393</td>
+      <td>話</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2.545393</td>
+      <td>2.827885</td>
+      <td>INHALE</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2.827885</td>
+      <td>2.894020</td>
+      <td>我</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2.894020</td>
+      <td>3.073005</td>
+      <td>就</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>3.073005</td>
+      <td>3.385478</td>
+      <td>比較</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>3.385478</td>
+      <td>3.468449</td>
+      <td>不</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>3.468449</td>
+      <td>3.796965</td>
+      <td>清楚</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>3.796965</td>
+      <td>3.974070</td>
+      <td>像</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>3.974070</td>
+      <td>4.053485</td>
+      <td>UNCERTAIN</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>4.053485</td>
+      <td>4.260025</td>
+      <td>我</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>4.260025</td>
+      <td>4.455985</td>
+      <td>每</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>4.455985</td>
+      <td>4.673332</td>
+      <td>天</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>4.673332</td>
+      <td>5.166285</td>
+      <td>上班</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>5.166285</td>
+      <td>5.321505</td>
+      <td>是</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>5.321505</td>
+      <td>5.667585</td>
+      <td>從</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>5.667585</td>
+      <td>6.018412</td>
+      <td>捷運</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>6.018412</td>
+      <td>6.549598</td>
+      <td>永春</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>6.549598</td>
+      <td>6.857577</td>
+      <td>站</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>6.857577</td>
+      <td>7.267132</td>
+      <td>INHALE</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>7.267132</td>
+      <td>7.482372</td>
+      <td>搭</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>7.482372</td>
+      <td>8.307932</td>
+      <td>捷運</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>8.307932</td>
+      <td>8.546353</td>
+      <td>到</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>8.546353</td>
+      <td>9.189732</td>
+      <td>NE GE</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>9.189732</td>
+      <td>9.586901</td>
+      <td>捷運</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>9.586901</td>
+      <td>9.722222</td>
+      <td>BREAK</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>9.722222</td>
+      <td>10.066175</td>
+      <td>忠孝</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>10.066175</td>
+      <td>10.625071</td>
+      <td>復興</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>10.625071</td>
+      <td>10.896550</td>
+      <td>站</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>10.896550</td>
+      <td>11.253793</td>
+      <td>INHALE</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>11.253793</td>
+      <td>11.507413</td>
+      <td>再</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>11.507413</td>
+      <td>12.072533</td>
+      <td>轉</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>12.072533</td>
+      <td>12.529593</td>
+      <td>NE GE</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>12.529593</td>
+      <td>13.493013</td>
+      <td>木柵線</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>13.493013</td>
+      <td>14.002674</td>
+      <td>INHALE</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>14.002674</td>
+      <td>14.190468</td>
+      <td>到</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>14.190468</td>
+      <td>14.565044</td>
+      <td>南京</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>14.565044</td>
+      <td>14.761768</td>
+      <td>站</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>14.761768</td>
+      <td>15.546374</td>
+      <td>下車</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>15.546374</td>
+      <td>15.772874</td>
+      <td>再</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>15.772874</td>
+      <td>15.926810</td>
+      <td>搭</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>15.926810</td>
+      <td>16.025074</td>
+      <td>一</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>16.025074</td>
+      <td>16.338474</td>
+      <td>程</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>16.338474</td>
+      <td>16.905172</td>
+      <td>公車</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>16.905172</td>
+      <td>17.333459</td>
+      <td>BREAK</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>17.333459</td>
+      <td>17.498172</td>
+      <td>到</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>17.498172</td>
+      <td>17.814974</td>
+      <td>NE GE</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <td>17.814974</td>
+      <td>18.415959</td>
+      <td>建國北路</td>
+    </tr>
+    <tr>
+      <th>51</th>
+      <td>18.415959</td>
+      <td>18.681175</td>
+      <td>口</td>
+    </tr>
+    <tr>
+      <th>52</th>
+      <td>18.681175</td>
+      <td>18.788005</td>
+      <td>SILENCE</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pu_tier</span> <span class="o">=</span> <span class="n">tg</span><span class="o">.</span><span class="n">tierDict</span><span class="p">[</span><span class="s1">&#39;PU&#39;</span><span class="p">]</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span> <span class="ow">in</span> <span class="n">pu_tier</span><span class="o">.</span><span class="n">entryList</span><span class="p">],</span>
+            <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;start&#39;</span><span class="p">,</span><span class="s1">&#39;end&#39;</span><span class="p">,</span><span class="s1">&#39;label&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>start</th>
+      <th>end</th>
+      <th>label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.000000</td>
+      <td>0.089101</td>
+      <td>SILENCE</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.089101</td>
+      <td>2.545393</td>
+      <td>001-01</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2.545393</td>
+      <td>2.827885</td>
+      <td>INHALE</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2.827885</td>
+      <td>3.796965</td>
+      <td>001-02</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>3.796965</td>
+      <td>4.053485</td>
+      <td>001-03</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>4.053485</td>
+      <td>5.667585</td>
+      <td>001-04</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>5.667585</td>
+      <td>6.857577</td>
+      <td>001-05</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>6.857577</td>
+      <td>7.267132</td>
+      <td>INHALE</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>7.267132</td>
+      <td>8.307932</td>
+      <td>001-06</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>8.307932</td>
+      <td>9.189732</td>
+      <td>001-07</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>9.189732</td>
+      <td>9.586901</td>
+      <td>001-08</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>9.586901</td>
+      <td>9.722222</td>
+      <td>BREAK</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>9.722222</td>
+      <td>10.896550</td>
+      <td>001-09</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>10.896550</td>
+      <td>11.253793</td>
+      <td>INHALE</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>11.253793</td>
+      <td>12.072533</td>
+      <td>001-10</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>12.072533</td>
+      <td>12.529593</td>
+      <td>001-11</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>12.529593</td>
+      <td>13.493013</td>
+      <td>001-12</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>13.493013</td>
+      <td>14.002674</td>
+      <td>INHALE</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>14.002674</td>
+      <td>15.546374</td>
+      <td>001-13</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>15.546374</td>
+      <td>16.905172</td>
+      <td>001-14</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>16.905172</td>
+      <td>17.333459</td>
+      <td>BREAK</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>17.333459</td>
+      <td>17.814974</td>
+      <td>001-15</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>17.814974</td>
+      <td>18.681175</td>
+      <td>001-16</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>18.681175</td>
+      <td>18.788005</td>
+      <td>SILENCE</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ckiptagger"
+        },
+        kernelOptions: {
+            kernelName: "ckiptagger",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ckiptagger'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="childes.html" title="previous page">CHILDES Corpus</a>
+    <a class='right-next' id="next-link" href="vectorizing-text.html" title="next page">Vectorizing Texts</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alvin Chen<br/>
+        
+            &copy; Copyright 2020 Alvin Chen.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="_static/js/index.js"></script>
+    
+  </body>
+</html>

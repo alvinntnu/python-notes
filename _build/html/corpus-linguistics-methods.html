@@ -119,6 +119,21 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="bnc.html">
+     BNC-XML
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="childes.html">
+     CHILDES Corpus
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="praat-textgrid.html">
+     Praat TextGrid Data
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="vectorizing-text.html">
      Vectorizing Texts
     </a>
@@ -255,6 +270,11 @@
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#frequency-list">
    Frequency List
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conditional-frequency-list">
+   Conditional Frequency List
   </a>
  </li>
 </ul>
@@ -643,6 +663,13 @@ n example : Last month in Ghana an American missionary discovered when he came
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#nltk.app.concordance()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Regular Expression Concordances</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="n">sents</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">brown</span><span class="o">.</span><span class="n">sents</span><span class="p">()]</span>
@@ -868,6 +895,154 @@ R[write to console]: The following objects are masked from ‘package:base’:
 701            case  360
 717           cases  148
 224            cent  155
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="conditional-frequency-list">
+<h2>Conditional Frequency List<a class="headerlink" href="#conditional-frequency-list" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Word by POS Frequency Distribution</span>
+
+<span class="n">brown_news_tagged_words</span> <span class="o">=</span> <span class="n">brown</span><span class="o">.</span><span class="n">tagged_words</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="s1">&#39;news&#39;</span><span class="p">,</span> <span class="n">tagset</span><span class="o">=</span><span class="s1">&#39;universal&#39;</span><span class="p">)</span>
+<span class="n">brown_news_cfd</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">ConditionalFreqDist</span><span class="p">(</span><span class="n">brown_news_tagged_words</span><span class="p">)</span>
+<span class="n">brown_news_cfd</span><span class="p">[</span><span class="s1">&#39;yield&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FreqDist({&#39;NOUN&#39;: 5, &#39;VERB&#39;: 1})
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## POS by Word Frequency Distribution</span>
+<span class="n">brown_news_cfd2</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">ConditionalFreqDist</span><span class="p">([(</span><span class="n">t</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="ow">in</span> <span class="n">brown_news_tagged_words</span><span class="p">])</span>
+<span class="n">brown_news_cfd2</span><span class="p">[</span><span class="s1">&#39;VERB&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;is&#39;, 732),
+ (&#39;was&#39;, 717),
+ (&#39;be&#39;, 526),
+ (&#39;said&#39;, 402),
+ (&#39;will&#39;, 388),
+ (&#39;are&#39;, 328),
+ (&#39;has&#39;, 300),
+ (&#39;had&#39;, 279),
+ (&#39;have&#39;, 265),
+ (&#39;were&#39;, 252)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Word by Genre Frequency Distribution</span>
+<span class="n">brown_genre_cfd</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">ConditionalFreqDist</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">genre</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">genre</span> <span class="ow">in</span> <span class="n">brown</span><span class="o">.</span><span class="n">categories</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">brown</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="n">genre</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">brown_genre_cfd</span><span class="o">.</span><span class="n">conditions</span><span class="p">()[:</span><span class="mi">50</span><span class="p">]</span>
+<span class="n">brown_genre_cfd</span><span class="p">[</span><span class="s1">&#39;mysterious&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FreqDist({&#39;belles_lettres&#39;: 6, &#39;fiction&#39;: 4, &#39;lore&#39;: 3, &#39;religion&#39;: 3, &#39;romance&#39;: 3, &#39;learned&#39;: 2, &#39;reviews&#39;: 2, &#39;adventure&#39;: 1, &#39;humor&#39;: 1, &#39;science_fiction&#39;: 1})
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">brown_genre_cfd</span><span class="p">[</span><span class="s1">&#39;mysterious&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span> <span class="c1"># with freq</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;belles_lettres&#39;, 6), (&#39;fiction&#39;, 4), (&#39;lore&#39;, 3), (&#39;religion&#39;, 3), (&#39;romance&#39;, 3), (&#39;learned&#39;, 2), (&#39;reviews&#39;, 2), (&#39;adventure&#39;, 1), (&#39;humor&#39;, 1), (&#39;science_fiction&#39;, 1)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Genre by Word Frequency Distribution</span>
+<span class="n">brown_genre_cdf2</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">ConditionalFreqDist</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">genre</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">genre</span> <span class="ow">in</span> <span class="n">brown</span><span class="o">.</span><span class="n">categories</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">brown</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="n">genre</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Genre by Word Frequency Distribution</span>
+<span class="n">brown_genre_cdf2</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">ConditionalFreqDist</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">genre</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">genre</span> <span class="ow">in</span> <span class="n">brown</span><span class="o">.</span><span class="n">categories</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">brown</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="n">genre</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">top_n_word</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">freq</span><span class="p">)</span> <span class="ow">in</span> <span class="n">brown_fd_words</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="k">if</span> <span class="n">word</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">isalpha</span><span class="p">()]</span>
+
+<span class="n">brown_genre_cdf2</span><span class="o">.</span><span class="n">tabulate</span><span class="p">(</span><span class="n">conditions</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;adventure&#39;</span><span class="p">,</span><span class="s1">&#39;editorial&#39;</span><span class="p">,</span><span class="s1">&#39;fiction&#39;</span><span class="p">],</span>
+                         <span class="n">samples</span><span class="o">=</span><span class="n">top_n_word</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           the   of  and   to    a   in that   is  was  for 
+adventure 3370 1322 1622 1309 1354  847  494   98  914  331 
+editorial 3508 1976 1302 1554 1095 1001  578  744  308  509 
+  fiction 3423 1419 1696 1489 1281  916  530  144 1082  392 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">top_n_word2</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">tag</span><span class="p">)</span> <span class="ow">in</span> <span class="n">brown</span><span class="o">.</span><span class="n">tagged_words</span><span class="p">(</span><span class="n">tagset</span><span class="o">=</span><span class="s1">&#39;universal&#39;</span><span class="p">)</span> 
+               <span class="k">if</span> <span class="n">tag</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;NOUN&#39;</span><span class="p">)]</span>
+<span class="n">top_n_word2_fd</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">FreqDist</span><span class="p">(</span><span class="n">top_n_word2</span><span class="p">)</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">top_n_word2_fd</span><span class="p">)</span>
+<span class="n">brown_genre_cdf2</span><span class="o">.</span><span class="n">tabulate</span><span class="p">(</span><span class="n">conditions</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;adventure&#39;</span><span class="p">,</span><span class="s1">&#39;editorial&#39;</span><span class="p">,</span><span class="s1">&#39;fiction&#39;</span><span class="p">],</span>
+                         <span class="n">samples</span><span class="o">=</span><span class="p">[</span><span class="n">w</span> <span class="k">for</span> <span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span> <span class="ow">in</span> <span class="n">top_n_word2_fd</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;time&#39;, 1555), (&#39;man&#39;, 1148), (&#39;Af&#39;, 994), (&#39;years&#39;, 942), (&#39;way&#39;, 883), (&#39;Mr.&#39;, 844), (&#39;people&#39;, 809), (&#39;men&#39;, 736), (&#39;world&#39;, 684), (&#39;life&#39;, 676)]
+            time    man     Af  years    way    Mr. people    men  world   life 
+adventure    127    165      0     32     65     22     24     81     15     29 
+editorial     72     56      0     63     43    110     75     38     66     35 
+  fiction     99    111      0     44     62     39     39     72     24     44 
 </pre></div>
 </div>
 </div>
