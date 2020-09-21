@@ -30,6 +30,8 @@
     - file: ckiptagger
 - file: nlp
   sections:
+    - file: text-normalization-eng
+    - file: sentiment-analysis-ml
     - file: word-embeddings
     - file: word2vec
     - file: doc2vec

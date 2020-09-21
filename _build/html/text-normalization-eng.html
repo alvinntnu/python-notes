@@ -1,0 +1,557 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Text Normalization (English) &#8212; Python Notes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Sentiment Analysis with Traditional Machine Learning" href="sentiment-analysis-ml.html" />
+    <link rel="prev" title="Natural Language Processing with Python" href="nlp.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/ntnu03.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Python Notes</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="python-basics.html">
+   Python Basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="corpus-processing.html">
+   Corpus Linguistics with Python
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="nlp.html">
+   Natural Language Processing with Python
+  </a>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Text Normalization (English)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sentiment-analysis-ml.html">
+     Sentiment Analysis with Traditional Machine Learning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sentiment-analysis-ml.html#load-and-normalize-data">
+     Load and normalize data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sentiment-analysis-ml.html#traditional-supervised-machine-learning-models">
+     Traditional Supervised Machine Learning Models
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="word-embeddings.html">
+     Word Embeddings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="word2vec.html">
+     Word2Vec
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="doc2vec.html">
+     Dov2Vec
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="nlp-spacy.html">
+     Natural Language Processing (spaCy)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="nlp-spacy-zh.html">
+     Chinese Natural Language Processing (spaCy)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="nlp-ckipnlp.html">
+     Natural Language Processing (ckipnlp)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/text-normalization-eng.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/text-normalization-eng.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/text-normalization-eng.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#html-tags">
+   HTML Tags
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stemming">
+   Stemming
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lemmatization">
+   Lemmatization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#contractions">
+   Contractions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#accented-characters-non-ascii">
+   Accented Characters (Non-ASCII)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#special-characters">
+   Special Characters
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stopwords">
+   Stopwords
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#redundant-whitespaces">
+   Redundant Whitespaces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spelling-checks">
+   Spelling Checks
+  </a>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="text-normalization-english">
+<h1>Text Normalization (English)<a class="headerlink" href="#text-normalization-english" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">spacy</span>
+<span class="kn">import</span> <span class="nn">unicodedata</span>
+<span class="c1">#from contractions import CONTRACTION_MAP</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">wordnet</span>
+<span class="kn">import</span> <span class="nn">collections</span>
+<span class="c1">#from textblob import Word</span>
+<span class="kn">from</span> <span class="nn">nltk.tokenize.toktok</span> <span class="kn">import</span> <span class="n">ToktokTokenizer</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="html-tags">
+<h2>HTML Tags<a class="headerlink" href="#html-tags" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://en.wikipedia.org/wiki/Python_(programming_language)&#39;</span><span class="p">)</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">content</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="p">[:</span><span class="mi">500</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b&#39;&lt;!DOCTYPE html&gt;\n&lt;html class=&quot;client-nojs&quot; lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;\n&lt;head&gt;\n&lt;meta charset=&quot;UTF-8&quot;/&gt;\n&lt;title&gt;Python (programming language) - Wikipedia&lt;/title&gt;\n&lt;script&gt;document.documentElement.className=&quot;client-js&quot;;RLCONF={&quot;wgBreakFrames&quot;:!1,&quot;wgSeparatorTransformTable&quot;:[&quot;&quot;,&quot;&quot;],&quot;wgDigitTransformTable&quot;:[&quot;&quot;,&quot;&quot;],&quot;wgDefaultDateFormat&quot;:&quot;dmy&quot;,&quot;wgMonthNames&quot;:[&quot;&quot;,&quot;January&quot;,&quot;February&quot;,&quot;March&quot;,&quot;April&quot;,&quot;May&quot;,&quot;June&quot;,&quot;July&quot;,&quot;August&quot;,&quot;September&quot;,&quot;October&quot;,&quot;November&quot;,&quot;December&quot;],&quot;wgRequestId&quot;:&quot;3845bbc1-2be3-40cd-8882-f7&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">strip_html_tags</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
+    <span class="c1">## Can include more HTML preprocessing here...</span>
+    <span class="n">stripped_html_elements</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">findAll</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;div&#39;</span><span class="p">,</span><span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span><span class="s1">&#39;mw-content-text&#39;</span><span class="p">})</span>
+    <span class="n">stripped_text</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">h</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">stripped_html_elements</span><span class="p">])</span>
+    <span class="n">stripped_text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[\r|\n|\r\n]+&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">stripped_text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">stripped_text</span>
+
+<span class="n">clean_content</span> <span class="o">=</span> <span class="n">strip_html_tags</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">clean_content</span><span class="p">[:</span><span class="mi">500</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>General-purpose, high-level programming language
+PythonParadigmMulti-paradigm: functional, imperative, object-oriented, structured, reflectiveDesigned byGuido van RossumDeveloperPython Software FoundationFirst appeared1990; 30 years ago (1990)[1]Stable release3.8.5
+   / 20 July 2020; 2 months ago (2020-07-20)[2]Preview release3.9.0rc1
+   / 11 August 2020; 41 days ago (2020-08-11)[3]
+Typing disciplineDuck, dynamic, gradual (since 3.5)[4]OSLinux, macOS, Windows Vista (and newer) and moreLicensePyt
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="stemming">
+<h2>Stemming<a class="headerlink" href="#stemming" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="lemmatization">
+<h2>Lemmatization<a class="headerlink" href="#lemmatization" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">spacy</span>
+<span class="c1"># use spacy.load(&#39;en&#39;) if you have downloaded the language model en directly after install spacy</span>
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;en&#39;</span><span class="p">,</span> <span class="n">parse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">entity</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;My system keeps crashing his crashed yesterday, ours crashes daily&#39;</span>
+
+<span class="k">def</span> <span class="nf">lemmatize_text</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">word</span><span class="o">.</span><span class="n">lemma_</span> <span class="k">if</span> <span class="n">word</span><span class="o">.</span><span class="n">lemma_</span> <span class="o">!=</span> <span class="s1">&#39;-PRON-&#39;</span> <span class="k">else</span> <span class="n">word</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">text</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">text</span>
+
+<span class="n">lemmatize_text</span><span class="p">(</span><span class="s2">&quot;My system keeps crashing! his crashed yesterday, ours crashes daily&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;My system keep crash ! his crash yesterday , ours crash daily&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="contractions">
+<h2>Contractions<a class="headerlink" href="#contractions" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">contractions</span> <span class="kn">import</span> <span class="n">CONTRACTION_MAP</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="k">def</span> <span class="nf">expand_contractions</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">contraction_mapping</span><span class="o">=</span><span class="n">CONTRACTION_MAP</span><span class="p">):</span>
+    
+    <span class="n">contractions_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;(</span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;|&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">contraction_mapping</span><span class="o">.</span><span class="n">keys</span><span class="p">())),</span> 
+                                      <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="o">|</span><span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">expand_match</span><span class="p">(</span><span class="n">contraction</span><span class="p">):</span>
+        <span class="n">match</span> <span class="o">=</span> <span class="n">contraction</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">first_char</span> <span class="o">=</span> <span class="n">match</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">expanded_contraction</span> <span class="o">=</span> <span class="n">contraction_mapping</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">match</span><span class="p">)</span>\
+                                <span class="k">if</span> <span class="n">contraction_mapping</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">match</span><span class="p">)</span>\
+                                <span class="k">else</span> <span class="n">contraction_mapping</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>                       
+        <span class="n">expanded_contraction</span> <span class="o">=</span> <span class="n">first_char</span><span class="o">+</span><span class="n">expanded_contraction</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="k">return</span> <span class="n">expanded_contraction</span>
+        
+    <span class="n">expanded_text</span> <span class="o">=</span> <span class="n">contractions_pattern</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">expand_match</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">expanded_text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">expanded_text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">expanded_text</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">expand_contractions</span><span class="p">(</span><span class="s2">&quot;Y&#39;all can&#39;t expand contractions I&#39;d think&quot;</span><span class="p">)</span>
+
+<span class="n">expand_contractions</span><span class="p">(</span><span class="s2">&quot;I&#39;m very glad he&#39;s here!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;I am very glad he is here!&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="accented-characters-non-ascii">
+<h2>Accented Characters (Non-ASCII)<a class="headerlink" href="#accented-characters-non-ascii" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/unicodedata.html">unicodedata dcoumentation</a></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">unicodedata</span>
+
+<span class="k">def</span> <span class="nf">remove_accented_chars</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+<span class="c1">#     ```</span>
+<span class="c1">#     (NFKD) will apply the compatibility decomposition, i.e. </span>
+<span class="c1">#     replace all compatibility characters with their equivalents. </span>
+<span class="c1">#     ```</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">unicodedata</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="s1">&#39;NFKD&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">,</span> <span class="s1">&#39;ignore&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">text</span>
+
+
+<span class="n">remove_accented_chars</span><span class="p">(</span><span class="s1">&#39;Sómě Áccěntěd těxt&#39;</span><span class="p">)</span>
+
+<span class="c1"># print(unicodedata.normalize(&#39;NFKD&#39;, &#39;Sómě Áccěntěd těxt&#39;))</span>
+<span class="c1"># print(unicodedata.normalize(&#39;NFKD&#39;, &#39;Sómě Áccěntěd těxt&#39;).encode(&#39;ascii&#39;,&#39;ignore&#39;))</span>
+<span class="c1"># print(unicodedata.normalize(&#39;NFKD&#39;, &#39;Sómě Áccěntěd těxt&#39;).encode(&#39;ascii&#39;,&#39;ignore&#39;).decode(&#39;utf-8&#39;, &#39;ignore&#39;))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Some Accented text&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="special-characters">
+<h2>Special Characters<a class="headerlink" href="#special-characters" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="stopwords">
+<h2>Stopwords<a class="headerlink" href="#stopwords" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">from</span> <span class="nn">nltk.tokenize.toktok</span> <span class="kn">import</span> <span class="n">ToktokTokenizer</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">ToktokTokenizer</span><span class="p">()</span> <span class="c1"># assuming per line per sentence </span>
+    <span class="c1"># for other Tokenizer, maybe sent.tokenize should go first</span>
+<span class="n">stopword_list</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">corpus</span><span class="o">.</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">remove_stopwords</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">is_lower_case</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">stopwords</span><span class="o">=</span><span class="n">stopword_list</span><span class="p">):</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">token</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">is_lower_case</span><span class="p">:</span>
+        <span class="n">filtered_tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">token</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span> <span class="k">if</span> <span class="n">token</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stopwords</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">filtered_tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">token</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span> <span class="k">if</span> <span class="n">token</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stopwords</span><span class="p">]</span>
+    <span class="n">filtered_text</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">filtered_tokens</span><span class="p">)</span>    
+    <span class="k">return</span> <span class="n">filtered_text</span>
+
+<span class="n">remove_stopwords</span><span class="p">(</span><span class="s2">&quot;The, and, if are stopwords, computer is not&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;, , stopwords , computer&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="redundant-whitespaces">
+<h2>Redundant Whitespaces<a class="headerlink" href="#redundant-whitespaces" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="spelling-checks">
+<h2>Spelling Checks<a class="headerlink" href="#spelling-checks" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ckiptagger"
+        },
+        kernelOptions: {
+            kernelName: "ckiptagger",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ckiptagger'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="nlp.html" title="previous page">Natural Language Processing with Python</a>
+    <a class='right-next' id="next-link" href="sentiment-analysis-ml.html" title="next page">Sentiment Analysis with Traditional Machine Learning</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alvin Chen<br/>
+        
+            &copy; Copyright 2020 Alvin Chen.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="_static/js/index.js"></script>
+    
+  </body>
+</html>
