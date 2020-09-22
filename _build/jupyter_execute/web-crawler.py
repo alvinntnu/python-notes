@@ -57,16 +57,18 @@ for page in range(1,num_of_index_page):
     url = findPrevIndex(url)
 len(all_links)
 
-type(all_links[20])
-#all_links[2]
+type(all_links[2])
+print(all_links[2])
 
 print('Push: {push:s} \n'
       'title: {title:s} \n'
       'date: {date:s} \n'
       'author: {author:s} \n'
       'link: {link:s} \n'
-      'text: {text:.5} \n'.format(**all_links[20]))
+      'text: {text:.5} \n'.format(**all_links[2]))
 
-:::{note}
-How to seperate post texts and push texts?
+
+
+:::{admonition} Exercise
+How to seperate post texts from push texts?
 :::

@@ -32,7 +32,7 @@ doc = nlp_en('This is a sentence')
     - is alpha
     - is stop
     
-:::{admonition, dropdow, note}
+:::{admonition,dropdown,note}
 For more information on POS tags, see spaCy (POS tag scheme documentation)[https://spacy.io/api/annotation#pos-tagging].
 :::
 

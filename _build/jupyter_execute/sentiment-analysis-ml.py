@@ -14,7 +14,7 @@ import nltk
 
 np.set_printoptions(precision=2, linewidth=80)
 
-# Load and normalize data
+## Load and normalize data
 
 %%time
 dataset = pd.read_csv('../data/movie_reviews.csv')

@@ -5,10 +5,11 @@
     - file: notebook-to-slides
     - file: google-colab
     - file: data-structure
+    - file: numpy
+    - file: pandas
     - file: program-structure
     - file: input-output
     - file: ggplot
-    - file: dplyr
     - file: magic-r
     - file: python-tricks
     - file: web-applications

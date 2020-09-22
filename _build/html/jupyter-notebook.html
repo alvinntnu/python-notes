@@ -104,6 +104,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="numpy.html">
+     Numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pandas.html">
+     Pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="program-structure.html">
      Program Structure
     </a>
@@ -116,11 +126,6 @@
    <li class="toctree-l2">
     <a class="reference internal" href="ggplot.html">
      ggplot
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="dplyr.html">
-     dplyr
     </a>
    </li>
    <li class="toctree-l2">
@@ -141,11 +146,6 @@
    <li class="toctree-l2">
     <a class="reference internal" href="productive-tech.html">
      Phythonic Productivity Techniques
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="temp-notes.html">
-     Python Fundamentals
     </a>
    </li>
   </ul>
@@ -353,12 +353,24 @@
 <ul class="simple">
 <li><p>In-text citation</p></li>
 </ul>
-<p>An example of in-text citation <a class="bibtex reference internal" href="references.html#deyne2016" id="id1">[1]</a>.</p>
+<p>An example of in-text citation <a class="bibtex reference internal" href="#id2" id="id1">[1]</a>.</p>
 <ul class="simple">
 <li><p>Bibliography</p></li>
 </ul>
+<div class="admonition">
+<p class="admonition-title"></p>
+<ul class="simple">
+<li><p>To include the bibliography at the end:</p></li>
+</ul>
 <p id="bibtex-bibliography-jupyter-notebook-0"><dl class="citation">
-<dt class="bibtex label" id="deyne2016"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dt class="bibtex label" id="deyne2016"><span class="brackets">1</span></dt>
+<dd><p>Simon De Deyne, Steven Verheyen, and Gert Storms. <em>Structure and organization of the mental lexicon: A network approach derived from syntactic dependency relations and word associations</em>, pages 47–79. Springer, Berlin, Germany, 2016. <a class="reference external" href="https://doi.org/10.1007/978-3-662-47238-5_3">doi:10.1007/978-3-662-47238-5_3</a>.</p>
+</dd>
+</dl>
+</p>
+</div>
+<p id="bibtex-bibliography-jupyter-notebook-1"><dl class="citation">
+<dt class="bibtex label" id="id2"><span class="brackets">1</span></dt>
 <dd><p>Simon De Deyne, Steven Verheyen, and Gert Storms. <em>Structure and organization of the mental lexicon: A network approach derived from syntactic dependency relations and word associations</em>, pages 47–79. Springer, Berlin, Germany, 2016. <a class="reference external" href="https://doi.org/10.1007/978-3-662-47238-5_3">doi:10.1007/978-3-662-47238-5_3</a>.</p>
 </dd>
 </dl>
@@ -630,8 +642,8 @@ IRkernel::installspec()
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 12.2 ms, sys: 17.7 ms, total: 29.9 ms
-Wall time: 11.3 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 13.9 ms, sys: 17.2 ms, total: 31.1 ms
+Wall time: 11.2 s
 </pre></div>
 </div>
 </div>
@@ -644,7 +656,7 @@ Wall time: 11.3 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10.5 µs ± 869 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10.1 µs ± 436 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
 </pre></div>
 </div>
 </div>
@@ -675,24 +687,25 @@ Automagic is ON, % prefix IS NOT needed for line magics.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bnc.ipynb                        nltk.ipynb
-childes.ipynb                    notebook-to-slides.ipynb
-ckiptagger.ipynb                 patterns-constructions.ipynb
-corpus-linguistics-methods.ipynb praat-textgrid.ipynb
-data-structure.ipynb             productive-tech.ipynb
-doc2vec.ipynb                    program-structure.ipynb
-dplyr.ipynb                      python-tricks.ipynb
-edit-distance.ipynb              references.ipynb
-ggplot.ipynb                     sentiment-analysis-ml.ipynb
-google-colab.ipynb               temp-notes.ipynb
-hello-world.ipynb                text-normalization-eng.ipynb
-input-output.ipynb               tokenization.ipynb
-jieba.ipynb                      vectorizing-text.ipynb
-jupyter-notebook.ipynb           web-applications.ipynb
-magic-r.ipynb                    web-crawler.ipynb
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bnc.ipynb                        notebook-to-slides.ipynb
+childes.ipynb                    numpy.ipynb
+ckiptagger.ipynb                 pandas.ipynb
+corpus-linguistics-methods.ipynb patterns-constructions.ipynb
+data-structure.ipynb             praat-textgrid.ipynb
+doc2vec.ipynb                    productive-tech.ipynb
+edit-distance.ipynb              program-structure.ipynb
+ggplot.ipynb                     python-tricks.ipynb
+google-colab.ipynb               references.ipynb
+hello-world.ipynb                sentiment-analysis-ml.ipynb
+input-output.ipynb               text-normalization-eng.ipynb
+jieba.ipynb                      tokenization.ipynb
+jupyter-notebook.ipynb           vectorizing-text.ipynb
+magic-r.ipynb                    web-applications.ipynb
+miscellaneous-notes.ipynb        web-crawler.ipynb
 nlp-ckipnlp.ipynb                word-cloud.ipynb
 nlp-spacy-zh.ipynb               word-embeddings.ipynb
 nlp-spacy.ipynb                  word2vec.ipynb
+nltk.ipynb
 </pre></div>
 </div>
 </div>
@@ -730,7 +743,11 @@ Attaching package: ‘dplyr’
     intersect, setdiff, setequal, union
 </pre></div>
 </div>
-<img alt="_images/jupyter-notebook_17_3.png" src="_images/jupyter-notebook_17_3.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R[write to console]: Need help getting started? Try the R Graphics Cookbok:
+https://r-graphics.org
+</pre></div>
+</div>
+<img alt="_images/jupyter-notebook_18_4.png" src="_images/jupyter-notebook_18_4.png" />
 </div>
 </div>
 </div>

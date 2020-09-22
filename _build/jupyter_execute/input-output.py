@@ -91,7 +91,7 @@ fp.close()
 fp2 = open('temp.txt','r')
 print([line for line in fp2])
 
-:::{admonition, note}
+:::{admonition,note}
 To access files at specific positions:
 ```
 file.seek()

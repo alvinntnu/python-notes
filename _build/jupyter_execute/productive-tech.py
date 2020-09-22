@@ -1,6 +1,6 @@
 # Phythonic Productivity Techniques
 
-### Getting Help
+## Getting Help
 
 import datetime
 dir(datetime)
@@ -9,7 +9,7 @@ dir
 # Check objects with specific keywords
 [_ for _ in dir(datetime) if 'date' in _.lower()]
 
-### Virtual Environments
+## Virtual Environments
 
 The following codes are run under terminal.
 

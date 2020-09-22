@@ -35,9 +35,23 @@ An example of in-text citation {cite}`deyne2016`.
 
 - Bibliography
 
+:::{admonition}
+
+- To include the bibliography at the end:
+
 ```{bibliography} book.bib
+:filter: docname in docnames
 :style: unsrt
 ```
+
+:::
+
+```{bibliography} book.bib
+:filter: docname in docnames
+:style: unsrt
+```
+
+
 
 ## Build the book
 
