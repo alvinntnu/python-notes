@@ -7,6 +7,7 @@
     - file: data-structure
     - file: numpy
     - file: pandas
+    - file: seaborn
     - file: program-structure
     - file: input-output
     - file: ggplot
@@ -14,7 +15,7 @@
     - file: python-tricks
     - file: web-applications
     - file: productive-tech
-    - file: temp-notes
+    - file: miscellaneous-notes
 - file: corpus-processing
   sections:
     - file: nltk
@@ -32,9 +33,13 @@
 - file: nlp
   sections:
     - file: text-normalization-eng
+    - file: sklearn
     - file: sentiment-analysis-ml
     - file: word-embeddings
     - file: word2vec
+    - file: sentiment-analysis-dl
+    - file: sentiment-analysis-lstm-v1
+    - file: seq-to-seq
     - file: doc2vec
     - file: nlp-spacy
     - file: nlp-spacy-zh

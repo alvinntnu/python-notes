@@ -2,6 +2,8 @@
 
 ## Installation
 
+- Spacy [language models](https://spacy.io/models/en-starters)
+
 ```
 # Install package
 ## In terminal:
@@ -10,6 +12,7 @@
 ## Download language model for Chinese and English
 !spacy download en
 !spacy download zh
+!spacy download en_vectors_web_lg ## pretrained word vectors
 ```
 
 import spacy

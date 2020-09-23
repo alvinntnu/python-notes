@@ -51,7 +51,9 @@ An example of in-text citation {cite}`deyne2016`.
 :style: unsrt
 ```
 
+## Add Images/Figures
 
+- [Documentation](https://jupyterbook.org/content/figures.html)
 
 ## Build the book
 

@@ -54,7 +54,10 @@ test_sentiments[0]
 norm_train_reviews = train_reviews
 norm_test_reviews = test_reviews
 
-# Traditional Supervised Machine Learning Models
+## Traditional Supervised Machine Learning Models
+
+- Logistic
+- SVM
 
 ## Feature Engineering
 

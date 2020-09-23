@@ -1,0 +1,923 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Machine Learning with Sci-Kit Learn &#8212; Python Notes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Sentiment Analysis with Traditional Machine Learning" href="sentiment-analysis-ml.html" />
+    <link rel="prev" title="Text Normalization (English)" href="text-normalization-eng.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/ntnu03.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Python Notes</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="python-basics.html">
+   Python Basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="corpus-processing.html">
+   Corpus Linguistics with Python
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="nlp.html">
+   Natural Language Processing with Python
+  </a>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="text-normalization-eng.html">
+     Text Normalization (English)
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Machine Learning with Sci-Kit Learn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sentiment-analysis-ml.html">
+     Sentiment Analysis with Traditional Machine Learning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="word-embeddings.html">
+     Word Embeddings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="word2vec.html">
+     Word2Vec
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sentiment-analysis-dl.html">
+     Sentiment Analysis with Deep Learning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sentiment-analysis-lstm-v1.html">
+     Sentiment Analysis with LSTM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="seq-to-seq.html">
+     Machine Translation (Sequence-to-Sequence LSTM)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="doc2vec.html">
+     Dov2Vec
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="nlp-spacy.html">
+     Natural Language Processing (spaCy)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="nlp-spacy-zh.html">
+     Chinese Natural Language Processing (spaCy)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="nlp-ckipnlp.html">
+     Natural Language Processing (ckipnlp)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/sklearn.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/sklearn.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/sklearn.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-class">
+   Data Class
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-loading">
+   Data Loading
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#splitting-data-into-train-and-test-sets">
+   Splitting Data into Train and Test Sets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#balance-the-classes">
+   Balance the Classes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#train-and-test-data-and-labels">
+   Train and Test Data and Labels
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#vectorization-bag-of-words-model">
+   Vectorization: Bag-of-Words Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#classification-models">
+   Classification Models
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#support-vector-machine-svm">
+     Support Vector Machine (SVM)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#decision-tree">
+     Decision Tree
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#naive-bayes">
+     Naive Bayes
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#logistic-regression">
+     Logistic Regression
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#evaluation">
+   Evaluation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tuning-model">
+   Tuning Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#saving-model">
+   Saving Model
+  </a>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="machine-learning-with-sci-kit-learn">
+<h1>Machine Learning with Sci-Kit Learn<a class="headerlink" href="#machine-learning-with-sci-kit-learn" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Based on <a class="reference external" href="https://github.com/KeithGalli/sklearn">Keith Galli’s sklearn tutorial</a></p></li>
+</ul>
+<div class="section" id="data-class">
+<h2>Data Class<a class="headerlink" href="#data-class" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Create a Review class for each token of the data</p></li>
+<li><p>This also demonstrates how Object-Oriented language works with the class</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+
+<span class="k">class</span> <span class="nc">Sentiment</span><span class="p">:</span>
+    <span class="n">NEGATIVE</span> <span class="o">=</span> <span class="s1">&#39;NEGATIVE&#39;</span>
+    <span class="n">NEUTRAL</span> <span class="o">=</span> <span class="s1">&#39;NEUTRAL&#39;</span>
+    <span class="n">POSITIVE</span> <span class="o">=</span> <span class="s1">&#39;POSITIVE&#39;</span>
+
+<span class="k">class</span> <span class="nc">Review</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">score</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">text</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">score</span> <span class="o">=</span> <span class="n">score</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sentiment</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_sentiment</span><span class="p">()</span>
+        
+    <span class="k">def</span> <span class="nf">get_sentiment</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">score</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Sentiment</span><span class="o">.</span><span class="n">NEGATIVE</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">score</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Sentiment</span><span class="o">.</span><span class="n">NEUTRAL</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Sentiment</span><span class="o">.</span><span class="n">POSITIVE</span>
+
+<span class="k">class</span> <span class="nc">ReviewContainer</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reviews</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reviews</span> <span class="o">=</span> <span class="n">reviews</span>
+    <span class="k">def</span> <span class="nf">get_text</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">reviews</span><span class="p">]</span>
+    <span class="k">def</span> <span class="nf">get_sentiment</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">sentiment</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">reviews</span><span class="p">]</span>
+    <span class="k">def</span> <span class="nf">evenly_distribute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">negative</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">sentiment</span> <span class="o">==</span> <span class="n">Sentiment</span><span class="o">.</span><span class="n">NEGATIVE</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">reviews</span><span class="p">))</span>
+        <span class="n">positive</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">sentiment</span> <span class="o">==</span> <span class="n">Sentiment</span><span class="o">.</span><span class="n">POSITIVE</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">reviews</span><span class="p">))</span>
+        <span class="n">positive_shrunk</span> <span class="o">=</span> <span class="n">positive</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">negative</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reviews</span> <span class="o">=</span> <span class="n">negative</span> <span class="o">+</span> <span class="n">positive_shrunk</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reviews</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="data-loading">
+<h2>Data Loading<a class="headerlink" href="#data-loading" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">fname</span> <span class="o">=</span> <span class="s1">&#39;../data/books_small_10000.json&#39;</span>
+
+<span class="n">reviews</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">cur_review</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+        <span class="n">reviews</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Review</span><span class="p">(</span><span class="n">cur_review</span><span class="p">[</span><span class="s1">&#39;reviewText&#39;</span><span class="p">],</span> <span class="n">cur_review</span><span class="p">[</span><span class="s1">&#39;overall&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of Reviews: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">reviews</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sample Text of Doc 1:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">30</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">reviews</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of Reviews: 10000
+Sample Text of Doc 1:
+------------------------------
+I bought both boxed sets, books 1-5.  Really a great series!  Start book 1 three weeks ago and just finished book 5.  Sloane Monroe is a great character and being able to follow her through both private life and her PI life gets a reader very involved!  Although clues may be right in front of the reader, there are twists and turns that keep one guessing until the last page!  These are books you won&#39;t be disappointed with.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Check Sentiment Distribution of the Current Dataset</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<span class="n">sentiment_distr</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">([</span><span class="n">r</span><span class="o">.</span><span class="n">get_sentiment</span><span class="p">()</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">reviews</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sentiment_distr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counter({&#39;POSITIVE&#39;: 8378, &#39;NEUTRAL&#39;: 978, &#39;NEGATIVE&#39;: 644})
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="splitting-data-into-train-and-test-sets">
+<h2>Splitting Data into Train and Test Sets<a class="headerlink" href="#splitting-data-into-train-and-test-sets" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">reviews</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.33</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Sentiment Distrubtion for Train and Test</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Counter</span><span class="p">([</span><span class="n">r</span><span class="o">.</span><span class="n">get_sentiment</span><span class="p">()</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">train</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Counter</span><span class="p">([</span><span class="n">r</span><span class="o">.</span><span class="n">get_sentiment</span><span class="p">()</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">test</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counter({&#39;POSITIVE&#39;: 5611, &#39;NEUTRAL&#39;: 653, &#39;NEGATIVE&#39;: 436})
+Counter({&#39;POSITIVE&#39;: 2767, &#39;NEUTRAL&#39;: 325, &#39;NEGATIVE&#39;: 208})
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="balance-the-classes">
+<h2>Balance the Classes<a class="headerlink" href="#balance-the-classes" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_container</span> <span class="o">=</span> <span class="n">ReviewContainer</span><span class="p">(</span><span class="n">train</span><span class="p">)</span>
+<span class="n">test_container</span> <span class="o">=</span> <span class="n">ReviewContainer</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+
+<span class="c1"># balance</span>
+<span class="n">train_container</span><span class="o">.</span><span class="n">evenly_distribute</span><span class="p">()</span>
+<span class="n">test_container</span><span class="o">.</span><span class="n">evenly_distribute</span><span class="p">()</span>
+
+<span class="c1"># check sentiment distribution again</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Counter</span><span class="p">([</span><span class="n">r</span><span class="o">.</span><span class="n">get_sentiment</span><span class="p">()</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">train_container</span><span class="o">.</span><span class="n">reviews</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Counter</span><span class="p">([</span><span class="n">r</span><span class="o">.</span><span class="n">get_sentiment</span><span class="p">()</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">test_container</span><span class="o">.</span><span class="n">reviews</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counter({&#39;NEGATIVE&#39;: 436, &#39;POSITIVE&#39;: 436})
+Counter({&#39;POSITIVE&#39;: 208, &#39;NEGATIVE&#39;: 208})
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="train-and-test-data-and-labels">
+<h2>Train and Test Data and Labels<a class="headerlink" href="#train-and-test-data-and-labels" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_text</span> <span class="o">=</span> <span class="n">train_container</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span>
+<span class="n">train_label</span> <span class="o">=</span> <span class="n">train_container</span><span class="o">.</span><span class="n">get_sentiment</span><span class="p">()</span>
+<span class="n">test_text</span> <span class="o">=</span> <span class="n">test_container</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span>
+<span class="n">test_label</span> <span class="o">=</span> <span class="n">test_container</span><span class="o">.</span><span class="n">get_sentiment</span><span class="p">()</span>
+
+<span class="c1"># print(train_label.count(Sentiment.POSITIVE))</span>
+<span class="c1"># print(train_label.count(Sentiment.NEGATIVE))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Counter</span><span class="p">(</span><span class="n">train_label</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counter({&#39;NEGATIVE&#39;: 436, &#39;POSITIVE&#39;: 436})
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="vectorization-bag-of-words-model">
+<h2>Vectorization: Bag-of-Words Model<a class="headerlink" href="#vectorization-bag-of-words-model" title="Permalink to this headline">¶</a></h2>
+<div class="important admonition">
+<p class="admonition-title"></p>
+<ul class="simple">
+<li><p>Always split the data into train and test first before vectorizing the texts</p></li>
+<li><p>Otherwise, you would leak information to the training process, which may lead to over-fitting</p></li>
+<li><p>When vectorizing the texts, <code class="docutils literal notranslate"><span class="pre">fit_transform()</span></code> the train and <code class="docutils literal notranslate"><span class="pre">transform()</span></code> the test</p></li>
+</ul>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span><span class="p">,</span> <span class="n">TfidfVectorizer</span>
+
+<span class="n">tfidf_vec</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span>
+<span class="n">train_text_bow</span> <span class="o">=</span> <span class="n">tfidf_vec</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">train_text</span><span class="p">)</span> <span class="c1"># fit train</span>
+<span class="n">test_text_bow</span> <span class="o">=</span> <span class="n">tfidf_vec</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">test_text</span><span class="p">)</span> <span class="c1"># transform test</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">train_text_bow</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">test_text_bow</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">train_text_bow</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">train_text_bow</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(872, 8906)
+(416, 8906)
+&lt;class &#39;scipy.sparse.csr.csr_matrix&#39;&gt;
+  (0, 8627)	0.09836318876375709
+  (0, 7654)	0.23134463284680223
+  (0, 423)	0.041330774273820904
+  (0, 447)	0.16338559600565572
+  (0, 3933)	0.20139897947953658
+  (0, 4412)	0.23134463284680223
+  (0, 3661)	0.23134463284680223
+  (0, 7401)	0.23134463284680223
+  (0, 1181)	0.08558092058645371
+  (0, 8843)	0.10730277619102119
+  (0, 2416)	0.1116143514761565
+  (0, 4646)	0.1450965750416578
+  (0, 8095)	0.20139897947953658
+  (0, 8608)	0.11287695621393898
+  (0, 81)	0.1984242074516195
+  (0, 416)	0.15756634623003665
+  (0, 3374)	0.089810254157827
+  (0, 8052)	0.04247238151178253
+  (0, 2854)	0.17017153874932028
+  (0, 8823)	0.08732692921302046
+  (0, 3464)	0.19544045785402064
+  (0, 7972)	0.15297808590666914
+  (0, 7929)	0.07813897665337834
+  (0, 4034)	0.10724130075428619
+  (0, 7976)	0.043812815607210474
+  (0, 4684)	0.07909149038735167
+  (0, 7311)	0.11757287310167247
+  (0, 8845)	0.17874596719915442
+  (0, 3968)	0.08356630374440875
+  (0, 3177)	0.05643847810696949
+  (0, 5760)	0.16774958732203998
+  (0, 213)	0.1397269231942697
+  (0, 469)	0.13875128690835245
+  (0, 996)	0.09249790939400998
+  (0, 5478)	0.04754393191943527
+  (0, 4711)	0.17874596719915442
+  (0, 3264)	0.08269007462407735
+  (0, 6548)	0.23134463284680223
+  (0, 7115)	0.23823432597636854
+  (0, 8879)	0.0718919145417484
+  (0, 1330)	0.23134463284680223
+  (0, 8817)	0.1397269231942697
+  (0, 5408)	0.060384739968219366
+  (0, 4264)	0.05319712753673744
+  (0, 4277)	0.19017572767774107
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="classification-models">
+<h2>Classification Models<a class="headerlink" href="#classification-models" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="support-vector-machine-svm">
+<h3>Support Vector Machine (SVM)<a class="headerlink" href="#support-vector-machine-svm" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
+
+<span class="n">model_svm</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
+<span class="n">model_svm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_text_bow</span><span class="p">,</span> <span class="n">train_label</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SVC(kernel=&#39;linear&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_svm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_text_bow</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+<span class="c1">#print(model_svm.score(test_text_bow, test_label))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;NEGATIVE&#39;, &#39;POSITIVE&#39;, &#39;POSITIVE&#39;, &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;,
+       &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;],
+      dtype=&#39;&lt;U8&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="decision-tree">
+<h3>Decision Tree<a class="headerlink" href="#decision-tree" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+
+<span class="n">model_dec</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">()</span>
+<span class="n">model_dec</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_text_bow</span><span class="p">,</span> <span class="n">train_label</span><span class="p">)</span>
+
+<span class="n">model_dec</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_text_bow</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;NEGATIVE&#39;, &#39;POSITIVE&#39;, &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;, &#39;POSITIVE&#39;,
+       &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;, &#39;POSITIVE&#39;, &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;],
+      dtype=&#39;&lt;U8&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="naive-bayes">
+<h3>Naive Bayes<a class="headerlink" href="#naive-bayes" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">GaussianNB</span>
+<span class="n">model_gnb</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
+<span class="n">model_gnb</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_text_bow</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">train_label</span><span class="p">)</span>
+
+<span class="n">model_gnb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_text_bow</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">toarray</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;NEGATIVE&#39;, &#39;POSITIVE&#39;, &#39;POSITIVE&#39;, &#39;POSITIVE&#39;, &#39;POSITIVE&#39;,
+       &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;],
+      dtype=&#39;&lt;U8&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="logistic-regression">
+<h3>Logistic Regression<a class="headerlink" href="#logistic-regression" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+
+<span class="n">model_lg</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
+<span class="n">model_lg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_text_bow</span><span class="p">,</span> <span class="n">train_label</span><span class="p">)</span>
+
+<span class="n">model_lg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_text_bow</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">toarray</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;NEGATIVE&#39;, &#39;POSITIVE&#39;, &#39;POSITIVE&#39;, &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;,
+       &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;, &#39;POSITIVE&#39;, &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;],
+      dtype=&#39;&lt;U8&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="evaluation">
+<h2>Evaluation<a class="headerlink" href="#evaluation" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Mean Accuracy</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model_svm</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">test_text_bow</span><span class="p">,</span> <span class="n">test_label</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model_dec</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">test_text_bow</span><span class="p">,</span> <span class="n">test_label</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model_gnb</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">test_text_bow</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">test_label</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model_lg</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">test_text_bow</span><span class="p">,</span> <span class="n">test_label</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8076923076923077
+0.6538461538461539
+0.6610576923076923
+0.8052884615384616
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># F1</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">f1_score</span>
+
+<span class="n">f1_score</span><span class="p">(</span><span class="n">test_label</span><span class="p">,</span> <span class="n">model_svm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_text_bow</span><span class="p">),</span> <span class="n">average</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">Sentiment</span><span class="o">.</span><span class="n">POSITIVE</span><span class="p">,</span> <span class="n">Sentiment</span><span class="o">.</span><span class="n">NEGATIVE</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.80582524, 0.80952381])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## try a whole new self-created review:)</span>
+<span class="n">new_review</span> <span class="o">=</span><span class="p">[</span><span class="s1">&#39;This book looks soso like the content but the cover is weird&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;This book looks soso like the content and the cover is weird&#39;</span>
+            <span class="p">]</span>
+<span class="n">new_review_bow</span> <span class="o">=</span> <span class="n">tfidf_vec</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">new_review</span><span class="p">)</span>
+<span class="n">model_svm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">new_review_bow</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;NEGATIVE&#39;, &#39;POSITIVE&#39;], dtype=&#39;&lt;U8&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="tuning-model">
+<h2>Tuning Model<a class="headerlink" href="#tuning-model" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="s1">&#39;rbf&#39;</span><span class="p">),</span> <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">32</span><span class="p">)}</span>
+
+<span class="n">svc</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">svc</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_text_bow</span><span class="p">,</span> <span class="n">train_label</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GridSearchCV(cv=5, estimator=SVC(),
+             param_grid={&#39;C&#39;: (1, 4, 8, 16, 32), &#39;kernel&#39;: (&#39;linear&#39;, &#39;rbf&#39;)})
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">sorted</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">cv_results_</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;C&#39;: 4, &#39;kernel&#39;: &#39;rbf&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">test_text_bow</span><span class="p">,</span> <span class="n">test_label</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8197115384615384
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="saving-model">
+<h2>Saving Model<a class="headerlink" href="#saving-model" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#  import pickle</span>
+
+<span class="c1"># with open(&#39;../ml-sent-svm.pkl&#39;, &#39;wb&#39;) as f:</span>
+<span class="c1">#     pickle.dump(clf, f)</span>
+<span class="c1"># with open(&#39;../ml-sent-svm.pkl&#39; &#39;rb&#39;) as f:</span>
+<span class="c1">#     loaded_svm = pickle.load(f)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import pkg_resources</span>
+<span class="c1"># import types</span>
+<span class="c1"># def get_imports():</span>
+<span class="c1">#     for name, val in globals().items():</span>
+<span class="c1">#         if isinstance(val, types.ModuleType):</span>
+<span class="c1">#             # Split ensures you get root package, </span>
+<span class="c1">#             # not just imported function</span>
+<span class="c1">#             name = val.__name__.split(&quot;.&quot;)[0]</span>
+
+<span class="c1">#         elif isinstance(val, type):</span>
+<span class="c1">#             name = val.__module__.split(&quot;.&quot;)[0]</span>
+
+<span class="c1">#         # Some packages are weird and have different</span>
+<span class="c1">#         # imported names vs. system/pip names. Unfortunately,</span>
+<span class="c1">#         # there is no systematic way to get pip names from</span>
+<span class="c1">#         # a package&#39;s imported name. You&#39;ll have to add</span>
+<span class="c1">#         # exceptions to this list manually!</span>
+<span class="c1">#         poorly_named_packages = {</span>
+<span class="c1">#             &quot;PIL&quot;: &quot;Pillow&quot;,</span>
+<span class="c1">#             &quot;sklearn&quot;: &quot;scikit-learn&quot;</span>
+<span class="c1">#         }</span>
+<span class="c1">#         if name in poorly_named_packages.keys():</span>
+<span class="c1">#             name = poorly_named_packages[name]</span>
+
+<span class="c1">#         yield name</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get_imports()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># imports = list(set(get_imports()))</span>
+
+<span class="c1"># # The only way I found to get the version of the root package</span>
+<span class="c1"># # from only the name of the package is to cross-check the names </span>
+<span class="c1"># # of installed packages vs. imported packages</span>
+<span class="c1"># requirements = []</span>
+<span class="c1"># for m in pkg_resources.working_set:</span>
+<span class="c1">#     if m.project_name in imports and m.project_name!=&quot;pip&quot;:</span>
+<span class="c1">#         requirements.append((m.project_name, m.version))</span>
+
+<span class="c1"># for r in requirements:</span>
+<span class="c1">#     print(&quot;{}=={}&quot;.format(*r))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ckiptagger"
+        },
+        kernelOptions: {
+            kernelName: "ckiptagger",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ckiptagger'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="text-normalization-eng.html" title="previous page">Text Normalization (English)</a>
+    <a class='right-next' id="next-link" href="sentiment-analysis-ml.html" title="next page">Sentiment Analysis with Traditional Machine Learning</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alvin Chen<br/>
+        
+            &copy; Copyright 2020 Alvin Chen.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="_static/js/index.js"></script>
+    
+  </body>
+</html>
