@@ -36,7 +36,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Dov2Vec" href="doc2vec.html" />
+    <link rel="next" title="Text Generation" href="text-gen-lstm-v1.html" />
     <link rel="prev" title="Sentiment Analysis with LSTM" href="sentiment-analysis-lstm-v1.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -131,6 +131,11 @@
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      Machine Translation (Sequence-to-Sequence LSTM)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="text-gen-lstm-v1.html">
+     Text Generation
     </a>
    </li>
    <li class="toctree-l2">
@@ -460,11 +465,11 @@ Max sequence length for outputs: 22
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;tensorflow.python.keras.engine.input_layer.InputLayer at 0x7feeba381650&gt;,
- &lt;tensorflow.python.keras.engine.input_layer.InputLayer at 0x7feeba381b50&gt;,
- &lt;tensorflow.python.keras.layers.recurrent_v2.LSTM at 0x7feeba381f10&gt;,
- &lt;tensorflow.python.keras.layers.recurrent_v2.LSTM at 0x7feed8e3d190&gt;,
- &lt;tensorflow.python.keras.layers.core.Dense at 0x7feeba388f90&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;tensorflow.python.keras.engine.input_layer.InputLayer at 0x7fe7d1af8650&gt;,
+ &lt;tensorflow.python.keras.engine.input_layer.InputLayer at 0x7fe7d1af8b50&gt;,
+ &lt;tensorflow.python.keras.layers.recurrent_v2.LSTM at 0x7fe7d1af8ed0&gt;,
+ &lt;tensorflow.python.keras.layers.recurrent_v2.LSTM at 0x7fe7e0857150&gt;,
+ &lt;tensorflow.python.keras.layers.core.Dense at 0x7fe7d1b00f90&gt;]
 </pre></div>
 </div>
 </div>
@@ -617,8 +622,9 @@ Max sequence length for outputs: 22
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: Hi.
 Decoded sentence: 你好。
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: Hi.
 Decoded sentence: 你好。
 </pre></div>
@@ -626,8 +632,9 @@ Decoded sentence: 你好。
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: Run.
 Decoded sentence: 你用跑的。
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: Wait!
 Decoded sentence: 等等！
 </pre></div>
@@ -680,8 +687,9 @@ Decoded sentence: 我退出。
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: I&#39;m OK.
 Decoded sentence: 我沒事。
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: Listen.
 Decoded sentence: 听着。
 </pre></div>
@@ -748,8 +756,9 @@ Decoded sentence: 联系我。
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: Call us.
 Decoded sentence: 叫醒汤姆。
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: Come in.
 Decoded sentence: 进来。
 </pre></div>
@@ -771,8 +780,9 @@ Decoded sentence: 滾！
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: Go away!
 Decoded sentence: 滾！
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: Go away.
 Decoded sentence: 走開！
 </pre></div>
@@ -780,8 +790,9 @@ Decoded sentence: 走開！
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: Goodbye!
 Decoded sentence: 告辞！
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: Goodbye!
 Decoded sentence: 告辞！
 </pre></div>
@@ -794,8 +805,9 @@ Decoded sentence: 等一下！
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: He came.
 Decoded sentence: 他来了。
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: He runs.
 Decoded sentence: 他跑。
 </pre></div>
@@ -803,8 +815,9 @@ Decoded sentence: 他跑。
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: Help me.
 Decoded sentence: 帮我一下。
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: Hold on.
 Decoded sentence: 坚持。
 </pre></div>
@@ -832,8 +845,9 @@ Decoded sentence: 我老了。
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: It&#39;s OK.
 Decoded sentence: 没关系。
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: It&#39;s me.
 Decoded sentence: 是我。
 </pre></div>
@@ -886,7 +900,7 @@ Decoded sentence: 和我进来。
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="sentiment-analysis-lstm-v1.html" title="previous page">Sentiment Analysis with LSTM</a>
-    <a class='right-next' id="next-link" href="doc2vec.html" title="next page">Dov2Vec</a>
+    <a class='right-next' id="next-link" href="text-gen-lstm-v1.html" title="next page">Text Generation</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

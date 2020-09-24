@@ -119,16 +119,6 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="seaborn.html#two-types-of-functions">
-     Two Types of Functions
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="seaborn.html#long-format-vs-wide-format-data">
-     Long-format vs. Wide-format Data
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="program-structure.html">
      Program Structure
     </a>
@@ -136,6 +126,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="input-output.html">
      Input and Output
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pickle.html">
+     Object Serialization
     </a>
    </li>
    <li class="toctree-l2">
@@ -673,8 +668,8 @@ IRkernel::installspec()
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 12.3 ms, sys: 17.2 ms, total: 29.6 ms
-Wall time: 12.3 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 14.8 ms, sys: 14.1 ms, total: 28.9 ms
+Wall time: 11.1 s
 </pre></div>
 </div>
 </div>
@@ -687,7 +682,7 @@ Wall time: 12.3 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10.1 µs ± 32.7 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10.9 µs ± 2.14 µs per loop (mean ± std. dev. of 7 runs, 100000 loops each)
 </pre></div>
 </div>
 </div>
@@ -718,7 +713,7 @@ Automagic is ON, % prefix IS NOT needed for line magics.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bnc.ipynb                        patterns-constructions.ipynb
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bnc.ipynb                        pickle.ipynb
 childes.ipynb                    praat-textgrid.ipynb
 ckiptagger.ipynb                 productive-tech.ipynb
 corpus-linguistics-methods.ipynb program-structure.ipynb
@@ -731,15 +726,16 @@ hello-world.ipynb                sentiment-analysis-lstm-v2.ipynb
 input-output.ipynb               sentiment-analysis-ml.ipynb
 jieba.ipynb                      seq-to-seq.ipynb
 jupyter-notebook.ipynb           sklearn.ipynb
-magic-r.ipynb                    text-normalization-eng.ipynb
-miscellaneous-notes.ipynb        tokenization.ipynb
-nlp-ckipnlp.ipynb                vectorizing-text.ipynb
-nlp-spacy-zh.ipynb               web-applications.ipynb
-nlp-spacy.ipynb                  web-crawler.ipynb
-nltk.ipynb                       word-cloud.ipynb
-notebook-to-slides.ipynb         word-embeddings.ipynb
-numpy.ipynb                      word2vec.ipynb
-pandas.ipynb
+magic-r.ipynb                    text-gen-lstm-v1.ipynb
+miscellaneous-notes.ipynb        text-gen-lstm-v2.ipynb
+nlp-ckipnlp.ipynb                text-normalization-eng.ipynb
+nlp-spacy-zh.ipynb               tokenization.ipynb
+nlp-spacy.ipynb                  vectorizing-text.ipynb
+nltk.ipynb                       web-applications.ipynb
+notebook-to-slides.ipynb         web-crawler.ipynb
+numpy.ipynb                      word-cloud.ipynb
+pandas.ipynb                     word-embeddings.ipynb
+patterns-constructions.ipynb     word2vec.ipynb
 </pre></div>
 </div>
 </div>
@@ -765,19 +761,22 @@ ggplot(aes(x,y)) + geom_point()
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R[write to console]: 
 Attaching package: ‘dplyr’
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R[write to console]: The following objects are masked from ‘package:stats’:
+
+
+R[write to console]: The following objects are masked from ‘package:stats’:
 
     filter, lag
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R[write to console]: The following objects are masked from ‘package:base’:
+
+
+R[write to console]: The following objects are masked from ‘package:base’:
 
     intersect, setdiff, setequal, union
+
+
+R[write to console]: Keep up to date with changes at https://www.tidyverse.org/blog/
 </pre></div>
 </div>
-<img alt="_images/jupyter-notebook_18_3.png" src="_images/jupyter-notebook_18_3.png" />
+<img alt="_images/jupyter-notebook_18_1.png" src="_images/jupyter-notebook_18_1.png" />
 </div>
 </div>
 </div>

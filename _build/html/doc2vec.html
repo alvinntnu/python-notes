@@ -37,7 +37,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Natural Language Processing (spaCy)" href="nlp-spacy.html" />
-    <link rel="prev" title="Machine Translation (Sequence-to-Sequence LSTM)" href="seq-to-seq.html" />
+    <link rel="prev" title="Text Generation" href="text-gen-lstm-v1.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
@@ -131,6 +131,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="seq-to-seq.html">
      Machine Translation (Sequence-to-Sequence LSTM)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="text-gen-lstm-v1.html">
+     Text Generation
     </a>
    </li>
    <li class="toctree-l2 current active">
@@ -379,8 +384,8 @@
   after removing the cwd from sys.path.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 9.93 s, sys: 615 ms, total: 10.5 s
-Wall time: 5.33 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 9.77 s, sys: 594 ms, total: 10.4 s
+Wall time: 5.24 s
 </pre></div>
 </div>
 </div>
@@ -414,7 +419,7 @@ Wall time: 5.33 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(0, 0.9365411996841431), (48, 0.8297750353813171), (40, 0.8207964897155762), (255, 0.8198246955871582), (272, 0.7733974456787109), (8, 0.7409986257553101), (264, 0.7104015350341797), (33, 0.6961292624473572), (19, 0.6559211611747742), (10, 0.6385510563850403)]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(0, 0.9435247182846069), (255, 0.8339279890060425), (48, 0.8315616250038147), (40, 0.8131303191184998), (272, 0.7871392965316772), (8, 0.7531124353408813), (264, 0.683213472366333), (33, 0.6784570813179016), (10, 0.6573399305343628), (19, 0.6441550850868225)]
 </pre></div>
 </div>
 </div>
@@ -437,8 +442,8 @@ Wall time: 5.33 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(0, 0.9295721054077148), (33, 0.4554154574871063), (48, 0.452021062374115), (40, 0.4286086857318878), (264, 0.38068726658821106), (8, 0.37246108055114746), (189, 0.3617926239967346), (46, 0.34823793172836304), (222, 0.34632593393325806), (272, 0.34288978576660156)]
-[(0, 0.9407751560211182), (48, 0.8381712436676025), (40, 0.8252201080322266), (255, 0.8174029588699341), (272, 0.7753660082817078), (8, 0.7511023283004761), (264, 0.701445460319519), (33, 0.6937500834465027), (19, 0.6703513264656067), (10, 0.6351790428161621)]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(0, 0.9381166696548462), (33, 0.48359060287475586), (48, 0.4512787461280823), (40, 0.44080305099487305), (189, 0.3927689492702484), (264, 0.38082998991012573), (8, 0.352436900138855), (46, 0.3488211929798126), (52, 0.34595102071762085), (255, 0.3448353707790375)]
+[(0, 0.9463861584663391), (255, 0.8350186944007874), (48, 0.8193879127502441), (40, 0.8023114204406738), (272, 0.7924073338508606), (8, 0.7539794445037842), (33, 0.6862359642982483), (264, 0.6806985139846802), (10, 0.6680514812469482), (25, 0.6390426754951477)]
 </pre></div>
 </div>
 </div>
@@ -564,7 +569,7 @@ new south wales firefighters are hoping lighter winds will help ease their workl
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="seq-to-seq.html" title="previous page">Machine Translation (Sequence-to-Sequence LSTM)</a>
+    <a class='left-prev' id="prev-link" href="text-gen-lstm-v1.html" title="previous page">Text Generation</a>
     <a class='right-next' id="next-link" href="nlp-spacy.html" title="next page">Natural Language Processing (spaCy)</a>
 
     </div>

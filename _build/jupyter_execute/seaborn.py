@@ -1,4 +1,4 @@
-## Data Visualization Using Seaborn
+# Data Visualization Using Seaborn
 
 ![](../image/seaborn-func.png)
 (source: [documentation](https://seaborn.pydata.org/tutorial/function_overview.html)
@@ -15,6 +15,7 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.
 
 import seaborn as sns
 %matplotlib inline
+sns.set(style='darkgrid')
 
 penguins = sns.load_dataset('penguins')
 penguins.head()
