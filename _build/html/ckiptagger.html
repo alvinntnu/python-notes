@@ -167,7 +167,10 @@
  <!-- To handle the deprecated key -->
 
 <div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+  <div style="text-align:left">
+    <a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
+</div>
+
 </div>
 
 </div>
@@ -389,15 +392,6 @@
 <span class="c1">#ws = WS(&#39;../../../NTNU/CorpusLinguistics/CorpusLinguistics_bookdown/data/&#39;)</span>
 <span class="n">pos</span> <span class="o">=</span> <span class="n">POS</span><span class="p">(</span><span class="n">MODEL_PATH</span><span class="p">)</span>
 <span class="n">ner</span> <span class="o">=</span> <span class="n">NER</span><span class="p">(</span><span class="n">MODEL_PATH</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Exception ignored in: &lt;bound method WS.__del__ of &lt;ckiptagger.api.WS object at 0x7fbf81051f98&gt;&gt;
-Traceback (most recent call last):
-  File &quot;/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/ckiptagger/api.py&quot;, line 65, in __del__
-    self.model.sess.close()
-AttributeError: &#39;WS&#39; object has no attribute &#39;model&#39;
 </pre></div>
 </div>
 </div>

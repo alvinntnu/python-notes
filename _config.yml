@@ -8,3 +8,8 @@ latex:
     targetname: book.tex
 parse:
   myst_extended_syntax: true
+html:
+    extra_navbar: |
+        <div style="text-align:left">
+            <a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
+        </div>
