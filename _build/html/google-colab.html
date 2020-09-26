@@ -114,11 +114,6 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="seaborn.html">
-     Data Visualization Using Seaborn
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="program-structure.html">
      Program Structure
     </a>
@@ -134,8 +129,13 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="ggplot.html">
-     ggplot
+    <a class="reference internal" href="data-visualization-1.html">
+     Data Visualization I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="data-visualization-2.html">
+     Data Visualization 2
     </a>
    </li>
    <li class="toctree-l2">
@@ -295,6 +295,11 @@
    Run .py script on Colab
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#free-gpu-computing">
+   Free GPU Computing
+  </a>
+ </li>
 </ul>
 
         </nav>
@@ -354,6 +359,41 @@ drive.mount(&#39;/content/gdrive&#39;)
 <div class="section" id="run-py-script-on-colab">
 <h2>Run .py script on Colab<a class="headerlink" href="#run-py-script-on-colab" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>! python3 &#39;/content/gdrive/My Drive/SCRIPT_NAME.py&#39;
+</pre></div>
+</div>
+</div>
+<div class="section" id="free-gpu-computing">
+<h2>Free GPU Computing<a class="headerlink" href="#free-gpu-computing" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>To enable GPU backend for your colab notebook:</p>
+<ul>
+<li><p>Runtime -&gt; Change runtime type -&gt; Hardware Accelerator-&gt;GPU.</p></li>
+</ul>
+</li>
+<li><p>To cross-check whether the GPU is enabled you can run the following cell in the colab notebook:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">is_gpu_available</span><span class="p">()</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">gpu_device_name</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorflow.python.client</span> <span class="kn">import</span> <span class="n">device_lib</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">device_lib</span><span class="o">.</span><span class="n">list_local_devices</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>The expected output would be:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">device</span><span class="p">:</span><span class="n">GPU</span><span class="p">:</span><span class="mi">0</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When uploading data files onto the Google Drive, remember to uncheck the box, which determines whether to automatically convert txt files to Google-compatible formats (e.g., txt -&gt; gdoc). This is undesirable.</p>
+</div>
+<ul class="simple">
+<li><p>Check the GPU spec</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!nvidia-smi
 </pre></div>
 </div>
 </div>

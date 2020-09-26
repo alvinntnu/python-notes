@@ -39,3 +39,37 @@ When you mount the drive, you will be asked to log into your Gmail and then Goog
 ```
 ! python3 '/content/gdrive/My Drive/SCRIPT_NAME.py'
 ```
+
+## Free GPU Computing
+
+- To enable GPU backend for your colab notebook:
+    - Runtime -> Change runtime type -> Hardware Accelerator->GPU.
+- To cross-check whether the GPU is enabled you can run the following cell in the colab notebook:
+```
+import tensorflow as tf
+tf.test.is_gpu_available()
+tf.test.gpu_device_name()
+```
+
+or:
+
+```
+from tensorflow.python.client import device_lib
+print(device_lib.list_local_devices())
+```
+
+The expected output would be:
+
+```
+/device:GPU:0
+```
+
+```{note}
+When uploading data files onto the Google Drive, remember to uncheck the box, which determines whether to automatically convert txt files to Google-compatible formats (e.g., txt -> gdoc). This is undesirable.
+```
+
+- Check the GPU spec
+
+```
+!nvidia-smi
+```

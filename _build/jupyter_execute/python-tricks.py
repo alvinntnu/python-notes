@@ -94,6 +94,29 @@ import pprint
 # pretty print loaded modules
 pprint.pprint(sys.modules)
 
+## How to output a dictionary
+my_mapping = {'a': 23, 'b': 42, 'c': 0xc0ffee}
+my_mapping
+
+# The "json" module can do a much better job:
+import json
+import pprint
+print(json.dumps(my_mapping, indent=4, sort_keys=True))
+
+
+# Note this only works with dicts containing
+# primitive types (check out the "pprint" module):
+json.dumps({all: 'yup'})
+
+
+import pprint
+pprint.pprint(my_mapping, depth=1)
+mPP = pprint.PrettyPrinter()
+mPP.pprint(my_mapping)
+
+
+my_mapping
+
 # from modulefinder import ModuleFinder
 # finder = ModuleFinder()
 # finder.run_script("SCRIPT_ONLY")

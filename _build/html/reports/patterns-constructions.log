@@ -32,9 +32,10 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-sent_ct.productions()
-#sent_ct.chomsky_normal_form()
-sent_ct
-sent_ct[0]
+from nltk.chunk.regexp import tag_pattern2re_pattern
+from nltk.chunk import RegexpParser
+from nltk.corpus import brown
+import nltk
+tag_pattern2re_pattern('<DT>?<NN.*>+')
 -------------------
 

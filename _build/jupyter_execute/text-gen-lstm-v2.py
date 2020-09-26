@@ -38,15 +38,15 @@ for i, sentence in enumerate(sentences):
         x[i, t, char_indices[char]]=1 # i-th sentence, t-th character, one-hot position
     y[i, char_indices[next_chars[i]]]=1 # i-th sentence, the target word one-hot position
 
-## Building Network
-from keras import layers
-model = keras.models.Sequential()
-model.add(layers.LSTM(128, input_shape=(maxlen, len(chars))))
-model.add(layers.Dense(len(chars), activation='softmax'))
+# ## Building Network
+# from keras import layers
+# model = keras.models.Sequential()
+# model.add(layers.LSTM(128, input_shape=(maxlen, len(chars))))
+# model.add(layers.Dense(len(chars), activation='softmax'))
 
-## Model configuration
-optimizer = keras.optimizers.RMSprop(lr=0.001)
-model.compile(loss='categorical_crossentropy', optimizer=optimizer)
+# ## Model configuration
+# optimizer = keras.optimizers.RMSprop(lr=0.001)
+# model.compile(loss='categorical_crossentropy', optimizer=optimizer)
 
 ## After the training, a function to sample the next char given the model prediction
 def sample(preds, temperature = 1.0):
@@ -58,26 +58,28 @@ def sample(preds, temperature = 1.0):
     return np.argmax(probas)
 
 ## Model Training
-history = model.fit(x, y, batch_size=128, epochs = 10)
+# history = model.fit(x, y, batch_size=128, epochs = 10)
 
 
 ## Save model
-model.save('../data/text-gen-lstm-shakespear.h5')
+# model.save('../data/text-gen-lstm-shakespear.h5')
 
-print(history.history.keys())
-loss_values = history.history['loss']
-epochs = range(1, len(loss_values)+1)
+# print(history.history.keys())
+# loss_values = history.history['loss']
+# epochs = range(1, len(loss_values)+1)
 
-import seaborn as sns
-import pandas as pd
-%matplotlib inline
+# import seaborn as sns
+# import pandas as pd
+# %matplotlib inline
 
-hist_df=pd.DataFrame(list(zip(epochs, loss_values)), columns=['epochs','loss_values'])
-sns.set(style='darkgrid')
-sns.relplot(data=hist_df,x='epochs', y='loss_values', kind='line')
+# hist_df=pd.DataFrame(list(zip(epochs, loss_values)), columns=['epochs','loss_values'])
+# sns.set(style='darkgrid')
+# sns.relplot(data=hist_df,x='epochs', y='loss_values', kind='line')
+
+from keras.models import load_model
+model = load_model('../data/text-gen-lstm-shakespear.h5')
 
 ## Generating Texts
-
 import random
 import sys
 

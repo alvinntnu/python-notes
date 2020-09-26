@@ -1,0 +1,998 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Chatbot &#8212; Python Notes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/ntnu03.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Python Notes</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="python-basics.html">
+   Python Basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="corpus-processing.html">
+   Corpus Linguistics with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="nlp.html">
+   Natural Language Processing with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <div style="text-align:left">
+    <a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
+</div>
+
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/chatbot.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/chatbot.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/chatbot.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prediction">
+   Prediction
+  </a>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="chatbot">
+<h1>Chatbot<a class="headerlink" href="#chatbot" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">from</span> <span class="nn">nltk.stem</span> <span class="kn">import</span> <span class="n">WordNetLemmatizer</span>
+<span class="n">lemmatizer</span> <span class="o">=</span> <span class="n">WordNetLemmatizer</span><span class="p">()</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Activation</span><span class="p">,</span> <span class="n">Dropout</span>
+<span class="kn">from</span> <span class="nn">keras.optimizers</span> <span class="kn">import</span> <span class="n">SGD</span>
+<span class="kn">import</span> <span class="nn">random</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">words</span><span class="o">=</span><span class="p">[]</span>
+<span class="n">classes</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">documents</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">ignore_words</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;?&#39;</span><span class="p">,</span> <span class="s1">&#39;!&#39;</span><span class="p">]</span>
+<span class="n">data_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../data/intents.json&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">intents</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">data_file</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">intents</span><span class="p">[</span><span class="s1">&#39;intents&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_keys([&#39;tag&#39;, &#39;patterns&#39;, &#39;responses&#39;, &#39;context&#39;])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">intents</span><span class="p">[</span><span class="s1">&#39;intents&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;tag&#39;: &#39;goodbye&#39;,
+ &#39;patterns&#39;: [&#39;Bye&#39;,
+  &#39;See you later&#39;,
+  &#39;Goodbye&#39;,
+  &#39;Nice chatting to you, bye&#39;,
+  &#39;Till next time&#39;],
+ &#39;responses&#39;: [&#39;See you!&#39;, &#39;Have a nice day&#39;, &#39;Bye! Come back again soon.&#39;],
+ &#39;context&#39;: [&#39;&#39;]}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">intent</span> <span class="ow">in</span> <span class="n">intents</span><span class="p">[</span><span class="s1">&#39;intents&#39;</span><span class="p">]:</span>
+    <span class="k">for</span> <span class="n">pattern</span> <span class="ow">in</span> <span class="n">intent</span><span class="p">[</span><span class="s1">&#39;patterns&#39;</span><span class="p">]:</span>
+
+        <span class="c1">#tokenize each word</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
+        <span class="n">words</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+        <span class="c1">#add documents in the corpus</span>
+        <span class="n">documents</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">w</span><span class="p">,</span> <span class="n">intent</span><span class="p">[</span><span class="s1">&#39;tag&#39;</span><span class="p">]))</span>
+
+        <span class="c1"># add to our classes list</span>
+        <span class="k">if</span> <span class="n">intent</span><span class="p">[</span><span class="s1">&#39;tag&#39;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">classes</span><span class="p">:</span>
+            <span class="n">classes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">intent</span><span class="p">[</span><span class="s1">&#39;tag&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">documents</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[([&#39;Hi&#39;, &#39;there&#39;], &#39;greeting&#39;),
+ ([&#39;How&#39;, &#39;are&#39;, &#39;you&#39;], &#39;greeting&#39;),
+ ([&#39;Is&#39;, &#39;anyone&#39;, &#39;there&#39;, &#39;?&#39;], &#39;greeting&#39;),
+ ([&#39;Hey&#39;], &#39;greeting&#39;),
+ ([&#39;Hola&#39;], &#39;greeting&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># lemmaztize and lower each word and remove duplicates</span>
+<span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">lemmatizer</span><span class="o">.</span><span class="n">lemmatize</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="n">w</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ignore_words</span><span class="p">]</span>
+<span class="n">words</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">words</span><span class="p">)))</span> <span class="c1"># vocabulary types</span>
+<span class="c1"># sort classes</span>
+<span class="n">classes</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">classes</span><span class="p">)))</span> <span class="c1"># class types</span>
+<span class="c1"># documents = combination between patterns and intents</span>
+<span class="nb">print</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">documents</span><span class="p">),</span> <span class="s2">&quot;documents&quot;</span><span class="p">)</span>
+<span class="c1"># classes = intents</span>
+<span class="nb">print</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">classes</span><span class="p">),</span> <span class="s2">&quot;classes&quot;</span><span class="p">,</span> <span class="n">classes</span><span class="p">)</span>
+<span class="c1"># words = all words, vocabulary</span>
+<span class="nb">print</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">),</span> <span class="s2">&quot;unique lemmatized words&quot;</span><span class="p">,</span> <span class="n">words</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>44 documents
+9 classes [&#39;adverse_drug&#39;, &#39;blood_pressure&#39;, &#39;blood_pressure_search&#39;, &#39;goodbye&#39;, &#39;greeting&#39;, &#39;hospital_search&#39;, &#39;options&#39;, &#39;pharmacy_search&#39;, &#39;thanks&#39;]
+88 unique lemmatized words [&quot;&#39;s&quot;, &#39;,&#39;, &#39;a&#39;, &#39;adverse&#39;, &#39;all&#39;, &#39;anyone&#39;, &#39;are&#39;, &#39;awesome&#39;, &#39;be&#39;, &#39;behavior&#39;, &#39;blood&#39;, &#39;by&#39;, &#39;bye&#39;, &#39;can&#39;, &#39;causing&#39;, &#39;chatting&#39;, &#39;check&#39;, &#39;could&#39;, &#39;data&#39;, &#39;day&#39;, &#39;detail&#39;, &#39;do&#39;, &#39;dont&#39;, &#39;drug&#39;, &#39;entry&#39;, &#39;find&#39;, &#39;for&#39;, &#39;give&#39;, &#39;good&#39;, &#39;goodbye&#39;, &#39;have&#39;, &#39;hello&#39;, &#39;help&#39;, &#39;helpful&#39;, &#39;helping&#39;, &#39;hey&#39;, &#39;hi&#39;, &#39;history&#39;, &#39;hola&#39;, &#39;hospital&#39;, &#39;how&#39;, &#39;i&#39;, &#39;id&#39;, &#39;is&#39;, &#39;later&#39;, &#39;list&#39;, &#39;load&#39;, &#39;locate&#39;, &#39;log&#39;, &#39;looking&#39;, &#39;lookup&#39;, &#39;management&#39;, &#39;me&#39;, &#39;module&#39;, &#39;nearby&#39;, &#39;next&#39;, &#39;nice&#39;, &#39;of&#39;, &#39;offered&#39;, &#39;open&#39;, &#39;patient&#39;, &#39;pharmacy&#39;, &#39;pressure&#39;, &#39;provide&#39;, &#39;reaction&#39;, &#39;related&#39;, &#39;result&#39;, &#39;search&#39;, &#39;searching&#39;, &#39;see&#39;, &#39;show&#39;, &#39;suitable&#39;, &#39;support&#39;, &#39;task&#39;, &#39;thank&#39;, &#39;thanks&#39;, &#39;that&#39;, &#39;there&#39;, &#39;till&#39;, &#39;time&#39;, &#39;to&#39;, &#39;transfer&#39;, &#39;up&#39;, &#39;want&#39;, &#39;what&#39;, &#39;which&#39;, &#39;with&#39;, &#39;you&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s1">&#39;../data/chatbot/&#39;</span><span class="p">)</span>
+<span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">words</span><span class="p">,</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../data/chatbot/words.pkl&#39;</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">))</span>
+<span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">classes</span><span class="p">,</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../data/chatbot/classes.pkl&#39;</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">))</span>
+
+<span class="c1"># create our training data</span>
+<span class="n">training</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># create an empty array for our output</span>
+<span class="n">output_empty</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">classes</span><span class="p">)</span>
+<span class="c1"># training set, bag of words for each sentence</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">documents</span><span class="p">:</span>
+    <span class="c1"># initialize our bag of words</span>
+    <span class="n">bag</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># list of tokenized words for the pattern</span>
+    <span class="n">pattern_words</span> <span class="o">=</span> <span class="n">doc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c1"># lemmatize each word - create base word, in attempt to represent related words</span>
+    <span class="n">pattern_words</span> <span class="o">=</span> <span class="p">[</span><span class="n">lemmatizer</span><span class="o">.</span><span class="n">lemmatize</span><span class="p">(</span><span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">pattern_words</span><span class="p">]</span>
+    <span class="c1"># create our bag of words array with 1, if word match found in current pattern</span>
+    <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+        <span class="n">bag</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">pattern_words</span> <span class="k">else</span> <span class="n">bag</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    
+    <span class="c1"># output is a &#39;0&#39; for each tag and &#39;1&#39; for current tag (for each pattern)</span>
+    <span class="n">output_row</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">output_empty</span><span class="p">)</span>
+    <span class="n">output_row</span><span class="p">[</span><span class="n">classes</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">doc</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span> <span class="o">=</span> <span class="mi">1</span>
+    
+    <span class="n">training</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">bag</span><span class="p">,</span> <span class="n">output_row</span><span class="p">])</span>
+<span class="c1"># shuffle our features and turn into np.array</span>
+<span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">training</span><span class="p">)</span>
+<span class="n">training</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">training</span><span class="p">)</span>
+<span class="c1"># create train and test lists. X - patterns, Y - intents</span>
+<span class="n">train_x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">training</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">train_y</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">training</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Training data created&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training data created
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create model - 3 layers. First layer 128 neurons, second layer 64 neurons and 3rd output layer contains number of neurons</span>
+<span class="c1"># equal to number of intents to predict output intent with softmax</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">train_x</span><span class="p">[</span><span class="mi">0</span><span class="p">]),),</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">train_y</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">))</span>
+
+<span class="c1"># Compile model. Stochastic gradient descent with Nesterov accelerated gradient gives good results for this model</span>
+<span class="n">sgd</span> <span class="o">=</span> <span class="n">SGD</span><span class="p">(</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">decay</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">nesterov</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="n">sgd</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+
+<span class="c1">#fitting and saving the model </span>
+<span class="n">hist</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">train_x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">train_y</span><span class="p">),</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;../data/chatbot/chatbot_model.h5&#39;</span><span class="p">,</span> <span class="n">hist</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;model created&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/200
+10/10 [==============================] - 0s 1ms/step - loss: 2.2226 - accuracy: 0.0638
+Epoch 2/200
+10/10 [==============================] - 0s 1ms/step - loss: 2.1884 - accuracy: 0.1064
+Epoch 3/200
+10/10 [==============================] - 0s 951us/step - loss: 2.0880 - accuracy: 0.2766
+Epoch 4/200
+10/10 [==============================] - 0s 955us/step - loss: 2.0634 - accuracy: 0.1915
+Epoch 5/200
+10/10 [==============================] - 0s 2ms/step - loss: 1.9612 - accuracy: 0.2979
+Epoch 6/200
+10/10 [==============================] - 0s 2ms/step - loss: 1.7681 - accuracy: 0.4468
+Epoch 7/200
+10/10 [==============================] - 0s 1ms/step - loss: 1.6190 - accuracy: 0.5106
+Epoch 8/200
+10/10 [==============================] - 0s 2ms/step - loss: 1.4802 - accuracy: 0.6170
+Epoch 9/200
+10/10 [==============================] - 0s 2ms/step - loss: 1.3738 - accuracy: 0.6383
+Epoch 10/200
+10/10 [==============================] - 0s 3ms/step - loss: 1.3057 - accuracy: 0.5745
+Epoch 11/200
+10/10 [==============================] - 0s 1ms/step - loss: 1.1145 - accuracy: 0.6809
+Epoch 12/200
+10/10 [==============================] - 0s 1ms/step - loss: 1.0446 - accuracy: 0.7234
+Epoch 13/200
+10/10 [==============================] - 0s 2ms/step - loss: 0.8941 - accuracy: 0.7660
+Epoch 14/200
+10/10 [==============================] - 0s 1ms/step - loss: 1.0271 - accuracy: 0.5319
+Epoch 15/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.7097 - accuracy: 0.8511
+Epoch 16/200
+10/10 [==============================] - 0s 2ms/step - loss: 0.7142 - accuracy: 0.7660
+Epoch 17/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.6817 - accuracy: 0.8298
+Epoch 18/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.4484 - accuracy: 0.9362
+Epoch 19/200
+10/10 [==============================] - 0s 913us/step - loss: 0.5135 - accuracy: 0.8723
+Epoch 20/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.4787 - accuracy: 0.8936
+Epoch 21/200
+10/10 [==============================] - 0s 936us/step - loss: 0.5960 - accuracy: 0.7872
+Epoch 22/200
+10/10 [==============================] - 0s 957us/step - loss: 0.5201 - accuracy: 0.8511
+Epoch 23/200
+10/10 [==============================] - 0s 951us/step - loss: 0.5554 - accuracy: 0.7872
+Epoch 24/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.4088 - accuracy: 0.8936
+Epoch 25/200
+10/10 [==============================] - 0s 848us/step - loss: 0.4764 - accuracy: 0.8298
+Epoch 26/200
+10/10 [==============================] - 0s 929us/step - loss: 0.4190 - accuracy: 0.8723
+Epoch 27/200
+10/10 [==============================] - 0s 994us/step - loss: 0.3897 - accuracy: 0.8936
+Epoch 28/200
+10/10 [==============================] - 0s 868us/step - loss: 0.3101 - accuracy: 0.9362
+Epoch 29/200
+10/10 [==============================] - 0s 887us/step - loss: 0.4575 - accuracy: 0.8511
+Epoch 30/200
+10/10 [==============================] - 0s 942us/step - loss: 0.2046 - accuracy: 0.9787
+Epoch 31/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.2342 - accuracy: 0.9362
+Epoch 32/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.2176 - accuracy: 0.9574
+Epoch 33/200
+10/10 [==============================] - 0s 909us/step - loss: 0.2404 - accuracy: 0.8936
+Epoch 34/200
+10/10 [==============================] - 0s 846us/step - loss: 0.3101 - accuracy: 0.9362
+Epoch 35/200
+10/10 [==============================] - 0s 964us/step - loss: 0.3161 - accuracy: 0.8936
+Epoch 36/200
+10/10 [==============================] - 0s 973us/step - loss: 0.1792 - accuracy: 0.9574
+Epoch 37/200
+10/10 [==============================] - 0s 851us/step - loss: 0.1427 - accuracy: 0.9574
+Epoch 38/200
+10/10 [==============================] - 0s 812us/step - loss: 0.2803 - accuracy: 0.9149
+Epoch 39/200
+10/10 [==============================] - 0s 3ms/step - loss: 0.1541 - accuracy: 0.9787
+Epoch 40/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.1137 - accuracy: 1.0000
+Epoch 41/200
+10/10 [==============================] - 0s 805us/step - loss: 0.2131 - accuracy: 0.9149
+Epoch 42/200
+10/10 [==============================] - 0s 849us/step - loss: 0.2154 - accuracy: 0.9574
+Epoch 43/200
+10/10 [==============================] - 0s 963us/step - loss: 0.1994 - accuracy: 0.9787
+Epoch 44/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.2344 - accuracy: 0.9362
+Epoch 45/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.2053 - accuracy: 0.9149
+Epoch 46/200
+10/10 [==============================] - 0s 864us/step - loss: 0.1606 - accuracy: 0.9362
+Epoch 47/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.1586 - accuracy: 0.9574
+Epoch 48/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.1362 - accuracy: 0.9574
+Epoch 49/200
+10/10 [==============================] - 0s 995us/step - loss: 0.1230 - accuracy: 0.9787
+Epoch 50/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0957 - accuracy: 0.9787
+Epoch 51/200
+10/10 [==============================] - 0s 988us/step - loss: 0.1603 - accuracy: 0.9362
+Epoch 52/200
+10/10 [==============================] - 0s 972us/step - loss: 0.1069 - accuracy: 0.9574
+Epoch 53/200
+10/10 [==============================] - 0s 883us/step - loss: 0.0720 - accuracy: 0.9574
+Epoch 54/200
+10/10 [==============================] - 0s 977us/step - loss: 0.0985 - accuracy: 0.9787
+Epoch 55/200
+10/10 [==============================] - 0s 969us/step - loss: 0.1453 - accuracy: 0.9574
+Epoch 56/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.1912 - accuracy: 0.9362
+Epoch 57/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.1080 - accuracy: 0.9787
+Epoch 58/200
+10/10 [==============================] - 0s 978us/step - loss: 0.1018 - accuracy: 0.9787
+Epoch 59/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.1323 - accuracy: 0.9362
+Epoch 60/200
+10/10 [==============================] - 0s 2ms/step - loss: 0.0483 - accuracy: 1.0000
+Epoch 61/200
+10/10 [==============================] - 0s 818us/step - loss: 0.1058 - accuracy: 1.0000
+Epoch 62/200
+10/10 [==============================] - 0s 896us/step - loss: 0.0991 - accuracy: 0.9787
+Epoch 63/200
+10/10 [==============================] - 0s 931us/step - loss: 0.1883 - accuracy: 0.9149
+Epoch 64/200
+10/10 [==============================] - 0s 829us/step - loss: 0.0913 - accuracy: 0.9787
+Epoch 65/200
+10/10 [==============================] - 0s 857us/step - loss: 0.0756 - accuracy: 0.9787
+Epoch 66/200
+10/10 [==============================] - 0s 942us/step - loss: 0.1205 - accuracy: 0.9574
+Epoch 67/200
+10/10 [==============================] - 0s 988us/step - loss: 0.1425 - accuracy: 0.9574
+Epoch 68/200
+10/10 [==============================] - 0s 868us/step - loss: 0.0923 - accuracy: 0.9787
+Epoch 69/200
+10/10 [==============================] - 0s 896us/step - loss: 0.0818 - accuracy: 1.0000
+Epoch 70/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0524 - accuracy: 1.0000
+Epoch 71/200
+10/10 [==============================] - 0s 807us/step - loss: 0.0268 - accuracy: 1.0000
+Epoch 72/200
+10/10 [==============================] - 0s 874us/step - loss: 0.0948 - accuracy: 0.9574
+Epoch 73/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0462 - accuracy: 1.0000
+Epoch 74/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0454 - accuracy: 0.9787
+Epoch 75/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0939 - accuracy: 0.9574
+Epoch 76/200
+10/10 [==============================] - 0s 848us/step - loss: 0.0226 - accuracy: 1.0000
+Epoch 77/200
+10/10 [==============================] - 0s 843us/step - loss: 0.0542 - accuracy: 1.0000
+Epoch 78/200
+10/10 [==============================] - 0s 928us/step - loss: 0.0595 - accuracy: 0.9787
+Epoch 79/200
+10/10 [==============================] - 0s 836us/step - loss: 0.0835 - accuracy: 0.9787
+Epoch 80/200
+10/10 [==============================] - 0s 795us/step - loss: 0.0524 - accuracy: 1.0000
+Epoch 81/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0527 - accuracy: 1.0000
+Epoch 82/200
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10/10 [==============================] - 0s 1ms/step - loss: 0.0513 - accuracy: 1.0000
+Epoch 83/200
+10/10 [==============================] - 0s 957us/step - loss: 0.0978 - accuracy: 0.9574
+Epoch 84/200
+10/10 [==============================] - 0s 796us/step - loss: 0.0342 - accuracy: 0.9787
+Epoch 85/200
+10/10 [==============================] - 0s 820us/step - loss: 0.0415 - accuracy: 1.0000
+Epoch 86/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.1362 - accuracy: 0.9362
+Epoch 87/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0909 - accuracy: 0.9787
+Epoch 88/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0513 - accuracy: 1.0000
+Epoch 89/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0218 - accuracy: 1.0000
+Epoch 90/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0644 - accuracy: 0.9574
+Epoch 91/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0529 - accuracy: 1.0000
+Epoch 92/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0380 - accuracy: 1.0000
+Epoch 93/200
+10/10 [==============================] - 0s 866us/step - loss: 0.0182 - accuracy: 1.0000
+Epoch 94/200
+10/10 [==============================] - 0s 926us/step - loss: 0.0439 - accuracy: 1.0000
+Epoch 95/200
+10/10 [==============================] - 0s 955us/step - loss: 0.0323 - accuracy: 1.0000
+Epoch 96/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0109 - accuracy: 1.0000
+Epoch 97/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0512 - accuracy: 1.0000
+Epoch 98/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0391 - accuracy: 1.0000
+Epoch 99/200
+10/10 [==============================] - 0s 784us/step - loss: 0.0330 - accuracy: 1.0000
+Epoch 100/200
+10/10 [==============================] - 0s 835us/step - loss: 0.0711 - accuracy: 0.9574
+Epoch 101/200
+10/10 [==============================] - 0s 2ms/step - loss: 0.0150 - accuracy: 1.0000
+Epoch 102/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0136 - accuracy: 1.0000
+Epoch 103/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0686 - accuracy: 0.9574
+Epoch 104/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0277 - accuracy: 1.0000
+Epoch 105/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0234 - accuracy: 1.0000
+Epoch 106/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0072 - accuracy: 1.0000
+Epoch 107/200
+10/10 [==============================] - 0s 899us/step - loss: 0.1059 - accuracy: 0.9787
+Epoch 108/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0379 - accuracy: 1.0000
+Epoch 109/200
+10/10 [==============================] - 0s 2ms/step - loss: 0.0125 - accuracy: 1.0000
+Epoch 110/200
+10/10 [==============================] - 0s 2ms/step - loss: 0.0364 - accuracy: 1.0000
+Epoch 111/200
+10/10 [==============================] - 0s 2ms/step - loss: 0.0346 - accuracy: 0.9787
+Epoch 112/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0460 - accuracy: 0.9787
+Epoch 113/200
+10/10 [==============================] - 0s 2ms/step - loss: 0.0127 - accuracy: 1.0000
+Epoch 114/200
+10/10 [==============================] - 0s 2ms/step - loss: 0.0106 - accuracy: 1.0000
+Epoch 115/200
+10/10 [==============================] - 0s 2ms/step - loss: 0.1008 - accuracy: 0.9787
+Epoch 116/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0362 - accuracy: 1.0000
+Epoch 117/200
+10/10 [==============================] - 0s 2ms/step - loss: 0.0140 - accuracy: 1.0000
+Epoch 118/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0588 - accuracy: 0.9787
+Epoch 119/200
+10/10 [==============================] - 0s 982us/step - loss: 0.0417 - accuracy: 1.0000
+Epoch 120/200
+10/10 [==============================] - 0s 950us/step - loss: 0.0259 - accuracy: 1.0000
+Epoch 121/200
+10/10 [==============================] - 0s 998us/step - loss: 0.0085 - accuracy: 1.0000
+Epoch 122/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0247 - accuracy: 1.0000
+Epoch 123/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0672 - accuracy: 1.0000
+Epoch 124/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0156 - accuracy: 1.0000
+Epoch 125/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0260 - accuracy: 1.0000
+Epoch 126/200
+10/10 [==============================] - 0s 939us/step - loss: 0.0204 - accuracy: 1.0000
+Epoch 127/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0042 - accuracy: 1.0000
+Epoch 128/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0163 - accuracy: 1.0000
+Epoch 129/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0241 - accuracy: 1.0000
+Epoch 130/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0108 - accuracy: 1.0000
+Epoch 131/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0378 - accuracy: 1.0000
+Epoch 132/200
+10/10 [==============================] - 0s 902us/step - loss: 0.0139 - accuracy: 1.0000
+Epoch 133/200
+10/10 [==============================] - 0s 948us/step - loss: 0.0374 - accuracy: 1.0000
+Epoch 134/200
+10/10 [==============================] - 0s 885us/step - loss: 0.0575 - accuracy: 0.9787
+Epoch 135/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0399 - accuracy: 1.0000
+Epoch 136/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0192 - accuracy: 1.0000
+Epoch 137/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0056 - accuracy: 1.0000
+Epoch 138/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0311 - accuracy: 1.0000
+Epoch 139/200
+10/10 [==============================] - 0s 826us/step - loss: 0.0140 - accuracy: 1.0000
+Epoch 140/200
+10/10 [==============================] - 0s 950us/step - loss: 0.0118 - accuracy: 1.0000
+Epoch 141/200
+10/10 [==============================] - 0s 906us/step - loss: 0.0138 - accuracy: 1.0000
+Epoch 142/200
+10/10 [==============================] - 0s 839us/step - loss: 0.0339 - accuracy: 0.9787
+Epoch 143/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0108 - accuracy: 1.0000
+Epoch 144/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0123 - accuracy: 1.0000
+Epoch 145/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0096 - accuracy: 1.0000
+Epoch 146/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0283 - accuracy: 1.0000
+Epoch 147/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0111 - accuracy: 1.0000
+Epoch 148/200
+10/10 [==============================] - 0s 2ms/step - loss: 0.0101 - accuracy: 1.0000
+Epoch 149/200
+10/10 [==============================] - 0s 793us/step - loss: 0.0383 - accuracy: 1.0000
+Epoch 150/200
+10/10 [==============================] - 0s 922us/step - loss: 0.0141 - accuracy: 1.0000
+Epoch 151/200
+10/10 [==============================] - 0s 902us/step - loss: 0.0253 - accuracy: 1.0000
+Epoch 152/200
+10/10 [==============================] - 0s 850us/step - loss: 0.0099 - accuracy: 1.0000
+Epoch 153/200
+10/10 [==============================] - 0s 847us/step - loss: 0.0110 - accuracy: 1.0000
+Epoch 154/200
+10/10 [==============================] - 0s 883us/step - loss: 0.0179 - accuracy: 1.0000
+Epoch 155/200
+10/10 [==============================] - 0s 919us/step - loss: 0.0166 - accuracy: 1.0000
+Epoch 156/200
+10/10 [==============================] - 0s 779us/step - loss: 0.0082 - accuracy: 1.0000
+Epoch 157/200
+10/10 [==============================] - 0s 928us/step - loss: 0.0090 - accuracy: 1.0000
+Epoch 158/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0011 - accuracy: 1.0000
+Epoch 159/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0151 - accuracy: 1.0000
+Epoch 160/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0289 - accuracy: 1.0000
+Epoch 161/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0387 - accuracy: 1.0000
+Epoch 162/200
+10/10 [==============================] - 0s 923us/step - loss: 0.0064 - accuracy: 1.0000
+Epoch 163/200
+10/10 [==============================] - 0s 858us/step - loss: 0.0105 - accuracy: 1.0000
+Epoch 164/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0519 - accuracy: 0.9787
+Epoch 165/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0081 - accuracy: 1.0000
+Epoch 166/200
+10/10 [==============================] - 0s 927us/step - loss: 0.0063 - accuracy: 1.0000
+Epoch 167/200
+10/10 [==============================] - 0s 864us/step - loss: 0.0187 - accuracy: 1.0000
+Epoch 168/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0340 - accuracy: 0.9787
+Epoch 169/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0108 - accuracy: 1.0000
+Epoch 170/200
+10/10 [==============================] - 0s 969us/step - loss: 0.0049 - accuracy: 1.0000
+Epoch 171/200
+10/10 [==============================] - 0s 806us/step - loss: 0.0048 - accuracy: 1.0000
+Epoch 172/200
+10/10 [==============================] - 0s 894us/step - loss: 0.0140 - accuracy: 1.0000
+Epoch 173/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0336 - accuracy: 1.0000
+Epoch 174/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0064 - accuracy: 1.0000
+Epoch 175/200
+10/10 [==============================] - 0s 2ms/step - loss: 0.0133 - accuracy: 1.0000
+Epoch 176/200
+10/10 [==============================] - 0s 954us/step - loss: 0.0436 - accuracy: 0.9787
+Epoch 177/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0247 - accuracy: 1.0000
+Epoch 178/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0042 - accuracy: 1.0000
+Epoch 179/200
+10/10 [==============================] - 0s 916us/step - loss: 0.0382 - accuracy: 0.9787
+Epoch 180/200
+10/10 [==============================] - 0s 962us/step - loss: 0.0189 - accuracy: 1.0000
+Epoch 181/200
+10/10 [==============================] - 0s 970us/step - loss: 0.0304 - accuracy: 1.0000
+Epoch 182/200
+10/10 [==============================] - 0s 875us/step - loss: 0.0109 - accuracy: 1.0000
+Epoch 183/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0117 - accuracy: 1.0000
+Epoch 184/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0155 - accuracy: 1.0000
+Epoch 185/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0514 - accuracy: 0.9787
+Epoch 186/200
+10/10 [==============================] - 0s 915us/step - loss: 0.0216 - accuracy: 1.0000
+Epoch 187/200
+10/10 [==============================] - 0s 976us/step - loss: 0.0278 - accuracy: 1.0000
+Epoch 188/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0050 - accuracy: 1.0000
+Epoch 189/200
+10/10 [==============================] - 0s 2ms/step - loss: 0.0423 - accuracy: 1.0000
+Epoch 190/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0316 - accuracy: 0.9787
+Epoch 191/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0033 - accuracy: 1.0000
+Epoch 192/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0036 - accuracy: 1.0000
+Epoch 193/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0183 - accuracy: 1.0000
+Epoch 194/200
+10/10 [==============================] - 0s 863us/step - loss: 0.0103 - accuracy: 1.0000
+Epoch 195/200
+10/10 [==============================] - 0s 891us/step - loss: 0.0037 - accuracy: 1.0000
+Epoch 196/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0067 - accuracy: 1.0000
+Epoch 197/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0038 - accuracy: 1.0000
+Epoch 198/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0042 - accuracy: 1.0000
+Epoch 199/200
+10/10 [==============================] - 0s 1ms/step - loss: 0.0076 - accuracy: 1.0000
+Epoch 200/200
+10/10 [==============================] - 0s 899us/step - loss: 0.0133 - accuracy: 1.0000
+model created
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="prediction">
+<h2>Prediction<a class="headerlink" href="#prediction" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">from</span> <span class="nn">nltk.stem</span> <span class="kn">import</span> <span class="n">WordNetLemmatizer</span>
+<span class="n">lemmatizer</span> <span class="o">=</span> <span class="n">WordNetLemmatizer</span><span class="p">()</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">load_model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">load_model</span><span class="p">(</span><span class="s1">&#39;../data/chatbot/chatbot_model.h5&#39;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="n">intents</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../data/intents.json&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<span class="n">words</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../data/chatbot/words.pkl&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">))</span>
+<span class="n">classes</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../data/chatbot/classes.pkl&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">clean_up_sentence</span><span class="p">(</span><span class="n">sentence</span><span class="p">):</span>
+    <span class="c1"># tokenize the pattern - split words into array</span>
+    <span class="n">sentence_words</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+    <span class="c1"># stem each word - create short form for word</span>
+    <span class="n">sentence_words</span> <span class="o">=</span> <span class="p">[</span><span class="n">lemmatizer</span><span class="o">.</span><span class="n">lemmatize</span><span class="p">(</span><span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">sentence_words</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">sentence_words</span>
+
+<span class="c1"># return bag of words array: 0 or 1 for each word in the bag that exists in the sentence</span>
+
+<span class="k">def</span> <span class="nf">bow</span><span class="p">(</span><span class="n">sentence</span><span class="p">,</span> <span class="n">words</span><span class="p">,</span> <span class="n">show_details</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="c1"># tokenize the pattern</span>
+    <span class="n">sentence_words</span> <span class="o">=</span> <span class="n">clean_up_sentence</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+    <span class="c1"># bag of words - matrix of N words, vocabulary matrix</span>
+    <span class="n">bag</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>  
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sentence_words</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">w</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">words</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">w</span> <span class="o">==</span> <span class="n">s</span><span class="p">:</span> 
+                <span class="c1"># assign 1 if current word is in the vocabulary position</span>
+                <span class="n">bag</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">show_details</span><span class="p">:</span>
+                    <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;found in bag: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">w</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">bag</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">predict_class</span><span class="p">(</span><span class="n">sentence</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+    <span class="c1"># filter out predictions below a threshold</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">bow</span><span class="p">(</span><span class="n">sentence</span><span class="p">,</span> <span class="n">words</span><span class="p">,</span><span class="n">show_details</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">p</span><span class="p">]))[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">ERROR_THRESHOLD</span> <span class="o">=</span> <span class="mf">0.25</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[[</span><span class="n">i</span><span class="p">,</span><span class="n">r</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">r</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">if</span> <span class="n">r</span><span class="o">&gt;</span><span class="n">ERROR_THRESHOLD</span><span class="p">]</span>
+    <span class="c1"># sort by strength of probability</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">return_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+        <span class="n">return_list</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;intent&quot;</span><span class="p">:</span> <span class="n">classes</span><span class="p">[</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="s2">&quot;probability&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])})</span>
+    <span class="k">return</span> <span class="n">return_list</span>
+
+<span class="k">def</span> <span class="nf">getResponse</span><span class="p">(</span><span class="n">ints</span><span class="p">,</span> <span class="n">intents_json</span><span class="p">):</span>
+    <span class="n">tag</span> <span class="o">=</span> <span class="n">ints</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;intent&#39;</span><span class="p">]</span>
+    <span class="n">list_of_intents</span> <span class="o">=</span> <span class="n">intents_json</span><span class="p">[</span><span class="s1">&#39;intents&#39;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">list_of_intents</span><span class="p">:</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s1">&#39;tag&#39;</span><span class="p">]</span><span class="o">==</span> <span class="n">tag</span><span class="p">):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s1">&#39;responses&#39;</span><span class="p">])</span>
+            <span class="k">break</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="k">def</span> <span class="nf">chatbot_response</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
+    <span class="n">ints</span> <span class="o">=</span> <span class="n">predict_class</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">getResponse</span><span class="p">(</span><span class="n">ints</span><span class="p">,</span> <span class="n">intents</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">res</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chatbot_response</span><span class="p">(</span><span class="s1">&#39;I need help&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Offering support for Adverse drug reaction, Blood pressure, Hospitals and Pharmacies&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># #Creating GUI with tkinter</span>
+<span class="c1"># import tkinter</span>
+<span class="c1"># from tkinter import *</span>
+
+
+<span class="c1"># def send():</span>
+<span class="c1">#     msg = EntryBox.get(&quot;1.0&quot;,&#39;end-1c&#39;).strip()</span>
+<span class="c1">#     EntryBox.delete(&quot;0.0&quot;,END)</span>
+
+<span class="c1">#     if msg != &#39;&#39;:</span>
+<span class="c1">#         ChatLog.config(state=NORMAL)</span>
+<span class="c1">#         ChatLog.insert(END, &quot;You: &quot; + msg + &#39;\n\n&#39;)</span>
+<span class="c1">#         ChatLog.config(foreground=&quot;#442265&quot;, font=(&quot;Verdana&quot;, 12 ))</span>
+    
+<span class="c1">#         res = chatbot_response(msg)</span>
+<span class="c1">#         ChatLog.insert(END, &quot;Bot: &quot; + res + &#39;\n\n&#39;)</span>
+            
+<span class="c1">#         ChatLog.config(state=DISABLED)</span>
+<span class="c1">#         ChatLog.yview(END)</span>
+ 
+
+<span class="c1"># base = Tk()</span>
+<span class="c1"># base.title(&quot;Hello&quot;)</span>
+<span class="c1"># base.geometry(&quot;400x500&quot;)</span>
+<span class="c1"># base.resizable(width=FALSE, height=FALSE)</span>
+
+<span class="c1"># #Create Chat window</span>
+<span class="c1"># ChatLog = Text(base, bd=0, bg=&quot;white&quot;, height=&quot;8&quot;, width=&quot;50&quot;, font=&quot;Arial&quot;,)</span>
+
+<span class="c1"># ChatLog.config(state=DISABLED)</span>
+
+<span class="c1"># #Bind scrollbar to Chat window</span>
+<span class="c1"># scrollbar = Scrollbar(base, command=ChatLog.yview, cursor=&quot;heart&quot;)</span>
+<span class="c1"># ChatLog[&#39;yscrollcommand&#39;] = scrollbar.set</span>
+
+<span class="c1"># #Create Button to send message</span>
+<span class="c1"># SendButton = Button(base, font=(&quot;Verdana&quot;,12,&#39;bold&#39;), text=&quot;Send&quot;, width=&quot;12&quot;, height=5,</span>
+<span class="c1">#                     bd=0, bg=&quot;#32de97&quot;, activebackground=&quot;#3c9d9b&quot;,fg=&#39;#ffffff&#39;,</span>
+<span class="c1">#                     command= send )</span>
+
+<span class="c1"># #Create the box to enter message</span>
+<span class="c1"># EntryBox = Text(base, bd=0, bg=&quot;white&quot;,width=&quot;29&quot;, height=&quot;5&quot;, font=&quot;Arial&quot;)</span>
+<span class="c1"># #EntryBox.bind(&quot;&lt;Return&gt;&quot;, send)</span>
+
+
+<span class="c1"># #Place all components on the screen</span>
+<span class="c1"># scrollbar.place(x=376,y=6, height=386)</span>
+<span class="c1"># ChatLog.place(x=6,y=6, height=386, width=370)</span>
+<span class="c1"># EntryBox.place(x=128, y=401, height=90, width=265)</span>
+<span class="c1"># SendButton.place(x=6, y=401, height=90)</span>
+
+<span class="c1"># base.mainloop()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r-tensorflow"
+        },
+        kernelOptions: {
+            kernelName: "r-tensorflow",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'r-tensorflow'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alvin Chen<br/>
+        
+            &copy; Copyright 2020 Alvin Chen.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="_static/js/index.js"></script>
+    
+  </body>
+</html>

@@ -13,3 +13,6 @@ html:
         <div style="text-align:left">
             <a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
         </div>
+execute:
+  exclude_patterns:
+    - 'transfer-learning-sent-encoding.ipynb'

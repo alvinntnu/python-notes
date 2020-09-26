@@ -139,6 +139,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="transfer-learning-sent-encoding.html">
+     Universal Sentence Embeddings
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="doc2vec.html">
      Dov2Vec
     </a>
@@ -490,7 +495,7 @@ Counter({&#39;POSITIVE&#39;: 2767, &#39;NEUTRAL&#39;: 325, &#39;NEGATIVE&#39;: 2
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counter({&#39;NEGATIVE&#39;: 436, &#39;POSITIVE&#39;: 436})
-Counter({&#39;POSITIVE&#39;: 208, &#39;NEGATIVE&#39;: 208})
+Counter({&#39;NEGATIVE&#39;: 208, &#39;POSITIVE&#39;: 208})
 </pre></div>
 </div>
 </div>
@@ -552,55 +557,37 @@ Counter({&#39;POSITIVE&#39;: 208, &#39;NEGATIVE&#39;: 208})
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(872, 8906)
 (416, 8906)
 &lt;class &#39;scipy.sparse.csr.csr_matrix&#39;&gt;
-  (0, 2658)	0.10324060507059768
-  (0, 4277)	0.04463054109818966
-  (0, 6392)	0.05969885282420307
-  (0, 5265)	0.12683664112179657
-  (0, 3179)	0.16486879879939226
-  (0, 3577)	0.08311916063305949
-  (0, 8052)	0.15947905796362807
-  (0, 3308)	0.21716832679322592
-  (0, 4758)	0.12304432037953072
-  (0, 820)	0.18905767924340575
-  (0, 3177)	0.0529800484516237
-  (0, 2835)	0.21716832679322592
-  (0, 4864)	0.11605619578601625
-  (0, 5634)	0.21716832679322592
-  (0, 8760)	0.05743177822590497
-  (0, 7445)	0.1597437895284603
-  (0, 5374)	0.14093451519118022
-  (0, 5514)	0.06928814917267069
-  (0, 3652)	0.0821633592587271
-  (0, 1386)	0.16486879879939226
-  (0, 4667)	0.21716832679322592
-  (0, 4439)	0.11181791710564651
-  (0, 1219)	0.07878082889166872
-  (0, 1730)	0.17463855886025012
-  (0, 6972)	0.15337367489376222
-  (0, 1200)	0.15535363557433587
-  (0, 7280)	0.14033307437024833
-  (0, 3793)	0.259834439034515
-  (0, 5478)	0.04463054109818966
-  (0, 7400)	0.19590344282673802
-  (0, 423)	0.07759622502293345
-  (0, 3647)	0.19590344282673802
-  (0, 3677)	0.17322295935634333
-  (0, 2285)	0.17463855886025012
-  (0, 6322)	0.1260397458593904
-  (0, 1168)	0.11207036400145053
-  (0, 3432)	0.07778575541426573
-  (0, 8608)	0.1589401453548711
-  (0, 5939)	0.10361703608343427
-  (0, 7929)	0.18337696673933962
-  (0, 7533)	0.12855508361847448
-  (0, 7976)	0.08225611928346538
-  (0, 4034)	0.1510046735989754
-  (0, 862)	0.11386392462043464
-  (0, 3737)	0.0821633592587271
-  (0, 611)	0.07296349935010836
-  (0, 5408)	0.056684491796384885
-  (0, 4264)	0.09987464187258151
-  (0, 4662)	0.21716832679322592
+  (0, 4982)	0.12094405698768586
+  (0, 3177)	0.08528717718722892
+  (0, 6746)	0.28772746526620935
+  (0, 5185)	0.12046457186971188
+  (0, 5384)	0.14121009131466422
+  (0, 1007)	0.20967442759671737
+  (0, 7280)	0.11295395275046353
+  (0, 8608)	0.08528717718722892
+  (0, 4277)	0.07184615676746418
+  (0, 797)	0.1503597979963349
+  (0, 1354)	0.21423642988880678
+  (0, 3087)	0.14157456956834036
+  (0, 7929)	0.05903997565662977
+  (0, 3376)	0.3495971428485973
+  (0, 2781)	0.154935900668025
+  (0, 1790)	0.14268442704408638
+  (0, 3037)	0.22486004507850843
+  (0, 1707)	0.3043446780340661
+  (0, 423)	0.0624571247668252
+  (0, 5266)	0.2753159053458067
+  (0, 4782)	0.14121009131466422
+  (0, 6745)	0.19694112986599496
+  (0, 4264)	0.08038900045246031
+  (0, 8692)	0.1650064261622476
+  (0, 991)	0.07256451967613528
+  (0, 7976)	0.06620786904780329
+  (0, 5554)	0.2753159053458067
+  (0, 8715)	0.17767060340692725
+  (0, 7683)	0.20289853354057635
+  (0, 5408)	0.18250116551028328
+  (0, 387)	0.16215091534431514
 </pre></div>
 </div>
 </div>
@@ -633,8 +620,8 @@ Counter({&#39;POSITIVE&#39;: 208, &#39;NEGATIVE&#39;: 208})
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;POSITIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;,
-       &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;, &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;],
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;,
+       &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;],
       dtype=&#39;&lt;U8&#39;)
 </pre></div>
 </div>
@@ -655,8 +642,8 @@ Counter({&#39;POSITIVE&#39;: 208, &#39;NEGATIVE&#39;: 208})
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;POSITIVE&#39;, &#39;POSITIVE&#39;, &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;, &#39;NEGATIVE&#39;,
-       &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;],
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;,
+       &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;],
       dtype=&#39;&lt;U8&#39;)
 </pre></div>
 </div>
@@ -676,8 +663,8 @@ Counter({&#39;POSITIVE&#39;: 208, &#39;NEGATIVE&#39;: 208})
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;POSITIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;,
-       &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;],
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;POSITIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;,
+       &#39;POSITIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;],
       dtype=&#39;&lt;U8&#39;)
 </pre></div>
 </div>
@@ -698,7 +685,7 @@ Counter({&#39;POSITIVE&#39;: 208, &#39;NEGATIVE&#39;: 208})
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;POSITIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;, &#39;NEGATIVE&#39;,
        &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;],
       dtype=&#39;&lt;U8&#39;)
 </pre></div>
@@ -721,7 +708,7 @@ Counter({&#39;POSITIVE&#39;: 208, &#39;NEGATIVE&#39;: 208})
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8076923076923077
-0.625
+0.6610576923076923
 0.6610576923076923
 0.8052884615384616
 </pre></div>
@@ -874,6 +861,11 @@ Counter({&#39;POSITIVE&#39;: 208, &#39;NEGATIVE&#39;: 208})
 
 <span class="c1"># for r in requirements:</span>
 <span class="c1">#     print(&quot;{}=={}&quot;.format(*r))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>scikit-learn==0.23.2
 </pre></div>
 </div>
 </div>

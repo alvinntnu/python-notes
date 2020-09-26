@@ -1,0 +1,931 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Universal Sentence Embeddings &#8212; Python Notes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/ntnu03.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Python Notes</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="python-basics.html">
+   Python Basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="corpus-processing.html">
+   Corpus Linguistics with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="nlp.html">
+   Natural Language Processing with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <div style="text-align:left">
+    <a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
+</div>
+
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/sentence-encoding.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/sentence-encoding.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/sentence-encoding.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loading-libaries">
+   Loading Libaries
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data">
+   Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#train-validation-and-test-sets-splitting">
+   Train, Validation, and Test Sets Splitting
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#text-wranlging">
+   Text Wranlging
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-ingestion-functions-for-tensorflow">
+   Data Ingestion Functions for tensorflow
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#universal-sentence-encoder">
+   Universal Sentence Encoder
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-evaluation">
+   Model Evaluation
+  </a>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="universal-sentence-embeddings">
+<h1>Universal Sentence Embeddings<a class="headerlink" href="#universal-sentence-embeddings" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>This is based on Ch 10 of Text Analytics with Python by Dipanjan Sarkar</p></li>
+</ul>
+<div class="section" id="loading-libaries">
+<h2>Loading Libaries<a class="headerlink" href="#loading-libaries" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">tensorflow_hub</span> <span class="k">as</span> <span class="nn">hub</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Check GPU if any</span>
+<span class="c1"># tf.test.is_gpu_available()</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">gpu_device_name</span><span class="p">()</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">list_physical_devices</span><span class="p">(</span><span class="s1">&#39;GPU&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="data">
+<h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>The original <a class="reference external" href="http://ai.stanford.edu/~amaas/data/sentiment/">IMDB Large Movie Review Dataset</a></p>
+<ul>
+<li><p>The original data include each text as an independent text file</p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://github.com/dipanjanS/data_science_for_all/tree/master/tds_deep_transfer_learning_nlp_classification">Sarkar’s repository</a> for csv file</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import tarfile</span>
+<span class="c1"># tar = tarfile.open(&quot;../data/movie_review.tar.gz&quot;)</span>
+<span class="c1"># tar.extractall(path=&quot;../data/stanford-movie-review/&quot;)</span>
+<span class="c1"># tar.close()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import os</span>
+<span class="c1"># import tarfile</span>
+
+<span class="c1"># def csv_files(members):</span>
+<span class="c1">#     for tarinfo in members:</span>
+<span class="c1">#         if os.path.splitext(tarinfo.name)[1] == &quot;.csv&quot;:</span>
+<span class="c1">#             yield tarinfo</span>
+
+<span class="c1"># tar = tarfile.open(&quot;../data/movie_review.tar.gz&quot;)</span>
+<span class="c1"># tar.extractall(path=&#39;../data/&#39;, members=csv_files(tar))</span>
+<span class="c1"># tar.close()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/data_science_for_all-master/tds_deep_transfer_learning_nlp_classification/movie_reviews.csv.bz2&#39;</span><span class="p">,</span>
+                     <span class="n">compression</span><span class="o">=</span><span class="s1">&#39;bz2&#39;</span><span class="p">)</span>
+<span class="n">dataset</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 50000 entries, 0 to 49999
+Data columns (total 2 columns):
+ #   Column     Non-Null Count  Dtype 
+---  ------     --------------  ----- 
+ 0   review     50000 non-null  object
+ 1   sentiment  50000 non-null  object
+dtypes: object(2)
+memory usage: 781.4+ KB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span><span class="o">.</span><span class="n">dtypes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>review       object
+sentiment    object
+dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Recode sentiment</span>
+
+<span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;sentiment&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">if</span> <span class="n">sentiment</span><span class="o">==</span><span class="s1">&#39;positive&#39;</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">sentiment</span> <span class="ow">in</span> <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;sentiment&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">]</span>
+<span class="n">dataset</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>review</th>
+      <th>sentiment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>One of the other reviewers has mentioned that ...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A wonderful little production. &lt;br /&gt;&lt;br /&gt;The...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>I thought this was a wonderful way to spend ti...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Basically there's a family where a little boy ...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Petter Mattei's "Love in the Time of Money" is...</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span><span class="o">.</span><span class="n">dtypes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>review       object
+sentiment     int64
+dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="train-validation-and-test-sets-splitting">
+<h2>Train, Validation, and Test Sets Splitting<a class="headerlink" href="#train-validation-and-test-sets-splitting" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Method 1 sklearn</span>
+<span class="c1"># from sklearn.model_selection import train_test_split</span>
+<span class="c1"># train, test = train_test_split(reviews, test_size = 0.33, random_state=42)</span>
+
+<span class="c1">## Method 2 numpy</span>
+<span class="n">train</span><span class="p">,</span> <span class="n">validate</span><span class="p">,</span> <span class="n">test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="o">.</span><span class="mi">6</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)),</span> <span class="nb">int</span><span class="p">(</span><span class="o">.</span><span class="mi">7</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">))])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">validate</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">test</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">train</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>review</th>
+      <th>sentiment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>41805</th>
+      <td>I seems in the beginning a interesting film, a...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2850</th>
+      <td>LE GRAND VOYAGE is a gentle miracle of a film,...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>20844</th>
+      <td>Second part (actually episode 4-8) of the hit ...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>13476</th>
+      <td>This soap is worse than bad: it's poisonous. O...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>21893</th>
+      <td>What would happened when a depressed cop works...</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="text-wranlging">
+<h2>Text Wranlging<a class="headerlink" href="#text-wranlging" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Text preprocessing usually takes care of:</p>
+<ul>
+<li><p>unnecessary html tags</p></li>
+<li><p>non-ASCII characters in English texts (e.g., accented characters)</p></li>
+<li><p>contraction issues</p></li>
+<li><p>special characters (unicode)</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## libaries for text pre-processing</span>
+<span class="c1">## !pip3 install contractions</span>
+<span class="kn">import</span> <span class="nn">contractions</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">import</span> <span class="nn">unicodedata</span>
+<span class="kn">import</span> <span class="nn">re</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Functions for Text Preprocessing</span>
+
+<span class="k">def</span> <span class="nf">strip_html_tags</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+    <span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">extract</span><span class="p">()</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">soup</span><span class="p">([</span><span class="s1">&#39;iframe&#39;</span><span class="p">,</span><span class="s1">&#39;script&#39;</span><span class="p">])]</span>
+    <span class="n">stripped_text</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span>
+    <span class="n">stripped_text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[\r|\n|\r\n]+&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">stripped_text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">stripped_text</span>
+<span class="k">def</span> <span class="nf">remove_accented_chars</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">unicodedata</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="s1">&#39;NFKD&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">,</span> <span class="s1">&#39;ignore&#39;</span><span class="p">)</span><span class="o">.</span> <span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">text</span>
+<span class="k">def</span> <span class="nf">expand_contractions</span><span class="p">(</span><span class="n">text</span><span class="p">):</span> 
+    <span class="k">return</span> <span class="n">contractions</span><span class="o">.</span><span class="n">fix</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">remove_special_characters</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">remove_digits</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;[^a-zA-Z0-9\s]&#39;</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">remove_digits</span> <span class="k">else</span> <span class="sa">r</span><span class="s1">&#39;[^a-zA-Z\s]&#39;</span> 
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">text</span>
+<span class="k">def</span> <span class="nf">pre_process_document</span><span class="p">(</span><span class="n">document</span><span class="p">):</span>
+    <span class="c1"># strip HTML</span>
+    <span class="n">document</span> <span class="o">=</span> <span class="n">strip_html_tags</span><span class="p">(</span><span class="n">document</span><span class="p">)</span>
+    <span class="c1"># case normalization</span>
+    <span class="n">document</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="c1"># remove empty lines</span>
+    <span class="n">document</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">document</span><span class="o">.</span><span class="n">maketrans</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\t\r</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;   &quot;</span><span class="p">))</span>
+    <span class="c1"># remove accented characters</span>
+    <span class="n">document</span> <span class="o">=</span> <span class="n">remove_accented_chars</span><span class="p">(</span><span class="n">document</span><span class="p">)</span>
+    <span class="c1"># expand contractions</span>
+    <span class="n">document</span> <span class="o">=</span> <span class="n">expand_contractions</span><span class="p">(</span><span class="n">document</span><span class="p">)</span>
+    <span class="c1"># remove special characters and\or digits</span>
+    <span class="c1"># insert spaces between special characters to isolate them </span>
+    <span class="n">special_char_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;([{.(-)!}])&#39;</span><span class="p">)</span>
+    <span class="n">document</span> <span class="o">=</span> <span class="n">special_char_pattern</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot; </span><span class="se">\\</span><span class="s2">1 &quot;</span><span class="p">,</span> <span class="n">document</span><span class="p">)</span>
+    <span class="n">document</span> <span class="o">=</span> <span class="n">remove_special_characters</span><span class="p">(</span><span class="n">document</span><span class="p">,</span> <span class="n">remove_digits</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># remove extra whitespace</span>
+    <span class="n">document</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39; +&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">document</span><span class="p">)</span> 
+    <span class="n">document</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">document</span>
+
+<span class="c1"># vectorize function</span>
+<span class="n">pre_process_corpus</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">pre_process_document</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pre_process_corpus</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;review&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array(&#39;i seems in the beginning a interesting film a spanish thriller in a interesting nowadays madrid but it isnt none of that is actually a film only interesting for future films directors learning about what not to do making a film it cant be worse in others words even the presence of a oscar winner mira sorvino isnt enough to justify the dollars expended to see this film the acting is horrendous and it seems the actors were just waiting to finish the daily shots to go home it lead to nowhere and is boring weak and bad dont expend time or money on this film&#39;,
+      dtype=&#39;&lt;U559&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="n">train_reviews</span> <span class="o">=</span> <span class="n">pre_process_corpus</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;review&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">train_sentiments</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="s1">&#39;sentiment&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">val_reviews</span> <span class="o">=</span> <span class="n">pre_process_corpus</span><span class="p">(</span><span class="n">validate</span><span class="p">[</span><span class="s1">&#39;review&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">val_sentiments</span> <span class="o">=</span> <span class="n">validate</span><span class="p">[</span><span class="s1">&#39;sentiment&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">test_reviews</span> <span class="o">=</span> <span class="n">pre_process_corpus</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;review&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">test_sentiments</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;sentiment&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 28.1 s, sys: 847 ms, total: 29 s
+Wall time: 29.4 s
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="data-ingestion-functions-for-tensorflow">
+<h2>Data Ingestion Functions for tensorflow<a class="headerlink" href="#data-ingestion-functions-for-tensorflow" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Training input on the whole training set with no limit on training epochs.</span>
+<span class="n">train_input_fn</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">compat</span><span class="o">.</span><span class="n">v1</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">numpy_input_fn</span><span class="p">(</span>
+    <span class="p">{</span><span class="s1">&#39;sentence&#39;</span><span class="p">:</span> <span class="n">train_reviews</span><span class="p">},</span> <span class="n">train_sentiments</span><span class="p">,</span> 
+    <span class="n">batch_size</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">num_epochs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prediction on the whole training set. </span>
+<span class="n">predict_train_input_fn</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">compat</span><span class="o">.</span><span class="n">v1</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">numpy_input_fn</span><span class="p">(</span>
+    <span class="p">{</span><span class="s1">&#39;sentence&#39;</span><span class="p">:</span> <span class="n">train_reviews</span><span class="p">},</span> <span class="n">train_sentiments</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prediction on the whole validation set. </span>
+<span class="n">predict_val_input_fn</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">compat</span><span class="o">.</span><span class="n">v1</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">numpy_input_fn</span><span class="p">(</span>
+    <span class="p">{</span><span class="s1">&#39;sentence&#39;</span><span class="p">:</span> <span class="n">val_reviews</span><span class="p">},</span> <span class="n">val_sentiments</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prediction on the test set.</span>
+<span class="n">predict_test_input_fn</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">compat</span><span class="o">.</span><span class="n">v1</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">numpy_input_fn</span><span class="p">(</span>
+    <span class="p">{</span><span class="s1">&#39;sentence&#39;</span><span class="p">:</span> <span class="n">test_reviews</span><span class="p">},</span> <span class="n">test_sentiments</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="universal-sentence-encoder">
+<h2>Universal Sentence Encoder<a class="headerlink" href="#universal-sentence-encoder" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">embedding_feature</span> <span class="o">=</span> <span class="n">hub</span><span class="o">.</span><span class="n">text_embedding_column</span><span class="p">(</span>
+    <span class="n">key</span><span class="o">=</span><span class="s1">&#39;sentence&#39;</span><span class="p">,</span> 
+    <span class="n">module_spec</span><span class="o">=</span><span class="s2">&quot;https://tfhub.dev/google/universal-sentence-encoder/2&quot;</span><span class="p">,</span>
+    <span class="n">trainable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dnn</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">DNNClassifier</span><span class="p">(</span>
+    <span class="n">hidden_units</span><span class="o">=</span><span class="p">[</span><span class="mi">512</span><span class="p">,</span><span class="mi">128</span><span class="p">],</span>
+    <span class="n">feature_columns</span><span class="o">=</span><span class="p">[</span><span class="n">embedding_feature</span><span class="p">],</span>
+    <span class="n">n_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">activation_fn</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">relu</span><span class="p">,</span>
+    <span class="n">dropout</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">optimizer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adagrad</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.005</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:tensorflow:Using default config.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:tensorflow:Using default config.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:Using temporary folder as model directory: /var/folders/n7/ltpzwx813c599nfxfb94s_640000gn/T/tmpobkqfogg
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:Using temporary folder as model directory: /var/folders/n7/ltpzwx813c599nfxfb94s_640000gn/T/tmpobkqfogg
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:tensorflow:Using config: {&#39;_model_dir&#39;: &#39;/var/folders/n7/ltpzwx813c599nfxfb94s_640000gn/T/tmpobkqfogg&#39;, &#39;_tf_random_seed&#39;: None, &#39;_save_summary_steps&#39;: 100, &#39;_save_checkpoints_steps&#39;: None, &#39;_save_checkpoints_secs&#39;: 600, &#39;_session_config&#39;: allow_soft_placement: true
+graph_options {
+  rewrite_options {
+    meta_optimizer_iterations: ONE
+  }
+}
+, &#39;_keep_checkpoint_max&#39;: 5, &#39;_keep_checkpoint_every_n_hours&#39;: 10000, &#39;_log_step_count_steps&#39;: 100, &#39;_train_distribute&#39;: None, &#39;_device_fn&#39;: None, &#39;_protocol&#39;: None, &#39;_eval_distribute&#39;: None, &#39;_experimental_distribute&#39;: None, &#39;_experimental_max_worker_delay_secs&#39;: None, &#39;_session_creation_timeout_secs&#39;: 7200, &#39;_service&#39;: None, &#39;_cluster_spec&#39;: ClusterSpec({}), &#39;_task_type&#39;: &#39;worker&#39;, &#39;_task_id&#39;: 0, &#39;_global_id_in_cluster&#39;: 0, &#39;_master&#39;: &#39;&#39;, &#39;_evaluation_master&#39;: &#39;&#39;, &#39;_is_chief&#39;: True, &#39;_num_ps_replicas&#39;: 0, &#39;_num_worker_replicas&#39;: 1}
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:tensorflow:Using config: {&#39;_model_dir&#39;: &#39;/var/folders/n7/ltpzwx813c599nfxfb94s_640000gn/T/tmpobkqfogg&#39;, &#39;_tf_random_seed&#39;: None, &#39;_save_summary_steps&#39;: 100, &#39;_save_checkpoints_steps&#39;: None, &#39;_save_checkpoints_secs&#39;: 600, &#39;_session_config&#39;: allow_soft_placement: true
+graph_options {
+  rewrite_options {
+    meta_optimizer_iterations: ONE
+  }
+}
+, &#39;_keep_checkpoint_max&#39;: 5, &#39;_keep_checkpoint_every_n_hours&#39;: 10000, &#39;_log_step_count_steps&#39;: 100, &#39;_train_distribute&#39;: None, &#39;_device_fn&#39;: None, &#39;_protocol&#39;: None, &#39;_eval_distribute&#39;: None, &#39;_experimental_distribute&#39;: None, &#39;_experimental_max_worker_delay_secs&#39;: None, &#39;_session_creation_timeout_secs&#39;: 7200, &#39;_service&#39;: None, &#39;_cluster_spec&#39;: ClusterSpec({}), &#39;_task_type&#39;: &#39;worker&#39;, &#39;_task_id&#39;: 0, &#39;_global_id_in_cluster&#39;: 0, &#39;_master&#39;: &#39;&#39;, &#39;_evaluation_master&#39;: &#39;&#39;, &#39;_is_chief&#39;: True, &#39;_num_ps_replicas&#39;: 0, &#39;_num_worker_replicas&#39;: 1}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tf</span><span class="o">.</span><span class="n">compat</span><span class="o">.</span><span class="n">v1</span><span class="o">.</span><span class="n">logging</span><span class="o">.</span><span class="n">set_verbosity</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">compat</span><span class="o">.</span><span class="n">v1</span><span class="o">.</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">TOTAL_STEPS</span> <span class="o">=</span> <span class="mi">1500</span>
+<span class="n">STEP_SIZE</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">TOTAL_STEPS</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">STEP_SIZE</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Training for step =&#39;</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">dnn</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">input_fn</span><span class="o">=</span><span class="n">train_input_fn</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="n">STEP_SIZE</span><span class="p">)</span>
+    <span class="n">elapsed_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Train Time (s):&#39;</span><span class="p">,</span> <span class="n">elapsed_time</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Eval Metrics (Train):&#39;</span><span class="p">,</span> <span class="n">dnn</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">input_fn</span><span class="o">=</span><span class="n">predict_train_input_fn</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Eval Metrics (Validation):&#39;</span><span class="p">,</span> <span class="n">dnn</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">input_fn</span><span class="o">=</span><span class="n">predict_val_input_fn</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------------------------------------------------------------------
+Training for step = 0
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">40</span><span class="o">-</span><span class="mi">3</span><span class="n">d81122073bb</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Training for step =&#39;</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="ne">---&gt; </span><span class="mi">11</span>     <span class="n">dnn</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">input_fn</span><span class="o">=</span><span class="n">train_input_fn</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="n">STEP_SIZE</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="n">elapsed_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span>     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Train Time (s):&#39;</span><span class="p">,</span> <span class="n">elapsed_time</span><span class="p">)</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/tensorflow_estimator/python/estimator/estimator.py</span> in <span class="ni">train</span><span class="nt">(self, input_fn, hooks, steps, max_steps, saving_listeners)</span>
+<span class="g g-Whitespace">    </span><span class="mi">347</span> 
+<span class="g g-Whitespace">    </span><span class="mi">348</span>       <span class="n">saving_listeners</span> <span class="o">=</span> <span class="n">_check_listeners_type</span><span class="p">(</span><span class="n">saving_listeners</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">349</span>       <span class="n">loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_train_model</span><span class="p">(</span><span class="n">input_fn</span><span class="p">,</span> <span class="n">hooks</span><span class="p">,</span> <span class="n">saving_listeners</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">350</span>       <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Loss for final step: </span><span class="si">%s</span><span class="s1">.&#39;</span><span class="p">,</span> <span class="n">loss</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">351</span>       <span class="k">return</span> <span class="bp">self</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/tensorflow_estimator/python/estimator/estimator.py</span> in <span class="ni">_train_model</span><span class="nt">(self, input_fn, hooks, saving_listeners)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1173</span>       <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_train_model_distributed</span><span class="p">(</span><span class="n">input_fn</span><span class="p">,</span> <span class="n">hooks</span><span class="p">,</span> <span class="n">saving_listeners</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1174</span>     <span class="k">else</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1175</span>       <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_train_model_default</span><span class="p">(</span><span class="n">input_fn</span><span class="p">,</span> <span class="n">hooks</span><span class="p">,</span> <span class="n">saving_listeners</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1176</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1177</span>   <span class="k">def</span> <span class="nf">_train_model_default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_fn</span><span class="p">,</span> <span class="n">hooks</span><span class="p">,</span> <span class="n">saving_listeners</span><span class="p">):</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/tensorflow_estimator/python/estimator/estimator.py</span> in <span class="ni">_train_model_default</span><span class="nt">(self, input_fn, hooks, saving_listeners)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1206</span>       <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_train_with_estimator_spec</span><span class="p">(</span><span class="n">estimator_spec</span><span class="p">,</span> <span class="n">worker_hooks</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1207</span>                                              <span class="n">hooks</span><span class="p">,</span> <span class="n">global_step_tensor</span><span class="p">,</span>
+<span class="ne">-&gt; </span><span class="mi">1208</span>                                              <span class="n">saving_listeners</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1209</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1210</span>   <span class="k">def</span> <span class="nf">_train_model_distributed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_fn</span><span class="p">,</span> <span class="n">hooks</span><span class="p">,</span> <span class="n">saving_listeners</span><span class="p">):</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/tensorflow_estimator/python/estimator/estimator.py</span> in <span class="ni">_train_with_estimator_spec</span><span class="nt">(self, estimator_spec, worker_hooks, hooks, global_step_tensor, saving_listeners)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1505</span>         <span class="n">config</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session_config</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1506</span>         <span class="n">max_wait_secs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">session_creation_timeout_secs</span><span class="p">,</span>
+<span class="ne">-&gt; </span><span class="mi">1507</span>         <span class="n">log_step_count_steps</span><span class="o">=</span><span class="n">log_step_count_steps</span><span class="p">)</span> <span class="k">as</span> <span class="n">mon_sess</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1508</span>       <span class="n">loss</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">1509</span>       <span class="n">any_step_done</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/tensorflow/python/training/monitored_session.py</span> in <span class="ni">MonitoredTrainingSession</span><span class="nt">(master, is_chief, checkpoint_dir, scaffold, hooks, chief_only_hooks, save_checkpoint_secs, save_summaries_steps, save_summaries_secs, config, stop_grace_period_secs, log_step_count_steps, max_wait_secs, save_checkpoint_steps, summary_dir, save_graph_def)</span>
+<span class="g g-Whitespace">    </span><span class="mi">602</span>       <span class="n">session_creator</span><span class="o">=</span><span class="n">session_creator</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">603</span>       <span class="n">hooks</span><span class="o">=</span><span class="n">all_hooks</span><span class="p">,</span>
+<span class="ne">--&gt; </span><span class="mi">604</span>       <span class="n">stop_grace_period_secs</span><span class="o">=</span><span class="n">stop_grace_period_secs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">605</span> 
+<span class="g g-Whitespace">    </span><span class="mi">606</span> 
+
+<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/tensorflow/python/training/monitored_session.py</span> in <span class="ni">__init__</span><span class="nt">(self, session_creator, hooks, stop_grace_period_secs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1036</span>         <span class="n">hooks</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1037</span>         <span class="n">should_recover</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="ne">-&gt; </span><span class="mi">1038</span>         <span class="n">stop_grace_period_secs</span><span class="o">=</span><span class="n">stop_grace_period_secs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1039</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1040</span> 
+
+<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/tensorflow/python/training/monitored_session.py</span> in <span class="ni">__init__</span><span class="nt">(self, session_creator, hooks, should_recover, stop_grace_period_secs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">747</span>         <span class="n">stop_grace_period_secs</span><span class="o">=</span><span class="n">stop_grace_period_secs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">748</span>     <span class="k">if</span> <span class="n">should_recover</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">749</span>       <span class="bp">self</span><span class="o">.</span><span class="n">_sess</span> <span class="o">=</span> <span class="n">_RecoverableSession</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_coordinated_creator</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">750</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">751</span>       <span class="bp">self</span><span class="o">.</span><span class="n">_sess</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coordinated_creator</span><span class="o">.</span><span class="n">create_session</span><span class="p">()</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/tensorflow/python/training/monitored_session.py</span> in <span class="ni">__init__</span><span class="nt">(self, sess_creator)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1229</span>     <span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1230</span><span class="sd">     self._sess_creator = sess_creator</span>
+<span class="ne">-&gt; </span><span class="mi">1231</span><span class="sd">     _WrappedSession.__init__(self, self._create_session())</span>
+<span class="g g-Whitespace">   </span><span class="mi">1232</span><span class="sd"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">1233</span><span class="sd">   def _create_session(self):</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/tensorflow/python/training/monitored_session.py</span> in <span class="ni">_create_session</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1234</span><span class="sd">     while True:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1235</span><span class="sd">       try:</span>
+<span class="ne">-&gt; </span><span class="mi">1236</span><span class="sd">         return self._sess_creator.create_session()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1237</span><span class="sd">       except _PREEMPTION_ERRORS as e:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1238</span><span class="sd">         logging.info(</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/tensorflow/python/training/monitored_session.py</span> in <span class="ni">create_session</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">900</span><span class="sd">       &quot;&quot;&quot;</span><span class="n">Creates</span> <span class="n">a</span> <span class="n">coordinated</span> <span class="n">session</span><span class="o">.</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">901</span><span class="s2">       # Keep the tf_sess for unit testing.</span>
+<span class="ne">--&gt; </span><span class="mi">902</span><span class="s2">       self.tf_sess = self._session_creator.create_session()</span>
+<span class="g g-Whitespace">    </span><span class="mi">903</span><span class="s2">       # We don&#39;t want coordinator to suppress any exception.</span>
+<span class="g g-Whitespace">    </span><span class="mi">904</span><span class="s2">       self.coord = coordinator.Coordinator(clean_stop_exception_types=[])</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/tensorflow/python/training/monitored_session.py</span> in <span class="ni">create_session</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">667</span><span class="s2">         init_op=self._scaffold.init_op,</span>
+<span class="g g-Whitespace">    </span><span class="mi">668</span><span class="s2">         init_feed_dict=self._scaffold.init_feed_dict,</span>
+<span class="ne">--&gt; </span><span class="mi">669</span><span class="s2">         init_fn=self._scaffold.init_fn)</span>
+<span class="g g-Whitespace">    </span><span class="mi">670</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">671</span><span class="s2"> </span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/tensorflow/python/training/session_manager.py</span> in <span class="ni">prepare_session</span><span class="nt">(self, master, init_op, saver, checkpoint_dir, checkpoint_filename_with_path, wait_for_checkpoint, max_wait_secs, config, init_feed_dict, init_fn)</span>
+<span class="g g-Whitespace">    </span><span class="mi">299</span><span class="s2">                            &quot;init_fn or local_init_op was given&quot;)</span>
+<span class="g g-Whitespace">    </span><span class="mi">300</span><span class="s2">       if init_op is not None:</span>
+<span class="ne">--&gt; </span><span class="mi">301</span><span class="s2">         sess.run(init_op, feed_dict=init_feed_dict)</span>
+<span class="g g-Whitespace">    </span><span class="mi">302</span><span class="s2">       if init_fn:</span>
+<span class="g g-Whitespace">    </span><span class="mi">303</span><span class="s2">         init_fn(sess)</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/tensorflow/python/client/session.py</span> in <span class="ni">run</span><span class="nt">(self, fetches, feed_dict, options, run_metadata)</span>
+<span class="g g-Whitespace">    </span><span class="mi">956</span><span class="s2">     try:</span>
+<span class="g g-Whitespace">    </span><span class="mi">957</span><span class="s2">       result = self._run(None, fetches, feed_dict, options_ptr,</span>
+<span class="ne">--&gt; </span><span class="mi">958</span><span class="s2">                          run_metadata_ptr)</span>
+<span class="g g-Whitespace">    </span><span class="mi">959</span><span class="s2">       if run_metadata:</span>
+<span class="g g-Whitespace">    </span><span class="mi">960</span><span class="s2">         proto_data = tf_session.TF_GetBuffer(run_metadata_ptr)</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/tensorflow/python/client/session.py</span> in <span class="ni">_run</span><span class="nt">(self, handle, fetches, feed_dict, options, run_metadata)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1179</span><span class="s2">     if final_fetches or final_targets or (handle and feed_dict_tensor):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1180</span><span class="s2">       results = self._do_run(handle, final_targets, final_fetches,</span>
+<span class="ne">-&gt; </span><span class="mi">1181</span><span class="s2">                              feed_dict_tensor, options, run_metadata)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1182</span><span class="s2">     else:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1183</span><span class="s2">       results = []</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/tensorflow/python/client/session.py</span> in <span class="ni">_do_run</span><span class="nt">(self, handle, target_list, fetch_list, feed_dict, options, run_metadata)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1357</span><span class="s2">     if handle is None:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1358</span><span class="s2">       return self._do_call(_run_fn, feeds, fetches, targets, options,</span>
+<span class="ne">-&gt; </span><span class="mi">1359</span><span class="s2">                            run_metadata)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1360</span><span class="s2">     else:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1361</span><span class="s2">       return self._do_call(_prun_fn, handle, feeds, fetches)</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/tensorflow/python/client/session.py</span> in <span class="ni">_do_call</span><span class="nt">(self, fn, *args)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1363</span><span class="s2">   def _do_call(self, fn, *args):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1364</span><span class="s2">     try:</span>
+<span class="ne">-&gt; </span><span class="mi">1365</span><span class="s2">       return fn(*args)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1366</span><span class="s2">     except errors.OpError as e:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1367</span><span class="s2">       message = compat.as_text(e.message)</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/tensorflow/python/client/session.py</span> in <span class="ni">_run_fn</span><span class="nt">(feed_dict, fetch_list, target_list, options, run_metadata)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1348</span><span class="s2">       self._extend_graph()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1349</span><span class="s2">       return self._call_tf_sessionrun(options, feed_dict, fetch_list,</span>
+<span class="ne">-&gt; </span><span class="mi">1350</span><span class="s2">                                       target_list, run_metadata)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1351</span><span class="s2"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">1352</span><span class="s2">     def _prun_fn(handle, feed_dict, fetch_list):</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/tensorflow/python/client/session.py</span> in <span class="ni">_call_tf_sessionrun</span><span class="nt">(self, options, feed_dict, fetch_list, target_list, run_metadata)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1441</span><span class="s2">     return tf_session.TF_SessionRun_wrapper(self._session, options, feed_dict,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1442</span><span class="s2">                                             fetch_list, target_list,</span>
+<span class="ne">-&gt; </span><span class="mi">1443</span><span class="s2">                                             run_metadata)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1444</span><span class="s2"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">1445</span><span class="s2">   def _call_tf_sessionprun(self, handle, feed_dict, fetch_list):</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="model-evaluation">
+<h2>Model Evaluation<a class="headerlink" href="#model-evaluation" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dnn</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">input_fn</span><span class="o">=</span><span class="n">predict_train_input_fn</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dnn</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">input_fn</span><span class="o">=</span><span class="n">predict_test_input_fn</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r-tensorflow"
+        },
+        kernelOptions: {
+            kernelName: "r-tensorflow",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'r-tensorflow'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alvin Chen<br/>
+        
+            &copy; Copyright 2020 Alvin Chen.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="_static/js/index.js"></script>
+    
+  </body>
+</html>

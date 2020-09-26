@@ -287,15 +287,15 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Building Network</span>
-<span class="kn">from</span> <span class="nn">keras</span> <span class="kn">import</span> <span class="n">layers</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Sequential</span><span class="p">()</span>
-<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="n">maxlen</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">chars</span><span class="p">))))</span>
-<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">chars</span><span class="p">),</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ## Building Network</span>
+<span class="c1"># from keras import layers</span>
+<span class="c1"># model = keras.models.Sequential()</span>
+<span class="c1"># model.add(layers.LSTM(128, input_shape=(maxlen, len(chars))))</span>
+<span class="c1"># model.add(layers.Dense(len(chars), activation=&#39;softmax&#39;))</span>
 
-<span class="c1">## Model configuration</span>
-<span class="n">optimizer</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">RMSprop</span><span class="p">(</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">)</span>
+<span class="c1"># ## Model configuration</span>
+<span class="c1"># optimizer = keras.optimizers.RMSprop(lr=0.001)</span>
+<span class="c1"># model.compile(loss=&#39;categorical_crossentropy&#39;, optimizer=optimizer)</span>
 </pre></div>
 </div>
 </div>
@@ -317,85 +317,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Model Training</span>
-<span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">epochs</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/10
- 6360/14214 [============&gt;.................] - ETA: 11:48 - loss: 2.0408
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">3</span><span class="n">dd846ea50fd</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1">## Model Training</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">epochs</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
-
-<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/tensorflow/python/keras/engine/training.py</span> in <span class="ni">_method_wrapper</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">106</span>   <span class="k">def</span> <span class="nf">_method_wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">107</span>     <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_in_multi_worker_mode</span><span class="p">():</span>  <span class="c1"># pylint: disable=protected-access</span>
-<span class="ne">--&gt; </span><span class="mi">108</span>       <span class="k">return</span> <span class="n">method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">109</span> 
-<span class="g g-Whitespace">    </span><span class="mi">110</span>     <span class="c1"># Running inside `run_distribute_coordinator` already.</span>
-
-<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/tensorflow/python/keras/engine/training.py</span> in <span class="ni">fit</span><span class="nt">(self, x, y, batch_size, epochs, verbose, callbacks, validation_split, validation_data, shuffle, class_weight, sample_weight, initial_epoch, steps_per_epoch, validation_steps, validation_batch_size, validation_freq, max_queue_size, workers, use_multiprocessing)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1096</span>                 <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1097</span>               <span class="n">callbacks</span><span class="o">.</span><span class="n">on_train_batch_begin</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1098</span>               <span class="n">tmp_logs</span> <span class="o">=</span> <span class="n">train_function</span><span class="p">(</span><span class="n">iterator</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1099</span>               <span class="k">if</span> <span class="n">data_handler</span><span class="o">.</span><span class="n">should_sync</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1100</span>                 <span class="n">context</span><span class="o">.</span><span class="n">async_wait</span><span class="p">()</span>
-
-<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/tensorflow/python/eager/def_function.py</span> in <span class="ni">__call__</span><span class="nt">(self, *args, **kwds)</span>
-<span class="g g-Whitespace">    </span><span class="mi">778</span>       <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">779</span>         <span class="n">compiler</span> <span class="o">=</span> <span class="s2">&quot;nonXla&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">780</span>         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">781</span> 
-<span class="g g-Whitespace">    </span><span class="mi">782</span>       <span class="n">new_tracing_count</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_tracing_count</span><span class="p">()</span>
-
-<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/tensorflow/python/eager/def_function.py</span> in <span class="ni">_call</span><span class="nt">(self, *args, **kwds)</span>
-<span class="g g-Whitespace">    </span><span class="mi">805</span>       <span class="c1"># In this case we have created variables on the first call, so we run the</span>
-<span class="g g-Whitespace">    </span><span class="mi">806</span>       <span class="c1"># defunned version which is guaranteed to never create variables.</span>
-<span class="ne">--&gt; </span><span class="mi">807</span>       <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stateless_fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>  <span class="c1"># pylint: disable=not-callable</span>
-<span class="g g-Whitespace">    </span><span class="mi">808</span>     <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stateful_fn</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">809</span>       <span class="c1"># Release the lock early so that multiple threads can perform the call</span>
-
-<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/tensorflow/python/eager/function.py</span> in <span class="ni">__call__</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2827</span>     <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">2828</span>       <span class="n">graph_function</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_maybe_define_function</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">2829</span>     <span class="k">return</span> <span class="n">graph_function</span><span class="o">.</span><span class="n">_filtered_call</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># pylint: disable=protected-access</span>
-<span class="g g-Whitespace">   </span><span class="mi">2830</span> 
-<span class="g g-Whitespace">   </span><span class="mi">2831</span>   <span class="nd">@property</span>
-
-<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/tensorflow/python/eager/function.py</span> in <span class="ni">_filtered_call</span><span class="nt">(self, args, kwargs, cancellation_manager)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1846</span>                            <span class="n">resource_variable_ops</span><span class="o">.</span><span class="n">BaseResourceVariable</span><span class="p">))],</span>
-<span class="g g-Whitespace">   </span><span class="mi">1847</span>         <span class="n">captured_inputs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">captured_inputs</span><span class="p">,</span>
-<span class="ne">-&gt; </span><span class="mi">1848</span>         <span class="n">cancellation_manager</span><span class="o">=</span><span class="n">cancellation_manager</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1849</span> 
-<span class="g g-Whitespace">   </span><span class="mi">1850</span>   <span class="k">def</span> <span class="nf">_call_flat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">captured_inputs</span><span class="p">,</span> <span class="n">cancellation_manager</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-
-<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/tensorflow/python/eager/function.py</span> in <span class="ni">_call_flat</span><span class="nt">(self, args, captured_inputs, cancellation_manager)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1922</span>       <span class="c1"># No tape is watching; skip to running the function.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1923</span>       <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_call_outputs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_inference_function</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
-<span class="ne">-&gt; </span><span class="mi">1924</span>           <span class="n">ctx</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">cancellation_manager</span><span class="o">=</span><span class="n">cancellation_manager</span><span class="p">))</span>
-<span class="g g-Whitespace">   </span><span class="mi">1925</span>     <span class="n">forward_backward</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_select_forward_and_backward_functions</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1926</span>         <span class="n">args</span><span class="p">,</span>
-
-<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/tensorflow/python/eager/function.py</span> in <span class="ni">call</span><span class="nt">(self, ctx, args, cancellation_manager)</span>
-<span class="g g-Whitespace">    </span><span class="mi">548</span>               <span class="n">inputs</span><span class="o">=</span><span class="n">args</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">549</span>               <span class="n">attrs</span><span class="o">=</span><span class="n">attrs</span><span class="p">,</span>
-<span class="ne">--&gt; </span><span class="mi">550</span>               <span class="n">ctx</span><span class="o">=</span><span class="n">ctx</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">551</span>         <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">552</span>           <span class="n">outputs</span> <span class="o">=</span> <span class="n">execute</span><span class="o">.</span><span class="n">execute_with_cancellation</span><span class="p">(</span>
-
-<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/tensorflow/python/eager/execute.py</span> in <span class="ni">quick_execute</span><span class="nt">(op_name, num_outputs, inputs, attrs, ctx, name)</span>
-<span class="g g-Whitespace">     </span><span class="mi">58</span>     <span class="n">ctx</span><span class="o">.</span><span class="n">ensure_initialized</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">59</span>     <span class="n">tensors</span> <span class="o">=</span> <span class="n">pywrap_tfe</span><span class="o">.</span><span class="n">TFE_Py_Execute</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">device_name</span><span class="p">,</span> <span class="n">op_name</span><span class="p">,</span>
-<span class="ne">---&gt; </span><span class="mi">60</span>                                         <span class="n">inputs</span><span class="p">,</span> <span class="n">attrs</span><span class="p">,</span> <span class="n">num_outputs</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">61</span>   <span class="k">except</span> <span class="n">core</span><span class="o">.</span><span class="n">_NotOkStatusException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">62</span>     <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
+<span class="c1"># history = model.fit(x, y, batch_size=128, epochs = 10)</span>
 </pre></div>
 </div>
 </div>
@@ -403,48 +325,44 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Save model</span>
-<span class="n">model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;../data/text-gen-lstm-shakespear.h5&#39;</span><span class="p">)</span>
+<span class="c1"># model.save(&#39;../data/text-gen-lstm-shakespear.h5&#39;)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-<span class="n">loss_values</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">]</span>
-<span class="n">epochs</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">loss_values</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_keys([&#39;loss&#39;])
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># print(history.history.keys())</span>
+<span class="c1"># loss_values = history.history[&#39;loss&#39;]</span>
+<span class="c1"># epochs = range(1, len(loss_values)+1)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import seaborn as sns</span>
+<span class="c1"># import pandas as pd</span>
+<span class="c1"># %matplotlib inline</span>
 
-<span class="n">hist_df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">loss_values</span><span class="p">)),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;epochs&#39;</span><span class="p">,</span><span class="s1">&#39;loss_values&#39;</span><span class="p">])</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;darkgrid&#39;</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">hist_df</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;epochs&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;loss_values&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">)</span>
+<span class="c1"># hist_df=pd.DataFrame(list(zip(epochs, loss_values)), columns=[&#39;epochs&#39;,&#39;loss_values&#39;])</span>
+<span class="c1"># sns.set(style=&#39;darkgrid&#39;)</span>
+<span class="c1"># sns.relplot(data=hist_df,x=&#39;epochs&#39;, y=&#39;loss_values&#39;, kind=&#39;line&#39;)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7fb8026924d0&gt;
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">load_model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">load_model</span><span class="p">(</span><span class="s1">&#39;../data/text-gen-lstm-shakespear.h5&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="_images/text-gen-lstm-v2_11_1.png" src="_images/text-gen-lstm-v2_11_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Generating Texts</span>
-
 <span class="kn">import</span> <span class="nn">random</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 
@@ -480,28 +398,41 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--Generating with seed: &quot;t is laden. it is
-believed that the more profound externed.-&quot;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--Generating with seed: &quot;ou urge. mowb&#39;r away the kings?
+  mess. with love a telled i&quot;
 ----- temperature: 0.2
-t is laden. it is
-believed that the more profound externed.--but it is the bast
-to divine for a religious conscience of the moral problem of soul, and the trasidity and the
-free spirit and the distimst of any say spirit as the bard in the freenses to
-renused t----- temperature: 0.5
-t of any say spirit as the bard in the freenses to
-renused to remain and dearing the same tors of the such a profound
-from the entire mone.n in the experience that man be inceres the
-sight of propertan a doubl of the enolyoring in a mystictified man: it is the----- temperature: 1.0
-n a doubl of the enolyoring in a mystictified man: it is the find&quot; upon
-the most instincts, from a lort and makes we now ach as are of
-the noblesto inscreation as generaies of every uncommence man
-and privilegen a goos
-imaginaten, when other are laugh manner, ----- temperature: 1.2
- privilegen a goos
-imaginaten, when other are laugh manner, only
-genathtic anomscising, lithtert of wisheful anybodder. posolaker-and just more instible fis is dution, this drigon of this un eashing
-pleasupprensity in brater, imminaly developedce and distour
-t
+ou urge. mowb&#39;r away the kings?
+  mess. with love a telled in the
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/ipykernel_launcher.py:4: RuntimeWarning: divide by zero encountered in log
+  after removing the cwd from sys.path.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> court of the state of the world,
+    and the companion of the constant and the state
+    to be a words and the man and the state of the man
+    that the father the body of the shall see the stat----- temperature: 0.5
+e man
+    that the father the body of the shall see the state of france.
+                                                       [tow,
+
+ 
+peord aidgency and lady marcius that holdnee,
+                                                        mess?
+               ----- temperature: 1.0
+                                       mess?
+                  shame, pity fall appoint
+    for i did staff. pack and lancuser, and he
+    and do teace thy verge and duke basest serv?
+    which had made stratch&#39;d. upon it or else;
+    i&#39;ll deformed thy after t----- temperature: 1.2
+de stratch&#39;d. upon it or else;
+    i&#39;ll deformed thy after to heaven, they do sir,
+    how. neit?
+  wolsey. i would down quit tell the pain; slee,x&#39;y change shefrs.
+    whoses me let her, for new within, hast they
+    m
 </pre></div>
 </div>
 </div>

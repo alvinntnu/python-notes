@@ -7,11 +7,11 @@
     - file: data-structure
     - file: numpy
     - file: pandas
-    - file: seaborn
     - file: program-structure
     - file: input-output
     - file: pickle
-    - file: ggplot
+    - file: data-visualization-1
+    - file: data-visualization-2
     - file: magic-r
     - file: python-tricks
     - file: web-applications
@@ -42,6 +42,7 @@
     - file: sentiment-analysis-lstm-v1
     - file: seq-to-seq
     - file: text-gen-lstm-v1
+    - file: transfer-learning-sent-encoding
     - file: doc2vec
     - file: nlp-spacy
     - file: nlp-spacy-zh

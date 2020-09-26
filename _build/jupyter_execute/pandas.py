@@ -26,6 +26,7 @@ iris.columns
 iris.index
 iris.info()
 iris.describe()
+iris.dtypes # check column data types
 
 
 ## `dplyr` Key Verbs

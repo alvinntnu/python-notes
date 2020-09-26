@@ -37,7 +37,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Input and Output" href="input-output.html" />
-    <link rel="prev" title="Data Visualization Using Seaborn" href="seaborn.html" />
+    <link rel="prev" title="Pandas" href="pandas.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
@@ -113,11 +113,6 @@
      Pandas
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="seaborn.html">
-     Data Visualization Using Seaborn
-    </a>
-   </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      Program Structure
@@ -134,8 +129,13 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="ggplot.html">
-     ggplot
+    <a class="reference internal" href="data-visualization-1.html">
+     Data Visualization I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="data-visualization-2.html">
+     Data Visualization 2
     </a>
    </li>
    <li class="toctree-l2">
@@ -426,6 +426,27 @@ Dickson has passed 4 test(s)
 </div>
 </div>
 </div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">tqdm</span></code>in for-loop can give us a progress bar in the iteration process.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span> 
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">)):</span> 
+<span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">  File</span><span class="nn"> &quot;&lt;ipython-input-3-617d68ecd70d&gt;&quot;</span><span class="gt">, line </span><span class="mi">3</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
+        <span class="o">^</span>
+<span class="ne">IndentationError</span>: expected an indented block
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="while-statement">
 <h2>While Statement<a class="headerlink" href="#while-statement" title="Permalink to this headline">¶</a></h2>
@@ -588,7 +609,7 @@ bye
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="seaborn.html" title="previous page">Data Visualization Using Seaborn</a>
+    <a class='left-prev' id="prev-link" href="pandas.html" title="previous page">Pandas</a>
     <a class='right-next' id="next-link" href="input-output.html" title="next page">Input and Output</a>
 
     </div>

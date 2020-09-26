@@ -364,22 +364,6 @@
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:526: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
-  _np_qint8 = np.dtype([(&quot;qint8&quot;, np.int8, 1)])
-/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:527: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
-  _np_quint8 = np.dtype([(&quot;quint8&quot;, np.uint8, 1)])
-/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:528: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
-  _np_qint16 = np.dtype([(&quot;qint16&quot;, np.int16, 1)])
-/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:529: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
-  _np_quint16 = np.dtype([(&quot;quint16&quot;, np.uint16, 1)])
-/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:530: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
-  _np_qint32 = np.dtype([(&quot;qint32&quot;, np.int32, 1)])
-/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:535: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
-  np_resource = np.dtype([(&quot;resource&quot;, np.ubyte, 1)])
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -392,6 +376,15 @@
 <span class="c1">#ws = WS(&#39;../../../NTNU/CorpusLinguistics/CorpusLinguistics_bookdown/data/&#39;)</span>
 <span class="n">pos</span> <span class="o">=</span> <span class="n">POS</span><span class="p">(</span><span class="n">MODEL_PATH</span><span class="p">)</span>
 <span class="n">ner</span> <span class="o">=</span> <span class="n">NER</span><span class="p">(</span><span class="n">MODEL_PATH</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Exception ignored in: &lt;bound method WS.__del__ of &lt;ckiptagger.api.WS object at 0x7fbf81051f98&gt;&gt;
+Traceback (most recent call last):
+  File &quot;/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/ckiptagger/api.py&quot;, line 65, in __del__
+    self.model.sess.close()
+AttributeError: &#39;WS&#39; object has no attribute &#39;model&#39;
 </pre></div>
 </div>
 </div>

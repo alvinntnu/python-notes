@@ -61,6 +61,14 @@ import itertools
 for (p, tn) in zip(names, tnum):
     print('%s has passed %.0f test(s)' % (p, tn))
 
+```{tip}
+Using `tqdm`in for-loop can give us a progress bar in the iteration process.
+```
+
+from tqdm import tqdm 
+for i in tqdm(range(10000)): 
+sleep(0.01) 
+
 ## While Statement
 
 n=5
