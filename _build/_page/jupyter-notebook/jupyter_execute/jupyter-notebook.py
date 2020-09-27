@@ -1,9 +1,12 @@
 # Jupyer Notebook
 
-This section includes notes relate to `Jupyter Notebook` as well as `jupyter-book`.
+- This section includes notes relate to `Jupyter Notebook` as well as `jupyter-book`.
 
-Recommended Readings:
-- [Jupyter Notebook Tips and Tricks](https://www.dataquest.io/blog/jupyter-notebook-tips-tricks-shortcuts/)
+- Recommended Readings:
+    - [Jupyter Notebook Tips and Tricks](https://www.dataquest.io/blog/jupyter-notebook-tips-tricks-shortcuts/)
+    - [Notebook to slides](https://medium.com/pyradise/jupyter-notebook-tricks-slideshows-a057a39c0a23)
+    - Check notebook extension documentations (Very useful) (See {ref}`nbextensions`)
+
 
 
 ## Keyboard Shortcuts
@@ -33,8 +36,38 @@ An example of in-text citation {cite}`deyne2016`.
 
 - Bibliography
 
+:::{admonition}
+
+- To include the bibliography at the end:
+
 ```{bibliography} book.bib
+:filter: docname in docnames
 :style: unsrt
+```
+
+:::
+
+```{bibliography} book.bib
+:filter: docname in docnames
+:style: unsrt
+```
+
+## Add Images/Figures
+
+- [Documentation](https://jupyterbook.org/content/figures.html)
+
+## Cross-reference and Citations
+
+- Add labels:
+
+```
+(LABEL_NAME)=
+```
+
+- Cross-reference:
+
+```
+{ref}`LABEL_NAME`
 ```
 
 ## Build the book
@@ -168,6 +201,27 @@ Sometimes, the pre-existing conda environment does not work properly. An easy so
 ```
 
 
+(nbextensions)=
+
+## Install Notebook Extensions
+
+- [nbextensions documentation](https://jupyter-contrib-nbextensions.readthedocs.io/en/latest/install.html)]
+
+- There are in general three steps
+    - Install the modudle `jupyter_contribe_nbextensions`
+    - Install javascript and css files
+    - Enable specific extensions
+```
+!pip install jupyter_contrib_nbextensions
+!jupyter contrib nbextension install --user
+!jupyter nbextension enable <nbextension require path>
+```
+
+- Use `jupyter_extensions_configuaror` to manguage the extensions
+- Recommended extensions:
+    - `varInspector`: very useful to check objects in the current memory of the kernel.
+    - `ScratchPad`: very good for debugging in notebook
+
 ## IPython Magic Commands
 
 - Magic commands from IPythhon
@@ -218,18 +272,7 @@ Sometimes, the pre-existing conda environment does not work properly. An easy so
 
 ## Hide or Remove Content
 
-
-### Hide markdown
-
-:::{admonition}
-
-```{toggle}
-
-hidden_contents
-
-```
-
-:::
+- See [documentation page](https://jupyterbook.org/interactive/hiding.html)
 
 ## Running R  and Python in the Same Notebook
 

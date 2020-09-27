@@ -51,8 +51,8 @@ test_sentiments[0]
 # norm_train_reviews = tn.normalize_corpus(train_reviews, stopwords=stop_words)
 # norm_test_reviews = tn.normalize_corpus(test_reviews, stopwords=stop_words)
 
-norm_train_reviews = train_reviews
-norm_test_reviews = test_reviews
+norm_train_reviews = train_reviews.tolist()
+norm_test_reviews = test_reviews.tolist()
 
 ## Traditional Supervised Machine Learning Models
 
@@ -65,10 +65,10 @@ norm_test_reviews = test_reviews
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 
 # build BOW features on train reviews
-cv = CountVectorizer(binary=False, min_df=5, max_df=0.7, ngram_range=(1,2))
+cv = CountVectorizer(binary=False, min_df=10, max_df=0.7, ngram_range=(1,3))
 cv_train_features = cv.fit_transform(norm_train_reviews)
 # build TFIDF features on train reviews
-tv = TfidfVectorizer(use_idf=True, min_df=5, max_df=0.7, ngram_range=(1,2),
+tv = TfidfVectorizer(use_idf=True, min_df=10, max_df=0.7, ngram_range=(1,3),
                      sublinear_tf=True)
 tv_train_features = tv.fit_transform(norm_train_reviews)
 
@@ -83,8 +83,8 @@ print('TFIDF model:> Train features shape:', tv_train_features.shape, ' Test fea
 
 from sklearn.linear_model import SGDClassifier, LogisticRegression
 
-lr = LogisticRegression(penalty='l2', max_iter=100, C=1)
-svm = SGDClassifier(loss='hinge', max_iter=100)
+lr = LogisticRegression(penalty='l2', max_iter=200, C=1)
+svm = SGDClassifier(loss='hinge', max_iter=200)
 
 :::{note}
 `pd.MultiIndex()` has been updated in Sarker's code. The argument `codes=` is new.
@@ -149,6 +149,7 @@ def display_model_performance_metrics(true_labels, predicted_labels, classes=[1,
                              classes=classes)
 from sklearn import metrics
 
+%%time
 # build model    
 lr.fit(cv_train_features, train_sentiments)
 # predict using model
@@ -232,3 +233,68 @@ display_model_performance_metrics(true_labels=test_sentiments, predicted_labels=
 #                                                 test_features=tv_test_features, test_labels=test_sentiments)
 # # meu.display_model_performance_metrics(true_labels=test_sentiments, predicted_labels=svm_tfidf_predictions,
 #                                       classes=['positive', 'negative'])
+
+## Explaining Model (LIME)
+
+- See [LIME Documentationb](https://github.com/marcotcr/lime)
+
+from lime import lime_text
+from sklearn.pipeline import make_pipeline
+
+
+c = make_pipeline(cv, lr)
+print(c.predict_proba([norm_test_reviews[0]]))
+
+from lime.lime_text import LimeTextExplainer
+explainer = LimeTextExplainer(class_names=['positive','negative'])
+
+idx = 200
+exp = explainer.explain_instance(norm_test_reviews[idx], c.predict_proba, num_features=6)
+print('Document id: %d' % idx)
+print('Probability(negative) =', c.predict_proba([norm_test_reviews[idx]])[0,1])
+
+print('True class: %s' % test_sentiments[idx])
+
+exp.as_list()
+
+print('Original prediction:', lr.predict_proba(cv_test_features[idx])[0,1])
+tmp = cv_test_features[idx].copy()
+tmp[0,cv.vocabulary_['excellent']] = 0
+tmp[0,cv.vocabulary_['see']] = 0
+print('Prediction removing some features:', lr.predict_proba(tmp)[0,1])
+print('Difference:', lr.predict_proba(tmp)[0,1] - lr.predict_proba(cv_test_features[idx])[0,1])
+
+fig = exp.as_pyplot_figure()
+
+exp.show_in_notebook(text=True)
+
+## SVM
+
+from sklearn.calibration import CalibratedClassifierCV 
+calibrator = CalibratedClassifierCV(svm, cv='prefit')
+svm2=calibrator.fit(cv_train_features, train_sentiments)
+
+c2 = make_pipeline(cv, svm2)
+print(c2.predict_proba([norm_test_reviews[0]]))
+
+
+
+idx = 200
+exp = explainer.explain_instance(norm_test_reviews[idx], c2.predict_proba, num_features=6)
+print('Document id: %d' % idx)
+print('Probability(negative) =', c2.predict_proba([norm_test_reviews[idx]])[0,1])
+
+print('True class: %s' % test_sentiments[idx])
+
+exp.as_list()
+
+print('Original prediction:', svm2.predict_proba(cv_test_features[idx])[0,1])
+tmp = cv_test_features[idx].copy()
+tmp[0,cv.vocabulary_['excellent']] = 0
+tmp[0,cv.vocabulary_['well']] = 0
+print('Prediction removing some features:', svm2.predict_proba(tmp)[0,1])
+print('Difference:', svm2.predict_proba(tmp)[0,1] - lr.predict_proba(cv_test_features[idx])[0,1])
+
+fig = exp.as_pyplot_figure()
+
+exp.show_in_notebook(text=True)

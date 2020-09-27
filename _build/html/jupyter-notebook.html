@@ -291,6 +291,11 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cross-reference-and-citations">
+   Cross-reference and Citations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#build-the-book">
    Build the book
   </a>
@@ -313,6 +318,11 @@
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#use-a-specific-environment-in-notebook">
    Use a specific environment in notebook
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#install-notebook-extensions">
+   Install Notebook Extensions
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -342,11 +352,15 @@
                 
   <div class="section" id="jupyer-notebook">
 <h1>Jupyer Notebook<a class="headerlink" href="#jupyer-notebook" title="Permalink to this headline">¶</a></h1>
-<p>This section includes notes relate to <code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Notebook</span></code> as well as <code class="docutils literal notranslate"><span class="pre">jupyter-book</span></code>.</p>
-<p>Recommended Readings:</p>
 <ul class="simple">
+<li><p>This section includes notes relate to <code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Notebook</span></code> as well as <code class="docutils literal notranslate"><span class="pre">jupyter-book</span></code>.</p></li>
+<li><p>Recommended Readings:</p>
+<ul>
 <li><p><a class="reference external" href="https://www.dataquest.io/blog/jupyter-notebook-tips-tricks-shortcuts/">Jupyter Notebook Tips and Tricks</a></p></li>
 <li><p><a class="reference external" href="https://medium.com/pyradise/jupyter-notebook-tricks-slideshows-a057a39c0a23">Notebook to slides</a></p></li>
+<li><p>Check notebook extension documentations (Very useful) (See <a class="reference internal" href="#nbextensions"><span class="std std-ref">Install Notebook Extensions</span></a>)</p></li>
+</ul>
+</li>
 </ul>
 <div class="section" id="keyboard-shortcuts">
 <h2>Keyboard Shortcuts<a class="headerlink" href="#keyboard-shortcuts" title="Permalink to this headline">¶</a></h2>
@@ -376,7 +390,7 @@
 <ul class="simple">
 <li><p>In-text citation</p></li>
 </ul>
-<p>An example of in-text citation <a class="bibtex reference internal" href="references.html#deyne2016" id="id1">[1]</a>.</p>
+<p>An example of in-text citation <a class="bibtex reference internal" href="#id2" id="id1">[1]</a>.</p>
 <ul class="simple">
 <li><p>Bibliography</p></li>
 </ul>
@@ -404,6 +418,21 @@
 <ul class="simple">
 <li><p><a class="reference external" href="https://jupyterbook.org/content/figures.html">Documentation</a></p></li>
 </ul>
+</div>
+<div class="section" id="cross-reference-and-citations">
+<h2>Cross-reference and Citations<a class="headerlink" href="#cross-reference-and-citations" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Add labels:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">LABEL_NAME</span><span class="p">)</span><span class="o">=</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Cross-reference:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>{ref}`LABEL_NAME`
+</pre></div>
+</div>
 </div>
 <div class="section" id="build-the-book">
 <h2>Build the book<a class="headerlink" href="#build-the-book" title="Permalink to this headline">¶</a></h2>
@@ -560,6 +589,34 @@ $ jt -t monokai
 <p>Sometimes, the pre-existing conda environment does not work properly. An easy solution is to create the environment again after you set up the jupyter notebook.</p>
 </div>
 </div>
+<div class="section" id="install-notebook-extensions">
+<span id="nbextensions"></span><h2>Install Notebook Extensions<a class="headerlink" href="#install-notebook-extensions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://jupyter-contrib-nbextensions.readthedocs.io/en/latest/install.html">nbextensions documentation</a></p></li>
+<li><p>There are in general three steps</p>
+<ul>
+<li><p>Install the modudle <code class="docutils literal notranslate"><span class="pre">jupyter_contribe_nbextensions</span></code></p></li>
+<li><p>Install javascript and css files</p></li>
+<li><p>Enable specific extensions</p></li>
+</ul>
+</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!pip install jupyter_contrib_nbextensions
+!jupyter contrib nbextension install --user
+!jupyter nbextension enable &lt;nbextension require path&gt;
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">jupyter_extensions_configuaror</span></code> to manguage the extensions</p></li>
+<li><p>Recommended extensions:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">varInspector</span></code>: very useful to check objects in the current memory of the kernel.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ScratchPad</span></code>: very good for debugging in notebook</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Table</span> <span class="pre">on</span> <span class="pre">Content</span> <span class="pre">(2)</span></code>: Good to view the outline structure of the notebook file.</p></li>
+</ul>
+</li>
+</ul>
+</div>
 <div class="section" id="ipython-magic-commands">
 <h2>IPython Magic Commands<a class="headerlink" href="#ipython-magic-commands" title="Permalink to this headline">¶</a></h2>
 <ul>
@@ -671,8 +728,8 @@ IRkernel::installspec()
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 12.8 ms, sys: 16.5 ms, total: 29.3 ms
-Wall time: 11.3 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 15 ms, sys: 13.6 ms, total: 28.7 ms
+Wall time: 11.1 s
 </pre></div>
 </div>
 </div>
@@ -685,7 +742,7 @@ Wall time: 11.3 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.82 µs ± 88.6 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10.1 µs ± 167 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
 </pre></div>
 </div>
 </div>
@@ -766,22 +823,19 @@ ggplot(aes(x,y)) + geom_point()
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R[write to console]: 
 Attaching package: ‘dplyr’
-
-
-R[write to console]: The following objects are masked from ‘package:stats’:
-
-    filter, lag
-
-
-R[write to console]: The following objects are masked from ‘package:base’:
-
-    intersect, setdiff, setequal, union
-
-
-R[write to console]: Keep up to date with changes at https://www.tidyverse.org/blog/
 </pre></div>
 </div>
-<img alt="_images/jupyter-notebook_18_1.png" src="_images/jupyter-notebook_18_1.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R[write to console]: The following objects are masked from ‘package:stats’:
+
+    filter, lag
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R[write to console]: The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+</pre></div>
+</div>
+<img alt="_images/jupyter-notebook_20_3.png" src="_images/jupyter-notebook_20_3.png" />
 </div>
 </div>
 </div>

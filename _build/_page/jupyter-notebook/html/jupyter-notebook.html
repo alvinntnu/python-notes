@@ -135,6 +135,16 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#add-images-figures">
+   Add Images/Figures
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cross-reference-and-citations">
+   Cross-reference and Citations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#build-the-book">
    Build the book
   </a>
@@ -160,6 +170,11 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#install-notebook-extensions">
+   Install Notebook Extensions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#ipython-magic-commands">
    IPython Magic Commands
   </a>
@@ -168,13 +183,6 @@
   <a class="reference internal nav-link" href="#hide-or-remove-content">
    Hide or Remove Content
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#hide-markdown">
-     Hide markdown
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#running-r-and-python-in-the-same-notebook">
@@ -193,10 +201,15 @@
                 
   <div class="section" id="jupyer-notebook">
 <h1>Jupyer Notebook<a class="headerlink" href="#jupyer-notebook" title="Permalink to this headline">¶</a></h1>
-<p>This section includes notes relate to <code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Notebook</span></code> as well as <code class="docutils literal notranslate"><span class="pre">jupyter-book</span></code>.</p>
-<p>Recommended Readings:</p>
 <ul class="simple">
+<li><p>This section includes notes relate to <code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Notebook</span></code> as well as <code class="docutils literal notranslate"><span class="pre">jupyter-book</span></code>.</p></li>
+<li><p>Recommended Readings:</p>
+<ul>
 <li><p><a class="reference external" href="https://www.dataquest.io/blog/jupyter-notebook-tips-tricks-shortcuts/">Jupyter Notebook Tips and Tricks</a></p></li>
+<li><p><a class="reference external" href="https://medium.com/pyradise/jupyter-notebook-tricks-slideshows-a057a39c0a23">Notebook to slides</a></p></li>
+<li><p>Check notebook extension documentations (Very useful) (See <a class="reference internal" href="#nbextensions"><span class="std std-ref">Install Notebook Extensions</span></a>)</p></li>
+</ul>
+</li>
 </ul>
 <div class="section" id="keyboard-shortcuts">
 <h2>Keyboard Shortcuts<a class="headerlink" href="#keyboard-shortcuts" title="Permalink to this headline">¶</a></h2>
@@ -226,16 +239,49 @@
 <ul class="simple">
 <li><p>In-text citation</p></li>
 </ul>
-<p>An example of in-text citation <a class="bibtex reference internal" href="#deyne2016" id="id1">[1]</a>.</p>
+<p>An example of in-text citation <a class="bibtex reference internal" href="#id2" id="id1">[1]</a>.</p>
 <ul class="simple">
 <li><p>Bibliography</p></li>
 </ul>
+<div class="admonition">
+<p class="admonition-title"></p>
+<ul class="simple">
+<li><p>To include the bibliography at the end:</p></li>
+</ul>
 <p id="bibtex-bibliography-jupyter-notebook-0"><dl class="citation">
-<dt class="bibtex label" id="deyne2016"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dt class="bibtex label" id="deyne2016"><span class="brackets">1</span></dt>
 <dd><p>Simon De Deyne, Steven Verheyen, and Gert Storms. <em>Structure and organization of the mental lexicon: A network approach derived from syntactic dependency relations and word associations</em>, pages 47–79. Springer, Berlin, Germany, 2016. <a class="reference external" href="https://doi.org/10.1007/978-3-662-47238-5_3">doi:10.1007/978-3-662-47238-5_3</a>.</p>
 </dd>
 </dl>
 </p>
+</div>
+<p id="bibtex-bibliography-jupyter-notebook-1"><dl class="citation">
+<dt class="bibtex label" id="id2"><span class="brackets">1</span></dt>
+<dd><p>Simon De Deyne, Steven Verheyen, and Gert Storms. <em>Structure and organization of the mental lexicon: A network approach derived from syntactic dependency relations and word associations</em>, pages 47–79. Springer, Berlin, Germany, 2016. <a class="reference external" href="https://doi.org/10.1007/978-3-662-47238-5_3">doi:10.1007/978-3-662-47238-5_3</a>.</p>
+</dd>
+</dl>
+</p>
+</div>
+<div class="section" id="add-images-figures">
+<h2>Add Images/Figures<a class="headerlink" href="#add-images-figures" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://jupyterbook.org/content/figures.html">Documentation</a></p></li>
+</ul>
+</div>
+<div class="section" id="cross-reference-and-citations">
+<h2>Cross-reference and Citations<a class="headerlink" href="#cross-reference-and-citations" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Add labels:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">LABEL_NAME</span><span class="p">)</span><span class="o">=</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Cross-reference:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>{ref}`LABEL_NAME`
+</pre></div>
+</div>
 </div>
 <div class="section" id="build-the-book">
 <h2>Build the book<a class="headerlink" href="#build-the-book" title="Permalink to this headline">¶</a></h2>
@@ -392,6 +438,33 @@ $ jt -t monokai
 <p>Sometimes, the pre-existing conda environment does not work properly. An easy solution is to create the environment again after you set up the jupyter notebook.</p>
 </div>
 </div>
+<div class="section" id="install-notebook-extensions">
+<span id="nbextensions"></span><h2>Install Notebook Extensions<a class="headerlink" href="#install-notebook-extensions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://jupyter-contrib-nbextensions.readthedocs.io/en/latest/install.html">nbextensions documentation</a>]</p></li>
+<li><p>There are in general three steps</p>
+<ul>
+<li><p>Install the modudle <code class="docutils literal notranslate"><span class="pre">jupyter_contribe_nbextensions</span></code></p></li>
+<li><p>Install javascript and css files</p></li>
+<li><p>Enable specific extensions</p></li>
+</ul>
+</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!pip install jupyter_contrib_nbextensions
+!jupyter contrib nbextension install --user
+!jupyter nbextension enable &lt;nbextension require path&gt;
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">jupyter_extensions_configuaror</span></code> to manguage the extensions</p></li>
+<li><p>Recommended extensions:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">varInspector</span></code>: very useful to check objects in the current memory of the kernel.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ScratchPad</span></code>: very good for debugging in notebook</p></li>
+</ul>
+</li>
+</ul>
+</div>
 <div class="section" id="ipython-magic-commands">
 <h2>IPython Magic Commands<a class="headerlink" href="#ipython-magic-commands" title="Permalink to this headline">¶</a></h2>
 <ul>
@@ -450,15 +523,9 @@ $ jt -t monokai
 </div>
 <div class="section" id="hide-or-remove-content">
 <h2>Hide or Remove Content<a class="headerlink" href="#hide-or-remove-content" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="hide-markdown">
-<h3>Hide markdown<a class="headerlink" href="#hide-markdown" title="Permalink to this headline">¶</a></h3>
-<div class="admonition">
-<p class="admonition-title"></p>
-<div class="toggle docutils container">
-<p>hidden_contents</p>
-</div>
-</div>
-</div>
+<ul class="simple">
+<li><p>See <a class="reference external" href="https://jupyterbook.org/interactive/hiding.html">documentation page</a></p></li>
+</ul>
 </div>
 <div class="section" id="running-r-and-python-in-the-same-notebook">
 <h2>Running R  and Python in the Same Notebook<a class="headerlink" href="#running-r-and-python-in-the-same-notebook" title="Permalink to this headline">¶</a></h2>
@@ -509,7 +576,7 @@ IRkernel::installspec()
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 13.5 ms, sys: 16.3 ms, total: 29.8 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 12.6 ms, sys: 18 ms, total: 30.6 ms
 Wall time: 11.2 s
 </pre></div>
 </div>
@@ -523,7 +590,7 @@ Wall time: 11.2 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10.4 µs ± 620 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.71 µs ± 56.6 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
 </pre></div>
 </div>
 </div>
@@ -554,19 +621,31 @@ Automagic is ON, % prefix IS NOT needed for line magics.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ckiptagger.ipynb                 nlp-spacy.ipynb
-corpus-linguistics-methods.ipynb nltk.ipynb
-data-structure.ipynb             patterns-constructions.ipynb
-dplyr.ipynb                      productive-tech.ipynb
-ggplot.ipynb                     program-structure.ipynb
-google-colab.ipynb               python-tricks.ipynb
-hello-world.ipynb                references.ipynb
-input-output.ipynb               temp-notes.ipynb
-jieba.ipynb                      tokenization.ipynb
-jupyter-notebook.ipynb           vectorizing-text.ipynb
-magic-r.ipynb                    web-applications.ipynb
-nlp-ckipnlp.ipynb                web-crawler.ipynb
-nlp-spacy-zh.ipynb               word-embeddings.ipynb
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bnc.ipynb                             pickle.ipynb
+chatbot.ipynb                         praat-textgrid.ipynb
+childes.ipynb                         productive-tech.ipynb
+ckiptagger.ipynb                      program-structure.ipynb
+corpus-linguistics-methods.ipynb      python-tricks.ipynb
+data-structure.ipynb                  references.ipynb
+data-visualization-1.ipynb            sentence-encoding.ipynb
+data-visualization-2.ipynb            sentiment-analysis-dl.ipynb
+doc2vec.ipynb                         sentiment-analysis-lstm-v1.ipynb
+edit-distance.ipynb                   sentiment-analysis-lstm-v2.ipynb
+google-colab.ipynb                    sentiment-analysis-ml.ipynb
+hello-world.ipynb                     seq-to-seq.ipynb
+input-output.ipynb                    sklearn.ipynb
+jieba.ipynb                           text-gen-lstm-v1.ipynb
+jupyter-notebook.ipynb                text-gen-lstm-v2.ipynb
+magic-r.ipynb                         text-normalization-eng.ipynb
+miscellaneous-notes.ipynb             tokenization.ipynb
+nlp-ckipnlp.ipynb                     transfer-learning-sent-encoding.ipynb
+nlp-spacy-zh.ipynb                    vectorizing-text.ipynb
+nlp-spacy.ipynb                       web-applications.ipynb
+nltk.ipynb                            web-crawler.ipynb
+notebook-to-slides.ipynb              word-cloud.ipynb
+numpy.ipynb                           word-embeddings.ipynb
+pandas.ipynb                          word2vec.ipynb
+patterns-constructions.ipynb
 </pre></div>
 </div>
 </div>
@@ -592,22 +671,19 @@ ggplot(aes(x,y)) + geom_point()
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R[write to console]: 
 Attaching package: ‘dplyr’
-
-
-R[write to console]: The following objects are masked from ‘package:stats’:
-
-    filter, lag
-
-
-R[write to console]: The following objects are masked from ‘package:base’:
-
-    intersect, setdiff, setequal, union
-
-
-R[write to console]: Keep up to date with changes at https://www.tidyverse.org/blog/
 </pre></div>
 </div>
-<img alt="_images/jupyter-notebook_17_1.png" src="_images/jupyter-notebook_17_1.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R[write to console]: The following objects are masked from ‘package:stats’:
+
+    filter, lag
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R[write to console]: The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+</pre></div>
+</div>
+<img alt="_images/jupyter-notebook_20_3.png" src="_images/jupyter-notebook_20_3.png" />
 </div>
 </div>
 </div>
