@@ -1,5 +1,5 @@
 # Book settings
-title: Python Notes
+title: Python Notes for Linguistics
 author: Alvin Chen
 logo: ntnu03.png
 copyright: "2020 Alvin Chen"
@@ -16,3 +16,7 @@ html:
 execute:
   exclude_patterns:
     - 'transfer-learning-sent-encoding.ipynb'
+sphinx:
+  extra_extensions:
+    - sphinxcontrib.bibtex
+    

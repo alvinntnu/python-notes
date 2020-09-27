@@ -143,10 +143,11 @@ The `-n` refers to "not Jekyll"
 ## Change Notebook Themes
 
 - The following code runs in the terminal.
+    - To preserve the toolbars (`-T`), Logo (`-N`), and kernel logo (`-kl`)
 ```
 $ pip install jupyterthemes
 $ jt -l
-$ jt -t monokai
+$ jt -t monokai (-T -N -kl)
 ```
 
 - List of theme names
@@ -156,7 +157,7 @@ $ jt -t monokai
     - chesterish
     - monokai
     - solarizedl
-    - solarizedd
+    - solarized
 - Reset to the original default theme:
 ```
 $ jt -r
@@ -222,6 +223,8 @@ Sometimes, the pre-existing conda environment does not work properly. An easy so
     - `varInspector`: very useful to check objects in the current memory of the kernel.
     - `ScratchPad`: very good for debugging in notebook
     - `Table on Content (2)`: Good to view the outline structure of the notebook file.
+    - `Spellchker`
+    - `Live Markdown Preview`
 
 ## IPython Magic Commands
 

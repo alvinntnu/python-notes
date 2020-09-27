@@ -9,10 +9,11 @@ Topics may include:
 - machine learning techniques
 - Important Python libraries for NLP
 - Important Tasks
-    - Text Classification
-    - Text Summarization
-    - Topic Modeling
-    - Text Similarity and Clustering
-    - Semantic Analysis and Network
-    - Sentiment Analysis
-    - Deep Learning
+- Text Classification
+- Text Summarization(?)
+- Topic Modeling
+- Text Similarity and Clustering
+- Semantic Analysis and Network
+- Sentiment Analysis
+- Deep Learning
+- Transfer Learning

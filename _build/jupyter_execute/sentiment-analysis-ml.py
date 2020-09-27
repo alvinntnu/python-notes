@@ -1,6 +1,6 @@
 # Sentiment Analysis with Traditional Machine Learning
 
-- This note is based on Text Analytics with Python Ch9 Senitment Analysis by Dipanjan Sarkar
+- This note is based on Text Analytics with Python Ch9 Sentiment Analysis by Dipanjan Sarkar
 - Logistic Regression
 - Support Vector Machine (SVM)
 

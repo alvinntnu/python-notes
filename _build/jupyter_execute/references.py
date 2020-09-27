@@ -1,5 +1,6 @@
 # References
 
 ```{bibliography} book.bib
-:style: unsrt
+:style: plain
+:filter: docname in docnames
 ```

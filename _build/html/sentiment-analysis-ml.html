@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Sentiment Analysis with Traditional Machine Learning &#8212; Python Notes</title>
+    <title>Sentiment Analysis with Traditional Machine Learning &#8212; Python Notes for Linguistics</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="_static/sphinx-book-theme.css" type="text/css" />
@@ -59,7 +59,7 @@
   <img src="_static/ntnu03.png" class="logo" alt="logo">
   
   
-  <h1 class="site-logo" id="site-title">Python Notes</h1>
+  <h1 class="site-logo" id="site-title">Python Notes for Linguistics</h1>
   
 </a>
 </div>
@@ -318,7 +318,7 @@
   <div class="section" id="sentiment-analysis-with-traditional-machine-learning">
 <h1>Sentiment Analysis with Traditional Machine Learning<a class="headerlink" href="#sentiment-analysis-with-traditional-machine-learning" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li><p>This note is based on Text Analytics with Python Ch9 Senitment Analysis by Dipanjan Sarkar</p></li>
+<li><p>This note is based on Text Analytics with Python Ch9 Sentiment Analysis by Dipanjan Sarkar</p></li>
 <li><p>Logistic Regression</p></li>
 <li><p>Support Vector Machine (SVM)</p></li>
 </ul>
@@ -348,8 +348,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 359 ms, sys: 62.9 ms, total: 422 ms
-Wall time: 1.72 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 358 ms, sys: 52.9 ms, total: 411 ms
+Wall time: 2.16 s
 </pre></div>
 </div>
 </div>
@@ -462,6 +462,12 @@ Wall time: 1.72 s
 <span class="n">tv</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">use_idf</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">min_df</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">max_df</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span>
                      <span class="n">sublinear_tf</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">tv_train_features</span> <span class="o">=</span> <span class="n">tv</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">norm_train_reviews</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 59.3 s, sys: 1.96 s, total: 1min 1s
+Wall time: 1min 2s
 </pre></div>
 </div>
 </div>
