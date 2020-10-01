@@ -295,6 +295,16 @@
    Long-format vs. Wide-format Data
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#chinese-fonts-issues">
+   Chinese Fonts Issues
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
 </ul>
 
         </nav>
@@ -319,14 +329,23 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://python-graph-gallery.com/">Python Graph Gallery</a></p></li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We can increase the dpi of the matplotlib parameters to get image of higher resolution in notebook. Instructions are included below. And please note that the dpi setting has to GO before the magic inline command. (The magic inline commened resets the dpi to default.)</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="c1"># from plotnine.data import mpg, mtcars</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
 
-<span class="c1"># mtcars.head()</span>
+<span class="c1">## Change DPI for higher resolution in notebook</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span><span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1"># Change DPI when saving graphs in files</span>
+<span class="c1"># matplotlib.rc(&quot;savefig&quot;, dpi=dpi)</span>
 </pre></div>
 </div>
 </div>
@@ -381,72 +400,72 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>-1.292469</td>
-      <td>0.583848</td>
-      <td>11.891685</td>
-      <td>6.321275</td>
-      <td>4.353254</td>
-      <td>1.859250</td>
-      <td>5.618766</td>
-      <td>5.382854</td>
-      <td>3.399460</td>
-      <td>1.116187</td>
+      <td>0.355926</td>
+      <td>1.607059</td>
+      <td>9.991959</td>
+      <td>6.645375</td>
+      <td>4.487513</td>
+      <td>0.586380</td>
+      <td>5.608923</td>
+      <td>4.807519</td>
+      <td>4.219553</td>
+      <td>2.887675</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
-      <td>0.654626</td>
-      <td>2.543769</td>
-      <td>10.500469</td>
-      <td>6.738539</td>
-      <td>3.997105</td>
-      <td>1.470839</td>
-      <td>6.759617</td>
-      <td>4.857082</td>
-      <td>5.483158</td>
-      <td>1.454840</td>
+      <td>-0.659473</td>
+      <td>1.692215</td>
+      <td>13.803379</td>
+      <td>5.004987</td>
+      <td>5.643279</td>
+      <td>1.948497</td>
+      <td>4.994634</td>
+      <td>4.737999</td>
+      <td>4.967163</td>
+      <td>4.378906</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
-      <td>-0.251433</td>
-      <td>2.972761</td>
-      <td>13.009600</td>
-      <td>8.441536</td>
-      <td>4.365838</td>
-      <td>3.043654</td>
-      <td>6.998311</td>
-      <td>7.168280</td>
-      <td>6.141847</td>
-      <td>4.836177</td>
+      <td>0.167897</td>
+      <td>1.966458</td>
+      <td>12.855409</td>
+      <td>8.906744</td>
+      <td>6.399182</td>
+      <td>3.946604</td>
+      <td>6.134672</td>
+      <td>7.447886</td>
+      <td>7.151702</td>
+      <td>2.888299</td>
     </tr>
     <tr>
       <th>3</th>
       <td>4</td>
-      <td>0.003450</td>
-      <td>6.277659</td>
-      <td>13.488228</td>
-      <td>9.916908</td>
-      <td>6.951307</td>
-      <td>4.532988</td>
-      <td>6.544669</td>
-      <td>7.908524</td>
-      <td>6.986740</td>
-      <td>5.710261</td>
+      <td>0.201705</td>
+      <td>6.213489</td>
+      <td>13.563196</td>
+      <td>9.122123</td>
+      <td>8.095340</td>
+      <td>4.388179</td>
+      <td>8.826792</td>
+      <td>7.325369</td>
+      <td>8.096314</td>
+      <td>6.367271</td>
     </tr>
     <tr>
       <th>4</th>
       <td>5</td>
-      <td>-1.450318</td>
-      <td>6.553666</td>
-      <td>14.162163</td>
-      <td>9.938421</td>
-      <td>6.051179</td>
-      <td>6.388737</td>
-      <td>9.664925</td>
-      <td>6.473662</td>
-      <td>7.846429</td>
-      <td>7.347523</td>
+      <td>-0.102548</td>
+      <td>7.768838</td>
+      <td>16.752292</td>
+      <td>10.732587</td>
+      <td>9.429381</td>
+      <td>5.628846</td>
+      <td>8.384201</td>
+      <td>10.479356</td>
+      <td>7.666153</td>
+      <td>5.630254</td>
     </tr>
   </tbody>
 </table>
@@ -480,7 +499,7 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Score&#39;)
 </pre></div>
 </div>
-<img alt="_images/data-visualization-1_7_1.png" src="_images/data-visualization-1_7_1.png" />
+<img alt="_images/data-visualization-1_8_1.png" src="_images/data-visualization-1_8_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -538,67 +557,67 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>-0.012056</td>
-      <td>0.985878</td>
-      <td>12.698039</td>
-      <td>5.247103</td>
-      <td>3.359516</td>
-      <td>0.195740</td>
-      <td>4.758381</td>
-      <td>2.888140</td>
-      <td>4.947211</td>
+      <td>0.776528</td>
+      <td>0.064712</td>
+      <td>10.681142</td>
+      <td>6.842174</td>
+      <td>4.747109</td>
+      <td>2.245407</td>
+      <td>6.204670</td>
+      <td>4.442722</td>
+      <td>4.059316</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
-      <td>-0.136165</td>
-      <td>2.821279</td>
-      <td>12.790382</td>
-      <td>7.837929</td>
-      <td>5.827330</td>
-      <td>1.889636</td>
-      <td>5.779558</td>
-      <td>5.059810</td>
-      <td>5.940351</td>
+      <td>-1.360830</td>
+      <td>1.943672</td>
+      <td>13.696152</td>
+      <td>6.789276</td>
+      <td>6.174461</td>
+      <td>5.293784</td>
+      <td>5.193191</td>
+      <td>5.039605</td>
+      <td>5.726754</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
-      <td>-0.402402</td>
-      <td>2.828900</td>
-      <td>12.621244</td>
-      <td>8.430561</td>
-      <td>6.759052</td>
-      <td>3.096205</td>
-      <td>7.059975</td>
-      <td>5.426436</td>
-      <td>7.039230</td>
+      <td>0.485185</td>
+      <td>3.457843</td>
+      <td>12.881825</td>
+      <td>9.932465</td>
+      <td>5.912951</td>
+      <td>3.116149</td>
+      <td>5.792501</td>
+      <td>8.960610</td>
+      <td>5.008806</td>
     </tr>
     <tr>
       <th>3</th>
       <td>4</td>
-      <td>1.143390</td>
-      <td>4.388547</td>
-      <td>13.903585</td>
-      <td>7.625302</td>
-      <td>6.432138</td>
-      <td>3.647629</td>
-      <td>8.564443</td>
-      <td>7.333413</td>
-      <td>8.344421</td>
+      <td>-0.687587</td>
+      <td>3.332373</td>
+      <td>16.999985</td>
+      <td>8.663451</td>
+      <td>6.649311</td>
+      <td>3.589447</td>
+      <td>7.456464</td>
+      <td>7.898190</td>
+      <td>8.417716</td>
     </tr>
     <tr>
       <th>4</th>
       <td>5</td>
-      <td>-0.097963</td>
-      <td>5.216186</td>
-      <td>15.987158</td>
-      <td>11.264088</td>
-      <td>10.523836</td>
-      <td>6.175565</td>
-      <td>9.658436</td>
-      <td>6.913424</td>
-      <td>8.788901</td>
+      <td>-1.125103</td>
+      <td>3.922534</td>
+      <td>14.764964</td>
+      <td>10.006613</td>
+      <td>8.902313</td>
+      <td>5.831324</td>
+      <td>9.481074</td>
+      <td>7.536330</td>
+      <td>8.058716</td>
     </tr>
   </tbody>
 </table>
@@ -637,7 +656,7 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.06, 0.5, &#39;Note&#39;)
 </pre></div>
 </div>
-<img alt="_images/data-visualization-1_10_1.png" src="_images/data-visualization-1_10_1.png" />
+<img alt="_images/data-visualization-1_11_1.png" src="_images/data-visualization-1_11_1.png" />
 </div>
 </div>
 </div>
@@ -653,7 +672,7 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
+
 <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;darkgrid&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -752,15 +771,19 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># histogram</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;flipper_length_mm&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;species&#39;</span><span class="p">,</span> <span class="n">multiple</span><span class="o">=</span><span class="s2">&quot;stack&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span> <span class="c1"># seaborn&gt;=0.11.0</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">displot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;flipper_length_mm&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="n">multiple</span><span class="o">=</span><span class="s2">&quot;stack&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;flipper_length_mm&#39;, ylabel=&#39;Count&#39;&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.11.0
 </pre></div>
 </div>
-<img alt="_images/data-visualization-1_15_1.png" src="_images/data-visualization-1_15_1.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f9c40e89090&gt;
+</pre></div>
+</div>
+<img alt="_images/data-visualization-1_16_2.png" src="_images/data-visualization-1_16_2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -770,10 +793,10 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f809a1f2c18&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f9c61604690&gt;
 </pre></div>
 </div>
-<img alt="_images/data-visualization-1_16_1.png" src="_images/data-visualization-1_16_1.png" />
+<img alt="_images/data-visualization-1_17_1.png" src="_images/data-visualization-1_17_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -783,10 +806,10 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f80a08a65c0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f9c41206d10&gt;
 </pre></div>
 </div>
-<img alt="_images/data-visualization-1_17_1.png" src="_images/data-visualization-1_17_1.png" />
+<img alt="_images/data-visualization-1_18_1.png" src="_images/data-visualization-1_18_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -800,7 +823,7 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;flipper_length_mm&#39;, ylabel=&#39;Density&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/data-visualization-1_18_1.png" src="_images/data-visualization-1_18_1.png" />
+<img alt="_images/data-visualization-1_19_1.png" src="_images/data-visualization-1_19_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -810,10 +833,10 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f809a334f28&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f9c4952bb90&gt;
 </pre></div>
 </div>
-<img alt="_images/data-visualization-1_19_1.png" src="_images/data-visualization-1_19_1.png" />
+<img alt="_images/data-visualization-1_20_1.png" src="_images/data-visualization-1_20_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -826,10 +849,10 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.lines._AxLine at 0x7f809a2a30f0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.lines._AxLine at 0x7f9c49e064d0&gt;
 </pre></div>
 </div>
-<img alt="_images/data-visualization-1_20_1.png" src="_images/data-visualization-1_20_1.png" />
+<img alt="_images/data-visualization-1_21_1.png" src="_images/data-visualization-1_21_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -840,10 +863,10 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f80a08bfcc0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f9c61685190&gt;
 </pre></div>
 </div>
-<img alt="_images/data-visualization-1_21_1.png" src="_images/data-visualization-1_21_1.png" />
+<img alt="_images/data-visualization-1_22_1.png" src="_images/data-visualization-1_22_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -853,10 +876,10 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f80a0b86630&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f9c61685d90&gt;
 </pre></div>
 </div>
-<img alt="_images/data-visualization-1_22_1.png" src="_images/data-visualization-1_22_1.png" />
+<img alt="_images/data-visualization-1_23_1.png" src="_images/data-visualization-1_23_1.png" />
 </div>
 </div>
 <ul class="simple">
@@ -869,10 +892,10 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.JointGrid at 0x7f80a9116358&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.JointGrid at 0x7f9c512b4850&gt;
 </pre></div>
 </div>
-<img alt="_images/data-visualization-1_24_1.png" src="_images/data-visualization-1_24_1.png" />
+<img alt="_images/data-visualization-1_25_1.png" src="_images/data-visualization-1_25_1.png" />
 </div>
 </div>
 <ul class="simple">
@@ -885,10 +908,10 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f80b8c1e7b8&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f9c41646b90&gt;
 </pre></div>
 </div>
-<img alt="_images/data-visualization-1_26_1.png" src="_images/data-visualization-1_26_1.png" />
+<img alt="_images/data-visualization-1_27_1.png" src="_images/data-visualization-1_27_1.png" />
 </div>
 </div>
 </div>
@@ -967,10 +990,10 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f80b90964a8&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f9c41631d50&gt;
 </pre></div>
 </div>
-<img alt="_images/data-visualization-1_29_1.png" src="_images/data-visualization-1_29_1.png" />
+<img alt="_images/data-visualization-1_30_1.png" src="_images/data-visualization-1_30_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -980,10 +1003,10 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f80a13993c8&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f9c49837510&gt;
 </pre></div>
 </div>
-<img alt="_images/data-visualization-1_30_1.png" src="_images/data-visualization-1_30_1.png" />
+<img alt="_images/data-visualization-1_31_1.png" src="_images/data-visualization-1_31_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1140,12 +1163,132 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f809aa22cf8&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f9c49860cd0&gt;
 </pre></div>
 </div>
-<img alt="_images/data-visualization-1_33_1.png" src="_images/data-visualization-1_33_1.png" />
+<img alt="_images/data-visualization-1_34_1.png" src="_images/data-visualization-1_34_1.png" />
 </div>
 </div>
+</div>
+<div class="section" id="chinese-fonts-issues">
+<h2>Chinese Fonts Issues<a class="headerlink" href="#chinese-fonts-issues" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Find system-compatible Chinese fonts using the terminal command:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!fc-list :lang=zh
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Define the font to be used as well as the font properties in Python:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rcParams</span>
+<span class="kn">from</span> <span class="nn">matplotlib.font_manager</span> <span class="kn">import</span> <span class="n">FontProperties</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="c1"># rcParams[&#39;axes.unicode_minus&#39;]=False</span>
+<span class="n">myfont</span> <span class="o">=</span> <span class="n">FontProperties</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="s1">&#39;/Library/Fonts/Songti.ttc&#39;</span><span class="p">,</span>
+ <span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;圖表標題&#39;</span><span class="p">,</span> <span class="n">fontproperties</span><span class="o">=</span><span class="n">myfont</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Y軸標題&#39;</span><span class="p">,</span> <span class="n">fontproperties</span><span class="o">=</span><span class="n">myfont</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;分類一&#39;</span><span class="p">,</span> <span class="s1">&#39;分類二&#39;</span><span class="p">,</span> <span class="s1">&#39;分類三&#39;</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span> <span class="n">prop</span><span class="o">=</span><span class="n">myfont</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>For a permanent solution, please read references.</p>
+<ul>
+<li><p>Modify the setting file in matplotlib: <code class="docutils literal notranslate"><span class="pre">matplotlib.matplotlib_fname()</span></code> to get the file path</p></li>
+<li><p>It’s similar to: <code class="docutils literal notranslate"><span class="pre">/Users/YOUR_NAME/opt/anaconda3/lib/python3.7/site-packages/matplotlib/mpl-data/matplotlibrc</span></code></p></li>
+<li><p>Two important parameters: <code class="docutils literal notranslate"><span class="pre">font.family</span></code> and <code class="docutils literal notranslate"><span class="pre">font.serif</span></code></p></li>
+<li><p>Add the font name under <code class="docutils literal notranslate"><span class="pre">font.serif</span></code>. My case: <code class="docutils literal notranslate"><span class="pre">Source</span> <span class="pre">Han</span> <span class="pre">Sans</span></code></p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## One can set the font preference permanently</span>
+<span class="c1">## in the setting file</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">matplotlib_fname</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/matplotlib/mpl-data/matplotlibrc&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rcParams</span>
+<span class="kn">from</span> <span class="nn">matplotlib.font_manager</span> <span class="kn">import</span> <span class="n">FontProperties</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="c1"># rcParams[&#39;axes.unicode_minus&#39;]=False</span>
+<span class="c1">#/Users/alvinchen/Library/Fonts/SourceHanSans.ttc</span>
+<span class="c1">#&#39;/System/Library/Fonts/PingFang.ttc&#39;</span>
+<span class="k">def</span> <span class="nf">getChineseFont</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">):</span>  
+    <span class="k">return</span> <span class="n">FontProperties</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="s1">&#39;/Users/Alvin/Library/Fonts/SourceHanSans.ttc&#39;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">)</span>  
+
+<span class="nb">print</span><span class="p">(</span><span class="n">getChineseFont</span><span class="p">()</span><span class="o">.</span><span class="n">get_name</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;圖表標題&#39;</span><span class="p">,</span> <span class="n">fontproperties</span><span class="o">=</span><span class="n">getChineseFont</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Y軸標題&#39;</span><span class="p">,</span> <span class="n">fontproperties</span><span class="o">=</span><span class="n">getChineseFont</span><span class="p">(</span><span class="mi">12</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;分類一&#39;</span><span class="p">,</span> <span class="s1">&#39;分類二&#39;</span><span class="p">,</span> <span class="s1">&#39;分類三&#39;</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span> <span class="n">prop</span><span class="o">=</span><span class="n">getChineseFont</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Source Han Sans
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f9c51daab90&gt;
+</pre></div>
+</div>
+<img alt="_images/data-visualization-1_38_2.png" src="_images/data-visualization-1_38_2.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Permanent Setting Version</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;PingFang HK&quot;</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.unicode_minus&#39;</span><span class="p">]</span><span class="o">=</span> <span class="kc">False</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;中文標題&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y軸標題&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x軸標題&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/data-visualization-1_39_0.png" src="_images/data-visualization-1_39_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Seaborn</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">font</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;san-serif&#39;</span><span class="p">])</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">,{</span><span class="s2">&quot;font.sans-serif&quot;</span><span class="p">:[</span><span class="s2">&quot;PingFang HK&quot;</span><span class="p">]})</span>
+<span class="n">cities_counter</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;好棒&#39;</span><span class="p">,</span> <span class="mi">285</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;給我&#39;</span><span class="p">,</span> <span class="mi">225</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;不要&#39;</span><span class="p">,</span> <span class="mi">163</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;細柔&#39;</span><span class="p">,</span> <span class="mi">136</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;吃飯&#39;</span><span class="p">,</span> <span class="mi">130</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;小小&#39;</span><span class="p">,</span> <span class="mi">124</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;深圳&#39;</span><span class="p">,</span> <span class="mi">88</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;溫州&#39;</span><span class="p">,</span> <span class="mi">67</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;小知&#39;</span><span class="p">,</span> <span class="mi">66</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;大之&#39;</span><span class="p">,</span> <span class="mi">45</span><span class="p">)]</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_color_codes</span><span class="p">(</span><span class="s2">&quot;pastel&quot;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">cities_counter</span><span class="p">[:</span><span class="mi">10</span><span class="p">]],</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">cities_counter</span><span class="p">[:</span><span class="mi">10</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
+</pre></div>
+</div>
+<img alt="_images/data-visualization-1_40_1.png" src="_images/data-visualization-1_40_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://medium.com/marketingdatascience/%E8%A7%A3%E6%B1%BApython-3-matplotlib%E8%88%87seaborn%E8%A6%96%E8%A6%BA%E5%8C%96%E5%A5%97%E4%BB%B6%E4%B8%AD%E6%96%87%E9%A1%AF%E7%A4%BA%E5%95%8F%E9%A1%8C-f7b3773a889b">解決Python 3 Matplotlib與Seaborn視覺化套件中文顯示問題</a></p></li>
+<li><p><a class="reference external" href="https://ithelp.ithome.com.tw/articles/10234373?sc=hot">Day 11 : Google Colab 實用奧步篇 ( 連結硬碟、繪圖中文顯示問題 )</a></p></li>
+<li><p><a class="reference external" href="https://github.com/adobe-fonts/source-han-sans">Souce Han Sans (open-source)</a></p></li>
+</ul>
 </div>
 </div>
 

@@ -33,11 +33,12 @@ The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
 %%time
-import gensim
-import keras
-from keras.models import Sequential
-from keras.layers import Dropout, Activation, Dense
-from sklearn.preprocessing import LabelEncoder
-from keras.layers.normalization import BatchNormalization
+# build word2vec model
+w2v_num_features = 512
+w2v_model = gensim.models.Word2Vec(tokenized_train, 
+                                   size=w2v_num_features, window=150,
+                                   min_count=10, sample=1e-3, workers=16)    
+
+## takes 5mins
 -------------------
 

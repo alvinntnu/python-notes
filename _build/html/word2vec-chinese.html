@@ -1,0 +1,949 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Word Embeddings &#8212; Python Notes for Linguistics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/ntnu03.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Python Notes for Linguistics</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="python-basics.html">
+   Python Basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="corpus-processing.html">
+   Corpus Linguistics with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="nlp.html">
+   Natural Language Processing with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <div style="text-align:left">
+    <a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
+</div>
+
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/word2vec-chinese.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/word2vec-chinese.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/word2vec-chinese.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loading-corpus-raw-texts">
+   Loading Corpus Raw Texts
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#word-segmentation-ckiptagger">
+   Word Segmentation (ckiptagger)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-frame-representation">
+   Data Frame Representation
+  </a>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="word-embeddings">
+<h1>Word Embeddings<a class="headerlink" href="#word-embeddings" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>A simple walk-through of word2vec on a Chinese data of presidential inaugaural addresses</p></li>
+</ul>
+<div class="section" id="loading-corpus-raw-texts">
+<h2>Loading Corpus Raw Texts<a class="headerlink" href="#loading-corpus-raw-texts" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus.reader</span> <span class="kn">import</span> <span class="n">PlaintextCorpusReader</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">jieba</span><span class="o">,</span> <span class="nn">re</span>
+
+<span class="n">jieba</span><span class="o">.</span><span class="n">set_dictionary</span><span class="p">(</span><span class="s2">&quot;../../../Corpus/jiaba/dict.txt.big.txt&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corpus_dir</span> <span class="o">=</span> <span class="s2">&quot;../../../Corpus/TaiwanPresidentialInaugarationSpeech_en/&quot;</span>
+
+<span class="n">twp</span> <span class="o">=</span> <span class="n">PlaintextCorpusReader</span><span class="p">(</span><span class="n">corpus_dir</span><span class="p">,</span> <span class="s2">&quot;.*\.txt&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">twp</span><span class="o">.</span><span class="n">raw</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>53833
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="word-segmentation-ckiptagger">
+<h2>Word Segmentation (ckiptagger)<a class="headerlink" href="#word-segmentation-ckiptagger" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ckiptagger</span> <span class="kn">import</span> <span class="n">WS</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:526: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_qint8 = np.dtype([(&quot;qint8&quot;, np.int8, 1)])
+/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:527: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_quint8 = np.dtype([(&quot;quint8&quot;, np.uint8, 1)])
+/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:528: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_qint16 = np.dtype([(&quot;qint16&quot;, np.int16, 1)])
+/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:529: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_quint16 = np.dtype([(&quot;quint16&quot;, np.uint16, 1)])
+/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:530: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_qint32 = np.dtype([(&quot;qint32&quot;, np.int32, 1)])
+/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:535: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  np_resource = np.dtype([(&quot;resource&quot;, np.ubyte, 1)])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ws</span> <span class="o">=</span> <span class="n">WS</span><span class="p">(</span><span class="s2">&quot;../../../Corpus/CKIP_WordSeg/data/&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Print first 200 chars of file 13</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">twp</span><span class="o">.</span><span class="n">raw</span><span class="p">(</span><span class="n">fileids</span><span class="o">=</span><span class="n">twp</span><span class="o">.</span><span class="n">fileids</span><span class="p">()[</span><span class="mi">13</span><span class="p">])[:</span><span class="mi">200</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>為年輕人打造一個更好的國家
+
+各位友邦的元首與貴賓、各國駐台使節及代表、現場的好朋友，全體的國人同胞，大家好，Ta̍k－Ke Hó（閩南語），Tai-Ga Ho（客家語），Djavadjavai[1]（排灣語）！
+
+感謝與承擔
+
+就在剛剛，我和陳建仁已經在總統府裡面，正式宣佈，正式宣誓就任 中華民國第十四任 總統與副總統。（掌聲） 我們要感謝這塊土地對我們的栽培，感謝人民對我們的信任，
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># word-seg the raw text and return a long string</span>
+<span class="k">def</span> <span class="nf">tokenize_raw1</span><span class="p">(</span><span class="n">raw</span><span class="p">):</span>
+    <span class="n">word_tok</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">para</span><span class="p">)</span> <span class="k">for</span> <span class="n">para</span> <span class="ow">in</span> <span class="n">ws</span><span class="p">(</span><span class="n">nltk</span><span class="o">.</span><span class="n">regexp_tokenize</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;[^\s]+&#39;</span><span class="p">))]</span> <span class="c1"># para-like units</span>
+    <span class="n">raw_tok</span>  <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">word_tok</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">raw_tok</span>
+
+<span class="c1"># word-seg the raw text and return list of words</span>
+<span class="k">def</span> <span class="nf">tokenize_raw2</span><span class="p">(</span><span class="n">raw</span><span class="p">):</span>
+    <span class="n">para_list</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">regexp_tokenize</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;[^\s]+&#39;</span><span class="p">)</span> <span class="c1"># para-like units</span>
+    <span class="n">word_list</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">ws</span><span class="p">(</span><span class="n">para_list</span><span class="p">),[])</span> 
+    <span class="k">return</span> <span class="n">word_list</span>
+
+
+<span class="k">def</span> <span class="nf">tokenize_raw3</span><span class="p">(</span><span class="n">raw</span><span class="p">):</span>
+    <span class="n">raw</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[\n\s\r]+&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">raw</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">jieba</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">raw</span><span class="p">)])</span>
+
+<span class="n">tokenize_corpus1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">tokenize_raw1</span><span class="p">)</span>
+<span class="n">tokenize_corpus2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">tokenize_raw2</span><span class="p">)</span>
+<span class="n">tokenize_corpus3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">tokenize_raw3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following experiments try to see whether a few parameters may impact the performance of Chinese tokenization:</p>
+<ol class="simple">
+<li><p>Segmenter: <code class="docutils literal notranslate"><span class="pre">ckiptagger</span></code> vs. <code class="docutils literal notranslate"><span class="pre">jibea</span></code></p></li>
+<li><p>Data Structure: <code class="docutils literal notranslate"><span class="pre">List</span></code> vs. <code class="docutils literal notranslate"><span class="pre">numpy.array</span></code></p></li>
+</ol>
+<p>It seems that <code class="docutils literal notranslate"><span class="pre">jieba</span></code> with <code class="docutils literal notranslate"><span class="pre">List</span></code> structure is the fastest?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">twp_corpus</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">twp</span><span class="o">.</span><span class="n">raw</span><span class="p">(</span><span class="n">fileids</span><span class="o">=</span><span class="n">fid</span><span class="p">)</span> <span class="k">for</span> <span class="n">fid</span> <span class="ow">in</span> <span class="n">twp</span><span class="o">.</span><span class="n">fileids</span><span class="p">()])</span>
+<span class="n">twp_corpus_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">twp</span><span class="o">.</span><span class="n">raw</span><span class="p">(</span><span class="n">fileids</span><span class="o">=</span><span class="n">fid</span><span class="p">)</span> <span class="k">for</span> <span class="n">fid</span> <span class="ow">in</span> <span class="n">twp</span><span class="o">.</span><span class="n">fileids</span><span class="p">()]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="n">twp_corpus_seg1a</span> <span class="o">=</span> <span class="n">tokenize_corpus1</span><span class="p">(</span><span class="n">twp_corpus</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 3min 11s, sys: 37.8 s, total: 3min 48s
+Wall time: 1min 15s
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="n">twp_corpus_seg1b</span> <span class="o">=</span> <span class="n">tokenize_corpus1</span><span class="p">(</span><span class="n">twp_corpus_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 3min 9s, sys: 45.6 s, total: 3min 55s
+Wall time: 1min 28s
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="n">twp_corpus_seg3a</span> <span class="o">=</span> <span class="n">tokenize_corpus3</span><span class="p">(</span><span class="n">twp_corpus</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Building prefix dict from /Users/Alvin/Dropbox/Corpus/jiaba/dict.txt.big.txt ...
+Loading model from cache /var/folders/n7/ltpzwx813c599nfxfb94s_640000gn/T/jieba.u799b9ba780e57432dfd1e51d6f89ab79.cache
+Loading model cost 5.665 seconds.
+Prefix dict has been built successfully.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 1.53 s, sys: 34.9 ms, total: 1.56 s
+Wall time: 6.11 s
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="n">twp_corpus_seg3b</span> <span class="o">=</span> <span class="n">tokenize_corpus3</span><span class="p">(</span><span class="n">twp_corpus_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 332 ms, sys: 7.92 ms, total: 340 ms
+Wall time: 506 ms
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">twp_corpus</span><span class="p">[</span><span class="mi">13</span><span class="p">,][:</span><span class="mi">200</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;為年輕人打造一個更好的國家\r\n\r\n各位友邦的元首與貴賓、各國駐台使節及代表、現場的好朋友，全體的國人同胞，大家好，Ta̍k－Ke Hó（閩南語），Tai-Ga Ho（客家語），Djavadjavai[1]（排灣語）！\r\n\r\n感謝與承擔\r\n\r\n就在剛剛，我和陳建仁已經在總統府裡面，正式宣佈，正式宣誓就任 中華民國第十四任 總統與副總統。（掌聲） 我們要感謝這塊土地對我們的栽培，感謝人民對我們的信任，&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">twp_corpus_seg1a</span><span class="p">[</span><span class="mi">13</span><span class="p">][:</span><span class="mi">200</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;為 年輕人 打造 一 個 更 好 的 國家 各位 友邦 的 元首 與 貴賓 、 各 國 駐 台 使節 及 代表 、 現場 的 好朋友 ， 全體 的 國人 同胞 ， 大家 好 ， Ta̍k－Ke Hó （ 閩南語 ） ， Tai-Ga Ho （ 客家語 ） ， Djavadjavai[1 ] （ 排灣語 ） ！ 感謝 與 承擔 就 在 剛剛 ， 我 和 陳建仁 已經 在 總統府 裡面 ， 正式 宣佈&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">twp_corpus_seg3a</span><span class="p">[</span><span class="mi">13</span><span class="p">][:</span><span class="mi">200</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;為 年輕人 打造 一個 更好 的 國家 各位 友邦 的 元首 與 貴賓 、 各國 駐台 使節 及 代表 、 現場 的 好 朋友 ， 全體 的 國人 同胞 ， 大家 好 ， Ta ̍ k － KeH ó （ 閩南語 ） ， Tai - GaHo （ 客家 語 ） ， Djavadjavai [ 1 ] （ 排灣 語 ） ！ 感謝 與 承擔 就 在 剛剛 ， 我 和 陳建仁 已經 在 總統府 裡面 ，&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="data-frame-representation">
+<h2>Data Frame Representation<a class="headerlink" href="#data-frame-representation" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## data frame representation</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+
+<span class="n">twp_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;fileid&quot;</span><span class="p">:</span> <span class="n">twp</span><span class="o">.</span><span class="n">fileids</span><span class="p">(),</span>
+    <span class="s2">&quot;corpus_raw&quot;</span><span class="p">:</span> <span class="n">twp_corpus</span><span class="p">,</span>
+    <span class="s2">&quot;corpus_seg_ckip&quot;</span><span class="p">:</span> <span class="n">twp_corpus_seg1a</span><span class="p">,</span>
+    <span class="s2">&quot;corpus_seg_jb&quot;</span><span class="p">:</span> <span class="n">twp_corpus_seg3a</span>
+<span class="p">})</span>
+<span class="n">twp_df</span><span class="p">[[</span><span class="s1">&#39;year&#39;</span><span class="p">,</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="s1">&#39;president&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">twp_df</span><span class="p">[</span><span class="s1">&#39;fileid&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">twp_df</span><span class="p">[</span><span class="s1">&#39;president&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">twp_df</span><span class="p">[</span><span class="s1">&#39;president&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.txt&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">twp_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>fileid</th>
+      <th>corpus_raw</th>
+      <th>corpus_seg_ckip</th>
+      <th>corpus_seg_jb</th>
+      <th>year</th>
+      <th>id</th>
+      <th>president</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1948_1_JIANGZHONGZHENG.txt</td>
+      <td>中正承國民大會依照憲法選舉為中華民國總統，擔任國家和人民的公僕，當此就職伊始，追念我　國父和...</td>
+      <td>中正 承 國民大會 依照 憲法 選舉為 中華民國 總統 ， 擔任 國家 和 人民 的 公僕 ...</td>
+      <td>中正 承 國民大會 依照 憲法 選舉 為 中華民國 總統 ， 擔任 國家 和 人民 的 公僕...</td>
+      <td>1948</td>
+      <td>1</td>
+      <td>JIANGZHONGZHENG</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1954_2_JIANGZHONGZHENG.txt</td>
+      <td>我大陸淪陷，已經四載。全體同胞正遭受著俄寇及其傀儡朱毛，殘殺迫害，呼號引領，急切待援之時；中...</td>
+      <td>我 大陸 淪陷 ， 已經 四 載 。 全體 同胞 正 遭受 著 俄寇 及 其 傀儡 朱毛 ，...</td>
+      <td>我 大陸 淪陷 ， 已經 四載 。 全體 同胞 正 遭受 著俄寇 及其 傀儡 朱毛 ， 殘殺...</td>
+      <td>1954</td>
+      <td>2</td>
+      <td>JIANGZHONGZHENG</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1960_3_JIANGZHONGZHENG.txt</td>
+      <td>國民大會第三次會議，重新選舉中正，賦予先復大陸，重建中華，維護國家領土主權，解救同胞生命自由...</td>
+      <td>國民大會 第三 次 會議 ， 重新 選舉 中正 ， 賦予 先 復 大陸 ， 重建 中華 ， ...</td>
+      <td>國民大會 第三次 會議 ， 重新 選舉 中正 ， 賦予 先 復 大陸 ， 重建 中華 ， 維...</td>
+      <td>1960</td>
+      <td>3</td>
+      <td>JIANGZHONGZHENG</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1966_4_JIANGZHONGZHENG.txt</td>
+      <td>國民大會第四次會議，根據憲法，代表全國人民，選舉中正繼續擔任中華民國第四任總統，並制定戰時授...</td>
+      <td>國民大會 第四 次 會議 ， 根據 憲法 ， 代表 全 國 人民 ， 選舉 中正 繼續 擔任...</td>
+      <td>國民大會 第四次 會議 ， 根據 憲法 ， 代表 全國 人民 ， 選舉 中正 繼續 擔任 中...</td>
+      <td>1966</td>
+      <td>4</td>
+      <td>JIANGZHONGZHENG</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1972_5_JIANGZHONGZHENG.txt</td>
+      <td>中正今天再度接受全國國民之付託，國民大會之推選，宣誓就任中華民國第五任總統，實深感於現階段在...</td>
+      <td>中正 今天 再度 接受 全 國 國民 之 付託 ， 國民大會 之 推選 ， 宣誓 就任 中華...</td>
+      <td>中正 今天 再度 接受 全國 國民 之 付託 ， 國民大會 之 推選 ， 宣誓 就任 中華民...</td>
+      <td>1972</td>
+      <td>5</td>
+      <td>JIANGZHONGZHENG</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>1978_6_JIANGJINGGUO.txt</td>
+      <td>國民大會受國民付託，依據憲法，選舉經國為中華民國第六任總統，今天經國和謝東閔副總統宣誓就職，...</td>
+      <td>國民大會 受 國民 付託 ， 依據 憲法 ， 選舉 經國 為 中華民國 第六 任 總統 ， ...</td>
+      <td>國民大會 受 國民 付託 ， 依據 憲法 ， 選舉 經國 為 中華民國 第六任 總統 ， 今...</td>
+      <td>1978</td>
+      <td>6</td>
+      <td>JIANGJINGGUO</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>1984_7_JIANGJINGGUO.txt</td>
+      <td>親愛的全國同胞們、諸位貴賓：\r\n\r\n　　國民大會第七次會議，選舉經國為中華民國第七任...</td>
+      <td>親愛 的 全 國 同胞 們 、 諸 位 貴賓 ： 國民大會 第七 次 會議 ， 選舉 經國 ...</td>
+      <td>親愛 的 全國 同胞們 、 諸位 貴賓 ： 國民大會 第七次 會議 ， 選舉 經國 為 中華...</td>
+      <td>1984</td>
+      <td>7</td>
+      <td>JIANGJINGGUO</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>1990_8_LIDEHUI.txt</td>
+      <td>開創中華民族的新時代\r\n\r\n親愛的全國同胞、各位貴賓：\r\n\r\n　　國民大會第...</td>
+      <td>開創 中華民族 的 新 時代 親愛 的 全 國 同胞 、 各 位 貴賓 ： 國民大會 第八 ...</td>
+      <td>開創 中華民族 的 新 時代 親愛 的 全國同胞 、 各位 貴賓 ： 國民大會 第八次 會議...</td>
+      <td>1990</td>
+      <td>8</td>
+      <td>LIDEHUI</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>1996_9_LIDEHUI.txt</td>
+      <td>經營大台灣，建立新中原\r\n\r\n各位遠道而來的友邦元首、各位特使、外交團的各位使節、各...</td>
+      <td>經營 大 台灣 ， 建立 新 中原 各位 遠道而來 的 友邦 元首 、 各位 特使 、 外交...</td>
+      <td>經營 大台灣 ， 建立 新 中原 各位 遠道而來 的 友邦 元首 、 各位 特使 、 外交團...</td>
+      <td>1996</td>
+      <td>9</td>
+      <td>LIDEHUI</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2000_10_CHENSHUIBIAN.txt</td>
+      <td>台灣站起來——迎接向上提升的新時代\r\n\r\n各位友邦元首、各位貴賓、各位親愛的海內外同...</td>
+      <td>台灣 站起來 — — 迎接 向 上 提升 的 新 時代 各位 友邦 元首 、 各位 貴賓 、...</td>
+      <td>台灣 站 起來 — — 迎接 向上 提升 的 新 時代 各位 友邦 元首 、 各位 貴賓 、...</td>
+      <td>2000</td>
+      <td>10</td>
+      <td>CHENSHUIBIAN</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2004_11_CHENSHUIBIAN.txt</td>
+      <td>為永續台灣奠基\r\n\r\n各位友邦元首、使節及代表團、各位貴賓 、親愛的國人同胞：\r\...</td>
+      <td>為 永續 台灣 奠基 各位 友邦 元首 、 使節 及 代表團 、 各 位 貴賓 、 親愛的 ...</td>
+      <td>為 永續 台灣 奠基 各位 友邦 元首 、 使節 及 代表團 、 各位 貴賓 、 親愛 的 ...</td>
+      <td>2004</td>
+      <td>11</td>
+      <td>CHENSHUIBIAN</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>2008_12_MAYANGJIU.txt</td>
+      <td>人民奮起，台灣新生\r\n\r\n各位友邦元首、各位貴賓、各位僑胞、各位鄉親父老、各位電視機...</td>
+      <td>人民 奮起 ， 台灣 新生 各位 友邦 元首 、 各位 貴賓 、 各位 僑胞 、 各位 鄉親...</td>
+      <td>人民 奮起 ， 台灣 新生 各位 友邦 元首 、 各位 貴賓 、 各位 僑胞 、 各位 鄉親...</td>
+      <td>2008</td>
+      <td>12</td>
+      <td>MAYANGJIU</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2012_13_MAYANGJIU.txt</td>
+      <td>堅持理想、攜手改革、打造幸福臺灣\r\n\r\n各位友邦元首、各位貴賓、各位僑胞、各位鄉親父...</td>
+      <td>堅持 理想 、 攜手 改革 、 打造 幸福 臺灣 各位 友邦 元首 、 各位 貴賓 、 各位...</td>
+      <td>堅持 理想 、 攜手 改革 、 打造 幸福 臺灣 各位 友邦 元首 、 各位 貴賓 、 各位...</td>
+      <td>2012</td>
+      <td>13</td>
+      <td>MAYANGJIU</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2016_14_CAYANGWEN.txt</td>
+      <td>為年輕人打造一個更好的國家\r\n\r\n各位友邦的元首與貴賓、各國駐台使節及代表、現場的好...</td>
+      <td>為 年輕人 打造 一 個 更 好 的 國家 各位 友邦 的 元首 與 貴賓 、 各 國 駐 ...</td>
+      <td>為 年輕人 打造 一個 更好 的 國家 各位 友邦 的 元首 與 貴賓 、 各國 駐台 使節...</td>
+      <td>2016</td>
+      <td>14</td>
+      <td>CAYANGWEN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## choose one version of segmented texts</span>
+<span class="n">twp_corpus_seg</span> <span class="o">=</span> <span class="n">twp_corpus_seg3a</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wst</span> <span class="o">=</span><span class="n">nltk</span><span class="o">.</span><span class="n">WhitespaceTokenizer</span><span class="p">()</span>
+<span class="n">tokenized_corpus</span> <span class="o">=</span> <span class="p">[</span><span class="n">wst</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">twp_corpus_seg</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Concordance</span>
+
+<span class="n">twp_text</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">tokenized_corpus</span><span class="p">,[]))</span>
+<span class="n">twp_text</span><span class="o">.</span><span class="n">concordance</span><span class="p">(</span><span class="s1">&#39;台灣&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Displaying 25 of 185 matches:
+澎 金馬地區 ， 但凡 所 規劃 ， 無不 著眼 於 整個 中國 前途 。 台灣 與 大陸 是 中國 不可分割 的 領土 ， 所有 中國 人同 為 血脈相連
+ 的 普遍 期盼 ， 推行 民主 政治 及 自由 經濟 制度 ， 放棄 在 台灣 海峽 使用 武力 ， 不 阻撓 我們 在 一個 中國 的 前提 下 開展 
+。 中國 的 統一 與 富強 是 所有 中國 人 共同 的 期望 。 除了 台灣 海峽兩岸 的 人民 負有 無可 旁貸 的 責任 之外 ， 遍佈 世界各地 
+ 今天 ， 中華民族 進入 一個 充滿希望 的 新 境界 。 今天 ， 在 台灣 的 我們 ， 以 無比 的 驕傲 與 自信 ， 堅定 地 告訴 全世界 ：
+同體 ； 而 第一次 由 人民 直選 總統 ， 更 讓 我們 確立 了 以 台灣 為 主體 的 奮鬥 意識 。 如何 讓 這塊 土地 更 美麗 ， 讓 生活
+以 ， 登輝 無時無刻 不在 思考 文化 的 重建 與 新生 。 希望 在 台灣 地區 的 同胞 ， 能 建立 新 的 生活 文化 ， 培養 長遠 宏大 的
+地域 ， 中華民族 五千年 優秀 文化 ， 也 起源於 中原 一隅之地 ， 台灣 位於 大陸 文化 與 海洋 文化 的 匯集點 ， 近 數十年 來 ， 因 
+泛 接觸 西方 民主 、 科學 及 現代 工商業 社會 文化 。 再 加上 台灣 的 教育 水準 與 發展 程度 ， 遠 超越 中國 其他 地區 ， 勢必 
+育 新文化 ， 更 在 重建 新 社會 。 隨著 政治 的 民主 開放 ， 台灣 社會 已 呈現 蓬勃 的 多元化 景象 。 我們 要 運用 多元化 所 釋
+讓 全民 享有 免於 匱乏 的 自由 。 當然 ， 我們 全 心 全力 在 台灣 建設 中華民國 的 同時 ， 也 不會 忘記 海外 的 中國 人 。 我們
+維護 此一 地區 的 民主 、 自由 、 繁榮 。 今天 ， 中華民國 在 台灣 的 生存 與 發展 ， 已 受到 國際 社會 的 肯定 與 尊重 。 在 
+領導 當局 見面 ， 直接 交換意見 。 全國 同胞們 ： 今天 我們 在 台灣 實現 了 中國 人 的 夢想 ！ 二十世紀 的 中國 人 ， 奮力 追求 
+運 的 關鍵 。 我們 相信 ， 同樣 是 中華民族 的 一份 子 ， 在 台灣 做 得到 的 ， 在 中國 大陸 也 可以 做到 。 因此 ， 我們 願意
+ 敬祝 中華民國 國運昌隆 ！ 各位 貴賓 健康 愉快 ！ 謝謝 大家 ！ 台灣 站 起來 — — 迎接 向上 提升 的 新 時代 各位 友邦 元首 、 各
+。 感謝 遠道而來 的 各位 嘉賓 ， 以及 全世界 熱愛 民主 、 關心 台灣 的 朋友 ， 與 我們 一起 分享 此刻 的 榮耀 。 我們 今天 在 這
+ 見證 一個 新 時代 的 開始 。 在 二十一 世紀 來臨 的 前夕 ， 台灣 人民 用 民主 的 選票 完成 了 歷史性 的 政黨 輪替 。 這 不僅 
+國 歷史 上 的 第一次 ， 更是 全球華人 社會 劃時代 的 里程碑 。 台灣 不 只 為 亞洲 的 民主 經驗 樹立 了 新 典範 ， 也 為 全世界 
+ ， 追求 和平 更是 人類 理性 的 最高 目標 。 公元 2000 年 台灣 總統大選 的 結果 ， 不是 個人 的 勝利 或 政黨 的 勝利 ， 而是
+ ， 一起 超越 了 恐懼 、 威脅 和 壓迫 ， 勇敢 的 站 起來 ！ 台灣 站 起來 ， 展現 著 理性 的 堅持 和 民主 的 信仰 。 台灣 站 
+ ！ 台灣 站 起來 ， 展現 著 理性 的 堅持 和 民主 的 信仰 。 台灣 站 起來 ， 代表 著 人民 的 自信 和 國家 的 尊嚴 。 台灣 站 
+ 。 台灣 站 起來 ， 代表 著 人民 的 自信 和 國家 的 尊嚴 。 台灣 站 起來 ， 象徵 著 希望 的 追求 和 夢想 的 實現 。 親愛 的 
+榮 盛典 。 今天 ， 我們 彷彿 站 在 一座 嶄新 的 歷史 門前 。 台灣 人民 透過 民主 錘鍊 的 過程 ， 為 我們 共同 的 命運 打造 了 
+ 國人 最高 的 推崇 與 衷心 的 感念 。 在 選舉 的 過程 中 ， 台灣 社會 高度 動員 、 積極 參與 ， 儘管 有 不同 的 主張 和 立場 
+ 清流 共治 」 是 阿扁 在 選舉 期間 對 人民 的 承諾 ， 也 是 台灣 社會 未來 要 跨越 斷層 、 向上 提升 的 重要 關鍵 。 「 全民 
+ 」 的 首要 目標 是 要 掃除 黑金 、 杜絕 賄選 。 長期以來 ， 台灣 社會 黑白不分 、 黑道 金權 介入 政治 的 情況 已經 遭致 台灣 人
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<span class="kn">import</span> <span class="nn">imageio</span>
+<span class="kn">from</span> <span class="nn">wordcloud</span> <span class="kn">import</span> <span class="n">WordCloud</span><span class="p">,</span> <span class="n">ImageColorGenerator</span><span class="p">,</span> <span class="n">STOPWORDS</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="n">words</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">tokenized_corpus</span><span class="p">,[])</span>
+<span class="n">words</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+<span class="nb">sorted</span><span class="p">(</span><span class="n">Counter</span><span class="p">(</span><span class="n">words</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  
+
+
+
+<span class="c1">## Check font paths</span>
+<span class="c1">## !fc-list :lang=zh</span>
+
+
+<span class="c1">## Load stopwords</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../../../Corpus/stopwords/tomlinNTUB-chinese-stopwords.txt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">stopwords</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create stopwords ad hoc</span>
+<span class="n">stopwords</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;一個&#39;</span><span class="p">])</span>
+<span class="n">wordcloud</span> <span class="o">=</span> <span class="n">WordCloud</span><span class="p">(</span><span class="n">font_path</span><span class="o">=</span><span class="s2">&quot;/System/Library/Fonts/PingFang.ttc&quot;</span><span class="p">,</span>
+                      <span class="n">background_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+                      <span class="c1">#stopwords=stopwords,</span>
+                      <span class="n">width</span><span class="o">=</span><span class="mi">1600</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">800</span> 
+                     <span class="p">)</span>  <span class="c1">##add  system chinese font path</span>
+<span class="n">wordcloud</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="n">w</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stopwords</span><span class="p">]))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">wordcloud</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="c1">#plt.savefig(&#39;../data/twp-wordcloud2.png&#39;, facecolor=&#39;k&#39;, bbox_inches=&#39;tight&#39;)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/word2vec-chinese_25_0.png" src="_images/word2vec-chinese_25_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">back_color</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;../image/tw-char.jpg&#39;</span><span class="p">)</span>
+<span class="n">wordcloud</span> <span class="o">=</span> <span class="n">WordCloud</span><span class="p">(</span><span class="n">font_path</span><span class="o">=</span><span class="s2">&quot;/System/Library/Fonts/PingFang.ttc&quot;</span><span class="p">,</span>
+                      <span class="n">background_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+                      <span class="n">mask</span><span class="o">=</span><span class="n">back_color</span><span class="p">,</span>
+                      <span class="n">random_state</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                      <span class="c1">#max_font_size=20,</span>
+                      <span class="c1">#min_font_size=20,</span>
+                      <span class="n">width</span><span class="o">=</span><span class="mi">1200</span><span class="p">,</span>
+                      <span class="n">height</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+<span class="n">wordcloud</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="n">w</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stopwords</span><span class="p">]))</span>
+<span class="n">image_colors</span> <span class="o">=</span> <span class="n">ImageColorGenerator</span><span class="p">(</span><span class="n">back_color</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">wordcloud</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;bilinear&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">fig_path</span> <span class="o">=</span> <span class="s1">&#39;../data/twp-wordcloud.png&#39;</span>
+<span class="n">wordcloud</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">fig_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/word2vec-chinese_26_0.png" src="_images/word2vec-chinese_26_0.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;wordcloud.wordcloud.WordCloud at 0x7fb4c96c6cc0&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Set features for parameters</span>
+<span class="n">embedding_size</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">context_size</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">min_word_count</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">sample</span> <span class="o">=</span> <span class="mf">1e-3</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="kn">from</span> <span class="nn">gensim.models</span> <span class="kn">import</span> <span class="n">word2vec</span>
+
+<span class="n">w2v_model</span> <span class="o">=</span> <span class="n">word2vec</span><span class="o">.</span><span class="n">Word2Vec</span><span class="p">(</span><span class="n">tokenized_corpus</span><span class="p">,</span> 
+                              <span class="n">size</span><span class="o">=</span><span class="n">embedding_size</span><span class="p">,</span>
+                              <span class="n">window</span><span class="o">=</span><span class="n">context_size</span><span class="p">,</span>
+                              <span class="n">min_count</span><span class="o">=</span><span class="n">min_word_count</span><span class="p">,</span>
+                              <span class="n">sample</span><span class="o">=</span><span class="n">sample</span><span class="p">,</span>
+                              <span class="nb">iter</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 4.52 s, sys: 155 ms, total: 4.68 s
+Wall time: 29.3 s
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## View Similar Words</span>
+<span class="n">w2v_model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">most_similar</span><span class="p">(</span><span class="s1">&#39;人民&#39;</span><span class="p">,</span> <span class="n">topn</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">w2v_model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">most_similar</span><span class="p">(</span><span class="s1">&#39;台灣&#39;</span><span class="p">,</span> <span class="n">topn</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;圖像&#39;, 0.8682724237442017),
+ (&#39;正面&#39;, 0.8600305318832397),
+ (&#39;讓&#39;, 0.8588578701019287),
+ (&#39;一直&#39;, 0.8482418060302734),
+ (&#39;一年&#39;, 0.8449902534484863)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">similar_words</span> <span class="o">=</span> <span class="p">{</span><span class="n">key_word</span><span class="p">:[</span><span class="n">similar_word</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">similar_word</span> <span class="ow">in</span> <span class="n">w2v_model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">most_similar</span><span class="p">(</span><span class="n">key_word</span><span class="p">,</span> <span class="n">topn</span><span class="o">=</span><span class="mi">6</span><span class="p">)]</span>
+                          <span class="k">for</span> <span class="n">key_word</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;台灣&#39;</span><span class="p">,</span><span class="s1">&#39;人民&#39;</span><span class="p">,</span><span class="s1">&#39;國家&#39;</span><span class="p">,</span><span class="s1">&#39;民主&#39;</span><span class="p">,</span><span class="s1">&#39;中共&#39;</span><span class="p">,</span><span class="s1">&#39;大陸&#39;</span><span class="p">,</span><span class="s1">&#39;共匪&#39;</span><span class="p">,</span><span class="s1">&#39;自由&#39;</span><span class="p">]}</span>
+<span class="n">similar_words</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;台灣&#39;: [&#39;圖像&#39;, &#39;正面&#39;, &#39;讓&#39;, &#39;一直&#39;, &#39;一年&#39;, &#39;一段&#39;],
+ &#39;人民&#39;: [&#39;政黨&#39;, &#39;高於&#39;, &#39;爭端&#39;, &#39;主人&#39;, &#39;信任&#39;, &#39;個人&#39;],
+ &#39;國家&#39;: [&#39;利益&#39;, &#39;最大&#39;, &#39;必以&#39;, &#39;重大&#39;, &#39;落幕&#39;, &#39;高於&#39;],
+ &#39;民主&#39;: [&#39;里程碑&#39;, &#39;劃時代&#39;, &#39;顛簸&#39;, &#39;全球華人&#39;, &#39;歷史性&#39;, &#39;毫不&#39;],
+ &#39;中共&#39;: [&#39;韓的&#39;, &#39;互相&#39;, &#39;機構&#39;, &#39;參加&#39;, &#39;終止&#39;, &#39;保衛&#39;],
+ &#39;大陸&#39;: [&#39;光復&#39;, &#39;志在&#39;, &#39;推&#39;, &#39;及於&#39;, &#39;商學&#39;, &#39;集中&#39;],
+ &#39;共匪&#39;: [&#39;乃是&#39;, &#39;其&#39;, &#39;奸匪&#39;, &#39;鬥爭&#39;, &#39;顛覆&#39;, &#39;敵人&#39;],
+ &#39;自由&#39;: [&#39;志在&#39;, &#39;這就是說&#39;, &#39;己任&#39;, &#39;剷除&#39;, &#39;推&#39;, &#39;真積力&#39;]}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Visualization</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.manifold</span> <span class="kn">import</span> <span class="n">TSNE</span>
+<span class="n">all_words</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([[</span><span class="n">key_word</span><span class="p">]</span><span class="o">+</span><span class="n">similar_words</span> <span class="k">for</span> <span class="n">key_word</span><span class="p">,</span> <span class="n">similar_words</span> <span class="ow">in</span> <span class="n">similar_words</span><span class="o">.</span><span class="n">items</span><span class="p">()],</span> <span class="p">[])</span>
+<span class="n">all_words_vec</span> <span class="o">=</span> <span class="n">w2v_model</span><span class="o">.</span><span class="n">wv</span><span class="p">[</span><span class="n">all_words</span><span class="p">]</span>
+
+<span class="n">tsne</span> <span class="o">=</span> <span class="n">TSNE</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">perplexity</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">tsne</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">all_words_vec</span><span class="p">)</span>
+<span class="n">labels</span><span class="o">=</span><span class="n">all_words</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Chinese Font Issues in Plotting</span>
+
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rcParams</span>
+<span class="kn">from</span> <span class="nn">matplotlib.font_manager</span> <span class="kn">import</span> <span class="n">FontProperties</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="c1"># 解决负号&#39;-&#39;显示为方块的问题</span>
+<span class="c1"># rcParams[&#39;axes.unicode_minus&#39;]=False</span>
+<span class="n">myfont</span> <span class="o">=</span> <span class="n">FontProperties</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="s1">&#39;/System/Library/Fonts/PingFang.ttc&#39;</span><span class="p">,</span>
+ <span class="n">size</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="c1"># plt.title(&#39;乘客等级分布&#39;, fontproperties=myfont)</span>
+<span class="c1"># plt.ylabel(&#39;人数&#39;, fontproperties=myfont)</span>
+<span class="c1"># plt.legend((&#39;头等舱&#39;, &#39;二等舱&#39;, &#39;三等舱&#39;), loc=&#39;best&#39;, prop=myfont)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">T</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">T</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">label</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">T</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">T</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">textcoords</span><span class="o">=</span><span class="s1">&#39;offset points&#39;</span><span class="p">,</span><span class="n">fontproperties</span><span class="o">=</span><span class="n">myfont</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/word2vec-chinese_33_0.png" src="_images/word2vec-chinese_33_0.png" />
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ckiptagger"
+        },
+        kernelOptions: {
+            kernelName: "ckiptagger",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ckiptagger'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alvin Chen<br/>
+        
+            &copy; Copyright 2020 Alvin Chen.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="_static/js/index.js"></script>
+    
+  </body>
+</html>

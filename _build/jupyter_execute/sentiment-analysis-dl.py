@@ -70,7 +70,8 @@ print('Sample test label transformation:\n'+'-'*35,
 %%time
 # build word2vec model
 w2v_num_features = 512
-w2v_model = gensim.models.Word2Vec(tokenized_train, size=w2v_num_features, window=150,
+w2v_model = gensim.models.Word2Vec(tokenized_train, 
+                                   size=w2v_num_features, window=150,
                                    min_count=10, sample=1e-3, workers=16)    
 
 ## takes 5mins

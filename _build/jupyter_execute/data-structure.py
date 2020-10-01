@@ -147,6 +147,15 @@ table = {'John': 98, 'Mary': 30, 'Jessica': 78, 'Goerge': 89, 'Jack': 45}
 print('Jack: {0[Jack]:d}'.format(table))
 print('Jack: {Jack:d}Jessica: {Jessica:d}'.format(**table))
 
+# wrapping strings
+import textwrap
+sentence= '''
+美國大選首場總統辯論今晚登場，辯論會上總統川普頻頻插話，並與對手拜登互相人身攻擊，兩人鬥嘴不斷。美國有線電視新聞網（CNN）主持人直呼，這是史上最混亂總統辯論。
+總統辯論一向被視為美國大選最重要環節之一，不少選民專心聆聽候選人政見，並為他們颱風及口條打分數。不過，今晚在俄亥俄州克里夫蘭市（Cleveland）登場的首場總統辯論，恐怕讓許多民眾直搖頭。
+90分鐘辯論開始沒多久，總統川普與民主黨總統候選人拜登（Joe Biden）就吵個不停。川普頻頻插話並對拜登展開人身攻擊，不只酸拜登造勢活動只有兩三隻小貓，並指他一點都不聰明；拜登則多次面露不耐要川普「閉嘴」，並稱他是個「小丑」（clown）。'''
+
+print(textwrap.fill(sentence, 20))
+
 ## Old string formatting
 import math
 print('The value of pi is %1.2f' % math.pi) # specify number of digits before and after .

@@ -254,7 +254,24 @@
             <i class="fas fa-list"></i> Contents
         </div>
         <nav id="bd-toc-nav">
-            
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#important-steps">
+   Important Steps
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#demonstration">
+   Demonstration
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
         </nav>
     </div>
 </div>
@@ -265,50 +282,197 @@
                 
   <div class="section" id="word-cloud">
 <h1>Word Cloud<a class="headerlink" href="#word-cloud" title="Permalink to this headline">¶</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">wordcloud</span> <span class="kn">import</span> <span class="n">WordCloud</span><span class="p">,</span> <span class="n">ImageColorGenerator</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">brown</span>
+<div class="section" id="important-steps">
+<h2>Important Steps<a class="headerlink" href="#important-steps" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>Prepare word frequency data</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">List</span></code>: Word list</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dictionary</span></code>: Word frequency dictionary</p></li>
+</ul>
+</li>
+<li><p>Determine filtering criteria</p>
+<ul class="simple">
+<li><p>remove stopwords?</p></li>
+<li><p>remove low-frequency words?</p></li>
+</ul>
+</li>
+<li><p>Chinese font issues</p>
+<ul class="simple">
+<li><p>Check system-supported Chinese fonts</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!fc-list :lang=zh  
 </pre></div>
 </div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">brown_text</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">brown</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="s1">&#39;mystery&#39;</span><span class="p">))</span>
-<span class="n">brown_text</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
+<ul class="simple">
+<li><p>Specify the font_path when initialize the <code class="docutils literal notranslate"><span class="pre">WordCloud</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">WordCloud</span></code> Parameters (selective)</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wc</span> <span class="o">=</span> <span class="n">WordCloud</span><span class="p">(</span>
+    <span class="n">font_path</span><span class="o">=...</span><span class="p">,</span> <span class="c1"># chinese font path</span>
+    <span class="n">width</span><span class="o">=...</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=...</span><span class="p">,</span>
+    <span class="n">margin</span><span class="o">=...</span><span class="p">,</span>
+    <span class="n">mask</span><span class="o">=...</span><span class="p">,</span>
+    <span class="n">max_words</span><span class="o">=...</span><span class="p">,</span>
+    <span class="n">min_font_size</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">max_font_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">stopwords</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="c1"># a set with stopwords</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">min_word_length</span><span class="o">=</span><span class="mi">0</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wc</span> <span class="o">=</span> <span class="n">WordCloud</span><span class="p">(</span><span class="n">max_font_size</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">brown_text</span><span class="p">)</span>
-<span class="n">wc</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="s1">&#39;output-wordcloud.png&#39;</span><span class="p">)</span>
+<ul>
+<li><p>Creating the word cloud from data</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">WordCloud.generate()</span></code> expects a text (non-word-segmented long string of texts)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">WordCloud.generate_from_frequencies()</span></code> expects a dictionary of {word:freq}</p></li>
+</ul>
+</li>
+<li><p>Increase Wordcloud resolution:</p>
+<ul class="simple">
+<li><p>When intializing the WordCloud, specify the <code class="docutils literal notranslate"><span class="pre">width</span></code> and <code class="docutils literal notranslate"><span class="pre">heigth</span></code></p></li>
+<li><p>When plotting, specify the figure size of plt:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;wordcloud.wordcloud.WordCloud at 0x7fa2e1a770b8&gt;
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">wc</span><span class="p">,</span>
-          <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;bilinear&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+</li>
+<li><p>Create a image-masked word cloud</p>
+<ul class="simple">
+<li><p>Prepare a jpg of the mask (the white background will mask the words)</p></li>
+</ul>
+</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">imageio</span>
+<span class="kn">from</span> <span class="nn">wordcloud</span> <span class="kn">import</span> <span class="n">WordCloud</span><span class="p">,</span> <span class="n">ImageColorGenerator</span>
+
+<span class="n">back_color</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">IMAGE_PATH</span><span class="p">)</span>
+
+<span class="n">wordcloud</span> <span class="o">=</span> <span class="n">WordCloud</span><span class="p">(</span><span class="n">mask</span><span class="o">=</span><span class="n">back_color</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">wordcloud</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;bilinear&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">wordcloud</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">PATH</span><span class="p">)</span>
+
+
+<span class="c1"># Use image color for words</span>
+<span class="n">image_colors</span> <span class="o">=</span> <span class="n">ImageColorGenerator</span><span class="p">(</span><span class="n">back_color</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">wordcloud</span><span class="o">.</span><span class="n">recolor</span><span class="p">(</span><span class="n">color_func</span><span class="o">=</span><span class="n">image_colors</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="demonstration">
+<h2>Demonstration<a class="headerlink" href="#demonstration" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Extract the first article from Google News</p></li>
+<li><p>Tokenize the news</p></li>
+<li><p>Create the word cloud</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Prepare Text Data</span>
+
+<span class="kn">import</span> <span class="nn">requests</span> 
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+ 
+ 
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://news.google.com/topics/CAAqJQgKIh9DQkFTRVFvSUwyMHZNRFptTXpJU0JYcG9MVlJYS0FBUAE?hl=zh-TW&amp;gl=TW&amp;ceid=TW%3Azh-Hant&#39;</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">web_content</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">text</span>
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">web_content</span><span class="p">,</span><span class="s1">&#39;lxml&#39;</span><span class="p">)</span>
+<span class="n">title</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s1">&#39;DY5T1d&#39;</span><span class="p">)</span>
+<span class="n">first_art_link</span> <span class="o">=</span> <span class="n">title</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;href&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span><span class="s1">&#39;https://news.google.com&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">#print(first_art_link)</span>
+<span class="n">art_request</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">first_art_link</span><span class="p">)</span>
+<span class="n">art_request</span><span class="o">.</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf8&#39;</span>
+<span class="n">soup_art</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">art_request</span><span class="o">.</span><span class="n">text</span><span class="p">,</span><span class="s1">&#39;lxml&#39;</span><span class="p">)</span>
+
+<span class="n">art_content</span> <span class="o">=</span> <span class="n">soup_art</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+<span class="n">art_texts</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">art_content</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">art_texts</span><span class="p">)</span>
+<span class="c1">## Create Word Cloud</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/word-cloud_4_0.png" src="_images/word-cloud_4_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;&#39;, &#39;\n&#39;, &#39;\r\n繼進入大學校園，查封國民黨台灣省黨部一百廿四箱文件後，促轉會又將目標指向了司法院。促轉會鎖定了九份大法官解釋，要求以政治檔案條例，揭露大法官與評議相關內容，但司法院拒絕，司法院強調的是，大法官評議過程依法必須保持秘密，必須尊重大法官審判評議的權力，要回到那個時空，體會他們走過的那一條路。&#39;, &#39;\n&#39;, &#39;\n&#39;, &#39;\n&#39;, &#39;\r\n促轉條例中明訂，促轉會成立的目的在「促進轉型正義及落實自由民主憲政」，開放政治檔案固然是促轉會重要工作之一，但其目的仍在於「平復司法不法，還原歷史真相，並促進社會和解」。&#39;, &#39;立即登入！全年暢讀專屬報導&#39;, &#39;快體驗，無廣告干擾的暢讀空間&#39;, &#39;\n                    繼進入大學校園，查封國民黨台灣省黨部一百廿四箱文件後，促轉會又將目標指向了司法院。促轉會鎖定了九份大法官解釋，要求以政治檔案條例，揭露大法官與評議相關內容，但司法院拒絕...                  &#39;, &#39;\n                    專訪財長蘇建榮的這天，在開場寒暄中提到「部長的氣色真好」，得到意外的答案是「我從上任第一天就突然血壓飆高，直到現在都靠藥物壓抑血壓」。身為國家的大掌櫃，因為肩上的重責大任，財長有高血壓可以理解。而民眾心目中理想的財長，又該做到哪些事？                  &#39;, &#39;\n                    聯合報從十年前起，年年針對兩岸關係民意大調查，今年的結果頗值得玩味。在兩岸關係和戰天平量表上，由於政經、軍事、外交、社會全面趨向緊張競爭，雖然民眾多半認為兩岸開戰可能性低，但天平的指針相當大幅度地往開戰方向擺動，完全表達了民眾不樂見戰爭發生，又擔心戰爭成真的心情...                  &#39;, &#39;\n                    衛福部證實，我國已於9月18日與「新冠肺炎疫苗全球取得機制」（COVAX）簽約，10月初付訂金。消息一出，國人彷彿吃下定心丸，至少在新冠肺炎疫苗的施打上，政府已經先跟國際組織「掛號」，不致成為疫情孤兒。                  &#39;, &#39;\n                    到底是官官相護？還是擔心自己的官位不保、丟掉了烏紗帽？否則，光是一個農委會水土保持局的台中分局，就有高達10公務人員被約談，其中有1人被收押，另外3人被強制處分；若事前沒有收到半點風聲，展開內部整肅，這樣如此缺乏警覺性，主管恐怕也是失職，不然就是內幕尚未掀開。                  &#39;, &#39;\n                    最近有兩件事，政府又悄悄將黑手伸進新聞媒體，身為民主社會的「第四權」，聯合報不得不扮演「吹哨者」的角色。                  &#39;]
+</pre></div>
 </div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jieba</span>
+
+<span class="n">jieba</span><span class="o">.</span><span class="n">set_dictionary</span><span class="p">(</span><span class="s1">&#39;../../../Corpus/jiaba/dict.txt.big.txt&#39;</span><span class="p">)</span>
+
+<span class="n">art_words</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">jieba</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">art_texts</span><span class="p">))]</span>
+<span class="c1">## Fine-tune Word Cloud</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Building prefix dict from /Users/Alvin/Dropbox/Corpus/jiaba/dict.txt.big.txt ...
+Loading model from cache /var/folders/n7/ltpzwx813c599nfxfb94s_640000gn/T/jieba.u799b9ba780e57432dfd1e51d6f89ab79.cache
+Loading model cost 1.427 seconds.
+Prefix dict has been built successfully.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<span class="kn">import</span> <span class="nn">imageio</span>
+<span class="kn">from</span> <span class="nn">wordcloud</span> <span class="kn">import</span> <span class="n">WordCloud</span><span class="p">,</span> <span class="n">ImageColorGenerator</span><span class="p">,</span> <span class="n">STOPWORDS</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+
+<span class="c1">## Check font paths</span>
+<span class="c1">## !fc-list :lang=zh</span>
+
+
+<span class="c1">## Load stopwords</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../../../Corpus/stopwords/tomlinNTUB-chinese-stopwords.txt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">stopwords</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()]</span>
+    
+<span class="c1"># Create stopwords ad hoc</span>
+<span class="n">stopwords</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;一個&#39;</span><span class="p">])</span>
+<span class="n">wordcloud</span> <span class="o">=</span> <span class="n">WordCloud</span><span class="p">(</span><span class="n">font_path</span><span class="o">=</span><span class="s2">&quot;/System/Library/Fonts/PingFang.ttc&quot;</span><span class="p">,</span>
+                      <span class="n">background_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+                      <span class="c1">#stopwords=stopwords,</span>
+                      <span class="n">width</span><span class="o">=</span><span class="mi">1600</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">800</span> 
+                     <span class="p">)</span>  <span class="c1">##add  system chinese font path</span>
+<span class="n">wordcloud</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">art_words</span> <span class="k">if</span> <span class="n">w</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stopwords</span><span class="p">]))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">wordcloud</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="c1">#plt.savefig(&#39;../data/twp-wordcloud2.png&#39;, facecolor=&#39;k&#39;, bbox_inches=&#39;tight&#39;)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/word-cloud_5_0.png" src="_images/word-cloud_5_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://medium.com/&#64;fsflyingsoar/%E7%AD%86%E8%A8%98-for-python-jieba-wordcloud-b814f5e04e01">筆記 for Python (Jieba + Wordcloud)</a></p></li>
+<li><p><a class="reference external" href="https://medium.com/pyladies-taiwan/%E4%BB%A5-jieba-%E8%88%87-gensim-%E6%8E%A2%E7%B4%A2%E6%96%87%E6%9C%AC%E4%B8%BB%E9%A1%8C-%E4%BA%94%E6%9C%88%E5%A4%A9%E4%BA%BA%E7%94%9F%E7%84%A1%E9%99%90%E5%85%AC%E5%8F%B8%E6%AD%8C%E8%A9%9E%E5%88%86%E6%9E%90-i-cd2147b89083">以 jieba 與 gensim 探索文本主題：五月天人生無限公司歌詞分析 ( I )</a></p></li>
+</ul>
 </div>
 </div>
 

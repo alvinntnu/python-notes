@@ -538,6 +538,39 @@ Jack: 45Jessica: 78
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># wrapping strings</span>
+<span class="kn">import</span> <span class="nn">textwrap</span>
+<span class="n">sentence</span><span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">美國大選首場總統辯論今晚登場，辯論會上總統川普頻頻插話，並與對手拜登互相人身攻擊，兩人鬥嘴不斷。美國有線電視新聞網（CNN）主持人直呼，這是史上最混亂總統辯論。</span>
+<span class="s1">總統辯論一向被視為美國大選最重要環節之一，不少選民專心聆聽候選人政見，並為他們颱風及口條打分數。不過，今晚在俄亥俄州克里夫蘭市（Cleveland）登場的首場總統辯論，恐怕讓許多民眾直搖頭。</span>
+<span class="s1">90分鐘辯論開始沒多久，總統川普與民主黨總統候選人拜登（Joe Biden）就吵個不停。川普頻頻插話並對拜登展開人身攻擊，不只酸拜登造勢活動只有兩三隻小貓，並指他一點都不聰明；拜登則多次面露不耐要川普「閉嘴」，並稱他是個「小丑」（clown）。&#39;&#39;&#39;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">textwrap</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">sentence</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 美國大選首場總統辯論今晚登場，辯論會上
+總統川普頻頻插話，並與對手拜登互相人身攻
+擊，兩人鬥嘴不斷。美國有線電視新聞網（C
+NN）主持人直呼，這是史上最混亂總統辯論
+。 總統辯論一向被視為美國大選最重要環節
+之一，不少選民專心聆聽候選人政見，並為他
+們颱風及口條打分數。不過，今晚在俄亥俄州
+克里夫蘭市（Cleveland）登場的首
+場總統辯論，恐怕讓許多民眾直搖頭。 90
+分鐘辯論開始沒多久，總統川普與民主黨總統
+候選人拜登（Joe Biden）就吵個不
+停。川普頻頻插話並對拜登展開人身攻擊，不
+只酸拜登造勢活動只有兩三隻小貓，並指他一
+點都不聰明；拜登則多次面露不耐要川普「閉
+嘴」，並稱他是個「小丑」（clown）。
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Old string formatting</span>
 <span class="kn">import</span> <span class="nn">math</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The value of pi is </span><span class="si">%1.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="c1"># specify number of digits before and after .</span>

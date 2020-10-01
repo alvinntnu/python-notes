@@ -5,15 +5,18 @@ More specifically, it is about extracting meaningful structures and patterns fro
 
 Topics may include:
 
-- Text Pre-processing techniques
-- machine learning techniques
+- Text Normalization Techniques
 - Important Python libraries for NLP
-- Important Tasks
+- Traditional (Shallow) Machine Learning
 - Text Classification
-- Text Summarization(?)
+- Text Summarization
 - Topic Modeling
 - Text Similarity and Clustering
 - Semantic Analysis and Network
 - Sentiment Analysis
-- Deep Learning
+- Word Embeddings and Deep Learning
+- LSTM
+- Sequence-to-Sequence and Machine Translation
 - Transfer Learning
+- Interpretation (LIME)
+- Hyper-Parameter Tuning (Pipeline and GridSearchCV)

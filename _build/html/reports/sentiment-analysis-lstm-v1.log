@@ -32,8 +32,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['# Deep Learn with Python Version', '', '## Loading data', 'from keras.datasets import imdb', 'from keras.preprocessing import sequence']
-...
-['max_features = 10000 # vocab size', 'max_len = 500 # text length to consider', 'batch_size = 128', '', '(train_data, train_labels), (test_data, test_labels) = imdb.load_data(num_words=max_features)']
+## Prediction and model performance
+pred_test = (model.predict(test_data) > 0.5).astype("int32")
+
 -------------------
 
