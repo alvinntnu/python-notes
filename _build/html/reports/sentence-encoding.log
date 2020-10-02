@@ -32,9 +32,9 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-import tensorflow as tf
-import tensorflow_hub as hub
-import numpy as np
-import pandas as pd
+embedding_feature = hub.text_embedding_column(
+    key='sentence', 
+    module_spec="https://tfhub.dev/google/universal-sentence-encoder/2",
+    trainable=False)
 -------------------
 

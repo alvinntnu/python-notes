@@ -276,24 +276,83 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#preparing-datasets">
+   Preparing Datasets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#matlibplot">
    Matlibplot
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#resolution">
+     Resolution
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#matplotlib-style">
+     Matplotlib Style
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#matplotlib-chinese-issues">
+     Matplotlib Chinese Issues
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plotting">
+     Plotting
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bar-plots">
+     Bar Plots
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pie-chart">
+     Pie Chart
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stacked-plot">
+     Stacked Plot
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#histogram">
+     Histogram
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#scatter-plot">
+     Scatter Plot
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#complex-graphs">
+     Complex Graphs
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#seaborn-module">
    Seaborn Module
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#two-types-of-functions">
-   Two Types of Functions
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#long-format-vs-wide-format-data">
-   Long-format vs. Wide-format Data
-  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#two-types-of-functions">
+     Two Types of Functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#long-format-vs-wide-format-data">
+     Long-format vs. Wide-format Data
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#chinese-fonts-issues">
@@ -303,6 +362,11 @@
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#references">
    References
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#requirements">
+   Requirements
   </a>
  </li>
 </ul>
@@ -317,22 +381,8 @@
                 
   <div class="section" id="data-visualization-i">
 <h1>Data Visualization I<a class="headerlink" href="#data-visualization-i" title="Permalink to this headline">¶</a></h1>
-<p><img alt="" src="_images/seaborn-func.png" />
-(source: <a class="reference external" href="https://seaborn.pydata.org/tutorial/function_overview.html">documentation</a></p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Still like the vidualization tools in R better.
-Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
-</div>
-<div class="section" id="matlibplot">
-<h2>Matlibplot<a class="headerlink" href="#matlibplot" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="https://python-graph-gallery.com/">Python Graph Gallery</a></p></li>
-</ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>We can increase the dpi of the matplotlib parameters to get image of higher resolution in notebook. Instructions are included below. And please note that the dpi setting has to GO before the magic inline command. (The magic inline commened resets the dpi to default.)</p>
-</div>
+<div class="section" id="preparing-datasets">
+<h2>Preparing Datasets<a class="headerlink" href="#preparing-datasets" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -340,9 +390,221 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib</span>
 
-<span class="c1">## Change DPI for higher resolution in notebook</span>
+
+<span class="c1"># Make a data frame</span>
+<span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">),</span> <span class="s1">&#39;y1&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="s1">&#39;y2&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">+</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">),</span> <span class="s1">&#39;y3&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">+</span><span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span><span class="mi">21</span><span class="p">),</span> <span class="s1">&#39;y4&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">+</span><span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">16</span><span class="p">),</span> <span class="s1">&#39;y5&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">+</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">14</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span><span class="o">-</span><span class="mi">6</span><span class="p">),</span> <span class="s1">&#39;y6&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">+</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">12</span><span class="p">),</span> <span class="s1">&#39;y7&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">+</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">15</span><span class="p">),</span> <span class="s1">&#39;y8&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">+</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">14</span><span class="p">),</span> <span class="s1">&#39;y9&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">+</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">14</span><span class="p">),</span> <span class="s1">&#39;y10&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">+</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">12</span><span class="p">)</span> <span class="p">})</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x      category
+y1      float64
+y2      float64
+y3      float64
+y4      float64
+y5      float64
+y6      float64
+y7      float64
+y8      float64
+y9      float64
+y10     float64
+dtype: object
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>x</th>
+      <th>y1</th>
+      <th>y2</th>
+      <th>y3</th>
+      <th>y4</th>
+      <th>y5</th>
+      <th>y6</th>
+      <th>y7</th>
+      <th>y8</th>
+      <th>y9</th>
+      <th>y10</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>0.099607</td>
+      <td>1.062917</td>
+      <td>11.014910</td>
+      <td>6.673528</td>
+      <td>3.374072</td>
+      <td>1.292243</td>
+      <td>5.458128</td>
+      <td>2.992255</td>
+      <td>4.238263</td>
+      <td>1.324917</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>-0.294190</td>
+      <td>1.023355</td>
+      <td>11.847572</td>
+      <td>8.871810</td>
+      <td>5.743494</td>
+      <td>1.910990</td>
+      <td>5.965952</td>
+      <td>4.105532</td>
+      <td>5.208148</td>
+      <td>3.973585</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>-1.387613</td>
+      <td>4.206145</td>
+      <td>12.328329</td>
+      <td>7.390810</td>
+      <td>6.847230</td>
+      <td>3.836089</td>
+      <td>6.868591</td>
+      <td>7.470104</td>
+      <td>6.276139</td>
+      <td>3.825925</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>-1.122892</td>
+      <td>3.300436</td>
+      <td>12.403621</td>
+      <td>11.162029</td>
+      <td>6.753667</td>
+      <td>6.978010</td>
+      <td>6.938639</td>
+      <td>6.014249</td>
+      <td>6.141820</td>
+      <td>4.117556</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>0.439559</td>
+      <td>7.007551</td>
+      <td>12.427089</td>
+      <td>10.616627</td>
+      <td>7.823585</td>
+      <td>5.586882</td>
+      <td>9.410038</td>
+      <td>9.983472</td>
+      <td>7.643815</td>
+      <td>5.784874</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>-0.323726</td>
+      <td>3.784799</td>
+      <td>15.300073</td>
+      <td>10.106149</td>
+      <td>7.080767</td>
+      <td>6.927248</td>
+      <td>9.659928</td>
+      <td>8.935798</td>
+      <td>7.089489</td>
+      <td>8.370448</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>1.648079</td>
+      <td>6.959808</td>
+      <td>18.138225</td>
+      <td>11.678972</td>
+      <td>8.593467</td>
+      <td>7.058316</td>
+      <td>10.087514</td>
+      <td>10.481942</td>
+      <td>9.256217</td>
+      <td>9.336169</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>0.891217</td>
+      <td>9.478759</td>
+      <td>18.211216</td>
+      <td>11.999828</td>
+      <td>4.654716</td>
+      <td>8.396182</td>
+      <td>11.685544</td>
+      <td>10.872502</td>
+      <td>10.567855</td>
+      <td>8.325996</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>-0.830944</td>
+      <td>8.575818</td>
+      <td>19.734044</td>
+      <td>14.920285</td>
+      <td>3.997832</td>
+      <td>9.796097</td>
+      <td>12.937252</td>
+      <td>12.732134</td>
+      <td>10.806689</td>
+      <td>9.830352</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>-0.901016</td>
+      <td>8.324928</td>
+      <td>18.849095</td>
+      <td>14.129869</td>
+      <td>6.215782</td>
+      <td>10.112098</td>
+      <td>14.677091</td>
+      <td>12.585531</td>
+      <td>12.900515</td>
+      <td>12.096963</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="matlibplot">
+<h2>Matlibplot<a class="headerlink" href="#matlibplot" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="resolution">
+<h3>Resolution<a class="headerlink" href="#resolution" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>We can increase the dpi of the matplotlib parameters to get image of higher resolution in notebook</p></li>
+<li><p>The dpi setting has to GO before the magic inline command because the magic inline commened resets the dpi to default</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Change DPI for higher resolution in notebook</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span><span class="o">=</span> <span class="mi">100</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span><span class="o">=</span> <span class="mi">80</span>
 
 <span class="c1"># Change DPI when saving graphs in files</span>
 <span class="c1"># matplotlib.rc(&quot;savefig&quot;, dpi=dpi)</span>
@@ -350,17 +612,490 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 </div>
 </div>
 </div>
+</div>
+<div class="section" id="matplotlib-style">
+<h3>Matplotlib Style<a class="headerlink" href="#matplotlib-style" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make a data frame</span>
-<span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">),</span> <span class="s1">&#39;y1&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="s1">&#39;y2&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">+</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">),</span> <span class="s1">&#39;y3&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">+</span><span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span><span class="mi">21</span><span class="p">),</span> <span class="s1">&#39;y4&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">+</span><span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">16</span><span class="p">),</span> <span class="s1">&#39;y5&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">+</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">14</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span><span class="o">-</span><span class="mi">6</span><span class="p">),</span> <span class="s1">&#39;y6&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">+</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">12</span><span class="p">),</span> <span class="s1">&#39;y7&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">+</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">15</span><span class="p">),</span> <span class="s1">&#39;y8&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">+</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">14</span><span class="p">),</span> <span class="s1">&#39;y9&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">+</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">14</span><span class="p">),</span> <span class="s1">&#39;y10&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">+</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">12</span><span class="p">)</span> <span class="p">})</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># available style</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">available</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Solarize_Light2&#39;, &#39;_classic_test_patch&#39;, &#39;bmh&#39;, &#39;classic&#39;, &#39;dark_background&#39;, &#39;fast&#39;, &#39;fivethirtyeight&#39;, &#39;ggplot&#39;, &#39;grayscale&#39;, &#39;seaborn&#39;, &#39;seaborn-bright&#39;, &#39;seaborn-colorblind&#39;, &#39;seaborn-dark&#39;, &#39;seaborn-dark-palette&#39;, &#39;seaborn-darkgrid&#39;, &#39;seaborn-deep&#39;, &#39;seaborn-muted&#39;, &#39;seaborn-notebook&#39;, &#39;seaborn-paper&#39;, &#39;seaborn-pastel&#39;, &#39;seaborn-poster&#39;, &#39;seaborn-talk&#39;, &#39;seaborn-ticks&#39;, &#39;seaborn-white&#39;, &#39;seaborn-whitegrid&#39;, &#39;tableau-colorblind10&#39;]
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># choose one style</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;fivethirtyeight&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="matplotlib-chinese-issues">
+<h3>Matplotlib Chinese Issues<a class="headerlink" href="#matplotlib-chinese-issues" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Setting Chinese Fonts</span>
+<span class="c1">## Permanent Setting Version</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;PingFang HK&quot;</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.unicode_minus&#39;</span><span class="p">]</span><span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="plotting">
+<h3>Plotting<a class="headerlink" href="#plotting" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Simple X and Y</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;y1&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/data-visualization-1_12_0.png" src="_images/data-visualization-1_12_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Simple X and two Y&#39;s</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;y1&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;y2&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/data-visualization-1_13_0.png" src="_images/data-visualization-1_13_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Adding legends</span>
+<span class="c1">## Simple X and two Y&#39;s</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;y1&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;資料1&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;y2&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;資料2&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/data-visualization-1_14_0.png" src="_images/data-visualization-1_14_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Save graphs</span>
+<span class="c1">## Simple X and two Y&#39;s</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;y1&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;資料1&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;y2&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;資料2&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;plot.png&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/data-visualization-1_15_0.png" src="_images/data-visualization-1_15_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Add x/y labels and title</span>
+<span class="c1">## Simple X and two Y&#39;s</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;y1&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;資料1&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;y2&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;資料2&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;X軸&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Y軸&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;漂亮的圖&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/data-visualization-1_16_0.png" src="_images/data-visualization-1_16_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="bar-plots">
+<h3>Bar Plots<a class="headerlink" href="#bar-plots" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Normal bar plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;y3&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/data-visualization-1_18_0.png" src="_images/data-visualization-1_18_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Sort bars according to values</span>
+
+<span class="n">df_sorted</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">&#39;y3&#39;</span><span class="p">,</span><span class="s1">&#39;y2&#39;</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_sorted</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
+<span class="n">df_sorted</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x      category
+y1      float64
+y2      float64
+y3      float64
+y4      float64
+y5      float64
+y6      float64
+y7      float64
+y8      float64
+y9      float64
+y10     float64
+dtype: object
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>x</th>
+      <th>y1</th>
+      <th>y2</th>
+      <th>y3</th>
+      <th>y4</th>
+      <th>y5</th>
+      <th>y6</th>
+      <th>y7</th>
+      <th>y8</th>
+      <th>y9</th>
+      <th>y10</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>0.099607</td>
+      <td>1.062917</td>
+      <td>11.014910</td>
+      <td>6.673528</td>
+      <td>3.374072</td>
+      <td>1.292243</td>
+      <td>5.458128</td>
+      <td>2.992255</td>
+      <td>4.238263</td>
+      <td>1.324917</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>-0.294190</td>
+      <td>1.023355</td>
+      <td>11.847572</td>
+      <td>8.871810</td>
+      <td>5.743494</td>
+      <td>1.910990</td>
+      <td>5.965952</td>
+      <td>4.105532</td>
+      <td>5.208148</td>
+      <td>3.973585</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>-1.387613</td>
+      <td>4.206145</td>
+      <td>12.328329</td>
+      <td>7.390810</td>
+      <td>6.847230</td>
+      <td>3.836089</td>
+      <td>6.868591</td>
+      <td>7.470104</td>
+      <td>6.276139</td>
+      <td>3.825925</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>-1.122892</td>
+      <td>3.300436</td>
+      <td>12.403621</td>
+      <td>11.162029</td>
+      <td>6.753667</td>
+      <td>6.978010</td>
+      <td>6.938639</td>
+      <td>6.014249</td>
+      <td>6.141820</td>
+      <td>4.117556</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>0.439559</td>
+      <td>7.007551</td>
+      <td>12.427089</td>
+      <td>10.616627</td>
+      <td>7.823585</td>
+      <td>5.586882</td>
+      <td>9.410038</td>
+      <td>9.983472</td>
+      <td>7.643815</td>
+      <td>5.784874</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>-0.323726</td>
+      <td>3.784799</td>
+      <td>15.300073</td>
+      <td>10.106149</td>
+      <td>7.080767</td>
+      <td>6.927248</td>
+      <td>9.659928</td>
+      <td>8.935798</td>
+      <td>7.089489</td>
+      <td>8.370448</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>1.648079</td>
+      <td>6.959808</td>
+      <td>18.138225</td>
+      <td>11.678972</td>
+      <td>8.593467</td>
+      <td>7.058316</td>
+      <td>10.087514</td>
+      <td>10.481942</td>
+      <td>9.256217</td>
+      <td>9.336169</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>0.891217</td>
+      <td>9.478759</td>
+      <td>18.211216</td>
+      <td>11.999828</td>
+      <td>4.654716</td>
+      <td>8.396182</td>
+      <td>11.685544</td>
+      <td>10.872502</td>
+      <td>10.567855</td>
+      <td>8.325996</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>-0.901016</td>
+      <td>8.324928</td>
+      <td>18.849095</td>
+      <td>14.129869</td>
+      <td>6.215782</td>
+      <td>10.112098</td>
+      <td>14.677091</td>
+      <td>12.585531</td>
+      <td>12.900515</td>
+      <td>12.096963</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>-0.830944</td>
+      <td>8.575818</td>
+      <td>19.734044</td>
+      <td>14.920285</td>
+      <td>3.997832</td>
+      <td>9.796097</td>
+      <td>12.937252</td>
+      <td>12.732134</td>
+      <td>10.806689</td>
+      <td>9.830352</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y3&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_sorted</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/data-visualization-1_20_0.png" src="_images/data-visualization-1_20_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Horizontal Bars</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y4&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;y4&#39;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/data-visualization-1_21_0.png" src="_images/data-visualization-1_21_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="pie-chart">
+<h3>Pie Chart<a class="headerlink" href="#pie-chart" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;fivethirtyeight&quot;</span><span class="p">)</span>
+
+<span class="n">slices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Attendance&#39;</span><span class="p">,</span> <span class="s1">&#39;Midterm&#39;</span><span class="p">,</span> <span class="s1">&#39;Final&#39;</span><span class="p">,</span> <span class="s1">&#39;Assignments&#39;</span><span class="p">]</span>
+<span class="n">explode</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">slices</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">explode</span><span class="o">=</span><span class="n">explode</span><span class="p">,</span> <span class="n">shadow</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">startangle</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">autopct</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%1.1f%%</span><span class="s1">&#39;</span><span class="p">,</span>
+        <span class="n">wedgeprops</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;edgecolor&#39;</span><span class="p">:</span> <span class="s1">&#39;black&#39;</span><span class="p">})</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Grading Policy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/data-visualization-1_23_0.png" src="_images/data-visualization-1_23_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="stacked-plot">
+<h3>Stacked Plot<a class="headerlink" href="#stacked-plot" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;fivethirtyeight&quot;</span><span class="p">)</span>
+
+
+<span class="n">minutes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+
+<span class="n">player1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">player2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">player3</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;player1&#39;</span><span class="p">,</span> <span class="s1">&#39;player2&#39;</span><span class="p">,</span> <span class="s1">&#39;player3&#39;</span><span class="p">]</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#6d904f&#39;</span><span class="p">,</span> <span class="s1">&#39;#fc4f30&#39;</span><span class="p">,</span> <span class="s1">&#39;#008fd5&#39;</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">stackplot</span><span class="p">(</span><span class="n">minutes</span><span class="p">,</span> <span class="n">player1</span><span class="p">,</span> <span class="n">player2</span><span class="p">,</span> <span class="n">player3</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="n">colors</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Stacked Plot&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/data-visualization-1_25_0.png" src="_images/data-visualization-1_25_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="histogram">
+<h3>Histogram<a class="headerlink" href="#histogram" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># grades = [random.randint(0,100) for i in range(1000)]</span>
+
+<span class="n">grades</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">85</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
+<span class="c1">#bins = [50, 60, 70, 80, 90,100]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">grades</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span> <span class="mi">50</span><span class="p">,</span><span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+<span class="n">reference_line</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">grades</span><span class="p">)</span>
+<span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;#fc4f30&#39;</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">reference_line</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Mean Score&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Histogram&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Student Grades&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;個數&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/data-visualization-1_27_0.png" src="_images/data-visualization-1_27_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="scatter-plot">
+<h3>Scatter Plot<a class="headerlink" href="#scatter-plot" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;y4&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;y5&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;y6&#39;</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;y6&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;summer&#39;</span><span class="p">,</span>
+            <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>
+
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;Y6數值大小&#39;</span><span class="p">)</span>
+
+<span class="c1"># plt.xscale(&#39;log&#39;)</span>
+<span class="c1"># plt.yscale(&#39;log&#39;)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;3D Scatterplot&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Y1&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Y2&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">13</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/data-visualization-1_29_0.png" src="_images/data-visualization-1_29_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="complex-graphs">
+<h3>Complex Graphs<a class="headerlink" href="#complex-graphs" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
 </pre></div>
 </div>
 </div>
@@ -400,72 +1135,142 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>0.355926</td>
-      <td>1.607059</td>
-      <td>9.991959</td>
-      <td>6.645375</td>
-      <td>4.487513</td>
-      <td>0.586380</td>
-      <td>5.608923</td>
-      <td>4.807519</td>
-      <td>4.219553</td>
-      <td>2.887675</td>
+      <td>0.099607</td>
+      <td>1.062917</td>
+      <td>11.014910</td>
+      <td>6.673528</td>
+      <td>3.374072</td>
+      <td>1.292243</td>
+      <td>5.458128</td>
+      <td>2.992255</td>
+      <td>4.238263</td>
+      <td>1.324917</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
-      <td>-0.659473</td>
-      <td>1.692215</td>
-      <td>13.803379</td>
-      <td>5.004987</td>
-      <td>5.643279</td>
-      <td>1.948497</td>
-      <td>4.994634</td>
-      <td>4.737999</td>
-      <td>4.967163</td>
-      <td>4.378906</td>
+      <td>-0.294190</td>
+      <td>1.023355</td>
+      <td>11.847572</td>
+      <td>8.871810</td>
+      <td>5.743494</td>
+      <td>1.910990</td>
+      <td>5.965952</td>
+      <td>4.105532</td>
+      <td>5.208148</td>
+      <td>3.973585</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
-      <td>0.167897</td>
-      <td>1.966458</td>
-      <td>12.855409</td>
-      <td>8.906744</td>
-      <td>6.399182</td>
-      <td>3.946604</td>
-      <td>6.134672</td>
-      <td>7.447886</td>
-      <td>7.151702</td>
-      <td>2.888299</td>
+      <td>-1.387613</td>
+      <td>4.206145</td>
+      <td>12.328329</td>
+      <td>7.390810</td>
+      <td>6.847230</td>
+      <td>3.836089</td>
+      <td>6.868591</td>
+      <td>7.470104</td>
+      <td>6.276139</td>
+      <td>3.825925</td>
     </tr>
     <tr>
       <th>3</th>
       <td>4</td>
-      <td>0.201705</td>
-      <td>6.213489</td>
-      <td>13.563196</td>
-      <td>9.122123</td>
-      <td>8.095340</td>
-      <td>4.388179</td>
-      <td>8.826792</td>
-      <td>7.325369</td>
-      <td>8.096314</td>
-      <td>6.367271</td>
+      <td>-1.122892</td>
+      <td>3.300436</td>
+      <td>12.403621</td>
+      <td>11.162029</td>
+      <td>6.753667</td>
+      <td>6.978010</td>
+      <td>6.938639</td>
+      <td>6.014249</td>
+      <td>6.141820</td>
+      <td>4.117556</td>
     </tr>
     <tr>
       <th>4</th>
       <td>5</td>
-      <td>-0.102548</td>
-      <td>7.768838</td>
-      <td>16.752292</td>
-      <td>10.732587</td>
-      <td>9.429381</td>
-      <td>5.628846</td>
-      <td>8.384201</td>
-      <td>10.479356</td>
-      <td>7.666153</td>
-      <td>5.630254</td>
+      <td>0.439559</td>
+      <td>7.007551</td>
+      <td>12.427089</td>
+      <td>10.616627</td>
+      <td>7.823585</td>
+      <td>5.586882</td>
+      <td>9.410038</td>
+      <td>9.983472</td>
+      <td>7.643815</td>
+      <td>5.784874</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>-0.323726</td>
+      <td>3.784799</td>
+      <td>15.300073</td>
+      <td>10.106149</td>
+      <td>7.080767</td>
+      <td>6.927248</td>
+      <td>9.659928</td>
+      <td>8.935798</td>
+      <td>7.089489</td>
+      <td>8.370448</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>1.648079</td>
+      <td>6.959808</td>
+      <td>18.138225</td>
+      <td>11.678972</td>
+      <td>8.593467</td>
+      <td>7.058316</td>
+      <td>10.087514</td>
+      <td>10.481942</td>
+      <td>9.256217</td>
+      <td>9.336169</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>0.891217</td>
+      <td>9.478759</td>
+      <td>18.211216</td>
+      <td>11.999828</td>
+      <td>4.654716</td>
+      <td>8.396182</td>
+      <td>11.685544</td>
+      <td>10.872502</td>
+      <td>10.567855</td>
+      <td>8.325996</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>-0.830944</td>
+      <td>8.575818</td>
+      <td>19.734044</td>
+      <td>14.920285</td>
+      <td>3.997832</td>
+      <td>9.796097</td>
+      <td>12.937252</td>
+      <td>12.732134</td>
+      <td>10.806689</td>
+      <td>9.830352</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>-0.901016</td>
+      <td>8.324928</td>
+      <td>18.849095</td>
+      <td>14.129869</td>
+      <td>6.215782</td>
+      <td>10.112098</td>
+      <td>14.677091</td>
+      <td>12.585531</td>
+      <td>12.900515</td>
+      <td>12.096963</td>
     </tr>
   </tbody>
 </table>
@@ -473,23 +1278,20 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># style</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;seaborn-darkgrid&#39;</span><span class="p">)</span>
- 
-<span class="c1"># create a color palette</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a color palette</span>
 <span class="n">palette</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;Set1&#39;</span><span class="p">)</span>
  
 <span class="c1"># multiple line plot</span>
 <span class="n">num</span><span class="o">=</span><span class="mi">0</span>
-<span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="c1">#plt.figure(figsize=(5,3), dpi=150)</span>
+<span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y10&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="n">num</span><span class="o">+=</span><span class="mi">1</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">palette</span><span class="p">(</span><span class="n">num</span><span class="p">),</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">column</span><span class="p">)</span>
  
-<span class="c1"># Add legend</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
  
 <span class="c1"># Add titles</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;A (bad) Spaghetti plot&quot;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Line Plot With Several Values&quot;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Score&quot;</span><span class="p">)</span>
 </pre></div>
@@ -499,135 +1301,17 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Score&#39;)
 </pre></div>
 </div>
-<img alt="_images/data-visualization-1_8_1.png" src="_images/data-visualization-1_8_1.png" />
+<img alt="_images/data-visualization-1_32_1.png" src="_images/data-visualization-1_32_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make a data frame</span>
-<span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">),</span> <span class="s1">&#39;y1&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="s1">&#39;y2&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">+</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">),</span> <span class="s1">&#39;y3&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">+</span><span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span><span class="mi">21</span><span class="p">),</span> <span class="s1">&#39;y4&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">+</span><span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">16</span><span class="p">),</span> <span class="s1">&#39;y5&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">+</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">14</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span><span class="o">-</span><span class="mi">6</span><span class="p">),</span> <span class="s1">&#39;y6&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">+</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">12</span><span class="p">),</span> <span class="s1">&#39;y7&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">+</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">15</span><span class="p">),</span> <span class="s1">&#39;y8&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">+</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">14</span><span class="p">),</span> <span class="s1">&#39;y9&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">+</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">14</span><span class="p">)</span> <span class="p">})</span>
- 
-<span class="c1"># Initialize the figure</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;seaborn-darkgrid&#39;</span><span class="p">)</span>
- 
-<span class="c1"># create a color palette</span>
-<span class="n">palette</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;Set1&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">palette</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;tab20&#39;</span><span class="p">)</span>
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>x</th>
-      <th>y1</th>
-      <th>y2</th>
-      <th>y3</th>
-      <th>y4</th>
-      <th>y5</th>
-      <th>y6</th>
-      <th>y7</th>
-      <th>y8</th>
-      <th>y9</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>0.776528</td>
-      <td>0.064712</td>
-      <td>10.681142</td>
-      <td>6.842174</td>
-      <td>4.747109</td>
-      <td>2.245407</td>
-      <td>6.204670</td>
-      <td>4.442722</td>
-      <td>4.059316</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>-1.360830</td>
-      <td>1.943672</td>
-      <td>13.696152</td>
-      <td>6.789276</td>
-      <td>6.174461</td>
-      <td>5.293784</td>
-      <td>5.193191</td>
-      <td>5.039605</td>
-      <td>5.726754</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>3</td>
-      <td>0.485185</td>
-      <td>3.457843</td>
-      <td>12.881825</td>
-      <td>9.932465</td>
-      <td>5.912951</td>
-      <td>3.116149</td>
-      <td>5.792501</td>
-      <td>8.960610</td>
-      <td>5.008806</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>4</td>
-      <td>-0.687587</td>
-      <td>3.332373</td>
-      <td>16.999985</td>
-      <td>8.663451</td>
-      <td>6.649311</td>
-      <td>3.589447</td>
-      <td>7.456464</td>
-      <td>7.898190</td>
-      <td>8.417716</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>-1.125103</td>
-      <td>3.922534</td>
-      <td>14.764964</td>
-      <td>10.006613</td>
-      <td>8.902313</td>
-      <td>5.831324</td>
-      <td>9.481074</td>
-      <td>7.536330</td>
-      <td>8.058716</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># multiple line plot</span>
+<span class="c1"># multiple line plot</span>
 <span class="n">num</span><span class="o">=</span><span class="mi">0</span>
-<span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y9&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="n">num</span><span class="o">+=</span><span class="mi">1</span>
     <span class="c1"># Find the right spot on the plot</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
@@ -643,28 +1327,34 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
         <span class="n">plt</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelleft</span><span class="o">=</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
     <span class="c1"># Add title</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">palette</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="p">)</span>
-<span class="c1"># general title</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;How the 9 students improved</span><span class="se">\n</span><span class="s2">these past few days?&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;italic&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.02</span><span class="p">)</span>
 
+<span class="c1"># general title</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Facet Grids&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;italic&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.02</span><span class="p">)</span>
+
+<span class="c1"># Not working</span>
+<span class="c1">#plt.tick_params(labelcolor=&#39;none&#39;, top=False, bottom=False, left=False, right=False)</span>
+<span class="c1"># plt.xlabel(&quot;common X&quot;)</span>
+<span class="c1"># plt.ylabel(&quot;common Y&quot;)</span>
 <span class="c1"># Axis title</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="s1">&#39;Time&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.06</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;Note&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="s1">&#39;vertical&#39;</span><span class="p">)</span>
+<span class="c1">#plt.xlabel(-0.5, 0, &#39;X-AXIS LABEL&#39;, ha=&#39;center&#39;, va=&#39;center&#39;)</span>
+<span class="c1">#plt.text(0.06, 0.5, &#39;Note&#39;, ha=&#39;center&#39;, va=&#39;center&#39;, rotation=&#39;vertical&#39;)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.06, 0.5, &#39;Note&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.02, &#39;Facet Grids&#39;)
 </pre></div>
 </div>
-<img alt="_images/data-visualization-1_11_1.png" src="_images/data-visualization-1_11_1.png" />
+<img alt="_images/data-visualization-1_33_1.png" src="_images/data-visualization-1_33_1.png" />
+</div>
 </div>
 </div>
 </div>
 <div class="section" id="seaborn-module">
 <h2>Seaborn Module<a class="headerlink" href="#seaborn-module" title="Permalink to this headline">¶</a></h2>
-</div>
+<p><img alt="" src="_images/seaborn-func.png" /></p>
 <div class="section" id="two-types-of-functions">
-<h2>Two Types of Functions<a class="headerlink" href="#two-types-of-functions" title="Permalink to this headline">¶</a></h2>
+<h3>Two Types of Functions<a class="headerlink" href="#two-types-of-functions" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Figure-level functions (Generic)</p></li>
 <li><p>Axex-level functions (Specific)</p></li>
@@ -780,10 +1470,10 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.11.0
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f9c40e89090&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7ff40a3db090&gt;
 </pre></div>
 </div>
-<img alt="_images/data-visualization-1_16_2.png" src="_images/data-visualization-1_16_2.png" />
+<img alt="_images/data-visualization-1_38_2.png" src="_images/data-visualization-1_38_2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -793,10 +1483,10 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f9c61604690&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7ff40ade23d0&gt;
 </pre></div>
 </div>
-<img alt="_images/data-visualization-1_17_1.png" src="_images/data-visualization-1_17_1.png" />
+<img alt="_images/data-visualization-1_39_1.png" src="_images/data-visualization-1_39_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -806,10 +1496,10 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f9c41206d10&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7ff3e848bfd0&gt;
 </pre></div>
 </div>
-<img alt="_images/data-visualization-1_18_1.png" src="_images/data-visualization-1_18_1.png" />
+<img alt="_images/data-visualization-1_40_1.png" src="_images/data-visualization-1_40_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -823,7 +1513,7 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;flipper_length_mm&#39;, ylabel=&#39;Density&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/data-visualization-1_19_1.png" src="_images/data-visualization-1_19_1.png" />
+<img alt="_images/data-visualization-1_41_1.png" src="_images/data-visualization-1_41_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -833,10 +1523,10 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f9c4952bb90&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7ff3f8ba6150&gt;
 </pre></div>
 </div>
-<img alt="_images/data-visualization-1_20_1.png" src="_images/data-visualization-1_20_1.png" />
+<img alt="_images/data-visualization-1_42_1.png" src="_images/data-visualization-1_42_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -849,10 +1539,10 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.lines._AxLine at 0x7f9c49e064d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.lines._AxLine at 0x7ff40af3af50&gt;
 </pre></div>
 </div>
-<img alt="_images/data-visualization-1_21_1.png" src="_images/data-visualization-1_21_1.png" />
+<img alt="_images/data-visualization-1_43_1.png" src="_images/data-visualization-1_43_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -863,10 +1553,10 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f9c61685190&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7ff3f8df25d0&gt;
 </pre></div>
 </div>
-<img alt="_images/data-visualization-1_22_1.png" src="_images/data-visualization-1_22_1.png" />
+<img alt="_images/data-visualization-1_44_1.png" src="_images/data-visualization-1_44_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -876,10 +1566,10 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f9c61685d90&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7ff3d8a98a10&gt;
 </pre></div>
 </div>
-<img alt="_images/data-visualization-1_23_1.png" src="_images/data-visualization-1_23_1.png" />
+<img alt="_images/data-visualization-1_45_1.png" src="_images/data-visualization-1_45_1.png" />
 </div>
 </div>
 <ul class="simple">
@@ -892,10 +1582,10 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.JointGrid at 0x7f9c512b4850&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.JointGrid at 0x7ff3e8a39e10&gt;
 </pre></div>
 </div>
-<img alt="_images/data-visualization-1_25_1.png" src="_images/data-visualization-1_25_1.png" />
+<img alt="_images/data-visualization-1_47_1.png" src="_images/data-visualization-1_47_1.png" />
 </div>
 </div>
 <ul class="simple">
@@ -908,15 +1598,15 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f9c41646b90&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7ff3d8f4a6d0&gt;
 </pre></div>
 </div>
-<img alt="_images/data-visualization-1_27_1.png" src="_images/data-visualization-1_27_1.png" />
+<img alt="_images/data-visualization-1_49_1.png" src="_images/data-visualization-1_49_1.png" />
 </div>
 </div>
 </div>
 <div class="section" id="long-format-vs-wide-format-data">
-<h2>Long-format vs. Wide-format Data<a class="headerlink" href="#long-format-vs-wide-format-data" title="Permalink to this headline">¶</a></h2>
+<h3>Long-format vs. Wide-format Data<a class="headerlink" href="#long-format-vs-wide-format-data" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flights</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;flights&quot;</span><span class="p">)</span>
@@ -990,10 +1680,10 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f9c41631d50&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7ff40b1b0310&gt;
 </pre></div>
 </div>
-<img alt="_images/data-visualization-1_30_1.png" src="_images/data-visualization-1_30_1.png" />
+<img alt="_images/data-visualization-1_52_1.png" src="_images/data-visualization-1_52_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1003,10 +1693,10 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f9c49837510&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7ff40b2fb2d0&gt;
 </pre></div>
 </div>
-<img alt="_images/data-visualization-1_31_1.png" src="_images/data-visualization-1_31_1.png" />
+<img alt="_images/data-visualization-1_53_1.png" src="_images/data-visualization-1_53_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1163,10 +1853,11 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f9c49860cd0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7ff3d97829d0&gt;
 </pre></div>
 </div>
-<img alt="_images/data-visualization-1_34_1.png" src="_images/data-visualization-1_34_1.png" />
+<img alt="_images/data-visualization-1_56_1.png" src="_images/data-visualization-1_56_1.png" />
+</div>
 </div>
 </div>
 </div>
@@ -1239,10 +1930,10 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Source Han Sans
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f9c51daab90&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7ff3d9ad0bd0&gt;
 </pre></div>
 </div>
-<img alt="_images/data-visualization-1_38_2.png" src="_images/data-visualization-1_38_2.png" />
+<img alt="_images/data-visualization-1_60_2.png" src="_images/data-visualization-1_60_2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1260,7 +1951,7 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/data-visualization-1_39_0.png" src="_images/data-visualization-1_39_0.png" />
+<img alt="_images/data-visualization-1_61_0.png" src="_images/data-visualization-1_61_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1278,17 +1969,34 @@ Seaborn is not intuitive, esp. for long-wide conversion of data frames.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
 </pre></div>
 </div>
-<img alt="_images/data-visualization-1_40_1.png" src="_images/data-visualization-1_40_1.png" />
+<img alt="_images/data-visualization-1_62_1.png" src="_images/data-visualization-1_62_1.png" />
 </div>
 </div>
 </div>
 <div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
+<li><p><a class="reference external" href="https://python-graph-gallery.com/">Python Graph Gallery</a></p></li>
+<li><p><a class="reference external" href="https://youtu.be/UO98lJQ3QGI">Corey Schafer’s YouTube matplotlib tutorial</a></p></li>
+<li><p><a class="reference external" href="https://matplotlib.org/3.1.1/tutorials/colors/colormaps.html">Matplotlib colormaps</a></p></li>
 <li><p><a class="reference external" href="https://medium.com/marketingdatascience/%E8%A7%A3%E6%B1%BApython-3-matplotlib%E8%88%87seaborn%E8%A6%96%E8%A6%BA%E5%8C%96%E5%A5%97%E4%BB%B6%E4%B8%AD%E6%96%87%E9%A1%AF%E7%A4%BA%E5%95%8F%E9%A1%8C-f7b3773a889b">解決Python 3 Matplotlib與Seaborn視覺化套件中文顯示問題</a></p></li>
 <li><p><a class="reference external" href="https://ithelp.ithome.com.tw/articles/10234373?sc=hot">Day 11 : Google Colab 實用奧步篇 ( 連結硬碟、繪圖中文顯示問題 )</a></p></li>
 <li><p><a class="reference external" href="https://github.com/adobe-fonts/source-han-sans">Souce Han Sans (open-source)</a></p></li>
+<li><p><a class="reference external" href="https://seaborn.pydata.org/tutorial/function_overview.html">Seaborn Documentation</a></p></li>
 </ul>
+</div>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>seaborn==0.11.0
+pandas==1.1.2
+numpy==1.18.1
+matplotlib==3.3.2
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 

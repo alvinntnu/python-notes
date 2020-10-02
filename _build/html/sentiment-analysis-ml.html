@@ -144,6 +144,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="hyperparameter-tuning.html">
+     Hyper-Parameter Tuning
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="doc2vec.html">
      Dov2Vec
     </a>
@@ -348,8 +353,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 358 ms, sys: 52.9 ms, total: 411 ms
-Wall time: 2.16 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 361 ms, sys: 47.8 ms, total: 409 ms
+Wall time: 407 ms
 </pre></div>
 </div>
 </div>
@@ -462,12 +467,6 @@ Wall time: 2.16 s
 <span class="n">tv</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">use_idf</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">min_df</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">max_df</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span>
                      <span class="n">sublinear_tf</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">tv_train_features</span> <span class="o">=</span> <span class="n">tv</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">norm_train_reviews</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 59.3 s, sys: 1.96 s, total: 1min 1s
-Wall time: 1min 2s
 </pre></div>
 </div>
 </div>

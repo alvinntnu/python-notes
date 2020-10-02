@@ -32,7 +32,14 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-import keras
-import numpy as np
+## Vectorizing sequences
+print('Vectorization...')
+## one-hot encoding for all characters
+x = np.zeros((len(sentences), maxlen, len(chars)), dtype=np.bool)
+y = np.zeros((len(sentences), len(chars)), dtype=np.bool)
+for i, sentence in enumerate(sentences):
+    for t, char in enumerate(sentence):
+        x[i, t, char_indices[char]]=1 # i-th sentence, t-th character, one-hot position
+    y[i, char_indices[next_chars[i]]]=1 # i-th sentence, the target word one-hot position
 -------------------
 

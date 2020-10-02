@@ -24,18 +24,17 @@ def get_imports():
             name = poorly_named_packages[name]
 
         yield name
+        
+        
+imports = list(set(get_imports()))
 
-def get_all():
-    imports = list(set(get_imports()))
+# The only way I found to get the version of the root package
+# from only the name of the package is to cross-check the names 
+# of installed packages vs. imported packages
+requirements = []
+for m in pkg_resources.working_set:
+    if m.project_name in imports and m.project_name!="pip":
+        requirements.append((m.project_name, m.version))
 
-    # The only way I found to get the version of the root package
-    # from only the name of the package is to cross-check the names 
-    # of installed packages vs. imported packages
-    requirements = []
-    for m in pkg_resources.working_set:
-        if m.project_name in imports and m.project_name!="pip":
-            requirements.append((m.project_name, m.version))
-
-    for r in requirements:
-        print("{}=={}".format(*r))
-    return requirements
+for r in requirements:
+    print("{}=={}".format(*r))

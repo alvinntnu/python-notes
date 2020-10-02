@@ -19,4 +19,4 @@ Topics may include:
 - Sequence-to-Sequence and Machine Translation
 - Transfer Learning
 - Interpretation (LIME)
-- Hyper-Parameter Tuning (Pipeline and GridSearchCV)
+- Hyper-Parameter Tuning (Grid Search and Cross Validation)

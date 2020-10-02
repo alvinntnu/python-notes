@@ -16,6 +16,7 @@ html:
 execute:
   exclude_patterns:
     - 'transfer-learning-sent-encoding.ipynb'
+    - 'hyperparameter-tuning.ipynb'
 sphinx:
   extra_extensions:
     - sphinxcontrib.bibtex

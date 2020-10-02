@@ -144,6 +144,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="hyperparameter-tuning.html">
+     Hyper-Parameter Tuning
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="doc2vec.html">
      Dov2Vec
     </a>
@@ -473,11 +478,11 @@ Max sequence length for outputs: 22
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;tensorflow.python.keras.engine.input_layer.InputLayer at 0x7f8cf0cdf610&gt;,
- &lt;tensorflow.python.keras.engine.input_layer.InputLayer at 0x7f8cf0cdfb10&gt;,
- &lt;tensorflow.python.keras.layers.recurrent_v2.LSTM at 0x7f8cf0cdfe10&gt;,
- &lt;tensorflow.python.keras.layers.recurrent_v2.LSTM at 0x7f8cf0cdfd10&gt;,
- &lt;tensorflow.python.keras.layers.core.Dense at 0x7f8cf0ce5f10&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;tensorflow.python.keras.engine.input_layer.InputLayer at 0x7fc26a55cc90&gt;,
+ &lt;tensorflow.python.keras.engine.input_layer.InputLayer at 0x7fc26a5621d0&gt;,
+ &lt;tensorflow.python.keras.layers.recurrent_v2.LSTM at 0x7fc26a562890&gt;,
+ &lt;tensorflow.python.keras.layers.recurrent_v2.LSTM at 0x7fc2790ef150&gt;,
+ &lt;tensorflow.python.keras.layers.core.Dense at 0x7fc26a56a610&gt;]
 </pre></div>
 </div>
 </div>
@@ -634,192 +639,228 @@ Decoded sentence: 你好。
 -
 Input sentence: Hi.
 Decoded sentence: 你好。
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: Run.
 Decoded sentence: 你用跑的。
 
 -
 Input sentence: Wait!
 Decoded sentence: 等等！
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: Hello!
 Decoded sentence: 你好。
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: I try.
 Decoded sentence: 让我来。
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: I won!
 Decoded sentence: 我赢了。
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: Oh no!
 Decoded sentence: 不会吧。
 
 -
 Input sentence: Cheers!
 Decoded sentence: 乾杯!
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: He ran.
 Decoded sentence: 他跑了。
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: Hop in.
 Decoded sentence: 跳进来。
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: I lost.
 Decoded sentence: 我迷失了。
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: I quit.
 Decoded sentence: 我退出。
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: I&#39;m OK.
 Decoded sentence: 我沒事。
 
 -
 Input sentence: Listen.
 Decoded sentence: 听着。
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: No way!
 Decoded sentence: 没门！
 
 -
 Input sentence: No way!
 Decoded sentence: 没门！
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: Really?
 Decoded sentence: 你确定？
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: Try it.
 Decoded sentence: 试试吧。
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: We try.
 Decoded sentence: 我们来试试。
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: Why me?
 Decoded sentence: 为什么是我？
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: Ask Tom.
 Decoded sentence: 去问汤姆。
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: Be calm.
 Decoded sentence: 冷静点。
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: Be fair.
 Decoded sentence: 公平点。
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: Be kind.
 Decoded sentence: 友善点。
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: Be nice.
 Decoded sentence: 和气点。
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: Call me.
 Decoded sentence: 联系我。
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: Call us.
 Decoded sentence: 联系我们。
 
 -
 Input sentence: Come in.
 Decoded sentence: 进来。
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: Get Tom.
 Decoded sentence: 找到汤姆。
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: Get out!
 Decoded sentence: 滾出去！
 
 -
 Input sentence: Go away!
 Decoded sentence: 滾！
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: Go away!
 Decoded sentence: 滾！
 
 -
 Input sentence: Go away.
 Decoded sentence: 走開！
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: Goodbye!
 Decoded sentence: 告辞！
 
 -
 Input sentence: Goodbye!
 Decoded sentence: 告辞！
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: Hang on!
 Decoded sentence: 等一下！
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: He came.
 Decoded sentence: 他来了。
 
 -
 Input sentence: He runs.
 Decoded sentence: 他跑。
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: Help me.
 Decoded sentence: 帮我一下。
 
 -
 Input sentence: Hold on.
 Decoded sentence: 坚持。
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: Hug Tom.
 Decoded sentence: 抱抱汤姆！
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: I agree.
 Decoded sentence: 我同意。
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: I&#39;m ill.
 Decoded sentence: 我生病了。
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: I&#39;m old.
 Decoded sentence: 我老了。
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: It&#39;s OK.
 Decoded sentence: 没关系。
 
 -
 Input sentence: It&#39;s me.
 Decoded sentence: 是我。
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: Join us.
 Decoded sentence: 来加入我们吧。
-
--
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
 Input sentence: Keep it.
 Decoded sentence: 留着吧。
 

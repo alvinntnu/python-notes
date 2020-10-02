@@ -43,6 +43,7 @@
     - file: seq-to-seq
     - file: text-gen-lstm-v1
     - file: transfer-learning-sent-encoding
+    - file: hyperparameter-tuning
     - file: doc2vec
     - file: nlp-spacy
     - file: nlp-spacy-zh
