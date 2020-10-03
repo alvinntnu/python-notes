@@ -1,0 +1,82 @@
+Traceback (most recent call last):
+  File "/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 56, in single_nb_execution
+    record_timing=False,
+  File "/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 1082, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/nbclient/util.py", line 74, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/nbclient/util.py", line 53, in just_run
+    return loop.run_until_complete(coro)
+  File "/Users/Alvin/opt/anaconda3/lib/python3.7/asyncio/base_events.py", line 583, in run_until_complete
+    return future.result()
+  File "/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 536, in async_execute
+    cell, index, execution_count=self.code_cells_executed + 1
+  File "/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 827, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 735, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply['content'])
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import re, collections
+
+def tokens(text): 
+    """
+    Get all words from the corpus
+    """
+    return re.findall('[a-z]+', text.lower()) 
+
+WORDS = tokens(open('../data/TextAnalyticsWithPython_data/big.txt').read())
+WORD_COUNTS = collections.Counter(WORDS)
+# top 10 words in corpus
+WORD_COUNTS.most_common(10)
+
+def edits0(word): 
+    """
+    Return all strings that are zero edits away 
+    from the input word (i.e., the word itself).
+    """
+    return {word}
+
+
+
+def edits1(word):
+    """
+    Return all strings that are one edit away 
+    from the input word.
+    """
+    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    def splits(word):
+        """
+        Return a list of all possible (first, rest) pairs 
+        that the input word is made of.
+        """
+        return [(word[:i], word[i:]) 
+                for i in range(len(word)+1)]
+                
+    pairs      = splits(word)
+    deletes    = [a+b[1:]           for (a, b) in pairs if b]
+    transposes = [a+b[1]+b[0]+b[2:] for (a, b) in pairs if len(b) > 1]
+    replaces   = [a+c+b[1:]         for (a, b) in pairs for c in alphabet if b]
+    inserts    = [a+c+b             for (a, b) in pairs for c in alphabet]
+    return set(deletes + transposes + replaces + inserts)
+
+
+def edits2(word):
+    """Return all strings that are two edits away 
+    from the input word.
+    """
+    return {e2 for e1 in edits1(word) for e2 in edits1(e1)}
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mFileNotFoundError[0m                         Traceback (most recent call last)
+[0;32m<ipython-input-1-904a687ebf57>[0m in [0;36m<module>[0;34m[0m
+[1;32m      7[0m     [0;32mreturn[0m [0mre[0m[0;34m.[0m[0mfindall[0m[0;34m([0m[0;34m'[a-z]+'[0m[0;34m,[0m [0mtext[0m[0;34m.[0m[0mlower[0m[0;34m([0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      8[0m [0;34m[0m[0m
+[0;32m----> 9[0;31m [0mWORDS[0m [0;34m=[0m [0mtokens[0m[0;34m([0m[0mopen[0m[0;34m([0m[0;34m'../data/TextAnalyticsWithPython_data/big.txt'[0m[0;34m)[0m[0;34m.[0m[0mread[0m[0;34m([0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     10[0m [0mWORD_COUNTS[0m [0;34m=[0m [0mcollections[0m[0;34m.[0m[0mCounter[0m[0;34m([0m[0mWORDS[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     11[0m [0;31m# top 10 words in corpus[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mFileNotFoundError[0m: [Errno 2] No such file or directory: '../data/TextAnalyticsWithPython_data/big.txt'
+FileNotFoundError: [Errno 2] No such file or directory: '../data/TextAnalyticsWithPython_data/big.txt'
+

@@ -420,6 +420,20 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="mi">559</span><span class="n">f8e6a4608</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> 
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">reviews</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="ne">----&gt; </span><span class="mi">6</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>         <span class="n">cur_review</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;../data/books_small_10000.json&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -499,7 +513,7 @@ Counter({&#39;POSITIVE&#39;: 2767, &#39;NEUTRAL&#39;: 325, &#39;NEGATIVE&#39;: 2
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counter({&#39;POSITIVE&#39;: 436, &#39;NEGATIVE&#39;: 436})
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counter({&#39;NEGATIVE&#39;: 436, &#39;POSITIVE&#39;: 436})
 Counter({&#39;NEGATIVE&#39;: 208, &#39;POSITIVE&#39;: 208})
 </pre></div>
 </div>
@@ -522,7 +536,7 @@ Counter({&#39;NEGATIVE&#39;: 208, &#39;POSITIVE&#39;: 208})
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counter({&#39;POSITIVE&#39;: 436, &#39;NEGATIVE&#39;: 436})
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counter({&#39;NEGATIVE&#39;: 436, &#39;POSITIVE&#39;: 436})
 </pre></div>
 </div>
 </div>
@@ -562,57 +576,37 @@ Counter({&#39;NEGATIVE&#39;: 208, &#39;POSITIVE&#39;: 208})
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(872, 8906)
 (416, 8906)
 &lt;class &#39;scipy.sparse.csr.csr_matrix&#39;&gt;
-  (0, 5656)	0.16934025363536226
-  (0, 3866)	0.1321309231109533
-  (0, 3264)	0.06420530702427228
-  (0, 7640)	0.15637769551720296
-  (0, 469)	0.10773444112202675
-  (0, 3177)	0.04382206487676244
-  (0, 3495)	0.07293219356969624
-  (0, 8665)	0.07182067132899259
-  (0, 569)	0.060007537924095286
-  (0, 3728)	0.1321309231109533
-  (0, 2216)	0.17962921484680203
-  (0, 3223)	0.08834489574145107
-  (0, 1989)	0.17962921484680203
-  (0, 8760)	0.047504281044618554
-  (0, 2925)	0.141462197056689
-  (0, 8408)	0.06796082988139153
-  (0, 704)	0.17962921484680203
-  (0, 7588)	0.12686192874510166
-  (0, 3793)	0.14328012119486497
-  (0, 4503)	0.1187809421901678
-  (0, 660)	0.06859131450412288
-  (0, 4684)	0.061411160243995906
-  (0, 8036)	0.06973382196528097
-  (0, 7352)	0.16934025363536226
-  (0, 8883)	0.07817207066251952
-  :	:
-  (0, 423)	0.03209157887286372
-  (0, 8653)	0.13878860014996952
-  (0, 8039)	0.10006385220212609
-  (0, 7026)	0.1092728333778682
-  (0, 2465)	0.1517511582681288
-  (0, 8052)	0.1319119523068855
-  (0, 1591)	0.16934025363536226
-  (0, 744)	0.16934025363536226
-  (0, 4264)	0.12391588428840557
-  (0, 991)	0.07456987542260629
-  (0, 7976)	0.1020563335000194
-  (0, 7690)	0.16934025363536226
-  (0, 2440)	0.16934025363536226
-  (0, 8005)	0.07840594974354882
-  (0, 3423)	0.0879996427875991
-  (0, 808)	0.09374794060741701
-  (0, 8319)	0.17962921484680203
-  (0, 779)	0.11586533906706711
-  (0, 7115)	0.09248938347541114
-  (0, 7950)	0.3386805072707245
-  (0, 5857)	0.3240802389591371
-  (0, 7925)	0.09023467853386659
-  (0, 7987)	0.09168373801063473
-  (0, 386)	0.09794798545313699
-  (0, 3669)	0.05164876877857861
+  (0, 4982)	0.12094405698768586
+  (0, 3177)	0.08528717718722892
+  (0, 6746)	0.28772746526620935
+  (0, 5185)	0.12046457186971188
+  (0, 5384)	0.14121009131466422
+  (0, 1007)	0.20967442759671737
+  (0, 7280)	0.11295395275046353
+  (0, 8608)	0.08528717718722892
+  (0, 4277)	0.07184615676746418
+  (0, 797)	0.1503597979963349
+  (0, 1354)	0.21423642988880678
+  (0, 3087)	0.14157456956834036
+  (0, 7929)	0.05903997565662977
+  (0, 3376)	0.3495971428485973
+  (0, 2781)	0.154935900668025
+  (0, 1790)	0.14268442704408638
+  (0, 3037)	0.22486004507850843
+  (0, 1707)	0.3043446780340661
+  (0, 423)	0.0624571247668252
+  (0, 5266)	0.2753159053458067
+  (0, 4782)	0.14121009131466422
+  (0, 6745)	0.19694112986599496
+  (0, 4264)	0.08038900045246031
+  (0, 8692)	0.1650064261622476
+  (0, 991)	0.07256451967613528
+  (0, 7976)	0.06620786904780329
+  (0, 5554)	0.2753159053458067
+  (0, 8715)	0.17767060340692725
+  (0, 7683)	0.20289853354057635
+  (0, 5408)	0.18250116551028328
+  (0, 387)	0.16215091534431514
 </pre></div>
 </div>
 </div>
@@ -645,8 +639,8 @@ Counter({&#39;NEGATIVE&#39;: 208, &#39;POSITIVE&#39;: 208})
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;, &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;,
-       &#39;POSITIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;, &#39;NEGATIVE&#39;],
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;,
+       &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;],
       dtype=&#39;&lt;U8&#39;)
 </pre></div>
 </div>
@@ -667,8 +661,8 @@ Counter({&#39;NEGATIVE&#39;: 208, &#39;POSITIVE&#39;: 208})
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;, &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;,
-       &#39;POSITIVE&#39;, &#39;POSITIVE&#39;, &#39;POSITIVE&#39;, &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;],
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;,
+       &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;],
       dtype=&#39;&lt;U8&#39;)
 </pre></div>
 </div>
@@ -688,8 +682,8 @@ Counter({&#39;NEGATIVE&#39;: 208, &#39;POSITIVE&#39;: 208})
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;,
-       &#39;POSITIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;, &#39;NEGATIVE&#39;],
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;POSITIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;,
+       &#39;POSITIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;],
       dtype=&#39;&lt;U8&#39;)
 </pre></div>
 </div>
@@ -710,8 +704,8 @@ Counter({&#39;NEGATIVE&#39;: 208, &#39;POSITIVE&#39;: 208})
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;, &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;,
-       &#39;POSITIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;, &#39;NEGATIVE&#39;],
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;, &#39;NEGATIVE&#39;,
+       &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;NEGATIVE&#39;, &#39;POSITIVE&#39;],
       dtype=&#39;&lt;U8&#39;)
 </pre></div>
 </div>
@@ -733,7 +727,7 @@ Counter({&#39;NEGATIVE&#39;: 208, &#39;POSITIVE&#39;: 208})
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8076923076923077
-0.6322115384615384
+0.6610576923076923
 0.6610576923076923
 0.8052884615384616
 </pre></div>
@@ -886,6 +880,11 @@ Counter({&#39;NEGATIVE&#39;: 208, &#39;POSITIVE&#39;: 208})
 
 <span class="c1"># for r in requirements:</span>
 <span class="c1">#     print(&quot;{}=={}&quot;.format(*r))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>scikit-learn==0.23.2
 </pre></div>
 </div>
 </div>

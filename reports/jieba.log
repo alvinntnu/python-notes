@@ -17,21 +17,32 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply['content'])
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import nltk
-from nltk.corpus.reader import PlaintextCorpusReader
-import numpy as np
-import jieba, re
+# set dictionary
 
-jieba.set_dictionary("../../../Corpus/jiaba/dict.txt.big.txt")
+jieba.set_dictionary('../../../Corpus/jiaba/dict.txt.jiebatw.txt/')
+#jieba.load_userdict()
+
+text = '據《日經亞洲評論》網站報導，儘管美國總統川普發起了讓美國製造業回歸的貿易戰，但包括電動汽車製造商特斯拉在內的一些公司反而加大馬力在大陸進行生產。另據高盛近日發布的一份報告指出，半導體設備和材料以及醫療保健領域的大多數公司實際上正擴大在大陸的生產，許多美國製造業拒絕「退出中國」。'
+
+print(' '.join(jieba.cut(text, cut_all=False, HMM=True))+'\n')
+print(' '.join(jieba.cut(text, cut_all=False, HMM=False))+'\n')
+print(' '.join(jieba.cut(text, cut_all=True, HMM=True))+'\n')
+
+text_pos = posseg.cut(text)
+#print(type(text_pos))
+for word, tag in text_pos:
+    print(word+'/'+tag)
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mException[0m                                 Traceback (most recent call last)
-[0;32m<ipython-input-1-4616a11c6c05>[0m in [0;36m<module>[0;34m[0m
-[1;32m      4[0m [0;32mimport[0m [0mjieba[0m[0;34m,[0m [0mre[0m[0;34m[0m[0;34m[0m[0m
+[0;32m<ipython-input-2-a432c2e1005e>[0m in [0;36m<module>[0;34m[0m
+[1;32m      1[0m [0;31m# set dictionary[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      2[0m [0;34m[0m[0m
+[0;32m----> 3[0;31m [0mjieba[0m[0;34m.[0m[0mset_dictionary[0m[0;34m([0m[0;34m'../../../Corpus/jiaba/dict.txt.jiebatw.txt/'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      4[0m [0;31m#jieba.load_userdict()[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
 [1;32m      5[0m [0;34m[0m[0m
-[0;32m----> 6[0;31m [0mjieba[0m[0;34m.[0m[0mset_dictionary[0m[0;34m([0m[0;34m"../../../Corpus/jiaba/dict.txt.big.txt"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m
+
 [0;32m~/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/jieba/__init__.py[0m in [0;36mset_dictionary[0;34m(self, dictionary_path)[0m
 [1;32m    511[0m             [0mabs_path[0m [0;34m=[0m [0m_get_abs_path[0m[0;34m([0m[0mdictionary_path[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [1;32m    512[0m             [0;32mif[0m [0;32mnot[0m [0mos[0m[0;34m.[0m[0mpath[0m[0;34m.[0m[0misfile[0m[0;34m([0m[0mabs_path[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
@@ -39,6 +50,6 @@ jieba.set_dictionary("../../../Corpus/jiaba/dict.txt.big.txt")
 [0m[1;32m    514[0m             [0mself[0m[0;34m.[0m[0mdictionary[0m [0;34m=[0m [0mabs_path[0m[0;34m[0m[0;34m[0m[0m
 [1;32m    515[0m             [0mself[0m[0;34m.[0m[0minitialized[0m [0;34m=[0m [0;32mFalse[0m[0;34m[0m[0;34m[0m[0m
 
-[0;31mException[0m: jieba: file does not exist: /Users/Alvin/Corpus/jiaba/dict.txt.big.txt
-Exception: jieba: file does not exist: /Users/Alvin/Corpus/jiaba/dict.txt.big.txt
+[0;31mException[0m: jieba: file does not exist: /Users/Alvin/Corpus/jiaba/dict.txt.jiebatw.txt
+Exception: jieba: file does not exist: /Users/Alvin/Corpus/jiaba/dict.txt.jiebatw.txt
 
