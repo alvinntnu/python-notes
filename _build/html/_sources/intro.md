@@ -12,14 +12,10 @@ This notebook is being updated on a regular basis. Most of the materials here ar
 
 The materials collected here were based on several useful reference books, which are listed as follows in terms of three categories:
 
-- Python Basics
-    - {cite}`gerrard2016lean`
-- Data Analysis with Python
-    - {cite}`mckinney2012python`
-- Natural Language Processing with Python
-    - {cite}`sarkar2019text,bird2009natural,vajjala2020,perkins2014python,srinivasa2018natural`
-- Deep Learning
-    - {cite}`francois2017deep`
+- Python Basics {cite}`gerrard2016lean`
+- Data Analysis with Python {cite}`mckinney2012python`
+- Natural Language Processing with Python {cite}`sarkar2019text,bird2009natural,vajjala2020,perkins2014python,srinivasa2018natural`
+- Deep Learning {cite}`francois2017deep`
     
 ## Blogs
 
@@ -29,6 +25,7 @@ In addition to books, there are many wonderful on-line resources, esp. professio
 - [LeeMeng](https://leemeng.tw/)
 - [Dipanzan Sarkar's articles](https://towardsdatascience.com/@dipanzan.sarkar)
 - [Python Graph Libraries](https://python-graph-gallery.com/)
+- [KGPTalkie NLP](https://kgptalkie.com/category/natural-language-processing-nlp/)
 
 
 ## References

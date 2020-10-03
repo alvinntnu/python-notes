@@ -219,39 +219,24 @@ plt.title("Line Plot With Several Values", loc='left', fontsize=12, fontweight=0
 plt.xlabel("Time")
 plt.ylabel("Score")
 
+import matplotlib.pyplot as plt
+plt.style.use('ggplot')
+
+df_columns = df.drop(['x','y1'], axis=1).columns
 palette = plt.get_cmap('tab20')
 
-# multiple line plot
 num=0
-plt.figure(figsize=(10,8))
-for column in df.drop(['x','y9'], axis=1):
-    num+=1
-    # Find the right spot on the plot
-    plt.subplot(3,3, num)
-    # Plot the lineplot
-    plt.plot(df['x'], df[column], marker='', color=palette(num), linewidth=1.9, alpha=0.9, label=column)
-    # Same limits for everybody!
-    plt.xlim(0,10)
-    plt.ylim(-2,22)
-    # Not ticks everywhere
-    if num in range(7) :
-        plt.tick_params(labelbottom='off')
-    if num not in [1,4,7] :
-        plt.tick_params(labelleft='off')
-    # Add title
-    plt.title(column, loc='left', fontsize=12, fontweight=0, color=palette(num) )
 
-# general title
-plt.suptitle("Facet Grids", fontsize=13, fontweight=0, color='black', style='italic', y=1.02)
+fig, ax = plt.subplots(nrows=3, ncols=3, sharex=True, sharey=True, figsize=(8, 6), dpi=100)
 
-# Not working
-#plt.tick_params(labelcolor='none', top=False, bottom=False, left=False, right=False)
-# plt.xlabel("common X")
-# plt.ylabel("common Y")
-# Axis title
-#plt.xlabel(-0.5, 0, 'X-AXIS LABEL', ha='center', va='center')
-#plt.text(0.06, 0.5, 'Note', ha='center', va='center', rotation='vertical')
-
+for row in range(3):
+    for col in range(3):
+        ax[row,col].plot(df['x'],df[df_columns[num]],color=palette(num), linewidth=1.9, alpha=0.9, label=df_columns[num])
+        ax[row,col].set_title(df_columns[num],loc='left', fontsize=14,color=palette(num))
+        num+=1
+fig.suptitle("Facet Grids", fontsize=14, fontweight=0, color='black', style='italic', y=1.02)
+fig.text(0.5, 0.0, 'Common X', ha='center', fontsize=14)
+fig.text(0.0, 0.5, 'Common Y', va='center', rotation='vertical', fontsize=14)
 
 ## Seaborn Module
 

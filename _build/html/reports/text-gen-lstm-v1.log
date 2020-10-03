@@ -32,7 +32,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-import keras
-import numpy as np
+['print(\'--Generating with seed: "\'+ generated_text + \'"\')', 'for temperature in [0.2, 0.5, 1.0, 1.2]:', "    print('----- temperature:', temperature)", '    sys.stdout.write(generated_text)', '    # generate 400 chars after the seed text']
+...
+['        next_char = chars[next_index]', '        ', '        generated_text += next_char # append the new char', '        generated_text = generated_text[1:] # get rid of the first char', '        sys.stdout.write(next_char)']
 -------------------
 
