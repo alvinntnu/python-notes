@@ -1,0 +1,1238 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Sentiment Analysis Using BERT &#8212; Python Notes for Linguistics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Dov2Vec" href="doc2vec.html" />
+    <link rel="prev" title="Hyper-Parameter Tuning" href="hyperparameter-tuning.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/ntnu03.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Python Notes for Linguistics</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="python-basics.html">
+   Python Basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="corpus-processing.html">
+   Corpus Linguistics with Python
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="nlp.html">
+   Natural Language Processing with Python
+  </a>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="text-normalization-eng.html">
+     Text Normalization (English)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sklearn.html">
+     Machine Learning with Sci-Kit Learn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sentiment-analysis-ml.html">
+     Sentiment Analysis with Traditional Machine Learning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="word-embeddings.html">
+     Word Embeddings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="word2vec.html">
+     Word2Vec
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sentiment-analysis-dl.html">
+     Sentiment Analysis with Deep Learning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sentiment-analysis-lstm-v1.html">
+     Sentiment Analysis with LSTM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="seq-to-seq.html">
+     Machine Translation (Sequence-to-Sequence LSTM)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="text-gen-lstm-v1.html">
+     Text Generation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="transfer-learning-sent-encoding.html">
+     Universal Sentence Embeddings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="hyperparameter-tuning.html">
+     Hyper-Parameter Tuning
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Sentiment Analysis Using BERT
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="doc2vec.html">
+     Dov2Vec
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="nlp-spacy.html">
+     Natural Language Processing (spaCy)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="nlp-spacy-zh.html">
+     Chinese Natural Language Processing (spaCy)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="nlp-ckipnlp.html">
+     Natural Language Processing (ckipnlp)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <div style="text-align:left">
+    <a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
+</div>
+
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/sentiment-analysis-using-bert-chinese.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/alvinntnu/python-notes/master?urlpath=tree/_build/html/sentiment-analysis-using-bert-chinese.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/_build/html/sentiment-analysis-using-bert-chinese.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#installing-ktrain">
+   Installing ktrain
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#importing-libraries">
+   Importing Libraries
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#clone-git-repository-for-data">
+   Clone Git Repository for Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-preparation">
+   Data Preparation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#train-test-split">
+   Train-Test Split
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-model">
+   Define Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-learner">
+   Define Learner
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#estimate-learning-rate-optional">
+   Estimate Learning Rate (Optional)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fit-and-save-model">
+   Fit and Save Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#evaluation">
+   Evaluation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prediction-and-deployment">
+   Prediction and Deployment
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#deploy-model">
+   Deploy Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="sentiment-analysis-using-bert">
+<h1>Sentiment Analysis Using BERT<a class="headerlink" href="#sentiment-analysis-using-bert" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Using <code class="docutils literal notranslate"><span class="pre">ktrain</span></code> for modeling</p>
+<ul>
+<li><p>The ktrain library is a lightweight wrapper for tf.keras in TensorFlow 2, which is “designed to make deep learning and AI more accessible and easier to apply for beginners and domain experts”.</p></li>
+</ul>
+</li>
+<li><p>Easy to implement BERT-like pre-trained language models</p></li>
+<li><p>This notebook works on sentiment analysis of Chinese movie reviews, which is a small dataset. I would like to see to what extent the transformers are effective when dealing with relatively smaller training set. This in turn shows us the powerful advantages of transfer learning.</p></li>
+</ul>
+<div class="section" id="installing-ktrain">
+<h2>Installing ktrain<a class="headerlink" href="#installing-ktrain" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install ktrain
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting ktrain
+?25l  Downloading https://files.pythonhosted.org/packages/f2/d5/a366ea331fc951b8ec2c9e7811cd101acfcac3a5d045f9d9320e74ea5f70/ktrain-0.21.4.tar.gz (25.3MB)
+     |████████████████████████████████| 25.3MB 129kB/s 
+?25hRequirement already satisfied: scikit-learn&gt;=0.21.3 in /usr/local/lib/python3.6/dist-packages (from ktrain) (0.22.2.post1)
+Requirement already satisfied: matplotlib&gt;=3.0.0 in /usr/local/lib/python3.6/dist-packages (from ktrain) (3.2.2)
+Requirement already satisfied: pandas&gt;=1.0.1 in /usr/local/lib/python3.6/dist-packages (from ktrain) (1.1.2)
+Requirement already satisfied: fastprogress&gt;=0.1.21 in /usr/local/lib/python3.6/dist-packages (from ktrain) (1.0.0)
+Collecting keras_bert&gt;=0.86.0
+  Downloading https://files.pythonhosted.org/packages/e2/7f/95fabd29f4502924fa3f09ff6538c5a7d290dfef2c2fe076d3d1a16e08f0/keras-bert-0.86.0.tar.gz
+Requirement already satisfied: requests in /usr/local/lib/python3.6/dist-packages (from ktrain) (2.23.0)
+Requirement already satisfied: joblib in /usr/local/lib/python3.6/dist-packages (from ktrain) (0.16.0)
+Collecting langdetect
+?25l  Downloading https://files.pythonhosted.org/packages/56/a3/8407c1e62d5980188b4acc45ef3d94b933d14a2ebc9ef3505f22cf772570/langdetect-1.0.8.tar.gz (981kB)
+     |████████████████████████████████| 983kB 48.9MB/s 
+?25hRequirement already satisfied: jieba in /usr/local/lib/python3.6/dist-packages (from ktrain) (0.42.1)
+Collecting cchardet
+?25l  Downloading https://files.pythonhosted.org/packages/1e/c5/7e1a0d7b4afd83d6f8de794fce82820ec4c5136c6d52e14000822681a842/cchardet-2.1.6-cp36-cp36m-manylinux2010_x86_64.whl (241kB)
+     |████████████████████████████████| 245kB 49.5MB/s 
+?25hRequirement already satisfied: networkx&gt;=2.3 in /usr/local/lib/python3.6/dist-packages (from ktrain) (2.5)
+Requirement already satisfied: bokeh in /usr/local/lib/python3.6/dist-packages (from ktrain) (2.1.1)
+Collecting seqeval
+  Downloading https://files.pythonhosted.org/packages/d8/9d/89d9ac5d6506f8368ba5ae53b054cf26bf796935eff6a1945431c7a5d485/seqeval-0.0.17.tar.gz
+Requirement already satisfied: packaging in /usr/local/lib/python3.6/dist-packages (from ktrain) (20.4)
+Collecting transformers&gt;=3.1.0
+?25l  Downloading https://files.pythonhosted.org/packages/19/22/aff234f4a841f8999e68a7a94bdd4b60b4cebcfeca5d67d61cd08c9179de/transformers-3.3.1-py3-none-any.whl (1.1MB)
+     |████████████████████████████████| 1.1MB 49.2MB/s 
+?25hRequirement already satisfied: ipython in /usr/local/lib/python3.6/dist-packages (from ktrain) (5.5.0)
+Collecting syntok
+  Downloading https://files.pythonhosted.org/packages/8c/76/a49e73a04b3e3a14ce232e8e28a1587f8108baa665644fe8c40e307e792e/syntok-1.3.1.tar.gz
+Collecting whoosh
+?25l  Downloading https://files.pythonhosted.org/packages/ba/19/24d0f1f454a2c1eb689ca28d2f178db81e5024f42d82729a4ff6771155cf/Whoosh-2.7.4-py2.py3-none-any.whl (468kB)
+     |████████████████████████████████| 471kB 49.2MB/s 
+?25hRequirement already satisfied: numpy&gt;=1.11.0 in /usr/local/lib/python3.6/dist-packages (from scikit-learn&gt;=0.21.3-&gt;ktrain) (1.18.5)
+Requirement already satisfied: scipy&gt;=0.17.0 in /usr/local/lib/python3.6/dist-packages (from scikit-learn&gt;=0.21.3-&gt;ktrain) (1.4.1)
+Requirement already satisfied: kiwisolver&gt;=1.0.1 in /usr/local/lib/python3.6/dist-packages (from matplotlib&gt;=3.0.0-&gt;ktrain) (1.2.0)
+Requirement already satisfied: python-dateutil&gt;=2.1 in /usr/local/lib/python3.6/dist-packages (from matplotlib&gt;=3.0.0-&gt;ktrain) (2.8.1)
+Requirement already satisfied: pyparsing!=2.0.4,!=2.1.2,!=2.1.6,&gt;=2.0.1 in /usr/local/lib/python3.6/dist-packages (from matplotlib&gt;=3.0.0-&gt;ktrain) (2.4.7)
+Requirement already satisfied: cycler&gt;=0.10 in /usr/local/lib/python3.6/dist-packages (from matplotlib&gt;=3.0.0-&gt;ktrain) (0.10.0)
+Requirement already satisfied: pytz&gt;=2017.2 in /usr/local/lib/python3.6/dist-packages (from pandas&gt;=1.0.1-&gt;ktrain) (2018.9)
+Requirement already satisfied: Keras&gt;=2.4.3 in /usr/local/lib/python3.6/dist-packages (from keras_bert&gt;=0.86.0-&gt;ktrain) (2.4.3)
+Collecting keras-transformer&gt;=0.38.0
+  Downloading https://files.pythonhosted.org/packages/89/6c/d6f0c164f4cc16fbc0d0fea85f5526e87a7d2df7b077809e422a7e626150/keras-transformer-0.38.0.tar.gz
+Requirement already satisfied: idna&lt;3,&gt;=2.5 in /usr/local/lib/python3.6/dist-packages (from requests-&gt;ktrain) (2.10)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.6/dist-packages (from requests-&gt;ktrain) (2020.6.20)
+Requirement already satisfied: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/local/lib/python3.6/dist-packages (from requests-&gt;ktrain) (1.24.3)
+Requirement already satisfied: chardet&lt;4,&gt;=3.0.2 in /usr/local/lib/python3.6/dist-packages (from requests-&gt;ktrain) (3.0.4)
+Requirement already satisfied: six in /usr/local/lib/python3.6/dist-packages (from langdetect-&gt;ktrain) (1.15.0)
+Requirement already satisfied: decorator&gt;=4.3.0 in /usr/local/lib/python3.6/dist-packages (from networkx&gt;=2.3-&gt;ktrain) (4.4.2)
+Requirement already satisfied: tornado&gt;=5.1 in /usr/local/lib/python3.6/dist-packages (from bokeh-&gt;ktrain) (5.1.1)
+Requirement already satisfied: Jinja2&gt;=2.7 in /usr/local/lib/python3.6/dist-packages (from bokeh-&gt;ktrain) (2.11.2)
+Requirement already satisfied: PyYAML&gt;=3.10 in /usr/local/lib/python3.6/dist-packages (from bokeh-&gt;ktrain) (3.13)
+Requirement already satisfied: pillow&gt;=4.0 in /usr/local/lib/python3.6/dist-packages (from bokeh-&gt;ktrain) (7.0.0)
+Requirement already satisfied: typing-extensions&gt;=3.7.4 in /usr/local/lib/python3.6/dist-packages (from bokeh-&gt;ktrain) (3.7.4.3)
+Collecting sentencepiece!=0.1.92
+?25l  Downloading https://files.pythonhosted.org/packages/d4/a4/d0a884c4300004a78cca907a6ff9a5e9fe4f090f5d95ab341c53d28cbc58/sentencepiece-0.1.91-cp36-cp36m-manylinux1_x86_64.whl (1.1MB)
+     |████████████████████████████████| 1.1MB 49.9MB/s 
+?25hCollecting sacremoses
+?25l  Downloading https://files.pythonhosted.org/packages/7d/34/09d19aff26edcc8eb2a01bed8e98f13a1537005d31e95233fd48216eed10/sacremoses-0.0.43.tar.gz (883kB)
+     |████████████████████████████████| 890kB 43.0MB/s 
+?25hRequirement already satisfied: filelock in /usr/local/lib/python3.6/dist-packages (from transformers&gt;=3.1.0-&gt;ktrain) (3.0.12)
+Requirement already satisfied: dataclasses; python_version &lt; &quot;3.7&quot; in /usr/local/lib/python3.6/dist-packages (from transformers&gt;=3.1.0-&gt;ktrain) (0.7)
+Requirement already satisfied: tqdm&gt;=4.27 in /usr/local/lib/python3.6/dist-packages (from transformers&gt;=3.1.0-&gt;ktrain) (4.41.1)
+Requirement already satisfied: regex!=2019.12.17 in /usr/local/lib/python3.6/dist-packages (from transformers&gt;=3.1.0-&gt;ktrain) (2019.12.20)
+Collecting tokenizers==0.8.1.rc2
+?25l  Downloading https://files.pythonhosted.org/packages/80/83/8b9fccb9e48eeb575ee19179e2bdde0ee9a1904f97de5f02d19016b8804f/tokenizers-0.8.1rc2-cp36-cp36m-manylinux1_x86_64.whl (3.0MB)
+     |████████████████████████████████| 3.0MB 45.9MB/s 
+?25hRequirement already satisfied: setuptools&gt;=18.5 in /usr/local/lib/python3.6/dist-packages (from ipython-&gt;ktrain) (50.3.0)
+Requirement already satisfied: pickleshare in /usr/local/lib/python3.6/dist-packages (from ipython-&gt;ktrain) (0.7.5)
+Requirement already satisfied: pexpect; sys_platform != &quot;win32&quot; in /usr/local/lib/python3.6/dist-packages (from ipython-&gt;ktrain) (4.8.0)
+Requirement already satisfied: prompt-toolkit&lt;2.0.0,&gt;=1.0.4 in /usr/local/lib/python3.6/dist-packages (from ipython-&gt;ktrain) (1.0.18)
+Requirement already satisfied: simplegeneric&gt;0.8 in /usr/local/lib/python3.6/dist-packages (from ipython-&gt;ktrain) (0.8.1)
+Requirement already satisfied: pygments in /usr/local/lib/python3.6/dist-packages (from ipython-&gt;ktrain) (2.6.1)
+Requirement already satisfied: traitlets&gt;=4.2 in /usr/local/lib/python3.6/dist-packages (from ipython-&gt;ktrain) (4.3.3)
+Requirement already satisfied: h5py in /usr/local/lib/python3.6/dist-packages (from Keras&gt;=2.4.3-&gt;keras_bert&gt;=0.86.0-&gt;ktrain) (2.10.0)
+Collecting keras-pos-embd&gt;=0.11.0
+  Downloading https://files.pythonhosted.org/packages/09/70/b63ed8fc660da2bb6ae29b9895401c628da5740c048c190b5d7107cadd02/keras-pos-embd-0.11.0.tar.gz
+Collecting keras-multi-head&gt;=0.27.0
+  Downloading https://files.pythonhosted.org/packages/e6/32/45adf2549450aca7867deccfa04af80a0ab1ca139af44b16bc669e0e09cd/keras-multi-head-0.27.0.tar.gz
+Collecting keras-layer-normalization&gt;=0.14.0
+  Downloading https://files.pythonhosted.org/packages/a4/0e/d1078df0494bac9ce1a67954e5380b6e7569668f0f3b50a9531c62c1fc4a/keras-layer-normalization-0.14.0.tar.gz
+Collecting keras-position-wise-feed-forward&gt;=0.6.0
+  Downloading https://files.pythonhosted.org/packages/e3/59/f0faa1037c033059e7e9e7758e6c23b4d1c0772cd48de14c4b6fd4033ad5/keras-position-wise-feed-forward-0.6.0.tar.gz
+Collecting keras-embed-sim&gt;=0.8.0
+  Downloading https://files.pythonhosted.org/packages/57/ef/61a1e39082c9e1834a2d09261d4a0b69f7c818b359216d4e1912b20b1c86/keras-embed-sim-0.8.0.tar.gz
+Requirement already satisfied: MarkupSafe&gt;=0.23 in /usr/local/lib/python3.6/dist-packages (from Jinja2&gt;=2.7-&gt;bokeh-&gt;ktrain) (1.1.1)
+Requirement already satisfied: click in /usr/local/lib/python3.6/dist-packages (from sacremoses-&gt;transformers&gt;=3.1.0-&gt;ktrain) (7.1.2)
+Requirement already satisfied: ptyprocess&gt;=0.5 in /usr/local/lib/python3.6/dist-packages (from pexpect; sys_platform != &quot;win32&quot;-&gt;ipython-&gt;ktrain) (0.6.0)
+Requirement already satisfied: wcwidth in /usr/local/lib/python3.6/dist-packages (from prompt-toolkit&lt;2.0.0,&gt;=1.0.4-&gt;ipython-&gt;ktrain) (0.2.5)
+Requirement already satisfied: ipython-genutils in /usr/local/lib/python3.6/dist-packages (from traitlets&gt;=4.2-&gt;ipython-&gt;ktrain) (0.2.0)
+Collecting keras-self-attention==0.46.0
+  Downloading https://files.pythonhosted.org/packages/15/6b/c804924a056955fa1f3ff767945187103cfc851ba9bd0fc5a6c6bc18e2eb/keras-self-attention-0.46.0.tar.gz
+Building wheels for collected packages: ktrain, keras-bert, langdetect, seqeval, syntok, keras-transformer, sacremoses, keras-pos-embd, keras-multi-head, keras-layer-normalization, keras-position-wise-feed-forward, keras-embed-sim, keras-self-attention
+  Building wheel for ktrain (setup.py) ... ?25l?25hdone
+  Created wheel for ktrain: filename=ktrain-0.21.4-cp36-none-any.whl size=25270024 sha256=b5d94e83dd30dc5e0cee64f8d9c476a22db5eb7da93af886e3743f20c68b6869
+  Stored in directory: /root/.cache/pip/wheels/e8/b6/c2/a730bb7727f9402827eb9cdd277a527a4a88acb2b0d22f06f0
+  Building wheel for keras-bert (setup.py) ... ?25l?25hdone
+  Created wheel for keras-bert: filename=keras_bert-0.86.0-cp36-none-any.whl size=34145 sha256=9ce5dfdb69ba2a17597d4aae36c73c2833fd192bf5584923776ea4db072b4d93
+  Stored in directory: /root/.cache/pip/wheels/66/f0/b1/748128b58562fc9e31b907bb5e2ab6a35eb37695e83911236b
+  Building wheel for langdetect (setup.py) ... ?25l?25hdone
+  Created wheel for langdetect: filename=langdetect-1.0.8-cp36-none-any.whl size=993195 sha256=452921aad7f0fa71a0a675f05753c83733eec8219da2b0852d2fee1c54a5a8bc
+  Stored in directory: /root/.cache/pip/wheels/8d/b3/aa/6d99de9f3841d7d3d40a60ea06e6d669e8e5012e6c8b947a57
+  Building wheel for seqeval (setup.py) ... ?25l?25hdone
+  Created wheel for seqeval: filename=seqeval-0.0.17-cp36-none-any.whl size=7640 sha256=418a9c8700c05dc4b7c179bcb8fb565e38c2327549228ebbb6616c3b536e0d12
+  Stored in directory: /root/.cache/pip/wheels/6a/c8/cf/7b9d5d52984c08ce4d27d6f858a682ef74a3738f43f489166a
+  Building wheel for syntok (setup.py) ... ?25l?25hdone
+  Created wheel for syntok: filename=syntok-1.3.1-cp36-none-any.whl size=20919 sha256=4756adcf1e33d309eb576663e9c4e35e9555afdfea473cc9a5ed157fff27799c
+  Stored in directory: /root/.cache/pip/wheels/51/c6/a4/be1920586c49469846bcd2888200bdecfe109ec421dab9be2d
+  Building wheel for keras-transformer (setup.py) ... ?25l?25hdone
+  Created wheel for keras-transformer: filename=keras_transformer-0.38.0-cp36-none-any.whl size=12942 sha256=5696a99ee4c1ecb7bd072d5a53192bc7f68c34461f847144283aa4034374d4df
+  Stored in directory: /root/.cache/pip/wheels/e5/fb/3a/37b2b9326c799aa010ae46a04ddb04f320d8c77c0b7e837f4e
+  Building wheel for sacremoses (setup.py) ... ?25l?25hdone
+  Created wheel for sacremoses: filename=sacremoses-0.0.43-cp36-none-any.whl size=893257 sha256=104b0c76271fe04e394fac7fa6369ed52b59d4785fb3b740d958408e0f746e73
+  Stored in directory: /root/.cache/pip/wheels/29/3c/fd/7ce5c3f0666dab31a50123635e6fb5e19ceb42ce38d4e58f45
+  Building wheel for keras-pos-embd (setup.py) ... ?25l?25hdone
+  Created wheel for keras-pos-embd: filename=keras_pos_embd-0.11.0-cp36-none-any.whl size=7554 sha256=32149186fe9e8f532c9104c6cfe4e57b691ee1ffb7b869a671a5d8e809c2189e
+  Stored in directory: /root/.cache/pip/wheels/5b/a1/a0/ce6b1d49ba1a9a76f592e70cf297b05c96bc9f418146761032
+  Building wheel for keras-multi-head (setup.py) ... ?25l?25hdone
+  Created wheel for keras-multi-head: filename=keras_multi_head-0.27.0-cp36-none-any.whl size=15612 sha256=7431cbd7f7986a478fd7a642aea0da819d545be18ed58a6720b3d525ecfa537c
+  Stored in directory: /root/.cache/pip/wheels/b5/b4/49/0a0c27dcb93c13af02fea254ff51d1a43a924dd4e5b7a7164d
+  Building wheel for keras-layer-normalization (setup.py) ... ?25l?25hdone
+  Created wheel for keras-layer-normalization: filename=keras_layer_normalization-0.14.0-cp36-none-any.whl size=5268 sha256=3e568ac688b36f04d28da603f68057323022326cd8f7861e60662a95a54fcccd
+  Stored in directory: /root/.cache/pip/wheels/54/80/22/a638a7d406fd155e507aa33d703e3fa2612b9eb7bb4f4fe667
+  Building wheel for keras-position-wise-feed-forward (setup.py) ... ?25l?25hdone
+  Created wheel for keras-position-wise-feed-forward: filename=keras_position_wise_feed_forward-0.6.0-cp36-none-any.whl size=5626 sha256=2c28f4658965e0022710fa59b0b86b5b03f237fba1ee6516187d604b7ec01642
+  Stored in directory: /root/.cache/pip/wheels/39/e2/e2/3514fef126a00574b13bc0b9e23891800158df3a3c19c96e3b
+  Building wheel for keras-embed-sim (setup.py) ... ?25l?25hdone
+  Created wheel for keras-embed-sim: filename=keras_embed_sim-0.8.0-cp36-none-any.whl size=4559 sha256=513d09467bfe96fd2840e11fa4b551770093fb302ec935ebe144ef1243e7cf21
+  Stored in directory: /root/.cache/pip/wheels/49/45/8b/c111f6cc8bec253e984677de73a6f4f5d2f1649f42aac191c8
+  Building wheel for keras-self-attention (setup.py) ... ?25l?25hdone
+  Created wheel for keras-self-attention: filename=keras_self_attention-0.46.0-cp36-none-any.whl size=17278 sha256=8993ebf2cf413a379708893d0494b85498b3c2aec2cc582b538faf6c573573d2
+  Stored in directory: /root/.cache/pip/wheels/d2/2e/80/fec4c05eb23c8e13b790e26d207d6e0ffe8013fad8c6bdd4d2
+Successfully built ktrain keras-bert langdetect seqeval syntok keras-transformer sacremoses keras-pos-embd keras-multi-head keras-layer-normalization keras-position-wise-feed-forward keras-embed-sim keras-self-attention
+Installing collected packages: keras-pos-embd, keras-self-attention, keras-multi-head, keras-layer-normalization, keras-position-wise-feed-forward, keras-embed-sim, keras-transformer, keras-bert, langdetect, cchardet, seqeval, sentencepiece, sacremoses, tokenizers, transformers, syntok, whoosh, ktrain
+Successfully installed cchardet-2.1.6 keras-bert-0.86.0 keras-embed-sim-0.8.0 keras-layer-normalization-0.14.0 keras-multi-head-0.27.0 keras-pos-embd-0.11.0 keras-position-wise-feed-forward-0.6.0 keras-self-attention-0.46.0 keras-transformer-0.38.0 ktrain-0.21.4 langdetect-1.0.8 sacremoses-0.0.43 sentencepiece-0.1.91 seqeval-0.0.17 syntok-1.3.1 tokenizers-0.8.1rc2 transformers-3.3.1 whoosh-2.7.4
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="importing-libraries">
+<h2>Importing Libraries<a class="headerlink" href="#importing-libraries" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">ktrain</span>
+<span class="kn">from</span> <span class="nn">ktrain</span> <span class="kn">import</span> <span class="n">text</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tf</span><span class="o">.</span><span class="n">__version__</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;2.3.0&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="clone-git-repository-for-data">
+<h2>Clone Git Repository for Data<a class="headerlink" href="#clone-git-repository-for-data" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Will need this if data is available on GitHub</span>
+<span class="c1"># !git clone https://github.com/laxmimerit/IMDB-Movie-Reviews-Large-Dataset-50k.git</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cloning into &#39;IMDB-Movie-Reviews-Large-Dataset-50k&#39;...
+remote: Enumerating objects: 10, done.
+remote: Counting objects: 100% (10/10), done.
+remote: Compressing objects: 100% (8/8), done.
+remote: Total 10 (delta 1), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (10/10), done.
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="data-preparation">
+<h2>Data Preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Mount the Google Drive first (manually via the tabs on the left of Google Colab</p></li>
+<li><p>The default path of the input data csv file is:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">GOOGLE_DRIVE_ROOT</span><span class="o">/</span><span class="n">ColabData</span><span class="o">/</span><span class="n">marc_movie_review_metadata</span><span class="o">.</span><span class="n">csv</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>In BERT, there is no need to do word segmentation. The model takes in the raw reviews as the input.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## loading the train dataset</span>
+<span class="c1">## change the path if necessary</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/content/drive/My Drive/ColabData/marc_movie_review_metadata.csv&#39;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span> <span class="nb">str</span><span class="p">)[[</span><span class="s1">&#39;reviews&#39;</span><span class="p">,</span><span class="s1">&#39;rating&#39;</span><span class="p">]]</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;reviews&#39;</span><span class="p">:</span><span class="s1">&#39;Reviews&#39;</span><span class="p">,</span> <span class="s1">&#39;rating&#39;</span><span class="p">:</span><span class="s1">&#39;Sentiment&#39;</span><span class="p">})</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Reviews</th>
+      <th>Sentiment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>唉，踩雷了，浪費時間，不推 唉，踩雷了，浪費時間，不推</td>
+      <td>negative</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>片長三個小時，只有最後半小時能看，前面真的鋪陳太久，我旁邊的都看到打呼</td>
+      <td>negative</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>史上之最，劇情拖太長，邊看邊想睡覺......  1.浩克竟然學會跟旁人一起合照。 2.索爾...</td>
+      <td>negative</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>難看死ㄌ 難看死了 難看死ㄌ 看到睡著 拖戲拖很長 爛到爆</td>
+      <td>negative</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>連續三度睡著，真的演的太好睡了</td>
+      <td>negative</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="n">data_train</span><span class="p">,</span> <span class="n">data_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## dimension of the dataset</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Size of train dataset: &quot;</span><span class="p">,</span><span class="n">data_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Size of test dataset: &quot;</span><span class="p">,</span><span class="n">data_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="c1">#printing last rows of train dataset</span>
+<span class="n">data_train</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+
+<span class="c1">#printing head rows of test dataset</span>
+<span class="n">data_test</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Size of train dataset:  (2880, 2)
+Size of test dataset:  (320, 2)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Reviews</th>
+      <th>Sentiment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2430</th>
+      <td>刻劃深刻的一部片，會讓人有心痛的感覺。亞瑟雖然有精神疾病，卻也希望用自己的方法帶來歡笑，可惜...</td>
+      <td>positive</td>
+    </tr>
+    <tr>
+      <th>1584</th>
+      <td>看過一次就夠了 如果不是做影評的 何必浪費錢 這就是一部刻意燒腦的電影 沒那麼偉大。</td>
+      <td>negative</td>
+    </tr>
+    <tr>
+      <th>769</th>
+      <td>給五星的是怎麼回事？純粹政治認同給的分數嗎？純粹以電影評論而已真的不好看，不合邏輯的地方太多...</td>
+      <td>negative</td>
+    </tr>
+    <tr>
+      <th>1631</th>
+      <td>雖然看似輕鬆詼諧劇情\r\n但深刻的撼動內心\r\n推薦給所有韓粉們</td>
+      <td>positive</td>
+    </tr>
+    <tr>
+      <th>2247</th>
+      <td>很刺激好看超爽！\r\n推薦去電影院看！</td>
+      <td>positive</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="train-test-split">
+<h2>Train-Test Split<a class="headerlink" href="#train-test-split" title="Permalink to this headline">¶</a></h2>
+<p>Models supported by transformers library for tensorflow 2:</p>
+<ul class="simple">
+<li><p><strong>BERT</strong>: bert-base-uncased, bert-large-uncased,bert-base-multilingual-uncased, and others.</p></li>
+<li><p><strong>DistilBERT</strong>: distilbert-base-uncased distilbert-base-multilingual-cased, distilbert-base-german-cased, and others</p></li>
+<li><p><strong>ALBERT</strong>: albert-base-v2, albert-large-v2, and others</p></li>
+<li><p><strong>RoBERTa</strong>: roberta-base, roberta-large, roberta-large-mnli</p></li>
+<li><p><strong>XLM</strong>: xlm-mlm-xnli15–1024, xlm-mlm-100–1280, and others</p></li>
+<li><p><strong>XLNet</strong>: xlnet-base-cased, xlnet-large-cased</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># text.texts_from_df return two tuples</span>
+<span class="c1"># maxlen means it is considering that much words and rest are getting trucated</span>
+<span class="c1"># preprocess_mode means tokenizing, embedding and transformation of text corpus(here it is considering BERT model)</span>
+
+
+<span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">),</span> <span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">),</span> <span class="n">preproc</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">texts_from_df</span><span class="p">(</span><span class="n">train_df</span><span class="o">=</span><span class="n">data_train</span><span class="p">,</span>
+                                                                   <span class="n">text_column</span> <span class="o">=</span> <span class="s1">&#39;Reviews&#39;</span><span class="p">,</span>
+                                                                   <span class="n">label_columns</span> <span class="o">=</span> <span class="s1">&#39;Sentiment&#39;</span><span class="p">,</span>
+                                                                   <span class="n">val_df</span> <span class="o">=</span> <span class="n">data_test</span><span class="p">,</span>
+                                                                   <span class="n">maxlen</span> <span class="o">=</span> <span class="mi">250</span><span class="p">,</span>
+                                                                   <span class="n">lang</span> <span class="o">=</span> <span class="s1">&#39;zh-*&#39;</span><span class="p">,</span>
+                                                                   <span class="n">preprocess_mode</span> <span class="o">=</span> <span class="s1">&#39;bert&#39;</span><span class="p">)</span> <span class="c1"># or distilbert</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>downloading pretrained BERT model (chinese_L-12_H-768_A-12.zip)...
+[██████████████████████████████████████████████████]
+extracting pretrained BERT model...
+done.
+
+cleanup downloaded zip...
+done.
+
+preprocessing train...
+language: zh-*
+</pre></div>
+</div>
+<div class="output text_html">done.</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Is Multi-Label? False
+preprocessing test...
+language: zh-*
+</pre></div>
+</div>
+<div class="output text_html">done.</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## size of data</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2880, 250) (2880, 2)
+(320, 250) (320, 2)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="define-model">
+<h2>Define Model<a class="headerlink" href="#define-model" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## use &#39;distilbert&#39; if you want</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">text_classifier</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;bert&#39;</span><span class="p">,</span> <span class="c1"># or distilbert</span>
+                             <span class="n">train_data</span> <span class="o">=</span> <span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">),</span>
+                             <span class="n">preproc</span> <span class="o">=</span> <span class="n">preproc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Is Multi-Label? False
+maxlen is 250
+done.
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="define-learner">
+<h2>Define Learner<a class="headerlink" href="#define-learner" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#here we have taken batch size as 6 as from the documentation it is recommend to use this with maxlen as 500</span>
+<span class="n">learner</span> <span class="o">=</span> <span class="n">ktrain</span><span class="o">.</span><span class="n">get_learner</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">train_data</span><span class="o">=</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">),</span>
+                   <span class="n">val_data</span> <span class="o">=</span> <span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">),</span>
+                   <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="estimate-learning-rate-optional">
+<h2>Estimate Learning Rate (Optional)<a class="headerlink" href="#estimate-learning-rate-optional" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>A nice artilce on how to interpret learning rate plots. See <a class="reference external" href="https://www.pyimagesearch.com/2019/08/05/keras-learning-rate-finder/">Keras Learning Rate Finder</a>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">learner</span><span class="o">.</span><span class="n">lr_find</span><span class="p">(</span><span class="n">show_plot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_epochs</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>simulating training for different learning rates... this may take a few moments...
+Epoch 1/2
+480/480 [==============================] - 234s 488ms/step - loss: 0.6287 - accuracy: 0.6681
+Epoch 2/2
+480/480 [==============================] - 235s 489ms/step - loss: 2.7506 - accuracy: 0.4878
+
+
+done.
+Visually inspect loss plot and select learning rate associated with falling loss
+</pre></div>
+</div>
+<img alt="_images/sentiment-analysis-using-bert-chinese_23_1.png" src="_images/sentiment-analysis-using-bert-chinese_23_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="fit-and-save-model">
+<h2>Fit and Save Model<a class="headerlink" href="#fit-and-save-model" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Essentially fit is a very basic training loop, whereas fit one cycle uses the one cycle policy callback</span>
+
+<span class="n">learner</span><span class="o">.</span><span class="n">fit_onecycle</span><span class="p">(</span><span class="n">lr</span> <span class="o">=</span> <span class="mf">2e-5</span><span class="p">,</span> <span class="n">epochs</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">predictor</span> <span class="o">=</span> <span class="n">ktrain</span><span class="o">.</span><span class="n">get_predictor</span><span class="p">(</span><span class="n">learner</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="n">preproc</span><span class="p">)</span>
+<span class="n">predictor</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;/content/drive/My Drive/ColabData/bert-ch-marc&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>begin training using onecycle policy with max lr of 2e-05...
+480/480 [==============================] - 249s 520ms/step - loss: 0.3143 - accuracy: 0.8639 - val_loss: 0.1878 - val_accuracy: 0.9406
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="evaluation">
+<h2>Evaluation<a class="headerlink" href="#evaluation" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span><span class="o">=</span><span class="n">predictor</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">data_test</span><span class="p">[</span><span class="s1">&#39;Reviews&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># classification report</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
+
+    negative       0.92      0.95      0.94       145
+    positive       0.96      0.93      0.94       175
+
+    accuracy                           0.94       320
+   macro avg       0.94      0.94      0.94       320
+weighted avg       0.94      0.94      0.94       320
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_true</span> <span class="o">=</span> <span class="n">data_test</span><span class="p">[</span><span class="s1">&#39;Sentiment&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="c1"># Confusion Matrix</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
+<span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[138,   7],
+       [ 12, 163]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Accuracy</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+<span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.940625
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Recall</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">recall_score</span>
+<span class="n">recall_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.95172414, 0.93142857])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Precision</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">precision_score</span>
+<span class="n">precision_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># F1</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">f1_score</span>
+<span class="n">f1_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## AUC-ROC Curve</span>
+<span class="n">y_pred_proba</span> <span class="o">=</span> <span class="n">predictor</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">data_test</span><span class="p">[</span><span class="s1">&#39;Reviews&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">return_proba</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">predictor</span><span class="o">.</span><span class="n">get_classes</span><span class="p">())</span> <span class="c1"># probability of each class</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y_pred_proba</span><span class="p">[:</span><span class="mi">5</span><span class="p">,])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;negative&#39;, &#39;positive&#39;]
+[[0.00750571 0.9924942 ]
+ [0.97774005 0.02225988]
+ [0.97982943 0.02017057]
+ [0.00750882 0.9924912 ]
+ [0.00296137 0.9970386 ]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_true_binary</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">if</span> <span class="n">label</span><span class="o">==</span><span class="s1">&#39;positive&#39;</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">y_true</span><span class="p">]</span>
+<span class="n">y_pred_proba_positive</span> <span class="o">=</span> <span class="n">y_pred_proba</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">y_pred_proba_negative</span> <span class="o">=</span> <span class="n">y_pred_proba</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">roc_auc_score</span>
+<span class="c1"># y_true = np.array([0, 0, 1, 1])</span>
+<span class="c1"># y_scores = np.array([0.1, 0.4, 0.35, 0.8])</span>
+<span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_true_binary</span><span class="p">,</span> <span class="n">y_pred_proba_positive</span><span class="p">)</span>
+
+
+<span class="c1"># import sklearn.metrics as metrics</span>
+<span class="c1"># # calculate the fpr and tpr for all thresholds of the classification</span>
+<span class="c1"># probs = model.predict_proba(X_test)</span>
+<span class="c1"># preds = probs[:,1] # </span>
+<span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">threshold</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">roc_curve</span><span class="p">(</span><span class="n">y_true_binary</span><span class="p">,</span> <span class="n">y_pred_proba_positive</span><span class="p">)</span>
+<span class="n">roc_auc</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">auc</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">)</span>
+
+<span class="c1"># method I: plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;fivethirtyeight&#39;</span><span class="p">)</span>
+<span class="n">palette</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;Set1&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">palette</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Receiver Operating Characteristic&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;AUC = </span><span class="si">%0.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">roc_auc</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">palette</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;lower right&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span><span class="s1">&#39;r--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">palette</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;True Positive Rate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;False Positive Rate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colors.ListedColormap object at 0x7ff18b3b9898&gt;
+</pre></div>
+</div>
+<img alt="_images/sentiment-analysis-using-bert-chinese_35_1.png" src="_images/sentiment-analysis-using-bert-chinese_35_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ## ggplot2 version</span>
+<span class="c1"># ## prettier?</span>
+
+
+<span class="c1">## Add label for color aesthetic setting</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">fpr</span> <span class="o">=</span> <span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span> <span class="o">=</span> <span class="n">tpr</span><span class="p">))</span>
+<span class="n">f</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span><span class="o">=</span> <span class="p">[</span><span class="s1">&#39;X&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
+
+
+<span class="kn">from</span> <span class="nn">plotnine</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">g</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">ggplot</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">aes</span><span class="p">(</span><span class="s1">&#39;fpr&#39;</span><span class="p">,</span> <span class="s1">&#39;tpr&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;label&#39;</span><span class="p">))</span>
+    <span class="o">+</span> <span class="n">geom_line</span><span class="p">(</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">geom_abline</span><span class="p">(</span><span class="n">linetype</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;lightpink&quot;</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">labs</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;False Positive Rate&#39;</span><span class="p">,</span> 
+           <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;True Positive Rate&#39;</span><span class="p">,</span>
+           <span class="n">title</span><span class="o">=</span><span class="s2">&quot;ROC Curve&quot;</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">scale_color_discrete</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;AUC = </span><span class="si">%0.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">roc_auc</span><span class="p">],</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">theme</span><span class="p">(</span><span class="n">legend_position</span> <span class="o">=</span> <span class="p">(</span><span class="o">.</span><span class="mi">75</span><span class="p">,</span><span class="o">.</span><span class="mi">25</span><span class="p">),</span>
+            <span class="n">legend_background</span> <span class="o">=</span> <span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> 
+                                             <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+                                             <span class="n">size</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">linetype</span><span class="o">=</span><span class="s2">&quot;solid&quot;</span><span class="p">,</span>
+                                             <span class="n">colour</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)))</span>
+<span class="n">g</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/sentiment-analysis-using-bert-chinese_36_0.png" src="_images/sentiment-analysis-using-bert-chinese_36_0.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ggplot: (-9223363245528407871)&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># g.save(&#39;/content/drive/My Drive/ColabData/ggplot-roc.png&#39;, width=12, height=10, dpi=300)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="prediction-and-deployment">
+<h2>Prediction and Deployment<a class="headerlink" href="#prediction-and-deployment" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#sample dataset to test on</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;前面好笑看到後面真的很好哭！推薦！&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;也太浪費錢了，劇情普普，新鮮度可以再加強&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;人生一定要走一遭電影院&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;不推&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;帶六歲孩子看，大人覺得小孩看可以，小孩也覺得好看&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;我想看兩人如何化解對方的防線，成為彼此的救贖；在人生旅途中，留下最深刻的回憶。&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;這部新恐龍是有史以來最好看的哆啦電影版，50週年紀念作當之無愧，真的太感人了，並且彩蛋多到數不完，這部電影不僅講述了勇氣、友誼與努力不懈的精神，也以大雄的視角來看父母的心情，不管是劇情、畫面都是一流，另外配樂非常到位，全程都不會無聊，非常推薦大人、小孩、父母去電影院看，絕對值得。&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;看完之後覺得新不如舊，還是大雄的恐龍好看，不管是劇情還是做畫，都是大雄的恐龍好，而且大雄的新恐龍做畫有點崩壞，是有沒有好好審查啊!以一部50周年慶的電影來說有點丟臉，自從藤子不二雄過世後，哆啦A夢的電影就一直表現平平，沒有以前的那份感動。&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">predictor</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;positive&#39;,
+ &#39;negative&#39;,
+ &#39;positive&#39;,
+ &#39;negative&#39;,
+ &#39;positive&#39;,
+ &#39;positive&#39;,
+ &#39;positive&#39;,
+ &#39;negative&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#return_proba = True means it will give the prediction probabilty for each class</span>
+
+<span class="n">predictor</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">return_proba</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.00433748, 0.9956625 ],
+       [0.98725605, 0.01274392],
+       [0.27484193, 0.72515804],
+       [0.9657716 , 0.0342284 ],
+       [0.43184906, 0.56815094],
+       [0.00549422, 0.9945057 ],
+       [0.00446275, 0.9955373 ],
+       [0.96282476, 0.03717517]], dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#classes available</span>
+
+<span class="n">predictor</span><span class="o">.</span><span class="n">get_classes</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;negative&#39;, &#39;positive&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## zip for furture deployment</span>
+<span class="c1"># !zip -r /content/bert.zip /content/bert</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="deploy-model">
+<h2>Deploy Model<a class="headerlink" href="#deploy-model" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># #loading the model</span>
+
+<span class="n">predictor_load</span> <span class="o">=</span> <span class="n">ktrain</span><span class="o">.</span><span class="n">load_predictor</span><span class="p">(</span><span class="s1">&#39;/content/drive/My Drive/ColabData/bert-ch-marc&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># #predicting the data</span>
+
+<span class="n">predictor_load</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;positive&#39;, &#39;negative&#39;, &#39;positive&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/amaiya/ktrain"><code class="docutils literal notranslate"><span class="pre">ktrain</span></code> module</a></p></li>
+<li><p><a class="reference external" href="https://kgptalkie.com/sentiment-classification-using-bert/">Sentiment Classification Using Bert</a></p></li>
+<li><p><a class="reference external" href="http://www.ipshop.xyz/15376.html">當Bert遇上Keras：這可能是Bert最簡單的打開姿勢</a></p></li>
+<li><p><a class="reference external" href="https://leemeng.tw/attack_on_bert_transfer_learning_in_nlp.html">進擊的 BERT：NLP 界的巨人之力與遷移學習</a></p></li>
+<li><p><a class="reference external" href="https://towardsdatascience.com/text-classification-with-hugging-face-transformers-in-tensorflow-2-without-tears-ee50e4f3e7ed">Text Classification with Hugging Face Transformers in TensorFlow 2 (Without Tears)</a></p></li>
+<li><p><a class="reference external" href="https://github.com/huggingface/transformers">Huggingface Transformers</a></p></li>
+<li><p><a class="reference external" href="https://huggingface.co/transformers/pretrained_models.html">Huggingface Pre-trained Models</a></p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="hyperparameter-tuning.html" title="previous page">Hyper-Parameter Tuning</a>
+    <a class='right-next' id="next-link" href="doc2vec.html" title="next page">Dov2Vec</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alvin Chen<br/>
+        
+            &copy; Copyright 2020 Alvin Chen.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="_static/js/index.js"></script>
+    
+  </body>
+</html>

@@ -37,7 +37,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Natural Language Processing (spaCy)" href="nlp-spacy.html" />
-    <link rel="prev" title="Hyper-Parameter Tuning" href="hyperparameter-tuning.html" />
+    <link rel="prev" title="Sentiment Analysis Using BERT" href="sentiment-analysis-using-bert-chinese.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
@@ -148,6 +148,11 @@
      Hyper-Parameter Tuning
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sentiment-analysis-using-bert-chinese.html">
+     Sentiment Analysis Using BERT
+    </a>
+   </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      Dov2Vec
@@ -244,7 +249,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/doc2vec.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/alvinntnu/python-notes/master?urlpath=tree/_build/html/doc2vec.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -252,7 +257,7 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/doc2vec.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/_build/html/doc2vec.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -318,6 +323,13 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/gensim/test/test_data
+/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/gensim/test/test_data/lee_background.cor
+/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/gensim/test/test_data/lee.cor
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -334,6 +346,12 @@
 
 <span class="n">train_corpus</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">read_corpus</span><span class="p">(</span><span class="n">lee_train_file</span><span class="p">))</span>
 <span class="n">test_corpus</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">read_corpus</span><span class="p">(</span><span class="n">lee_test_file</span><span class="p">,</span> <span class="n">tokens_only</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/smart_open/smart_open_lib.py:254: UserWarning: This function is deprecated, use smart_open.open instead. See the migration notes for details: https://github.com/RaRe-Technologies/smart_open/blob/master/README.rst#migrating-to-the-new-open-function
+  &#39;See the migration notes for details: %s&#39; % _MIGRATION_NOTES_URL
 </pre></div>
 </div>
 </div>
@@ -379,6 +397,16 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/Alvin/.local/lib/python3.6/site-packages/ipykernel_launcher.py:4: DeprecationWarning: Call to deprecated `iter` (Attribute will be removed in 4.0.0, use self.epochs instead).
+  after removing the cwd from sys.path.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 10.5 s, sys: 625 ms, total: 11.1 s
+Wall time: 5.98 s
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="concatenated-model">
@@ -409,13 +437,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/Alvin/.local/lib/python3.6/site-packages/ipykernel_launcher.py:4: DeprecationWarning: Call to deprecated `iter` (Attribute will be removed in 4.0.0, use self.epochs instead).
-  after removing the cwd from sys.path.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(0, 0.9368101358413696), (255, 0.8137705326080322), (40, 0.803788423538208), (48, 0.8003876209259033), (272, 0.7586298584938049), (8, 0.7521106600761414), (264, 0.6914103031158447), (33, 0.6747715473175049), (19, 0.6746760010719299), (9, 0.631972074508667)]
-CPU times: user 34.4 s, sys: 1.04 s, total: 35.5 s
-Wall time: 16 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(0, 0.9458891153335571), (40, 0.8471023440361023), (48, 0.8296629786491394), (255, 0.8186222314834595), (272, 0.7796355485916138), (8, 0.755848228931427), (264, 0.7171856164932251), (33, 0.7041466236114502), (19, 0.6828470826148987), (10, 0.6591960787773132)]
 </pre></div>
 </div>
 </div>
@@ -438,8 +460,8 @@ Wall time: 16 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(0, 0.9366896748542786), (33, 0.4539541006088257), (48, 0.4524938762187958), (40, 0.4287397265434265), (264, 0.39175593852996826), (46, 0.3697209358215332), (189, 0.3649308681488037), (7, 0.3508635461330414), (255, 0.35068175196647644), (8, 0.34026744961738586)]
-[(0, 0.9364113807678223), (255, 0.8205079436302185), (48, 0.793235719203949), (40, 0.7922816872596741), (272, 0.7660207748413086), (8, 0.7495102882385254), (264, 0.7083025574684143), (33, 0.6953338384628296), (19, 0.668237566947937), (10, 0.65041184425354)]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(0, 0.9447145462036133), (33, 0.4906274676322937), (48, 0.44374871253967285), (40, 0.42783311009407043), (189, 0.38296616077423096), (264, 0.3696485161781311), (255, 0.3644927740097046), (8, 0.35945671796798706), (52, 0.35580772161483765), (272, 0.35181155800819397)]
+[(0, 0.9452221989631653), (40, 0.8330732583999634), (255, 0.8189575672149658), (48, 0.811291515827179), (272, 0.7768511772155762), (8, 0.7525947093963623), (33, 0.7040777206420898), (264, 0.6998440623283386), (19, 0.6671469211578369), (10, 0.6569505929946899)]
 </pre></div>
 </div>
 </div>
@@ -565,7 +587,7 @@ new south wales firefighters are hoping lighter winds will help ease their workl
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="hyperparameter-tuning.html" title="previous page">Hyper-Parameter Tuning</a>
+    <a class='left-prev' id="prev-link" href="sentiment-analysis-using-bert-chinese.html" title="previous page">Sentiment Analysis Using BERT</a>
     <a class='right-next' id="next-link" href="nlp-spacy.html" title="next page">Natural Language Processing (spaCy)</a>
 
     </div>
