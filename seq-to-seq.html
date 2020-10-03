@@ -1,0 +1,891 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Machine Translation (Sequence-to-Sequence LSTM) &#8212; Python Notes for Linguistics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Text Generation" href="text-gen-lstm-v1.html" />
+    <link rel="prev" title="Sentiment Analysis with LSTM" href="sentiment-analysis-lstm-v1.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/ntnu03.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Python Notes for Linguistics</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="python-basics.html">
+   Python Basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="corpus-processing.html">
+   Corpus Linguistics with Python
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="nlp.html">
+   Natural Language Processing with Python
+  </a>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="text-normalization-eng.html">
+     Text Normalization (English)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sklearn.html">
+     Machine Learning with Sci-Kit Learn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sentiment-analysis-ml.html">
+     Sentiment Analysis with Traditional Machine Learning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="word-embeddings.html">
+     Word Embeddings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="word2vec.html">
+     Word2Vec
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sentiment-analysis-dl.html">
+     Sentiment Analysis with Deep Learning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sentiment-analysis-lstm-v1.html">
+     Sentiment Analysis with LSTM
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Machine Translation (Sequence-to-Sequence LSTM)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="text-gen-lstm-v1.html">
+     Text Generation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="transfer-learning-sent-encoding.html">
+     Universal Sentence Embeddings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="hyperparameter-tuning.html">
+     Hyper-Parameter Tuning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="doc2vec.html">
+     Dov2Vec
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="nlp-spacy.html">
+     Natural Language Processing (spaCy)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="nlp-spacy-zh.html">
+     Chinese Natural Language Processing (spaCy)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="nlp-ckipnlp.html">
+     Natural Language Processing (ckipnlp)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <div style="text-align:left">
+    <a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
+</div>
+
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/seq-to-seq.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/seq-to-seq.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/seq-to-seq.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="machine-translation-sequence-to-sequence-lstm">
+<h1>Machine Translation (Sequence-to-Sequence LSTM)<a class="headerlink" href="#machine-translation-sequence-to-sequence-lstm" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>This is based on:</p>
+<ul>
+<li><p><a class="reference external" href="https://github.com/keras-team/keras/blob/master/examples/lstm_seq2seq.py">A ten-minute introduction to sequence-to-sequence learning in Keras</a></p></li>
+<li><p><a class="reference external" href="https://ithelp.ithome.com.tw/articles/10194403">Day 18:機器翻譯(Machine Translation</a></p></li>
+</ul>
+</li>
+<li><p>Data:</p>
+<ul>
+<li><p><a class="reference external" href="http://www.manythings.org/anki/fra-eng.zip">English to French sentence pairs</a></p></li>
+<li><p><a class="reference external" href="http://www.manythings.org/anki/">Paired Datasets of Other languages</a></p></li>
+</ul>
+</li>
+<li><p>References</p>
+<ul>
+<li><p><a class="reference external" href="https://arxiv.org/abs/1409.3215">Sequence to Sequence Learning with Neural Networks</a></p></li>
+<li><p><a class="reference external" href="https://arxiv.org/abs/1406.1078">Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation</a></p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Model</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Input</span><span class="p">,</span> <span class="n">LSTM</span><span class="p">,</span> <span class="n">Dense</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">64</span>  <span class="c1"># Batch size for training.</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># Number of epochs to train for.</span>
+<span class="n">latent_dim</span> <span class="o">=</span> <span class="mi">256</span>  <span class="c1"># Latent dimensionality of the encoding space.</span>
+<span class="n">num_samples</span> <span class="o">=</span> <span class="mi">10000</span>  <span class="c1"># Number of samples to train on.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Path to the data txt file on disk.</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;../data/cmn.txt&#39;</span>
+
+<span class="c1"># Vectorize the data.</span>
+<span class="n">input_texts</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">target_texts</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">input_characters</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="n">target_characters</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">[:</span> <span class="nb">min</span><span class="p">(</span><span class="n">num_samples</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]:</span>
+    <span class="n">input_text</span><span class="p">,</span> <span class="n">target_text</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="c1"># We use &quot;tab&quot; as the &quot;start sequence&quot; character</span>
+    <span class="c1"># for the targets, and &quot;\n&quot; as &quot;end sequence&quot; character.</span>
+    <span class="n">target_text</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">target_text</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="n">input_texts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">input_text</span><span class="p">)</span>
+    <span class="n">target_texts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">target_text</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">input_text</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">char</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">input_characters</span><span class="p">:</span>
+            <span class="n">input_characters</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">char</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">target_text</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">char</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">target_characters</span><span class="p">:</span>
+            <span class="n">target_characters</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">char</span><span class="p">)</span>
+
+<span class="c1"># Sort Dictionary</span>
+<span class="n">input_characters</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">input_characters</span><span class="p">))</span>
+<span class="n">target_characters</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">target_characters</span><span class="p">))</span>
+<span class="n">num_encoder_tokens</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_characters</span><span class="p">)</span>
+<span class="n">num_decoder_tokens</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">target_characters</span><span class="p">)</span>
+
+<span class="c1"># Find maxinum sent lengths </span>
+<span class="n">max_encoder_seq_length</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span> <span class="k">for</span> <span class="n">txt</span> <span class="ow">in</span> <span class="n">input_texts</span><span class="p">])</span>
+<span class="n">max_decoder_seq_length</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span> <span class="k">for</span> <span class="n">txt</span> <span class="ow">in</span> <span class="n">target_texts</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of samples:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_texts</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of unique input tokens:&#39;</span><span class="p">,</span> <span class="n">num_encoder_tokens</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of unique output tokens:&#39;</span><span class="p">,</span> <span class="n">num_decoder_tokens</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Max sequence length for inputs:&#39;</span><span class="p">,</span> <span class="n">max_encoder_seq_length</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Max sequence length for outputs:&#39;</span><span class="p">,</span> <span class="n">max_decoder_seq_length</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of samples: 10000
+Number of unique input tokens: 73
+Number of unique output tokens: 2640
+Max sequence length for inputs: 31
+Max sequence length for outputs: 22
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Indexing characters</span>
+<span class="n">input_token_index</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+    <span class="p">[(</span><span class="n">char</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">char</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">input_characters</span><span class="p">)])</span>
+<span class="n">target_token_index</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+    <span class="p">[(</span><span class="n">char</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">char</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">target_characters</span><span class="p">)])</span>
+
+
+<span class="c1"># Initialize encoder/decoder</span>
+<span class="n">encoder_input_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span>
+    <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">input_texts</span><span class="p">),</span> <span class="n">max_encoder_seq_length</span><span class="p">,</span> <span class="n">num_encoder_tokens</span><span class="p">),</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+<span class="n">decoder_input_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span>
+    <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">input_texts</span><span class="p">),</span> <span class="n">max_decoder_seq_length</span><span class="p">,</span> <span class="n">num_decoder_tokens</span><span class="p">),</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+<span class="n">decoder_target_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span>
+    <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">input_texts</span><span class="p">),</span> <span class="n">max_decoder_seq_length</span><span class="p">,</span> <span class="n">num_decoder_tokens</span><span class="p">),</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># indexing</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">input_text</span><span class="p">,</span> <span class="n">target_text</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">input_texts</span><span class="p">,</span> <span class="n">target_texts</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">t</span><span class="p">,</span> <span class="n">char</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">input_text</span><span class="p">):</span>
+        <span class="n">encoder_input_data</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">input_token_index</span><span class="p">[</span><span class="n">char</span><span class="p">]]</span> <span class="o">=</span> <span class="mf">1.</span>
+    <span class="n">encoder_input_data</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:,</span> <span class="n">input_token_index</span><span class="p">[</span><span class="s1">&#39; &#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="mf">1.</span>
+    <span class="k">for</span> <span class="n">t</span><span class="p">,</span> <span class="n">char</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">target_text</span><span class="p">):</span>
+        <span class="c1"># decoder_target_data is ahead of decoder_input_data by one timestep</span>
+        <span class="n">decoder_input_data</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">target_token_index</span><span class="p">[</span><span class="n">char</span><span class="p">]]</span> <span class="o">=</span> <span class="mf">1.</span>
+        <span class="k">if</span> <span class="n">t</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># decoder_target_data will be ahead by one timestep</span>
+            <span class="c1"># and will not include the start character.</span>
+            <span class="n">decoder_target_data</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">target_token_index</span><span class="p">[</span><span class="n">char</span><span class="p">]]</span> <span class="o">=</span> <span class="mf">1.</span>
+    <span class="n">decoder_input_data</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:,</span> <span class="n">target_token_index</span><span class="p">[</span><span class="s1">&#39; &#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="mf">1.</span>
+    <span class="n">decoder_target_data</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">t</span><span class="p">:,</span> <span class="n">target_token_index</span><span class="p">[</span><span class="s1">&#39; &#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="mf">1.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define an input sequence and process it.</span>
+<span class="n">encoder_inputs</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_encoder_tokens</span><span class="p">))</span>
+<span class="n">encoder</span> <span class="o">=</span> <span class="n">LSTM</span><span class="p">(</span><span class="n">latent_dim</span><span class="p">,</span> <span class="n">return_state</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">encoder_outputs</span><span class="p">,</span> <span class="n">state_h</span><span class="p">,</span> <span class="n">state_c</span> <span class="o">=</span> <span class="n">encoder</span><span class="p">(</span><span class="n">encoder_inputs</span><span class="p">)</span>
+<span class="c1"># We discard `encoder_outputs` and only keep the states.</span>
+<span class="n">encoder_states</span> <span class="o">=</span> <span class="p">[</span><span class="n">state_h</span><span class="p">,</span> <span class="n">state_c</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up the decoder, using `encoder_states` as initial state.</span>
+<span class="n">decoder_inputs</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_decoder_tokens</span><span class="p">))</span>
+<span class="c1"># We set up our decoder to return full output sequences,</span>
+<span class="c1"># and to return internal states as well. We don&#39;t use the</span>
+<span class="c1"># return states in the training model, but we will use them in inference.</span>
+<span class="n">decoder_lstm</span> <span class="o">=</span> <span class="n">LSTM</span><span class="p">(</span><span class="n">latent_dim</span><span class="p">,</span> <span class="n">return_sequences</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_state</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">decoder_outputs</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">decoder_lstm</span><span class="p">(</span><span class="n">decoder_inputs</span><span class="p">,</span>
+                                     <span class="n">initial_state</span><span class="o">=</span><span class="n">encoder_states</span><span class="p">)</span>
+<span class="n">decoder_dense</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">num_decoder_tokens</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">)</span>
+<span class="n">decoder_outputs</span> <span class="o">=</span> <span class="n">decoder_dense</span><span class="p">(</span><span class="n">decoder_outputs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the model that will turn</span>
+<span class="c1"># `encoder_input_data` &amp; `decoder_input_data` into `decoder_target_data`</span>
+<span class="c1"># model = Model([encoder_inputs, decoder_inputs], decoder_outputs)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # Run training</span>
+<span class="c1"># model.compile(optimizer=&#39;rmsprop&#39;, loss=&#39;categorical_crossentropy&#39;,</span>
+<span class="c1">#               metrics=[&#39;accuracy&#39;])</span>
+<span class="c1"># model.fit([encoder_input_data, decoder_input_data], decoder_target_data,</span>
+<span class="c1">#           batch_size=batch_size,</span>
+<span class="c1">#           epochs=epochs,</span>
+<span class="c1">#           validation_split=0.2)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save model</span>
+<span class="c1"># model.save(&#39;../data/s2s-cmn.h5&#39;)</span>
+<span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">load_model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">load_model</span><span class="p">(</span><span class="s1">&#39;../data/s2s-cmn.h5&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">layers</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;tensorflow.python.keras.engine.input_layer.InputLayer at 0x7f8cf0cdf610&gt;,
+ &lt;tensorflow.python.keras.engine.input_layer.InputLayer at 0x7f8cf0cdfb10&gt;,
+ &lt;tensorflow.python.keras.layers.recurrent_v2.LSTM at 0x7f8cf0cdfe10&gt;,
+ &lt;tensorflow.python.keras.layers.recurrent_v2.LSTM at 0x7f8cf0cdfd10&gt;,
+ &lt;tensorflow.python.keras.layers.core.Dense at 0x7f8cf0ce5f10&gt;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # save model</span>
+<span class="c1"># with open(&#39;../data/s2s_cmn_encoder_model.json&#39;, &#39;w&#39;, encoding=&#39;utf8&#39;) as f:</span>
+<span class="c1">#     f.write(encoder_model.to_json())</span>
+<span class="c1"># encoder_model.save_weights(&#39;../data/s2s_cmn_encoder_model_weights.h5&#39;)</span>
+
+<span class="c1"># with open(&#39;../data/s2s_cmn_decoder_model.json&#39;, &#39;w&#39;, encoding=&#39;utf8&#39;) as f:</span>
+<span class="c1">#     f.write(decoder_model.to_json())</span>
+<span class="c1"># decoder_model.save_weights(&#39;../data/s2s_cmn_decoder_model_weights.h5&#39;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## This solution did not work</span>
+<span class="c1"># from keras.models import model_from_json</span>
+<span class="c1"># def load_model(model_filename, model_weights_filename):</span>
+<span class="c1">#     with open(model_filename, &#39;r&#39;, encoding=&#39;utf8&#39;) as f:</span>
+<span class="c1">#         model = model_from_json(f.read())</span>
+<span class="c1">#     model.load_weights(model_weights_filename)</span>
+<span class="c1">#     return model</span>
+
+<span class="c1"># encoder_model = load_model(&#39;../data/s2s_cmn_encoder_model.json&#39;, &#39;../data/s2s_cmn_encoder_model_weights.h5&#39;)</span>
+<span class="c1"># decoder_model = load_model(&#39;../data/s2s_cmn_decoder_model.json&#39;, &#39;../data/s2s_cmn_decoder_model_weights.h5&#39;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## If the model is loaded via external files</span>
+<span class="c1">## Load the encoder_model, decoder_model this way</span>
+
+<span class="n">encoder_inputs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1">#input_1</span>
+<span class="n">encoder_outputs</span><span class="p">,</span> <span class="n">state_h_enc</span><span class="p">,</span> <span class="n">state_c_enc</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">output</span> <span class="c1"># lstm_1</span>
+<span class="n">encoder_states</span> <span class="o">=</span> <span class="p">[</span><span class="n">state_h_enc</span><span class="p">,</span> <span class="n">state_c_enc</span><span class="p">]</span>
+<span class="n">encoder_model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">encoder_inputs</span><span class="p">,</span> <span class="n">encoder_states</span><span class="p">)</span>
+
+<span class="n">decoder_inputs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1">#input_2</span>
+<span class="n">decoder_state_input_h</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">latent_dim</span><span class="p">,),</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;input_3&#39;</span><span class="p">)</span>
+<span class="n">decoder_state_input_c</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">latent_dim</span><span class="p">,),</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;input_4&#39;</span><span class="p">)</span>
+<span class="n">decoder_states_inputs</span> <span class="o">=</span> <span class="p">[</span><span class="n">decoder_state_input_h</span><span class="p">,</span> <span class="n">decoder_state_input_c</span><span class="p">]</span>
+<span class="n">decoder_lstm</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">decoder_outputs</span><span class="p">,</span> <span class="n">state_h_dec</span><span class="p">,</span> <span class="n">state_c_dec</span> <span class="o">=</span> <span class="n">decoder_lstm</span><span class="p">(</span>
+    <span class="n">decoder_inputs</span><span class="p">,</span> <span class="n">initial_state</span><span class="o">=</span><span class="n">decoder_states_inputs</span><span class="p">)</span>
+<span class="n">decoder_states</span> <span class="o">=</span> <span class="p">[</span><span class="n">state_h_dec</span><span class="p">,</span> <span class="n">state_c_dec</span><span class="p">]</span>
+<span class="n">decoder_dense</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">decoder_outputs</span><span class="o">=</span><span class="n">decoder_dense</span><span class="p">(</span><span class="n">decoder_outputs</span><span class="p">)</span>
+
+<span class="n">decoder_model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">decoder_inputs</span><span class="p">]</span> <span class="o">+</span> <span class="n">decoder_states_inputs</span><span class="p">,</span>
+    <span class="p">[</span><span class="n">decoder_outputs</span><span class="p">]</span> <span class="o">+</span> <span class="n">decoder_states</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # Next: inference mode (sampling).</span>
+<span class="c1"># # Here&#39;s the drill:</span>
+<span class="c1"># # 1) encode input and retrieve initial decoder state</span>
+<span class="c1"># # 2) run one step of decoder with this initial state</span>
+<span class="c1"># # and a &quot;start of sequence&quot; token as target.</span>
+<span class="c1"># # Output will be the next target token</span>
+<span class="c1"># # 3) Repeat with the current target token and current states</span>
+
+<span class="c1"># # Define sampling models</span>
+<span class="c1"># encoder_model = Model(encoder_inputs, encoder_states)</span>
+
+<span class="c1"># decoder_state_input_h = Input(shape=(latent_dim,))</span>
+<span class="c1"># decoder_state_input_c = Input(shape=(latent_dim,))</span>
+<span class="c1"># decoder_states_inputs = [decoder_state_input_h, decoder_state_input_c]</span>
+<span class="c1"># decoder_outputs, state_h, state_c = decoder_lstm(</span>
+<span class="c1">#     decoder_inputs, initial_state=decoder_states_inputs)</span>
+<span class="c1"># decoder_states = [state_h, state_c]</span>
+<span class="c1"># decoder_outputs = decoder_dense(decoder_outputs)</span>
+<span class="c1"># decoder_model = Model(</span>
+<span class="c1">#     [decoder_inputs] + decoder_states_inputs,</span>
+<span class="c1">#     [decoder_outputs] + decoder_states)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reverse-lookup token index to decode sequences back to</span>
+<span class="c1"># something readable.</span>
+<span class="n">reverse_input_char_index</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">char</span><span class="p">)</span> <span class="k">for</span> <span class="n">char</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">input_token_index</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+<span class="n">reverse_target_char_index</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">char</span><span class="p">)</span> <span class="k">for</span> <span class="n">char</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">target_token_index</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+
+
+<span class="k">def</span> <span class="nf">decode_sequence</span><span class="p">(</span><span class="n">input_seq</span><span class="p">):</span>
+    <span class="c1"># Encode the input as state vectors.</span>
+    <span class="n">states_value</span> <span class="o">=</span> <span class="n">encoder_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">input_seq</span><span class="p">)</span>
+
+    <span class="c1"># Generate empty target sequence of length 1.</span>
+    <span class="n">target_seq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">num_decoder_tokens</span><span class="p">))</span>
+    <span class="c1"># Populate the first character of target sequence with the start character.</span>
+    <span class="n">target_seq</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">target_token_index</span><span class="p">[</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="mf">1.</span>
+
+    <span class="c1"># Sampling loop for a batch of sequences</span>
+    <span class="c1"># (to simplify, here we assume a batch of size 1).</span>
+    <span class="n">stop_condition</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">decoded_sentence</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">stop_condition</span><span class="p">:</span>
+        <span class="n">output_tokens</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">decoder_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">target_seq</span><span class="p">]</span> <span class="o">+</span> <span class="n">states_value</span><span class="p">)</span>
+
+        <span class="c1"># Sample a token</span>
+        <span class="n">sampled_token_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">output_tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
+        <span class="n">sampled_char</span> <span class="o">=</span> <span class="n">reverse_target_char_index</span><span class="p">[</span><span class="n">sampled_token_index</span><span class="p">]</span>
+        <span class="n">decoded_sentence</span> <span class="o">+=</span> <span class="n">sampled_char</span>
+
+        <span class="c1"># Exit condition: either hit max length</span>
+        <span class="c1"># or find stop character.</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">sampled_char</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="ow">or</span>
+           <span class="nb">len</span><span class="p">(</span><span class="n">decoded_sentence</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">max_decoder_seq_length</span><span class="p">):</span>
+            <span class="n">stop_condition</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="c1"># Update the target sequence (of length 1).</span>
+        <span class="n">target_seq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">num_decoder_tokens</span><span class="p">))</span>
+        <span class="n">target_seq</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sampled_token_index</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span>
+
+        <span class="c1"># Update states</span>
+        <span class="n">states_value</span> <span class="o">=</span> <span class="p">[</span><span class="n">h</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">decoded_sentence</span>
+
+
+<span class="k">for</span> <span class="n">seq_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
+    <span class="c1"># Take one sequence (part of the training set)</span>
+    <span class="c1"># for trying out decoding.</span>
+    <span class="n">input_seq</span> <span class="o">=</span> <span class="n">encoder_input_data</span><span class="p">[</span><span class="n">seq_index</span><span class="p">:</span> <span class="n">seq_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">decoded_sentence</span> <span class="o">=</span> <span class="n">decode_sequence</span><span class="p">(</span><span class="n">input_seq</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Input sentence:&#39;</span><span class="p">,</span> <span class="n">input_texts</span><span class="p">[</span><span class="n">seq_index</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Decoded sentence:&#39;</span><span class="p">,</span> <span class="n">decoded_sentence</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-
+Input sentence: Hi.
+Decoded sentence: 你好。
+
+-
+Input sentence: Hi.
+Decoded sentence: 你好。
+
+-
+Input sentence: Run.
+Decoded sentence: 你用跑的。
+
+-
+Input sentence: Wait!
+Decoded sentence: 等等！
+
+-
+Input sentence: Hello!
+Decoded sentence: 你好。
+
+-
+Input sentence: I try.
+Decoded sentence: 让我来。
+
+-
+Input sentence: I won!
+Decoded sentence: 我赢了。
+
+-
+Input sentence: Oh no!
+Decoded sentence: 不会吧。
+
+-
+Input sentence: Cheers!
+Decoded sentence: 乾杯!
+
+-
+Input sentence: He ran.
+Decoded sentence: 他跑了。
+
+-
+Input sentence: Hop in.
+Decoded sentence: 跳进来。
+
+-
+Input sentence: I lost.
+Decoded sentence: 我迷失了。
+
+-
+Input sentence: I quit.
+Decoded sentence: 我退出。
+
+-
+Input sentence: I&#39;m OK.
+Decoded sentence: 我沒事。
+
+-
+Input sentence: Listen.
+Decoded sentence: 听着。
+
+-
+Input sentence: No way!
+Decoded sentence: 没门！
+
+-
+Input sentence: No way!
+Decoded sentence: 没门！
+
+-
+Input sentence: Really?
+Decoded sentence: 你确定？
+
+-
+Input sentence: Try it.
+Decoded sentence: 试试吧。
+
+-
+Input sentence: We try.
+Decoded sentence: 我们来试试。
+
+-
+Input sentence: Why me?
+Decoded sentence: 为什么是我？
+
+-
+Input sentence: Ask Tom.
+Decoded sentence: 去问汤姆。
+
+-
+Input sentence: Be calm.
+Decoded sentence: 冷静点。
+
+-
+Input sentence: Be fair.
+Decoded sentence: 公平点。
+
+-
+Input sentence: Be kind.
+Decoded sentence: 友善点。
+
+-
+Input sentence: Be nice.
+Decoded sentence: 和气点。
+
+-
+Input sentence: Call me.
+Decoded sentence: 联系我。
+
+-
+Input sentence: Call us.
+Decoded sentence: 联系我们。
+
+-
+Input sentence: Come in.
+Decoded sentence: 进来。
+
+-
+Input sentence: Get Tom.
+Decoded sentence: 找到汤姆。
+
+-
+Input sentence: Get out!
+Decoded sentence: 滾出去！
+
+-
+Input sentence: Go away!
+Decoded sentence: 滾！
+
+-
+Input sentence: Go away!
+Decoded sentence: 滾！
+
+-
+Input sentence: Go away.
+Decoded sentence: 走開！
+
+-
+Input sentence: Goodbye!
+Decoded sentence: 告辞！
+
+-
+Input sentence: Goodbye!
+Decoded sentence: 告辞！
+
+-
+Input sentence: Hang on!
+Decoded sentence: 等一下！
+
+-
+Input sentence: He came.
+Decoded sentence: 他来了。
+
+-
+Input sentence: He runs.
+Decoded sentence: 他跑。
+
+-
+Input sentence: Help me.
+Decoded sentence: 帮我一下。
+
+-
+Input sentence: Hold on.
+Decoded sentence: 坚持。
+
+-
+Input sentence: Hug Tom.
+Decoded sentence: 抱抱汤姆！
+
+-
+Input sentence: I agree.
+Decoded sentence: 我同意。
+
+-
+Input sentence: I&#39;m ill.
+Decoded sentence: 我生病了。
+
+-
+Input sentence: I&#39;m old.
+Decoded sentence: 我老了。
+
+-
+Input sentence: It&#39;s OK.
+Decoded sentence: 没关系。
+
+-
+Input sentence: It&#39;s me.
+Decoded sentence: 是我。
+
+-
+Input sentence: Join us.
+Decoded sentence: 来加入我们吧。
+
+-
+Input sentence: Keep it.
+Decoded sentence: 留着吧。
+
+-
+Input sentence: Kiss me.
+Decoded sentence: 吻我。
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r-tensorflow"
+        },
+        kernelOptions: {
+            kernelName: "r-tensorflow",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'r-tensorflow'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="sentiment-analysis-lstm-v1.html" title="previous page">Sentiment Analysis with LSTM</a>
+    <a class='right-next' id="next-link" href="text-gen-lstm-v1.html" title="next page">Text Generation</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alvin Chen<br/>
+        
+            &copy; Copyright 2020 Alvin Chen.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="_static/js/index.js"></script>
+    
+  </body>
+</html>

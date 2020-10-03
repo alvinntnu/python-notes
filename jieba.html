@@ -1,0 +1,613 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Chinese Word Segmentation (jieba) &#8212; Python Notes for Linguistics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Chinese Word Segmentation (ckiptagger)" href="ckiptagger.html" />
+    <link rel="prev" title="Vectorizing Texts" href="vectorizing-text.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/ntnu03.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Python Notes for Linguistics</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="python-basics.html">
+   Python Basics
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="corpus-processing.html">
+   Corpus Linguistics with Python
+  </a>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="nltk.html">
+     Natural Language Tool-Kits (NLTK)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="web-crawler.html">
+     Web Crawler
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="corpus-linguistics-methods.html">
+     Corpus Lingustics Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tokenization.html">
+     Tokenization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="word-cloud.html">
+     Word Cloud
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="patterns-constructions.html">
+     Patterns and Constructions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="bnc.html">
+     BNC-XML
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="childes.html">
+     CHILDES Corpus
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="praat-textgrid.html">
+     Praat TextGrid Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="vectorizing-text.html">
+     Vectorizing Texts
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Chinese Word Segmentation (jieba)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ckiptagger.html">
+     Chinese Word Segmentation (ckiptagger)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="nlp.html">
+   Natural Language Processing with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <div style="text-align:left">
+    <a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
+</div>
+
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/jieba.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/jieba.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/jieba.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#important-steps">
+   Important Steps
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#demonstration">
+   Demonstration
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#word-cloud">
+   Word Cloud
+  </a>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="chinese-word-segmentation-jieba">
+<h1>Chinese Word Segmentation (jieba)<a class="headerlink" href="#chinese-word-segmentation-jieba" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="important-steps">
+<h2>Important Steps<a class="headerlink" href="#important-steps" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Install <code class="docutils literal notranslate"><span class="pre">jieba</span></code> module</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!pip install jieba
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>import module</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jieba</span>
+<span class="kn">import</span> <span class="nn">jieba.analyse</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>initialize traditional Chinese dictionary</p>
+<ul>
+<li><p>Download the traditional chinese dictionary from <a class="reference external" href="https://raw.githubusercontent.com/ldkrsi/jieba-zh_TW/master/jieba/dict.txt"><code class="docutils literal notranslate"><span class="pre">jieba-tw</span></code></a></p></li>
+</ul>
+</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jieba</span><span class="o">.</span><span class="n">set_dictionary</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Add own project-specific dictionary</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jieba</span><span class="o">.</span><span class="n">load_userdict</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Add add-hoc words to dictionary</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jieba</span><span class="o">.</span><span class="n">add_word</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Remove words</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jieba</span><span class="o">.</span><span class="n">del_word</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Chinese stopwords (See <a class="reference external" href="https://github.com/tomlinNTUB/Python/tree/master/%E4%B8%AD%E6%96%87%E5%88%86%E8%A9%9E">林宏任老師 GitHub</a></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">jieba.cut()</span></code> does not interact with stopword list</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jieba.analyse.set_stop_words(file_apth)</span></code></p></li>
+</ul>
+</li>
+<li><p>Word segmentation</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">jieba.cut()</span></code> returns a <code class="docutils literal notranslate"><span class="pre">generator</span></code> object</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jieba.lcut()</span></code> resuts a <code class="docutils literal notranslate"><span class="pre">List</span></code> object</p></li>
+</ul>
+</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># full</span>
+
+<span class="n">jieba</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">TEXT</span><span class="p">,</span> <span class="n">cut_all</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">jieba</span><span class="o">.</span><span class="n">lcut</span><span class="p">(</span><span class="n">TEXT</span><span class="p">,</span> <span class="n">cut_all</span><span class="o">=</span><span class="kc">True</span>
+
+<span class="c1"># default</span>
+<span class="n">jieba</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">TEXT</span><span class="p">,</span> <span class="n">cut_all</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">jieba</span><span class="o">.</span><span class="n">lcut</span><span class="p">(</span><span class="n">TEXT</span><span class="p">,</span> <span class="n">cut_all</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Keyword Extraction</p>
+<ul>
+<li><p>The module uses the TF-IDF score to extract keywords</p></li>
+<li><p>But how documents are defined in Jieba? Eahc list element in the input is a doc?</p></li>
+</ul>
+</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jieba</span><span class="o">.</span><span class="n">analyse</span><span class="o">.</span><span class="n">extract_tags</span><span class="p">(</span><span class="n">TEXT</span><span class="p">,</span> <span class="n">topK</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">withWeight</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">allowPOS</span><span class="o">=</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="demonstration">
+<h2>Demonstration<a class="headerlink" href="#demonstration" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jieba</span>
+<span class="kn">from</span> <span class="nn">jieba</span> <span class="kn">import</span> <span class="n">posseg</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># set dictionary</span>
+
+<span class="n">jieba</span><span class="o">.</span><span class="n">set_dictionary</span><span class="p">(</span><span class="s1">&#39;../../../Corpus/jiaba/dict.txt.jiebatw.txt/&#39;</span><span class="p">)</span>
+<span class="c1">#jieba.load_userdict()</span>
+
+<span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;據《日經亞洲評論》網站報導，儘管美國總統川普發起了讓美國製造業回歸的貿易戰，但包括電動汽車製造商特斯拉在內的一些公司反而加大馬力在大陸進行生產。另據高盛近日發布的一份報告指出，半導體設備和材料以及醫療保健領域的大多數公司實際上正擴大在大陸的生產，許多美國製造業拒絕「退出中國」。&#39;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jieba</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">cut_all</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">HMM</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jieba</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">cut_all</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">HMM</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">jieba</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">cut_all</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">HMM</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">text_pos</span> <span class="o">=</span> <span class="n">posseg</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="c1">#print(type(text_pos))</span>
+<span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">text_pos</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">tag</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Building prefix dict from /Users/Alvin/Dropbox/Corpus/jiaba/dict.txt.jiebatw.txt ...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading model from cache /var/folders/n7/ltpzwx813c599nfxfb94s_640000gn/T/jieba.udb8fadb783c120319248f96f63d284df.cache
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading model cost 0.529 seconds.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Prefix dict has been built successfully.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>據 《 日經 亞洲 評論 》 網站 報導 ， 儘管 美國 總統 川普 發起 了 讓 美國 製造業 回歸 的 貿易戰 ， 但 包括 電動 汽車 製造商 特斯拉 在內 的 一些 公司 反而 加大 馬力 在 大陸 進行 生產 。 另據 高盛 近日 發布 的 一份 報告 指出 ， 半導體 設備 和 材料 以及 醫療 保健 領域 的 大多數 公司 實際 上 正 擴大 在 大陸 的 生產 ， 許多 美國 製造業 拒絕 「 退出 中國 」 。
+
+據 《 日經 亞洲 評論 》 網站 報導 ， 儘管 美國 總統 川普 發起 了 讓 美國 製造業 回歸 的 貿易戰 ， 但 包括 電動 汽車 製造商 特斯拉 在內 的 一 些 公司 反而 加大 馬力 在 大陸 進行 生產 。 另 據 高盛 近日 發布 的 一 份 報告 指出 ， 半導體 設備 和 材料 以及 醫療 保健 領域 的 大 多 數 公司 實際 上 正 擴大 在 大陸 的 生產 ， 許多 美國 製造業 拒絕 「 退出 中國 」 。
+
+據 《 日經 亞洲 評論 》 網站 報導 ， 儘管 美國 國總統 總統 川普 發起 了 讓美 美國 美國製 製造 製造業 造業 回歸 的 貿易 貿易戰 ， 但 包括 電動 汽車 車製 製造 製造商 商特 特斯拉 斯拉 在內 的 一 些 公司 反而 加大 大馬 馬力 在 大陸 進行 行生產 生產 。 另 據 高盛 近日 發布 的 一 份 報告 指出 ， 半導體 導體 設備 和 材料 以及 醫療 保健 領域 的 大 多 數 公司 實際 上 正 擴大 在 大陸 的 生產 ， 許多 美國 美國製 製造 製造業 造業 拒絕 「 退出 中國 」。
+
+據/x
+《/x
+日經/x
+亞洲/x
+評論/x
+》/x
+網站/x
+報導/x
+，/x
+儘管/x
+美國/x
+總統/x
+川普/x
+發起/x
+了讓/v
+美國/x
+製造業/x
+回歸/x
+的/uj
+貿易戰/x
+，/x
+但/c
+包括/v
+電動/x
+汽車/x
+製造商/x
+特斯拉/nrt
+在內/x
+的/uj
+一些/m
+公司/n
+反而/c
+加大/v
+馬力/x
+在/p
+大陸/x
+進行/x
+生產/x
+。/x
+另/r
+據/p
+高盛/nr
+近日/t
+發布/x
+的/uj
+一份/m
+報告/x
+指出/v
+，/x
+半導體/x
+設備/x
+和/c
+材料/n
+以及/c
+醫療/x
+保健/nr
+領域/x
+的/uj
+大多數/m
+公司/n
+實際/x
+上/f
+正/d
+擴大/x
+在/p
+大陸/x
+的/uj
+生產/x
+，/x
+許多/x
+美國/x
+製造業/x
+拒絕/x
+「/x
+退出/v
+中國/x
+」/x
+。/x
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load stopwords</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../../../Corpus/stopwords/tomlinNTUB-chinese-stopwords.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">stopwords</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()]</span>
+
+<span class="n">words1</span> <span class="o">=</span> <span class="n">jieba</span><span class="o">.</span><span class="n">lcut</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">cut_all</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">words2</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words1</span> <span class="k">if</span> <span class="n">w</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stopwords</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">words1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">words2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">words2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>97
+67
+[&#39;日經&#39;, &#39;亞洲&#39;, &#39;評論&#39;, &#39;網站&#39;, &#39;報導&#39;, &#39;美國&#39;, &#39;國總統&#39;, &#39;總統&#39;, &#39;川普&#39;, &#39;發起&#39;, &#39;讓美&#39;, &#39;美國&#39;, &#39;美國製&#39;, &#39;製造&#39;, &#39;製造業&#39;, &#39;造業&#39;, &#39;回歸&#39;, &#39;貿易&#39;, &#39;貿易戰&#39;, &#39;包括&#39;, &#39;電動&#39;, &#39;汽車&#39;, &#39;車製&#39;, &#39;製造&#39;, &#39;製造商&#39;, &#39;商特&#39;, &#39;特斯拉&#39;, &#39;斯拉&#39;, &#39;在內&#39;, &#39;公司&#39;, &#39;加大&#39;, &#39;大馬&#39;, &#39;馬力&#39;, &#39;大陸&#39;, &#39;進行&#39;, &#39;行生產&#39;, &#39;生產&#39;, &#39;高盛&#39;, &#39;近日&#39;, &#39;發布&#39;, &#39;份&#39;, &#39;報告&#39;, &#39;指出&#39;, &#39;半導體&#39;, &#39;導體&#39;, &#39;設備&#39;, &#39;材料&#39;, &#39;醫療&#39;, &#39;保健&#39;, &#39;領域&#39;, &#39;數&#39;, &#39;公司&#39;, &#39;實際&#39;, &#39;正&#39;, &#39;擴大&#39;, &#39;大陸&#39;, &#39;生產&#39;, &#39;美國&#39;, &#39;美國製&#39;, &#39;製造&#39;, &#39;製造業&#39;, &#39;造業&#39;, &#39;拒絕&#39;, &#39;「&#39;, &#39;退出&#39;, &#39;中國&#39;, &#39;」。&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="word-cloud">
+<h2>Word Cloud<a class="headerlink" href="#word-cloud" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="n">wf</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">Counter</span><span class="p">(</span><span class="n">words2</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">wordcloud</span> <span class="kn">import</span> <span class="n">WordCloud</span>
+<span class="n">wc</span> <span class="o">=</span> <span class="n">WordCloud</span><span class="p">(</span><span class="n">background_color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span>
+               <span class="n">font_path</span><span class="o">=</span><span class="s1">&#39;/System/Library/Fonts/STHeiti Medium.ttc&#39;</span><span class="p">,</span>
+               <span class="n">random_state</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+               <span class="n">max_font_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+               <span class="n">stopwords</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;包括&#39;</span><span class="p">])</span> <span class="c1">## stopwords not work when wc.genreate_from_frequencies</span>
+<span class="n">wc</span><span class="o">.</span><span class="n">generate_from_frequencies</span><span class="p">(</span><span class="n">frequencies</span><span class="o">=</span><span class="n">wf</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">wc</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/jieba_8_0.png" src="_images/jieba_8_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#wc.to_file(FILE_PATH)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ckiptagger"
+        },
+        kernelOptions: {
+            kernelName: "ckiptagger",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ckiptagger'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="vectorizing-text.html" title="previous page">Vectorizing Texts</a>
+    <a class='right-next' id="next-link" href="ckiptagger.html" title="next page">Chinese Word Segmentation (ckiptagger)</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alvin Chen<br/>
+        
+            &copy; Copyright 2020 Alvin Chen.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="_static/js/index.js"></script>
+    
+  </body>
+</html>

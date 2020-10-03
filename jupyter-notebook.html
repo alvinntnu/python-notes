@@ -1,0 +1,902 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Jupyer Notebook &#8212; Python Notes for Linguistics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Notebook to Slides" href="notebook-to-slides.html" />
+    <link rel="prev" title="Python Basics" href="python-basics.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/ntnu03.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Python Notes for Linguistics</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="python-basics.html">
+   Python Basics
+  </a>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Jupyer Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="notebook-to-slides.html">
+     Notebook to Slides
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="google-colab.html">
+     Google Colaboratory (Colab)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="data-structure.html">
+     Data Structure
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="numpy.html">
+     Numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pandas.html">
+     Pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="program-structure.html">
+     Program Structure
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="input-output.html">
+     Input and Output
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pickle.html">
+     Object Serialization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="data-visualization-1.html">
+     Data Visualization I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="data-visualization-2.html">
+     Data Visualization 2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="magic-r.html">
+     Magic R
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="python-tricks.html">
+     Python Tricks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="web-applications.html">
+     Web Applications
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="productive-tech.html">
+     Phythonic Productivity Techniques
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="miscellaneous-notes.html">
+     Miscellaneous Notes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="corpus-processing.html">
+   Corpus Linguistics with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="nlp.html">
+   Natural Language Processing with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <div style="text-align:left">
+    <a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
+</div>
+
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/jupyter-notebook.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/jupyter-notebook.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/jupyter-notebook.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#keyboard-shortcuts">
+   Keyboard Shortcuts
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#citation">
+   Citation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#add-images-figures">
+   Add Images/Figures
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cross-reference-and-citations">
+   Cross-reference and Citations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#build-the-book">
+   Build the book
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#publish-jupyter-book-on-github">
+   Publish Jupyter-book on Github
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#publish-the-book-as-github-pages">
+   Publish the book as Github Pages
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#change-notebook-themes">
+   Change Notebook Themes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#use-a-specific-environment-in-notebook">
+   Use a specific environment in notebook
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#install-notebook-extensions">
+   Install Notebook Extensions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ipython-magic-commands">
+   IPython Magic Commands
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hide-or-remove-content">
+   Hide or Remove Content
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#running-r-and-python-in-the-same-notebook">
+   Running R  and Python in the Same Notebook
+  </a>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="jupyer-notebook">
+<h1>Jupyer Notebook<a class="headerlink" href="#jupyer-notebook" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>This section includes notes relate to <code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Notebook</span></code> as well as <code class="docutils literal notranslate"><span class="pre">jupyter-book</span></code>.</p></li>
+<li><p>Recommended Readings:</p>
+<ul>
+<li><p><a class="reference external" href="https://www.dataquest.io/blog/jupyter-notebook-tips-tricks-shortcuts/">Jupyter Notebook Tips and Tricks</a></p></li>
+<li><p><a class="reference external" href="https://medium.com/pyradise/jupyter-notebook-tricks-slideshows-a057a39c0a23">Notebook to slides</a></p></li>
+<li><p>Check notebook extension documentations (Very useful) (See <a class="reference internal" href="#nbextensions"><span class="std std-ref">Install Notebook Extensions</span></a>)</p></li>
+</ul>
+</li>
+</ul>
+<div class="section" id="keyboard-shortcuts">
+<h2>Keyboard Shortcuts<a class="headerlink" href="#keyboard-shortcuts" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Cmd</span> <span class="pre">+</span> <span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">P</span></code>: Look up key shortcuts</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Esc</span></code>: Get into command mode</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Enter</span></code>: Get into edit mode</p></li>
+<li><p>While in command mode:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">A</span></code>: insert a new cell above</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">B</span></code>: insert a new cell below</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DD</span></code>: delete the current cell</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">Tab</span></code>: Documentation (Docstring) of the object</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">-</span></code>: Split cells</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Esc</span> <span class="pre">+</span> <span class="pre">F</span></code>: Find and replace</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Esc</span> <span class="pre">+</span> <span class="pre">O</span></code>: Toggle cell outputs</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">UP/DOWN</span></code>: select multiple cells</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">M</span></code>: Merge multiple cells</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Y</span></code>: Change cell to code</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">M</span></code>: Change cell to markdown</p></li>
+</ul>
+</div>
+<div class="section" id="citation">
+<h2>Citation<a class="headerlink" href="#citation" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>In-text citation</p></li>
+</ul>
+<p>An example of in-text citation <a class="bibtex reference internal" href="#id2" id="id1">[1]</a>.</p>
+<ul class="simple">
+<li><p>Bibliography</p></li>
+</ul>
+<div class="admonition">
+<p class="admonition-title"></p>
+<ul class="simple">
+<li><p>To include the bibliography at the end:</p></li>
+</ul>
+<p id="bibtex-bibliography-jupyter-notebook-0"><dl class="citation">
+<dt class="bibtex label" id="deyne2016"><span class="brackets">1</span></dt>
+<dd><p>Alexander Mehler, Andy Lücking, Sven Banisch, Philippe Blanchard, and Barbara Job, editors. <em>Structure and organization of the mental lexicon: A network approach derived from syntactic dependency relations and word associations</em>, pages 47–79. Springer, Berlin, Germany, 2016. <a class="reference external" href="https://doi.org/10.1007/978-3-662-47238-5_3">doi:10.1007/978-3-662-47238-5_3</a>.</p>
+</dd>
+</dl>
+</p>
+</div>
+<p id="bibtex-bibliography-jupyter-notebook-1"><dl class="citation">
+<dt class="bibtex label" id="id2"><span class="brackets">1</span></dt>
+<dd><p>Alexander Mehler, Andy Lücking, Sven Banisch, Philippe Blanchard, and Barbara Job, editors. <em>Structure and organization of the mental lexicon: A network approach derived from syntactic dependency relations and word associations</em>, pages 47–79. Springer, Berlin, Germany, 2016. <a class="reference external" href="https://doi.org/10.1007/978-3-662-47238-5_3">doi:10.1007/978-3-662-47238-5_3</a>.</p>
+</dd>
+</dl>
+</p>
+</div>
+<div class="section" id="add-images-figures">
+<h2>Add Images/Figures<a class="headerlink" href="#add-images-figures" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://jupyterbook.org/content/figures.html">Documentation</a></p></li>
+</ul>
+</div>
+<div class="section" id="cross-reference-and-citations">
+<h2>Cross-reference and Citations<a class="headerlink" href="#cross-reference-and-citations" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Add labels:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">LABEL_NAME</span><span class="p">)</span><span class="o">=</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Cross-reference:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>{ref}`LABEL_NAME`
+</pre></div>
+</div>
+</div>
+<div class="section" id="build-the-book">
+<h2>Build the book<a class="headerlink" href="#build-the-book" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">terminal</span></code> and set to the root of the book directory</p></li>
+<li><p>Build the book</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ jupyter-book build .
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Push to GitHub</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git add .
+$ git commit -m &quot;XXX&quot;
+$ git push origin master
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Update GitHub Pages html files</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git-ghp -n -p -f _build/html
+</pre></div>
+</div>
+</div>
+<div class="section" id="publish-jupyter-book-on-github">
+<h2>Publish Jupyter-book on Github<a class="headerlink" href="#publish-jupyter-book-on-github" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>Documentations</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://jupyterbook.org/publish/gh-pages.html">Official documentation</a></p></li>
+<li><p><a class="reference external" href="https://docs.github.com/en/github/importing-your-projects-to-github/adding-an-existing-project-to-github-using-the-command-line">Adding existing projects to Github repo</a></p></li>
+</ul>
+</li>
+<li><p>Important Steps</p>
+<ul class="simple">
+<li><p>Create an empty repo on Github</p></li>
+<li><p>Open Terminal.</p></li>
+<li><p>Change the current working directory to your local project.</p></li>
+<li><p>Initialize the local directory as a Git repository: <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">git</span> <span class="pre">init</span></code></p></li>
+<li><p>Add commmits:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git add .
+# To unstage a file, use &#39;git reset HEAD YOUR-FILE&#39;.
+$ git commit -m &quot;First commit&quot;
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Add the Github remote URL to the project local directory</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git remote add origin remote repository URL
+# Sets the new remote
+$ git remote -v
+# Verifies the new remote URL
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Push changes</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git push -u origin master
+# Pushes the changes in your local repository up to the remote repository you specified as the origin
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="publish-the-book-as-github-pages">
+<h2>Publish the book as Github Pages<a class="headerlink" href="#publish-the-book-as-github-pages" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Install <code class="docutils literal notranslate"><span class="pre">ghp-import</span></code></p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install ghp-import
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Create a branch of the repo called gh-pages and pushes to GitHub</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ghp-import -n -p -f _build/html
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">-n</span></code> refers to “not Jekyll”</p>
+</div>
+</div>
+<div class="section" id="change-notebook-themes">
+<h2>Change Notebook Themes<a class="headerlink" href="#change-notebook-themes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>The following code runs in the terminal.</p>
+<ul>
+<li><p>To preserve the toolbars (<code class="docutils literal notranslate"><span class="pre">-T</span></code>), Logo (<code class="docutils literal notranslate"><span class="pre">-N</span></code>), and kernel logo (<code class="docutils literal notranslate"><span class="pre">-kl</span></code>)</p></li>
+</ul>
+</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install jupyterthemes
+$ jt -l
+$ jt -t monokai (-T -N -kl)
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>List of theme names</p>
+<ul>
+<li><p>onedork</p></li>
+<li><p>grade3</p></li>
+<li><p>oceans16</p></li>
+<li><p>chesterish</p></li>
+<li><p>monokai</p></li>
+<li><p>solarizedl</p></li>
+<li><p>solarized</p></li>
+</ul>
+</li>
+<li><p>Reset to the original default theme:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ jt -r
+</pre></div>
+</div>
+</div>
+<div class="section" id="use-a-specific-environment-in-notebook">
+<h2>Use a specific environment in notebook<a class="headerlink" href="#use-a-specific-environment-in-notebook" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>First, create a new environment</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>! conda create --name ENV_NAME python=3.6
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Activate the new envrionment</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ source activate ENV_NAME
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>install <code class="docutils literal notranslate"><span class="pre">ipykernal</span></code></p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install --user ipykernel
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Add the environment kernal to Jupyter</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python -m ipykernel install --user --name=myenv
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Check current environment kernels in Jupyter</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ jupyter kernelspec list
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Remove an environment from Jupyter kernel list</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ jupyter kernelspec uninstall myenv
+</pre></div>
+</div>
+<div class="dropdown admonition note">
+<p class="admonition-title">Note</p>
+<p>Sometimes, the pre-existing conda environment does not work properly. An easy solution is to create the environment again after you set up the jupyter notebook.</p>
+</div>
+</div>
+<div class="section" id="install-notebook-extensions">
+<span id="nbextensions"></span><h2>Install Notebook Extensions<a class="headerlink" href="#install-notebook-extensions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://jupyter-contrib-nbextensions.readthedocs.io/en/latest/install.html">nbextensions documentation</a></p></li>
+<li><p>There are in general three steps</p>
+<ul>
+<li><p>Install the modudle <code class="docutils literal notranslate"><span class="pre">jupyter_contribe_nbextensions</span></code></p></li>
+<li><p>Install javascript and css files</p></li>
+<li><p>Enable specific extensions</p></li>
+</ul>
+</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!pip install jupyter_contrib_nbextensions
+!jupyter contrib nbextension install --user
+!jupyter nbextension enable &lt;nbextension require path&gt;
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">jupyter_extensions_configuaror</span></code> to manguage the extensions</p></li>
+<li><p>Recommended extensions:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">varInspector</span></code>: very useful to check objects in the current memory of the kernel.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ScratchPad</span></code>: very good for debugging in notebook</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Table</span> <span class="pre">on</span> <span class="pre">Content</span> <span class="pre">(2)</span></code>: Good to view the outline structure of the notebook file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Spellchker</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Live</span> <span class="pre">Markdown</span> <span class="pre">Preview</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="ipython-magic-commands">
+<h2>IPython Magic Commands<a class="headerlink" href="#ipython-magic-commands" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>Magic commands from IPythhon</p></li>
+<li><p>Useful magic commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># list all env variables</span>
+<span class="o">%</span><span class="n">evn</span>
+<span class="c1"># set env variable</span>
+<span class="o">%</span><span class="n">env</span> <span class="n">OMP_NUM_THREADS</span><span class="o">=</span><span class="mi">4</span>
+</pre></div>
+</div>
+</li>
+<li><p>Run external python codes/files</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">run</span> <span class="o">./</span><span class="n">hello</span><span class="o">-</span><span class="n">world</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+</li>
+<li><p>Insert code from an external script</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">load</span> <span class="n">SCRIPT_NAME</span>
+</pre></div>
+</div>
+</li>
+<li><p>Time the process</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">## Time the single run of the code in the cell</span>
+<span class="o">%%</span><span class="n">time</span>
+<span class="c1">## Run a statement 100,000 times by default and provide the mean of the fastest three times</span>
+<span class="o">%</span><span class="n">timeit</span>
+<span class="c1">## Shoe how much time your program spent in each function</span>
+<span class="o">%</span><span class="n">prun</span> <span class="n">STATEMENT_NAME</span>
+</pre></div>
+</div>
+</li>
+<li><p>Write files</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">writefile</span> <span class="n">FILENAME</span>
+<span class="c1">## save contents of the cell to an external file</span>
+<span class="o">%</span><span class="n">pycat</span>
+<span class="c1">## show the syntax highlighted contents of an external file</span>
+</pre></div>
+</div>
+</li>
+<li><p>Debugging <code class="docutils literal notranslate"><span class="pre">%pdb</span></code></p></li>
+<li><p>Render high-resolution graphs for Retina screens</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">config</span> <span class="n">InlineBackend</span><span class="o">.</span><span class="n">figure_format</span> <span class="o">=</span> <span class="s1">&#39;retina&#39;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Run shell commands</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!ls *.ipynb
+</pre></div>
+</div>
+</li>
+<li><p>LaTex formula automatic rendering in markdown</p>
+<p><span class="math notranslate nohighlight">\(P(A \mid B) = \frac{P(B \mid A) P(A)}{P(B)}\)</span></p>
+</li>
+</ul>
+</div>
+<div class="section" id="hide-or-remove-content">
+<h2>Hide or Remove Content<a class="headerlink" href="#hide-or-remove-content" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>See <a class="reference external" href="https://jupyterbook.org/interactive/hiding.html">documentation page</a></p></li>
+</ul>
+</div>
+<div class="section" id="running-r-and-python-in-the-same-notebook">
+<h2>Running R  and Python in the Same Notebook<a class="headerlink" href="#running-r-and-python-in-the-same-notebook" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>To do this, first we need to install relevant R packages to make the system default R kernel avaiable to the notebook</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># in the terminal
+$ R
+# in R
+install.package(&quot;IRkernel&quot;)
+IRkernel::installspec()
+</pre></div>
+</div>
+</li>
+<li><p>Then install the python module <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">rpy2</span></code></p></li>
+<li><p>To use R and Python at the same time, the magic commend</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">load_ext</span> <span class="n">rpy2</span><span class="o">.</span><span class="n">ipython</span>
+<span class="o">%</span><span class="n">R</span> <span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Mac users may run into issues when installing <code class="docutils literal notranslate"><span class="pre">rpy2</span></code>. Please see <a class="reference external" href="https://blog.csdn.net/u010555997/article/details/104078809">this solution</a>. General principles:</p>
+<ul class="simple">
+<li><p>Install Homebrew</p></li>
+<li><p>Install ggc with <code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">gcc</span></code></p></li>
+<li><p>Install rpy2 using the updated gcc <code class="docutils literal notranslate"><span class="pre">env</span> <span class="pre">CC=/usr/local/Cellar/gcc/10.2.0/bin/gcc-10</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">rpy2</span></code></p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">run</span> hello-world.ipynb
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello Word!
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 13.6 ms, sys: 17.6 ms, total: 31.1 ms
+Wall time: 11.8 s
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
+<span class="o">%</span><span class="k">timeit</span> numpy.random.normal(size=100)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.61 µs ± 259 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># List all Magic commands</span>
+<span class="o">%</span><span class="k">lsmagic</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Available line magics:
+%alias  %alias_magic  %autoawait  %autocall  %automagic  %autosave  %bookmark  %cat  %cd  %clear  %colors  %conda  %config  %connect_info  %cp  %debug  %dhist  %dirs  %doctest_mode  %ed  %edit  %env  %gui  %hist  %history  %killbgscripts  %ldir  %less  %lf  %lk  %ll  %load  %load_ext  %loadpy  %logoff  %logon  %logstart  %logstate  %logstop  %ls  %lsmagic  %lx  %macro  %magic  %man  %matplotlib  %mkdir  %more  %mv  %notebook  %page  %pastebin  %pdb  %pdef  %pdoc  %pfile  %pinfo  %pinfo2  %pip  %popd  %pprint  %precision  %prun  %psearch  %psource  %pushd  %pwd  %pycat  %pylab  %qtconsole  %quickref  %recall  %rehashx  %reload_ext  %rep  %rerun  %reset  %reset_selective  %rm  %rmdir  %run  %save  %sc  %set_env  %store  %sx  %system  %tb  %time  %timeit  %unalias  %unload_ext  %who  %who_ls  %whos  %xdel  %xmode
+
+Available cell magics:
+%%!  %%HTML  %%SVG  %%bash  %%capture  %%debug  %%file  %%html  %%javascript  %%js  %%latex  %%markdown  %%perl  %%prun  %%pypy  %%python  %%python2  %%python3  %%ruby  %%script  %%sh  %%svg  %%sx  %%system  %%time  %%timeit  %%writefile
+
+Automagic is ON, % prefix IS NOT needed for line magics.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>ls *.ipynb
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bnc.ipynb                             pickle.ipynb
+chatbot.ipynb                         praat-textgrid.ipynb
+childes.ipynb                         productive-tech.ipynb
+ckiptagger.ipynb                      program-structure.ipynb
+corpus-linguistics-methods.ipynb      python-tricks.ipynb
+data-structure.ipynb                  references.ipynb
+data-visualization-1.ipynb            sentence-encoding.ipynb
+data-visualization-2.ipynb            sentiment-analysis-dl.ipynb
+doc2vec.ipynb                         sentiment-analysis-lstm-v1.ipynb
+edit-distance.ipynb                   sentiment-analysis-lstm-v2.ipynb
+google-colab.ipynb                    sentiment-analysis-ml.ipynb
+hello-world.ipynb                     seq-to-seq.ipynb
+hyperparameter-tuning.ipynb           sklearn.ipynb
+input-output.ipynb                    text-gen-lstm-v1.ipynb
+jieba.ipynb                           text-gen-lstm-v2.ipynb
+jupyter-notebook.ipynb                text-normalization-eng.ipynb
+magic-r.ipynb                         tokenization.ipynb
+miscellaneous-notes.ipynb             transfer-learning-sent-encoding.ipynb
+nlp-ckipnlp.ipynb                     vectorizing-text.ipynb
+nlp-spacy-zh.ipynb                    web-applications.ipynb
+nlp-spacy.ipynb                       web-crawler.ipynb
+nltk.ipynb                            word-cloud.ipynb
+notebook-to-slides.ipynb              word-embeddings.ipynb
+numpy.ipynb                           word2vec-chinese.ipynb
+pandas.ipynb                          word2vec.ipynb
+patterns-constructions.ipynb
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Run R code chunks in notebook with python codes</span>
+<span class="o">%</span><span class="k">load_ext</span> rpy2.ipython
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">R</span> 
+library(dplyr)
+library(ggplot2)
+data.frame(x = seq(1,100), y = seq(seq(1,100))) %&gt;%
+ggplot(aes(x,y)) + geom_point()
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R[write to console]: 
+Attaching package: ‘dplyr’
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R[write to console]: The following objects are masked from ‘package:stats’:
+
+    filter, lag
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R[write to console]: The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+</pre></div>
+</div>
+<img alt="_images/jupyter-notebook_20_3.png" src="_images/jupyter-notebook_20_3.png" />
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="python-basics.html" title="previous page">Python Basics</a>
+    <a class='right-next' id="next-link" href="notebook-to-slides.html" title="next page">Notebook to Slides</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alvin Chen<br/>
+        
+            &copy; Copyright 2020 Alvin Chen.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="_static/js/index.js"></script>
+    
+  </body>
+</html>

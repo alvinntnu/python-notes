@@ -1,0 +1,1353 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Universal Sentence Embeddings &#8212; Python Notes for Linguistics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Hyper-Parameter Tuning" href="hyperparameter-tuning.html" />
+    <link rel="prev" title="Text Generation" href="text-gen-lstm-v1.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/ntnu03.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Python Notes for Linguistics</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="python-basics.html">
+   Python Basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="corpus-processing.html">
+   Corpus Linguistics with Python
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="nlp.html">
+   Natural Language Processing with Python
+  </a>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="text-normalization-eng.html">
+     Text Normalization (English)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sklearn.html">
+     Machine Learning with Sci-Kit Learn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sentiment-analysis-ml.html">
+     Sentiment Analysis with Traditional Machine Learning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="word-embeddings.html">
+     Word Embeddings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="word2vec.html">
+     Word2Vec
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sentiment-analysis-dl.html">
+     Sentiment Analysis with Deep Learning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sentiment-analysis-lstm-v1.html">
+     Sentiment Analysis with LSTM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="seq-to-seq.html">
+     Machine Translation (Sequence-to-Sequence LSTM)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="text-gen-lstm-v1.html">
+     Text Generation
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Universal Sentence Embeddings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="hyperparameter-tuning.html">
+     Hyper-Parameter Tuning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="doc2vec.html">
+     Dov2Vec
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="nlp-spacy.html">
+     Natural Language Processing (spaCy)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="nlp-spacy-zh.html">
+     Chinese Natural Language Processing (spaCy)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="nlp-ckipnlp.html">
+     Natural Language Processing (ckipnlp)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <div style="text-align:left">
+    <a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
+</div>
+
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/transfer-learning-sent-encoding.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/transfer-learning-sent-encoding.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/transfer-learning-sent-encoding.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loading-libaries">
+   Loading Libaries
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data">
+   Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#train-validation-and-test-sets-splitting">
+   Train, Validation, and Test Sets Splitting
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#text-wranlging">
+   Text Wranlging
+  </a>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="universal-sentence-embeddings">
+<h1>Universal Sentence Embeddings<a class="headerlink" href="#universal-sentence-embeddings" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>This is based on Ch 10 of Text Analytics with Python by Dipanjan Sarkar</p></li>
+<li><p><a class="reference external" href="https://www.curiousily.com/posts/sentiment-analysis-with-tensorflow-2-and-keras-using-python/">source</a></p></li>
+<li><p><a class="reference external" href="https://www.dlology.com/blog/keras-meets-universal-sentence-encoder-transfer-learning-for-text-data/">source</a></p></li>
+</ul>
+<div class="section" id="loading-libaries">
+<h2>Loading Libaries<a class="headerlink" href="#loading-libaries" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">tensorflow_hub</span> <span class="k">as</span> <span class="nn">hub</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Check GPU if any</span>
+<span class="c1"># tf.test.is_gpu_available()</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">gpu_device_name</span><span class="p">()</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">list_physical_devices</span><span class="p">(</span><span class="s1">&#39;GPU&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[PhysicalDevice(name=&#39;/physical_device:GPU:0&#39;, device_type=&#39;GPU&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="data">
+<h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>The original <a class="reference external" href="http://ai.stanford.edu/~amaas/data/sentiment/">IMDB Large Movie Review Dataset</a></p>
+<ul>
+<li><p>The original data include each text as an independent text file</p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://github.com/dipanjanS/data_science_for_all/tree/master/tds_deep_transfer_learning_nlp_classification">Sarkar’s repository</a> for csv file</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import tarfile</span>
+<span class="c1"># tar = tarfile.open(&quot;../data/movie_review.tar.gz&quot;)</span>
+<span class="c1"># tar.extractall(path=&quot;../data/stanford-movie-review/&quot;)</span>
+<span class="c1"># tar.close()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import os</span>
+<span class="c1"># import tarfile</span>
+
+<span class="c1"># def csv_files(members):</span>
+<span class="c1">#     for tarinfo in members:</span>
+<span class="c1">#         if os.path.splitext(tarinfo.name)[1] == &quot;.csv&quot;:</span>
+<span class="c1">#             yield tarinfo</span>
+
+<span class="c1"># tar = tarfile.open(&quot;../data/movie_review.tar.gz&quot;)</span>
+<span class="c1"># tar.extractall(path=&#39;../data/&#39;, members=csv_files(tar))</span>
+<span class="c1"># tar.close()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
+<span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/gdrive&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Drive already mounted at /content/gdrive; to attempt to forcibly remount, call drive.mount(&quot;/content/gdrive&quot;, force_remount=True).
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/content/gdrive/My Drive/Colab Notebooks/movie_reviews.csv.bz2&#39;</span><span class="p">,</span>
+                     <span class="n">compression</span><span class="o">=</span><span class="s1">&#39;bz2&#39;</span><span class="p">)</span>
+<span class="n">dataset</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 50000 entries, 0 to 49999
+Data columns (total 2 columns):
+ #   Column     Non-Null Count  Dtype 
+---  ------     --------------  ----- 
+ 0   review     50000 non-null  object
+ 1   sentiment  50000 non-null  object
+dtypes: object(2)
+memory usage: 781.4+ KB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span><span class="o">.</span><span class="n">dtypes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>review       object
+sentiment    object
+dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Recode sentiment</span>
+
+<span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;sentiment&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">if</span> <span class="n">sentiment</span><span class="o">==</span><span class="s1">&#39;positive&#39;</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">sentiment</span> <span class="ow">in</span> <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;sentiment&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">]</span>
+<span class="n">dataset</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>review</th>
+      <th>sentiment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>One of the other reviewers has mentioned that ...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A wonderful little production. &lt;br /&gt;&lt;br /&gt;The...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>I thought this was a wonderful way to spend ti...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Basically there's a family where a little boy ...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Petter Mattei's "Love in the Time of Money" is...</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span><span class="o">.</span><span class="n">dtypes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>review       object
+sentiment     int64
+dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="train-validation-and-test-sets-splitting">
+<h2>Train, Validation, and Test Sets Splitting<a class="headerlink" href="#train-validation-and-test-sets-splitting" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Method 1 sklearn</span>
+<span class="c1"># from sklearn.model_selection import train_test_split</span>
+<span class="c1"># train, test = train_test_split(reviews, test_size = 0.33, random_state=42)</span>
+
+<span class="c1">## Method 2 numpy</span>
+<span class="n">train</span><span class="p">,</span> <span class="n">validate</span><span class="p">,</span> <span class="n">test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="o">.</span><span class="mi">6</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)),</span> <span class="nb">int</span><span class="p">(</span><span class="o">.</span><span class="mi">7</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">))])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">validate</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">test</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">train</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>review</th>
+      <th>sentiment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>30463</th>
+      <td>A have a female friend who is currently being ...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3960</th>
+      <td>If there's one theme of this film, it's that p...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>36812</th>
+      <td>Ninja Hunter (AKA Wu Tang vs Ninja) is pure en...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>47930</th>
+      <td>I can say without a shadow of a doubt that Goi...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>11350</th>
+      <td>Just once I'd like to see a version of Beowulf...</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="text-wranlging">
+<h2>Text Wranlging<a class="headerlink" href="#text-wranlging" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Text preprocessing usually takes care of:</p>
+<ul>
+<li><p>unnecessary html tags</p></li>
+<li><p>non-ASCII characters in English texts (e.g., accented characters)</p></li>
+<li><p>contraction issues</p></li>
+<li><p>special characters (unicode)</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## libaries for text pre-processing</span>
+<span class="o">!</span>pip3 install contractions
+<span class="kn">import</span> <span class="nn">contractions</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">import</span> <span class="nn">unicodedata</span>
+<span class="kn">import</span> <span class="nn">re</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: contractions in /usr/local/lib/python3.6/dist-packages (0.0.25)
+Requirement already satisfied: textsearch in /usr/local/lib/python3.6/dist-packages (from contractions) (0.0.17)
+Requirement already satisfied: pyahocorasick in /usr/local/lib/python3.6/dist-packages (from textsearch-&gt;contractions) (1.4.0)
+Requirement already satisfied: Unidecode in /usr/local/lib/python3.6/dist-packages (from textsearch-&gt;contractions) (1.1.1)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Functions for Text Preprocessing</span>
+
+<span class="k">def</span> <span class="nf">strip_html_tags</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+    <span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">extract</span><span class="p">()</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">soup</span><span class="p">([</span><span class="s1">&#39;iframe&#39;</span><span class="p">,</span><span class="s1">&#39;script&#39;</span><span class="p">])]</span>
+    <span class="n">stripped_text</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span>
+    <span class="n">stripped_text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[\r|\n|\r\n]+&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">stripped_text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">stripped_text</span>
+<span class="k">def</span> <span class="nf">remove_accented_chars</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">unicodedata</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="s1">&#39;NFKD&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">,</span> <span class="s1">&#39;ignore&#39;</span><span class="p">)</span><span class="o">.</span> <span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">text</span>
+<span class="k">def</span> <span class="nf">expand_contractions</span><span class="p">(</span><span class="n">text</span><span class="p">):</span> 
+    <span class="k">return</span> <span class="n">contractions</span><span class="o">.</span><span class="n">fix</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">remove_special_characters</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">remove_digits</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;[^a-zA-Z0-9\s]&#39;</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">remove_digits</span> <span class="k">else</span> <span class="sa">r</span><span class="s1">&#39;[^a-zA-Z\s]&#39;</span> 
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">text</span>
+<span class="k">def</span> <span class="nf">pre_process_document</span><span class="p">(</span><span class="n">document</span><span class="p">):</span>
+    <span class="c1"># strip HTML</span>
+    <span class="n">document</span> <span class="o">=</span> <span class="n">strip_html_tags</span><span class="p">(</span><span class="n">document</span><span class="p">)</span>
+    <span class="c1"># case normalization</span>
+    <span class="n">document</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="c1"># remove empty lines</span>
+    <span class="n">document</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">document</span><span class="o">.</span><span class="n">maketrans</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\t\r</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;   &quot;</span><span class="p">))</span>
+    <span class="c1"># remove accented characters</span>
+    <span class="n">document</span> <span class="o">=</span> <span class="n">remove_accented_chars</span><span class="p">(</span><span class="n">document</span><span class="p">)</span>
+    <span class="c1"># expand contractions</span>
+    <span class="n">document</span> <span class="o">=</span> <span class="n">expand_contractions</span><span class="p">(</span><span class="n">document</span><span class="p">)</span>
+    <span class="c1"># remove special characters and\or digits</span>
+    <span class="c1"># insert spaces between special characters to isolate them </span>
+    <span class="n">special_char_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;([{.(-)!}])&#39;</span><span class="p">)</span>
+    <span class="n">document</span> <span class="o">=</span> <span class="n">special_char_pattern</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot; </span><span class="se">\\</span><span class="s2">1 &quot;</span><span class="p">,</span> <span class="n">document</span><span class="p">)</span>
+    <span class="n">document</span> <span class="o">=</span> <span class="n">remove_special_characters</span><span class="p">(</span><span class="n">document</span><span class="p">,</span> <span class="n">remove_digits</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># remove extra whitespace</span>
+    <span class="n">document</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39; +&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">document</span><span class="p">)</span> 
+    <span class="n">document</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">document</span>
+
+<span class="c1"># vectorize function</span>
+<span class="n">pre_process_corpus</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">pre_process_document</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pre_process_corpus</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;review&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array(&#39;a have a female friend who is currently being drawn into a relationship with an sob who has a long term girlfriend of course the sob is very goodlooking charming etc and my friend is a very intelligent woman watching jean pierre leauds character at work is exactly like watching what goes on in real life when guys like that destroy the lives of our female friends it is tragic and you know she is going to end up very hurt but there is nothing you can do leaud is brilliant totally empty a blank throughout he pulls the faces and tells the stories he thinks will get the reaction he wants the scene two hours in when leaud and lebrun have made love and the next morning he puts on a record and very sweetly and charmingly sings along to amuse her is brilliant the what the hell am i doing here with this idiot expression that flickers back and forth across her face will be in my memory for a long time to come it is a long film but see it in one go preferably in a cinema takes a while to get into but then the time just disappears&#39;,
+      dtype=&#39;&lt;U1033&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="n">train_reviews</span> <span class="o">=</span> <span class="n">pre_process_corpus</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;review&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">train_sentiments</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="s1">&#39;sentiment&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">val_reviews</span> <span class="o">=</span> <span class="n">pre_process_corpus</span><span class="p">(</span><span class="n">validate</span><span class="p">[</span><span class="s1">&#39;review&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">val_sentiments</span> <span class="o">=</span> <span class="n">validate</span><span class="p">[</span><span class="s1">&#39;sentiment&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">test_reviews</span> <span class="o">=</span> <span class="n">pre_process_corpus</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;review&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">test_sentiments</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;sentiment&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 25.6 s, sys: 1.1 s, total: 26.7 s
+Wall time: 26.7 s
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># train_text = train_reviews.tolist()</span>
+<span class="n">train_text</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">train_reviews</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+<span class="n">test_text</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">test_reviews</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+<span class="n">val_text</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">val_reviews</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+
+<span class="n">train_label</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">train_sentiments</span><span class="p">),</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
+<span class="n">test_label</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">test_sentiments</span><span class="p">),</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
+<span class="n">val_label</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">val_sentiments</span><span class="p">),</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">train_text</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">train_label</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># y is one-hot encoding</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;if there is one theme of this film it is that people can cope with hardship by having a good imagination this family is poor their father works graveyard and their mother works doubleshifts and peter is constantly picked on for a variety of reasons and becomes increasingly frustrated that he is often mistaken for a girl he is just starting to approach that age of or where your perceptions start to change and thinks like your appearance start to matter the backdrop of this story is the worlds fair and the centennial of canada the films greatest moments come during the various fantasy sequences where we see just how they cope watch the flim and if you have ever had a childhood friend that you dreamt with and then for some reason lost you will really like this film perhaps kids will like this film but only adults will truly appreciate it including its references to bolsheviks and what parents will do for their children&#39;]
+[0 1]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow_hub</span> <span class="k">as</span> <span class="nn">hub</span>
+
+<span class="n">embed</span> <span class="o">=</span> <span class="n">hub</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;https://tfhub.dev/google/universal-sentence-encoder/4&quot;</span><span class="p">)</span>
+<span class="n">embeddings</span> <span class="o">=</span> <span class="n">embed</span><span class="p">([</span>
+    <span class="s2">&quot;The quick brown fox jumps over the lazy dog.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;I am a sentence for which I would like to get its embedding&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">embeddings</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">embed</span><span class="p">(</span><span class="n">train_text</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span> <span class="c1"># train_text[0] sentence embeddings</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="c1">## Converting train_text into embedding</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">train_text</span><span class="p">):</span>
+  <span class="n">emb</span> <span class="o">=</span> <span class="n">embed</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+  <span class="n">review_emb</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">emb</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+  <span class="n">X_train</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">review_emb</span><span class="p">)</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 30000/30000 [03:24&lt;00:00, 146.63it/s]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Converting test_text into embeddings</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">test_text</span><span class="p">):</span>
+  <span class="n">emb</span> <span class="o">=</span> <span class="n">embed</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+  <span class="n">review_emb</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">emb</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+  <span class="n">X_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">review_emb</span><span class="p">)</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 15000/15000 [01:43&lt;00:00, 145.51it/s]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Converting val_text into embeddings</span>
+<span class="n">X_val</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">val_text</span><span class="p">):</span>
+  <span class="n">emb</span> <span class="o">=</span> <span class="n">embed</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+  <span class="n">review_emb</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">emb</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+  <span class="n">X_val</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">review_emb</span><span class="p">)</span>
+<span class="n">X_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X_val</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 5000/5000 [00:34&lt;00:00, 146.26it/s]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">keras</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">Sequential</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+  <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span>
+    <span class="n">units</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
+    <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">),</span>
+    <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span>
+  <span class="p">)</span>
+<span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+  <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+  <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span>
+    <span class="n">units</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+    <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span>
+  <span class="p">)</span>
+<span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+  <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+    <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span>
+    <span class="n">optimizer</span><span class="o">=</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="mf">0.001</span><span class="p">),</span>
+    <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">train_label</span><span class="p">,</span>
+    <span class="n">epochs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+    <span class="n">validation_split</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0907 - accuracy: 0.9649 - val_loss: 0.4847 - val_accuracy: 0.8663
+Epoch 2/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0943 - accuracy: 0.9635 - val_loss: 0.4747 - val_accuracy: 0.8693
+Epoch 3/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0887 - accuracy: 0.9663 - val_loss: 0.4798 - val_accuracy: 0.8653
+Epoch 4/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0826 - accuracy: 0.9689 - val_loss: 0.4820 - val_accuracy: 0.8640
+Epoch 5/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0828 - accuracy: 0.9681 - val_loss: 0.4939 - val_accuracy: 0.8663
+Epoch 6/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0780 - accuracy: 0.9704 - val_loss: 0.4925 - val_accuracy: 0.8637
+Epoch 7/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0765 - accuracy: 0.9714 - val_loss: 0.5111 - val_accuracy: 0.8687
+Epoch 8/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0787 - accuracy: 0.9699 - val_loss: 0.5137 - val_accuracy: 0.8670
+Epoch 9/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0785 - accuracy: 0.9707 - val_loss: 0.4848 - val_accuracy: 0.8677
+Epoch 10/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0754 - accuracy: 0.9716 - val_loss: 0.5021 - val_accuracy: 0.8697
+Epoch 11/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0699 - accuracy: 0.9734 - val_loss: 0.5287 - val_accuracy: 0.8670
+Epoch 12/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0708 - accuracy: 0.9730 - val_loss: 0.5241 - val_accuracy: 0.8630
+Epoch 13/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0722 - accuracy: 0.9730 - val_loss: 0.5117 - val_accuracy: 0.8693
+Epoch 14/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0685 - accuracy: 0.9754 - val_loss: 0.5213 - val_accuracy: 0.8663
+Epoch 15/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0712 - accuracy: 0.9736 - val_loss: 0.5044 - val_accuracy: 0.8617
+Epoch 16/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0687 - accuracy: 0.9743 - val_loss: 0.5369 - val_accuracy: 0.8683
+Epoch 17/50
+211/211 [==============================] - 1s 4ms/step - loss: 0.0652 - accuracy: 0.9758 - val_loss: 0.5372 - val_accuracy: 0.8687
+Epoch 18/50
+211/211 [==============================] - 1s 4ms/step - loss: 0.0629 - accuracy: 0.9758 - val_loss: 0.5652 - val_accuracy: 0.8683
+Epoch 19/50
+211/211 [==============================] - 1s 4ms/step - loss: 0.0690 - accuracy: 0.9737 - val_loss: 0.5236 - val_accuracy: 0.8653
+Epoch 20/50
+211/211 [==============================] - 1s 4ms/step - loss: 0.0647 - accuracy: 0.9756 - val_loss: 0.5389 - val_accuracy: 0.8620
+Epoch 21/50
+211/211 [==============================] - 1s 4ms/step - loss: 0.0585 - accuracy: 0.9779 - val_loss: 0.5691 - val_accuracy: 0.8690
+Epoch 22/50
+211/211 [==============================] - 1s 4ms/step - loss: 0.0592 - accuracy: 0.9777 - val_loss: 0.5927 - val_accuracy: 0.8623
+Epoch 23/50
+211/211 [==============================] - 1s 4ms/step - loss: 0.0651 - accuracy: 0.9757 - val_loss: 0.5288 - val_accuracy: 0.8670
+Epoch 24/50
+211/211 [==============================] - 1s 4ms/step - loss: 0.0588 - accuracy: 0.9781 - val_loss: 0.5623 - val_accuracy: 0.8663
+Epoch 25/50
+211/211 [==============================] - 1s 4ms/step - loss: 0.0622 - accuracy: 0.9766 - val_loss: 0.5416 - val_accuracy: 0.8677
+Epoch 26/50
+211/211 [==============================] - 1s 4ms/step - loss: 0.0646 - accuracy: 0.9747 - val_loss: 0.5431 - val_accuracy: 0.8647
+Epoch 27/50
+211/211 [==============================] - 1s 4ms/step - loss: 0.0581 - accuracy: 0.9787 - val_loss: 0.5923 - val_accuracy: 0.8640
+Epoch 28/50
+211/211 [==============================] - 1s 4ms/step - loss: 0.0575 - accuracy: 0.9786 - val_loss: 0.5783 - val_accuracy: 0.8743
+Epoch 29/50
+211/211 [==============================] - 1s 4ms/step - loss: 0.0583 - accuracy: 0.9783 - val_loss: 0.5742 - val_accuracy: 0.8703
+Epoch 30/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0558 - accuracy: 0.9800 - val_loss: 0.5673 - val_accuracy: 0.8703
+Epoch 31/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0557 - accuracy: 0.9790 - val_loss: 0.5604 - val_accuracy: 0.8683
+Epoch 32/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0567 - accuracy: 0.9781 - val_loss: 0.5714 - val_accuracy: 0.8700
+Epoch 33/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0566 - accuracy: 0.9787 - val_loss: 0.5915 - val_accuracy: 0.8693
+Epoch 34/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0558 - accuracy: 0.9791 - val_loss: 0.5833 - val_accuracy: 0.8647
+Epoch 35/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0568 - accuracy: 0.9790 - val_loss: 0.5700 - val_accuracy: 0.8690
+Epoch 36/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0550 - accuracy: 0.9795 - val_loss: 0.5621 - val_accuracy: 0.8707
+Epoch 37/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0544 - accuracy: 0.9794 - val_loss: 0.5886 - val_accuracy: 0.8663
+Epoch 38/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0560 - accuracy: 0.9790 - val_loss: 0.5700 - val_accuracy: 0.8700
+Epoch 39/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0530 - accuracy: 0.9796 - val_loss: 0.6133 - val_accuracy: 0.8670
+Epoch 40/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0555 - accuracy: 0.9795 - val_loss: 0.5893 - val_accuracy: 0.8660
+Epoch 41/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0553 - accuracy: 0.9790 - val_loss: 0.6191 - val_accuracy: 0.8657
+Epoch 42/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0521 - accuracy: 0.9805 - val_loss: 0.5944 - val_accuracy: 0.8690
+Epoch 43/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0516 - accuracy: 0.9808 - val_loss: 0.6012 - val_accuracy: 0.8687
+Epoch 44/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0495 - accuracy: 0.9818 - val_loss: 0.6279 - val_accuracy: 0.8720
+Epoch 45/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0520 - accuracy: 0.9810 - val_loss: 0.6298 - val_accuracy: 0.8690
+Epoch 46/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0487 - accuracy: 0.9816 - val_loss: 0.6375 - val_accuracy: 0.8703
+Epoch 47/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0505 - accuracy: 0.9806 - val_loss: 0.6342 - val_accuracy: 0.8720
+Epoch 48/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0474 - accuracy: 0.9822 - val_loss: 0.6572 - val_accuracy: 0.8620
+Epoch 49/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0488 - accuracy: 0.9819 - val_loss: 0.6287 - val_accuracy: 0.8690
+Epoch 50/50
+211/211 [==============================] - 1s 3ms/step - loss: 0.0487 - accuracy: 0.9816 - val_loss: 0.6265 - val_accuracy: 0.8687
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## plotting </span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">history</span><span class="o">.</span><span class="n">history</span>
+
+<span class="n">history_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">],</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">],</span> <span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;val_loss&#39;</span><span class="p">],</span> <span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;val_accuracy&#39;</span><span class="p">])),</span>
+                          <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">,</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span><span class="s1">&#39;val_loss&#39;</span><span class="p">,</span><span class="s1">&#39;val_accurary&#39;</span><span class="p">])</span>
+<span class="n">history_df</span><span class="p">[</span><span class="s1">&#39;epoch&#39;</span><span class="p">]</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">history_df</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">])</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">history_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>loss</th>
+      <th>accuracy</th>
+      <th>val_loss</th>
+      <th>val_accurary</th>
+      <th>epoch</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.419730</td>
+      <td>0.809000</td>
+      <td>0.322251</td>
+      <td>0.862000</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.330260</td>
+      <td>0.858259</td>
+      <td>0.312898</td>
+      <td>0.864000</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.320665</td>
+      <td>0.863407</td>
+      <td>0.308870</td>
+      <td>0.864333</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.310101</td>
+      <td>0.867481</td>
+      <td>0.303316</td>
+      <td>0.867333</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.304804</td>
+      <td>0.871926</td>
+      <td>0.302841</td>
+      <td>0.873000</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.292450</td>
+      <td>0.876519</td>
+      <td>0.296977</td>
+      <td>0.873667</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.283341</td>
+      <td>0.884704</td>
+      <td>0.297412</td>
+      <td>0.869000</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.275332</td>
+      <td>0.884630</td>
+      <td>0.299703</td>
+      <td>0.868667</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.265320</td>
+      <td>0.893037</td>
+      <td>0.299673</td>
+      <td>0.872000</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>0.255613</td>
+      <td>0.896852</td>
+      <td>0.300012</td>
+      <td>0.873333</td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;train loss&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;val_loss&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;val loss&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;epoch&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Cross-entropy loss&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+
+
+<span class="c1"># # style</span>
+<span class="c1"># plt.style.use(&#39;seaborn-darkgrid&#39;)</span>
+ 
+<span class="c1"># # create a color palette</span>
+<span class="c1"># palette = plt.get_cmap(&#39;Set1&#39;)</span>
+ 
+<span class="c1"># # multiple line plot</span>
+<span class="c1"># num=0</span>
+<span class="c1"># for column in history_df.drop([&#39;epoch&#39;,&#39;loss&#39;,&#39;val_loss&#39;], axis=1):</span>
+<span class="c1">#   num+=1</span>
+<span class="c1">#   plt.plot(history_df[&#39;epoch&#39;], history_df[column], marker=&#39;&#39;, color=palette(num), linewidth=1, alpha=0.9, label=column)</span>
+ 
+<span class="c1"># # Add legend</span>
+<span class="c1"># plt.legend(loc=2, ncol=2)</span>
+ 
+<span class="c1"># # Add titles</span>
+<span class="c1"># plt.title(&quot;A (bad) Spaghetti plot&quot;, loc=&#39;left&#39;, fontsize=12, fontweight=0, color=&#39;orange&#39;)</span>
+<span class="c1"># plt.xlabel(&quot;Time&quot;)</span>
+<span class="c1"># plt.ylabel(&quot;Score&quot;)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/transfer-learning-sent-encoding_33_0.png" src="_images/transfer-learning-sent-encoding_33_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;train accuracy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;val_accuracy&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;val accuracy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;epoch&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;accuracy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/transfer-learning-sent-encoding_34_0.png" src="_images/transfer-learning-sent-encoding_34_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">test_label</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>469/469 [==============================] - 1s 2ms/step - loss: 0.6929 - accuracy: 0.8607
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.6929293870925903, 0.8606666922569275]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span> 
+<span class="c1">#y_pred = np.argmax(y_pred, axis = 1)[:5] </span>
+<span class="n">label</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">test_label</span><span class="p">,</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)[:</span><span class="mi">5</span><span class="p">]</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">y_pred</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">label</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1.4283112e-01 8.5716891e-01]
+ [5.6122297e-01 4.3877703e-01]
+ [1.6821243e-01 8.3178753e-01]
+ [1.0710892e-07 9.9999988e-01]
+ [6.6318661e-01 3.3681333e-01]]
+[1 1 0 1 0]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">[:</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span>
+
+<span class="s2">&quot;Bad&quot;</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;Good&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.1428309 0.8571691]]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Good&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">test_text</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;i love the series many of the stereotypes portraying southerrners as hicks are very apparent but such people do exist all too frequently the portrayal of southern government rings all too true as well but the sympathetic characters reminds one of the many good things about the south as well some things never change and we see the good old boys every day there is a lucas buck in every southern town who has only to make a phone call to make things happen and the storybook po white trash are all too familiar aside from the supernatural elements everything else could very well happen in the modern south i somehow think trinity sc must have been in barnwell county&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># functions from Text Analytics with Python book</span>
+<span class="k">def</span> <span class="nf">get_metrics</span><span class="p">(</span><span class="n">true_labels</span><span class="p">,</span> <span class="n">predicted_labels</span><span class="p">):</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Accuracy:&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span>
+                        <span class="n">metrics</span><span class="o">.</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">true_labels</span><span class="p">,</span> 
+                                               <span class="n">predicted_labels</span><span class="p">),</span>
+                        <span class="mi">4</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Precision:&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span>
+                        <span class="n">metrics</span><span class="o">.</span><span class="n">precision_score</span><span class="p">(</span><span class="n">true_labels</span><span class="p">,</span> 
+                                               <span class="n">predicted_labels</span><span class="p">,</span>
+                                               <span class="n">average</span><span class="o">=</span><span class="s1">&#39;weighted&#39;</span><span class="p">),</span>
+                        <span class="mi">4</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Recall:&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span>
+                        <span class="n">metrics</span><span class="o">.</span><span class="n">recall_score</span><span class="p">(</span><span class="n">true_labels</span><span class="p">,</span> 
+                                               <span class="n">predicted_labels</span><span class="p">,</span>
+                                               <span class="n">average</span><span class="o">=</span><span class="s1">&#39;weighted&#39;</span><span class="p">),</span>
+                        <span class="mi">4</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;F1 Score:&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span>
+                        <span class="n">metrics</span><span class="o">.</span><span class="n">f1_score</span><span class="p">(</span><span class="n">true_labels</span><span class="p">,</span> 
+                                               <span class="n">predicted_labels</span><span class="p">,</span>
+                                               <span class="n">average</span><span class="o">=</span><span class="s1">&#39;weighted&#39;</span><span class="p">),</span>
+                        <span class="mi">4</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">display_confusion_matrix</span><span class="p">(</span><span class="n">true_labels</span><span class="p">,</span> <span class="n">predicted_labels</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]):</span>
+    
+    <span class="n">total_classes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">classes</span><span class="p">)</span>
+    <span class="n">level_labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">total_classes</span><span class="o">*</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">total_classes</span><span class="p">))]</span>
+
+    <span class="n">cm</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_true</span><span class="o">=</span><span class="n">true_labels</span><span class="p">,</span> <span class="n">y_pred</span><span class="o">=</span><span class="n">predicted_labels</span><span class="p">,</span> 
+                                  <span class="n">labels</span><span class="o">=</span><span class="n">classes</span><span class="p">)</span>
+    <span class="n">cm_frame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">cm</span><span class="p">,</span> 
+                            <span class="n">columns</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="p">(</span><span class="n">levels</span><span class="o">=</span><span class="p">[[</span><span class="s1">&#39;Predicted:&#39;</span><span class="p">],</span> <span class="n">classes</span><span class="p">],</span> 
+                                                  <span class="n">codes</span><span class="o">=</span><span class="n">level_labels</span><span class="p">),</span> 
+                            <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="p">(</span><span class="n">levels</span><span class="o">=</span><span class="p">[[</span><span class="s1">&#39;Actual:&#39;</span><span class="p">],</span> <span class="n">classes</span><span class="p">],</span> 
+                                                <span class="n">codes</span><span class="o">=</span><span class="n">level_labels</span><span class="p">))</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="n">cm_frame</span><span class="p">)</span> 
+<span class="k">def</span> <span class="nf">display_classification_report</span><span class="p">(</span><span class="n">true_labels</span><span class="p">,</span> <span class="n">predicted_labels</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]):</span>
+
+    <span class="n">report</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_true</span><span class="o">=</span><span class="n">true_labels</span><span class="p">,</span> 
+                                           <span class="n">y_pred</span><span class="o">=</span><span class="n">predicted_labels</span><span class="p">,</span> 
+                                           <span class="n">labels</span><span class="o">=</span><span class="n">classes</span><span class="p">)</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="n">report</span><span class="p">)</span>
+    
+    
+    
+<span class="k">def</span> <span class="nf">display_model_performance_metrics</span><span class="p">(</span><span class="n">true_labels</span><span class="p">,</span> <span class="n">predicted_labels</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Model Performance metrics:&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">30</span><span class="p">)</span>
+    <span class="n">get_metrics</span><span class="p">(</span><span class="n">true_labels</span><span class="o">=</span><span class="n">true_labels</span><span class="p">,</span> <span class="n">predicted_labels</span><span class="o">=</span><span class="n">predicted_labels</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Model Classification report:&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">30</span><span class="p">)</span>
+    <span class="n">display_classification_report</span><span class="p">(</span><span class="n">true_labels</span><span class="o">=</span><span class="n">true_labels</span><span class="p">,</span> <span class="n">predicted_labels</span><span class="o">=</span><span class="n">predicted_labels</span><span class="p">,</span> 
+                                  <span class="n">classes</span><span class="o">=</span><span class="n">classes</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Prediction Confusion Matrix:&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">30</span><span class="p">)</span>
+    <span class="n">display_confusion_matrix</span><span class="p">(</span><span class="n">true_labels</span><span class="o">=</span><span class="n">true_labels</span><span class="p">,</span> <span class="n">predicted_labels</span><span class="o">=</span><span class="n">predicted_labels</span><span class="p">,</span> 
+                             <span class="n">classes</span><span class="o">=</span><span class="n">classes</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">test_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">test_pred</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">test_pred</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">test_sentiments</span><span class="p">)</span>
+<span class="n">display_model_performance_metrics</span><span class="p">(</span><span class="n">test_sentiments</span><span class="p">,</span> <span class="n">test_pred</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1 1 1 ... 1 0 1]
+[1 1 0 ... 1 0 1]
+Model Performance metrics:
+------------------------------
+Accuracy: 0.8607
+Precision: 0.8607
+Recall: 0.8607
+F1 Score: 0.8607
+
+Model Classification report:
+------------------------------
+              precision    recall  f1-score   support
+
+           1       0.86      0.87      0.86      7538
+           0       0.86      0.85      0.86      7462
+
+    accuracy                           0.86     15000
+   macro avg       0.86      0.86      0.86     15000
+weighted avg       0.86      0.86      0.86     15000
+
+
+Prediction Confusion Matrix:
+------------------------------
+          Predicted:      
+                   1     0
+Actual: 1       6539   999
+        0       1091  6371
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r-tensorflow"
+        },
+        kernelOptions: {
+            kernelName: "r-tensorflow",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'r-tensorflow'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="text-gen-lstm-v1.html" title="previous page">Text Generation</a>
+    <a class='right-next' id="next-link" href="hyperparameter-tuning.html" title="next page">Hyper-Parameter Tuning</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alvin Chen<br/>
+        
+            &copy; Copyright 2020 Alvin Chen.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="_static/js/index.js"></script>
+    
+  </body>
+</html>

@@ -1,0 +1,678 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Natural Language Tool-Kits (NLTK) &#8212; Python Notes for Linguistics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Web Crawler" href="web-crawler.html" />
+    <link rel="prev" title="Corpus Linguistics with Python" href="corpus-processing.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/ntnu03.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Python Notes for Linguistics</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="python-basics.html">
+   Python Basics
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="corpus-processing.html">
+   Corpus Linguistics with Python
+  </a>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Natural Language Tool-Kits (NLTK)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="web-crawler.html">
+     Web Crawler
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="corpus-linguistics-methods.html">
+     Corpus Lingustics Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tokenization.html">
+     Tokenization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="word-cloud.html">
+     Word Cloud
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="patterns-constructions.html">
+     Patterns and Constructions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="bnc.html">
+     BNC-XML
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="childes.html">
+     CHILDES Corpus
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="praat-textgrid.html">
+     Praat TextGrid Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="vectorizing-text.html">
+     Vectorizing Texts
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="jieba.html">
+     Chinese Word Segmentation (jieba)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ckiptagger.html">
+     Chinese Word Segmentation (ckiptagger)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="nlp.html">
+   Natural Language Processing with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <div style="text-align:left">
+    <a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
+</div>
+
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/nltk.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/nltk.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/nltk.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#install">
+   Install
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#corpora-data">
+   Corpora Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#wordnet">
+   WordNet
+  </a>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="natural-language-tool-kits-nltk">
+<h1>Natural Language Tool-Kits (NLTK)<a class="headerlink" href="#natural-language-tool-kits-nltk" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>The almightly <code class="docutils literal notranslate"><span class="pre">nltk</span></code> package!</p></li>
+</ul>
+<div class="section" id="install">
+<h2>Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Install package in terminal</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!pip install nltk
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Download nltk data in python</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">halt_on_error</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
+<span class="c1"># nltk.download(&#39;all&#39;, halt_on_error=False)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="corpora-data">
+<h2>Corpora Data<a class="headerlink" href="#corpora-data" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>The package includes a lot of pre-loaded corpora datasets</p></li>
+<li><p>The default <code class="docutils literal notranslate"><span class="pre">nltk_data</span></code> directory is in <code class="docutils literal notranslate"><span class="pre">/Users/YOUT_NAME/nltk_data/</span></code></p></li>
+<li><p>Selective Examples</p>
+<ul>
+<li><p>Brown Corpus</p></li>
+<li><p>Reuters Corpus</p></li>
+<li><p>WordNet</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">gutenberg</span><span class="p">,</span> <span class="n">brown</span><span class="p">,</span> <span class="n">reuters</span>
+
+<span class="c1"># brown corpus</span>
+<span class="c1">## Categories (topics?)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Brown Corpus Total Categories: &#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">brown</span><span class="o">.</span><span class="n">categories</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Categories List: &#39;</span><span class="p">,</span> <span class="n">brown</span><span class="o">.</span><span class="n">categories</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Brown Corpus Total Categories:  15
+Categories List:  [&#39;adventure&#39;, &#39;belles_lettres&#39;, &#39;editorial&#39;, &#39;fiction&#39;, &#39;government&#39;, &#39;hobbies&#39;, &#39;humor&#39;, &#39;learned&#39;, &#39;lore&#39;, &#39;mystery&#39;, &#39;news&#39;, &#39;religion&#39;, &#39;reviews&#39;, &#39;romance&#39;, &#39;science_fiction&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sentences</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">brown</span><span class="o">.</span><span class="n">sents</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span> <span class="c1">## first sentence</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">brown</span><span class="o">.</span><span class="n">sents</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="s1">&#39;fiction&#39;</span><span class="p">))</span> <span class="c1">## first sentence for fiction texts</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;The&#39;, &#39;Fulton&#39;, &#39;County&#39;, &#39;Grand&#39;, &#39;Jury&#39;, &#39;said&#39;, &#39;Friday&#39;, &#39;an&#39;, &#39;investigation&#39;, &#39;of&#39;, &quot;Atlanta&#39;s&quot;, &#39;recent&#39;, &#39;primary&#39;, &#39;election&#39;, &#39;produced&#39;, &#39;``&#39;, &#39;no&#39;, &#39;evidence&#39;, &quot;&#39;&#39;&quot;, &#39;that&#39;, &#39;any&#39;, &#39;irregularities&#39;, &#39;took&#39;, &#39;place&#39;, &#39;.&#39;]
+[[&#39;Thirty-three&#39;], [&#39;Scotty&#39;, &#39;did&#39;, &#39;not&#39;, &#39;go&#39;, &#39;back&#39;, &#39;to&#39;, &#39;school&#39;, &#39;.&#39;], ...]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Tagged Sentences</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">brown</span><span class="o">.</span><span class="n">tagged_sents</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;The&#39;, &#39;AT&#39;), (&#39;Fulton&#39;, &#39;NP-TL&#39;), (&#39;County&#39;, &#39;NN-TL&#39;), (&#39;Grand&#39;, &#39;JJ-TL&#39;), (&#39;Jury&#39;, &#39;NN-TL&#39;), (&#39;said&#39;, &#39;VBD&#39;), (&#39;Friday&#39;, &#39;NR&#39;), (&#39;an&#39;, &#39;AT&#39;), (&#39;investigation&#39;, &#39;NN&#39;), (&#39;of&#39;, &#39;IN&#39;), (&quot;Atlanta&#39;s&quot;, &#39;NP$&#39;), (&#39;recent&#39;, &#39;JJ&#39;), (&#39;primary&#39;, &#39;NN&#39;), (&#39;election&#39;, &#39;NN&#39;), (&#39;produced&#39;, &#39;VBD&#39;), (&#39;``&#39;, &#39;``&#39;), (&#39;no&#39;, &#39;AT&#39;), (&#39;evidence&#39;, &#39;NN&#39;), (&quot;&#39;&#39;&quot;, &quot;&#39;&#39;&quot;), (&#39;that&#39;, &#39;CS&#39;), (&#39;any&#39;, &#39;DTI&#39;), (&#39;irregularities&#39;, &#39;NNS&#39;), (&#39;took&#39;, &#39;VBD&#39;), (&#39;place&#39;, &#39;NN&#39;), (&#39;.&#39;, &#39;.&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Sentence in natural forms</span>
+<span class="n">sents</span> <span class="o">=</span> <span class="n">brown</span><span class="o">.</span><span class="n">sents</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="s1">&#39;fiction&#39;</span><span class="p">)</span>
+<span class="p">[</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sent</span><span class="p">)</span> <span class="k">for</span> <span class="n">sent</span> <span class="ow">in</span> <span class="n">sents</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Scotty did not go back to school .&#39;,
+ &#39;His parents talked seriously and lengthily to their own doctor and to a specialist at the University Hospital -- Mr. McKinley was entitled to a discount for members of his family -- and it was decided it would be best for him to take the remainder of the term off , spend a lot of time in bed and , for the rest , do pretty much as he chose -- provided , of course , he chose to do nothing too exciting or too debilitating .&#39;,
+ &#39;His teacher and his school principal were conferred with and everyone agreed that , if he kept up with a certain amount of work at home , there was little danger of his losing a term .&#39;,
+ &#39;Scotty accepted the decision with indifference and did not enter the arguments .&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Get tagged words</span>
+<span class="n">tagged_words</span> <span class="o">=</span> <span class="n">brown</span><span class="o">.</span><span class="n">tagged_words</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="s1">&#39;fiction&#39;</span><span class="p">)</span>
+
+<span class="c1">#print(tagged_words[1]) ## a tuple</span>
+
+<span class="c1">## Get all nouns </span>
+<span class="n">nouns</span> <span class="o">=</span> <span class="p">[(</span><span class="n">word</span><span class="p">,</span> <span class="n">tag</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">tagged_words</span> 
+                      <span class="k">if</span> <span class="nb">any</span> <span class="p">(</span><span class="n">noun_tag</span> <span class="ow">in</span> <span class="n">tag</span> <span class="k">for</span> <span class="n">noun_tag</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;NP&#39;</span><span class="p">,</span><span class="s1">&#39;NN&#39;</span><span class="p">])]</span>
+<span class="c1">## Check first ten nouns</span>
+<span class="n">nouns</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;Scotty&#39;, &#39;NP&#39;),
+ (&#39;school&#39;, &#39;NN&#39;),
+ (&#39;parents&#39;, &#39;NNS&#39;),
+ (&#39;doctor&#39;, &#39;NN&#39;),
+ (&#39;specialist&#39;, &#39;NN&#39;),
+ (&#39;University&#39;, &#39;NN-TL&#39;),
+ (&#39;Hospital&#39;, &#39;NN-TL&#39;),
+ (&#39;Mr.&#39;, &#39;NP&#39;),
+ (&#39;McKinley&#39;, &#39;NP&#39;),
+ (&#39;discount&#39;, &#39;NN&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Creating Freq list</span>
+<span class="n">nouns_freq</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">FreqDist</span><span class="p">([</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">nouns</span><span class="p">])</span>
+<span class="nb">sorted</span><span class="p">(</span><span class="n">nouns_freq</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)[:</span><span class="mi">20</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;man&#39;, 111),
+ (&#39;time&#39;, 99),
+ (&#39;men&#39;, 72),
+ (&#39;room&#39;, 63),
+ (&#39;way&#39;, 62),
+ (&#39;eyes&#39;, 60),
+ (&#39;face&#39;, 55),
+ (&#39;house&#39;, 54),
+ (&#39;head&#39;, 54),
+ (&#39;night&#39;, 53),
+ (&#39;day&#39;, 52),
+ (&#39;hand&#39;, 50),
+ (&#39;door&#39;, 47),
+ (&#39;life&#39;, 44),
+ (&#39;years&#39;, 44),
+ (&#39;Mrs.&#39;, 41),
+ (&#39;God&#39;, 41),
+ (&#39;Kate&#39;, 40),
+ (&#39;Mr.&#39;, 39),
+ (&#39;people&#39;, 39)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">sorted</span><span class="p">(</span><span class="n">nouns_freq</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)[:</span><span class="mi">20</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;zoo&#39;, 2),
+ (&#39;zlotys&#39;, 1),
+ (&#39;zenith&#39;, 1),
+ (&#39;youth&#39;, 5),
+ (&#39;yelling&#39;, 1),
+ (&#39;years&#39;, 44),
+ (&#39;yearning&#39;, 1),
+ (&quot;year&#39;s&quot;, 1),
+ (&#39;year&#39;, 9),
+ (&#39;yards&#39;, 4),
+ (&#39;yard&#39;, 7),
+ (&#39;yachts&#39;, 1),
+ (&#39;writing&#39;, 2),
+ (&#39;writers&#39;, 1),
+ (&#39;writer&#39;, 4),
+ (&#39;wrists&#39;, 1),
+ (&#39;wrist&#39;, 2),
+ (&#39;wrinkles&#39;, 1),
+ (&#39;wrinkle&#39;, 1),
+ (&#39;wretch&#39;, 1)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nouns_freq</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;man&#39;, 111),
+ (&#39;time&#39;, 99),
+ (&#39;men&#39;, 72),
+ (&#39;room&#39;, 63),
+ (&#39;way&#39;, 62),
+ (&#39;eyes&#39;, 60),
+ (&#39;face&#39;, 55),
+ (&#39;house&#39;, 54),
+ (&#39;head&#39;, 54),
+ (&#39;night&#39;, 53)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Accsess data via fileid</span>
+<span class="n">brown</span><span class="o">.</span><span class="n">fileids</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="s1">&#39;fiction&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">brown</span><span class="o">.</span><span class="n">sents</span><span class="p">(</span><span class="n">fileids</span><span class="o">=</span><span class="s1">&#39;ck01&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[&#39;Thirty-three&#39;], [&#39;Scotty&#39;, &#39;did&#39;, &#39;not&#39;, &#39;go&#39;, &#39;back&#39;, &#39;to&#39;, &#39;school&#39;, &#39;.&#39;], ...]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="wordnet">
+<h2>WordNet<a class="headerlink" href="#wordnet" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>A dictionary resource</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">wordnet</span> <span class="k">as</span> <span class="n">wn</span>
+<span class="n">word</span> <span class="o">=</span> <span class="s1">&#39;walk&#39;</span>
+
+<span class="c1"># get synsets</span>
+<span class="n">word_synsets</span> <span class="o">=</span> <span class="n">wn</span><span class="o">.</span><span class="n">synsets</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+<span class="n">word_synsets</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Synset(&#39;walk.n.01&#39;),
+ Synset(&#39;base_on_balls.n.01&#39;),
+ Synset(&#39;walk.n.03&#39;),
+ Synset(&#39;walk.n.04&#39;),
+ Synset(&#39;walk.n.05&#39;),
+ Synset(&#39;walk.n.06&#39;),
+ Synset(&#39;walk_of_life.n.01&#39;),
+ Synset(&#39;walk.v.01&#39;),
+ Synset(&#39;walk.v.02&#39;),
+ Synset(&#39;walk.v.03&#39;),
+ Synset(&#39;walk.v.04&#39;),
+ Synset(&#39;walk.v.05&#39;),
+ Synset(&#39;walk.v.06&#39;),
+ Synset(&#39;walk.v.07&#39;),
+ Synset(&#39;walk.v.08&#39;),
+ Synset(&#39;walk.v.09&#39;),
+ Synset(&#39;walk.v.10&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Get details of each synset</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">word_synsets</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">name</span><span class="p">())</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;walk.v&#39;</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s1">&#39;Syset ID: </span><span class="si">%s</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="s1">&#39;POS Tag: </span><span class="si">%s</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="s1">&#39;Definition: </span><span class="si">%s</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="s1">&#39;Examples: </span><span class="si">%s</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">name</span><span class="p">(),</span> <span class="n">s</span><span class="o">.</span><span class="n">pos</span><span class="p">(),</span> <span class="n">s</span><span class="o">.</span><span class="n">definition</span><span class="p">(),</span><span class="n">s</span><span class="o">.</span><span class="n">examples</span><span class="p">())</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Syset ID: walk.v.01 
+POS Tag: v 
+Definition: use one&#39;s feet to advance; advance by steps 
+Examples: [&quot;Walk, don&#39;t run!&quot;, &#39;We walked instead of driving&#39;, &#39;She walks with a slight limp&#39;, &#39;The patient cannot walk yet&#39;, &#39;Walk over to the cabinet&#39;] 
+
+Syset ID: walk.v.02 
+POS Tag: v 
+Definition: accompany or escort 
+Examples: [&quot;I&#39;ll walk you to your car&quot;] 
+
+Syset ID: walk.v.03 
+POS Tag: v 
+Definition: obtain a base on balls 
+Examples: [] 
+
+Syset ID: walk.v.04 
+POS Tag: v 
+Definition: traverse or cover by walking 
+Examples: [&#39;Walk the tightrope&#39;, &#39;Paul walked the streets of Damascus&#39;, &#39;She walks 3 miles every day&#39;] 
+
+Syset ID: walk.v.05 
+POS Tag: v 
+Definition: give a base on balls to 
+Examples: [] 
+
+Syset ID: walk.v.06 
+POS Tag: v 
+Definition: live or behave in a specified manner 
+Examples: [&#39;walk in sadness&#39;] 
+
+Syset ID: walk.v.07 
+POS Tag: v 
+Definition: be or act in association with 
+Examples: [&#39;We must walk with our dispossessed brothers and sisters&#39;, &#39;Walk with God&#39;] 
+
+Syset ID: walk.v.08 
+POS Tag: v 
+Definition: walk at a pace 
+Examples: [&#39;The horses walked across the meadow&#39;] 
+
+Syset ID: walk.v.09 
+POS Tag: v 
+Definition: make walk 
+Examples: [&#39;He walks the horse up the mountain&#39;, &#39;Walk the dog twice a day&#39;] 
+
+Syset ID: walk.v.10 
+POS Tag: v 
+Definition: take a walk; go for a walk; walk for pleasure 
+Examples: [&#39;The lovers held hands while walking&#39;, &#39;We like to walk every Sunday&#39;] 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ckiptagger"
+        },
+        kernelOptions: {
+            kernelName: "ckiptagger",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ckiptagger'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="corpus-processing.html" title="previous page">Corpus Linguistics with Python</a>
+    <a class='right-next' id="next-link" href="web-crawler.html" title="next page">Web Crawler</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alvin Chen<br/>
+        
+            &copy; Copyright 2020 Alvin Chen.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="_static/js/index.js"></script>
+    
+  </body>
+</html>

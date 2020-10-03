@@ -1,0 +1,739 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>CHILDES Corpus &#8212; Python Notes for Linguistics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Praat TextGrid Data" href="praat-textgrid.html" />
+    <link rel="prev" title="BNC-XML" href="bnc.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/ntnu03.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Python Notes for Linguistics</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="python-basics.html">
+   Python Basics
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="corpus-processing.html">
+   Corpus Linguistics with Python
+  </a>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="nltk.html">
+     Natural Language Tool-Kits (NLTK)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="web-crawler.html">
+     Web Crawler
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="corpus-linguistics-methods.html">
+     Corpus Lingustics Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tokenization.html">
+     Tokenization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="word-cloud.html">
+     Word Cloud
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="patterns-constructions.html">
+     Patterns and Constructions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="bnc.html">
+     BNC-XML
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     CHILDES Corpus
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="praat-textgrid.html">
+     Praat TextGrid Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="vectorizing-text.html">
+     Vectorizing Texts
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="jieba.html">
+     Chinese Word Segmentation (jieba)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ckiptagger.html">
+     Chinese Word Segmentation (ckiptagger)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="nlp.html">
+   Natural Language Processing with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <div style="text-align:left">
+    <a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
+</div>
+
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/childes.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/childes.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/childes.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cha-file">
+   CHA file
+  </a>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="childes-corpus">
+<h1>CHILDES Corpus<a class="headerlink" href="#childes-corpus" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>NLTK can deal with the xml format of the CHILDES corpus</p></li>
+<li><p>CHILDES xml is available at <a class="reference external" href="https://childes.talkbank.org/data-xml/">https://childes.talkbank.org/data-xml/</a></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus.reader</span> <span class="kn">import</span> <span class="n">CHILDESCorpusReader</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">CHILDESCorpusReader</span><span class="p">(</span><span class="s1">&#39;../../../Corpus/CHILDES/Chinese/Chang1_xml/&#39;</span><span class="p">,</span> <span class="s1">&#39;.*.xml&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="o">.</span><span class="n">fileids</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;01.xml&#39;,
+ &#39;02.xml&#39;,
+ &#39;03.xml&#39;,
+ &#39;04.xml&#39;,
+ &#39;05.xml&#39;,
+ &#39;06.xml&#39;,
+ &#39;07.xml&#39;,
+ &#39;08.xml&#39;,
+ &#39;09.xml&#39;,
+ &#39;10.xml&#39;,
+ &#39;11.xml&#39;,
+ &#39;12.xml&#39;,
+ &#39;13.xml&#39;,
+ &#39;14.xml&#39;,
+ &#39;15.xml&#39;,
+ &#39;16.xml&#39;,
+ &#39;17.xml&#39;,
+ &#39;18.xml&#39;,
+ &#39;19.xml&#39;,
+ &#39;20.xml&#39;,
+ &#39;21.xml&#39;,
+ &#39;22.xml&#39;,
+ &#39;23.xml&#39;,
+ &#39;24.xml&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># print basic profile for each xml</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">fileids</span><span class="p">()[:</span><span class="mi">5</span><span class="p">]:</span>
+    <span class="n">cur_corpus</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">corpus</span><span class="p">(</span><span class="n">f</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">cur_corpus</span><span class="p">[</span><span class="s1">&#39;Corpus&#39;</span><span class="p">],</span>
+          <span class="n">cur_corpus</span><span class="p">[</span><span class="s1">&#39;PID&#39;</span><span class="p">],</span>
+         <span class="n">cur_corpus</span><span class="p">[</span><span class="s1">&#39;ActivityType&#39;</span><span class="p">],</span>
+         <span class="n">cur_corpus</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Num of Words: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="n">f</span><span class="p">))))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Num of Sents: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">sents</span><span class="p">(</span><span class="n">f</span><span class="p">))))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chang1 11312/c-00007599-1 toyplay 1996-02-06
+Num of Words: 1632
+Num of Sents: 343
+Chang1 11312/c-00007600-1 toyplay 1996-02-06
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Num of Words: 864
+Num of Sents: 215
+Chang1 11312/c-00007601-1 toyplay 1996-02-06
+Num of Words: 879
+Num of Sents: 197
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chang1 11312/c-00007602-1 toyplay 1996-02-07
+Num of Words: 816
+Num of Sents: 144
+Chang1 11312/c-00007603-1 toyplay 1996-02-07
+Num of Words: 1294
+Num of Sents: 200
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># participants</span>
+<span class="n">r</span><span class="o">.</span><span class="n">participants</span><span class="p">(</span><span class="n">fileids</span><span class="o">=</span><span class="n">r</span><span class="o">.</span><span class="n">fileids</span><span class="p">()[</span><span class="mi">10</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span><span class="c1"># first file participants</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>defaultdict(&lt;function nltk.corpus.reader.childes.CHILDESCorpusReader._get_participants.&lt;locals&gt;.dictOfDicts()&gt;,
+            {&#39;CHI&#39;: defaultdict(&lt;function nltk.corpus.reader.childes.CHILDESCorpusReader._get_participants.&lt;locals&gt;.dictOfDicts()&gt;,
+                         {&#39;id&#39;: &#39;CHI&#39;,
+                          &#39;name&#39;: &#39;中立&#39;,
+                          &#39;role&#39;: &#39;Target_Child&#39;,
+                          &#39;language&#39;: &#39;zho&#39;,
+                          &#39;age&#39;: &#39;P6Y05M&#39;,
+                          &#39;sex&#39;: &#39;male&#39;,
+                          &#39;group&#39;: &#39;six&#39;,
+                          &#39;SES&#39;: &#39;MC&#39;,
+                          &#39;birthday&#39;: &#39;1989-09-22&#39;}),
+             &#39;EXP&#39;: defaultdict(&lt;function nltk.corpus.reader.childes.CHILDESCorpusReader._get_participants.&lt;locals&gt;.dictOfDicts()&gt;,
+                         {&#39;id&#39;: &#39;EXP&#39;,
+                          &#39;role&#39;: &#39;Investigator&#39;,
+                          &#39;language&#39;: &#39;zho&#39;})})
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_speakers</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">participants</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">speakers_cur_file</span> <span class="ow">in</span> <span class="n">all_speakers</span><span class="p">[:</span><span class="mi">5</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;====&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">spid</span> <span class="ow">in</span> <span class="n">speakers_cur_file</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">cur_spid_data</span> <span class="o">=</span> <span class="n">speakers_cur_file</span><span class="p">[</span><span class="n">spid</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">spid</span><span class="p">,</span> <span class="s2">&quot;: &quot;</span><span class="p">,</span> <span class="p">[(</span><span class="n">param</span><span class="p">,</span> <span class="n">cur_spid_data</span><span class="p">[</span><span class="n">param</span><span class="p">])</span> <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">cur_spid_data</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>====
+CHI :  [(&#39;id&#39;, &#39;CHI&#39;), (&#39;name&#39;, &#39;爱华&#39;), (&#39;role&#39;, &#39;Target_Child&#39;), (&#39;language&#39;, &#39;zho&#39;), (&#39;age&#39;, &#39;P6Y05M&#39;), (&#39;sex&#39;, &#39;female&#39;), (&#39;group&#39;, &#39;six&#39;), (&#39;SES&#39;, &#39;MC&#39;), (&#39;birthday&#39;, &#39;1989-09-25&#39;)]
+EXP :  [(&#39;id&#39;, &#39;EXP&#39;), (&#39;role&#39;, &#39;Investigator&#39;), (&#39;language&#39;, &#39;zho&#39;)]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>====
+CHI :  [(&#39;id&#39;, &#39;CHI&#39;), (&#39;name&#39;, &#39;建华&#39;), (&#39;role&#39;, &#39;Target_Child&#39;), (&#39;language&#39;, &#39;zho&#39;), (&#39;age&#39;, &#39;P6Y01M&#39;), (&#39;sex&#39;, &#39;male&#39;), (&#39;group&#39;, &#39;six&#39;), (&#39;SES&#39;, &#39;MC&#39;), (&#39;birthday&#39;, &#39;1989-01-17&#39;)]
+EXP :  [(&#39;id&#39;, &#39;EXP&#39;), (&#39;role&#39;, &#39;Investigator&#39;), (&#39;language&#39;, &#39;zho&#39;)]
+====
+CHI :  [(&#39;id&#39;, &#39;CHI&#39;), (&#39;name&#39;, &#39;凯丽&#39;), (&#39;role&#39;, &#39;Target_Child&#39;), (&#39;language&#39;, &#39;zho&#39;), (&#39;age&#39;, &#39;P5Y07M&#39;), (&#39;sex&#39;, &#39;female&#39;), (&#39;group&#39;, &#39;five&#39;), (&#39;SES&#39;, &#39;MC&#39;), (&#39;birthday&#39;, &#39;1990-07-10&#39;)]
+EXP :  [(&#39;id&#39;, &#39;EXP&#39;), (&#39;role&#39;, &#39;Investigator&#39;), (&#39;language&#39;, &#39;zho&#39;)]
+====
+CHI :  [(&#39;id&#39;, &#39;CHI&#39;), (&#39;name&#39;, &#39;志强&#39;), (&#39;role&#39;, &#39;Target_Child&#39;), (&#39;language&#39;, &#39;zho&#39;), (&#39;age&#39;, &#39;P5Y11M&#39;), (&#39;sex&#39;, &#39;male&#39;), (&#39;group&#39;, &#39;five&#39;), (&#39;SES&#39;, &#39;MC&#39;), (&#39;birthday&#39;, &#39;1990-03-28&#39;)]
+EXP :  [(&#39;id&#39;, &#39;EXP&#39;), (&#39;role&#39;, &#39;Investigator&#39;), (&#39;language&#39;, &#39;zho&#39;)]
+====
+CHI :  [(&#39;id&#39;, &#39;CHI&#39;), (&#39;name&#39;, &#39;兰欣&#39;), (&#39;role&#39;, &#39;Target_Child&#39;), (&#39;language&#39;, &#39;zho&#39;), (&#39;age&#39;, &#39;P6Y02M&#39;), (&#39;sex&#39;, &#39;female&#39;), (&#39;group&#39;, &#39;six&#39;), (&#39;SES&#39;, &#39;MC&#39;), (&#39;birthday&#39;, &#39;1989-12-24&#39;)]
+EXP :  [(&#39;id&#39;, &#39;EXP&#39;), (&#39;role&#39;, &#39;Investigator&#39;), (&#39;language&#39;, &#39;zho&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;01.xml&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">sents</span><span class="p">(</span><span class="s1">&#39;01.xml&#39;</span><span class="p">,</span> <span class="n">speaker</span><span class="o">=</span><span class="s1">&#39;EXP&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">sents</span><span class="p">(</span><span class="s1">&#39;01.xml&#39;</span><span class="p">,</span> <span class="n">speaker</span><span class="o">=</span><span class="s1">&#39;CHI&#39;</span><span class="p">))</span> <span class="c1"># replace=T, stem=True</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[&#39;我们&#39;, &#39;来&#39;, &#39;玩&#39;, &#39;森林&#39;, &#39;的&#39;, &#39;游戏&#39;], [&#39;哦&#39;, &#39;这&#39;, &#39;是&#39;, &#39;森林&#39;, &#39;的&#39;, &#39;草地&#39;], ...]
+[[&#39;森林&#39;, &#39;有&#39;, &#39;很&#39;, &#39;多&#39;, &#39;树&#39;], [&#39;爸爸&#39;, &#39;办公室&#39;, &#39;有&#39;, &#39;好&#39;, &#39;多&#39;, &#39;树&#39;], ...]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># age</span>
+<span class="n">r</span><span class="o">.</span><span class="n">age</span><span class="p">()</span>
+<span class="n">r</span><span class="o">.</span><span class="n">age</span><span class="p">(</span><span class="n">month</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">r</span><span class="o">.</span><span class="n">age</span><span class="p">(</span><span class="n">fileids</span><span class="o">=</span><span class="s1">&#39;01.xml&#39;</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[77]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># MLU</span>
+<span class="n">r</span><span class="o">.</span><span class="n">MLU</span><span class="p">(</span><span class="n">fileids</span><span class="o">=</span><span class="s1">&#39;01.xml&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[5.5606060606060606]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[(</span><span class="n">age</span><span class="p">,</span> <span class="n">mlu</span><span class="p">)</span>  
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">fileids</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">age</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">age</span><span class="p">(</span><span class="n">fileids</span> <span class="o">=</span> <span class="n">f</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">mlu</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">MLU</span><span class="p">(</span><span class="n">fileids</span> <span class="o">=</span> <span class="n">f</span><span class="p">)</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(77, 5.5606060606060606),
+ (73, 4.304347826086956),
+ (67, 4.445783132530121),
+ (71, 5.046511627906977),
+ (74, 7.421052631578948),
+ (77, 8.365853658536585),
+ (71, 7.355263157894737),
+ (70, 9.371428571428572),
+ (67, 5.439024390243903),
+ (69, 5.931677018633541),
+ (77, 5.0),
+ (70, 6.712328767123288),
+ (48, 4.022222222222222),
+ (51, 5.208791208791209),
+ (52, 3.9863013698630136),
+ (51, 3.8867924528301887),
+ (50, 5.409638554216867),
+ (42, 3.3185840707964602),
+ (47, 6.27027027027027),
+ (47, 3.9545454545454546),
+ (49, 3.68),
+ (53, 4.785714285714286),
+ (46, 5.798941798941799),
+ (46, 3.5090909090909093)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span>
+
+<span class="n">age_mlu_data</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([(</span><span class="n">age</span><span class="p">,</span> <span class="n">mlu</span><span class="p">)</span>  
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">fileids</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">age</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">age</span><span class="p">(</span><span class="n">fileids</span> <span class="o">=</span> <span class="n">f</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">mlu</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">MLU</span><span class="p">(</span><span class="n">fileids</span> <span class="o">=</span> <span class="n">f</span><span class="p">)</span>
+<span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">,</span><span class="s1">&#39;MLU&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> rpy2.ipython
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">R</span>
+library(ggplot2)
+library(dplyr)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">R</span> -i age_mlu_data
+age_mlu_data %&gt;%
+ggplot(aes(Age, MLU)) +
+geom_point(size=2) +
+geom_smooth(method=&quot;lm&quot;) +
+labs(x=&quot;Child Age(Months)&quot;,y=&quot;Mean Length of Utterances (MLU)&quot;)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R[write to console]: `geom_smooth()` using formula &#39;y ~ x&#39;
+</pre></div>
+</div>
+<img alt="_images/childes_13_1.png" src="_images/childes_13_1.png" />
+</div>
+</div>
+<div class="section" id="cha-file">
+<h2>CHA file<a class="headerlink" href="#cha-file" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Fantastic package for CHA files: <a class="reference external" href="http://pylangacq.org/">PyLangAcq</a></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pylangacq</span> <span class="k">as</span> <span class="nn">pla</span>
+<span class="n">pylangacq</span><span class="o">.</span><span class="n">__version__</span>  <span class="c1"># show version number</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;0.11.0&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nccu</span> <span class="o">=</span> <span class="n">pla</span><span class="o">.</span><span class="n">read_chat</span><span class="p">(</span><span class="s1">&#39;../../../Corpus/NCCUTaiwanMandarin/transcript/*.cha&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nccu</span><span class="o">.</span><span class="n">number_of_files</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>36
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Corpus Size:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nccu</span><span class="o">.</span><span class="n">words</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Corpus Size: 171254
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_headers</span><span class="o">=</span> <span class="n">nccu</span><span class="o">.</span><span class="n">headers</span><span class="p">()</span>
+<span class="c1">#all_headers[list(all_headers.keys())[0]]</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">all_headers</span><span class="o">.</span><span class="n">items</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;/Users/Alvin/Dropbox/Corpus/NCCUTaiwanMandarin/transcript/M019.cha&#39;,
+ {&#39;UTF8&#39;: &#39;&#39;,
+  &#39;PID&#39;: &#39;11312/a-00005100-1&#39;,
+  &#39;Languages&#39;: &#39;zho, nan, eng&#39;,
+  &#39;Participants&#39;: {&#39;F&#39;: {&#39;participant_name&#39;: &#39;Participant&#39;,
+    &#39;language&#39;: &#39;zho&#39;,
+    &#39;corpus&#39;: &#39;TaiwanMandarin&#39;,
+    &#39;age&#39;: &#39;24;&#39;,
+    &#39;sex&#39;: &#39;female&#39;,
+    &#39;group&#39;: &#39;&#39;,
+    &#39;SES&#39;: &#39;Asian&#39;,
+    &#39;participant_role&#39;: &#39;Participant&#39;,
+    &#39;education&#39;: &#39;&#39;,
+    &#39;custom&#39;: &#39;Friend&#39;},
+   &#39;M&#39;: {&#39;participant_name&#39;: &#39;Participant&#39;,
+    &#39;language&#39;: &#39;zho&#39;,
+    &#39;corpus&#39;: &#39;TaiwanMandarin&#39;,
+    &#39;age&#39;: &#39;24;&#39;,
+    &#39;sex&#39;: &#39;male&#39;,
+    &#39;group&#39;: &#39;&#39;,
+    &#39;SES&#39;: &#39;Asian&#39;,
+    &#39;participant_role&#39;: &#39;Participant&#39;,
+    &#39;education&#39;: &#39;&#39;,
+    &#39;custom&#39;: &#39;Friend&#39;}},
+  &#39;Options&#39;: &#39;CA-Unicode&#39;,
+  &#39;Media&#39;: &#39;M019, audio, unlinked&#39;,
+  &#39;Comment&#39;: &#39;Please use the slider at the left to control media playback.&#39;,
+  &#39;Date&#39;: [&#39;07-OCT-2009&#39;]})
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nccu</span><span class="o">.</span><span class="n">word_frequency</span><span class="p">()</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">nccu</span><span class="o">.</span><span class="n">word_ngrams</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[((&#39;對&#39;, &#39;對&#39;, &#39;對&#39;), 210),
+ ((&#39;然後&#39;, &#39;我&#39;, &#39;就&#39;), 137),
+ ((&#39;我&#39;, &#39;不&#39;, &#39;知道&#39;), 129),
+ ((&#39;⌊&#39;, &#39;對&#39;, &#39;啊&#39;), 119),
+ ((&#39;有&#39;, &#39;一&#39;, &#39;個&#39;), 113),
+ ((&#39;對&#39;, &#39;啊&#39;, &#39;⌋&#39;), 109),
+ ((&#39;⌊&#39;, &#39;um&#39;, &#39;⌋&#39;), 108),
+ ((&#39;我&#39;, &#39;就&#39;, &#39;說&#39;), 90),
+ ((&#39;真&#39;, &#39;的&#39;, &#39;很&#39;), 76),
+ ((&#39;他&#39;, &#39;就&#39;, &#39;說&#39;), 71)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sent</span><span class="p">)</span> <span class="k">for</span> <span class="n">sent</span> <span class="ow">in</span> <span class="n">nccu</span><span class="o">.</span><span class="n">sents</span><span class="p">()[:</span><span class="mi">10</span><span class="p">]]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>反正 就 我 覺得 喔 就 現在 小學生 程度 差 真 的 很 誇張 我 教 的 那個 我 教 的 那個 小五 跟 我 上次 上次 教到 的 ⌈ 那個 小五 ⌉
+⌊ 對 對 那個 ⌋ 那個
+一樣 喔 我 那個 學生 是 他 學 那個 何嘉仁 已經 那個 程度 太 高 了 他 跟不上 才 請 家教 我 上次 去 那個 瑛如 他們 那個 是 那個 課本 太 難 他 完全 看不懂 他 連 you I 都 看不懂 然後 我 那個 學生 是 課本 太 簡單 了 瞄 兩下 單字 背 一下 就好 那 我們 先 把 這 簡單 的 課本 放到 旁邊 去 我們 來 看 何嘉仁 是 這樣子 耶 差 好 多 喔 然後 看了 有 點 心酸 吶 ⌈ 可 那 沒 辦法 ⌉
+⌊ 可 那 沒 辦 ⌋ .
+沒 辦法
+對 呀 因為 這 並 不是 老師 有時候 我 覺得 老師 其實 能 做 的
+而且 ⌈ 一 個 禮拜 ⌉ 才 一 次 耶
+⌊ 大概 有 ⌋
+⌈ 一 次 ⌉
+⌊ 一 個 禮拜 ⌋ 一 次 真的 很 少 ⌈ 家教 都 ⌉ /.
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ckiptagger"
+        },
+        kernelOptions: {
+            kernelName: "ckiptagger",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ckiptagger'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="bnc.html" title="previous page">BNC-XML</a>
+    <a class='right-next' id="next-link" href="praat-textgrid.html" title="next page">Praat TextGrid Data</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alvin Chen<br/>
+        
+            &copy; Copyright 2020 Alvin Chen.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="_static/js/index.js"></script>
+    
+  </body>
+</html>
