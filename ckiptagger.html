@@ -229,7 +229,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/ckiptagger.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/alvinntnu/python-notes/master?urlpath=tree/_build/html/ckiptagger.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -237,7 +237,7 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/ckiptagger.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/_build/html/ckiptagger.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -396,37 +396,11 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="n">fc73dd0dc883</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1">## Loading model</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1">#ws = WS(&#39;/Users/Alvin/Dropbox/NTNU/CorpusLinguistics/CorpusLinguistics_bookdown/data/&#39;)</span>
-<span class="ne">----&gt; </span><span class="mi">6</span> <span class="n">ws</span> <span class="o">=</span> <span class="n">WS</span><span class="p">(</span><span class="n">MODEL_PATH</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="c1">#ws = WS(&#39;../../../NTNU/CorpusLinguistics/CorpusLinguistics_bookdown/data/&#39;)</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">pos</span> <span class="o">=</span> <span class="n">POS</span><span class="p">(</span><span class="n">MODEL_PATH</span><span class="p">)</span>
-
-<span class="nn">~/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/ckiptagger/api.py</span> in <span class="ni">__init__</span><span class="nt">(self, data_dir, disable_cuda)</span>
-<span class="g g-Whitespace">     </span><span class="mi">40</span>         <span class="n">config</span><span class="o">.</span><span class="n">layers</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="g g-Whitespace">     </span><span class="mi">41</span>         <span class="n">config</span><span class="o">.</span><span class="n">hidden_d</span> <span class="o">=</span> <span class="mi">500</span>
-<span class="ne">---&gt; </span><span class="mi">42</span>         <span class="n">config</span><span class="o">.</span><span class="n">w_token_to_vector</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">w_embedding_d</span> <span class="o">=</span> <span class="n">_load_embedding</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s2">&quot;embedding_character&quot;</span><span class="p">))</span>
-<span class="g g-Whitespace">     </span><span class="mi">43</span> 
-<span class="g g-Whitespace">     </span><span class="mi">44</span>         <span class="k">if</span> <span class="n">disable_cuda</span><span class="p">:</span>
-
-<span class="nn">~/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/ckiptagger/api.py</span> in <span class="ni">_load_embedding</span><span class="nt">(embedding_dir)</span>
-<span class="g g-Whitespace">    </span><span class="mi">352</span> <span class="k">def</span> <span class="nf">_load_embedding</span><span class="p">(</span><span class="n">embedding_dir</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">353</span>     <span class="n">token_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">embedding_dir</span><span class="p">,</span> <span class="s2">&quot;token_list.npy&quot;</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">354</span>     <span class="n">token_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">token_file</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">355</span> 
-<span class="g g-Whitespace">    </span><span class="mi">356</span>     <span class="n">vector_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">embedding_dir</span><span class="p">,</span> <span class="s2">&quot;vector_list.npy&quot;</span><span class="p">)</span>
-
-<span class="nn">~/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/numpy/lib/npyio.py</span> in <span class="ni">load</span><span class="nt">(file, mmap_mode, allow_pickle, fix_imports, encoding)</span>
-<span class="g g-Whitespace">    </span><span class="mi">414</span>             <span class="n">own_fid</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="g g-Whitespace">    </span><span class="mi">415</span>         <span class="k">else</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">416</span>             <span class="n">fid</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">enter_context</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">os_fspath</span><span class="p">(</span><span class="n">file</span><span class="p">),</span> <span class="s2">&quot;rb&quot;</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">417</span>             <span class="n">own_fid</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="g g-Whitespace">    </span><span class="mi">418</span> 
-
-<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;../../../NTNU/CorpusLinguistics/CorpusLinguistics_bookdown/data/embedding_character/token_list.npy&#39;
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Exception ignored in: &lt;bound method WS.__del__ of &lt;ckiptagger.api.WS object at 0x7fbf81051f98&gt;&gt;
+Traceback (most recent call last):
+  File &quot;/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/ckiptagger/api.py&quot;, line 65, in __del__
+    self.model.sess.close()
+AttributeError: &#39;WS&#39; object has no attribute &#39;model&#39;
 </pre></div>
 </div>
 </div>

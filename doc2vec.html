@@ -37,7 +37,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Natural Language Processing (spaCy)" href="nlp-spacy.html" />
-    <link rel="prev" title="Hyper-Parameter Tuning" href="hyperparameter-tuning.html" />
+    <link rel="prev" title="Sentiment Analysis Using BERT" href="sentiment-analysis-using-bert-chinese.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
@@ -148,6 +148,11 @@
      Hyper-Parameter Tuning
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sentiment-analysis-using-bert-chinese.html">
+     Sentiment Analysis Using BERT
+    </a>
+   </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      Dov2Vec
@@ -244,7 +249,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/doc2vec.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/alvinntnu/python-notes/master?urlpath=tree/_build/html/doc2vec.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -252,7 +257,7 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/doc2vec.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/_build/html/doc2vec.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -397,8 +402,8 @@
   after removing the cwd from sys.path.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 10.5 s, sys: 596 ms, total: 11.1 s
-Wall time: 6.14 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 10.5 s, sys: 625 ms, total: 11.1 s
+Wall time: 5.98 s
 </pre></div>
 </div>
 </div>
@@ -432,7 +437,7 @@ Wall time: 6.14 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(0, 0.9462876319885254), (48, 0.8409425616264343), (255, 0.8358715176582336), (40, 0.8257716298103333), (272, 0.7953324317932129), (8, 0.7706071138381958), (33, 0.7048359513282776), (264, 0.7006926536560059), (19, 0.6907402873039246), (9, 0.6670656800270081)]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(0, 0.9458891153335571), (40, 0.8471023440361023), (48, 0.8296629786491394), (255, 0.8186222314834595), (272, 0.7796355485916138), (8, 0.755848228931427), (264, 0.7171856164932251), (33, 0.7041466236114502), (19, 0.6828470826148987), (10, 0.6591960787773132)]
 </pre></div>
 </div>
 </div>
@@ -455,8 +460,8 @@ Wall time: 6.14 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(0, 0.9391850233078003), (33, 0.44260627031326294), (48, 0.4420638382434845), (40, 0.4378429055213928), (189, 0.37919357419013977), (8, 0.37590813636779785), (264, 0.3627750873565674), (46, 0.33412909507751465), (9, 0.33341532945632935), (255, 0.3280476927757263)]
-[(0, 0.9474434852600098), (255, 0.8389220237731934), (48, 0.8369715809822083), (40, 0.8238754272460938), (272, 0.8020830154418945), (8, 0.7590154409408569), (33, 0.7038602828979492), (264, 0.6980624198913574), (19, 0.6835278272628784), (9, 0.6555143594741821)]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(0, 0.9447145462036133), (33, 0.4906274676322937), (48, 0.44374871253967285), (40, 0.42783311009407043), (189, 0.38296616077423096), (264, 0.3696485161781311), (255, 0.3644927740097046), (8, 0.35945671796798706), (52, 0.35580772161483765), (272, 0.35181155800819397)]
+[(0, 0.9452221989631653), (40, 0.8330732583999634), (255, 0.8189575672149658), (48, 0.811291515827179), (272, 0.7768511772155762), (8, 0.7525947093963623), (33, 0.7040777206420898), (264, 0.6998440623283386), (19, 0.6671469211578369), (10, 0.6569505929946899)]
 </pre></div>
 </div>
 </div>
@@ -582,7 +587,7 @@ new south wales firefighters are hoping lighter winds will help ease their workl
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="hyperparameter-tuning.html" title="previous page">Hyper-Parameter Tuning</a>
+    <a class='left-prev' id="prev-link" href="sentiment-analysis-using-bert-chinese.html" title="previous page">Sentiment Analysis Using BERT</a>
     <a class='right-next' id="next-link" href="nlp-spacy.html" title="next page">Natural Language Processing (spaCy)</a>
 
     </div>
