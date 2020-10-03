@@ -1,17 +1,7 @@
 # Test Colab Notebook
 
-# Test Colab Notebook
-
-- Updates from local
-- See if i can push the changes onto github
-- and pull the changes from colab
-
-import os
-
-print(os.getcwd())
-
-print('I modified the code on Google Colab.')
-
-1. Test 1
-2. Test 2
-3. Test 3
+- Save all local files fo the repo in Google Drive
+- I can modify the files on Google Drive via Colab when mounting the Google Drive
+- Then the modifications will be synced with my iMac
+- Push changes to github via iMac
+- For the moment, on macbook pro, I edit the files via Google Drive and Colab only. No local files are stored on macbook pro

@@ -64,6 +64,6 @@ r = CHILDESCorpusReader('../../../Corpus/CHILDES/Chinese/Chang1_xml/', '.*.xml')
 [0m[1;32m    316[0m         [0mself[0m[0;34m.[0m[0m_path[0m [0;34m=[0m [0m_path[0m[0;34m[0m[0;34m[0m[0m
 [1;32m    317[0m [0;34m[0m[0m
 
-[0;31mOSError[0m: No such file or directory: '/Users/Alvin/Corpus/CHILDES/Chinese/Chang1_xml'
-OSError: No such file or directory: '/Users/Alvin/Corpus/CHILDES/Chinese/Chang1_xml'
+[0;31mOSError[0m: No such file or directory: '/Users/Alvin/GoogleDrive/Corpus/CHILDES/Chinese/Chang1_xml'
+OSError: No such file or directory: '/Users/Alvin/GoogleDrive/Corpus/CHILDES/Chinese/Chang1_xml'
 

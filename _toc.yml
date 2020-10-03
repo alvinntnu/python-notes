@@ -4,6 +4,7 @@
     - file: jupyter-notebook
     - file: notebook-to-slides
     - file: google-colab
+    - file: google-colab-r
     - file: data-structure
     - file: numpy
     - file: pandas
