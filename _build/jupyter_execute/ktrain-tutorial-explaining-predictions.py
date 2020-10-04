@@ -39,7 +39,7 @@ os.environ["CUDA_VISIBLE_DEVICES"]="0"
 
 ## Overview: Explainable AI in *ktrain*
 
-- [**Explainable AI**](XAI)(https://www.darpa.mil/program/explainable-artificial-intelligence)
+- [**Explainable AI (XAI)**](https://www.darpa.mil/program/explainable-artificial-intelligence)
 - Obtain the `Predictor` with `ktrain.get_predictor`
 - In combination with text data, one can easily make predictions from the raw and unprocessed text of a document as follows:
 
@@ -49,7 +49,15 @@ predictor.predict(document_text)
 ```
 - Utilize the `explain` method of `Predictor` objects to help understand how those predictions were **made**
 
-## Data
+## Three Types of Prediction
+
+- Deep Learning Model Using BERT
+- Classification
+- Regression
+
+## Sentiment Analysis Using BERT
+
+### Data
 
 - Marc's thesis data (Chinese movie reviews)
 
@@ -77,7 +85,7 @@ data_train.tail()
 #printing head rows of test dataset
 data_test.head()
 
-## Train-Test Split
+### Train-Test Split
 
 # STEP 1: load and preprocess text data
 # (x_train, y_train), (x_test, y_test), preproc = text.texts_from_df('aclImdb', 
@@ -96,7 +104,7 @@ data_test.head()
                                                                    lang = 'zh-*',
                                                                    preprocess_mode = 'bert') # or distilbert
 
-## Define Model
+### Define Model
 
 # # STEP 2: define a Keras text classification model
 # from tensorflow.keras.models import Sequential
@@ -119,7 +127,7 @@ learner = ktrain.get_learner(model=model, train_data=(X_train, y_train),
                    val_data = (X_test, y_test),
                    batch_size = 6)
 
-## Fitting Model
+### Fitting Model
 
 
 ## STEP 3: train
@@ -127,14 +135,14 @@ learner = ktrain.get_learner(model=model, train_data=(X_train, y_train),
 # learner.autofit(0.005, 1)
 # learner.fit_onecycle(lr = 2e-5, epochs = 1)
 
-## Saving Model
+### Saving Model
 
 predictor = ktrain.get_predictor(learner.model, preproc)
 # predictor = ktrain.load_predictor('bert-ch-marc')
 
 # predictor.save('../output/bert-ch-marc')
 
-## Prediction
+### Prediction
 
 - Invoke `view_top_losses` to view the most misclassified review in the validation set
 
@@ -162,11 +170,13 @@ The visualization is generated using a technique called [LIME](https://arxiv.org
 The model prediction is **positive**. Do GREEN words give the impression of a positive feedback?
 
 
-## Explaining Tabular Models
+## Logistic Regression
 
 - Train a model to predict **Survival** using [Kaggle's Titatnic dataset](https://www.kaggle.com/c/titanic).
 
 - After training the model, **explain** the model's prediction for a specific example.
+
+## %cd '../../RepositoryData/data'
 
 import pandas as pd
 import numpy as np
@@ -187,7 +197,7 @@ test_df = df[~msk]
 import ktrain
 from ktrain import tabular
 trn, val, preproc = tabular.tabular_from_df(train_df, label_columns=['Survived'], random_state=42)
-model = tabular.tabular_classifier('mlp', trn)
+model = tabular.tabular_classifier('mlp', trn) # multilayer perception (Deep Neural network)
 learner = ktrain.get_learner(model, train_data=trn, val_data=val, batch_size=32)
 learner.fit_onecycle(1e-3, 25)
 
@@ -198,11 +208,60 @@ df['Survived'] = test_df['Survived']
 df['predicted_Survived'] = np.argmax(preds, axis=1)
 df.head()
 
-Let's explain the male passenger with PassengerID=5 using the [shape](https://github.com/slundberg/shap) library.
+- Require [shap](https://github.com/slundberg/shap) library to perform model explanation
+- take case ID35 for example
+
 
 predictor.explain(test_df, row_index=35, class_id=1)
 
-From the visualization above, we can see that his First class status (`Pclass=1`) and his higher-than-average Fare price (suggesting that he i is wealthy) are pushing the model higher towards predicting **Survived**.  At the same time, the fact that he is a `Male` pushes the model to lower its prediction towards **NOT Survived**.   For these reasons, this is a border-line and uncertain prediction.
+From the visualization above, we can see that:
+- his First class status (`Pclass=1`) and his higher-than-average Fare price (suggesting that he is wealthy) are pushing the model higher towards predicting **Survived**. 
+- the fact that he is a `Male` pushes the model to lower its prediction towards **NOT Survived**.
+- For these reasons, this is a border-line and uncertain prediction.
 
-For more information, see the [tutorial notebook on tabular models](https://nbviewer.jupyter.org/github/amaiya/ktrain/blob/master/tutorials/tutorial-08-tabular_classification_and_regression.ipynb).
+## Regression
 
+import os
+# os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID";
+# os.environ["CUDA_VISIBLE_DEVICES"]="0"; 
+
+import urllib.request
+import pandas as pd
+import numpy as np
+pd.set_option('display.max_columns', None)
+
+
+import ktrain
+from ktrain import tabular
+
+## loading data
+train_df = pd.read_csv('housing_price/train.csv', index_col=0)
+train_df.head()
+
+train_df.drop(['Alley','PoolQC','MiscFeature','Fence','FireplaceQu','Utilities'], 1, inplace=True)
+train_df.head()
+
+
+trn, val, preproc = tabular.tabular_from_df(train_df, is_regression=True, 
+                                             label_columns='SalePrice', random_state=42)
+
+model = tabular.tabular_regression_model('mlp', trn)
+learner = ktrain.get_learner(model, train_data=trn, val_data=val, batch_size=128)
+
+learner.lr_find(show_plot=True, max_epochs=16)
+
+
+## Inspect the loss plot above
+learner.autofit(1e-1)
+
+learner.evaluate(test_data=val)
+
+predictor = ktrain.get_predictor(learner.model, preproc)
+
+predictor.explain(train_df, row_index=25)
+
+## References
+
+- [*ktrain* Module](https://github.com/amaiya/ktrain)
+- [Explainable AI in *ktrain*](https://nbviewer.jupyter.org/github/amaiya/ktrain/blob/master/tutorials/tutorial-A2-explaining-predictions.ipynb)
+- [*ktrain* tutorial notebook on tabular models](https://nbviewer.jupyter.org/github/amaiya/ktrain/blob/master/tutorials/tutorial-08-tabular_classification_and_regression.ipynb)
