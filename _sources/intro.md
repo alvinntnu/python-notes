@@ -6,6 +6,11 @@ This notebook collects my personal python notes for linguistics. These notes are
 This notebook is being updated on a regular basis. Most of the materials here are for educational purposes only.
 
 
+## Main Topics
+
+- Python Basics
+- Corpus Linguistics with Python
+- NLP with Python
 
 ## Books
 
