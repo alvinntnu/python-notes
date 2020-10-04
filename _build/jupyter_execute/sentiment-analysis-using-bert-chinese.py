@@ -1,5 +1,6 @@
 # Sentiment Analysis Using BERT
 
+- This notebook runs on Google Colab
 - Using `ktrain` for modeling
   - The ktrain library is a lightweight wrapper for tf.keras in TensorFlow 2, which is "designed to make deep learning and AI more accessible and easier to apply for beginners and domain experts".
 - Easy to implement BERT-like pre-trained language models

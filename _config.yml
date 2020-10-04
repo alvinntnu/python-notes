@@ -9,6 +9,7 @@ latex:
 parse:
   myst_extended_syntax: true
 html:
+    home_page_in_navbar: false
     extra_navbar: |
         <div style="text-align:left">
             <a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
@@ -24,12 +25,12 @@ execute:
     - 'sentiment-analysis-using-bert-chinese.ipynb'
     - 'sentiment-analysis-using-bert.ipynb'
     - 'transfer-learning-sent-encoding-chinese.ipynb'
+    - 'ktrain-tutorial-explaining-predictions.ipynb'
 sphinx:
   extra_extensions:
     - sphinxcontrib.bibtex
 repository:
   url                       : https://github.com/alvinntnu/python-notes
-  path_to_book              : _build/html
   branch                    : master
 launch_buttons:
   colab_url: "https://colab.research.google.com"
