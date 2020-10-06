@@ -1,7 +1,7 @@
 Python Basics
 =======================
 
-This section includes all the basic topics for Python.
+This section covers the fundamental structures and concepts of Python.
 
 - Recommended Readings
     - [Lean Python: Learn Just Enough Python to Build Useful Tools](https://www.amazon.com/Lean-Python-Learn-Enough-Useful/dp/1484223845)

@@ -181,6 +181,22 @@ print(y)
 print(np.vstack([x,y]))
 print(np.hstack([x,y]))
 
+- Find which element has a specific value
+
+## Search Elements in array
+x = [1,2,3,4,0,1,2,3,4,11] 
+x=np.array(x)
+np.where(x == 2)
+
+- Identify the first index of the element that is of the specific value
+
+np.min(np.where(x==2))
+
+- Find the index of the MIN/MAX
+
+np.argmin(x)
+np.argmax(x)
+
 ## Load from File
 
 ```

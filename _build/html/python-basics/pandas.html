@@ -1,0 +1,4240 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Pandas &#8212; Python Notes for Linguistics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/ntnu03.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Python Notes for Linguistics</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="python-basics.html">
+   Python Basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../corpus/corpus-processing.html">
+   Corpus Linguistics with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../nlp/nlp.html">
+   Natural Language Processing with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <div style="text-align:left">
+    <a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
+</div>
+
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/python-basics/pandas.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/alvinntnu/python-notes/master?urlpath=tree/python-basics/pandas.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/python-basics/pandas.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#libraries">
+   Libraries
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#importing-exporting-data">
+   Importing/Exporting Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inspecting-data-frame">
+   Inspecting Data Frame
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#basic-functions">
+   Basic Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#subsetting-data-frame">
+   Subsetting Data Frame
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exploration">
+   Exploration
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#na-values">
+     NA Values
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#converting-data-types">
+     Converting Data Types
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pandas-supported-data-types">
+     Pandas-supported Data Types
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#transformation">
+     Transformation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#filter">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       filter()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#arrange">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       arrange()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#select">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       select()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mutate">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       mutate()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#apply-mutate-if">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       apply()
+      </span>
+     </code>
+     ,
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       mutate_if()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#group-by-and-summarize">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       group_by()
+      </span>
+     </code>
+     and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       summarize()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rename">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       rename()
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#join-combine-data-frames">
+   Join/Combine Data Frames
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#statistics">
+   Statistics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#requirements">
+   Requirements
+  </a>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="pandas">
+<h1>Pandas<a class="headerlink" href="#pandas" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Methods to deal with tabular data</p></li>
+<li><p>These methods are to replicate what <code class="docutils literal notranslate"><span class="pre">dplyr</span></code> in R is capable of</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> can download R datasets from https://vincentarelbundock.github.io/Rdatasets/datasets.html</p></li>
+</ul>
+<div class="section" id="libraries">
+<h2>Libraries<a class="headerlink" href="#libraries" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="importing-exporting-data">
+<h2>Importing/Exporting Data<a class="headerlink" href="#importing-exporting-data" title="Permalink to this headline">¶</a></h2>
+<p>Importing:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pd.read_csv(filename)</span></code>: From a CSV file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pd.read_table(filename)</span></code>: From a delimited text file (like TSV)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pd.read_excel(filename)</span></code>: From an Excel file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pd.read_sql(query,</span> <span class="pre">connection_object)</span></code>: Read from a SQL table/database</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pd.read_json(json_string)</span></code>: Read from a JSON formatted string, URL or file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pd.read_html(url)</span></code>: Parses an html URL, string or file and extracts tables to a list of dataframes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pd.read_clipboard()</span></code>: Takes the contents of your clipboard and passes it to read_table()</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pd.DataFrame(dict)</span></code>: From a dict, keys for columns names, values for data as lists</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pd.DataFrame(list</span> <span class="pre">of</span> <span class="pre">tuples)</span></code>: From a list, which includes the records of each row</p></li>
+</ul>
+<p>Exporting:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">df.to_csv(filename)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df.to_excel(filename)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df.to_sql(table_name,</span> <span class="pre">connection_object)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df.to_json(filename)</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">DEMO_DATA_DIR</span> <span class="o">=</span> <span class="s1">&#39;../../../RepositoryData/data/titanic/&#39;</span>
+<span class="n">iris</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_rdataset</span><span class="p">(</span><span class="s1">&#39;iris&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+<span class="n">titanic</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">DEMO_DATA_DIR</span><span class="o">+</span><span class="s1">&#39;train.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span>
+   <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span>
+   <span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">)]</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="s2">&quot;B&quot;</span><span class="p">,</span><span class="s2">&quot;C&quot;</span><span class="p">,</span><span class="s2">&quot;D&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>5</td>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>9</td>
+      <td>10</td>
+      <td>11</td>
+      <td>12</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;A&quot;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span>
+    <span class="s2">&quot;B&quot;</span><span class="p">:[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">],</span>
+    <span class="s2">&quot;C&quot;</span><span class="p">:[</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">]}</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>5</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>6</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>7</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>8</td>
+      <td>12</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When you have data of the <strong>columns</strong>, use <strong>dict</strong>; when you have the data of the <strong>rows</strong>, use <strong>list</strong> as the source data structures of a data frame.</p>
+</div>
+</div>
+<div class="section" id="inspecting-data-frame">
+<h2>Inspecting Data Frame<a class="headerlink" href="#inspecting-data-frame" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">df.head(n)</span></code>: First n rows of the DataFrame</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df.tail(n)</span></code>: Last n rows of the DataFrame</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df.shape</span></code>: Number of rows and columns</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df.info()</span></code>: Index, Datatype and Memory information</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df.describe()</span></code>: Summary statistics for numerical columns</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">s.value_counts(dropna=False)</span></code>: View unique values and counts</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df.apply(pd.Series.value_counts)</span></code>: Unique values and counts for all columns</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df.columns</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df.index</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df.dtypes</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df.set_index('column_name')</span></code>: Set a column as the index</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 150 entries, 0 to 149
+Data columns (total 5 columns):
+ #   Column        Non-Null Count  Dtype  
+---  ------        --------------  -----  
+ 0   Sepal.Length  150 non-null    float64
+ 1   Sepal.Width   150 non-null    float64
+ 2   Petal.Length  150 non-null    float64
+ 3   Petal.Width   150 non-null    float64
+ 4   Species       150 non-null    object 
+dtypes: float64(4), object(1)
+memory usage: 6.0+ KB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Sepal.Length</th>
+      <th>Sepal.Width</th>
+      <th>Petal.Length</th>
+      <th>Petal.Width</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>150.000000</td>
+      <td>150.000000</td>
+      <td>150.000000</td>
+      <td>150.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>5.843333</td>
+      <td>3.057333</td>
+      <td>3.758000</td>
+      <td>1.199333</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.828066</td>
+      <td>0.435866</td>
+      <td>1.765298</td>
+      <td>0.762238</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>4.300000</td>
+      <td>2.000000</td>
+      <td>1.000000</td>
+      <td>0.100000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>5.100000</td>
+      <td>2.800000</td>
+      <td>1.600000</td>
+      <td>0.300000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>5.800000</td>
+      <td>3.000000</td>
+      <td>4.350000</td>
+      <td>1.300000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>6.400000</td>
+      <td>3.300000</td>
+      <td>5.100000</td>
+      <td>1.800000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>7.900000</td>
+      <td>4.400000</td>
+      <td>6.900000</td>
+      <td>2.500000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">iris</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(150, 5)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Sepal.Length</th>
+      <th>Sepal.Width</th>
+      <th>Petal.Length</th>
+      <th>Petal.Width</th>
+      <th>Species</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">titanic</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PassengerId</th>
+      <th>Survived</th>
+      <th>Pclass</th>
+      <th>Name</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>SibSp</th>
+      <th>Parch</th>
+      <th>Ticket</th>
+      <th>Fare</th>
+      <th>Cabin</th>
+      <th>Embarked</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>888</th>
+      <td>889</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Johnston, Miss. Catherine Helen "Carrie"</td>
+      <td>female</td>
+      <td>NaN</td>
+      <td>1</td>
+      <td>2</td>
+      <td>W./C. 6607</td>
+      <td>23.45</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>889</th>
+      <td>890</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Behr, Mr. Karl Howell</td>
+      <td>male</td>
+      <td>26.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>111369</td>
+      <td>30.00</td>
+      <td>C148</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>890</th>
+      <td>891</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Dooley, Mr. Patrick</td>
+      <td>male</td>
+      <td>32.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>370376</td>
+      <td>7.75</td>
+      <td>NaN</td>
+      <td>Q</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;Species&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>setosa        50
+virginica     50
+versicolor    50
+Name: Species, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">titanic</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="o">.</span><span class="n">value_counts</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PassengerId</th>
+      <th>Survived</th>
+      <th>Pclass</th>
+      <th>Name</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>SibSp</th>
+      <th>Parch</th>
+      <th>Ticket</th>
+      <th>Fare</th>
+      <th>Cabin</th>
+      <th>Embarked</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>NaN</td>
+      <td>549.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>608.0</td>
+      <td>678.0</td>
+      <td>NaN</td>
+      <td>15.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>0.42</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>0.67</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>0.75</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>0.83</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>del Carlo, Mr. Sebastiano</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>female</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>314.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>male</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>577.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>van Billiard, Mr. Austin Blyler</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>van Melkebeke, Mr. Philemon</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>2848 rows × 12 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">titanic</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;Sepal.Length&#39;, &#39;Sepal.Width&#39;, &#39;Petal.Length&#39;, &#39;Petal.Width&#39;,
+       &#39;Species&#39;],
+      dtype=&#39;object&#39;)
+Index([&#39;PassengerId&#39;, &#39;Survived&#39;, &#39;Pclass&#39;, &#39;Name&#39;, &#39;Sex&#39;, &#39;Age&#39;, &#39;SibSp&#39;,
+       &#39;Parch&#39;, &#39;Ticket&#39;, &#39;Fare&#39;, &#39;Cabin&#39;, &#39;Embarked&#39;],
+      dtype=&#39;object&#39;)
+RangeIndex(start=0, stop=150, step=1)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">titanic</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sepal.Length    float64
+Sepal.Width     float64
+Petal.Length    float64
+Petal.Width     float64
+Species          object
+dtype: object
+PassengerId      int64
+Survived         int64
+Pclass           int64
+Name            object
+Sex             object
+Age            float64
+SibSp            int64
+Parch            int64
+Ticket          object
+Fare           float64
+Cabin           object
+Embarked        object
+dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="basic-functions">
+<h2>Basic Functions<a class="headerlink" href="#basic-functions" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## DataFrame attributes</span>
+<span class="n">iris</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">iris</span><span class="o">.</span><span class="n">columns</span>
+<span class="n">iris</span><span class="o">.</span><span class="n">index</span>
+<span class="n">iris</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="n">iris</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="n">iris</span><span class="o">.</span><span class="n">dtypes</span> <span class="c1"># check column data types</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 150 entries, 0 to 149
+Data columns (total 5 columns):
+ #   Column        Non-Null Count  Dtype  
+---  ------        --------------  -----  
+ 0   Sepal.Length  150 non-null    float64
+ 1   Sepal.Width   150 non-null    float64
+ 2   Petal.Length  150 non-null    float64
+ 3   Petal.Width   150 non-null    float64
+ 4   Species       150 non-null    object 
+dtypes: float64(4), object(1)
+memory usage: 6.0+ KB
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sepal.Length    float64
+Sepal.Width     float64
+Petal.Length    float64
+Petal.Width     float64
+Species          object
+dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="subsetting-data-frame">
+<h2>Subsetting Data Frame<a class="headerlink" href="#subsetting-data-frame" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">df[col]</span></code>: Returns column with label col as Series</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df[[col1,</span> <span class="pre">col2]]</span></code>: Returns columns as a new DataFrame</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">s.iloc[0]</span></code>: Selection by position</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">s.loc['index_one']</span></code>: Selection by index</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df.iloc[0,:]</span></code>: First row</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df.iloc[0,0]</span></code>: First element of first column</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;Species&#39;</span><span class="p">]</span> <span class="c1"># first six rows of &#39;Species&#39; column</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    setosa
+1    setosa
+2    setosa
+3    setosa
+4    setosa
+5    setosa
+Name: Species, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span> <span class="c1"># same as above</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    setosa
+1    setosa
+2    setosa
+3    setosa
+4    setosa
+Name: Species, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="exploration">
+<h2>Exploration<a class="headerlink" href="#exploration" title="Permalink to this headline">¶</a></h2>
+<p>How to perform the key functions provided in R <code class="docutils literal notranslate"><span class="pre">dplyr</span></code>?</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dplyr</span></code> Key Verbs</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">filter()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">select()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mutate()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">arrange()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">summarize()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">group_by()</span></code></p></li>
+</ul>
+</li>
+</ul>
+<div class="section" id="na-values">
+<h3>NA Values<a class="headerlink" href="#na-values" title="Permalink to this headline">¶</a></h3>
+<p>Functions to take care of <code class="docutils literal notranslate"><span class="pre">NA</span></code> values:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">df.isnull()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df.notnull()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df.dropna()</span></code>: Drop rows with null values</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df.dropna(axis=1)</span></code>: Drop columns with null values</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df.dropna(axis=1,</span> <span class="pre">thresh=n)</span></code>: Drop all columns have less than n non-values</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df.fillna(x)</span></code>: Replaces all null values with <code class="docutils literal notranslate"><span class="pre">x</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">s.fillna(s.mean())</span></code>: Replace the null values of a Series with its mean score</p></li>
+</ul>
+<ul class="simple">
+<li><p>Quick check of the null values in each column</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">titanic</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PassengerId      0
+Survived         0
+Pclass           0
+Name             0
+Sex              0
+Age            177
+SibSp            0
+Parch            0
+Ticket           0
+Fare             0
+Cabin          687
+Embarked         2
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">titanic</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">thresh</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PassengerId</th>
+      <th>Survived</th>
+      <th>Pclass</th>
+      <th>Name</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>SibSp</th>
+      <th>Parch</th>
+      <th>Ticket</th>
+      <th>Fare</th>
+      <th>Embarked</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Braund, Mr. Owen Harris</td>
+      <td>male</td>
+      <td>22.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>A/5 21171</td>
+      <td>7.2500</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Cumings, Mrs. John Bradley (Florence Briggs Th...</td>
+      <td>female</td>
+      <td>38.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>PC 17599</td>
+      <td>71.2833</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>1</td>
+      <td>3</td>
+      <td>Heikkinen, Miss. Laina</td>
+      <td>female</td>
+      <td>26.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>STON/O2. 3101282</td>
+      <td>7.9250</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Futrelle, Mrs. Jacques Heath (Lily May Peel)</td>
+      <td>female</td>
+      <td>35.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>113803</td>
+      <td>53.1000</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Allen, Mr. William Henry</td>
+      <td>male</td>
+      <td>35.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>373450</td>
+      <td>8.0500</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>886</th>
+      <td>887</td>
+      <td>0</td>
+      <td>2</td>
+      <td>Montvila, Rev. Juozas</td>
+      <td>male</td>
+      <td>27.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>211536</td>
+      <td>13.0000</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>887</th>
+      <td>888</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Graham, Miss. Margaret Edith</td>
+      <td>female</td>
+      <td>19.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>112053</td>
+      <td>30.0000</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>888</th>
+      <td>889</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Johnston, Miss. Catherine Helen "Carrie"</td>
+      <td>female</td>
+      <td>NaN</td>
+      <td>1</td>
+      <td>2</td>
+      <td>W./C. 6607</td>
+      <td>23.4500</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>889</th>
+      <td>890</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Behr, Mr. Karl Howell</td>
+      <td>male</td>
+      <td>26.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>111369</td>
+      <td>30.0000</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>890</th>
+      <td>891</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Dooley, Mr. Patrick</td>
+      <td>male</td>
+      <td>32.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>370376</td>
+      <td>7.7500</td>
+      <td>Q</td>
+    </tr>
+  </tbody>
+</table>
+<p>891 rows × 11 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">titanic</span><span class="o">.</span><span class="n">notnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PassengerId    891
+Survived       891
+Pclass         891
+Name           891
+Sex            891
+Age            714
+SibSp          891
+Parch          891
+Ticket         891
+Fare           891
+Cabin          204
+Embarked       889
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="converting-data-types">
+<h3>Converting Data Types<a class="headerlink" href="#converting-data-types" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">s.astype(float)</span></code>: Convert a Series into a <code class="docutils literal notranslate"><span class="pre">float</span></code> type</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span><span class="o">.</span><span class="n">dtypes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sepal.Length    float64
+Sepal.Width     float64
+Petal.Length    float64
+Petal.Width     float64
+Species          object
+dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;Species&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;Species&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+<span class="n">iris</span><span class="o">.</span><span class="n">dtypes</span>
+<span class="c1">#iris.value_counts(iris[&#39;Species&#39;]).plot.bar()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sepal.Length     float64
+Sepal.Width      float64
+Petal.Length     float64
+Petal.Width      float64
+Species         category
+dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="pandas-supported-data-types">
+<h3>Pandas-supported Data Types<a class="headerlink" href="#pandas-supported-data-types" title="Permalink to this headline">¶</a></h3>
+<p><img alt="pandas-dtypes" src="../_images/pandas-dtypes.png" /></p>
+<p>(<a class="reference external" href="https://pbpython.com/pandas_dtypes.html">source</a>)</p>
+</div>
+<div class="section" id="transformation">
+<h3>Transformation<a class="headerlink" href="#transformation" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">s.replace(X,</span> <span class="pre">Y)</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">titanic</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">titanic</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Survived&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
+<span class="n">titanic</span><span class="o">.</span><span class="n">columns</span>
+<span class="n">titanic</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Sex&#39;</span><span class="p">,</span><span class="s1">&#39;Pclass&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">titanic</span><span class="p">[</span><span class="n">titanic</span><span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">18</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Sex&#39;</span><span class="p">,</span><span class="s1">&#39;Pclass&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>PassengerId</th>
+      <th>Survived</th>
+      <th>Age</th>
+      <th>SibSp</th>
+      <th>Parch</th>
+      <th>Fare</th>
+    </tr>
+    <tr>
+      <th>Sex</th>
+      <th>Pclass</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="3" valign="top">female</th>
+      <th>1</th>
+      <td>525.375000</td>
+      <td>0.875000</td>
+      <td>14.125000</td>
+      <td>0.500000</td>
+      <td>0.875000</td>
+      <td>104.083337</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>369.250000</td>
+      <td>1.000000</td>
+      <td>8.333333</td>
+      <td>0.583333</td>
+      <td>1.083333</td>
+      <td>26.241667</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>374.942857</td>
+      <td>0.542857</td>
+      <td>8.428571</td>
+      <td>1.571429</td>
+      <td>1.057143</td>
+      <td>18.727977</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">male</th>
+      <th>1</th>
+      <td>526.500000</td>
+      <td>1.000000</td>
+      <td>8.230000</td>
+      <td>0.500000</td>
+      <td>2.000000</td>
+      <td>116.072900</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>527.818182</td>
+      <td>0.818182</td>
+      <td>4.757273</td>
+      <td>0.727273</td>
+      <td>1.000000</td>
+      <td>25.659473</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>437.953488</td>
+      <td>0.232558</td>
+      <td>9.963256</td>
+      <td>2.069767</td>
+      <td>1.000000</td>
+      <td>22.752523</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="../_images/pandas_40_1.png" src="../_images/pandas_40_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="filter">
+<h3><code class="docutils literal notranslate"><span class="pre">filter()</span></code><a class="headerlink" href="#filter" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## filter</span>
+<span class="n">iris</span><span class="p">[</span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;Sepal.Length&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Sepal.Length</th>
+      <th>Sepal.Width</th>
+      <th>Petal.Length</th>
+      <th>Petal.Width</th>
+      <th>Species</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>5.4</td>
+      <td>3.9</td>
+      <td>1.7</td>
+      <td>0.4</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>5.4</td>
+      <td>3.7</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>5.8</td>
+      <td>4.0</td>
+      <td>1.2</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>5.7</td>
+      <td>4.4</td>
+      <td>1.5</td>
+      <td>0.4</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>145</th>
+      <td>6.7</td>
+      <td>3.0</td>
+      <td>5.2</td>
+      <td>2.3</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>146</th>
+      <td>6.3</td>
+      <td>2.5</td>
+      <td>5.0</td>
+      <td>1.9</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>147</th>
+      <td>6.5</td>
+      <td>3.0</td>
+      <td>5.2</td>
+      <td>2.0</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>148</th>
+      <td>6.2</td>
+      <td>3.4</td>
+      <td>5.4</td>
+      <td>2.3</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>149</th>
+      <td>5.9</td>
+      <td>3.0</td>
+      <td>5.1</td>
+      <td>1.8</td>
+      <td>virginica</td>
+    </tr>
+  </tbody>
+</table>
+<p>118 rows × 5 columns</p>
+</div></div></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When there are more than one filtering condition, put the conditions in parentheses.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span><span class="p">[(</span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;Sepal.Length&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">4</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;Sepal.Width&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">5</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Sepal.Length</th>
+      <th>Sepal.Width</th>
+      <th>Petal.Length</th>
+      <th>Petal.Width</th>
+      <th>Species</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;`Sepal.Length`&gt;5&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Sepal.Length</th>
+      <th>Sepal.Width</th>
+      <th>Petal.Length</th>
+      <th>Petal.Width</th>
+      <th>Species</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>5.4</td>
+      <td>3.9</td>
+      <td>1.7</td>
+      <td>0.4</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>5.4</td>
+      <td>3.7</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>5.8</td>
+      <td>4.0</td>
+      <td>1.2</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>5.7</td>
+      <td>4.4</td>
+      <td>1.5</td>
+      <td>0.4</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>145</th>
+      <td>6.7</td>
+      <td>3.0</td>
+      <td>5.2</td>
+      <td>2.3</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>146</th>
+      <td>6.3</td>
+      <td>2.5</td>
+      <td>5.0</td>
+      <td>1.9</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>147</th>
+      <td>6.5</td>
+      <td>3.0</td>
+      <td>5.2</td>
+      <td>2.0</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>148</th>
+      <td>6.2</td>
+      <td>3.4</td>
+      <td>5.4</td>
+      <td>2.3</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>149</th>
+      <td>5.9</td>
+      <td>3.0</td>
+      <td>5.1</td>
+      <td>1.8</td>
+      <td>virginica</td>
+    </tr>
+  </tbody>
+</table>
+<p>118 rows × 5 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span><span class="p">[(</span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;Sepal.Length&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">5</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;Sepal.Width&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">4</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Sepal.Length</th>
+      <th>Sepal.Width</th>
+      <th>Petal.Length</th>
+      <th>Petal.Width</th>
+      <th>Species</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>15</th>
+      <td>5.7</td>
+      <td>4.4</td>
+      <td>1.5</td>
+      <td>0.4</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>5.2</td>
+      <td>4.1</td>
+      <td>1.5</td>
+      <td>0.1</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>5.5</td>
+      <td>4.2</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="arrange">
+<h3><code class="docutils literal notranslate"><span class="pre">arrange()</span></code><a class="headerlink" href="#arrange" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">&#39;Species&#39;</span><span class="p">,</span><span class="s1">&#39;Sepal.Length&#39;</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">,</span><span class="kc">True</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Sepal.Length</th>
+      <th>Sepal.Width</th>
+      <th>Petal.Length</th>
+      <th>Petal.Width</th>
+      <th>Species</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>106</th>
+      <td>4.9</td>
+      <td>2.5</td>
+      <td>4.5</td>
+      <td>1.7</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>121</th>
+      <td>5.6</td>
+      <td>2.8</td>
+      <td>4.9</td>
+      <td>2.0</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>113</th>
+      <td>5.7</td>
+      <td>2.5</td>
+      <td>5.0</td>
+      <td>2.0</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>101</th>
+      <td>5.8</td>
+      <td>2.7</td>
+      <td>5.1</td>
+      <td>1.9</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>114</th>
+      <td>5.8</td>
+      <td>2.8</td>
+      <td>5.1</td>
+      <td>2.4</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>5.5</td>
+      <td>4.2</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>5.5</td>
+      <td>3.5</td>
+      <td>1.3</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>5.7</td>
+      <td>4.4</td>
+      <td>1.5</td>
+      <td>0.4</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>5.7</td>
+      <td>3.8</td>
+      <td>1.7</td>
+      <td>0.3</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>5.8</td>
+      <td>4.0</td>
+      <td>1.2</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+  </tbody>
+</table>
+<p>150 rows × 5 columns</p>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="select">
+<h3><code class="docutils literal notranslate"><span class="pre">select()</span></code><a class="headerlink" href="#select" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## select</span>
+<span class="n">iris</span><span class="p">[[</span><span class="s1">&#39;Sepal.Length&#39;</span><span class="p">,</span> <span class="s1">&#39;Species&#39;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Sepal.Length</th>
+      <th>Species</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.1</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.9</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.7</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.6</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>145</th>
+      <td>6.7</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>146</th>
+      <td>6.3</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>147</th>
+      <td>6.5</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>148</th>
+      <td>6.2</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>149</th>
+      <td>5.9</td>
+      <td>virginica</td>
+    </tr>
+  </tbody>
+</table>
+<p>150 rows × 2 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## deselect columns</span>
+<span class="n">iris</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Sepal.Length&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Sepal.Width</th>
+      <th>Petal.Length</th>
+      <th>Petal.Width</th>
+      <th>Species</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span><span class="o">.</span><span class="n">filter</span><span class="p">([</span><span class="s1">&#39;Species&#39;</span><span class="p">,</span><span class="s1">&#39;Sepal.Length&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Species</th>
+      <th>Sepal.Length</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>setosa</td>
+      <td>5.1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>setosa</td>
+      <td>4.9</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>setosa</td>
+      <td>4.7</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>setosa</td>
+      <td>4.6</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>setosa</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>145</th>
+      <td>virginica</td>
+      <td>6.7</td>
+    </tr>
+    <tr>
+      <th>146</th>
+      <td>virginica</td>
+      <td>6.3</td>
+    </tr>
+    <tr>
+      <th>147</th>
+      <td>virginica</td>
+      <td>6.5</td>
+    </tr>
+    <tr>
+      <th>148</th>
+      <td>virginica</td>
+      <td>6.2</td>
+    </tr>
+    <tr>
+      <th>149</th>
+      <td>virginica</td>
+      <td>5.9</td>
+    </tr>
+  </tbody>
+</table>
+<p>150 rows × 2 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span><span class="p">[[</span><span class="s1">&#39;Species&#39;</span><span class="p">,</span><span class="s1">&#39;Sepal.Length&#39;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Species</th>
+      <th>Sepal.Length</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>setosa</td>
+      <td>5.1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>setosa</td>
+      <td>4.9</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>setosa</td>
+      <td>4.7</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>setosa</td>
+      <td>4.6</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>setosa</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>145</th>
+      <td>virginica</td>
+      <td>6.7</td>
+    </tr>
+    <tr>
+      <th>146</th>
+      <td>virginica</td>
+      <td>6.3</td>
+    </tr>
+    <tr>
+      <th>147</th>
+      <td>virginica</td>
+      <td>6.5</td>
+    </tr>
+    <tr>
+      <th>148</th>
+      <td>virginica</td>
+      <td>6.2</td>
+    </tr>
+    <tr>
+      <th>149</th>
+      <td>virginica</td>
+      <td>5.9</td>
+    </tr>
+  </tbody>
+</table>
+<p>150 rows × 2 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## extract one particular column</span>
+<span class="n">sepal_length</span> <span class="o">=</span> <span class="n">iris</span><span class="p">[</span><span class="s1">&#39;Sepal.Length&#39;</span><span class="p">]</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">sepal_length</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pandas.core.series.Series
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="mutate">
+<h3><code class="docutils literal notranslate"><span class="pre">mutate()</span></code><a class="headerlink" href="#mutate" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## mutate</span>
+<span class="n">iris</span><span class="p">[</span><span class="s1">&#39;Species_new&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">iris</span><span class="p">[</span><span class="s1">&#39;Species&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">iris</span><span class="p">[</span><span class="s1">&#39;Species_initial&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">iris</span><span class="p">[</span><span class="s1">&#39;Species&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+<span class="n">iris</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Sepal.Length</th>
+      <th>Sepal.Width</th>
+      <th>Petal.Length</th>
+      <th>Petal.Width</th>
+      <th>Species</th>
+      <th>Species_new</th>
+      <th>Species_initial</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>6</td>
+      <td>SE</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>6</td>
+      <td>SE</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>6</td>
+      <td>SE</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>6</td>
+      <td>SE</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>6</td>
+      <td>SE</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>145</th>
+      <td>6.7</td>
+      <td>3.0</td>
+      <td>5.2</td>
+      <td>2.3</td>
+      <td>virginica</td>
+      <td>9</td>
+      <td>VI</td>
+    </tr>
+    <tr>
+      <th>146</th>
+      <td>6.3</td>
+      <td>2.5</td>
+      <td>5.0</td>
+      <td>1.9</td>
+      <td>virginica</td>
+      <td>9</td>
+      <td>VI</td>
+    </tr>
+    <tr>
+      <th>147</th>
+      <td>6.5</td>
+      <td>3.0</td>
+      <td>5.2</td>
+      <td>2.0</td>
+      <td>virginica</td>
+      <td>9</td>
+      <td>VI</td>
+    </tr>
+    <tr>
+      <th>148</th>
+      <td>6.2</td>
+      <td>3.4</td>
+      <td>5.4</td>
+      <td>2.3</td>
+      <td>virginica</td>
+      <td>9</td>
+      <td>VI</td>
+    </tr>
+    <tr>
+      <th>149</th>
+      <td>5.9</td>
+      <td>3.0</td>
+      <td>5.1</td>
+      <td>1.8</td>
+      <td>virginica</td>
+      <td>9</td>
+      <td>VI</td>
+    </tr>
+  </tbody>
+</table>
+<p>150 rows × 7 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## mutate alternative 2</span>
+<span class="n">iris</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">Specias_initial2</span> <span class="o">=</span> <span class="n">iris</span><span class="p">[</span><span class="s1">&#39;Species&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">upper</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Sepal.Length</th>
+      <th>Sepal.Width</th>
+      <th>Petal.Length</th>
+      <th>Petal.Width</th>
+      <th>Species</th>
+      <th>Species_new</th>
+      <th>Species_initial</th>
+      <th>Specias_initial2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>6</td>
+      <td>SE</td>
+      <td>SETOSA</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>6</td>
+      <td>SE</td>
+      <td>SETOSA</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>6</td>
+      <td>SE</td>
+      <td>SETOSA</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>6</td>
+      <td>SE</td>
+      <td>SETOSA</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>6</td>
+      <td>SE</td>
+      <td>SETOSA</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>145</th>
+      <td>6.7</td>
+      <td>3.0</td>
+      <td>5.2</td>
+      <td>2.3</td>
+      <td>virginica</td>
+      <td>9</td>
+      <td>VI</td>
+      <td>VIRGINICA</td>
+    </tr>
+    <tr>
+      <th>146</th>
+      <td>6.3</td>
+      <td>2.5</td>
+      <td>5.0</td>
+      <td>1.9</td>
+      <td>virginica</td>
+      <td>9</td>
+      <td>VI</td>
+      <td>VIRGINICA</td>
+    </tr>
+    <tr>
+      <th>147</th>
+      <td>6.5</td>
+      <td>3.0</td>
+      <td>5.2</td>
+      <td>2.0</td>
+      <td>virginica</td>
+      <td>9</td>
+      <td>VI</td>
+      <td>VIRGINICA</td>
+    </tr>
+    <tr>
+      <th>148</th>
+      <td>6.2</td>
+      <td>3.4</td>
+      <td>5.4</td>
+      <td>2.3</td>
+      <td>virginica</td>
+      <td>9</td>
+      <td>VI</td>
+      <td>VIRGINICA</td>
+    </tr>
+    <tr>
+      <th>149</th>
+      <td>5.9</td>
+      <td>3.0</td>
+      <td>5.1</td>
+      <td>1.8</td>
+      <td>virginica</td>
+      <td>9</td>
+      <td>VI</td>
+      <td>VIRGINICA</td>
+    </tr>
+  </tbody>
+</table>
+<p>150 rows × 8 columns</p>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="apply-mutate-if">
+<h3><code class="docutils literal notranslate"><span class="pre">apply()</span></code>, <code class="docutils literal notranslate"><span class="pre">mutate_if()</span></code><a class="headerlink" href="#apply-mutate-if" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">df.apply(np.mean)</span></code>: Apply a function to all columns</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df.apply(np.max,axis=1)</span></code>: Apply a function to each row</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When <code class="docutils literal notranslate"><span class="pre">apply()</span></code> functions to the data frame, the <code class="docutils literal notranslate"><span class="pre">axis=1</span></code> refers to row mutation and <code class="docutils literal notranslate"><span class="pre">axis=0</span></code> refers to column mutation. This is very counter-intuitive for R users.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Sepal.Length</th>
+      <th>Sepal.Width</th>
+      <th>Petal.Length</th>
+      <th>Petal.Width</th>
+      <th>Species</th>
+      <th>Species_new</th>
+      <th>Species_initial</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>6</td>
+      <td>SE</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>6</td>
+      <td>SE</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>6</td>
+      <td>SE</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>6</td>
+      <td>SE</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>6</td>
+      <td>SE</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>5.4</td>
+      <td>3.9</td>
+      <td>1.7</td>
+      <td>0.4</td>
+      <td>setosa</td>
+      <td>6</td>
+      <td>SE</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>4.6</td>
+      <td>3.4</td>
+      <td>1.4</td>
+      <td>0.3</td>
+      <td>setosa</td>
+      <td>6</td>
+      <td>SE</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>5.0</td>
+      <td>3.4</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>6</td>
+      <td>SE</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>4.4</td>
+      <td>2.9</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>6</td>
+      <td>SE</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>4.9</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.1</td>
+      <td>setosa</td>
+      <td>6</td>
+      <td>SE</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span><span class="p">[[</span><span class="s1">&#39;Sepal.Width&#39;</span><span class="p">,</span><span class="s1">&#39;Petal.Width&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    3.7
+1    3.2
+2    3.4
+3    3.3
+4    3.8
+5    4.3
+6    3.7
+7    3.6
+8    3.1
+9    3.2
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="group-by-and-summarize">
+<h3><code class="docutils literal notranslate"><span class="pre">group_by()</span></code> and <code class="docutils literal notranslate"><span class="pre">summarize()</span></code><a class="headerlink" href="#group-by-and-summarize" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;Species&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Sepal.Length</th>
+      <th>Sepal.Width</th>
+      <th>Petal.Length</th>
+      <th>Petal.Width</th>
+    </tr>
+    <tr>
+      <th>Species</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>setosa</th>
+      <td>5.006</td>
+      <td>3.428</td>
+      <td>1.462</td>
+      <td>0.246</td>
+    </tr>
+    <tr>
+      <th>versicolor</th>
+      <td>5.936</td>
+      <td>2.770</td>
+      <td>4.260</td>
+      <td>1.326</td>
+    </tr>
+    <tr>
+      <th>virginica</th>
+      <td>6.588</td>
+      <td>2.974</td>
+      <td>5.552</td>
+      <td>2.026</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span><span class="o">.</span><span class="n">filter</span><span class="p">([</span><span class="s1">&#39;Species&#39;</span><span class="p">,</span><span class="s1">&#39;Sepal.Length&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Species&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;Sepal.Length&#39;</span><span class="p">:[</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span><span class="s1">&#39;count&#39;</span><span class="p">,</span><span class="s1">&#39;std&#39;</span><span class="p">]})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="3" halign="left">Sepal.Length</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>mean</th>
+      <th>count</th>
+      <th>std</th>
+    </tr>
+    <tr>
+      <th>Species</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>setosa</th>
+      <td>5.006</td>
+      <td>50</td>
+      <td>0.352490</td>
+    </tr>
+    <tr>
+      <th>versicolor</th>
+      <td>5.936</td>
+      <td>50</td>
+      <td>0.516171</td>
+    </tr>
+    <tr>
+      <th>virginica</th>
+      <td>6.588</td>
+      <td>50</td>
+      <td>0.635880</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">titanic</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PassengerId</th>
+      <th>Survived</th>
+      <th>Pclass</th>
+      <th>Name</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>SibSp</th>
+      <th>Parch</th>
+      <th>Ticket</th>
+      <th>Fare</th>
+      <th>Cabin</th>
+      <th>Embarked</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Braund, Mr. Owen Harris</td>
+      <td>male</td>
+      <td>22.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>A/5 21171</td>
+      <td>7.2500</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Cumings, Mrs. John Bradley (Florence Briggs Th...</td>
+      <td>female</td>
+      <td>38.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>PC 17599</td>
+      <td>71.2833</td>
+      <td>C85</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>1</td>
+      <td>3</td>
+      <td>Heikkinen, Miss. Laina</td>
+      <td>female</td>
+      <td>26.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>STON/O2. 3101282</td>
+      <td>7.9250</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Futrelle, Mrs. Jacques Heath (Lily May Peel)</td>
+      <td>female</td>
+      <td>35.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>113803</td>
+      <td>53.1000</td>
+      <td>C123</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Allen, Mr. William Henry</td>
+      <td>male</td>
+      <td>35.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>373450</td>
+      <td>8.0500</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">titanic</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Pclass&#39;</span><span class="p">,</span><span class="s1">&#39;Sex&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>PassengerId</th>
+      <th>Survived</th>
+      <th>Age</th>
+      <th>SibSp</th>
+      <th>Parch</th>
+      <th>Fare</th>
+    </tr>
+    <tr>
+      <th>Pclass</th>
+      <th>Sex</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">1</th>
+      <th>female</th>
+      <td>44106</td>
+      <td>91</td>
+      <td>2942.00</td>
+      <td>52</td>
+      <td>43</td>
+      <td>9975.8250</td>
+    </tr>
+    <tr>
+      <th>male</th>
+      <td>55599</td>
+      <td>45</td>
+      <td>4169.42</td>
+      <td>38</td>
+      <td>34</td>
+      <td>8201.5875</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">2</th>
+      <th>female</th>
+      <td>33676</td>
+      <td>70</td>
+      <td>2125.50</td>
+      <td>37</td>
+      <td>46</td>
+      <td>1669.7292</td>
+    </tr>
+    <tr>
+      <th>male</th>
+      <td>48380</td>
+      <td>17</td>
+      <td>3043.33</td>
+      <td>37</td>
+      <td>24</td>
+      <td>2132.1125</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">3</th>
+      <th>female</th>
+      <td>57561</td>
+      <td>72</td>
+      <td>2218.50</td>
+      <td>129</td>
+      <td>115</td>
+      <td>2321.1086</td>
+    </tr>
+    <tr>
+      <th>male</th>
+      <td>158064</td>
+      <td>47</td>
+      <td>6706.42</td>
+      <td>173</td>
+      <td>78</td>
+      <td>4393.5865</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">titanic</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Pclass&#39;</span><span class="p">,</span><span class="s1">&#39;Sex&#39;</span><span class="p">],</span> <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Survived&#39;</span><span class="p">],</span> <span class="n">aggfunc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>Survived</th>
+    </tr>
+    <tr>
+      <th>Pclass</th>
+      <th>Sex</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">1</th>
+      <th>female</th>
+      <td>91</td>
+    </tr>
+    <tr>
+      <th>male</th>
+      <td>45</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">2</th>
+      <th>female</th>
+      <td>70</td>
+    </tr>
+    <tr>
+      <th>male</th>
+      <td>17</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">3</th>
+      <th>female</th>
+      <td>72</td>
+    </tr>
+    <tr>
+      <th>male</th>
+      <td>47</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="rename">
+<h3><code class="docutils literal notranslate"><span class="pre">rename()</span></code><a class="headerlink" href="#rename" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span>
+<span class="n">iris</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;Sepal.Length&#39;, &#39;Sepal.Width&#39;, &#39;Petal.Length&#39;, &#39;Petal.Width&#39;, &#39;Species&#39;,
+       &#39;Species_new&#39;, &#39;Species_initial&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Selective renaming column names</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Sepal.Length&#39;</span><span class="p">:</span><span class="s1">&#39;SLen&#39;</span><span class="p">})</span>
+<span class="n">iris</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>SLen</th>
+      <th>Sepal.Width</th>
+      <th>Petal.Length</th>
+      <th>Petal.Width</th>
+      <th>Species</th>
+      <th>Species_new</th>
+      <th>Species_initial</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>6</td>
+      <td>SE</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>6</td>
+      <td>SE</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>6</td>
+      <td>SE</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>6</td>
+      <td>SE</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>6</td>
+      <td>SE</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>145</th>
+      <td>6.7</td>
+      <td>3.0</td>
+      <td>5.2</td>
+      <td>2.3</td>
+      <td>virginica</td>
+      <td>9</td>
+      <td>VI</td>
+    </tr>
+    <tr>
+      <th>146</th>
+      <td>6.3</td>
+      <td>2.5</td>
+      <td>5.0</td>
+      <td>1.9</td>
+      <td>virginica</td>
+      <td>9</td>
+      <td>VI</td>
+    </tr>
+    <tr>
+      <th>147</th>
+      <td>6.5</td>
+      <td>3.0</td>
+      <td>5.2</td>
+      <td>2.0</td>
+      <td>virginica</td>
+      <td>9</td>
+      <td>VI</td>
+    </tr>
+    <tr>
+      <th>148</th>
+      <td>6.2</td>
+      <td>3.4</td>
+      <td>5.4</td>
+      <td>2.3</td>
+      <td>virginica</td>
+      <td>9</td>
+      <td>VI</td>
+    </tr>
+    <tr>
+      <th>149</th>
+      <td>5.9</td>
+      <td>3.0</td>
+      <td>5.1</td>
+      <td>1.8</td>
+      <td>virginica</td>
+      <td>9</td>
+      <td>VI</td>
+    </tr>
+  </tbody>
+</table>
+<p>150 rows × 7 columns</p>
+</div></div></div>
+</div>
+<ul class="simple">
+<li><p>Massive renaming column names</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s1">&#39;XX&#39;</span><span class="o">+</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>XXSLen</th>
+      <th>XXSepal.Width</th>
+      <th>XXPetal.Length</th>
+      <th>XXPetal.Width</th>
+      <th>XXSpecies</th>
+      <th>XXSpecies_new</th>
+      <th>XXSpecies_initial</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>6</td>
+      <td>SE</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>6</td>
+      <td>SE</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>6</td>
+      <td>SE</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>6</td>
+      <td>SE</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>6</td>
+      <td>SE</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>145</th>
+      <td>6.7</td>
+      <td>3.0</td>
+      <td>5.2</td>
+      <td>2.3</td>
+      <td>virginica</td>
+      <td>9</td>
+      <td>VI</td>
+    </tr>
+    <tr>
+      <th>146</th>
+      <td>6.3</td>
+      <td>2.5</td>
+      <td>5.0</td>
+      <td>1.9</td>
+      <td>virginica</td>
+      <td>9</td>
+      <td>VI</td>
+    </tr>
+    <tr>
+      <th>147</th>
+      <td>6.5</td>
+      <td>3.0</td>
+      <td>5.2</td>
+      <td>2.0</td>
+      <td>virginica</td>
+      <td>9</td>
+      <td>VI</td>
+    </tr>
+    <tr>
+      <th>148</th>
+      <td>6.2</td>
+      <td>3.4</td>
+      <td>5.4</td>
+      <td>2.3</td>
+      <td>virginica</td>
+      <td>9</td>
+      <td>VI</td>
+    </tr>
+    <tr>
+      <th>149</th>
+      <td>5.9</td>
+      <td>3.0</td>
+      <td>5.1</td>
+      <td>1.8</td>
+      <td>virginica</td>
+      <td>9</td>
+      <td>VI</td>
+    </tr>
+  </tbody>
+</table>
+<p>150 rows × 7 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">titanic</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PassengerId</th>
+      <th>Survived</th>
+      <th>Pclass</th>
+      <th>Name</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>SibSp</th>
+      <th>Parch</th>
+      <th>Ticket</th>
+      <th>Fare</th>
+      <th>Cabin</th>
+      <th>Embarked</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Braund, Mr. Owen Harris</td>
+      <td>male</td>
+      <td>22.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>A/5 21171</td>
+      <td>7.2500</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Cumings, Mrs. John Bradley (Florence Briggs Th...</td>
+      <td>female</td>
+      <td>38.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>PC 17599</td>
+      <td>71.2833</td>
+      <td>C85</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>1</td>
+      <td>3</td>
+      <td>Heikkinen, Miss. Laina</td>
+      <td>female</td>
+      <td>26.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>STON/O2. 3101282</td>
+      <td>7.9250</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Futrelle, Mrs. Jacques Heath (Lily May Peel)</td>
+      <td>female</td>
+      <td>35.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>113803</td>
+      <td>53.1000</td>
+      <td>C123</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Allen, Mr. William Henry</td>
+      <td>male</td>
+      <td>35.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>373450</td>
+      <td>8.0500</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Moran, Mr. James</td>
+      <td>male</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>0</td>
+      <td>330877</td>
+      <td>8.4583</td>
+      <td>NaN</td>
+      <td>Q</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>0</td>
+      <td>1</td>
+      <td>McCarthy, Mr. Timothy J</td>
+      <td>male</td>
+      <td>54.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>17463</td>
+      <td>51.8625</td>
+      <td>E46</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Palsson, Master. Gosta Leonard</td>
+      <td>male</td>
+      <td>2.0</td>
+      <td>3</td>
+      <td>1</td>
+      <td>349909</td>
+      <td>21.0750</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>1</td>
+      <td>3</td>
+      <td>Johnson, Mrs. Oscar W (Elisabeth Vilhelmina Berg)</td>
+      <td>female</td>
+      <td>27.0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>347742</td>
+      <td>11.1333</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>1</td>
+      <td>2</td>
+      <td>Nasser, Mrs. Nicholas (Adele Achem)</td>
+      <td>female</td>
+      <td>14.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>237736</td>
+      <td>30.0708</td>
+      <td>NaN</td>
+      <td>C</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">titanic</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Name&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="s2">&quot;_&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PassengerId</th>
+      <th>Survived</th>
+      <th>Pclass</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>SibSp</th>
+      <th>Parch</th>
+      <th>Ticket</th>
+      <th>Fare</th>
+      <th>Cabin</th>
+      <th>Embarked</th>
+    </tr>
+    <tr>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>BRAUND,_MR._OWEN_HARRIS</th>
+      <td>1</td>
+      <td>0</td>
+      <td>3</td>
+      <td>male</td>
+      <td>22.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>A/5 21171</td>
+      <td>7.2500</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>CUMINGS,_MRS._JOHN_BRADLEY_(FLORENCE_BRIGGS_THAYER)</th>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>female</td>
+      <td>38.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>PC 17599</td>
+      <td>71.2833</td>
+      <td>C85</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>HEIKKINEN,_MISS._LAINA</th>
+      <td>3</td>
+      <td>1</td>
+      <td>3</td>
+      <td>female</td>
+      <td>26.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>STON/O2. 3101282</td>
+      <td>7.9250</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>FUTRELLE,_MRS._JACQUES_HEATH_(LILY_MAY_PEEL)</th>
+      <td>4</td>
+      <td>1</td>
+      <td>1</td>
+      <td>female</td>
+      <td>35.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>113803</td>
+      <td>53.1000</td>
+      <td>C123</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>ALLEN,_MR._WILLIAM_HENRY</th>
+      <td>5</td>
+      <td>0</td>
+      <td>3</td>
+      <td>male</td>
+      <td>35.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>373450</td>
+      <td>8.0500</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>MONTVILA,_REV._JUOZAS</th>
+      <td>887</td>
+      <td>0</td>
+      <td>2</td>
+      <td>male</td>
+      <td>27.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>211536</td>
+      <td>13.0000</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>GRAHAM,_MISS._MARGARET_EDITH</th>
+      <td>888</td>
+      <td>1</td>
+      <td>1</td>
+      <td>female</td>
+      <td>19.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>112053</td>
+      <td>30.0000</td>
+      <td>B42</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>JOHNSTON,_MISS._CATHERINE_HELEN_"CARRIE"</th>
+      <td>889</td>
+      <td>0</td>
+      <td>3</td>
+      <td>female</td>
+      <td>NaN</td>
+      <td>1</td>
+      <td>2</td>
+      <td>W./C. 6607</td>
+      <td>23.4500</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>BEHR,_MR._KARL_HOWELL</th>
+      <td>890</td>
+      <td>1</td>
+      <td>1</td>
+      <td>male</td>
+      <td>26.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>111369</td>
+      <td>30.0000</td>
+      <td>C148</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>DOOLEY,_MR._PATRICK</th>
+      <td>891</td>
+      <td>0</td>
+      <td>3</td>
+      <td>male</td>
+      <td>32.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>370376</td>
+      <td>7.7500</td>
+      <td>NaN</td>
+      <td>Q</td>
+    </tr>
+  </tbody>
+</table>
+<p>891 rows × 11 columns</p>
+</div></div></div>
+</div>
+</div>
+</div>
+<div class="section" id="join-combine-data-frames">
+<h2>Join/Combine Data Frames<a class="headerlink" href="#join-combine-data-frames" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">df1.append(df2)</span></code>: Add the rows in df1 to the end of df2 (columns should be identical) (<code class="docutils literal notranslate"><span class="pre">rbind()</span></code> in R)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pd.concat([df1,</span> <span class="pre">df2],axis=1)</span></code>: Add the columns in df1 to the end of df2 (rows should be identical) (<code class="docutils literal notranslate"><span class="pre">cbind()</span></code> in R)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df1.join(df2,on=col1,how='inner')</span></code>: SQL-style join the columns in df1 with the columns on df2 where the rows for col have identical values. ‘how’ can be one of ‘left’, ‘right’, ‘outer’, ‘inner’</p></li>
+</ul>
+</div>
+<div class="section" id="statistics">
+<h2>Statistics<a class="headerlink" href="#statistics" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">df.describe()</span></code>: Summary statistics for numerical columns</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df.mean()</span></code>: Returns the mean of all columns</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df.corr()</span></code>: Returns the correlation between columns in a DataFrame</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df.count()</span></code>: Returns the number of non-null values in each DataFrame column</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df.max()</span></code>: Returns the highest value in each column</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df.min()</span></code>: Returns the lowest value in each column</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df.median()</span></code>: Returns the median of each column</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df.std()</span></code>: Returns the standard deviation of each column</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">titanic</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PassengerId    891
+Survived       891
+Pclass         891
+Name           891
+Sex            891
+Age            714
+SibSp          891
+Parch          891
+Ticket         891
+Fare           891
+Cabin          204
+Embarked       889
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">titanic</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PassengerId    446.0000
+Survived         0.0000
+Pclass           3.0000
+Age             28.0000
+SibSp            0.0000
+Parch            0.0000
+Fare            14.4542
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.amazon.com/gp/product/1491957662/ref=as_li_tl_nodl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1491957662&amp;linkCode=as2&amp;tag=ledoux-20&amp;linkId=eff92247940c967299befaed855c580a">Python for Data Analysis</a></p></li>
+<li><p><a class="reference external" href="https://github.com/wesm/pydata-book">Python for Data Analysis GitHub</a></p></li>
+<li><p><a class="reference external" href="https://stackoverflow.com/questions/28417293/sample-datasets-in-pandas">How to get sample datasets in Python</a></p></li>
+</ul>
+</div>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>statsmodels==0.12.0
+pandas==1.1.2
+numpy==1.18.1
+matplotlib==3.3.2
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python-notes",
+            path: "./python-basics"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python-notes'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alvin Chen<br/>
+        
+            &copy; Copyright 2020 Alvin Chen.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>

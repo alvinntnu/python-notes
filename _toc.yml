@@ -1,11 +1,11 @@
 - file: intro
-- file: python-basics
+- file: python-basics/python-basics
   sections:
-    - file: jupyter-notebook
-    - file: notebook-to-slides
-    - file: google-colab
-    - file: google-colab-r
-    - file: data-structure
+    - file: python-basics/jupyter-notebook
+    - file: python-basics/notebook-to-slides
+    - file: python-basics/google-colab
+    - file: python-basics/google-colab-r
+    - file: python-basics/data-structure
     - file: numpy
     - file: pandas
     - file: program-structure
@@ -18,7 +18,7 @@
     - file: web-applications
     - file: productive-tech
     - file: miscellaneous-notes
-- file: corpus-processing
+- file: corpus/corpus-processing
   sections:
     - file: nltk
     - file: web-crawler
@@ -32,7 +32,7 @@
     - file: vectorizing-text
     - file: jieba
     - file: ckiptagger
-- file: nlp
+- file: nlp/nlp
   sections:
     - file: nlp-spacy
     - file: nlp-spacy-zh

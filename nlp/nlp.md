@@ -1,4 +1,5 @@
-# Natural Language Processing with Python
+Natural Language Processing with Python
+=======================
 
 This section includes notes on natural language processing with Python.
 More specifically, it is about extracting meaningful structures and patterns from massive collections of texts.
@@ -15,8 +16,8 @@ Topics may include:
 - Semantic Analysis and Network
 - Sentiment Analysis
 - Word Embeddings and Deep Learning
-- LSTM
+- Recurrent Neural Network and LSTM
 - Sequence-to-Sequence and Machine Translation
-- Transfer Learning
-- Interpretation (LIME)
+- Transfer Learning Using BERT
 - Hyper-Parameter Tuning (Grid Search and Cross Validation)
+- Explainable AI (LIME)
