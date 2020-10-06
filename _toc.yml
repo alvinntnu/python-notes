@@ -6,8 +6,8 @@
     - file: python-basics/google-colab
     - file: python-basics/google-colab-r
     - file: python-basics/data-structure
-    - file: numpy
-    - file: pandas
+    - file: python-basics/numpy
+    - file: python-basics/pandas
     - file: program-structure
     - file: input-output
     - file: pickle

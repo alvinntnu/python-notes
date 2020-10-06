@@ -11,14 +11,13 @@ jieba==0.42.1
 jupyter-book==0.8.1
 jupyter-nbextensions-configurator==0.4.1
 jupyter-sphinx==0.3.1
-jupyterlab==1.2.6
-jupyterlab-server==1.0.6
+jupyterlab==2.2.8
 jupyterthemes==0.20.0
 Keras==2.4.3
 ktrain==0.21.4
 matplotlib==3.3.2
 nltk==3.4.5
-notebook==6.0.3
+notebook==6.1.4
 numpy==1.18.1
 pandas==1.1.2
 plotnine==0.7.1
