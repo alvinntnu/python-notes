@@ -36,8 +36,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Pandas" href="pandas.html" />
-    <link rel="prev" title="Data Structure" href="data-structure.html" />
+    <link rel="prev" title="Data Structure" href="python-basics/data-structure.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
@@ -72,43 +71,38 @@
 <nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
   <ul class="current nav sidenav_l1">
  <li class="toctree-l1 current active">
-  <a class="reference internal" href="python-basics.html">
+  <a class="reference internal" href="python-basics/python-basics.html">
    Python Basics
   </a>
   <ul class="current">
    <li class="toctree-l2">
-    <a class="reference internal" href="jupyter-notebook.html">
+    <a class="reference internal" href="python-basics/jupyter-notebook.html">
      Jupyer Notebook
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="notebook-to-slides.html">
+    <a class="reference internal" href="python-basics/notebook-to-slides.html">
      Notebook to Slides
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="google-colab.html">
+    <a class="reference internal" href="python-basics/google-colab.html">
      Google Colaboratory (Colab)
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="google-colab-r.html">
+    <a class="reference internal" href="python-basics/google-colab-r.html">
      Google Colab R
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="data-structure.html">
+    <a class="reference internal" href="python-basics/data-structure.html">
      Data Structure
     </a>
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      Numpy
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="pandas.html">
-     Pandas
     </a>
    </li>
    <li class="toctree-l2">
@@ -164,12 +158,12 @@
   </ul>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="corpus-processing.html">
+  <a class="reference internal" href="corpus/corpus-processing.html">
    Corpus Linguistics with Python
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="nlp.html">
+  <a class="reference internal" href="nlp/nlp.html">
    Natural Language Processing with Python
   </a>
  </li>
@@ -344,8 +338,8 @@ float32
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 19 µs, sys: 5 µs, total: 24 µs
-Wall time: 26.9 µs
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 17 µs, sys: 4 µs, total: 21 µs
+Wall time: 23.8 µs
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.84147096, 0.9092974 , 0.14112   ], dtype=float32)
@@ -364,8 +358,8 @@ Wall time: 26.9 µs
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 190 µs, sys: 24 µs, total: 214 µs
-Wall time: 75.1 µs
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 61 µs, sys: 3 µs, total: 64 µs
+Wall time: 67.7 µs
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.8414709848078965, 0.9092974268256817, 0.1411200080598672]
@@ -516,13 +510,13 @@ Wall time: 75.1 µs
  [4 5 6]]
 [[99 99 99]
  [99 99 99]]
-[[0.15537474 0.23178621 0.88033985]
- [0.50078658 0.39116898 0.0976448 ]
- [0.77430551 0.64056086 0.17908872]
- [0.67636843 0.01685493 0.25712514]]
-[[-4  5 -4]
- [ 6  5 -9]
- [-2  4  2]]
+[[0.17302484 0.6488814  0.18553416]
+ [0.65113494 0.89330517 0.475007  ]
+ [0.85339122 0.3950132  0.38144628]
+ [0.13687413 0.53867414 0.44876099]]
+[[  7 -10   9]
+ [  7  -1   0]
+ [  0  -2   0]]
 [[1. 0. 0. 0. 0.]
  [0. 1. 0. 0. 0.]
  [0. 0. 1. 0. 0.]
@@ -718,11 +712,11 @@ Wall time: 75.1 µs
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 5 99 73]
- [81 11 12]]
-[ 5 11 12]
-[ 5 11]
-[ 86 110  85]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[45  2 19]
+ [74 93 21]]
+[45  2 19]
+[ 2 21]
+[119  95  40]
 </pre></div>
 </div>
 </div>
@@ -761,6 +755,55 @@ Wall time: 75.1 µs
 </div>
 </div>
 </div>
+<ul class="simple">
+<li><p>Find which element has a specific value</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Search Elements in array</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">11</span><span class="p">]</span> 
+<span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([1, 6]),)
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Identify the first index of the element that is of the specific value</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">x</span><span class="o">==</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Find the index of the MIN/MAX</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9
+</pre></div>
+</div>
+</div>
+</div>
 <div class="section" id="load-from-file">
 <h2>Load from File<a class="headerlink" href="#load-from-file" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">filedata</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genformat</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
@@ -780,16 +823,16 @@ Wall time: 75.1 µs
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "ckiptagger"
+            mode: "python"
         },
         kernelOptions: {
-            kernelName: "ckiptagger",
+            kernelName: "python-notes",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'ckiptagger'</script>
+    <script>kernelName = 'python-notes'</script>
 
               </div>
               
@@ -799,8 +842,7 @@ Wall time: 75.1 µs
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="data-structure.html" title="previous page">Data Structure</a>
-    <a class='right-next' id="next-link" href="pandas.html" title="next page">Pandas</a>
+    <a class='left-prev' id="prev-link" href="python-basics/data-structure.html" title="previous page">Data Structure</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
