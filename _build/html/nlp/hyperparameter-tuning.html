@@ -1,0 +1,2382 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hyper-Parameter Tuning &#8212; Python Notes for Linguistics</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Sentiment Analysis Using BERT" href="sentiment-analysis-using-bert-chinese.html" />
+    <link rel="prev" title="Universal Sentence Embeddings" href="transfer-learning-sent-encoding.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/ntnu03.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Python Notes for Linguistics</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python-basics/python-basics.html">
+   Python Basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../corpus/corpus-processing.html">
+   Corpus Linguistics with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../statistical-analyses/statistical-analyses.html">
+   Statistical Analyses
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="nlp.html">
+   Natural Language Processing with Python
+  </a>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="nlp-spacy.html">
+     Natural Language Processing (spaCy)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="nlp-spacy-zh.html">
+     Chinese Natural Language Processing (spaCy)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="nlp-ckipnlp.html">
+     Natural Language Processing (ckipnlp)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="text-normalization-eng.html">
+     Text Normalization (English)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sklearn.html">
+     Machine Learning with Sci-Kit Learn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sentiment-analysis-ml.html">
+     Sentiment Analysis with Traditional Machine Learning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="word-embeddings.html">
+     Word Embeddings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="word2vec-chinese.html">
+     Word Embeddings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="word2vec.html">
+     Word2Vec
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="doc2vec.html">
+     Dov2Vec
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sentiment-analysis-dl.html">
+     Sentiment Analysis with Deep Learning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sentiment-analysis-lstm-v1.html">
+     Sentiment Analysis with LSTM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="seq-to-seq.html">
+     Machine Translation (Sequence-to-Sequence LSTM)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="text-gen-lstm-v1.html">
+     Text Generation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="transfer-learning-sent-encoding.html">
+     Universal Sentence Embeddings
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Hyper-Parameter Tuning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sentiment-analysis-using-bert-chinese.html">
+     Sentiment Analysis Using BERT
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ktrain-tutorial-explaining-predictions.html">
+     Explainable AI
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <div style="text-align:left">
+    <a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
+</div>
+
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/nlp/hyperparameter-tuning.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/alvinntnu/python-notes/master?urlpath=tree/nlp/hyperparameter-tuning.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/nlp/hyperparameter-tuning.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#svm-model">
+   SVM Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#default-k-fold-cross-validation">
+   Default K-fold Cross Validation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gridsearchcv-and-fine-tuning-hyper-parameters">
+   GridSearchCV and Fine-Tuning Hyper-Parameters
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cross-validation-hyper-parameter-tuning-and-pipeline">
+   Cross-validation, Hyper-Parameter Tuning, and Pipeline
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#deep-learning-example">
+   Deep Learning Example
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mnist-dataset">
+   MNIST Dataset
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hyper-parameter-tuning-using-grid-search">
+   Hyper-Parameter Tuning Using Grid Search
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#k-fold-validation">
+   K-fold Validation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#shuffle-split-cross-validation">
+   Shuffle Split Cross Validation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stratified-k-fold-validation">
+   Stratified K-Fold Validation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stratified-shuffle-split">
+   Stratified Shuffle Split
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gridsearchcv-and-cross-validation">
+   GridSearchCV and Cross-Validation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#requirements">
+   Requirements
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="hyper-parameter-tuning">
+<h1>Hyper-Parameter Tuning<a class="headerlink" href="#hyper-parameter-tuning" title="Permalink to this headline">¶</a></h1>
+<p>There are two important techniques to fine-tune the hyperparameters of the model: Grid Search and Cross Validation.</p>
+<ul class="simple">
+<li><p>Grid Search</p>
+<ul>
+<li><p>Define a few parameter values and experiment all these values in modeling. Use <code class="docutils literal notranslate"><span class="pre">sklearn.model_selection.GridSearchCV</span></code> to find the best parameter settings.</p></li>
+</ul>
+</li>
+<li><p>Cross Validation</p>
+<ul>
+<li><p>Fine-tune the parameters using cross-validation. Common CV methods include <code class="docutils literal notranslate"><span class="pre">sklearn.model_selection.StratifiedKFold</span></code>, <code class="docutils literal notranslate"><span class="pre">sklearn_model_selection.ShuffleSplit</span></code>, <code class="docutils literal notranslate"><span class="pre">LeaveOneOut</span></code>.</p></li>
+</ul>
+</li>
+</ul>
+<p>Both mothods can make use of the <code class="docutils literal notranslate"><span class="pre">pipeline</span></code> in sklearn to streamline the processing of training and validation.</p>
+<div class="section" id="svm-model">
+<h2>SVM Model<a class="headerlink" href="#svm-model" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>This example is from the officient <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> documentation</p></li>
+<li><p>A classic SVM model with train and test split</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Normal SVM model</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_train</span><span class="o">.</span><span class="n">shape</span>
+
+<span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_test</span><span class="o">.</span><span class="n">shape</span>
+
+<span class="c1">## fit on train sets</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="c1">## test on test sets</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9666666666666667
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="default-k-fold-cross-validation">
+<h2>Default K-fold Cross Validation<a class="headerlink" href="#default-k-fold-cross-validation" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>We can easily use the <code class="docutils literal notranslate"><span class="pre">cross_val_score()</span></code> to do the K-fold cross validation for a specific training model (without shuffling)</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>By default, <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code> returns a random split.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Cross-validation</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;f1_macro&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accuracy: </span><span class="si">%0.2f</span><span class="s2"> (+/- </span><span class="si">%0.2f</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">scores</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">scores</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.97 (+/- 0.09)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="gridsearchcv-and-fine-tuning-hyper-parameters">
+<h2>GridSearchCV and Fine-Tuning Hyper-Parameters<a class="headerlink" href="#gridsearchcv-and-fine-tuning-hyper-parameters" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Important steps:</p>
+<ul>
+<li><p>Define SVM classifier</p></li>
+<li><p>Define a set of parameter values to experiment</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">GridSearchCV</span></code> to find the best parameter settings</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GridSearchCV</span></code> by default implements cross-validation methods to find the optimal parameter settings.</p></li>
+<li><p>In other words, we can specify our own more sophisticated CV methods in <code class="docutils literal notranslate"><span class="pre">GridSearchCV</span></code>.</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span><span class="p">,</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+<span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;kernel&#39;</span><span class="p">:(</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="s1">&#39;rbf&#39;</span><span class="p">),</span> <span class="s1">&#39;C&#39;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">]}</span>
+<span class="n">svc</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">svc</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span> <span class="c1"># </span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+
+
+<span class="nb">sorted</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">cv_results_</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+<span class="c1">#print(clf.cv_results_)</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">cv_results_df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span>
+<span class="n">cv_results_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean_fit_time</th>
+      <th>std_fit_time</th>
+      <th>mean_score_time</th>
+      <th>std_score_time</th>
+      <th>param_C</th>
+      <th>param_kernel</th>
+      <th>params</th>
+      <th>split0_test_score</th>
+      <th>split1_test_score</th>
+      <th>split2_test_score</th>
+      <th>split3_test_score</th>
+      <th>split4_test_score</th>
+      <th>mean_test_score</th>
+      <th>std_test_score</th>
+      <th>rank_test_score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.000737</td>
+      <td>0.000221</td>
+      <td>0.000469</td>
+      <td>0.000225</td>
+      <td>1</td>
+      <td>linear</td>
+      <td>{'C': 1, 'kernel': 'linear'}</td>
+      <td>0.966667</td>
+      <td>1.000000</td>
+      <td>0.966667</td>
+      <td>0.966667</td>
+      <td>1.0</td>
+      <td>0.980000</td>
+      <td>0.016330</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.000651</td>
+      <td>0.000035</td>
+      <td>0.000331</td>
+      <td>0.000015</td>
+      <td>1</td>
+      <td>rbf</td>
+      <td>{'C': 1, 'kernel': 'rbf'}</td>
+      <td>0.966667</td>
+      <td>0.966667</td>
+      <td>0.966667</td>
+      <td>0.933333</td>
+      <td>1.0</td>
+      <td>0.966667</td>
+      <td>0.021082</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.000511</td>
+      <td>0.000027</td>
+      <td>0.000276</td>
+      <td>0.000013</td>
+      <td>10</td>
+      <td>linear</td>
+      <td>{'C': 10, 'kernel': 'linear'}</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>0.900000</td>
+      <td>0.966667</td>
+      <td>1.0</td>
+      <td>0.973333</td>
+      <td>0.038873</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.000604</td>
+      <td>0.000047</td>
+      <td>0.000344</td>
+      <td>0.000070</td>
+      <td>10</td>
+      <td>rbf</td>
+      <td>{'C': 10, 'kernel': 'rbf'}</td>
+      <td>0.966667</td>
+      <td>1.000000</td>
+      <td>0.966667</td>
+      <td>0.966667</td>
+      <td>1.0</td>
+      <td>0.980000</td>
+      <td>0.016330</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="cross-validation-hyper-parameter-tuning-and-pipeline">
+<h2>Cross-validation, Hyper-Parameter Tuning, and Pipeline<a class="headerlink" href="#cross-validation-hyper-parameter-tuning-and-pipeline" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Common cross validation methods:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">StratifiedKFold</span></code>: Split data into train and validation sets by preserving the percentage of samples of each class</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ShuffleSplit</span></code>: Split data into train and validation sets by first shuffling the data and then splitting</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">StratifiedShuffleSplit</span></code>: Stratified + Shuffled</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LeaveOneOut</span></code>: Creating train sets by taking all samples execept one, which is left out for validation</p></li>
+</ul>
+</li>
+<li><p>Important Steps</p>
+<ul>
+<li><p>Define all preprocessing methods as Tranasformer</p></li>
+<li><p>Create a pipeline</p></li>
+<li><p>Define a cross-validation method</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">cross_val_score()</span></code> to fine the best parameter settings by feeding the pipeline and the CV method</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">make_pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">StratifiedKFold</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">ShuffleSplit</span>
+
+<span class="c1">## Create pipeline</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="c1">## Define CV methods</span>
+<span class="n">kfold</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">shuffsplit</span> <span class="o">=</span> <span class="n">ShuffleSplit</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+
+<span class="c1">## CV results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;K-fold CV:&#39;</span><span class="p">,</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">kfold</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shuffle CV:&#39;</span><span class="p">,</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">shuffsplit</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>K-fold CV: [0.96666667 0.96666667 0.96666667 0.9        1.        ]
+Shuffle CV: [0.86666667 1.         1.         1.         0.93333333]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="deep-learning-example">
+<h2>Deep Learning Example<a class="headerlink" href="#deep-learning-example" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>This is based on <a class="reference external" href="https://www.kaggle.com/shujunge/gridsearchcv-with-keras">GridSearchCV with keras</a></p></li>
+</ul>
+</div>
+<div class="section" id="mnist-dataset">
+<h2>MNIST Dataset<a class="headerlink" href="#mnist-dataset" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">keras.datasets</span> <span class="kn">import</span> <span class="n">mnist</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+<span class="n">nb_classes</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">),</span> <span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span> <span class="o">=</span> <span class="n">mnist</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">784</span><span class="p">)</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">784</span><span class="p">)</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+<span class="n">X_train</span> <span class="o">/=</span> <span class="mi">255</span>
+<span class="n">X_test</span> <span class="o">/=</span> <span class="mi">255</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Convert y labels (integers) into binary class matrix</span>
+<span class="kn">from</span> <span class="nn">keras.utils</span> <span class="kn">import</span> <span class="n">np_utils</span>
+<span class="n">Y_train</span> <span class="o">=</span> <span class="n">np_utils</span><span class="o">.</span><span class="n">to_categorical</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">nb_classes</span><span class="p">)</span>
+<span class="n">Y_test</span> <span class="o">=</span> <span class="n">np_utils</span><span class="o">.</span><span class="n">to_categorical</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">nb_classes</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Y_train</span><span class="p">[:</span><span class="mi">5</span><span class="p">,])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0. 0. 0. 0. 0. 1. 0. 0. 0. 0.]
+ [1. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+ [0. 0. 0. 0. 1. 0. 0. 0. 0. 0.]
+ [0. 1. 0. 0. 0. 0. 0. 0. 0. 0.]
+ [0. 0. 0. 0. 0. 0. 0. 0. 0. 1.]]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="hyper-parameter-tuning-using-grid-search">
+<h2>Hyper-Parameter Tuning Using Grid Search<a class="headerlink" href="#hyper-parameter-tuning-using-grid-search" title="Permalink to this headline">¶</a></h2>
+<p>In this example, we aim to fine-tune the following hyper-parameters of the deep neural network:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">optimizer</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">kernel_initializer</span></code> of the Dense layer</p></li>
+</ul>
+<p>We can fine-tune other common parameters like epochs and batch-sizes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_model</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;rmsprop&#39;</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="s1">&#39;glorot_uniform&#39;</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">784</span><span class="p">,)))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span> <span class="c1"># An &quot;activation&quot; is just a non-linear function applied to the output</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">))</span>   <span class="c1"># Dropout helps protect the model from memorizing or &quot;overfitting&quot; the training data</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="n">kernel_initializer</span><span class="o">=</span><span class="n">init</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">kernel_initializer</span><span class="o">=</span><span class="n">init</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;softmax&#39;</span><span class="p">))</span> <span class="c1"># This special &quot;softmax&quot; a</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;binary_crossentropy&#39;</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span> 
+    <span class="k">return</span> <span class="n">model</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">keras.wrappers.scikit_learn</span> <span class="kn">import</span> <span class="n">KerasClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+<span class="n">start</span><span class="o">=</span><span class="n">time</span><span class="p">()</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">KerasClassifier</span><span class="p">(</span><span class="n">build_fn</span><span class="o">=</span><span class="n">create_model</span><span class="p">)</span>
+<span class="n">optimizers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;rmsprop&#39;</span><span class="p">,</span> <span class="s1">&#39;adam&#39;</span><span class="p">]</span>
+<span class="n">init</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;glorot_uniform&#39;</span><span class="p">,</span> <span class="s1">&#39;normal&#39;</span><span class="p">,</span> <span class="s1">&#39;uniform&#39;</span><span class="p">]</span>
+<span class="c1"># epochs = [50, 100, 150]</span>
+<span class="c1"># batches = [5, 10, 20]</span>
+<span class="n">param_grid</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">optimizers</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="n">init</span><span class="p">)</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">param_grid</span><span class="p">)</span>
+<span class="n">grid_result</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;total time:&quot;</span><span class="p">,</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">start</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1500/1500 [==============================] - 4s 3ms/step - loss: 0.0417 - accuracy: 0.9264
+375/375 [==============================] - 1s 2ms/step - loss: 0.0259 - accuracy: 0.9593
+1500/1500 [==============================] - 4s 3ms/step - loss: 0.0416 - accuracy: 0.9270
+375/375 [==============================] - 1s 2ms/step - loss: 0.0226 - accuracy: 0.9651
+1500/1500 [==============================] - 4s 3ms/step - loss: 0.0410 - accuracy: 0.9282
+375/375 [==============================] - 1s 2ms/step - loss: 0.0270 - accuracy: 0.9578
+1500/1500 [==============================] - 4s 3ms/step - loss: 0.0415 - accuracy: 0.9274
+375/375 [==============================] - 1s 2ms/step - loss: 0.0289 - accuracy: 0.9567
+1500/1500 [==============================] - 4s 3ms/step - loss: 0.0419 - accuracy: 0.9270
+375/375 [==============================] - 1s 2ms/step - loss: 0.0221 - accuracy: 0.9633
+1500/1500 [==============================] - 4s 2ms/step - loss: 0.0406 - accuracy: 0.9271
+375/375 [==============================] - 1s 2ms/step - loss: 0.0220 - accuracy: 0.9626
+1500/1500 [==============================] - 4s 2ms/step - loss: 0.0399 - accuracy: 0.9276
+375/375 [==============================] - 1s 2ms/step - loss: 0.0239 - accuracy: 0.9604
+1500/1500 [==============================] - 4s 2ms/step - loss: 0.0397 - accuracy: 0.9293
+375/375 [==============================] - 1s 2ms/step - loss: 0.0232 - accuracy: 0.9592
+1500/1500 [==============================] - 4s 2ms/step - loss: 0.0406 - accuracy: 0.9277
+375/375 [==============================] - 1s 2ms/step - loss: 0.0219 - accuracy: 0.9624
+1500/1500 [==============================] - 4s 2ms/step - loss: 0.0406 - accuracy: 0.9271
+375/375 [==============================] - 1s 2ms/step - loss: 0.0213 - accuracy: 0.9628
+1500/1500 [==============================] - 4s 3ms/step - loss: 0.0421 - accuracy: 0.9262
+375/375 [==============================] - 1s 2ms/step - loss: 0.0254 - accuracy: 0.9599
+1500/1500 [==============================] - 4s 3ms/step - loss: 0.0416 - accuracy: 0.9277
+375/375 [==============================] - 1s 2ms/step - loss: 0.0239 - accuracy: 0.9621
+1500/1500 [==============================] - 4s 3ms/step - loss: 0.0418 - accuracy: 0.9276
+375/375 [==============================] - 1s 2ms/step - loss: 0.0271 - accuracy: 0.9573
+1500/1500 [==============================] - 4s 3ms/step - loss: 0.0416 - accuracy: 0.9277
+375/375 [==============================] - 1s 2ms/step - loss: 0.0272 - accuracy: 0.9560
+1500/1500 [==============================] - 4s 3ms/step - loss: 0.0423 - accuracy: 0.9250
+375/375 [==============================] - 1s 2ms/step - loss: 0.0227 - accuracy: 0.9643
+1500/1500 [==============================] - 4s 2ms/step - loss: 0.0407 - accuracy: 0.9268
+375/375 [==============================] - 1s 2ms/step - loss: 0.0263 - accuracy: 0.9568
+1500/1500 [==============================] - 4s 2ms/step - loss: 0.0405 - accuracy: 0.9283
+375/375 [==============================] - 1s 2ms/step - loss: 0.0219 - accuracy: 0.9612
+1500/1500 [==============================] - 4s 2ms/step - loss: 0.0409 - accuracy: 0.9275
+375/375 [==============================] - 1s 2ms/step - loss: 0.0227 - accuracy: 0.9615
+1500/1500 [==============================] - 4s 2ms/step - loss: 0.0406 - accuracy: 0.9284
+375/375 [==============================] - 1s 2ms/step - loss: 0.0241 - accuracy: 0.9573
+1500/1500 [==============================] - 4s 2ms/step - loss: 0.0407 - accuracy: 0.9276
+375/375 [==============================] - 1s 2ms/step - loss: 0.0184 - accuracy: 0.9672
+1500/1500 [==============================] - 4s 3ms/step - loss: 0.0422 - accuracy: 0.9251
+375/375 [==============================] - 1s 2ms/step - loss: 0.0253 - accuracy: 0.9614
+1500/1500 [==============================] - 4s 3ms/step - loss: 0.0417 - accuracy: 0.9264
+375/375 [==============================] - 1s 2ms/step - loss: 0.0238 - accuracy: 0.9621
+1500/1500 [==============================] - 4s 3ms/step - loss: 0.0418 - accuracy: 0.9266
+375/375 [==============================] - 1s 2ms/step - loss: 0.0261 - accuracy: 0.9584
+1500/1500 [==============================] - 4s 3ms/step - loss: 0.0412 - accuracy: 0.9276
+375/375 [==============================] - 1s 2ms/step - loss: 0.0331 - accuracy: 0.9478
+1500/1500 [==============================] - 4s 3ms/step - loss: 0.0428 - accuracy: 0.9250
+375/375 [==============================] - 1s 2ms/step - loss: 0.0223 - accuracy: 0.9663
+1500/1500 [==============================] - 3s 2ms/step - loss: 0.0412 - accuracy: 0.9258
+375/375 [==============================] - 1s 2ms/step - loss: 0.0211 - accuracy: 0.9632
+1500/1500 [==============================] - 3s 2ms/step - loss: 0.0411 - accuracy: 0.9243
+375/375 [==============================] - 1s 2ms/step - loss: 0.0281 - accuracy: 0.9517
+1500/1500 [==============================] - 4s 2ms/step - loss: 0.0417 - accuracy: 0.9268
+375/375 [==============================] - 1s 2ms/step - loss: 0.0311 - accuracy: 0.9483
+1500/1500 [==============================] - 4s 2ms/step - loss: 0.0412 - accuracy: 0.9266
+375/375 [==============================] - 1s 2ms/step - loss: 0.0247 - accuracy: 0.9566
+1500/1500 [==============================] - 4s 2ms/step - loss: 0.0421 - accuracy: 0.9253
+375/375 [==============================] - 1s 2ms/step - loss: 0.0255 - accuracy: 0.9543
+1875/1875 [==============================] - 4s 2ms/step - loss: 0.0370 - accuracy: 0.9340
+total time: 163.10951614379883
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## The Best Model</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best: </span><span class="si">%f</span><span class="s2"> using </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">grid_result</span><span class="o">.</span><span class="n">best_score_</span><span class="p">,</span> <span class="n">grid_result</span><span class="o">.</span><span class="n">best_params_</span><span class="p">))</span>
+
+<span class="c1">## Print all experiment results</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">grid_result</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span>
+<span class="n">results</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best: 0.961483 using {&#39;init&#39;: &#39;glorot_uniform&#39;, &#39;optimizer&#39;: &#39;adam&#39;}
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean_fit_time</th>
+      <th>std_fit_time</th>
+      <th>mean_score_time</th>
+      <th>std_score_time</th>
+      <th>param_init</th>
+      <th>param_optimizer</th>
+      <th>params</th>
+      <th>split0_test_score</th>
+      <th>split1_test_score</th>
+      <th>split2_test_score</th>
+      <th>split3_test_score</th>
+      <th>split4_test_score</th>
+      <th>mean_test_score</th>
+      <th>std_test_score</th>
+      <th>rank_test_score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>4.962227</td>
+      <td>0.534804</td>
+      <td>0.789589</td>
+      <td>0.021689</td>
+      <td>glorot_uniform</td>
+      <td>rmsprop</td>
+      <td>{'init': 'glorot_uniform', 'optimizer': 'rmspr...</td>
+      <td>0.959333</td>
+      <td>0.965083</td>
+      <td>0.957750</td>
+      <td>0.956667</td>
+      <td>0.963333</td>
+      <td>0.960433</td>
+      <td>0.003244</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.087789</td>
+      <td>0.024603</td>
+      <td>0.798292</td>
+      <td>0.013339</td>
+      <td>glorot_uniform</td>
+      <td>adam</td>
+      <td>{'init': 'glorot_uniform', 'optimizer': 'adam'}</td>
+      <td>0.962583</td>
+      <td>0.960417</td>
+      <td>0.959250</td>
+      <td>0.962417</td>
+      <td>0.962750</td>
+      <td>0.961483</td>
+      <td>0.001401</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.723551</td>
+      <td>0.063123</td>
+      <td>0.842619</td>
+      <td>0.107239</td>
+      <td>normal</td>
+      <td>rmsprop</td>
+      <td>{'init': 'normal', 'optimizer': 'rmsprop'}</td>
+      <td>0.959917</td>
+      <td>0.962083</td>
+      <td>0.957333</td>
+      <td>0.956000</td>
+      <td>0.964333</td>
+      <td>0.959933</td>
+      <td>0.003040</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.174438</td>
+      <td>0.124374</td>
+      <td>0.784431</td>
+      <td>0.015665</td>
+      <td>normal</td>
+      <td>adam</td>
+      <td>{'init': 'normal', 'optimizer': 'adam'}</td>
+      <td>0.956833</td>
+      <td>0.961167</td>
+      <td>0.961500</td>
+      <td>0.957333</td>
+      <td>0.967167</td>
+      <td>0.960800</td>
+      <td>0.003712</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4.698246</td>
+      <td>0.033024</td>
+      <td>0.798633</td>
+      <td>0.015098</td>
+      <td>uniform</td>
+      <td>rmsprop</td>
+      <td>{'init': 'uniform', 'optimizer': 'rmsprop'}</td>
+      <td>0.961417</td>
+      <td>0.962083</td>
+      <td>0.958417</td>
+      <td>0.947833</td>
+      <td>0.966250</td>
+      <td>0.959200</td>
+      <td>0.006209</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>4.086391</td>
+      <td>0.034679</td>
+      <td>0.859442</td>
+      <td>0.142505</td>
+      <td>uniform</td>
+      <td>adam</td>
+      <td>{'init': 'uniform', 'optimizer': 'adam'}</td>
+      <td>0.963250</td>
+      <td>0.951667</td>
+      <td>0.948333</td>
+      <td>0.956583</td>
+      <td>0.954333</td>
+      <td>0.954833</td>
+      <td>0.005029</td>
+      <td>6</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="k-fold-validation">
+<h2>K-fold Validation<a class="headerlink" href="#k-fold-validation" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Similar to shuffle split?</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">seed</span><span class="o">=</span><span class="mi">12</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_model</span><span class="p">():</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">784</span><span class="p">,)))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span> <span class="c1"># An &quot;activation&quot; is just a non-linear function applied to the output</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">))</span>   <span class="c1"># Dropout helps protect the model from memorizing or &quot;overfitting&quot; the training data</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">512</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;softmax&#39;</span><span class="p">))</span> <span class="c1"># This special &quot;softmax&quot; a</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;binary_crossentropy&#39;</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;rmsprop&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span> 
+    <span class="k">return</span> <span class="n">model</span>
+
+<span class="kn">from</span> <span class="nn">keras.wrappers.scikit_learn</span> <span class="kn">import</span> <span class="n">KerasClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">StratifiedKFold</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
+<span class="n">start</span><span class="o">=</span><span class="n">time</span><span class="p">()</span>
+
+<span class="n">model2</span> <span class="o">=</span> <span class="n">KerasClassifier</span><span class="p">(</span><span class="n">build_fn</span><span class="o">=</span><span class="n">create_model</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1500</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">model2</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;K-fold Results: </span><span class="si">%.2f%%</span><span class="s2"> (</span><span class="si">%.2f%%</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;total time:&quot;</span><span class="p">,</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">start</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/10
+36/36 [==============================] - 0s 7ms/step - loss: 0.1047 - accuracy: 0.7911
+Epoch 2/10
+36/36 [==============================] - 0s 7ms/step - loss: 0.0458 - accuracy: 0.9188
+Epoch 3/10
+36/36 [==============================] - 0s 7ms/step - loss: 0.0334 - accuracy: 0.9411
+Epoch 4/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0255 - accuracy: 0.9559
+Epoch 5/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0207 - accuracy: 0.9641
+Epoch 6/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0168 - accuracy: 0.9712
+Epoch 7/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0141 - accuracy: 0.9755
+Epoch 8/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0121 - accuracy: 0.9795
+Epoch 9/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0108 - accuracy: 0.9817
+Epoch 10/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0095 - accuracy: 0.9835
+4/4 [==============================] - 0s 4ms/step - loss: 0.0121 - accuracy: 0.9782
+Epoch 1/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.1044 - accuracy: 0.7950
+Epoch 2/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0435 - accuracy: 0.9239
+Epoch 3/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0319 - accuracy: 0.9445
+Epoch 4/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0257 - accuracy: 0.9552
+Epoch 5/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0196 - accuracy: 0.9662
+Epoch 6/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0161 - accuracy: 0.9725
+Epoch 7/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0141 - accuracy: 0.9758
+Epoch 8/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0117 - accuracy: 0.9799
+Epoch 9/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0100 - accuracy: 0.9825
+Epoch 10/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0088 - accuracy: 0.9851
+4/4 [==============================] - 0s 3ms/step - loss: 0.0159 - accuracy: 0.9748
+Epoch 1/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.1058 - accuracy: 0.7887
+Epoch 2/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0450 - accuracy: 0.9204
+Epoch 3/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0318 - accuracy: 0.9444
+Epoch 4/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0249 - accuracy: 0.9570
+Epoch 5/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0199 - accuracy: 0.9663
+Epoch 6/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0168 - accuracy: 0.9714
+Epoch 7/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0140 - accuracy: 0.9765
+Epoch 8/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0117 - accuracy: 0.9802
+Epoch 9/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0102 - accuracy: 0.9827
+Epoch 10/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0088 - accuracy: 0.9859
+4/4 [==============================] - 0s 3ms/step - loss: 0.0184 - accuracy: 0.9685
+Epoch 1/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.1028 - accuracy: 0.7998
+Epoch 2/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0449 - accuracy: 0.9203
+Epoch 3/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0322 - accuracy: 0.9445
+Epoch 4/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0243 - accuracy: 0.9577
+Epoch 5/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0198 - accuracy: 0.9660
+Epoch 6/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0167 - accuracy: 0.9715
+Epoch 7/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0141 - accuracy: 0.9757
+Epoch 8/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0121 - accuracy: 0.9796
+Epoch 9/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0097 - accuracy: 0.9830
+Epoch 10/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0088 - accuracy: 0.9846
+4/4 [==============================] - 0s 3ms/step - loss: 0.0130 - accuracy: 0.9783
+Epoch 1/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.1050 - accuracy: 0.7889
+Epoch 2/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0456 - accuracy: 0.9189
+Epoch 3/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0325 - accuracy: 0.9439
+Epoch 4/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0252 - accuracy: 0.9563
+Epoch 5/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0206 - accuracy: 0.9643
+Epoch 6/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0165 - accuracy: 0.9717
+Epoch 7/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0142 - accuracy: 0.9763
+Epoch 8/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0117 - accuracy: 0.9799
+Epoch 9/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0102 - accuracy: 0.9829
+Epoch 10/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0086 - accuracy: 0.9852
+4/4 [==============================] - 0s 3ms/step - loss: 0.0144 - accuracy: 0.9750
+Epoch 1/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.1059 - accuracy: 0.7875
+Epoch 2/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0451 - accuracy: 0.9212
+Epoch 3/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0322 - accuracy: 0.9446
+Epoch 4/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0246 - accuracy: 0.9583
+Epoch 5/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0206 - accuracy: 0.9649
+Epoch 6/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0163 - accuracy: 0.9719
+Epoch 7/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0141 - accuracy: 0.9750
+Epoch 8/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0122 - accuracy: 0.9793
+Epoch 9/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0106 - accuracy: 0.9819
+Epoch 10/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0086 - accuracy: 0.9855
+4/4 [==============================] - 0s 4ms/step - loss: 0.0154 - accuracy: 0.9740
+Epoch 1/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.1047 - accuracy: 0.7929
+Epoch 2/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0460 - accuracy: 0.9187
+Epoch 3/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0328 - accuracy: 0.9433
+Epoch 4/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0247 - accuracy: 0.9576
+Epoch 5/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0205 - accuracy: 0.9644
+Epoch 6/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0175 - accuracy: 0.9700
+Epoch 7/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0141 - accuracy: 0.9755
+Epoch 8/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0117 - accuracy: 0.9800
+Epoch 9/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0105 - accuracy: 0.9820
+Epoch 10/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0084 - accuracy: 0.9853
+4/4 [==============================] - 0s 4ms/step - loss: 0.0143 - accuracy: 0.9763
+Epoch 1/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.1046 - accuracy: 0.7949
+Epoch 2/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0463 - accuracy: 0.9182
+Epoch 3/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0328 - accuracy: 0.9426
+Epoch 4/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0253 - accuracy: 0.9556
+Epoch 5/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0206 - accuracy: 0.9649
+Epoch 6/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0167 - accuracy: 0.9714
+Epoch 7/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0145 - accuracy: 0.9753
+Epoch 8/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0118 - accuracy: 0.9797
+Epoch 9/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0102 - accuracy: 0.9828
+Epoch 10/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0085 - accuracy: 0.9856
+4/4 [==============================] - 0s 4ms/step - loss: 0.0181 - accuracy: 0.9720
+Epoch 1/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.1042 - accuracy: 0.7922
+Epoch 2/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0440 - accuracy: 0.9239
+Epoch 3/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0324 - accuracy: 0.9429
+Epoch 4/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0248 - accuracy: 0.9578
+Epoch 5/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0199 - accuracy: 0.9663
+Epoch 6/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0166 - accuracy: 0.9719
+Epoch 7/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0138 - accuracy: 0.9764
+Epoch 8/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0106 - accuracy: 0.9820
+Epoch 9/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0102 - accuracy: 0.9823
+Epoch 10/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0081 - accuracy: 0.9863
+4/4 [==============================] - 0s 3ms/step - loss: 0.0180 - accuracy: 0.9710
+Epoch 1/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.1045 - accuracy: 0.7953
+Epoch 2/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0455 - accuracy: 0.9199
+Epoch 3/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0328 - accuracy: 0.9438
+Epoch 4/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0252 - accuracy: 0.9557
+Epoch 5/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0209 - accuracy: 0.9647
+Epoch 6/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0175 - accuracy: 0.9697
+Epoch 7/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0145 - accuracy: 0.9749
+Epoch 8/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0124 - accuracy: 0.9785
+Epoch 9/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0102 - accuracy: 0.9824
+Epoch 10/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0089 - accuracy: 0.9847
+4/4 [==============================] - 0s 3ms/step - loss: 0.0114 - accuracy: 0.9810
+K-fold Results: 97.49% (0.36%)
+total time: 29.779260635375977
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="shuffle-split-cross-validation">
+<h2>Shuffle Split Cross Validation<a class="headerlink" href="#shuffle-split-cross-validation" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Shuffle but not stratified</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Shuffle Split</span>
+<span class="n">start</span><span class="o">=</span><span class="n">time</span><span class="p">()</span>
+<span class="n">sf</span> <span class="o">=</span> <span class="n">ShuffleSplit</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">model2</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">sf</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;K-fold Results: </span><span class="si">%.2f%%</span><span class="s2"> (</span><span class="si">%.2f%%</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;total time:&quot;</span><span class="p">,</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">start</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.1039 - accuracy: 0.7965
+Epoch 2/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0454 - accuracy: 0.9197
+Epoch 3/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0335 - accuracy: 0.9410
+Epoch 4/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0259 - accuracy: 0.9553
+Epoch 5/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0202 - accuracy: 0.9651
+Epoch 6/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0169 - accuracy: 0.9713
+Epoch 7/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0142 - accuracy: 0.9758
+Epoch 8/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0126 - accuracy: 0.9788
+Epoch 9/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0098 - accuracy: 0.9839
+Epoch 10/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0092 - accuracy: 0.9839
+4/4 [==============================] - 0s 3ms/step - loss: 0.0129 - accuracy: 0.9773
+Epoch 1/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.1039 - accuracy: 0.7952
+Epoch 2/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0453 - accuracy: 0.9183
+Epoch 3/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0320 - accuracy: 0.9442
+Epoch 4/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0261 - accuracy: 0.9551
+Epoch 5/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0208 - accuracy: 0.9647
+Epoch 6/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0164 - accuracy: 0.9723
+Epoch 7/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0139 - accuracy: 0.9765
+Epoch 8/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0120 - accuracy: 0.9791
+Epoch 9/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0101 - accuracy: 0.9835
+Epoch 10/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0088 - accuracy: 0.9850
+4/4 [==============================] - 0s 3ms/step - loss: 0.0124 - accuracy: 0.9788
+Epoch 1/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.1057 - accuracy: 0.7922
+Epoch 2/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0458 - accuracy: 0.9200
+Epoch 3/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0323 - accuracy: 0.9431
+Epoch 4/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0257 - accuracy: 0.9568
+Epoch 5/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0208 - accuracy: 0.9642
+Epoch 6/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0169 - accuracy: 0.9709
+Epoch 7/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0141 - accuracy: 0.9753
+Epoch 8/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0123 - accuracy: 0.9788
+Epoch 9/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0101 - accuracy: 0.9828
+Epoch 10/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0093 - accuracy: 0.9839
+4/4 [==============================] - 0s 5ms/step - loss: 0.0122 - accuracy: 0.9783
+Epoch 1/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.1039 - accuracy: 0.7970
+Epoch 2/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0442 - accuracy: 0.9224
+Epoch 3/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0321 - accuracy: 0.9445
+Epoch 4/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0249 - accuracy: 0.9570
+Epoch 5/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0206 - accuracy: 0.9644
+Epoch 6/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0164 - accuracy: 0.9709
+Epoch 7/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0140 - accuracy: 0.9765
+Epoch 8/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0114 - accuracy: 0.9802
+Epoch 9/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0103 - accuracy: 0.9818
+Epoch 10/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0084 - accuracy: 0.9858
+4/4 [==============================] - 0s 4ms/step - loss: 0.0167 - accuracy: 0.9733
+Epoch 1/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.1043 - accuracy: 0.7938
+Epoch 2/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0453 - accuracy: 0.9199
+Epoch 3/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0331 - accuracy: 0.9418
+Epoch 4/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0255 - accuracy: 0.9557
+Epoch 5/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0208 - accuracy: 0.9642
+Epoch 6/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0163 - accuracy: 0.9714
+Epoch 7/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0141 - accuracy: 0.9749
+Epoch 8/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0124 - accuracy: 0.9781
+Epoch 9/10
+36/36 [==============================] - 0s 7ms/step - loss: 0.0098 - accuracy: 0.9834
+Epoch 10/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0087 - accuracy: 0.9851
+4/4 [==============================] - 0s 4ms/step - loss: 0.0168 - accuracy: 0.9752
+Epoch 1/10
+36/36 [==============================] - 0s 7ms/step - loss: 0.1014 - accuracy: 0.8043
+Epoch 2/10
+36/36 [==============================] - 0s 7ms/step - loss: 0.0443 - accuracy: 0.9218
+Epoch 3/10
+36/36 [==============================] - 0s 7ms/step - loss: 0.0323 - accuracy: 0.9439
+Epoch 4/10
+36/36 [==============================] - 0s 7ms/step - loss: 0.0247 - accuracy: 0.9577
+Epoch 5/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0202 - accuracy: 0.9654
+Epoch 6/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0164 - accuracy: 0.9724
+Epoch 7/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0139 - accuracy: 0.9759
+Epoch 8/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0113 - accuracy: 0.9806
+Epoch 9/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0100 - accuracy: 0.9821
+Epoch 10/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0084 - accuracy: 0.9860
+4/4 [==============================] - 0s 4ms/step - loss: 0.0125 - accuracy: 0.9800
+Epoch 1/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.1080 - accuracy: 0.7908
+Epoch 2/10
+36/36 [==============================] - 0s 7ms/step - loss: 0.0467 - accuracy: 0.9186
+Epoch 3/10
+36/36 [==============================] - 0s 7ms/step - loss: 0.0332 - accuracy: 0.9424
+Epoch 4/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0253 - accuracy: 0.9568
+Epoch 5/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0209 - accuracy: 0.9638
+Epoch 6/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0170 - accuracy: 0.9702
+Epoch 7/10
+36/36 [==============================] - 0s 7ms/step - loss: 0.0141 - accuracy: 0.9760
+Epoch 8/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0120 - accuracy: 0.9789
+Epoch 9/10
+36/36 [==============================] - 0s 7ms/step - loss: 0.0101 - accuracy: 0.9831
+Epoch 10/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0091 - accuracy: 0.9847
+4/4 [==============================] - 0s 4ms/step - loss: 0.0120 - accuracy: 0.9785
+Epoch 1/10
+36/36 [==============================] - 0s 7ms/step - loss: 0.1038 - accuracy: 0.7945
+Epoch 2/10
+36/36 [==============================] - 0s 7ms/step - loss: 0.0448 - accuracy: 0.9215
+Epoch 3/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0322 - accuracy: 0.9439
+Epoch 4/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0253 - accuracy: 0.9561
+Epoch 5/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0204 - accuracy: 0.9649
+Epoch 6/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0163 - accuracy: 0.9718
+Epoch 7/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0136 - accuracy: 0.9768
+Epoch 8/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0121 - accuracy: 0.9788
+Epoch 9/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0100 - accuracy: 0.9822
+Epoch 10/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0087 - accuracy: 0.9849
+4/4 [==============================] - 0s 3ms/step - loss: 0.0155 - accuracy: 0.9747
+Epoch 1/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.1076 - accuracy: 0.7903
+Epoch 2/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0463 - accuracy: 0.9187
+Epoch 3/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0328 - accuracy: 0.9422
+Epoch 4/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0250 - accuracy: 0.9565
+Epoch 5/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0199 - accuracy: 0.9658
+Epoch 6/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0171 - accuracy: 0.9701
+Epoch 7/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0136 - accuracy: 0.9765
+Epoch 8/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0116 - accuracy: 0.9802
+Epoch 9/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0102 - accuracy: 0.9823
+Epoch 10/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0090 - accuracy: 0.9845
+4/4 [==============================] - 0s 4ms/step - loss: 0.0137 - accuracy: 0.9770
+Epoch 1/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.1045 - accuracy: 0.7910
+Epoch 2/10
+36/36 [==============================] - 0s 7ms/step - loss: 0.0454 - accuracy: 0.9210
+Epoch 3/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0324 - accuracy: 0.9441
+Epoch 4/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0253 - accuracy: 0.9561
+Epoch 5/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0202 - accuracy: 0.9651
+Epoch 6/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0165 - accuracy: 0.9719
+Epoch 7/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0144 - accuracy: 0.9755
+Epoch 8/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0116 - accuracy: 0.9804
+Epoch 9/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0100 - accuracy: 0.9832
+Epoch 10/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0089 - accuracy: 0.9848
+4/4 [==============================] - 0s 3ms/step - loss: 0.0127 - accuracy: 0.9787
+K-fold Results: 97.72% (0.20%)
+total time: 31.2500159740448
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="stratified-k-fold-validation">
+<h2>Stratified K-Fold Validation<a class="headerlink" href="#stratified-k-fold-validation" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Stratified but not shuffled</p></li>
+<li><p>Stratified cross-validation gives poor results. No idea why?</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">Y_train</span><span class="p">[:</span><span class="mi">4</span><span class="p">,])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y_train</span><span class="p">[:</span><span class="mi">4</span><span class="p">])</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="n">Counter</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0. 0. 0. 0. 0. 1. 0. 0. 0. 0.]
+ [1. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+ [0. 0. 0. 0. 1. 0. 0. 0. 0. 0.]
+ [0. 1. 0. 0. 0. 0. 0. 0. 0. 0.]]
+[5 0 4 1]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counter({0: 5923,
+         1: 6742,
+         2: 5958,
+         3: 6131,
+         4: 5842,
+         5: 5421,
+         6: 5918,
+         7: 6265,
+         8: 5851,
+         9: 5949})
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Stratified Shuffle</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">StratifiedKFold</span>
+<span class="n">start</span><span class="o">=</span><span class="n">time</span><span class="p">()</span>
+<span class="n">sk</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">model2</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">sk</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Stratified K-fold Results: </span><span class="si">%.2f%%</span><span class="s2"> (</span><span class="si">%.2f%%</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;total time:&quot;</span><span class="p">,</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">start</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/10
+36/36 [==============================] - 0s 6ms/step - loss: 10.0234 - accuracy: 0.0974
+Epoch 2/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8925 - accuracy: 0.1069
+Epoch 3/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8916 - accuracy: 0.1004
+Epoch 4/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8916 - accuracy: 0.0986
+Epoch 5/10
+36/36 [==============================] - 0s 6ms/step - loss: 9.8916 - accuracy: 0.1016
+Epoch 6/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8916 - accuracy: 0.0997
+Epoch 7/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8916 - accuracy: 0.0999
+Epoch 8/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8916 - accuracy: 0.1024
+Epoch 9/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8916 - accuracy: 0.1017
+Epoch 10/10
+36/36 [==============================] - 0s 6ms/step - loss: 9.8916 - accuracy: 0.1002
+4/4 [==============================] - 0s 3ms/step - loss: 9.8922 - accuracy: 0.0987
+Epoch 1/10
+36/36 [==============================] - 0s 5ms/step - loss: 10.0317 - accuracy: 0.0952
+Epoch 2/10
+36/36 [==============================] - 0s 6ms/step - loss: 9.8930 - accuracy: 0.1012
+Epoch 3/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8919 - accuracy: 0.1015
+Epoch 4/10
+36/36 [==============================] - 0s 6ms/step - loss: 9.8918 - accuracy: 0.1006
+Epoch 5/10
+36/36 [==============================] - 0s 6ms/step - loss: 9.8918 - accuracy: 0.0984
+Epoch 6/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8918 - accuracy: 0.0992
+Epoch 7/10
+36/36 [==============================] - 0s 6ms/step - loss: 9.8918 - accuracy: 0.0992
+Epoch 8/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8918 - accuracy: 0.0981
+Epoch 9/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8918 - accuracy: 0.0992
+Epoch 10/10
+36/36 [==============================] - 0s 6ms/step - loss: 9.8918 - accuracy: 0.1014
+4/4 [==============================] - 0s 4ms/step - loss: 9.8903 - accuracy: 0.0987
+Epoch 1/10
+36/36 [==============================] - 0s 6ms/step - loss: 10.0076 - accuracy: 0.0989
+Epoch 2/10
+36/36 [==============================] - 0s 6ms/step - loss: 9.8922 - accuracy: 0.1001
+Epoch 3/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8918 - accuracy: 0.1016
+Epoch 4/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8918 - accuracy: 0.0968
+Epoch 5/10
+36/36 [==============================] - 0s 6ms/step - loss: 9.8918 - accuracy: 0.1012
+Epoch 6/10
+36/36 [==============================] - 0s 6ms/step - loss: 9.8918 - accuracy: 0.0975
+Epoch 7/10
+36/36 [==============================] - 0s 6ms/step - loss: 9.8918 - accuracy: 0.0995
+Epoch 8/10
+36/36 [==============================] - 0s 6ms/step - loss: 9.8918 - accuracy: 0.1021
+Epoch 9/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8918 - accuracy: 0.1017
+Epoch 10/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8918 - accuracy: 0.1018
+4/4 [==============================] - 0s 3ms/step - loss: 9.8903 - accuracy: 0.0993
+Epoch 1/10
+36/36 [==============================] - 0s 6ms/step - loss: 10.0352 - accuracy: 0.1036
+Epoch 2/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8921 - accuracy: 0.1104
+Epoch 3/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8918 - accuracy: 0.1044
+Epoch 4/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8918 - accuracy: 0.1035
+Epoch 5/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8918 - accuracy: 0.0994
+Epoch 6/10
+36/36 [==============================] - 0s 6ms/step - loss: 9.8918 - accuracy: 0.1016
+Epoch 7/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8918 - accuracy: 0.0992
+Epoch 8/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8918 - accuracy: 0.1004
+Epoch 9/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8918 - accuracy: 0.1002
+Epoch 10/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8918 - accuracy: 0.1022
+4/4 [==============================] - 0s 4ms/step - loss: 9.8903 - accuracy: 0.1022
+Epoch 1/10
+36/36 [==============================] - 0s 6ms/step - loss: 10.0332 - accuracy: 0.0993
+Epoch 2/10
+36/36 [==============================] - 0s 6ms/step - loss: 9.8924 - accuracy: 0.1021
+Epoch 3/10
+36/36 [==============================] - 0s 6ms/step - loss: 9.8916 - accuracy: 0.1002
+Epoch 4/10
+36/36 [==============================] - 0s 6ms/step - loss: 9.8916 - accuracy: 0.0984
+Epoch 5/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8916 - accuracy: 0.0999
+Epoch 6/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8916 - accuracy: 0.0978
+Epoch 7/10
+36/36 [==============================] - 0s 6ms/step - loss: 9.8916 - accuracy: 0.0956
+Epoch 8/10
+36/36 [==============================] - 0s 6ms/step - loss: 9.8916 - accuracy: 0.1037
+Epoch 9/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8916 - accuracy: 0.1028
+Epoch 10/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8916 - accuracy: 0.1009
+4/4 [==============================] - 0s 4ms/step - loss: 9.8922 - accuracy: 0.0992
+Epoch 1/10
+36/36 [==============================] - 0s 5ms/step - loss: 10.0069 - accuracy: 0.0996
+Epoch 2/10
+36/36 [==============================] - 0s 6ms/step - loss: 9.8921 - accuracy: 0.0977
+Epoch 3/10
+36/36 [==============================] - 0s 6ms/step - loss: 9.8916 - accuracy: 0.1000
+Epoch 4/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8916 - accuracy: 0.0980
+Epoch 5/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8916 - accuracy: 0.1004
+Epoch 6/10
+36/36 [==============================] - 0s 6ms/step - loss: 9.8916 - accuracy: 0.0998
+Epoch 7/10
+36/36 [==============================] - 0s 6ms/step - loss: 9.8916 - accuracy: 0.0991
+Epoch 8/10
+36/36 [==============================] - 0s 6ms/step - loss: 9.8916 - accuracy: 0.1025
+Epoch 9/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8916 - accuracy: 0.1010
+Epoch 10/10
+36/36 [==============================] - 0s 6ms/step - loss: 9.8916 - accuracy: 0.0991
+4/4 [==============================] - 0s 3ms/step - loss: 9.8925 - accuracy: 0.1023
+Epoch 1/10
+36/36 [==============================] - 0s 5ms/step - loss: 10.0232 - accuracy: 0.0983
+Epoch 2/10
+36/36 [==============================] - 0s 6ms/step - loss: 9.8921 - accuracy: 0.0992
+Epoch 3/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8916 - accuracy: 0.0999
+Epoch 4/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8916 - accuracy: 0.0981
+Epoch 5/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8916 - accuracy: 0.0989
+Epoch 6/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8916 - accuracy: 0.0995
+Epoch 7/10
+36/36 [==============================] - 0s 6ms/step - loss: 9.8916 - accuracy: 0.0973
+Epoch 8/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8916 - accuracy: 0.1000
+Epoch 9/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8916 - accuracy: 0.1006
+Epoch 10/10
+36/36 [==============================] - 0s 6ms/step - loss: 9.8916 - accuracy: 0.0990
+4/4 [==============================] - 0s 4ms/step - loss: 9.8925 - accuracy: 0.0975
+Epoch 1/10
+36/36 [==============================] - 0s 5ms/step - loss: 10.0450 - accuracy: 0.0947
+Epoch 2/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8924 - accuracy: 0.0943
+Epoch 3/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8919 - accuracy: 0.1015
+Epoch 4/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8918 - accuracy: 0.0983
+Epoch 5/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8918 - accuracy: 0.0987
+Epoch 6/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8918 - accuracy: 0.1005
+Epoch 7/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8918 - accuracy: 0.1005
+Epoch 8/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8918 - accuracy: 0.0977
+Epoch 9/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8918 - accuracy: 0.1024
+Epoch 10/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8918 - accuracy: 0.1005
+4/4 [==============================] - 0s 3ms/step - loss: 9.8900 - accuracy: 0.0987
+Epoch 1/10
+36/36 [==============================] - 0s 5ms/step - loss: 10.0163 - accuracy: 0.1055
+Epoch 2/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8919 - accuracy: 0.0834
+Epoch 3/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8915 - accuracy: 0.0926
+Epoch 4/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8915 - accuracy: 0.0991
+Epoch 5/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8915 - accuracy: 0.1032
+Epoch 6/10
+36/36 [==============================] - 0s 6ms/step - loss: 9.8915 - accuracy: 0.1005
+Epoch 7/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8915 - accuracy: 0.1022
+Epoch 8/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8915 - accuracy: 0.1000
+Epoch 9/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8915 - accuracy: 0.1006
+Epoch 10/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8915 - accuracy: 0.0996
+4/4 [==============================] - 0s 4ms/step - loss: 9.8929 - accuracy: 0.0987
+Epoch 1/10
+36/36 [==============================] - 0s 6ms/step - loss: 10.0165 - accuracy: 0.1039
+Epoch 2/10
+36/36 [==============================] - 0s 6ms/step - loss: 9.8919 - accuracy: 0.0942
+Epoch 3/10
+36/36 [==============================] - 0s 6ms/step - loss: 9.8915 - accuracy: 0.0979
+Epoch 4/10
+36/36 [==============================] - 0s 6ms/step - loss: 9.8915 - accuracy: 0.0997
+Epoch 5/10
+36/36 [==============================] - 0s 6ms/step - loss: 9.8915 - accuracy: 0.1028
+Epoch 6/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8915 - accuracy: 0.1006
+Epoch 7/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8915 - accuracy: 0.0996
+Epoch 8/10
+36/36 [==============================] - 0s 6ms/step - loss: 9.8915 - accuracy: 0.1008
+Epoch 9/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8915 - accuracy: 0.1046
+Epoch 10/10
+36/36 [==============================] - 0s 5ms/step - loss: 9.8915 - accuracy: 0.0997
+4/4 [==============================] - 0s 4ms/step - loss: 9.8933 - accuracy: 0.1022
+Stratified K-fold Results: 9.97% (0.17%)
+total time: 30.07964015007019
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="stratified-shuffle-split">
+<h2>Stratified Shuffle Split<a class="headerlink" href="#stratified-shuffle-split" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>A mix of <code class="docutils literal notranslate"><span class="pre">StratifiedKFold</span></code> and <code class="docutils literal notranslate"><span class="pre">ShuffleSplit</span></code>, which returns stratified randomized folds</p></li>
+<li><p>The folds are made by preserving the percentage of samples for each class.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Stratified Shuffle</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">StratifiedShuffleSplit</span>
+<span class="n">start</span><span class="o">=</span><span class="n">time</span><span class="p">()</span>
+<span class="n">ss</span> <span class="o">=</span> <span class="n">StratifiedShuffleSplit</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">model2</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">ss</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Stratified Shuffle Results: </span><span class="si">%.2f%%</span><span class="s2"> (</span><span class="si">%.2f%%</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;total time:&quot;</span><span class="p">,</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">start</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/10
+36/36 [==============================] - 0s 7ms/step - loss: 0.1072 - accuracy: 0.7853
+Epoch 2/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0460 - accuracy: 0.9186
+Epoch 3/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0341 - accuracy: 0.9406
+Epoch 4/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0260 - accuracy: 0.9551
+Epoch 5/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0209 - accuracy: 0.9644
+Epoch 6/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0170 - accuracy: 0.9708
+Epoch 7/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0143 - accuracy: 0.9756
+Epoch 8/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0122 - accuracy: 0.9788
+Epoch 9/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0101 - accuracy: 0.9828
+Epoch 10/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0093 - accuracy: 0.9840
+4/4 [==============================] - 0s 3ms/step - loss: 0.0149 - accuracy: 0.9753
+Epoch 1/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.1032 - accuracy: 0.7954
+Epoch 2/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0449 - accuracy: 0.9205
+Epoch 3/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0321 - accuracy: 0.9437
+Epoch 4/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0250 - accuracy: 0.9573
+Epoch 5/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0204 - accuracy: 0.9647
+Epoch 6/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0168 - accuracy: 0.9714
+Epoch 7/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0142 - accuracy: 0.9754
+Epoch 8/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0118 - accuracy: 0.9803
+Epoch 9/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0099 - accuracy: 0.9833
+Epoch 10/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0086 - accuracy: 0.9856
+4/4 [==============================] - 0s 3ms/step - loss: 0.0151 - accuracy: 0.9752
+Epoch 1/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.1054 - accuracy: 0.7976
+Epoch 2/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0474 - accuracy: 0.9161
+Epoch 3/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0328 - accuracy: 0.9434
+Epoch 4/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0253 - accuracy: 0.9564
+Epoch 5/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0205 - accuracy: 0.9654
+Epoch 6/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0171 - accuracy: 0.9706
+Epoch 7/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0136 - accuracy: 0.9767
+Epoch 8/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0124 - accuracy: 0.9790
+Epoch 9/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0105 - accuracy: 0.9818
+Epoch 10/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0087 - accuracy: 0.9849
+4/4 [==============================] - 0s 3ms/step - loss: 0.0143 - accuracy: 0.9745
+Epoch 1/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.1044 - accuracy: 0.7927
+Epoch 2/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0452 - accuracy: 0.9197
+Epoch 3/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0320 - accuracy: 0.9444
+Epoch 4/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0250 - accuracy: 0.9570
+Epoch 5/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0198 - accuracy: 0.9658
+Epoch 6/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0167 - accuracy: 0.9710
+Epoch 7/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0139 - accuracy: 0.9762
+Epoch 8/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0117 - accuracy: 0.9803
+Epoch 9/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0102 - accuracy: 0.9824
+Epoch 10/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0088 - accuracy: 0.9849
+4/4 [==============================] - 0s 3ms/step - loss: 0.0167 - accuracy: 0.9722
+Epoch 1/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.1065 - accuracy: 0.7891
+Epoch 2/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0462 - accuracy: 0.9185
+Epoch 3/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0330 - accuracy: 0.9418
+Epoch 4/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0252 - accuracy: 0.9568
+Epoch 5/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0214 - accuracy: 0.9632
+Epoch 6/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0170 - accuracy: 0.9709
+Epoch 7/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0144 - accuracy: 0.9744
+Epoch 8/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0120 - accuracy: 0.9794
+Epoch 9/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0107 - accuracy: 0.9810
+Epoch 10/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0094 - accuracy: 0.9841
+4/4 [==============================] - 0s 5ms/step - loss: 0.0141 - accuracy: 0.9780
+Epoch 1/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.1051 - accuracy: 0.7913
+Epoch 2/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0464 - accuracy: 0.9176
+Epoch 3/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0320 - accuracy: 0.9447
+Epoch 4/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0254 - accuracy: 0.9560
+Epoch 5/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0204 - accuracy: 0.9648
+Epoch 6/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0170 - accuracy: 0.9709
+Epoch 7/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0143 - accuracy: 0.9752
+Epoch 8/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0117 - accuracy: 0.9796
+Epoch 9/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0104 - accuracy: 0.9824
+Epoch 10/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0088 - accuracy: 0.9849
+4/4 [==============================] - 0s 3ms/step - loss: 0.0143 - accuracy: 0.9770
+Epoch 1/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.1052 - accuracy: 0.7921
+Epoch 2/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0445 - accuracy: 0.9216
+Epoch 3/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0325 - accuracy: 0.9442
+Epoch 4/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0254 - accuracy: 0.9570
+Epoch 5/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0201 - accuracy: 0.9650
+Epoch 6/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0168 - accuracy: 0.9705
+Epoch 7/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0140 - accuracy: 0.9766
+Epoch 8/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0118 - accuracy: 0.9799
+Epoch 9/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0098 - accuracy: 0.9833
+Epoch 10/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0089 - accuracy: 0.9847
+4/4 [==============================] - 0s 3ms/step - loss: 0.0138 - accuracy: 0.9763
+Epoch 1/10
+36/36 [==============================] - 0s 7ms/step - loss: 0.1029 - accuracy: 0.7947
+Epoch 2/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0447 - accuracy: 0.9211
+Epoch 3/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0316 - accuracy: 0.9444
+Epoch 4/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0239 - accuracy: 0.9595
+Epoch 5/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0198 - accuracy: 0.9657
+Epoch 6/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0157 - accuracy: 0.9731
+Epoch 7/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0139 - accuracy: 0.9756
+Epoch 8/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0119 - accuracy: 0.9797
+Epoch 9/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0093 - accuracy: 0.9842
+Epoch 10/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0086 - accuracy: 0.9854
+4/4 [==============================] - 0s 4ms/step - loss: 0.0127 - accuracy: 0.9777
+Epoch 1/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.1030 - accuracy: 0.7933
+Epoch 2/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0447 - accuracy: 0.9201
+Epoch 3/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0322 - accuracy: 0.9437
+Epoch 4/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0250 - accuracy: 0.9572
+Epoch 5/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0193 - accuracy: 0.9659
+Epoch 6/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0168 - accuracy: 0.9704
+Epoch 7/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0134 - accuracy: 0.9769
+Epoch 8/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0123 - accuracy: 0.9788
+Epoch 9/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0096 - accuracy: 0.9834
+Epoch 10/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0086 - accuracy: 0.9857
+4/4 [==============================] - 0s 4ms/step - loss: 0.0136 - accuracy: 0.9775
+Epoch 1/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.1058 - accuracy: 0.7881
+Epoch 2/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0448 - accuracy: 0.9198
+Epoch 3/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0323 - accuracy: 0.9436
+Epoch 4/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0259 - accuracy: 0.9553
+Epoch 5/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0201 - accuracy: 0.9648
+Epoch 6/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0171 - accuracy: 0.9708
+Epoch 7/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0141 - accuracy: 0.9756
+Epoch 8/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0120 - accuracy: 0.9790
+Epoch 9/10
+36/36 [==============================] - 0s 6ms/step - loss: 0.0102 - accuracy: 0.9822
+Epoch 10/10
+36/36 [==============================] - 0s 5ms/step - loss: 0.0083 - accuracy: 0.9862
+4/4 [==============================] - 0s 3ms/step - loss: 0.0119 - accuracy: 0.9795
+Stratified Shuffle Results: 97.63% (0.20%)
+total time: 30.383320093154907
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="gridsearchcv-and-cross-validation">
+<h2>GridSearchCV and Cross-Validation<a class="headerlink" href="#gridsearchcv-and-cross-validation" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>We perform the <code class="docutils literal notranslate"><span class="pre">GridSearchCV</span></code> to find the optimal optimizers</p></li>
+<li><p>We determine the best parameter values based on stratified shuffled 5-fold cross validation</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_model</span><span class="p">():</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">784</span><span class="p">,)))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span> <span class="c1"># An &quot;activation&quot; is just a non-linear function applied to the output</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">))</span>   <span class="c1"># Dropout helps protect the model from memorizing or &quot;overfitting&quot; the training data</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">512</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;softmax&#39;</span><span class="p">))</span> <span class="c1"># This special &quot;softmax&quot; a</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;binary_crossentropy&#39;</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;rmsprop&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span> 
+    <span class="k">return</span> <span class="n">model</span>
+<span class="n">start</span><span class="o">=</span><span class="n">time</span><span class="p">()</span>
+
+<span class="c1">## Define cross-validation method</span>
+<span class="n">ss</span> <span class="o">=</span> <span class="n">StratifiedShuffleSplit</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1">## Define Model</span>
+<span class="n">model3</span> <span class="o">=</span> <span class="n">KerasClassifier</span><span class="p">(</span><span class="n">build_fn</span><span class="o">=</span><span class="n">create_model</span><span class="p">)</span>
+
+<span class="c1">## Define Hyper-parameter values</span>
+<span class="n">optimizers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;rmsprop&#39;</span><span class="p">,</span> <span class="s1">&#39;adam&#39;</span><span class="p">]</span>
+<span class="n">param_grid</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">optimizers</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="n">init</span><span class="p">)</span>
+
+<span class="c1">## Define GridSearchCV</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">param_grid</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">ss</span><span class="p">)</span>
+<span class="n">grid_result</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;total time:&quot;</span><span class="p">,</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">start</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1688/1688 [==============================] - 6s 4ms/step - loss: 0.0402 - accuracy: 0.9310
+188/188 [==============================] - 0s 2ms/step - loss: 0.0275 - accuracy: 0.9605
+1688/1688 [==============================] - 6s 4ms/step - loss: 0.0395 - accuracy: 0.9323
+188/188 [==============================] - 0s 2ms/step - loss: 0.0300 - accuracy: 0.9485
+1688/1688 [==============================] - 6s 3ms/step - loss: 0.0398 - accuracy: 0.9315
+188/188 [==============================] - 0s 2ms/step - loss: 0.0232 - accuracy: 0.9605
+1688/1688 [==============================] - 6s 3ms/step - loss: 0.0400 - accuracy: 0.9308
+188/188 [==============================] - 0s 2ms/step - loss: 0.0249 - accuracy: 0.9627
+1688/1688 [==============================] - 6s 4ms/step - loss: 0.0400 - accuracy: 0.9309
+188/188 [==============================] - 0s 2ms/step - loss: 0.0305 - accuracy: 0.9533
+1688/1688 [==============================] - 5s 3ms/step - loss: 0.0393 - accuracy: 0.9297
+188/188 [==============================] - 0s 2ms/step - loss: 0.0237 - accuracy: 0.9608
+1688/1688 [==============================] - 5s 3ms/step - loss: 0.0382 - accuracy: 0.9311
+188/188 [==============================] - 0s 2ms/step - loss: 0.0201 - accuracy: 0.9648
+1688/1688 [==============================] - 5s 3ms/step - loss: 0.0387 - accuracy: 0.9310
+188/188 [==============================] - 0s 2ms/step - loss: 0.0274 - accuracy: 0.9540
+1688/1688 [==============================] - 5s 3ms/step - loss: 0.0379 - accuracy: 0.9324
+188/188 [==============================] - 0s 2ms/step - loss: 0.0256 - accuracy: 0.9577
+1688/1688 [==============================] - 5s 3ms/step - loss: 0.0389 - accuracy: 0.9311
+188/188 [==============================] - 0s 2ms/step - loss: 0.0217 - accuracy: 0.9633
+1688/1688 [==============================] - 6s 4ms/step - loss: 0.0405 - accuracy: 0.9282
+188/188 [==============================] - 0s 2ms/step - loss: 0.0236 - accuracy: 0.9647
+1688/1688 [==============================] - 6s 3ms/step - loss: 0.0397 - accuracy: 0.9305
+188/188 [==============================] - 0s 2ms/step - loss: 0.0259 - accuracy: 0.9587
+1688/1688 [==============================] - 6s 3ms/step - loss: 0.0405 - accuracy: 0.9285
+188/188 [==============================] - 0s 2ms/step - loss: 0.0219 - accuracy: 0.9645
+1688/1688 [==============================] - 6s 3ms/step - loss: 0.0398 - accuracy: 0.9305
+188/188 [==============================] - 0s 2ms/step - loss: 0.0311 - accuracy: 0.9557
+1688/1688 [==============================] - 6s 3ms/step - loss: 0.0398 - accuracy: 0.9308
+188/188 [==============================] - 0s 2ms/step - loss: 0.0212 - accuracy: 0.9642
+1688/1688 [==============================] - 5s 3ms/step - loss: 0.0392 - accuracy: 0.9298
+188/188 [==============================] - 0s 2ms/step - loss: 0.0230 - accuracy: 0.9590
+1688/1688 [==============================] - 5s 3ms/step - loss: 0.0388 - accuracy: 0.9310
+188/188 [==============================] - 0s 2ms/step - loss: 0.0232 - accuracy: 0.9580
+1688/1688 [==============================] - 5s 3ms/step - loss: 0.0390 - accuracy: 0.9299
+188/188 [==============================] - 0s 2ms/step - loss: 0.0224 - accuracy: 0.9613
+1688/1688 [==============================] - 5s 3ms/step - loss: 0.0391 - accuracy: 0.9302
+188/188 [==============================] - 0s 2ms/step - loss: 0.0263 - accuracy: 0.9573
+1688/1688 [==============================] - 5s 3ms/step - loss: 0.0391 - accuracy: 0.9297
+188/188 [==============================] - 0s 2ms/step - loss: 0.0221 - accuracy: 0.9638
+1688/1688 [==============================] - 6s 3ms/step - loss: 0.0408 - accuracy: 0.9281
+188/188 [==============================] - 0s 2ms/step - loss: 0.0235 - accuracy: 0.9618
+1688/1688 [==============================] - 5s 3ms/step - loss: 0.0408 - accuracy: 0.9296
+188/188 [==============================] - 0s 2ms/step - loss: 0.0246 - accuracy: 0.9605
+1688/1688 [==============================] - 5s 3ms/step - loss: 0.0404 - accuracy: 0.9306
+188/188 [==============================] - 0s 2ms/step - loss: 0.0271 - accuracy: 0.9593
+1688/1688 [==============================] - 5s 3ms/step - loss: 0.0399 - accuracy: 0.9296
+188/188 [==============================] - 0s 2ms/step - loss: 0.0231 - accuracy: 0.9638
+1688/1688 [==============================] - 5s 3ms/step - loss: 0.0403 - accuracy: 0.9299
+188/188 [==============================] - 0s 2ms/step - loss: 0.0213 - accuracy: 0.9653
+1688/1688 [==============================] - 5s 3ms/step - loss: 0.0395 - accuracy: 0.9291
+188/188 [==============================] - 0s 2ms/step - loss: 0.0239 - accuracy: 0.9612
+1688/1688 [==============================] - 5s 3ms/step - loss: 0.0394 - accuracy: 0.9289
+188/188 [==============================] - 0s 2ms/step - loss: 0.0217 - accuracy: 0.9635
+1688/1688 [==============================] - 5s 3ms/step - loss: 0.0401 - accuracy: 0.9289
+188/188 [==============================] - 0s 2ms/step - loss: 0.0210 - accuracy: 0.9640
+1688/1688 [==============================] - 5s 3ms/step - loss: 0.0397 - accuracy: 0.9286
+188/188 [==============================] - 0s 2ms/step - loss: 0.0225 - accuracy: 0.9600
+1688/1688 [==============================] - 5s 3ms/step - loss: 0.0405 - accuracy: 0.9280
+188/188 [==============================] - 0s 2ms/step - loss: 0.0193 - accuracy: 0.9663
+1875/1875 [==============================] - 4s 2ms/step - loss: 0.0384 - accuracy: 0.9313
+total time: 203.81905102729797
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## The Best Model</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best: </span><span class="si">%f</span><span class="s2"> using </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">grid_result</span><span class="o">.</span><span class="n">best_score_</span><span class="p">,</span> <span class="n">grid_result</span><span class="o">.</span><span class="n">best_params_</span><span class="p">))</span>
+
+<span class="c1">## Print all experiment results</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">grid_result</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span>
+<span class="n">results</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best: 0.963000 using {&#39;init&#39;: &#39;uniform&#39;, &#39;optimizer&#39;: &#39;adam&#39;}
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean_fit_time</th>
+      <th>std_fit_time</th>
+      <th>mean_score_time</th>
+      <th>std_score_time</th>
+      <th>param_init</th>
+      <th>param_optimizer</th>
+      <th>params</th>
+      <th>split0_test_score</th>
+      <th>split1_test_score</th>
+      <th>split2_test_score</th>
+      <th>split3_test_score</th>
+      <th>split4_test_score</th>
+      <th>mean_test_score</th>
+      <th>std_test_score</th>
+      <th>rank_test_score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>6.656565</td>
+      <td>0.121780</td>
+      <td>0.524209</td>
+      <td>0.008416</td>
+      <td>glorot_uniform</td>
+      <td>rmsprop</td>
+      <td>{'init': 'glorot_uniform', 'optimizer': 'rmspr...</td>
+      <td>0.960500</td>
+      <td>0.948500</td>
+      <td>0.960500</td>
+      <td>0.962667</td>
+      <td>0.953333</td>
+      <td>0.957100</td>
+      <td>0.005334</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>6.022944</td>
+      <td>0.100696</td>
+      <td>0.534721</td>
+      <td>0.013367</td>
+      <td>glorot_uniform</td>
+      <td>adam</td>
+      <td>{'init': 'glorot_uniform', 'optimizer': 'adam'}</td>
+      <td>0.960833</td>
+      <td>0.964833</td>
+      <td>0.954000</td>
+      <td>0.957667</td>
+      <td>0.963333</td>
+      <td>0.960133</td>
+      <td>0.003912</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>6.614549</td>
+      <td>0.093743</td>
+      <td>0.522084</td>
+      <td>0.007600</td>
+      <td>normal</td>
+      <td>rmsprop</td>
+      <td>{'init': 'normal', 'optimizer': 'rmsprop'}</td>
+      <td>0.964667</td>
+      <td>0.958667</td>
+      <td>0.964500</td>
+      <td>0.955667</td>
+      <td>0.964167</td>
+      <td>0.961533</td>
+      <td>0.003693</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>5.639868</td>
+      <td>0.232617</td>
+      <td>0.496856</td>
+      <td>0.013943</td>
+      <td>normal</td>
+      <td>adam</td>
+      <td>{'init': 'normal', 'optimizer': 'adam'}</td>
+      <td>0.959000</td>
+      <td>0.958000</td>
+      <td>0.961333</td>
+      <td>0.957333</td>
+      <td>0.963833</td>
+      <td>0.959900</td>
+      <td>0.002389</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>6.057838</td>
+      <td>0.092201</td>
+      <td>0.491186</td>
+      <td>0.010245</td>
+      <td>uniform</td>
+      <td>rmsprop</td>
+      <td>{'init': 'uniform', 'optimizer': 'rmsprop'}</td>
+      <td>0.961833</td>
+      <td>0.960500</td>
+      <td>0.959333</td>
+      <td>0.963833</td>
+      <td>0.965333</td>
+      <td>0.962167</td>
+      <td>0.002178</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>5.619616</td>
+      <td>0.151503</td>
+      <td>0.484414</td>
+      <td>0.004364</td>
+      <td>uniform</td>
+      <td>adam</td>
+      <td>{'init': 'uniform', 'optimizer': 'adam'}</td>
+      <td>0.961167</td>
+      <td>0.963500</td>
+      <td>0.964000</td>
+      <td>0.960000</td>
+      <td>0.966333</td>
+      <td>0.963000</td>
+      <td>0.002224</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV"><code class="docutils literal notranslate"><span class="pre">GridSearchCV</span></code> documentation</a></p></li>
+<li><p><a class="reference external" href="https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation">Cross-validation: evaluating estimator performance</a></p></li>
+<li><p><a class="reference external" href="https://scikit-learn.org/stable/modules/model_evaluation.html#scoring-parameter">Scoring Parameters</a></p></li>
+<li><p><a class="reference external" href="https://www.kaggle.com/shujunge/gridsearchcv-with-keras">GridSearchCV with keras</a></p></li>
+</ul>
+</div>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %run ./get_modules.py</span>
+<span class="kn">import</span> <span class="nn">pkg_resources</span>
+<span class="kn">import</span> <span class="nn">types</span>
+<span class="k">def</span> <span class="nf">get_imports</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">types</span><span class="o">.</span><span class="n">ModuleType</span><span class="p">):</span>
+            <span class="c1"># Split ensures you get root package, </span>
+            <span class="c1"># not just imported function</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="vm">__name__</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">type</span><span class="p">):</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="vm">__module__</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># Some packages are weird and have different</span>
+        <span class="c1"># imported names vs. system/pip names. Unfortunately,</span>
+        <span class="c1"># there is no systematic way to get pip names from</span>
+        <span class="c1"># a package&#39;s imported name. You&#39;ll have to add</span>
+        <span class="c1"># exceptions to this list manually!</span>
+        <span class="n">poorly_named_packages</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;PIL&quot;</span><span class="p">:</span> <span class="s2">&quot;Pillow&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;sklearn&quot;</span><span class="p">:</span> <span class="s2">&quot;scikit-learn&quot;</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">poorly_named_packages</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">poorly_named_packages</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+
+        <span class="k">yield</span> <span class="n">name</span>
+        
+        
+<span class="n">imports</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">get_imports</span><span class="p">()))</span>
+
+<span class="c1"># The only way I found to get the version of the root package</span>
+<span class="c1"># from only the name of the package is to cross-check the names </span>
+<span class="c1"># of installed packages vs. imported packages</span>
+<span class="n">requirements</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">working_set</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">m</span><span class="o">.</span><span class="n">project_name</span> <span class="ow">in</span> <span class="n">imports</span> <span class="ow">and</span> <span class="n">m</span><span class="o">.</span><span class="n">project_name</span><span class="o">!=</span><span class="s2">&quot;pip&quot;</span><span class="p">:</span>
+        <span class="n">requirements</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">m</span><span class="o">.</span><span class="n">project_name</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">version</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">requirements</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">==</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">r</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensorflow==2.3.0
+scikit-learn==0.22.2.post1
+pandas==1.1.2
+numpy==1.18.5
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./nlp"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="transfer-learning-sent-encoding.html" title="previous page">Universal Sentence Embeddings</a>
+    <a class='right-next' id="next-link" href="sentiment-analysis-using-bert-chinese.html" title="next page">Sentiment Analysis Using BERT</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alvin Chen<br/>
+        
+            &copy; Copyright 2020 Alvin Chen.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

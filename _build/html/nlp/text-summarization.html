@@ -1,0 +1,1025 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Text Summarization &#8212; Python Notes for Linguistics</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/ntnu03.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Python Notes for Linguistics</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python-basics/python-basics.html">
+   Python Basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../corpus/corpus-processing.html">
+   Corpus Linguistics with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../statistical-analyses/statistical-analyses.html">
+   Statistical Analyses
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="nlp.html">
+   Natural Language Processing with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <div style="text-align:left">
+    <a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
+</div>
+
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/nlp/text-summarization.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/alvinntnu/python-notes/master?urlpath=tree/nlp/text-summarization.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/nlp/text-summarization.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#keyphrase-extraction">
+   Keyphrase Extraction
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#n-grams">
+     N-grams
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#collocations-bigrams">
+     Collocations (Bigrams)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#collocations-n-grams">
+     Collocations (N-grams)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#weighted-tag-based-phrase-extraction">
+   Weighted Tag-based Phrase Extraction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#topic-modeling">
+   Topic Modeling
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#document-summarization">
+   Document Summarization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="text-summarization">
+<h1>Text Summarization<a class="headerlink" href="#text-summarization" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">DEMO_DATA_ROOT</span> <span class="o">=</span> <span class="s2">&quot;../../../RepositoryData/data&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Efficient ways to summarize the semantics of massive collections of documents</p></li>
+<li><p>Three general methods:</p>
+<ul>
+<li><p>Keyphrase extraction</p></li>
+<li><p>Topic modeling</p></li>
+<li><p>Document summarization</p></li>
+</ul>
+</li>
+</ul>
+<div class="section" id="keyphrase-extraction">
+<h2>Keyphrase Extraction<a class="headerlink" href="#keyphrase-extraction" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>N-grams</p></li>
+<li><p>Collocations</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">gutenberg</span>
+<span class="kn">import</span> <span class="nn">text_normalizer</span> <span class="k">as</span> <span class="nn">tn</span>
+<span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Loading corpus, Alice in the Wonderland.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load corpus</span>
+<span class="n">alice</span> <span class="o">=</span> <span class="n">gutenberg</span><span class="o">.</span><span class="n">sents</span><span class="p">(</span><span class="n">fileids</span><span class="o">=</span><span class="s1">&#39;carroll-alice.txt&#39;</span><span class="p">)</span>
+<span class="c1"># concatenate each word token of a sentence</span>
+<span class="n">alice</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span> <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">alice</span><span class="p">]</span>
+<span class="c1"># normalize text</span>
+<span class="c1"># `filter()` removes tokens that are False after normalization</span>
+<span class="n">norm_alice</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> 
+                         <span class="n">tn</span><span class="o">.</span><span class="n">normalize_corpus</span><span class="p">(</span><span class="n">alice</span><span class="p">,</span> <span class="n">text_lemmatization</span><span class="o">=</span><span class="kc">False</span><span class="p">)))</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Compare raw texts vs, noramlized texts:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">alice</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">norm_alice</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ Alice &#39; s Adventures in Wonderland by Lewis Carroll 1865 ] 
+ alice adventures wonderland lewis carroll
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="n-grams">
+<h3>N-grams<a class="headerlink" href="#n-grams" title="Permalink to this headline">¶</a></h3>
+<p>A function to create n-grams.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compute_ngrams</span><span class="p">(</span><span class="n">sequence</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span>
+        <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">sequence</span><span class="p">[</span><span class="n">index</span><span class="p">:]</span>
+               <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)))</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">compute_ngrams</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;B&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;D&#39;</span><span class="p">],</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;A&#39;, &#39;B&#39;), (&#39;B&#39;, &#39;C&#39;), (&#39;C&#39;, &#39;D&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">flatten_corpus</span><span class="p">(</span><span class="n">corpus</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">document</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> 
+                     <span class="k">for</span> <span class="n">document</span> <span class="ow">in</span> <span class="n">corpus</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_top_ngrams</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span> <span class="n">ngram_val</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    
+    <span class="n">corpus</span> <span class="o">=</span> <span class="n">flatten_corpus</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+
+    <span class="n">ngrams</span> <span class="o">=</span> <span class="n">compute_ngrams</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">ngram_val</span><span class="p">)</span>
+    <span class="n">ngrams_freq_dist</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">FreqDist</span><span class="p">(</span><span class="n">ngrams</span><span class="p">)</span>
+    <span class="n">sorted_ngrams_fd</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">ngrams_freq_dist</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> 
+                              <span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">sorted_ngrams</span> <span class="o">=</span> <span class="n">sorted_ngrams_fd</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">limit</span><span class="p">]</span>
+    <span class="n">sorted_ngrams</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">text</span><span class="p">),</span> <span class="n">freq</span><span class="p">)</span> 
+                     <span class="k">for</span> <span class="n">text</span><span class="p">,</span> <span class="n">freq</span> <span class="ow">in</span> <span class="n">sorted_ngrams</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">sorted_ngrams</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_top_ngrams</span><span class="p">(</span><span class="n">corpus</span><span class="o">=</span><span class="n">norm_alice</span><span class="p">,</span> <span class="n">ngram_val</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+               <span class="n">limit</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;said alice&#39;, 123),
+ (&#39;mock turtle&#39;, 56),
+ (&#39;march hare&#39;, 31),
+ (&#39;said king&#39;, 29),
+ (&#39;thought alice&#39;, 26),
+ (&#39;white rabbit&#39;, 22),
+ (&#39;said hatter&#39;, 22),
+ (&#39;said mock&#39;, 20),
+ (&#39;said caterpillar&#39;, 18),
+ (&#39;said gryphon&#39;, 18)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_top_ngrams</span><span class="p">(</span><span class="n">corpus</span><span class="o">=</span><span class="n">norm_alice</span><span class="p">,</span> <span class="n">ngram_val</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+               <span class="n">limit</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;said mock turtle&#39;, 20),
+ (&#39;said march hare&#39;, 10),
+ (&#39;poor little thing&#39;, 6),
+ (&#39;little golden key&#39;, 5),
+ (&#39;certainly said alice&#39;, 5),
+ (&#39;white kid gloves&#39;, 5),
+ (&#39;march hare said&#39;, 5),
+ (&#39;mock turtle said&#39;, 5),
+ (&#39;know said alice&#39;, 4),
+ (&#39;might well say&#39;, 4)]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="collocations-bigrams">
+<h3>Collocations (Bigrams)<a class="headerlink" href="#collocations-bigrams" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.collocations</span> <span class="kn">import</span> <span class="n">BigramCollocationFinder</span>
+<span class="kn">from</span> <span class="nn">nltk.collocations</span> <span class="kn">import</span> <span class="n">BigramAssocMeasures</span>
+
+<span class="n">finder</span> <span class="o">=</span> <span class="n">BigramCollocationFinder</span><span class="o">.</span><span class="n">from_documents</span><span class="p">([</span><span class="n">item</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> 
+                                                <span class="k">for</span> <span class="n">item</span> 
+                                                <span class="ow">in</span> <span class="n">norm_alice</span><span class="p">])</span>
+<span class="n">finder</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nltk.collocations.BigramCollocationFinder at 0x7ffc66265b70&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Apply frequency filter:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">finder</span><span class="o">.</span><span class="n">apply_freq_filter</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Inherit BigramAssocMeasures</span>
+<span class="k">class</span> <span class="nc">AugmentedBigramAssocMeasures</span><span class="p">(</span><span class="n">BigramAssocMeasures</span><span class="p">):</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">dp_fwd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">marginals</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Scores bigrams using phi-square, the square of the Pearson correlation</span>
+<span class="sd">        coefficient.</span>
+<span class="sd">        This may be shown with respect to a contingency table::</span>
+
+<span class="sd">                w1    ~w1</span>
+<span class="sd">             ------ ------</span>
+<span class="sd">         w2 | n_ii | n_oi | = n_xi</span>
+<span class="sd">             ------ ------</span>
+<span class="sd">        ~w2 | n_io | n_oo |</span>
+<span class="sd">             ------ ------</span>
+<span class="sd">             = n_ix        TOTAL = n_xx</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">n_ii</span><span class="p">,</span> <span class="n">n_io</span><span class="p">,</span> <span class="n">n_oi</span><span class="p">,</span> <span class="n">n_oo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contingency</span><span class="p">(</span><span class="o">*</span><span class="n">marginals</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">n_ii</span><span class="o">/</span><span class="p">(</span><span class="n">n_ii</span><span class="o">+</span><span class="n">n_io</span><span class="p">))</span> <span class="o">-</span> <span class="p">(</span><span class="n">n_oi</span><span class="o">/</span><span class="p">(</span><span class="n">n_oi</span><span class="o">+</span><span class="n">n_oo</span><span class="p">))</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">dp_bwd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">marginals</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Scores bigrams using phi-square, the square of the Pearson correlation</span>
+<span class="sd">        coefficient.</span>
+<span class="sd">        This may be shown with respect to a contingency table::</span>
+
+<span class="sd">                w1    ~w1</span>
+<span class="sd">             ------ ------</span>
+<span class="sd">         w2 | n_ii | n_oi | = n_xi</span>
+<span class="sd">             ------ ------</span>
+<span class="sd">        ~w2 | n_io | n_oo |</span>
+<span class="sd">             ------ ------</span>
+<span class="sd">             = n_ix        TOTAL = n_xx</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">n_ii</span><span class="p">,</span> <span class="n">n_io</span><span class="p">,</span> <span class="n">n_oi</span><span class="p">,</span> <span class="n">n_oo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contingency</span><span class="p">(</span><span class="o">*</span><span class="n">marginals</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">n_ii</span><span class="o">/</span><span class="p">(</span><span class="n">n_ii</span><span class="o">+</span><span class="n">n_oi</span><span class="p">))</span> <span class="o">-</span> <span class="p">(</span><span class="n">n_io</span><span class="o">/</span><span class="p">(</span><span class="n">n_io</span><span class="o">+</span><span class="n">n_oo</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Collocations based on raw frequencies:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bigram_measures</span> <span class="o">=</span> <span class="n">AugmentedBigramAssocMeasures</span><span class="p">()</span>                                                
+<span class="n">finder</span><span class="o">.</span><span class="n">nbest</span><span class="p">(</span><span class="n">bigram_measures</span><span class="o">.</span><span class="n">raw_freq</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;said&#39;, &#39;alice&#39;),
+ (&#39;mock&#39;, &#39;turtle&#39;),
+ (&#39;march&#39;, &#39;hare&#39;),
+ (&#39;said&#39;, &#39;king&#39;),
+ (&#39;thought&#39;, &#39;alice&#39;),
+ (&#39;said&#39;, &#39;hatter&#39;),
+ (&#39;white&#39;, &#39;rabbit&#39;),
+ (&#39;said&#39;, &#39;mock&#39;),
+ (&#39;said&#39;, &#39;caterpillar&#39;),
+ (&#39;said&#39;, &#39;gryphon&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Collocations based on PMI:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">finder</span><span class="o">.</span><span class="n">nbest</span><span class="p">(</span><span class="n">bigram_measures</span><span class="o">.</span><span class="n">pmi</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;soo&#39;, &#39;oop&#39;),
+ (&#39;beg&#39;, &#39;pardon&#39;),
+ (&#39;bread&#39;, &#39;butter&#39;),
+ (&#39;golden&#39;, &#39;key&#39;),
+ (&#39;kid&#39;, &#39;gloves&#39;),
+ (&#39;twinkle&#39;, &#39;twinkle&#39;),
+ (&#39;evening&#39;, &#39;beautiful&#39;),
+ (&#39;join&#39;, &#39;dance&#39;),
+ (&#39;play&#39;, &#39;croquet&#39;),
+ (&#39;set&#39;, &#39;work&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bigrams_pmi</span><span class="o">=</span><span class="n">finder</span><span class="o">.</span><span class="n">score_ngrams</span><span class="p">(</span><span class="n">bigram_measures</span><span class="o">.</span><span class="n">pmi</span><span class="p">)</span>
+<span class="n">bigrams_pmi</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[((&#39;soo&#39;, &#39;oop&#39;), 10.771961015522411),
+ ((&#39;beg&#39;, &#39;pardon&#39;), 10.579315937580013),
+ ((&#39;bread&#39;, &#39;butter&#39;), 10.186998514801253),
+ ((&#39;golden&#39;, &#39;key&#39;), 10.186998514801253),
+ ((&#39;kid&#39;, &#39;gloves&#39;), 10.119884318942718),
+ ((&#39;twinkle&#39;, &#39;twinkle&#39;), 9.901244032467378),
+ ((&#39;evening&#39;, &#39;beautiful&#39;), 9.878876219438924),
+ ((&#39;join&#39;, &#39;dance&#39;), 9.878876219438924),
+ ((&#39;play&#39;, &#39;croquet&#39;), 9.731319031025066),
+ ((&#39;set&#39;, &#39;work&#39;), 9.356923516243567)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bigrams_dpfwd</span><span class="o">=</span><span class="n">finder</span><span class="o">.</span><span class="n">score_ngrams</span><span class="p">(</span><span class="n">bigram_measures</span><span class="o">.</span><span class="n">dp_fwd</span><span class="p">)</span>
+<span class="n">bigrams_dpfwd</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[((&#39;soo&#39;, &#39;oop&#39;), 1.0),
+ ((&#39;beg&#39;, &#39;pardon&#39;), 0.9998365211705085),
+ ((&#39;march&#39;, &#39;hare&#39;), 0.9997542796297814),
+ ((&#39;white&#39;, &#39;kid&#39;), 0.9979566816510013),
+ ((&#39;mock&#39;, &#39;turtle&#39;), 0.9491525423728814),
+ ((&#39;set&#39;, &#39;work&#39;), 0.749345977763244),
+ ((&#39;three&#39;, &#39;gardeners&#39;), 0.7482014388489209),
+ ((&#39;little&#39;, &#39;golden&#39;), 0.7042309444009763),
+ ((&#39;join&#39;, &#39;dance&#39;), 0.6923076923076923),
+ ((&#39;bread&#39;, &#39;butter&#39;), 0.6665849072030087)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bigrams_dpbwd</span><span class="o">=</span><span class="n">finder</span><span class="o">.</span><span class="n">score_ngrams</span><span class="p">(</span><span class="n">bigram_measures</span><span class="o">.</span><span class="n">dp_bwd</span><span class="p">)</span>
+<span class="n">bigrams_dpbwd</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[((&#39;soo&#39;, &#39;oop&#39;), 1.0),
+ ((&#39;mock&#39;, &#39;turtle&#39;), 0.9997537754432042),
+ ((&#39;join&#39;, &#39;dance&#39;), 0.9996729621453683),
+ ((&#39;kid&#39;, &#39;gloves&#39;), 0.9995096035962403),
+ ((&#39;evening&#39;, &#39;beautiful&#39;), 0.9993461381283204),
+ ((&#39;march&#39;, &#39;hare&#39;), 0.9117647058823529),
+ ((&#39;bread&#39;, &#39;butter&#39;), 0.8568976188529854),
+ ((&#39;golden&#39;, &#39;key&#39;), 0.8568976188529854),
+ ((&#39;trembling&#39;, &#39;voice&#39;), 0.8298185384992643),
+ ((&#39;beg&#39;, &#39;pardon&#39;), 0.75)]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="collocations-n-grams">
+<h3>Collocations (N-grams)<a class="headerlink" href="#collocations-n-grams" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.collocations</span> <span class="kn">import</span> <span class="n">TrigramCollocationFinder</span>
+<span class="kn">from</span> <span class="nn">nltk.collocations</span> <span class="kn">import</span> <span class="n">TrigramAssocMeasures</span>
+
+<span class="n">finder</span> <span class="o">=</span> <span class="n">TrigramCollocationFinder</span><span class="o">.</span><span class="n">from_documents</span><span class="p">([</span><span class="n">item</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> 
+                                                <span class="k">for</span> <span class="n">item</span> 
+                                                <span class="ow">in</span> <span class="n">norm_alice</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Trigrams based on raw frequencies:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trigram_measures</span> <span class="o">=</span> <span class="n">TrigramAssocMeasures</span><span class="p">()</span>                                                
+<span class="n">finder</span><span class="o">.</span><span class="n">nbest</span><span class="p">(</span><span class="n">trigram_measures</span><span class="o">.</span><span class="n">raw_freq</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;said&#39;, &#39;mock&#39;, &#39;turtle&#39;),
+ (&#39;said&#39;, &#39;march&#39;, &#39;hare&#39;),
+ (&#39;poor&#39;, &#39;little&#39;, &#39;thing&#39;),
+ (&#39;little&#39;, &#39;golden&#39;, &#39;key&#39;),
+ (&#39;march&#39;, &#39;hare&#39;, &#39;said&#39;),
+ (&#39;mock&#39;, &#39;turtle&#39;, &#39;said&#39;),
+ (&#39;white&#39;, &#39;kid&#39;, &#39;gloves&#39;),
+ (&#39;beau&#39;, &#39;ootiful&#39;, &#39;soo&#39;),
+ (&#39;certainly&#39;, &#39;said&#39;, &#39;alice&#39;),
+ (&#39;might&#39;, &#39;well&#39;, &#39;say&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Trigrams based on PMI:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">finder</span><span class="o">.</span><span class="n">nbest</span><span class="p">(</span><span class="n">trigram_measures</span><span class="o">.</span><span class="n">pmi</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;accustomed&#39;, &#39;usurpation&#39;, &#39;conquest&#39;),
+ (&#39;adjourn&#39;, &#39;immediate&#39;, &#39;adoption&#39;),
+ (&#39;adoption&#39;, &#39;energetic&#39;, &#39;remedies&#39;),
+ (&#39;ancient&#39;, &#39;modern&#39;, &#39;seaography&#39;),
+ (&#39;apple&#39;, &#39;roast&#39;, &#39;turkey&#39;),
+ (&#39;arithmetic&#39;, &#39;ambition&#39;, &#39;distraction&#39;),
+ (&#39;brother&#39;, &#39;latin&#39;, &#39;grammar&#39;),
+ (&#39;canvas&#39;, &#39;bag&#39;, &#39;tied&#39;),
+ (&#39;cherry&#39;, &#39;tart&#39;, &#39;custard&#39;),
+ (&#39;circle&#39;, &#39;exact&#39;, &#39;shape&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="weighted-tag-based-phrase-extraction">
+<h2>Weighted Tag-based Phrase Extraction<a class="headerlink" href="#weighted-tag-based-phrase-extraction" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Chunks</p></li>
+</ul>
+<p>Load data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">DEMO_DATA_ROOT</span><span class="o">+</span><span class="s1">&#39;/elephants.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r+&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+<span class="n">sentences</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">sent_tokenize</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">sentences</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>29
+</pre></div>
+</div>
+</div>
+</div>
+<p>Normalize texts.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">norm_sentences</span> <span class="o">=</span> <span class="n">tn</span><span class="o">.</span><span class="n">normalize_corpus</span><span class="p">(</span><span class="n">sentences</span><span class="p">,</span> <span class="n">text_lower_case</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
+                                     <span class="n">text_stemming</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">text_lemmatization</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">stopword_removal</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">norm_sentences</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Elephants are large mammals of the family Elephantidae and the order Proboscidea&#39;,
+ &#39;Three species are currently recognised the African bush elephant Loxodonta africana the African forest elephant L cyclotis and the Asian elephant Elephas maximus&#39;,
+ &#39;Elephants are scattered throughout subSaharan Africa South Asia and Southeast Asia&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Define chunk-based tokenizer.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">itertools</span>
+<span class="n">stopwords</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">corpus</span><span class="o">.</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">get_chunks</span><span class="p">(</span><span class="n">sentences</span><span class="p">,</span> <span class="n">grammar</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;NP: {&lt;DT&gt;? &lt;JJ&gt;* &lt;NN.*&gt;+}&#39;</span><span class="p">,</span> <span class="n">stopword_list</span><span class="o">=</span><span class="n">stopwords</span><span class="p">):</span>
+    
+    <span class="n">all_chunks</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">chunker</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">chunk</span><span class="o">.</span><span class="n">regexp</span><span class="o">.</span><span class="n">RegexpParser</span><span class="p">(</span><span class="n">grammar</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">:</span>
+        
+        <span class="n">tagged_sents</span> <span class="o">=</span> <span class="p">[</span><span class="n">nltk</span><span class="o">.</span><span class="n">pos_tag</span><span class="p">(</span><span class="n">nltk</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">sentence</span><span class="p">))]</span>   
+        
+        <span class="n">chunks</span> <span class="o">=</span> <span class="p">[</span><span class="n">chunker</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">tagged_sent</span><span class="p">)</span> 
+                      <span class="k">for</span> <span class="n">tagged_sent</span> <span class="ow">in</span> <span class="n">tagged_sents</span><span class="p">]</span>
+        
+        <span class="n">wtc_sents</span> <span class="o">=</span> <span class="p">[</span><span class="n">nltk</span><span class="o">.</span><span class="n">chunk</span><span class="o">.</span><span class="n">tree2conlltags</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+                         <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">chunks</span><span class="p">]</span>    
+        
+        <span class="n">flattened_chunks</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+                            <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">(</span>
+                                <span class="n">wtc_sent</span> <span class="k">for</span> <span class="n">wtc_sent</span> <span class="ow">in</span> <span class="n">wtc_sents</span><span class="p">)</span>
+                           <span class="p">)</span>
+        
+        <span class="n">valid_chunks_tagged</span> <span class="o">=</span> <span class="p">[(</span><span class="n">status</span><span class="p">,</span> <span class="p">[</span><span class="n">wtc</span> <span class="k">for</span> <span class="n">wtc</span> <span class="ow">in</span> <span class="n">chunk</span><span class="p">])</span> 
+                                   <span class="k">for</span> <span class="n">status</span><span class="p">,</span> <span class="n">chunk</span> 
+                                       <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">flattened_chunks</span><span class="p">,</span> 
+                                                <span class="k">lambda</span> <span class="n">word_pos_chunk</span><span class="p">:</span> <span class="n">word_pos_chunk</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;O&#39;</span><span class="p">)]</span>
+        
+        <span class="n">valid_chunks</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> 
+                                <span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">wtc_group</span> 
+                                    <span class="k">if</span> <span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stopword_list</span><span class="p">)</span> 
+                                        <span class="k">for</span> <span class="n">status</span><span class="p">,</span> <span class="n">wtc_group</span> <span class="ow">in</span> <span class="n">valid_chunks_tagged</span>
+                                            <span class="k">if</span> <span class="n">status</span><span class="p">]</span>
+                                            
+        <span class="n">all_chunks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">valid_chunks</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">all_chunks</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Get chunks from texts.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chunks</span> <span class="o">=</span> <span class="n">get_chunks</span><span class="p">(</span><span class="n">norm_sentences</span><span class="p">)</span>
+<span class="n">chunks</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[&#39;elephants&#39;, &#39;large mammals&#39;, &#39;family elephantidae&#39;, &#39;order proboscidea&#39;],
+ [&#39;species&#39;,
+  &#39;african bush elephant loxodonta&#39;,
+  &#39;african forest elephant l cyclotis&#39;,
+  &#39;asian elephant elephas maximus&#39;],
+ [&#39;elephants&#39;, &#39;subsaharan africa south asia&#39;, &#39;southeast asia&#39;],
+ [&#39;elephantidae&#39;,
+  &#39;family&#39;,
+  &#39;order proboscidea&#39;,
+  &#39;extinct members&#39;,
+  &#39;order&#39;,
+  &#39;deinotheres gomphotheres mammoths&#39;,
+  &#39;mastodons&#39;],
+ [&#39;elephants&#39;,
+  &#39;several distinctive features&#39;,
+  &#39;long trunk&#39;,
+  &#39;proboscis&#39;,
+  &#39;many purposes&#39;,
+  &#39;water&#39;,
+  &#39;grasping objects&#39;],
+ [&#39;incisors&#39;, &#39;tusks&#39;, &#39;weapons&#39;, &#39;tools&#39;, &#39;objects&#39;],
+ [&#39;elephants&#39;, &#39;flaps&#39;, &#39;body temperature&#39;],
+ [&#39;pillarlike legs&#39;, &#39;great weight&#39;],
+ [&#39;african elephants&#39;,
+  &#39;ears&#39;,
+  &#39;backs&#39;,
+  &#39;asian elephants&#39;,
+  &#39;ears&#39;,
+  &#39;convex&#39;,
+  &#39;level backs&#39;],
+ [&#39;elephants&#39;, &#39;different habitats&#39;, &#39;savannahs forests deserts&#39;, &#39;marshes&#39;],
+ [&#39;water&#39;],
+ [&#39;keystone species&#39;, &#39;impact&#39;, &#39;environments&#39;],
+ [&#39;animals&#39;,
+  &#39;distance&#39;,
+  &#39;elephants&#39;,
+  &#39;predators&#39;,
+  &#39;lions tigers hyenas&#39;,
+  &#39;wild dogs&#39;,
+  &#39;young elephants&#39;,
+  &#39;calves&#39;],
+ [&#39;elephants&#39;, &#39;fissionfusion society&#39;, &#39;multiple family groups&#39;],
+ [&#39;females cows&#39;,
+  &#39;family groups&#39;,
+  &#39;female&#39;,
+  &#39;calves&#39;,
+  &#39;several related females&#39;],
+ [&#39;groups&#39;, &#39;individual known&#39;, &#39;matriarch&#39;, &#39;cow&#39;],
+ [&#39;males bulls&#39;, &#39;family groups&#39;, &#39;males&#39;],
+ [&#39;adult&#39;,
+  &#39;family groups&#39;,
+  &#39;mate&#39;,
+  &#39;enter state&#39;,
+  &#39;increased testosterone&#39;,
+  &#39;aggression&#39;,
+  &#39;musth&#39;,
+  &#39;dominance&#39;,
+  &#39;reproductive success&#39;],
+ [&#39;calves&#39;, &#39;centre&#39;, &#39;attention&#39;, &#39;family groups&#39;, &#39;mothers&#39;, &#39;years&#39;],
+ [&#39;elephants&#39;, &#39;years&#39;, &#39;wild&#39;],
+ [&#39;touch sight smell&#39;,
+  &#39;sound elephants&#39;,
+  &#39;infrasound&#39;,
+  &#39;seismic communication&#39;,
+  &#39;long distances&#39;],
+ [&#39;elephant intelligence&#39;, &#39;primates&#39;, &#39;cetaceans&#39;],
+ [&#39;selfawareness&#39;, &#39;dead individuals&#39;, &#39;kind&#39;],
+ [&#39;african elephants&#39;,
+  &#39;international union&#39;,
+  &#39;conservation&#39;,
+  &#39;nature iucn&#39;,
+  &#39;asian elephant&#39;],
+ [&#39;threats&#39;, &#39;populations&#39;, &#39;ivory trade&#39;, &#39;animals&#39;, &#39;ivory tusks&#39;],
+ [&#39;threats&#39;, &#39;elephants&#39;, &#39;habitat destruction&#39;, &#39;conflicts&#39;, &#39;local people&#39;],
+ [&#39;elephants&#39;, &#39;animals&#39;, &#39;asia&#39;],
+ [&#39;past&#39;, &#39;war today&#39;, &#39;display&#39;, &#39;zoos&#39;, &#39;entertainment&#39;, &#39;circuses&#39;],
+ [&#39;elephants&#39;, &#39;art folklore religion literature&#39;, &#39;popular culture&#39;]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Weight chunks.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gensim</span> <span class="kn">import</span> <span class="n">corpora</span><span class="p">,</span> <span class="n">models</span>
+
+<span class="k">def</span> <span class="nf">get_tfidf_weighted_keyphrases</span><span class="p">(</span><span class="n">sentences</span><span class="p">,</span> 
+                                  <span class="n">grammar</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;NP: {&lt;DT&gt;? &lt;JJ&gt;* &lt;NN.*&gt;+}&#39;</span><span class="p">,</span>
+                                  <span class="n">top_n</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+    
+    <span class="n">valid_chunks</span> <span class="o">=</span> <span class="n">get_chunks</span><span class="p">(</span><span class="n">sentences</span><span class="p">,</span> <span class="n">grammar</span><span class="o">=</span><span class="n">grammar</span><span class="p">)</span>
+                                     
+    <span class="n">dictionary</span> <span class="o">=</span> <span class="n">corpora</span><span class="o">.</span><span class="n">Dictionary</span><span class="p">(</span><span class="n">valid_chunks</span><span class="p">)</span>
+    <span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span><span class="n">dictionary</span><span class="o">.</span><span class="n">doc2bow</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span> <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">valid_chunks</span><span class="p">]</span>
+    
+    <span class="n">tfidf</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TfidfModel</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+    <span class="n">corpus_tfidf</span> <span class="o">=</span> <span class="n">tfidf</span><span class="p">[</span><span class="n">corpus</span><span class="p">]</span>
+    
+    <span class="n">weighted_phrases</span> <span class="o">=</span> <span class="p">{</span><span class="n">dictionary</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">idx</span><span class="p">):</span> <span class="n">value</span> 
+                           <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">corpus_tfidf</span> 
+                               <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">}</span>
+                            
+    <span class="n">weighted_phrases</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">weighted_phrases</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> 
+                              <span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">weighted_phrases</span> <span class="o">=</span> <span class="p">[(</span><span class="n">term</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">wt</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span> <span class="k">for</span> <span class="n">term</span><span class="p">,</span> <span class="n">wt</span> <span class="ow">in</span> <span class="n">weighted_phrases</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">weighted_phrases</span><span class="p">[:</span><span class="n">top_n</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_tfidf_weighted_keyphrases</span><span class="p">(</span><span class="n">sentences</span><span class="o">=</span><span class="n">norm_sentences</span><span class="p">,</span> <span class="n">top_n</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;water&#39;, 1.0),
+ (&#39;asia&#39;, 0.807),
+ (&#39;wild&#39;, 0.764),
+ (&#39;great weight&#39;, 0.707),
+ (&#39;pillarlike legs&#39;, 0.707),
+ (&#39;southeast asia&#39;, 0.693),
+ (&#39;subsaharan africa south asia&#39;, 0.693),
+ (&#39;body temperature&#39;, 0.693),
+ (&#39;flaps&#39;, 0.693),
+ (&#39;fissionfusion society&#39;, 0.693),
+ (&#39;multiple family groups&#39;, 0.693),
+ (&#39;art folklore religion literature&#39;, 0.693),
+ (&#39;popular culture&#39;, 0.693),
+ (&#39;ears&#39;, 0.681),
+ (&#39;males&#39;, 0.653),
+ (&#39;males bulls&#39;, 0.653),
+ (&#39;family elephantidae&#39;, 0.607),
+ (&#39;large mammals&#39;, 0.607),
+ (&#39;years&#39;, 0.607),
+ (&#39;environments&#39;, 0.577),
+ (&#39;impact&#39;, 0.577),
+ (&#39;keystone species&#39;, 0.577),
+ (&#39;cetaceans&#39;, 0.577),
+ (&#39;elephant intelligence&#39;, 0.577),
+ (&#39;primates&#39;, 0.577),
+ (&#39;dead individuals&#39;, 0.577),
+ (&#39;kind&#39;, 0.577),
+ (&#39;selfawareness&#39;, 0.577),
+ (&#39;different habitats&#39;, 0.57),
+ (&#39;marshes&#39;, 0.57)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gensim.summarization</span> <span class="kn">import</span> <span class="n">keywords</span>
+
+<span class="n">key_words</span> <span class="o">=</span> <span class="n">keywords</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ratio</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scores</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">lemmatize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="p">[(</span><span class="n">item</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span> <span class="k">for</span> <span class="n">item</span><span class="p">,</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">key_words</span><span class="p">][:</span><span class="mi">25</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;african bush elephant&#39;, 0.261),
+ (&#39;including&#39;, 0.141),
+ (&#39;family&#39;, 0.137),
+ (&#39;cow&#39;, 0.124),
+ (&#39;forests&#39;, 0.108),
+ (&#39;female&#39;, 0.103),
+ (&#39;asia&#39;, 0.102),
+ (&#39;objects&#39;, 0.098),
+ (&#39;sight&#39;, 0.098),
+ (&#39;ivory&#39;, 0.098),
+ (&#39;tigers&#39;, 0.098),
+ (&#39;males&#39;, 0.088),
+ (&#39;folklore&#39;, 0.087),
+ (&#39;religion&#39;, 0.087),
+ (&#39;known&#39;, 0.087),
+ (&#39;larger ears&#39;, 0.085),
+ (&#39;water&#39;, 0.075),
+ (&#39;highly recognisable&#39;, 0.075),
+ (&#39;breathing lifting&#39;, 0.074),
+ (&#39;flaps&#39;, 0.073),
+ (&#39;africa&#39;, 0.072),
+ (&#39;gomphotheres&#39;, 0.072),
+ (&#39;animals tend&#39;, 0.071),
+ (&#39;success&#39;, 0.071),
+ (&#39;south&#39;, 0.07)]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="topic-modeling">
+<h2>Topic Modeling<a class="headerlink" href="#topic-modeling" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="document-summarization">
+<h2>Document Summarization<a class="headerlink" href="#document-summarization" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Text Analytics with Python (2nd Ed.) Chapter 6</p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python-notes",
+            path: "./nlp"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python-notes'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alvin Chen<br/>
+        
+            &copy; Copyright 2020 Alvin Chen.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

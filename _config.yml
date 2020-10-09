@@ -15,17 +15,18 @@ html:
             <a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
         </div>
 execute:
+  execute_notebooks: auto
   exclude_patterns:
-    - 'seq-to-seq.ipynb'
-    - 'text-gen-lstm-v2.ipynb'
-    - 'transfer-learning-sent-encoding.ipynb'
-    - 'hyperparameter-tuning.ipynb'
-    - 'sentiment-analysis-marc.ipynb'
-    - 'sentiment-analysis-svm-hyperparameter-marc.ipynb'
-    - 'sentiment-analysis-using-bert-chinese.ipynb'
-    - 'sentiment-analysis-using-bert.ipynb'
-    - 'transfer-learning-sent-encoding-chinese.ipynb'
-    - 'ktrain-tutorial-explaining-predictions.ipynb'
+    - 'nlp/seq-to-seq.ipynb'
+    - 'nlp/text-gen-lstm-v2.ipynb'
+    - 'nlp/transfer-learning-sent-encoding.ipynb'
+    - 'nlp/hyperparameter-tuning.ipynb'
+    - 'nlp/sentiment-analysis-marc.ipynb'
+    - 'nlp/sentiment-analysis-svm-hyperparameter-marc.ipynb'
+    - 'nlp/sentiment-analysis-using-bert-chinese.ipynb'
+    - 'nlp/sentiment-analysis-using-bert.ipynb'
+    - 'nlp/transfer-learning-sent-encoding-chinese.ipynb'
+    - 'nlp/ktrain-tutorial-explaining-predictions.ipynb'
 sphinx:
   extra_extensions:
     - sphinxcontrib.bibtex

@@ -1,0 +1,928 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sentiment Analysis Using BERT &#8212; Python Notes for Linguistics</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/ntnu03.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Python Notes for Linguistics</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python-basics/python-basics.html">
+   Python Basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../corpus/corpus-processing.html">
+   Corpus Linguistics with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../statistical-analyses/statistical-analyses.html">
+   Statistical Analyses
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="nlp.html">
+   Natural Language Processing with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <div style="text-align:left">
+    <a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
+</div>
+
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/nlp/sentiment-analysis-using-bert.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/alvinntnu/python-notes/master?urlpath=tree/nlp/sentiment-analysis-using-bert.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/nlp/sentiment-analysis-using-bert.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#installing-ktrain">
+   Installing ktrain
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#importing-libraries">
+   Importing Libraries
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#clone-git-repository-for-data">
+   Clone Git Repository for Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-preparation">
+   Data Preparation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#train-test-split">
+   Train-Test Split
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-model">
+   Define Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-learner">
+   Define Learner
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fit-model">
+   Fit Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#save-model">
+   Save Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prediction">
+   Prediction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#deploy-model">
+   Deploy Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="sentiment-analysis-using-bert">
+<h1>Sentiment Analysis Using BERT<a class="headerlink" href="#sentiment-analysis-using-bert" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Using <code class="docutils literal notranslate"><span class="pre">ktrain</span></code> for learning</p></li>
+<li><p>Using BERT pre-trained language model</p></li>
+</ul>
+<div class="section" id="installing-ktrain">
+<h2>Installing ktrain<a class="headerlink" href="#installing-ktrain" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install ktrain
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting ktrain
+?25l  Downloading https://files.pythonhosted.org/packages/f2/d5/a366ea331fc951b8ec2c9e7811cd101acfcac3a5d045f9d9320e74ea5f70/ktrain-0.21.4.tar.gz (25.3MB)
+     |████████████████████████████████| 25.3MB 128kB/s 
+?25hRequirement already satisfied: scikit-learn&gt;=0.21.3 in /usr/local/lib/python3.6/dist-packages (from ktrain) (0.22.2.post1)
+Requirement already satisfied: matplotlib&gt;=3.0.0 in /usr/local/lib/python3.6/dist-packages (from ktrain) (3.2.2)
+Requirement already satisfied: pandas&gt;=1.0.1 in /usr/local/lib/python3.6/dist-packages (from ktrain) (1.1.2)
+Requirement already satisfied: fastprogress&gt;=0.1.21 in /usr/local/lib/python3.6/dist-packages (from ktrain) (1.0.0)
+Collecting keras_bert&gt;=0.86.0
+  Downloading https://files.pythonhosted.org/packages/e2/7f/95fabd29f4502924fa3f09ff6538c5a7d290dfef2c2fe076d3d1a16e08f0/keras-bert-0.86.0.tar.gz
+Requirement already satisfied: requests in /usr/local/lib/python3.6/dist-packages (from ktrain) (2.23.0)
+Requirement already satisfied: joblib in /usr/local/lib/python3.6/dist-packages (from ktrain) (0.16.0)
+Collecting langdetect
+?25l  Downloading https://files.pythonhosted.org/packages/56/a3/8407c1e62d5980188b4acc45ef3d94b933d14a2ebc9ef3505f22cf772570/langdetect-1.0.8.tar.gz (981kB)
+     |████████████████████████████████| 983kB 22.1MB/s 
+?25hRequirement already satisfied: jieba in /usr/local/lib/python3.6/dist-packages (from ktrain) (0.42.1)
+Collecting cchardet
+?25l  Downloading https://files.pythonhosted.org/packages/1e/c5/7e1a0d7b4afd83d6f8de794fce82820ec4c5136c6d52e14000822681a842/cchardet-2.1.6-cp36-cp36m-manylinux2010_x86_64.whl (241kB)
+     |████████████████████████████████| 245kB 50.8MB/s 
+?25hRequirement already satisfied: networkx&gt;=2.3 in /usr/local/lib/python3.6/dist-packages (from ktrain) (2.5)
+Requirement already satisfied: bokeh in /usr/local/lib/python3.6/dist-packages (from ktrain) (2.1.1)
+Collecting seqeval
+  Downloading https://files.pythonhosted.org/packages/d8/9d/89d9ac5d6506f8368ba5ae53b054cf26bf796935eff6a1945431c7a5d485/seqeval-0.0.17.tar.gz
+Requirement already satisfied: packaging in /usr/local/lib/python3.6/dist-packages (from ktrain) (20.4)
+Collecting transformers&gt;=3.1.0
+?25l  Downloading https://files.pythonhosted.org/packages/19/22/aff234f4a841f8999e68a7a94bdd4b60b4cebcfeca5d67d61cd08c9179de/transformers-3.3.1-py3-none-any.whl (1.1MB)
+     |████████████████████████████████| 1.1MB 51.2MB/s 
+?25hRequirement already satisfied: ipython in /usr/local/lib/python3.6/dist-packages (from ktrain) (5.5.0)
+Collecting syntok
+  Downloading https://files.pythonhosted.org/packages/8c/76/a49e73a04b3e3a14ce232e8e28a1587f8108baa665644fe8c40e307e792e/syntok-1.3.1.tar.gz
+Collecting whoosh
+?25l  Downloading https://files.pythonhosted.org/packages/ba/19/24d0f1f454a2c1eb689ca28d2f178db81e5024f42d82729a4ff6771155cf/Whoosh-2.7.4-py2.py3-none-any.whl (468kB)
+     |████████████████████████████████| 471kB 48.9MB/s 
+?25hRequirement already satisfied: numpy&gt;=1.11.0 in /usr/local/lib/python3.6/dist-packages (from scikit-learn&gt;=0.21.3-&gt;ktrain) (1.18.5)
+Requirement already satisfied: scipy&gt;=0.17.0 in /usr/local/lib/python3.6/dist-packages (from scikit-learn&gt;=0.21.3-&gt;ktrain) (1.4.1)
+Requirement already satisfied: python-dateutil&gt;=2.1 in /usr/local/lib/python3.6/dist-packages (from matplotlib&gt;=3.0.0-&gt;ktrain) (2.8.1)
+Requirement already satisfied: cycler&gt;=0.10 in /usr/local/lib/python3.6/dist-packages (from matplotlib&gt;=3.0.0-&gt;ktrain) (0.10.0)
+Requirement already satisfied: pyparsing!=2.0.4,!=2.1.2,!=2.1.6,&gt;=2.0.1 in /usr/local/lib/python3.6/dist-packages (from matplotlib&gt;=3.0.0-&gt;ktrain) (2.4.7)
+Requirement already satisfied: kiwisolver&gt;=1.0.1 in /usr/local/lib/python3.6/dist-packages (from matplotlib&gt;=3.0.0-&gt;ktrain) (1.2.0)
+Requirement already satisfied: pytz&gt;=2017.2 in /usr/local/lib/python3.6/dist-packages (from pandas&gt;=1.0.1-&gt;ktrain) (2018.9)
+Requirement already satisfied: Keras&gt;=2.4.3 in /usr/local/lib/python3.6/dist-packages (from keras_bert&gt;=0.86.0-&gt;ktrain) (2.4.3)
+Collecting keras-transformer&gt;=0.38.0
+  Downloading https://files.pythonhosted.org/packages/89/6c/d6f0c164f4cc16fbc0d0fea85f5526e87a7d2df7b077809e422a7e626150/keras-transformer-0.38.0.tar.gz
+Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.6/dist-packages (from requests-&gt;ktrain) (2020.6.20)
+Requirement already satisfied: chardet&lt;4,&gt;=3.0.2 in /usr/local/lib/python3.6/dist-packages (from requests-&gt;ktrain) (3.0.4)
+Requirement already satisfied: idna&lt;3,&gt;=2.5 in /usr/local/lib/python3.6/dist-packages (from requests-&gt;ktrain) (2.10)
+Requirement already satisfied: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/local/lib/python3.6/dist-packages (from requests-&gt;ktrain) (1.24.3)
+Requirement already satisfied: six in /usr/local/lib/python3.6/dist-packages (from langdetect-&gt;ktrain) (1.15.0)
+Requirement already satisfied: decorator&gt;=4.3.0 in /usr/local/lib/python3.6/dist-packages (from networkx&gt;=2.3-&gt;ktrain) (4.4.2)
+Requirement already satisfied: Jinja2&gt;=2.7 in /usr/local/lib/python3.6/dist-packages (from bokeh-&gt;ktrain) (2.11.2)
+Requirement already satisfied: typing-extensions&gt;=3.7.4 in /usr/local/lib/python3.6/dist-packages (from bokeh-&gt;ktrain) (3.7.4.3)
+Requirement already satisfied: pillow&gt;=4.0 in /usr/local/lib/python3.6/dist-packages (from bokeh-&gt;ktrain) (7.0.0)
+Requirement already satisfied: tornado&gt;=5.1 in /usr/local/lib/python3.6/dist-packages (from bokeh-&gt;ktrain) (5.1.1)
+Requirement already satisfied: PyYAML&gt;=3.10 in /usr/local/lib/python3.6/dist-packages (from bokeh-&gt;ktrain) (3.13)
+Requirement already satisfied: tqdm&gt;=4.27 in /usr/local/lib/python3.6/dist-packages (from transformers&gt;=3.1.0-&gt;ktrain) (4.41.1)
+Collecting sacremoses
+?25l  Downloading https://files.pythonhosted.org/packages/7d/34/09d19aff26edcc8eb2a01bed8e98f13a1537005d31e95233fd48216eed10/sacremoses-0.0.43.tar.gz (883kB)
+     |████████████████████████████████| 890kB 34.4MB/s 
+?25hRequirement already satisfied: filelock in /usr/local/lib/python3.6/dist-packages (from transformers&gt;=3.1.0-&gt;ktrain) (3.0.12)
+Requirement already satisfied: regex!=2019.12.17 in /usr/local/lib/python3.6/dist-packages (from transformers&gt;=3.1.0-&gt;ktrain) (2019.12.20)
+Requirement already satisfied: dataclasses; python_version &lt; &quot;3.7&quot; in /usr/local/lib/python3.6/dist-packages (from transformers&gt;=3.1.0-&gt;ktrain) (0.7)
+Collecting sentencepiece!=0.1.92
+?25l  Downloading https://files.pythonhosted.org/packages/d4/a4/d0a884c4300004a78cca907a6ff9a5e9fe4f090f5d95ab341c53d28cbc58/sentencepiece-0.1.91-cp36-cp36m-manylinux1_x86_64.whl (1.1MB)
+     |████████████████████████████████| 1.1MB 45.3MB/s 
+?25hCollecting tokenizers==0.8.1.rc2
+?25l  Downloading https://files.pythonhosted.org/packages/80/83/8b9fccb9e48eeb575ee19179e2bdde0ee9a1904f97de5f02d19016b8804f/tokenizers-0.8.1rc2-cp36-cp36m-manylinux1_x86_64.whl (3.0MB)
+     |████████████████████████████████| 3.0MB 48.1MB/s 
+?25hRequirement already satisfied: traitlets&gt;=4.2 in /usr/local/lib/python3.6/dist-packages (from ipython-&gt;ktrain) (4.3.3)
+Requirement already satisfied: simplegeneric&gt;0.8 in /usr/local/lib/python3.6/dist-packages (from ipython-&gt;ktrain) (0.8.1)
+Requirement already satisfied: pygments in /usr/local/lib/python3.6/dist-packages (from ipython-&gt;ktrain) (2.6.1)
+Requirement already satisfied: setuptools&gt;=18.5 in /usr/local/lib/python3.6/dist-packages (from ipython-&gt;ktrain) (50.3.0)
+Requirement already satisfied: prompt-toolkit&lt;2.0.0,&gt;=1.0.4 in /usr/local/lib/python3.6/dist-packages (from ipython-&gt;ktrain) (1.0.18)
+Requirement already satisfied: pickleshare in /usr/local/lib/python3.6/dist-packages (from ipython-&gt;ktrain) (0.7.5)
+Requirement already satisfied: pexpect; sys_platform != &quot;win32&quot; in /usr/local/lib/python3.6/dist-packages (from ipython-&gt;ktrain) (4.8.0)
+Requirement already satisfied: h5py in /usr/local/lib/python3.6/dist-packages (from Keras&gt;=2.4.3-&gt;keras_bert&gt;=0.86.0-&gt;ktrain) (2.10.0)
+Collecting keras-pos-embd&gt;=0.11.0
+  Downloading https://files.pythonhosted.org/packages/09/70/b63ed8fc660da2bb6ae29b9895401c628da5740c048c190b5d7107cadd02/keras-pos-embd-0.11.0.tar.gz
+Collecting keras-multi-head&gt;=0.27.0
+  Downloading https://files.pythonhosted.org/packages/e6/32/45adf2549450aca7867deccfa04af80a0ab1ca139af44b16bc669e0e09cd/keras-multi-head-0.27.0.tar.gz
+Collecting keras-layer-normalization&gt;=0.14.0
+  Downloading https://files.pythonhosted.org/packages/a4/0e/d1078df0494bac9ce1a67954e5380b6e7569668f0f3b50a9531c62c1fc4a/keras-layer-normalization-0.14.0.tar.gz
+Collecting keras-position-wise-feed-forward&gt;=0.6.0
+  Downloading https://files.pythonhosted.org/packages/e3/59/f0faa1037c033059e7e9e7758e6c23b4d1c0772cd48de14c4b6fd4033ad5/keras-position-wise-feed-forward-0.6.0.tar.gz
+Collecting keras-embed-sim&gt;=0.8.0
+  Downloading https://files.pythonhosted.org/packages/57/ef/61a1e39082c9e1834a2d09261d4a0b69f7c818b359216d4e1912b20b1c86/keras-embed-sim-0.8.0.tar.gz
+Requirement already satisfied: MarkupSafe&gt;=0.23 in /usr/local/lib/python3.6/dist-packages (from Jinja2&gt;=2.7-&gt;bokeh-&gt;ktrain) (1.1.1)
+Requirement already satisfied: click in /usr/local/lib/python3.6/dist-packages (from sacremoses-&gt;transformers&gt;=3.1.0-&gt;ktrain) (7.1.2)
+Requirement already satisfied: ipython-genutils in /usr/local/lib/python3.6/dist-packages (from traitlets&gt;=4.2-&gt;ipython-&gt;ktrain) (0.2.0)
+Requirement already satisfied: wcwidth in /usr/local/lib/python3.6/dist-packages (from prompt-toolkit&lt;2.0.0,&gt;=1.0.4-&gt;ipython-&gt;ktrain) (0.2.5)
+Requirement already satisfied: ptyprocess&gt;=0.5 in /usr/local/lib/python3.6/dist-packages (from pexpect; sys_platform != &quot;win32&quot;-&gt;ipython-&gt;ktrain) (0.6.0)
+Collecting keras-self-attention==0.46.0
+  Downloading https://files.pythonhosted.org/packages/15/6b/c804924a056955fa1f3ff767945187103cfc851ba9bd0fc5a6c6bc18e2eb/keras-self-attention-0.46.0.tar.gz
+Building wheels for collected packages: ktrain, keras-bert, langdetect, seqeval, syntok, keras-transformer, sacremoses, keras-pos-embd, keras-multi-head, keras-layer-normalization, keras-position-wise-feed-forward, keras-embed-sim, keras-self-attention
+  Building wheel for ktrain (setup.py) ... ?25l?25hdone
+  Created wheel for ktrain: filename=ktrain-0.21.4-cp36-none-any.whl size=25270024 sha256=c43980abd9db06e4971f4d4a1a6b6026822e754451eb9ea5475bc2c5625a2a64
+  Stored in directory: /root/.cache/pip/wheels/e8/b6/c2/a730bb7727f9402827eb9cdd277a527a4a88acb2b0d22f06f0
+  Building wheel for keras-bert (setup.py) ... ?25l?25hdone
+  Created wheel for keras-bert: filename=keras_bert-0.86.0-cp36-none-any.whl size=34145 sha256=f796671a6665147dff1a057d86433cbd660fd258673aeefb6effeb9e9300c07a
+  Stored in directory: /root/.cache/pip/wheels/66/f0/b1/748128b58562fc9e31b907bb5e2ab6a35eb37695e83911236b
+  Building wheel for langdetect (setup.py) ... ?25l?25hdone
+  Created wheel for langdetect: filename=langdetect-1.0.8-cp36-none-any.whl size=993195 sha256=82c1fc242c35d7d5af178bc51b84b885519b01f0fa41f58ec6574883406883fb
+  Stored in directory: /root/.cache/pip/wheels/8d/b3/aa/6d99de9f3841d7d3d40a60ea06e6d669e8e5012e6c8b947a57
+  Building wheel for seqeval (setup.py) ... ?25l?25hdone
+  Created wheel for seqeval: filename=seqeval-0.0.17-cp36-none-any.whl size=7640 sha256=a429e3f1edd3e4b0c09457f5c0cb448b8c0e896e31c4a258ffc0a47ebd15bf4a
+  Stored in directory: /root/.cache/pip/wheels/6a/c8/cf/7b9d5d52984c08ce4d27d6f858a682ef74a3738f43f489166a
+  Building wheel for syntok (setup.py) ... ?25l?25hdone
+  Created wheel for syntok: filename=syntok-1.3.1-cp36-none-any.whl size=20919 sha256=2eaf86f75a32200a2475d7fa639db588a8361f6a54edd6348a3df8e3f8f89685
+  Stored in directory: /root/.cache/pip/wheels/51/c6/a4/be1920586c49469846bcd2888200bdecfe109ec421dab9be2d
+  Building wheel for keras-transformer (setup.py) ... ?25l?25hdone
+  Created wheel for keras-transformer: filename=keras_transformer-0.38.0-cp36-none-any.whl size=12942 sha256=9fd087310dcc34f5fb91d1190cc195b23a54389859e21f19871da7993a09b1af
+  Stored in directory: /root/.cache/pip/wheels/e5/fb/3a/37b2b9326c799aa010ae46a04ddb04f320d8c77c0b7e837f4e
+  Building wheel for sacremoses (setup.py) ... ?25l?25hdone
+  Created wheel for sacremoses: filename=sacremoses-0.0.43-cp36-none-any.whl size=893257 sha256=7e676a89481c9d150028cac2a2bebe919bc776c9a3743f43f12d0721f22199e2
+  Stored in directory: /root/.cache/pip/wheels/29/3c/fd/7ce5c3f0666dab31a50123635e6fb5e19ceb42ce38d4e58f45
+  Building wheel for keras-pos-embd (setup.py) ... ?25l?25hdone
+  Created wheel for keras-pos-embd: filename=keras_pos_embd-0.11.0-cp36-none-any.whl size=7554 sha256=67db067f9d0afcac874b461621880cf0c085634a3f392a1a3f59cfea4c8ff205
+  Stored in directory: /root/.cache/pip/wheels/5b/a1/a0/ce6b1d49ba1a9a76f592e70cf297b05c96bc9f418146761032
+  Building wheel for keras-multi-head (setup.py) ... ?25l?25hdone
+  Created wheel for keras-multi-head: filename=keras_multi_head-0.27.0-cp36-none-any.whl size=15612 sha256=d17fa8aabf4271eea69b50c17f01a2dc9576cf120361ac01609b0635ead22228
+  Stored in directory: /root/.cache/pip/wheels/b5/b4/49/0a0c27dcb93c13af02fea254ff51d1a43a924dd4e5b7a7164d
+  Building wheel for keras-layer-normalization (setup.py) ... ?25l?25hdone
+  Created wheel for keras-layer-normalization: filename=keras_layer_normalization-0.14.0-cp36-none-any.whl size=5268 sha256=31598faf0eda0965faebbd2d15b8e8c5a8142884c2465b4a01b228db24387189
+  Stored in directory: /root/.cache/pip/wheels/54/80/22/a638a7d406fd155e507aa33d703e3fa2612b9eb7bb4f4fe667
+  Building wheel for keras-position-wise-feed-forward (setup.py) ... ?25l?25hdone
+  Created wheel for keras-position-wise-feed-forward: filename=keras_position_wise_feed_forward-0.6.0-cp36-none-any.whl size=5626 sha256=27c0b676efc9c37173da12b5a69559ea2e6deed5af3d0d6572e8b3ae273d1a00
+  Stored in directory: /root/.cache/pip/wheels/39/e2/e2/3514fef126a00574b13bc0b9e23891800158df3a3c19c96e3b
+  Building wheel for keras-embed-sim (setup.py) ... ?25l?25hdone
+  Created wheel for keras-embed-sim: filename=keras_embed_sim-0.8.0-cp36-none-any.whl size=4559 sha256=64a00523f731a0419d0a1ebed7b8354f6f4f20a1f36dbdf8fd10fd589e9d6a46
+  Stored in directory: /root/.cache/pip/wheels/49/45/8b/c111f6cc8bec253e984677de73a6f4f5d2f1649f42aac191c8
+  Building wheel for keras-self-attention (setup.py) ... ?25l?25hdone
+  Created wheel for keras-self-attention: filename=keras_self_attention-0.46.0-cp36-none-any.whl size=17278 sha256=e391c2c573819f94977b0a487ebc5206ed7a9e26c02e3f48e6e31e1f3d6b38cd
+  Stored in directory: /root/.cache/pip/wheels/d2/2e/80/fec4c05eb23c8e13b790e26d207d6e0ffe8013fad8c6bdd4d2
+Successfully built ktrain keras-bert langdetect seqeval syntok keras-transformer sacremoses keras-pos-embd keras-multi-head keras-layer-normalization keras-position-wise-feed-forward keras-embed-sim keras-self-attention
+Installing collected packages: keras-pos-embd, keras-self-attention, keras-multi-head, keras-layer-normalization, keras-position-wise-feed-forward, keras-embed-sim, keras-transformer, keras-bert, langdetect, cchardet, seqeval, sacremoses, sentencepiece, tokenizers, transformers, syntok, whoosh, ktrain
+Successfully installed cchardet-2.1.6 keras-bert-0.86.0 keras-embed-sim-0.8.0 keras-layer-normalization-0.14.0 keras-multi-head-0.27.0 keras-pos-embd-0.11.0 keras-position-wise-feed-forward-0.6.0 keras-self-attention-0.46.0 keras-transformer-0.38.0 ktrain-0.21.4 langdetect-1.0.8 sacremoses-0.0.43 sentencepiece-0.1.91 seqeval-0.0.17 syntok-1.3.1 tokenizers-0.8.1rc2 transformers-3.3.1 whoosh-2.7.4
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="importing-libraries">
+<h2>Importing Libraries<a class="headerlink" href="#importing-libraries" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">ktrain</span>
+<span class="kn">from</span> <span class="nn">ktrain</span> <span class="kn">import</span> <span class="n">text</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tf</span><span class="o">.</span><span class="n">__version__</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;2.3.0&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="clone-git-repository-for-data">
+<h2>Clone Git Repository for Data<a class="headerlink" href="#clone-git-repository-for-data" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git clone https://github.com/laxmimerit/IMDB-Movie-Reviews-Large-Dataset-50k.git
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cloning into &#39;IMDB-Movie-Reviews-Large-Dataset-50k&#39;...
+remote: Enumerating objects: 10, done.
+remote: Counting objects: 100% (10/10), done.
+remote: Compressing objects: 100% (8/8), done.
+remote: Total 10 (delta 1), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (10/10), done.
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="data-preparation">
+<h2>Data Preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#loading the train dataset</span>
+
+<span class="n">data_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;IMDB-Movie-Reviews-Large-Dataset-50k/train.xlsx&#39;</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">str</span><span class="p">)</span>
+<span class="c1">#loading the test dataset</span>
+
+<span class="n">data_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;IMDB-Movie-Reviews-Large-Dataset-50k/test.xlsx&#39;</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">str</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#dimension of the dataset</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Size of train dataset: &quot;</span><span class="p">,</span><span class="n">data_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Size of test dataset: &quot;</span><span class="p">,</span><span class="n">data_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="c1">#printing last rows of train dataset</span>
+
+<span class="n">data_train</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+<span class="c1">#printing head rows of test dataset</span>
+
+<span class="n">data_test</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Size of train dataset:  (25000, 2)
+Size of test dataset:  (25000, 2)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Reviews</th>
+      <th>Sentiment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Who would have thought that a movie about a ma...</td>
+      <td>pos</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>After realizing what is going on around us ......</td>
+      <td>pos</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>I grew up watching the original Disney Cindere...</td>
+      <td>neg</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>David Mamet wrote the screenplay and made his ...</td>
+      <td>pos</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Admittedly, I didn't have high expectations of...</td>
+      <td>neg</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="train-test-split">
+<h2>Train-Test Split<a class="headerlink" href="#train-test-split" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># text.texts_from_df return two tuples</span>
+<span class="c1"># maxlen means it is considering that much words and rest are getting trucated</span>
+<span class="c1"># preprocess_mode means tokenizing, embedding and transformation of text corpus(here it is considering BERT model)</span>
+
+
+<span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">),</span> <span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">),</span> <span class="n">preproc</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">texts_from_df</span><span class="p">(</span><span class="n">train_df</span><span class="o">=</span><span class="n">data_train</span><span class="p">,</span>
+                                                                   <span class="n">text_column</span> <span class="o">=</span> <span class="s1">&#39;Reviews&#39;</span><span class="p">,</span>
+                                                                   <span class="n">label_columns</span> <span class="o">=</span> <span class="s1">&#39;Sentiment&#39;</span><span class="p">,</span>
+                                                                   <span class="n">val_df</span> <span class="o">=</span> <span class="n">data_test</span><span class="p">,</span>
+                                                                   <span class="n">maxlen</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span>
+                                                                   <span class="n">preprocess_mode</span> <span class="o">=</span> <span class="s1">&#39;bert&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>downloading pretrained BERT model (uncased_L-12_H-768_A-12.zip)...
+[██████████████████████████████████████████████████]
+extracting pretrained BERT model...
+done.
+
+cleanup downloaded zip...
+done.
+
+preprocessing train...
+language: en
+</pre></div>
+</div>
+<div class="output text_html">done.</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Is Multi-Label? False
+preprocessing test...
+language: en
+</pre></div>
+</div>
+<div class="output text_html">done.</div></div>
+</div>
+</div>
+<div class="section" id="define-model">
+<h2>Define Model<a class="headerlink" href="#define-model" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># name = &quot;bert&quot; means, here we are using BERT model.</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">text_classifier</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;bert&#39;</span><span class="p">,</span>
+                             <span class="n">train_data</span> <span class="o">=</span> <span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">),</span>
+                             <span class="n">preproc</span> <span class="o">=</span> <span class="n">preproc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Is Multi-Label? False
+maxlen is 500
+done.
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="define-learner">
+<h2>Define Learner<a class="headerlink" href="#define-learner" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#here we have taken batch size as 6 as from the documentation it is recommend to use this with maxlen as 500</span>
+
+<span class="n">learner</span> <span class="o">=</span> <span class="n">ktrain</span><span class="o">.</span><span class="n">get_learner</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">train_data</span><span class="o">=</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">),</span>
+                   <span class="n">val_data</span> <span class="o">=</span> <span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">),</span>
+                   <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="fit-model">
+<h2>Fit Model<a class="headerlink" href="#fit-model" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Essentially fit is a very basic training loop, whereas fit one cycle uses the one cycle policy callback</span>
+
+<span class="n">learner</span><span class="o">.</span><span class="n">fit_onecycle</span><span class="p">(</span><span class="n">lr</span> <span class="o">=</span> <span class="mf">2e-5</span><span class="p">,</span> <span class="n">epochs</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>begin training using onecycle policy with max lr of 2e-05...
+4167/4167 [==============================] - 5332s 1s/step - loss: 0.2583 - accuracy: 0.8910 - val_loss: 0.1086 - val_accuracy: 0.9654
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tensorflow.python.keras.callbacks.History at 0x7f159cbab668&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="save-model">
+<h2>Save Model<a class="headerlink" href="#save-model" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">predictor</span> <span class="o">=</span> <span class="n">ktrain</span><span class="o">.</span><span class="n">get_predictor</span><span class="p">(</span><span class="n">learner</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="n">preproc</span><span class="p">)</span>
+<span class="n">predictor</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;/content/drive/My Drive/ColabData/bert&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-11-a205088a6581&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">predictor</span> <span class="o">=</span> <span class="n">ktrain</span><span class="o">.</span><span class="n">get_predictor</span><span class="p">(</span><span class="n">learner</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="n">preproc</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">predictor</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;/content/drive/My Drive/ColabData/bert&#39;</span><span class="p">)</span>
+
+<span class="nn">/usr/local/lib/python3.6/dist-packages/ktrain/predictor.py</span> in <span class="ni">save</span><span class="nt">(self, fpath)</span>
+<span class="g g-Whitespace">     </span><span class="mi">54</span>         <span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">55</span><span class="sd">         self._make_predictor_folder(fpath)</span>
+<span class="ne">---&gt; </span><span class="mi">56</span><span class="sd">         self._save_model(fpath)</span>
+<span class="g g-Whitespace">     </span><span class="mi">57</span><span class="sd">         self._save_preproc(fpath)</span>
+<span class="g g-Whitespace">     </span><span class="mi">58</span><span class="sd">         return</span>
+
+<span class="nn">/usr/local/lib/python3.6/dist-packages/ktrain/text/predictor.py</span> in <span class="ni">_save_model</span><span class="nt">(self, fpath)</span>
+<span class="g g-Whitespace">    </span><span class="mi">165</span><span class="sd">             self.model.save_pretrained(fpath)</span>
+<span class="g g-Whitespace">    </span><span class="mi">166</span><span class="sd">         else:</span>
+<span class="ne">--&gt; </span><span class="mi">167</span><span class="sd">             super()._save_model(fpath)</span>
+<span class="g g-Whitespace">    </span><span class="mi">168</span><span class="sd">         return</span>
+<span class="g g-Whitespace">    </span><span class="mi">169</span><span class="sd"> </span>
+
+<span class="nn">/usr/local/lib/python3.6/dist-packages/ktrain/predictor.py</span> in <span class="ni">_save_model</span><span class="nt">(self, fpath)</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span><span class="sd">             self.model.compile(loss=crf_loss, optimizer=U.DEFAULT_OPT)</span>
+<span class="g g-Whitespace">     </span><span class="mi">41</span><span class="sd">         model_path = os.path.join(fpath, U.MODEL_NAME)</span>
+<span class="ne">---&gt; </span><span class="mi">42</span><span class="sd">         self.model.save(model_path, save_format=&#39;h5&#39;)</span>
+<span class="g g-Whitespace">     </span><span class="mi">43</span><span class="sd">         return</span>
+<span class="g g-Whitespace">     </span><span class="mi">44</span><span class="sd"> </span>
+
+<span class="nn">/usr/local/lib/python3.6/dist-packages/tensorflow/python/keras/engine/training.py</span> in <span class="ni">save</span><span class="nt">(self, filepath, overwrite, include_optimizer, save_format, signatures, options)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1977</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1978</span>     <span class="n">save</span><span class="o">.</span><span class="n">save_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">,</span> <span class="n">overwrite</span><span class="p">,</span> <span class="n">include_optimizer</span><span class="p">,</span> <span class="n">save_format</span><span class="p">,</span>
+<span class="ne">-&gt; </span><span class="mi">1979</span>                     <span class="n">signatures</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1980</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1981</span>   <span class="k">def</span> <span class="nf">save_weights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+
+<span class="nn">/usr/local/lib/python3.6/dist-packages/tensorflow/python/keras/saving/save.py</span> in <span class="ni">save_model</span><span class="nt">(model, filepath, overwrite, include_optimizer, save_format, signatures, options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">129</span>           <span class="s1">&#39;or using `save_weights`.&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">130</span>     <span class="n">hdf5_format</span><span class="o">.</span><span class="n">save_model_to_hdf5</span><span class="p">(</span>
+<span class="ne">--&gt; </span><span class="mi">131</span>         <span class="n">model</span><span class="p">,</span> <span class="n">filepath</span><span class="p">,</span> <span class="n">overwrite</span><span class="p">,</span> <span class="n">include_optimizer</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">132</span>   <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">133</span>     <span class="n">saved_model_save</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">filepath</span><span class="p">,</span> <span class="n">overwrite</span><span class="p">,</span> <span class="n">include_optimizer</span><span class="p">,</span>
+
+<span class="nn">/usr/local/lib/python3.6/dist-packages/tensorflow/python/keras/saving/hdf5_format.py</span> in <span class="ni">save_model_to_hdf5</span><span class="nt">(model, filepath, overwrite, include_optimizer)</span>
+<span class="g g-Whitespace">    </span><span class="mi">100</span>         <span class="k">return</span>
+<span class="g g-Whitespace">    </span><span class="mi">101</span> 
+<span class="ne">--&gt; </span><span class="mi">102</span>     <span class="n">f</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">103</span>     <span class="n">opened_new_file</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="g g-Whitespace">    </span><span class="mi">104</span>   <span class="k">else</span><span class="p">:</span>
+
+<span class="nn">/usr/local/lib/python3.6/dist-packages/h5py/_hl/files.py</span> in <span class="ni">__init__</span><span class="nt">(self, name, mode, driver, libver, userblock_size, swmr, rdcc_nslots, rdcc_nbytes, rdcc_w0, track_order, **kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">406</span>                 <span class="n">fid</span> <span class="o">=</span> <span class="n">make_fid</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">userblock_size</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">407</span>                                <span class="n">fapl</span><span class="p">,</span> <span class="n">fcpl</span><span class="o">=</span><span class="n">make_fcpl</span><span class="p">(</span><span class="n">track_order</span><span class="o">=</span><span class="n">track_order</span><span class="p">),</span>
+<span class="ne">--&gt; </span><span class="mi">408</span>                                <span class="n">swmr</span><span class="o">=</span><span class="n">swmr</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">409</span> 
+<span class="g g-Whitespace">    </span><span class="mi">410</span>             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">libver</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+
+<span class="nn">/usr/local/lib/python3.6/dist-packages/h5py/_hl/files.py</span> in <span class="ni">make_fid</span><span class="nt">(name, mode, userblock_size, fapl, fcpl, swmr)</span>
+<span class="g g-Whitespace">    </span><span class="mi">177</span>         <span class="n">fid</span> <span class="o">=</span> <span class="n">h5f</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">h5f</span><span class="o">.</span><span class="n">ACC_EXCL</span><span class="p">,</span> <span class="n">fapl</span><span class="o">=</span><span class="n">fapl</span><span class="p">,</span> <span class="n">fcpl</span><span class="o">=</span><span class="n">fcpl</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">178</span>     <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;w&#39;</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">179</span>         <span class="n">fid</span> <span class="o">=</span> <span class="n">h5f</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">h5f</span><span class="o">.</span><span class="n">ACC_TRUNC</span><span class="p">,</span> <span class="n">fapl</span><span class="o">=</span><span class="n">fapl</span><span class="p">,</span> <span class="n">fcpl</span><span class="o">=</span><span class="n">fcpl</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">180</span>     <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;a&#39;</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">181</span>         <span class="c1"># Open in append mode (read/write).</span>
+
+<span class="nn">h5py/_objects.pyx</span> in <span class="ni">h5py._objects.with_phil.wrapper</span><span class="nt">()</span>
+
+<span class="nn">h5py/_objects.pyx</span> in <span class="ni">h5py._objects.with_phil.wrapper</span><span class="nt">()</span>
+
+<span class="nn">h5py/h5f.pyx</span> in <span class="ni">h5py.h5f.create</span><span class="nt">()</span>
+
+<span class="nn">h5py/h5g.pyx</span> in <span class="ni">h5py.h5g.GroupID.__init__</span><span class="nt">()</span>
+
+<span class="nn">h5py/h5g.pyx</span> in <span class="ni">h5py.h5g.GroupID.__init__</span><span class="nt">()</span>
+
+<span class="nn">/usr/lib/python3.6/importlib/_bootstrap.py</span> in <span class="ni">parent</span><span class="nt">(self)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="prediction">
+<h2>Prediction<a class="headerlink" href="#prediction" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#sample dataset to test on</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;this movie was horrible, the plot was really boring. acting was okay&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;the fild is really sucked. there is not plot and acting was bad&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;what a beautiful movie. great plot. acting was good. will see it again&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">predictor</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;neg&#39;, &#39;neg&#39;, &#39;pos&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#return_proba = True means it will give the prediction probabilty for each class</span>
+
+<span class="n">predictor</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">return_proba</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.9971378 , 0.00286228],
+       [0.9964477 , 0.00355225],
+       [0.00146626, 0.9985337 ]], dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#classes available</span>
+
+<span class="n">predictor</span><span class="o">.</span><span class="n">get_classes</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;neg&#39;, &#39;pos&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># !zip -r /content/bert.zip /content/bert</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="deploy-model">
+<h2>Deploy Model<a class="headerlink" href="#deploy-model" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># #loading the model</span>
+
+<span class="n">predictor_load</span> <span class="o">=</span> <span class="n">ktrain</span><span class="o">.</span><span class="n">load_predictor</span><span class="p">(</span><span class="s1">&#39;/content/drive/My Drive/ColabData/bert&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Call to keras.models.load_model failed.  Try using the learner.model.save_weights and learner.model.load_weights instead.
+Error was: SavedModel file does not exist at: /content/drive/My Drive/ColabData/bert/{saved_model.pbtxt|saved_model.pb}
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-13-86c7fa72649e&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># #loading the model</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> 
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">predictor_load</span> <span class="o">=</span> <span class="n">ktrain</span><span class="o">.</span><span class="n">load_predictor</span><span class="p">(</span><span class="s1">&#39;/content/drive/My Drive/ColabData/bert&#39;</span><span class="p">)</span>
+
+<span class="nn">/usr/local/lib/python3.6/dist-packages/ktrain/core.py</span> in <span class="ni">load_predictor</span><span class="nt">(fpath, batch_size)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1498</span>     <span class="c1"># return the appropriate predictor</span>
+<span class="g g-Whitespace">   </span><span class="mi">1499</span>     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">Model</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1500</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;model must be of instance Model&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1501</span>     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">preproc</span><span class="p">,</span> <span class="p">(</span><span class="n">ImagePreprocessor</span><span class="p">,</span> <span class="n">TextPreprocessor</span><span class="p">,</span> <span class="n">NERPreprocessor</span><span class="p">,</span> <span class="n">NodePreprocessor</span><span class="p">,</span> <span class="n">LinkPreprocessor</span><span class="p">,</span> <span class="n">TabularPreprocessor</span><span class="p">)):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1502</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;preproc must be instance of ktrain.preprocessor.Preprocessor&#39;</span><span class="p">)</span>
+
+<span class="ne">ValueError</span>: model must be of instance Model
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># #predicting the data</span>
+
+<span class="c1"># predictor_load.predict(data)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/amaiya/ktrain"><code class="docutils literal notranslate"><span class="pre">ktrain</span></code> module</a></p></li>
+<li><p><a class="reference external" href="https://kgptalkie.com/sentiment-classification-using-bert/">Sentiment Classification Using Bert</a></p></li>
+<li><p><a class="reference external" href="http://www.ipshop.xyz/15376.html">當Bert遇上Keras：這可能是Bert最簡單的打開姿勢</a></p></li>
+<li><p><a class="reference external" href="https://leemeng.tw/attack_on_bert_transfer_learning_in_nlp.html">進擊的 BERT：NLP 界的巨人之力與遷移學習</a></p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./nlp"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alvin Chen<br/>
+        
+            &copy; Copyright 2020 Alvin Chen.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

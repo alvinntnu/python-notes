@@ -1,0 +1,1661 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Corpus Lingustics Methods &#8212; Python Notes for Linguistics</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tokenization" href="tokenization.html" />
+    <link rel="prev" title="Web Crawler" href="web-crawler.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/ntnu03.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Python Notes for Linguistics</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python-basics/python-basics.html">
+   Python Basics
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="corpus-processing.html">
+   Corpus Linguistics with Python
+  </a>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="nltk.html">
+     Natural Language Tool-Kits (NLTK)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="web-crawler.html">
+     Web Crawler
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Corpus Lingustics Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tokenization.html">
+     Tokenization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="word-cloud.html">
+     Word Cloud
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="patterns-constructions.html">
+     Patterns and Constructions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="bnc.html">
+     BNC-XML
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="childes.html">
+     CHILDES Corpus
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="praat-textgrid.html">
+     Praat TextGrid Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="vectorizing-text.html">
+     Vectorizing Texts
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="jieba.html">
+     Chinese Word Segmentation (jieba)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ckiptagger.html">
+     Chinese Word Segmentation (ckiptagger)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../statistical-analyses/statistical-analyses.html">
+   Statistical Analyses
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../nlp/nlp.html">
+   Natural Language Processing with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <div style="text-align:left">
+    <a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
+</div>
+
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/corpus/corpus-linguistics-methods.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/alvinntnu/python-notes/master?urlpath=tree/corpus/corpus-linguistics-methods.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/corpus/corpus-linguistics-methods.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#preparing-corpus-data">
+   Preparing Corpus Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#collocations">
+   Collocations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#delta-p">
+   Delta P
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#concordance">
+   Concordance
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#frequency-list">
+   Frequency List
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conditional-frequency-list">
+   Conditional Frequency List
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="corpus-lingustics-methods">
+<h1>Corpus Lingustics Methods<a class="headerlink" href="#corpus-lingustics-methods" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>With <code class="docutils literal notranslate"><span class="pre">nltk</span></code>, we can easily implement quite a few corpus-linguistic methods</p>
+<ul>
+<li><p>Concordance Analysis (Simple Words)</p></li>
+<li><p>Frequency Lists</p></li>
+<li><p>Collocations</p></li>
+<li><p>Data Analysis with R</p></li>
+<li><p>Concordance Analysis (Patterns, Constructions?)</p>
+<ul>
+<li><p>Patterns on sentence strings</p></li>
+<li><p>Patterns on sentence word-tag strings</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="section" id="preparing-corpus-data">
+<h2>Preparing Corpus Data<a class="headerlink" href="#preparing-corpus-data" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">brown</span>
+<span class="kn">from</span> <span class="nn">nltk.text</span> <span class="kn">import</span> <span class="n">Text</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">brown_text</span> <span class="o">=</span> <span class="n">Text</span><span class="p">(</span><span class="n">brown</span><span class="o">.</span><span class="n">words</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="collocations">
+<h2>Collocations<a class="headerlink" href="#collocations" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Documentation <a class="reference external" href="https://www.nltk.org/howto/collocations.html">nltk.collocations</a></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Collocations based on Text</span>
+<span class="n">brown_text</span><span class="o">.</span><span class="n">collocation_list</span><span class="p">()[:</span><span class="mi">10</span><span class="p">]</span>
+<span class="c1">#brown_text.collocations()</span>
+
+<span class="kn">from</span> <span class="nn">nltk.collocations</span> <span class="kn">import</span> <span class="n">BigramAssocMeasures</span><span class="p">,</span> <span class="n">BigramCollocationFinder</span>
+
+<span class="n">bigram_measures</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">collocations</span><span class="o">.</span><span class="n">BigramAssocMeasures</span><span class="p">()</span>
+<span class="n">finder</span> <span class="o">=</span> <span class="n">BigramCollocationFinder</span><span class="o">.</span><span class="n">from_words</span><span class="p">(</span><span class="n">brown</span><span class="o">.</span><span class="n">words</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## bigram collocations based on different association measures</span>
+<span class="n">finder</span><span class="o">.</span><span class="n">nbest</span><span class="p">(</span><span class="n">bigram_measures</span><span class="o">.</span><span class="n">likelihood_ratio</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">finder</span><span class="o">.</span><span class="n">nbest</span><span class="p">(</span><span class="n">bigram_measures</span><span class="o">.</span><span class="n">pmi</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;$10,000-per-year&#39;, &#39;French-born&#39;),
+ (&#39;$79.89&#39;, &#39;nothing-down&#39;),
+ (&#39;$8.50&#39;, &#39;tab&#39;),
+ (&quot;&#39;low&quot;, &#39;nigras&#39;),
+ (&#39;0.5-mv./m.&#39;, &#39;50-percent&#39;),
+ (&#39;0.78&#39;, &#39;mEq&#39;),
+ (&#39;1,100&#39;, &#39;circumscriptions&#39;),
+ (&#39;1,257,700&#39;, &#39;non-farm&#39;),
+ (&#39;11-inch&#39;, &#39;headroom&#39;),
+ (&#39;11-shot&#39;, &#39;hammerless&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Apply freq-based filers for bigram collocations</span>
+<span class="n">finder</span><span class="o">.</span><span class="n">apply_freq_filter</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1">## Apply word filer</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
+<span class="n">stop_words_en</span> <span class="o">=</span> <span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">)</span>
+<span class="n">finder</span><span class="o">.</span><span class="n">apply_word_filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">isalpha</span><span class="p">())</span>
+
+<span class="n">finder</span><span class="o">.</span><span class="n">nbest</span><span class="p">(</span><span class="n">bigram_measures</span><span class="o">.</span><span class="n">likelihood_ratio</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">finder</span><span class="o">.</span><span class="n">nbest</span><span class="p">(</span><span class="n">bigram_measures</span><span class="o">.</span><span class="n">pmi</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;Hong&#39;, &#39;Kong&#39;),
+ (&#39;Viet&#39;, &#39;Nam&#39;),
+ (&#39;Pathet&#39;, &#39;Lao&#39;),
+ (&#39;Simms&#39;, &#39;Purdew&#39;),
+ (&#39;El&#39;, &#39;Paso&#39;),
+ (&#39;Lo&#39;, &#39;Shu&#39;),
+ (&#39;Internal&#39;, &#39;Revenue&#39;),
+ (&#39;Puerto&#39;, &#39;Rico&#39;),
+ (&#39;Saxon&#39;, &#39;Shore&#39;),
+ (&#39;carbon&#39;, &#39;tetrachloride&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Create collocations based on tagged words</span>
+<span class="n">finder</span> <span class="o">=</span> <span class="n">BigramCollocationFinder</span><span class="o">.</span><span class="n">from_words</span><span class="p">(</span>
+    <span class="n">brown</span><span class="o">.</span><span class="n">tagged_words</span><span class="p">())</span>
+<span class="n">finder</span><span class="o">.</span><span class="n">apply_word_filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="ow">not</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">isalpha</span><span class="p">())</span>
+<span class="n">finder</span><span class="o">.</span><span class="n">nbest</span><span class="p">(</span><span class="n">bigram_measures</span><span class="o">.</span><span class="n">pmi</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[((&#39;A&#39;, &#39;AT-NC&#39;), (&#39;charge&#39;, &#39;NN-NC&#39;)),
+ ((&#39;A&#39;, &#39;FW-IN&#39;), (&#39;quibusdam&#39;, &#39;FW-WPO&#39;)),
+ ((&#39;ACTH&#39;, &#39;NP&#39;), (&#39;Gel&#39;, &#39;NN-TL&#39;)),
+ ((&#39;Abner&#39;, &#39;NP&#39;), (&#39;Haynes&#39;, &#39;NP&#39;)),
+ ((&#39;Ace&#39;, &#39;NN-TL&#39;), (&#39;Driver&#39;, &#39;NN-TL&#39;)),
+ ((&#39;Acoustical&#39;, &#39;JJ-HL&#39;), (&#39;interferometer&#39;, &#39;NN-HL&#39;)),
+ ((&#39;Actively&#39;, &#39;RB-HL&#39;), (&#39;modernizing&#39;, &#39;VBG-HL&#39;)),
+ ((&#39;Ad&#39;, &#39;FW-IN-TL&#39;), (&#39;Amicam&#39;, &#39;FW-NN-TL&#39;)),
+ ((&#39;Adjusted&#39;, &#39;VBN-HL&#39;), (&#39;gross&#39;, &#39;JJ-HL&#39;)),
+ ((&#39;Aerobacter&#39;, &#39;NP&#39;), (&#39;aerogenes&#39;, &#39;NP&#39;))]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Create collcoations based on tags only</span>
+<span class="n">finder</span> <span class="o">=</span> <span class="n">BigramCollocationFinder</span><span class="o">.</span><span class="n">from_words</span><span class="p">(</span>
+    <span class="n">t</span> <span class="k">for</span> <span class="n">w</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">brown</span><span class="o">.</span><span class="n">tagged_words</span><span class="p">(</span><span class="n">tagset</span><span class="o">=</span><span class="s1">&#39;universal&#39;</span><span class="p">))</span>
+<span class="n">finder</span><span class="o">.</span><span class="n">nbest</span><span class="p">(</span><span class="n">bigram_measures</span><span class="o">.</span><span class="n">pmi</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;X&#39;, &#39;X&#39;),
+ (&#39;PRON&#39;, &#39;VERB&#39;),
+ (&#39;PRT&#39;, &#39;VERB&#39;),
+ (&#39;ADP&#39;, &#39;DET&#39;),
+ (&#39;DET&#39;, &#39;ADJ&#39;),
+ (&#39;ADJ&#39;, &#39;NOUN&#39;),
+ (&#39;.&#39;, &#39;CONJ&#39;),
+ (&#39;DET&#39;, &#39;NOUN&#39;),
+ (&#39;VERB&#39;, &#39;PRT&#39;),
+ (&#39;.&#39;, &#39;PRON&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Create collocations with intervneing words (gapped n-grams)</span>
+<span class="n">finder</span> <span class="o">=</span> <span class="n">BigramCollocationFinder</span><span class="o">.</span><span class="n">from_words</span><span class="p">(</span><span class="n">brown</span><span class="o">.</span><span class="n">words</span><span class="p">(),</span> <span class="n">window_size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">finder</span><span class="o">.</span><span class="n">apply_word_filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">isalpha</span><span class="p">())</span>
+<span class="n">finder</span><span class="o">.</span><span class="n">apply_freq_filter</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">finder</span><span class="o">.</span><span class="n">nbest</span><span class="p">(</span><span class="n">bigram_measures</span><span class="o">.</span><span class="n">pmi</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;Hong&#39;, &#39;Kong&#39;),
+ (&#39;Viet&#39;, &#39;Nam&#39;),
+ (&#39;Pathet&#39;, &#39;Lao&#39;),
+ (&#39;Simms&#39;, &#39;Purdew&#39;),
+ (&#39;El&#39;, &#39;Paso&#39;),
+ (&#39;Lo&#39;, &#39;Shu&#39;),
+ (&#39;Internal&#39;, &#39;Revenue&#39;),
+ (&#39;Puerto&#39;, &#39;Rico&#39;),
+ (&#39;Saxon&#39;, &#39;Shore&#39;),
+ (&#39;carbon&#39;, &#39;tetrachloride&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Finders</span>
+<span class="n">scored</span> <span class="o">=</span> <span class="n">finder</span><span class="o">.</span><span class="n">score_ngrams</span><span class="p">(</span><span class="n">bigram_measures</span><span class="o">.</span><span class="n">raw_freq</span><span class="p">)</span>
+<span class="n">scored</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[((&#39;of&#39;, &#39;the&#39;), 0.008288896237659233),
+ ((&#39;in&#39;, &#39;the&#39;), 0.004776126600941102),
+ ((&#39;to&#39;, &#39;the&#39;), 0.002950416468594341),
+ ((&#39;on&#39;, &#39;the&#39;), 0.0019781397047172215),
+ ((&#39;and&#39;, &#39;the&#39;), 0.001839489076741831),
+ ((&#39;for&#39;, &#39;the&#39;), 0.0015148226994329964),
+ ((&#39;to&#39;, &#39;be&#39;), 0.0014614292899021006),
+ ((&#39;at&#39;, &#39;the&#39;), 0.0012969431411859538),
+ ((&#39;with&#39;, &#39;the&#39;), 0.0012676628843464302),
+ ((&#39;of&#39;, &#39;a&#39;), 0.0012581898600748196)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>How to get the document frequency of the bigrams???</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unigram_freq</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">FreqDist</span><span class="p">(</span><span class="n">brown</span><span class="o">.</span><span class="n">words</span><span class="p">())</span>
+<span class="n">bigram_freq</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">FreqDist</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nltk</span><span class="o">.</span><span class="n">bigrams</span><span class="p">(</span><span class="n">brown</span><span class="o">.</span><span class="n">words</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unigram_freq_per_file</span> <span class="o">=</span> <span class="p">[</span><span class="n">nltk</span><span class="o">.</span><span class="n">FreqDist</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> 
+                         <span class="k">for</span> <span class="n">words</span> <span class="ow">in</span> <span class="p">[</span><span class="n">brown</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="n">fileids</span><span class="o">=</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">brown</span><span class="o">.</span><span class="n">fileids</span><span class="p">()]]</span>
+<span class="n">bigram_freq_per_file</span> <span class="o">=</span> <span class="p">[</span><span class="n">nltk</span><span class="o">.</span><span class="n">FreqDist</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nltk</span><span class="o">.</span><span class="n">bigrams</span><span class="p">(</span><span class="n">words</span><span class="p">))</span>
+                         <span class="k">for</span> <span class="n">words</span> <span class="ow">in</span> <span class="p">[</span><span class="n">brown</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="n">fileids</span><span class="o">=</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">brown</span><span class="o">.</span><span class="n">fileids</span><span class="p">()]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Function to get unigram dispersion</span>
+<span class="k">def</span> <span class="nf">createUnigramDipsersionDist</span><span class="p">(</span><span class="n">uni_freq</span><span class="p">,</span> <span class="n">uni_freq_per_file</span><span class="p">):</span>
+    <span class="nb">len</span><span class="p">(</span><span class="n">uni_freq_per_file</span><span class="p">)</span>
+    <span class="n">unigram_dispersion</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">fid</span> <span class="ow">in</span> <span class="n">uni_freq_per_file</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">w</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fid</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">unigram_dispersion</span><span class="p">:</span>
+                <span class="n">unigram_dispersion</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">unigram_dispersion</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">unigram_dispersion</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unigram_dispersion</span> <span class="o">=</span> <span class="n">createUnigramDipsersionDist</span><span class="p">(</span><span class="n">unigram_freq</span><span class="p">,</span> <span class="n">unigram_freq_per_file</span><span class="p">)</span>
+<span class="c1"># Dictionary cannot be sliced/subset</span>
+<span class="c1"># Get the items() and convert to list for subsetting</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">unigram_dispersion</span><span class="o">.</span><span class="n">items</span><span class="p">())[:</span><span class="mi">20</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;The&#39;, 500),
+ (&#39;Fulton&#39;, 3),
+ (&#39;County&#39;, 45),
+ (&#39;Grand&#39;, 17),
+ (&#39;Jury&#39;, 4),
+ (&#39;said&#39;, 314),
+ (&#39;Friday&#39;, 34),
+ (&#39;an&#39;, 498),
+ (&#39;investigation&#39;, 34),
+ (&#39;of&#39;, 500),
+ (&quot;Atlanta&#39;s&quot;, 2),
+ (&#39;recent&#39;, 114),
+ (&#39;primary&#39;, 59),
+ (&#39;election&#39;, 28),
+ (&#39;produced&#39;, 66),
+ (&#39;``&#39;, 462),
+ (&#39;no&#39;, 455),
+ (&#39;evidence&#39;, 119),
+ (&quot;&#39;&#39;&quot;, 463),
+ (&#39;that&#39;, 500)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#dict(sorted(bigram_freq.items()[:3]))</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">bigram_freq</span><span class="o">.</span><span class="n">items</span><span class="p">())[:</span><span class="mi">20</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;The_Fulton&#39;, 1),
+ (&#39;Fulton_County&#39;, 6),
+ (&#39;County_Grand&#39;, 1),
+ (&#39;Grand_Jury&#39;, 2),
+ (&#39;Jury_said&#39;, 1),
+ (&#39;said_Friday&#39;, 4),
+ (&#39;Friday_an&#39;, 1),
+ (&#39;an_investigation&#39;, 7),
+ (&#39;investigation_of&#39;, 15),
+ (&quot;of_Atlanta&#39;s&quot;, 1),
+ (&quot;Atlanta&#39;s_recent&quot;, 1),
+ (&#39;recent_primary&#39;, 1),
+ (&#39;primary_election&#39;, 2),
+ (&#39;election_produced&#39;, 1),
+ (&#39;produced_``&#39;, 1),
+ (&#39;``_no&#39;, 6),
+ (&#39;no_evidence&#39;, 14),
+ (&quot;evidence_&#39;&#39;&quot;, 3),
+ (&quot;&#39;&#39;_that&quot;, 16),
+ (&#39;that_any&#39;, 31)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bigram_dispersion</span> <span class="o">=</span> <span class="n">createUnigramDipsersionDist</span><span class="p">(</span><span class="n">bigram_freq</span><span class="p">,</span> <span class="n">bigram_freq_per_file</span><span class="p">)</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">bigram_dispersion</span><span class="o">.</span><span class="n">items</span><span class="p">())[:</span><span class="mi">20</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;The_Fulton&#39;, 1),
+ (&#39;Fulton_County&#39;, 1),
+ (&#39;County_Grand&#39;, 1),
+ (&#39;Grand_Jury&#39;, 2),
+ (&#39;Jury_said&#39;, 1),
+ (&#39;said_Friday&#39;, 3),
+ (&#39;Friday_an&#39;, 1),
+ (&#39;an_investigation&#39;, 7),
+ (&#39;investigation_of&#39;, 14),
+ (&quot;of_Atlanta&#39;s&quot;, 1),
+ (&quot;Atlanta&#39;s_recent&quot;, 1),
+ (&#39;recent_primary&#39;, 1),
+ (&#39;primary_election&#39;, 2),
+ (&#39;election_produced&#39;, 1),
+ (&#39;produced_``&#39;, 1),
+ (&#39;``_no&#39;, 6),
+ (&#39;no_evidence&#39;, 12),
+ (&quot;evidence_&#39;&#39;&quot;, 3),
+ (&quot;&#39;&#39;_that&quot;, 16),
+ (&#39;that_any&#39;, 30)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">unigram_freq</span><span class="p">)</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">unigram_dispersion</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="delta-p">
+<h2>Delta P<a class="headerlink" href="#delta-p" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Inherit BigramAssocMeasures</span>
+<span class="k">class</span> <span class="nc">AugmentedBigramAssocMeasures</span><span class="p">(</span><span class="n">BigramAssocMeasures</span><span class="p">):</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">dp_fwd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">marginals</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Scores bigrams using DP forward</span>
+<span class="sd">        This may be shown with respect to a contingency table::</span>
+
+<span class="sd">                w1    ~w1</span>
+<span class="sd">             ------ ------</span>
+<span class="sd">         w2 | n_ii | n_oi | = n_xi</span>
+<span class="sd">             ------ ------</span>
+<span class="sd">        ~w2 | n_io | n_oo |</span>
+<span class="sd">             ------ ------</span>
+<span class="sd">             = n_ix        TOTAL = n_xx</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">n_ii</span><span class="p">,</span> <span class="n">n_io</span><span class="p">,</span> <span class="n">n_oi</span><span class="p">,</span> <span class="n">n_oo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contingency</span><span class="p">(</span><span class="o">*</span><span class="n">marginals</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">n_ii</span><span class="o">/</span><span class="p">(</span><span class="n">n_ii</span><span class="o">+</span><span class="n">n_io</span><span class="p">))</span> <span class="o">-</span> <span class="p">(</span><span class="n">n_oi</span><span class="o">/</span><span class="p">(</span><span class="n">n_oi</span><span class="o">+</span><span class="n">n_oo</span><span class="p">))</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">dp_bwd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">marginals</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Scores bigrams using DP backward</span>
+<span class="sd">        This may be shown with respect to a contingency table::</span>
+
+<span class="sd">                w1    ~w1</span>
+<span class="sd">             ------ ------</span>
+<span class="sd">         w2 | n_ii | n_oi | = n_xi</span>
+<span class="sd">             ------ ------</span>
+<span class="sd">        ~w2 | n_io | n_oo |</span>
+<span class="sd">             ------ ------</span>
+<span class="sd">             = n_ix        TOTAL = n_xx</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">n_ii</span><span class="p">,</span> <span class="n">n_io</span><span class="p">,</span> <span class="n">n_oi</span><span class="p">,</span> <span class="n">n_oo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contingency</span><span class="p">(</span><span class="o">*</span><span class="n">marginals</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">n_ii</span><span class="o">/</span><span class="p">(</span><span class="n">n_ii</span><span class="o">+</span><span class="n">n_oi</span><span class="p">))</span> <span class="o">-</span> <span class="p">(</span><span class="n">n_io</span><span class="o">/</span><span class="p">(</span><span class="n">n_io</span><span class="o">+</span><span class="n">n_oo</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bigram_measures</span> <span class="o">=</span> <span class="n">AugmentedBigramAssocMeasures</span><span class="p">()</span>
+<span class="n">finder</span> <span class="o">=</span> <span class="n">BigramCollocationFinder</span><span class="o">.</span><span class="n">from_words</span><span class="p">(</span><span class="n">brown</span><span class="o">.</span><span class="n">words</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">finder</span><span class="o">.</span><span class="n">apply_freq_filter</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bigrams_dpfwd</span> <span class="o">=</span> <span class="n">finder</span><span class="o">.</span><span class="n">score_ngrams</span><span class="p">(</span><span class="n">bigram_measures</span><span class="o">.</span><span class="n">dp_fwd</span><span class="p">)</span>
+<span class="n">bigrams_dpfwd</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[((&#39;Hong&#39;, &#39;Kong&#39;), 1.0),
+ ((&#39;Lo&#39;, &#39;Shu&#39;), 1.0),
+ ((&#39;Viet&#39;, &#39;Nam&#39;), 0.9999974164190018),
+ ((&#39;Puerto&#39;, &#39;Rico&#39;), 0.9999974164012019),
+ ((&#39;Los&#39;, &#39;Angeles&#39;), 0.9999965551244676),
+ ((&#39;Simms&#39;, &#39;Purdew&#39;), 0.9999956940353778),
+ ((&#39;El&#39;, &#39;Paso&#39;), 0.9999913880855886),
+ ((&#39;Blue&#39;, &#39;Throat&#39;), 0.9999698582736025),
+ ((&#39;Du&#39;, &quot;Pont&#39;s&quot;), 0.999955217852231),
+ ((&#39;sweet&#39;, &#39;clover&#39;), 0.9999552178136648)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bigrams_dpbwd</span> <span class="o">=</span> <span class="n">finder</span><span class="o">.</span><span class="n">score_ngrams</span><span class="p">(</span><span class="n">bigram_measures</span><span class="o">.</span><span class="n">dp_bwd</span><span class="p">)</span>
+<span class="n">bigrams_dpbwd</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[((&#39;Hong&#39;, &#39;Kong&#39;), 1.0),
+ ((&#39;Lo&#39;, &#39;Shu&#39;), 1.0),
+ ((&#39;Pathet&#39;, &#39;Lao&#39;), 0.9999939716599121),
+ ((&#39;Export-Import&#39;, &#39;Bank&#39;), 0.9999870820838838),
+ ((&quot;Drug&#39;s&quot;, &#39;chemical&#39;), 0.999963829803725),
+ ((&#39;text-form&#39;, &#39;list&#39;), 0.9998966570270638),
+ ((&#39;Inquirer&#39;, &#39;:&#39;), 0.9984653528870225),
+ ((&#39;AP&#39;, &#39;)&#39;), 0.9978883513122019),
+ ((&#39;accordance&#39;, &#39;with&#39;), 0.9939784975869208),
+ ((&#39;compatible&#39;, &#39;with&#39;), 0.9939750735461291)]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="concordance">
+<h2>Concordance<a class="headerlink" href="#concordance" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Simple Concordances</span>
+<span class="n">brown_text</span><span class="o">.</span><span class="n">concordance</span><span class="p">(</span><span class="s1">&#39;American&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">79</span><span class="p">,</span> <span class="n">lines</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Displaying 5 of 569 matches:
+will deliver tomorrow night to the American people over nationwide television 
+ocial security taxes on 70 million American workers would be raised to pay the
+o retired as vice president of the American Screw Co. in 1955 said , `` Both p
+wice elected overwhelmingly by the American people as president of the United 
+n example : Last month in Ghana an American missionary discovered when he came
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#nltk.app.concordance()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Regular Expression Concordances</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="n">sents</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">brown</span><span class="o">.</span><span class="n">sents</span><span class="p">()]</span>
+<span class="n">regex_1</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;(is|was) \w+ing&#39;</span>
+<span class="n">targets</span> <span class="o">=</span> <span class="p">[</span><span class="n">sent</span> <span class="k">for</span> <span class="n">sent</span> <span class="ow">in</span> <span class="n">sents</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span> <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">regex_1</span><span class="p">,</span> <span class="n">sent</span><span class="p">)]</span>
+<span class="n">targets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1">#if targets:</span>
+<span class="c1">#    for match in targets:</span>
+<span class="c1">#        print(match.strip())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;The City Purchasing Department , the jury said , `` is lacking in experienced clerical personnel as a result of city personnel policies &#39;&#39; .&quot;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="frequency-list">
+<h2>Frequency List<a class="headerlink" href="#frequency-list" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## word frequencies</span>
+<span class="n">brown_fd_words</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">FreqDist</span><span class="p">(</span><span class="n">brown</span><span class="o">.</span><span class="n">words</span><span class="p">())</span>
+<span class="n">brown_fd_words</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;the&#39;, 62713),
+ (&#39;,&#39;, 58334),
+ (&#39;.&#39;, 49346),
+ (&#39;of&#39;, 36080),
+ (&#39;and&#39;, 27915),
+ (&#39;to&#39;, 25732),
+ (&#39;a&#39;, 21881),
+ (&#39;in&#39;, 19536),
+ (&#39;that&#39;, 10237),
+ (&#39;is&#39;, 10011)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## nouns freq</span>
+<span class="n">brown_fd_nouns</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">FreqDist</span><span class="p">([</span><span class="n">w</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">w</span><span class="p">,</span><span class="n">t</span> <span class="ow">in</span> <span class="n">brown</span><span class="o">.</span><span class="n">tagged_words</span><span class="p">()</span> 
+                                 <span class="k">if</span> <span class="nb">any</span> <span class="p">(</span><span class="n">noun_tag</span> <span class="ow">in</span> <span class="n">t</span> <span class="k">for</span> <span class="n">noun_tag</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;NP&#39;</span><span class="p">,</span><span class="s1">&#39;NN&#39;</span><span class="p">])])</span>
+<span class="n">brown_fd_nouns</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">brown_fd_nouns_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">brown_fd_nouns</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;word&#39;</span><span class="p">,</span><span class="s1">&#39;freq&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Sort the data frame:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">brown_fd_nouns_df</span><span class="p">[</span><span class="n">brown_fd_nouns_df</span><span class="p">[</span><span class="s1">&#39;freq&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">100</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s2">&quot;freq&quot;</span><span class="p">,</span><span class="s2">&quot;word&quot;</span><span class="p">],</span><span class="n">ascending</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">,</span><span class="kc">True</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>word</th>
+      <th>freq</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>243</th>
+      <td>time</td>
+      <td>1597</td>
+    </tr>
+    <tr>
+      <th>174</th>
+      <td>man</td>
+      <td>1203</td>
+    </tr>
+    <tr>
+      <th>5114</th>
+      <td>af</td>
+      <td>995</td>
+    </tr>
+    <tr>
+      <th>248</th>
+      <td>years</td>
+      <td>949</td>
+    </tr>
+    <tr>
+      <th>779</th>
+      <td>way</td>
+      <td>899</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1030</th>
+      <td>events</td>
+      <td>101</td>
+    </tr>
+    <tr>
+      <th>204</th>
+      <td>james</td>
+      <td>101</td>
+    </tr>
+    <tr>
+      <th>1723</th>
+      <td>officer</td>
+      <td>101</td>
+    </tr>
+    <tr>
+      <th>272</th>
+      <td>test</td>
+      <td>101</td>
+    </tr>
+    <tr>
+      <th>3644</th>
+      <td>trees</td>
+      <td>101</td>
+    </tr>
+  </tbody>
+</table>
+<p>433 rows × 2 columns</p>
+</div></div></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We can also pass the data frame to R for data exploration.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> rpy2.ipython
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">R</span> -i brown_fd_nouns_df
+
+library(dplyr)
+brown_fd_nouns_df %&gt;%
+filter(freq &gt; 100) %&gt;%
+arrange(desc(freq), word) %&gt;% 
+head(50)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R[write to console]: 
+Attaching package: ‘dplyr’
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R[write to console]: The following objects are masked from ‘package:stats’:
+
+    filter, lag
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R[write to console]: The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        word
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> freq
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>243 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        time
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1597
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>174 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         man
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1203
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5114
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          af
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  995
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>248 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       years
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  949
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>779 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         way
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  899
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>486 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      people
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  845
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1011
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         mr.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  844
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>63  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       state
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  787
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1099
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       world
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  787
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1227
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         men
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  763
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1438
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        life
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  715
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>303 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         day
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  687
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>175 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        year
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  656
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>875 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      states
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  586
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>278 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        work
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  583
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>299 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       house
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  582
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>158 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        mrs.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  534
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>865 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        part
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  496
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9   
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       place
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  496
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>340 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      school
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  489
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      number
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  470
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1801
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      course
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  465
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1173
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         war
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  463
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>101 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        fact
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  447
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>590 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       water
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  444
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1343
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        hand
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  423
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>896 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  government
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  418
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>229 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      system
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  416
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>121 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       night
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  411
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1217
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        head
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  407
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1869
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        eyes
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  401
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>756 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    business
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  393
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        city
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  393
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>72  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     program
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  388
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>525 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       group
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  386
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>371 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        days
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  384
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>819 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        room
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  383
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>656 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   president
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  382
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1001
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        side
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  375
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>39  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         end
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  369
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1246
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       point
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  369
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1254
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      things
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  368
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>212 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        john
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  362
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1061
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         use
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  361
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>701 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        case
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  360
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>354 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       order
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  359
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>459 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    children
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  355
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>356 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      church
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  348
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1108
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       power
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  340
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>595 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> development
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  333
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="conditional-frequency-list">
+<h2>Conditional Frequency List<a class="headerlink" href="#conditional-frequency-list" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Word by POS Frequency Distribution</span>
+
+<span class="n">brown_news_tagged_words</span> <span class="o">=</span> <span class="n">brown</span><span class="o">.</span><span class="n">tagged_words</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="s1">&#39;news&#39;</span><span class="p">,</span> <span class="n">tagset</span><span class="o">=</span><span class="s1">&#39;universal&#39;</span><span class="p">)</span>
+<span class="n">brown_news_cfd</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">ConditionalFreqDist</span><span class="p">(</span><span class="n">brown_news_tagged_words</span><span class="p">)</span>
+<span class="n">brown_news_cfd</span><span class="p">[</span><span class="s1">&#39;yield&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FreqDist({&#39;NOUN&#39;: 5, &#39;VERB&#39;: 1})
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## POS by Word Frequency Distribution</span>
+<span class="n">brown_news_cfd2</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">ConditionalFreqDist</span><span class="p">([(</span><span class="n">t</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="ow">in</span> <span class="n">brown_news_tagged_words</span><span class="p">])</span>
+<span class="n">brown_news_cfd2</span><span class="p">[</span><span class="s1">&#39;VERB&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;is&#39;, 732),
+ (&#39;was&#39;, 717),
+ (&#39;be&#39;, 526),
+ (&#39;said&#39;, 402),
+ (&#39;will&#39;, 388),
+ (&#39;are&#39;, 328),
+ (&#39;has&#39;, 300),
+ (&#39;had&#39;, 279),
+ (&#39;have&#39;, 265),
+ (&#39;were&#39;, 252)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Word by Genre Frequency Distribution</span>
+<span class="n">brown_genre_cfd</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">ConditionalFreqDist</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">genre</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">genre</span> <span class="ow">in</span> <span class="n">brown</span><span class="o">.</span><span class="n">categories</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">brown</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="n">genre</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">brown_genre_cfd</span><span class="o">.</span><span class="n">conditions</span><span class="p">()[:</span><span class="mi">50</span><span class="p">]</span>
+<span class="n">brown_genre_cfd</span><span class="p">[</span><span class="s1">&#39;mysterious&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FreqDist({&#39;belles_lettres&#39;: 6, &#39;fiction&#39;: 4, &#39;lore&#39;: 3, &#39;religion&#39;: 3, &#39;romance&#39;: 3, &#39;learned&#39;: 2, &#39;reviews&#39;: 2, &#39;adventure&#39;: 1, &#39;humor&#39;: 1, &#39;science_fiction&#39;: 1})
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">brown_genre_cfd</span><span class="p">[</span><span class="s1">&#39;mysterious&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span> <span class="c1"># with freq</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;belles_lettres&#39;, 6), (&#39;fiction&#39;, 4), (&#39;lore&#39;, 3), (&#39;religion&#39;, 3), (&#39;romance&#39;, 3), (&#39;learned&#39;, 2), (&#39;reviews&#39;, 2), (&#39;adventure&#39;, 1), (&#39;humor&#39;, 1), (&#39;science_fiction&#39;, 1)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Genre by Word Frequency Distribution</span>
+<span class="n">brown_genre_cdf2</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">ConditionalFreqDist</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">genre</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">genre</span> <span class="ow">in</span> <span class="n">brown</span><span class="o">.</span><span class="n">categories</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">brown</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="n">genre</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Genre by Word Frequency Distribution</span>
+<span class="n">brown_genre_cdf2</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">ConditionalFreqDist</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">genre</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">genre</span> <span class="ow">in</span> <span class="n">brown</span><span class="o">.</span><span class="n">categories</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">brown</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="n">genre</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">top_n_word</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">freq</span><span class="p">)</span> <span class="ow">in</span> <span class="n">brown_fd_words</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="k">if</span> <span class="n">word</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">isalpha</span><span class="p">()]</span>
+
+<span class="n">brown_genre_cdf2</span><span class="o">.</span><span class="n">tabulate</span><span class="p">(</span><span class="n">conditions</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;adventure&#39;</span><span class="p">,</span><span class="s1">&#39;editorial&#39;</span><span class="p">,</span><span class="s1">&#39;fiction&#39;</span><span class="p">],</span>
+                         <span class="n">samples</span><span class="o">=</span><span class="n">top_n_word</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           the   of  and   to    a   in that   is  was  for 
+adventure 3370 1322 1622 1309 1354  847  494   98  914  331 
+editorial 3508 1976 1302 1554 1095 1001  578  744  308  509 
+  fiction 3423 1419 1696 1489 1281  916  530  144 1082  392 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">top_n_word2</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">tag</span><span class="p">)</span> <span class="ow">in</span> <span class="n">brown</span><span class="o">.</span><span class="n">tagged_words</span><span class="p">(</span><span class="n">tagset</span><span class="o">=</span><span class="s1">&#39;universal&#39;</span><span class="p">)</span> 
+               <span class="k">if</span> <span class="n">tag</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;NOUN&#39;</span><span class="p">)]</span>
+<span class="n">top_n_word2_fd</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">FreqDist</span><span class="p">(</span><span class="n">top_n_word2</span><span class="p">)</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">top_n_word2_fd</span><span class="p">)</span>
+<span class="n">brown_genre_cdf2</span><span class="o">.</span><span class="n">tabulate</span><span class="p">(</span><span class="n">conditions</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;adventure&#39;</span><span class="p">,</span><span class="s1">&#39;editorial&#39;</span><span class="p">,</span><span class="s1">&#39;fiction&#39;</span><span class="p">],</span>
+                         <span class="n">samples</span><span class="o">=</span><span class="p">[</span><span class="n">w</span> <span class="k">for</span> <span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span> <span class="ow">in</span> <span class="n">top_n_word2_fd</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;time&#39;, 1555), (&#39;man&#39;, 1148), (&#39;Af&#39;, 994), (&#39;years&#39;, 942), (&#39;way&#39;, 883), (&#39;Mr.&#39;, 844), (&#39;people&#39;, 809), (&#39;men&#39;, 736), (&#39;world&#39;, 684), (&#39;life&#39;, 676)]
+            time    man     Af  years    way    Mr. people    men  world   life 
+adventure    127    165      0     32     65     22     24     81     15     29 
+editorial     72     56      0     63     43    110     75     38     66     35 
+  fiction     99    111      0     44     62     39     39     72     24     44 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python-notes",
+            path: "./corpus"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python-notes'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="web-crawler.html" title="previous page">Web Crawler</a>
+    <a class='right-next' id="next-link" href="tokenization.html" title="next page">Tokenization</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alvin Chen<br/>
+        
+            &copy; Copyright 2020 Alvin Chen.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>
