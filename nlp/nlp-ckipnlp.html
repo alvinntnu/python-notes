@@ -1,0 +1,527 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Natural Language Processing (ckipnlp) &#8212; Python Notes for Linguistics</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Text Normalization (English)" href="text-normalization-eng.html" />
+    <link rel="prev" title="Chinese Natural Language Processing (spaCy)" href="nlp-spacy-zh.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/ntnu03.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Python Notes for Linguistics</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python-basics/python-basics.html">
+   Python Basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../corpus/corpus-processing.html">
+   Corpus Linguistics with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../statistical-analyses/statistical-analyses.html">
+   Statistical Analyses
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="nlp.html">
+   Natural Language Processing with Python
+  </a>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="nlp-spacy.html">
+     Natural Language Processing (spaCy)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="nlp-spacy-zh.html">
+     Chinese Natural Language Processing (spaCy)
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Natural Language Processing (ckipnlp)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="text-normalization-eng.html">
+     Text Normalization (English)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sklearn.html">
+     Machine Learning with Sci-Kit Learn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sentiment-analysis-ml.html">
+     Sentiment Analysis with Traditional Machine Learning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="word-embeddings.html">
+     Word Embeddings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="word2vec-chinese.html">
+     Word Embeddings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="word2vec.html">
+     Word2Vec
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="doc2vec.html">
+     Dov2Vec
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sentiment-analysis-dl.html">
+     Sentiment Analysis with Deep Learning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sentiment-analysis-lstm-v1.html">
+     Sentiment Analysis with LSTM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="seq-to-seq.html">
+     Machine Translation (Sequence-to-Sequence LSTM)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="text-gen-lstm-v1.html">
+     Text Generation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="transfer-learning-sent-encoding.html">
+     Universal Sentence Embeddings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="hyperparameter-tuning.html">
+     Hyper-Parameter Tuning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sentiment-analysis-using-bert-chinese.html">
+     Sentiment Analysis Using BERT
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ktrain-tutorial-explaining-predictions.html">
+     Explainable AI
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <div style="text-align:left">
+    <a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
+</div>
+
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/nlp/nlp-ckipnlp.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/alvinntnu/python-notes/master?urlpath=tree/nlp/nlp-ckipnlp.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/nlp/nlp-ckipnlp.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="natural-language-processing-ckipnlp">
+<h1>Natural Language Processing (ckipnlp)<a class="headerlink" href="#natural-language-processing-ckipnlp" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Chinese NLP toolkit developed by Academia Sinica</p></li>
+<li><p>The CPU version works pretty slowly</p></li>
+<li><p>The documentation of <code class="docutils literal notranslate"><span class="pre">ckipnlp</span></code> is limited. Need more time to figure out what is what and how to do what :)</p></li>
+<li><p>Documentation:</p>
+<ul>
+<li><p><a class="reference external" href="https://ckipnlp.readthedocs.io">ckipnlp</a></p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ckipnlp.pipeline</span> <span class="kn">import</span> <span class="n">CkipPipeline</span><span class="p">,</span> <span class="n">CkipDocument</span>
+
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">CkipPipeline</span><span class="p">()</span>
+<span class="n">doc</span> <span class="o">=</span> <span class="n">CkipDocument</span><span class="p">(</span><span class="n">raw</span><span class="o">=</span><span class="s1">&#39;中研院的開發系統，來測試看看，挺酷的！&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Word Segmentation</span>
+<span class="n">pipeline</span><span class="o">.</span><span class="n">get_ws</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">ws</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">doc</span><span class="o">.</span><span class="n">ws</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">to_text</span><span class="p">())</span>
+
+<span class="c1"># Part-of-Speech Tagging</span>
+<span class="n">pipeline</span><span class="o">.</span><span class="n">get_pos</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">doc</span><span class="o">.</span><span class="n">pos</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">to_text</span><span class="p">())</span>
+
+<span class="c1"># Named-Entity Recognition</span>
+<span class="n">pipeline</span><span class="o">.</span><span class="n">get_ner</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">ner</span><span class="p">)</span>
+<span class="c1"># Constituency Parsing</span>
+<span class="c1">#pipeline.get_conparse(doc)</span>
+<span class="c1">#print(doc.conparse)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:526: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_qint8 = np.dtype([(&quot;qint8&quot;, np.int8, 1)])
+/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:527: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_quint8 = np.dtype([(&quot;quint8&quot;, np.uint8, 1)])
+/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:528: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_qint16 = np.dtype([(&quot;qint16&quot;, np.int16, 1)])
+/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:529: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_quint16 = np.dtype([(&quot;quint16&quot;, np.uint16, 1)])
+/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:530: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_qint32 = np.dtype([(&quot;qint32&quot;, np.int32, 1)])
+/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:535: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  np_resource = np.dtype([(&quot;resource&quot;, np.ubyte, 1)])
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[&#39;中研院&#39;, &#39;的&#39;, &#39;開發&#39;, &#39;系統&#39;, &#39;，&#39;, &#39;來&#39;, &#39;測試&#39;, &#39;看看&#39;, &#39;，&#39;, &#39;挺&#39;, &#39;酷&#39;, &#39;的&#39;, &#39;！&#39;]]
+中研院　的　開發　系統　，　來　測試　看看　，　挺　酷　的　！
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ckipnlp.container.util.wspos</span> <span class="kn">import</span> <span class="n">WsPosParagraph</span>
+
+<span class="c1"># Word Segmentation &amp; Part-of-Speech Tagging</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">WsPosParagraph</span><span class="o">.</span><span class="n">to_text</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">ws</span><span class="p">,</span> <span class="n">doc</span><span class="o">.</span><span class="n">pos</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>中研院(Nc)　的(DE)　開發(Nv)　系統(Na)　，(COMMACATEGORY)　來(D)　測試(VC)　看看(Di)　，(COMMACATEGORY)　挺(Dfa)　酷(VH)　的(T)　！(EXCLAMATIONCATEGORY)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ckipnlp.container.util.wspos</span> <span class="kn">import</span> <span class="n">WsPosSentence</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">WsPosParagraph</span><span class="o">.</span><span class="n">to_text</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">ws</span><span class="p">,</span> <span class="n">doc</span><span class="o">.</span><span class="n">pos</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>中研院(Nc)　的(DE)　開發(Nv)　系統(Na)　，(COMMACATEGORY)　來(D)　測試(VC)　看看(Di)　，(COMMACATEGORY)　挺(Dfa)　酷(VH)　的(T)　！(EXCLAMATIONCATEGORY)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">doc2</span> <span class="o">=</span> <span class="n">CkipDocument</span><span class="p">(</span><span class="n">raw</span><span class="o">=</span><span class="s1">&#39;武漢肺炎全球肆虐，至今已有2906萬人確診、92萬染疫身亡，而流亡美國的中國大陸病毒學家閻麗夢，14日時開通了推特帳號，並公布一份長達26頁的科學論文，研究直指武肺病毒與自然人畜共通傳染病的病毒不同，並呼籲追查武漢P4實驗室及美國衛生研究院（NIH）之間的金流，引發討論。&#39;</span><span class="p">)</span>
+<span class="c1"># Word Segmentation &amp; Part-of-Speech Tagging</span>
+
+<span class="c1"># Word Segmentation</span>
+<span class="n">pipeline</span><span class="o">.</span><span class="n">get_ws</span><span class="p">(</span><span class="n">doc2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">doc2</span><span class="o">.</span><span class="n">ws</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">doc2</span><span class="o">.</span><span class="n">ws</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">to_text</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[&#39;武漢&#39;, &#39;肺炎&#39;, &#39;全球&#39;, &#39;肆虐&#39;, &#39;，&#39;, &#39;至今&#39;, &#39;已&#39;, &#39;有&#39;, &#39;2906萬&#39;, &#39;人&#39;, &#39;確診&#39;, &#39;、&#39;, &#39;92萬&#39;, &#39;染疫&#39;, &#39;身亡&#39;, &#39;，&#39;, &#39;而&#39;, &#39;流亡&#39;, &#39;美國&#39;, &#39;的&#39;, &#39;中國&#39;, &#39;大陸&#39;, &#39;病毒學家&#39;, &#39;閻麗夢&#39;, &#39;，&#39;, &#39;14日&#39;, &#39;時&#39;, &#39;開通&#39;, &#39;了&#39;, &#39;推特&#39;, &#39;帳號&#39;, &#39;，&#39;, &#39;並&#39;, &#39;公布&#39;, &#39;一&#39;, &#39;份&#39;, &#39;長達&#39;, &#39;26&#39;, &#39;頁&#39;, &#39;的&#39;, &#39;科學&#39;, &#39;論文&#39;, &#39;，&#39;, &#39;研究&#39;, &#39;直指&#39;, &#39;武肺&#39;, &#39;病毒&#39;, &#39;與&#39;, &#39;自然&#39;, &#39;人畜&#39;, &#39;共通&#39;, &#39;傳染病&#39;, &#39;的&#39;, &#39;病毒&#39;, &#39;不同&#39;, &#39;，&#39;, &#39;並&#39;, &#39;呼籲&#39;, &#39;追查&#39;, &#39;武漢&#39;, &#39;P4&#39;, &#39;實驗室&#39;, &#39;及&#39;, &#39;美國&#39;, &#39;衛生&#39;, &#39;研究院&#39;, &#39;（&#39;, &#39;NIH&#39;, &#39;）&#39;, &#39;之間&#39;, &#39;的&#39;, &#39;金流&#39;, &#39;，&#39;, &#39;引發&#39;, &#39;討論&#39;, &#39;。&#39;]]
+武漢　肺炎　全球　肆虐　，　至今　已　有　2906萬　人　確診　、　92萬　染疫　身亡　，　而　流亡　美國　的　中國　大陸　病毒學家　閻麗夢　，　14日　時　開通　了　推特　帳號　，　並　公布　一　份　長達　26　頁　的　科學　論文　，　研究　直指　武肺　病毒　與　自然　人畜　共通　傳染病　的　病毒　不同　，　並　呼籲　追查　武漢　P4　實驗室　及　美國　衛生　研究院　（　NIH　）　之間　的　金流　，　引發　討論　。
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Part-of-Speech Tagging</span>
+<span class="n">pipeline</span><span class="o">.</span><span class="n">get_pos</span><span class="p">(</span><span class="n">doc2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">doc2</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">doc2</span><span class="o">.</span><span class="n">pos</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">to_text</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[&#39;Nc&#39;, &#39;Na&#39;, &#39;Nc&#39;, &#39;VC&#39;, &#39;COMMACATEGORY&#39;, &#39;D&#39;, &#39;D&#39;, &#39;V_2&#39;, &#39;Neu&#39;, &#39;Na&#39;, &#39;VA&#39;, &#39;PAUSECATEGORY&#39;, &#39;Neu&#39;, &#39;Na&#39;, &#39;VH&#39;, &#39;COMMACATEGORY&#39;, &#39;Cbb&#39;, &#39;VCL&#39;, &#39;Nc&#39;, &#39;DE&#39;, &#39;Nc&#39;, &#39;Nc&#39;, &#39;Na&#39;, &#39;Nb&#39;, &#39;COMMACATEGORY&#39;, &#39;Nd&#39;, &#39;Ng&#39;, &#39;VH&#39;, &#39;Di&#39;, &#39;Na&#39;, &#39;Na&#39;, &#39;COMMACATEGORY&#39;, &#39;Cbb&#39;, &#39;VE&#39;, &#39;Neu&#39;, &#39;Nf&#39;, &#39;VJ&#39;, &#39;Neu&#39;, &#39;Nf&#39;, &#39;DE&#39;, &#39;Na&#39;, &#39;Na&#39;, &#39;COMMACATEGORY&#39;, &#39;VE&#39;, &#39;VE&#39;, &#39;Na&#39;, &#39;Na&#39;, &#39;Caa&#39;, &#39;Na&#39;, &#39;Na&#39;, &#39;A&#39;, &#39;Na&#39;, &#39;DE&#39;, &#39;Na&#39;, &#39;VH&#39;, &#39;COMMACATEGORY&#39;, &#39;Cbb&#39;, &#39;VE&#39;, &#39;VC&#39;, &#39;Nc&#39;, &#39;Nb&#39;, &#39;Nc&#39;, &#39;Caa&#39;, &#39;Nc&#39;, &#39;Na&#39;, &#39;Nc&#39;, &#39;PARENTHESISCATEGORY&#39;, &#39;FW&#39;, &#39;PARENTHESISCATEGORY&#39;, &#39;Ng&#39;, &#39;DE&#39;, &#39;Na&#39;, &#39;COMMACATEGORY&#39;, &#39;VC&#39;, &#39;VE&#39;, &#39;PERIODCATEGORY&#39;]]
+Nc　Na　Nc　VC　COMMACATEGORY　D　D　V_2　Neu　Na　VA　PAUSECATEGORY　Neu　Na　VH　COMMACATEGORY　Cbb　VCL　Nc　DE　Nc　Nc　Na　Nb　COMMACATEGORY　Nd　Ng　VH　Di　Na　Na　COMMACATEGORY　Cbb　VE　Neu　Nf　VJ　Neu　Nf　DE　Na　Na　COMMACATEGORY　VE　VE　Na　Na　Caa　Na　Na　A　Na　DE　Na　VH　COMMACATEGORY　Cbb　VE　VC　Nc　Nb　Nc　Caa　Nc　Na　Nc　PARENTHESISCATEGORY　FW　PARENTHESISCATEGORY　Ng　DE　Na　COMMACATEGORY　VC　VE　PERIODCATEGORY
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">WsPosParagraph</span><span class="o">.</span><span class="n">to_text</span><span class="p">(</span><span class="n">doc2</span><span class="o">.</span><span class="n">ws</span><span class="p">,</span> <span class="n">doc2</span><span class="o">.</span><span class="n">pos</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>武漢(Nc)　肺炎(Na)　全球(Nc)　肆虐(VC)　，(COMMACATEGORY)　至今(D)　已(D)　有(V_2)　2906萬(Neu)　人(Na)　確診(VA)　、(PAUSECATEGORY)　92萬(Neu)　染疫(Na)　身亡(VH)　，(COMMACATEGORY)　而(Cbb)　流亡(VCL)　美國(Nc)　的(DE)　中國(Nc)　大陸(Nc)　病毒學家(Na)　閻麗夢(Nb)　，(COMMACATEGORY)　14日(Nd)　時(Ng)　開通(VH)　了(Di)　推特(Na)　帳號(Na)　，(COMMACATEGORY)　並(Cbb)　公布(VE)　一(Neu)　份(Nf)　長達(VJ)　26(Neu)　頁(Nf)　的(DE)　科學(Na)　論文(Na)　，(COMMACATEGORY)　研究(VE)　直指(VE)　武肺(Na)　病毒(Na)　與(Caa)　自然(Na)　人畜(Na)　共通(A)　傳染病(Na)　的(DE)　病毒(Na)　不同(VH)　，(COMMACATEGORY)　並(Cbb)　呼籲(VE)　追查(VC)　武漢(Nc)　P4(Nb)　實驗室(Nc)　及(Caa)　美國(Nc)　衛生(Na)　研究院(Nc)　（(PARENTHESISCATEGORY)　NIH(FW)　）(PARENTHESISCATEGORY)　之間(Ng)　的(DE)　金流(Na)　，(COMMACATEGORY)　引發(VC)　討論(VE)　。(PERIODCATEGORY)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipeline</span><span class="o">.</span><span class="n">get_ner</span><span class="p">(</span><span class="n">doc2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">doc2</span><span class="o">.</span><span class="n">ner</span><span class="p">)</span>
+
+<span class="c1">#WsPosSentence.to_text(doc2.ws, doc2.pos)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[NerToken(word=&#39;14日&#39;, ner=&#39;DATE&#39;, idx=(48, 51)), NerToken(word=&#39;NIH&#39;, ner=&#39;ORG&#39;, idx=(121, 124)), NerToken(word=&#39;閻麗夢&#39;, ner=&#39;PERSON&#39;, idx=(44, 47)), NerToken(word=&#39;武漢&#39;, ner=&#39;GPE&#39;, idx=(0, 2)), NerToken(word=&#39;美國&#39;, ner=&#39;GPE&#39;, idx=(33, 35)), NerToken(word=&#39;92萬&#39;, ner=&#39;CARDINAL&#39;, idx=(22, 25)), NerToken(word=&#39;美國衛生研究院&#39;, ner=&#39;ORG&#39;, idx=(113, 120)), NerToken(word=&#39;武漢P4實驗室&#39;, ner=&#39;ORG&#39;, idx=(105, 112)), NerToken(word=&#39;中國大陸&#39;, ner=&#39;GPE&#39;, idx=(36, 40)), NerToken(word=&#39;26&#39;, ner=&#39;CARDINAL&#39;, idx=(67, 69)), NerToken(word=&#39;2906萬&#39;, ner=&#39;CARDINAL&#39;, idx=(13, 18))]]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ckiptagger"
+        },
+        kernelOptions: {
+            kernelName: "ckiptagger",
+            path: "./nlp"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ckiptagger'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="nlp-spacy-zh.html" title="previous page">Chinese Natural Language Processing (spaCy)</a>
+    <a class='right-next' id="next-link" href="text-normalization-eng.html" title="next page">Text Normalization (English)</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alvin Chen<br/>
+        
+            &copy; Copyright 2020 Alvin Chen.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

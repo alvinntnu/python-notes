@@ -1,0 +1,449 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Crawler &#8212; Python Notes for Linguistics</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Corpus Lingustics Methods" href="corpus-linguistics-methods.html" />
+    <link rel="prev" title="Natural Language Tool-Kits (NLTK)" href="nltk.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/ntnu03.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Python Notes for Linguistics</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python-basics/python-basics.html">
+   Python Basics
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="corpus-processing.html">
+   Corpus Linguistics with Python
+  </a>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="nltk.html">
+     Natural Language Tool-Kits (NLTK)
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Web Crawler
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="corpus-linguistics-methods.html">
+     Corpus Lingustics Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tokenization.html">
+     Tokenization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="word-cloud.html">
+     Word Cloud
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="patterns-constructions.html">
+     Patterns and Constructions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="bnc.html">
+     BNC-XML
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="childes.html">
+     CHILDES Corpus
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="praat-textgrid.html">
+     Praat TextGrid Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="vectorizing-text.html">
+     Vectorizing Texts
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="jieba.html">
+     Chinese Word Segmentation (jieba)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ckiptagger.html">
+     Chinese Word Segmentation (ckiptagger)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../statistical-analyses/statistical-analyses.html">
+   Statistical Analyses
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../nlp/nlp.html">
+   Natural Language Processing with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <div style="text-align:left">
+    <a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
+</div>
+
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/corpus/web-crawler.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/alvinntnu/python-notes/master?urlpath=tree/corpus/web-crawler.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/corpus/web-crawler.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="web-crawler">
+<h1>Web Crawler<a class="headerlink" href="#web-crawler" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span> <span class="k">as</span> <span class="n">soup</span>  <span class="c1"># HTML data structure</span>
+
+<span class="c1"># extract article hyperlinks from an index page</span>
+<span class="k">def</span> <span class="nf">extractArtLinks</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">cookies</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;over18&#39;</span><span class="p">:</span><span class="s1">&#39;1&#39;</span><span class="p">})</span>
+    <span class="n">page_soup</span> <span class="o">=</span> <span class="n">soup</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
+    <span class="n">containers</span> <span class="o">=</span> <span class="n">page_soup</span><span class="o">.</span><span class="n">findAll</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;r-ent&quot;</span><span class="p">})</span>
+    <span class="n">art_links</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">container</span> <span class="ow">in</span> <span class="n">containers</span><span class="p">:</span>
+        <span class="c1"># Finds all link tags &quot;a&quot; from within the first div.</span>
+        <span class="n">art_link</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">art_link</span><span class="p">:</span>
+            <span class="c1">#print(art_link[&#39;href&#39;])</span>
+            <span class="c1">#print(container.find(&#39;div&#39;,{&#39;class&#39;:&#39;title&#39;}).get_text())</span>
+            <span class="n">art_meta</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span><span class="s1">&#39;meta&#39;</span><span class="p">})</span>
+            <span class="c1">#print(art_meta.find(&#39;div&#39;,{&#39;class&#39;:&#39;author&#39;}).get_text())</span>
+            <span class="c1">#print(art_meta.find(&#39;div&#39;,{&#39;class&#39;:&#39;date&#39;}).get_text())</span>
+
+            <span class="n">art_links</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s1">&#39;push&#39;</span><span class="p">:</span> <span class="n">container</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span><span class="s1">&#39;nrec&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">get_text</span><span class="p">(),</span>
+                <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">container</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span><span class="s1">&#39;title&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span>
+                <span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="n">art_meta</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span><span class="s1">&#39;date&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">get_text</span><span class="p">(),</span>
+                <span class="s1">&#39;author&#39;</span><span class="p">:</span> <span class="n">art_meta</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span><span class="s1">&#39;author&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">get_text</span><span class="p">(),</span>
+                <span class="s1">&#39;link&#39;</span><span class="p">:</span> <span class="n">art_link</span><span class="p">[</span><span class="s1">&#39;href&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="n">extractArtText</span><span class="p">(</span><span class="s1">&#39;https://www.ptt.cc&#39;</span> <span class="o">+</span> <span class="n">art_link</span><span class="p">[</span><span class="s1">&#39;href&#39;</span><span class="p">])</span>
+            <span class="p">})</span>
+
+    <span class="k">return</span><span class="p">(</span><span class="n">art_links</span><span class="p">)</span>
+
+<span class="c1"># find the previous index page link</span>
+<span class="k">def</span> <span class="nf">findPrevIndex</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">cookies</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;over18&#39;</span><span class="p">:</span><span class="s1">&#39;1&#39;</span><span class="p">})</span>
+    <span class="n">page_soup</span> <span class="o">=</span> <span class="n">soup</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">,</span><span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
+    <span class="n">btn</span> <span class="o">=</span> <span class="n">page_soup</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;div.btn-group &gt; a&#39;</span><span class="p">)</span>
+    <span class="n">up_page_href</span> <span class="o">=</span> <span class="n">btn</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="s1">&#39;href&#39;</span><span class="p">]</span>
+    <span class="n">next_page_url</span> <span class="o">=</span> <span class="s1">&#39;https://www.ptt.cc&#39;</span> <span class="o">+</span> <span class="n">up_page_href</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">next_page_url</span><span class="p">)</span>
+
+<span class="c1"># extract article contents from  the article hyperlink</span>
+<span class="k">def</span> <span class="nf">extractArtText</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">cookies</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;over18&#39;</span><span class="p">:</span><span class="s1">&#39;1&#39;</span><span class="p">})</span>
+    <span class="n">page_soup</span> <span class="o">=</span> <span class="n">soup</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s2">&quot;lxml&quot;</span><span class="p">)</span>
+    <span class="c1">#print(page_soup.find(&quot;div&quot;,{&quot;id&quot;:&quot;main-content&quot;}).get_text())</span>
+    <span class="n">art_text</span><span class="o">=</span><span class="n">page_soup</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;div#main-content&#39;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">art_text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># main()</span>
+<span class="n">num_of_index_page</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">board_name</span> <span class="o">=</span> <span class="s1">&#39;Food&#39;</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://www.ptt.cc/bbs/</span><span class="si">{}</span><span class="s1">/index.html&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">board_name</span><span class="p">)</span>
+<span class="n">all_links</span> <span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">page</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">num_of_index_page</span><span class="p">):</span>
+    <span class="n">all_links</span> <span class="o">=</span> <span class="n">all_links</span> <span class="o">+</span> <span class="n">extractArtLinks</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">findPrevIndex</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">all_links</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">all_links</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">all_links</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;push&#39;: &#39;&#39;, &#39;title&#39;: &#39;[食記] 台中 老派廚房 值得一吃的高鐵附近美食&#39;, &#39;date&#39;: &#39;10/10&#39;, &#39;author&#39;: &#39;tonlin&#39;, &#39;link&#39;: &#39;/bbs/Food/M.1602260252.A.ADF.html&#39;, &#39;text&#39;: &#39;作者tonlin (帽子與大象)看板Food標題[食記] 台中 老派廚房時間Sat Oct 10 00:17:25 2020\n   餐廳名稱：老派廚房\n   消費時間：2020年/10月\n   地址：台中市烏日區三榮路一段366號\n   電話：04-2338-4066\n   營業時間：週三、四、日 09:00~16:00\n             週五、六 09:00–14:30、17:00–20:00（週一、二公休）\n\n   圖文網誌版：https://tonlinphoto.pixnet.net/blog/post/47515127\n\n\n距離高鐵高鐵車程只要5分鐘的老派廚房，座落在台中市與彰化縣的交界。\n\n這一區應該是新開發的區域，附近有好多大樓正在興建當中，感覺一派欣欣向榮。\n\n一下車，就看到老派廚房小小的門面，\n\n外頭有張復古的圓桌和一臺Vespa，很有一種義式風情。\n\n\n\n走進餐廳，有許多歐式風情的復古感畫作，餐廳內的桌椅也都是深色的木桌與木椅，\n\n燈光和氛圍，就和我在義大利吃過的小餐館一樣。\n\n可能因為是平日，氣氛輕鬆而舒適，讓人覺得很放鬆。\n\n\n\n老派廚房原本是以私廚和外燴餐點為主，9月起正式轉型為餐酒館，也販售早午餐。\n\n不過我們到的時候已經超過早午餐供應時間了。\n\n我們點了德國豬腳佐香腸花椰、主廚煙燻美式肋排佐薯瓣、綜合莓果冰沙、美式咖啡。\n\n\n\n可能是因為有點忙，或者是因為剛開業還沒上手（？），原本桌上是沒有水的。\n\n我們詢問了之後，服務人員送上了這瓶加了葡萄柚和香草的水瓶。\n\n整瓶水本身是冰過的，我覺得在炎熱的天氣中還蠻貼心的。\n\n在我們喝完了之後，也有來關心我們是否需要補水，很細心。\n\n\n\n沒有很久，主菜就上桌了。\n\n這道德國豬腳佐香腸花椰，表皮烤得金黃香脆，內裡軟嫩多汁，\n\n我覺得是蠻成功的一道德國豬腳。\n\n旁邊的沾醬酸甜開胃，不過我覺得豬腳單吃就很不錯。\n\n\n\n同時上桌的主廚煙燻美式肋排佐薯瓣令我非常驚喜。\n\n因為多年前在王品吃的肋排，以及喜宴上的肋排料理幾乎都超大支，\n\n光是處理就要花一點時間。\n\n老派廚房的美式肋排，已經先處理好成一塊一塊、方便入口的大小，這一點非常加分。\n\n而且口味非常細膩，鹹香入味，卻不會讓人有一般肋排料理過度重口味的感覺，很棒。\n\n肋排搭配的薯瓣，網狀造型搭配上香脆的口感，也很推薦。\n\n\n\n我沒拍冰美式，直接分享我的綜合莓果冰沙，我覺得秒殺目前我喝過的各家冰沙。\n\n不僅可以喝出莓果的用料豐富，而且調味很剛好，不會讓人覺得過酸，清爽好入口。\n\n\n\n整體來說我給這一次用餐經驗非常高的分數，也立刻在我自己的私人臉書分享了。\n\n一位朋友偶爾會到台中上課出差，馬上留言說下次要去試試，非常期待她的心得。\n\n我回覆她的時候，有特別提到兩個人用餐居然不用1,000元，CP值很高，\n\n但剛剛認真看了菜單，才發現店家似乎有幫我們打了8折（是因為剛開幕嗎？）～\n\n當天結帳的時候因為趕著要去搭高鐵，沒有發現被打折了XD\n\n不過不管有沒有折扣，都非常推薦這間老派廚房喔！\n\n\n\n以上～\n\n\n\n\n--\n※ 發信站: 批踢踢實業坊(ptt.cc), 來自: 111.240.127.210 (臺灣)\n※ 文章網址: https://www.ptt.cc/bbs/Food/M.1602260252.A.ADF.html\n※ 編輯: tonlin (111.240.127.210 臺灣), 10/10/2020 00:18:12\n&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Push: </span><span class="si">{push:s}</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span>
+      <span class="s1">&#39;title: </span><span class="si">{title:s}</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span>
+      <span class="s1">&#39;date: </span><span class="si">{date:s}</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span>
+      <span class="s1">&#39;author: </span><span class="si">{author:s}</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span>
+      <span class="s1">&#39;link: </span><span class="si">{link:s}</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span>
+      <span class="s1">&#39;text: </span><span class="si">{text:.5}</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">all_links</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Push:  
+title: [食記] 台中 老派廚房 值得一吃的高鐵附近美食 
+date: 10/10 
+author: tonlin 
+link: /bbs/Food/M.1602260252.A.ADF.html 
+text: 作者ton 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition">
+<p class="admonition-title"> Exercise</p>
+<p>How to seperate post texts from push texts?</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ckiptagger"
+        },
+        kernelOptions: {
+            kernelName: "ckiptagger",
+            path: "./corpus"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ckiptagger'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="nltk.html" title="previous page">Natural Language Tool-Kits (NLTK)</a>
+    <a class='right-next' id="next-link" href="corpus-linguistics-methods.html" title="next page">Corpus Lingustics Methods</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alvin Chen<br/>
+        
+            &copy; Copyright 2020 Alvin Chen.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

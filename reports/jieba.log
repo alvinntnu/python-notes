@@ -50,6 +50,6 @@ for word, tag in text_pos:
 [0m[1;32m    514[0m             [0mself[0m[0;34m.[0m[0mdictionary[0m [0;34m=[0m [0mabs_path[0m[0;34m[0m[0;34m[0m[0m
 [1;32m    515[0m             [0mself[0m[0;34m.[0m[0minitialized[0m [0;34m=[0m [0;32mFalse[0m[0;34m[0m[0;34m[0m[0m
 
-[0;31mException[0m: jieba: file does not exist: /Users/Alvin/GoogleDrive/Corpus/jiaba/dict.txt.jiebatw.txt
-Exception: jieba: file does not exist: /Users/Alvin/GoogleDrive/Corpus/jiaba/dict.txt.jiebatw.txt
+[0;31mException[0m: jieba: file does not exist: /Users/Alvin/GoogleDrive/_MySyncDrive/Corpus/jiaba/dict.txt.jiebatw.txt
+Exception: jieba: file does not exist: /Users/Alvin/GoogleDrive/_MySyncDrive/Corpus/jiaba/dict.txt.jiebatw.txt
 

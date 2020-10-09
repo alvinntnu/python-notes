@@ -1,0 +1,1616 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Python Tricks &#8212; Python Notes for Linguistics</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Web Applications" href="web-applications.html" />
+    <link rel="prev" title="Magic R" href="magic-r.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/ntnu03.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Python Notes for Linguistics</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="python-basics.html">
+   Python Basics
+  </a>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="jupyter-notebook.html">
+     Jupyer Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="notebook-to-slides.html">
+     Notebook to Slides
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="google-colab.html">
+     Google Colaboratory (Colab)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="google-colab-r.html">
+     Google Colab R
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="data-structure.html">
+     Data Structure
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="numpy.html">
+     Numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pandas.html">
+     Pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="program-structure.html">
+     Program Structure
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="input-output.html">
+     Input and Output
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pickle.html">
+     Object Serialization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="data-visualization-1.html">
+     Data Visualization I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="data-visualization-2.html">
+     Data Visualization 2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="magic-r.html">
+     Magic R
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Python Tricks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="web-applications.html">
+     Web Applications
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="productive-tech.html">
+     Phythonic Productivity Techniques
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="miscellaneous-notes.html">
+     Miscellaneous Notes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../corpus/corpus-processing.html">
+   Corpus Linguistics with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../statistical-analyses/statistical-analyses.html">
+   Statistical Analyses
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../nlp/nlp.html">
+   Natural Language Processing with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <div style="text-align:left">
+    <a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
+</div>
+
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/python-basics/python-tricks.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/alvinntnu/python-notes/master?urlpath=tree/python-basics/python-tricks.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/python-basics/python-tricks.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-path">
+   Module Path
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sorting-iterables">
+   Sorting Iterables
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#find-modules-in-memory">
+   Find Modules in Memory
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#format-dict-output">
+   Format Dict Output
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#unpacking-tuples">
+   Unpacking Tuples
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#filter">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     filter()
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#asterisk">
+   Asterisk
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     *
+    </span>
+   </code>
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="python-tricks">
+<h1>Python Tricks<a class="headerlink" href="#python-tricks" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>This notebook mostly includes useful Python tricks provided by <a class="reference external" href="https://dbader.org/">Dan Bader</a>.</p></li>
+<li><p>He has a very useful book: <a class="reference external" href="https://www.tenlong.com.tw/products/9781775093305">Python Tricks: A Buffet of Awesome Python Features</a>. Highly recommended!!</p></li>
+<li><p>Also, I include other tricks that came from different sources as well as many trial-and-errors. Not very organized, but always good to keep all these referneces.</p></li>
+</ul>
+<div class="section" id="module-path">
+<h2>Module Path<a class="headerlink" href="#module-path" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Find module path</span>
+<span class="kn">import</span> <span class="nn">re</span><span class="o">,</span> <span class="nn">os</span>
+<span class="c1">#print(re.__path__[0]) # if the module is a directory</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="vm">__file__</span><span class="p">)</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="vm">__file__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/Alvin/opt/anaconda3/lib/python3.7/re.py
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="sorting-iterables">
+<h2>Sorting Iterables<a class="headerlink" href="#sorting-iterables" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## convert a int List into str List</span>
+<span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">a</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
+
+<span class="c1"># convert a int tuple into str tuple</span>
+<span class="n">e</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">23</span><span class="p">,</span><span class="mi">42</span><span class="p">,</span><span class="mi">54</span><span class="p">)]</span>
+<span class="n">f</span> <span class="o">=</span> <span class="p">[</span><span class="nb">tuple</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tp</span><span class="p">])</span> <span class="k">for</span> <span class="n">tp</span> <span class="ow">in</span> <span class="n">e</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 5, 10]
+&lt;class &#39;str&#39;&gt;
+[&#39;1&#39;, &#39;5&#39;, &#39;10&#39;]
+&lt;class &#39;list&#39;&gt;
+[(2, 3, 4), (23, 42, 54)]
+[(&#39;2&#39;, &#39;3&#39;, &#39;4&#39;), (&#39;23&#39;, &#39;42&#39;, &#39;54&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## How to sort a Python dict by value</span>
+<span class="c1"># (== get a representation sorted by value)</span>
+<span class="n">xs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+<span class="nb">sorted</span><span class="p">(</span><span class="n">xs</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;d&#39;, 1), (&#39;c&#39;, 2), (&#39;b&#39;, 3), (&#39;a&#39;, 4)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## How to sort a Python dict using operator</span>
+<span class="kn">import</span> <span class="nn">operator</span>
+<span class="nb">sorted</span><span class="p">(</span><span class="n">xs</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="c1">#operator.itemgette</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;a&#39;, 4), (&#39;b&#39;, 3), (&#39;c&#39;, 2), (&#39;d&#39;, 1)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">xs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;a&#39;, 4)
+(&#39;b&#39;, 3)
+(&#39;c&#39;, 2)
+(&#39;d&#39;, 1)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## sort a list</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randrange</span>
+<span class="n">num</span> <span class="o">=</span> <span class="p">[</span><span class="n">randrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">)]</span>
+<span class="c1">#sorted(num, reverse=True)</span>
+<span class="c1">#sorted(num) # default ascending order</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+<span class="n">num</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span><span class="c1"># this mutates the list and does not return anything</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="c1"># list is mutable</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[11, 26, 16, 89, 8, 17, 62, 56, 20, 10, 40, 80, 99, 29, 43, 89, 31, 78, 45, 12]
+[8, 10, 11, 12, 16, 17, 20, 26, 29, 31, 40, 43, 45, 56, 62, 78, 80, 89, 89, 99]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## sort a tuple?</span>
+
+<span class="n">tuple_ex</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="c1">#tuple_ex</span>
+<span class="n">tuple_ex_sorted</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">tuple_ex</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tuple_ex</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tuple_ex_sorted</span><span class="p">)</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">tuple_ex_sorted</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2, 50, -2, 30)
+[-2, 2, 30, 50]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>list
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># into string </span>
+<span class="k">def</span> <span class="nf">convertTuple</span><span class="p">(</span><span class="n">tup</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span> 
+    <span class="nb">str</span> <span class="o">=</span>  <span class="n">split</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tup</span><span class="p">)</span> 
+    <span class="k">return</span> <span class="nb">str</span>
+  
+<span class="c1"># Driver code </span>
+<span class="nb">print</span><span class="p">(</span><span class="n">convertTuple</span><span class="p">(</span><span class="nb">tuple</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tuple_ex</span><span class="p">]),</span> <span class="n">split</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2,50,-2,30
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tuple_lexicon</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s1">&#39;the&#39;</span><span class="p">,</span> <span class="s1">&#39;det&#39;</span><span class="p">,[</span><span class="mi">23</span><span class="p">,</span> <span class="mi">800</span><span class="p">]),</span>
+    <span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">,</span> <span class="s1">&#39;prep&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">70</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
+<span class="p">]</span>
+
+<span class="c1"># sort according to alphabets?</span>
+<span class="c1">#print(sorted(tuple_lexicon, key=lambda x:x[0]))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">tuple_lexicon</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tuple_lexicon</span><span class="o">.</span><span class="n">sort</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tuple_lexicon</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;the&#39;, &#39;det&#39;, [23, 800]), (&#39;off&#39;, &#39;prep&#39;, [70, 100])]
+None
+[(&#39;off&#39;, &#39;prep&#39;, [70, 100]), (&#39;the&#39;, &#39;det&#39;, [23, 800])]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="find-modules-in-memory">
+<h2>Find Modules in Memory<a class="headerlink" href="#find-modules-in-memory" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip list</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">modulenames</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="nb">globals</span><span class="p">())</span>
+<span class="n">allmodules</span> <span class="o">=</span> <span class="p">[</span><span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">modulenames</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">allmodules</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;module &#39;re&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/re.py&#39;&gt;, &lt;module &#39;os&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/os.py&#39;&gt;, &lt;module &#39;operator&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/operator.py&#39;&gt;, &lt;module &#39;sys&#39; (built-in)&gt;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">pprint</span>
+
+<span class="c1"># pretty print loaded modules</span>
+<span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;IPython&#39;: &lt;module &#39;IPython&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/__init__.py&#39;&gt;,
+ &#39;IPython.core&#39;: &lt;module &#39;IPython.core&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/__init__.py&#39;&gt;,
+ &#39;IPython.core.alias&#39;: &lt;module &#39;IPython.core.alias&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/alias.py&#39;&gt;,
+ &#39;IPython.core.application&#39;: &lt;module &#39;IPython.core.application&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/application.py&#39;&gt;,
+ &#39;IPython.core.async_helpers&#39;: &lt;module &#39;IPython.core.async_helpers&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/async_helpers.py&#39;&gt;,
+ &#39;IPython.core.autocall&#39;: &lt;module &#39;IPython.core.autocall&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/autocall.py&#39;&gt;,
+ &#39;IPython.core.builtin_trap&#39;: &lt;module &#39;IPython.core.builtin_trap&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/builtin_trap.py&#39;&gt;,
+ &#39;IPython.core.compilerop&#39;: &lt;module &#39;IPython.core.compilerop&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/compilerop.py&#39;&gt;,
+ &#39;IPython.core.completer&#39;: &lt;module &#39;IPython.core.completer&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/completer.py&#39;&gt;,
+ &#39;IPython.core.completerlib&#39;: &lt;module &#39;IPython.core.completerlib&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/completerlib.py&#39;&gt;,
+ &#39;IPython.core.crashhandler&#39;: &lt;module &#39;IPython.core.crashhandler&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/crashhandler.py&#39;&gt;,
+ &#39;IPython.core.debugger&#39;: &lt;module &#39;IPython.core.debugger&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/debugger.py&#39;&gt;,
+ &#39;IPython.core.display&#39;: &lt;module &#39;IPython.core.display&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/display.py&#39;&gt;,
+ &#39;IPython.core.display_trap&#39;: &lt;module &#39;IPython.core.display_trap&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/display_trap.py&#39;&gt;,
+ &#39;IPython.core.displayhook&#39;: &lt;module &#39;IPython.core.displayhook&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/displayhook.py&#39;&gt;,
+ &#39;IPython.core.displaypub&#39;: &lt;module &#39;IPython.core.displaypub&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/displaypub.py&#39;&gt;,
+ &#39;IPython.core.error&#39;: &lt;module &#39;IPython.core.error&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/error.py&#39;&gt;,
+ &#39;IPython.core.events&#39;: &lt;module &#39;IPython.core.events&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/events.py&#39;&gt;,
+ &#39;IPython.core.excolors&#39;: &lt;module &#39;IPython.core.excolors&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/excolors.py&#39;&gt;,
+ &#39;IPython.core.extensions&#39;: &lt;module &#39;IPython.core.extensions&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/extensions.py&#39;&gt;,
+ &#39;IPython.core.formatters&#39;: &lt;module &#39;IPython.core.formatters&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/formatters.py&#39;&gt;,
+ &#39;IPython.core.getipython&#39;: &lt;module &#39;IPython.core.getipython&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/getipython.py&#39;&gt;,
+ &#39;IPython.core.history&#39;: &lt;module &#39;IPython.core.history&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/history.py&#39;&gt;,
+ &#39;IPython.core.hooks&#39;: &lt;module &#39;IPython.core.hooks&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/hooks.py&#39;&gt;,
+ &#39;IPython.core.inputtransformer2&#39;: &lt;module &#39;IPython.core.inputtransformer2&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/inputtransformer2.py&#39;&gt;,
+ &#39;IPython.core.interactiveshell&#39;: &lt;module &#39;IPython.core.interactiveshell&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/interactiveshell.py&#39;&gt;,
+ &#39;IPython.core.latex_symbols&#39;: &lt;module &#39;IPython.core.latex_symbols&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/latex_symbols.py&#39;&gt;,
+ &#39;IPython.core.logger&#39;: &lt;module &#39;IPython.core.logger&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/logger.py&#39;&gt;,
+ &#39;IPython.core.macro&#39;: &lt;module &#39;IPython.core.macro&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/macro.py&#39;&gt;,
+ &#39;IPython.core.magic&#39;: &lt;module &#39;IPython.core.magic&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/magic.py&#39;&gt;,
+ &#39;IPython.core.magic_arguments&#39;: &lt;module &#39;IPython.core.magic_arguments&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/magic_arguments.py&#39;&gt;,
+ &#39;IPython.core.magics&#39;: &lt;module &#39;IPython.core.magics&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/magics/__init__.py&#39;&gt;,
+ &#39;IPython.core.magics.auto&#39;: &lt;module &#39;IPython.core.magics.auto&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/magics/auto.py&#39;&gt;,
+ &#39;IPython.core.magics.basic&#39;: &lt;module &#39;IPython.core.magics.basic&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/magics/basic.py&#39;&gt;,
+ &#39;IPython.core.magics.code&#39;: &lt;module &#39;IPython.core.magics.code&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/magics/code.py&#39;&gt;,
+ &#39;IPython.core.magics.config&#39;: &lt;module &#39;IPython.core.magics.config&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/magics/config.py&#39;&gt;,
+ &#39;IPython.core.magics.display&#39;: &lt;module &#39;IPython.core.magics.display&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/magics/display.py&#39;&gt;,
+ &#39;IPython.core.magics.execution&#39;: &lt;module &#39;IPython.core.magics.execution&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/magics/execution.py&#39;&gt;,
+ &#39;IPython.core.magics.extension&#39;: &lt;module &#39;IPython.core.magics.extension&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/magics/extension.py&#39;&gt;,
+ &#39;IPython.core.magics.history&#39;: &lt;module &#39;IPython.core.magics.history&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/magics/history.py&#39;&gt;,
+ &#39;IPython.core.magics.logging&#39;: &lt;module &#39;IPython.core.magics.logging&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/magics/logging.py&#39;&gt;,
+ &#39;IPython.core.magics.namespace&#39;: &lt;module &#39;IPython.core.magics.namespace&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/magics/namespace.py&#39;&gt;,
+ &#39;IPython.core.magics.osm&#39;: &lt;module &#39;IPython.core.magics.osm&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/magics/osm.py&#39;&gt;,
+ &#39;IPython.core.magics.packaging&#39;: &lt;module &#39;IPython.core.magics.packaging&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/magics/packaging.py&#39;&gt;,
+ &#39;IPython.core.magics.pylab&#39;: &lt;module &#39;IPython.core.magics.pylab&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/magics/pylab.py&#39;&gt;,
+ &#39;IPython.core.magics.script&#39;: &lt;module &#39;IPython.core.magics.script&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/magics/script.py&#39;&gt;,
+ &#39;IPython.core.oinspect&#39;: &lt;module &#39;IPython.core.oinspect&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/oinspect.py&#39;&gt;,
+ &#39;IPython.core.page&#39;: &lt;module &#39;IPython.core.page&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/page.py&#39;&gt;,
+ &#39;IPython.core.payload&#39;: &lt;module &#39;IPython.core.payload&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/payload.py&#39;&gt;,
+ &#39;IPython.core.payloadpage&#39;: &lt;module &#39;IPython.core.payloadpage&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/payloadpage.py&#39;&gt;,
+ &#39;IPython.core.prefilter&#39;: &lt;module &#39;IPython.core.prefilter&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/prefilter.py&#39;&gt;,
+ &#39;IPython.core.profiledir&#39;: &lt;module &#39;IPython.core.profiledir&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/profiledir.py&#39;&gt;,
+ &#39;IPython.core.pylabtools&#39;: &lt;module &#39;IPython.core.pylabtools&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/pylabtools.py&#39;&gt;,
+ &#39;IPython.core.release&#39;: &lt;module &#39;IPython.core.release&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/release.py&#39;&gt;,
+ &#39;IPython.core.shellapp&#39;: &lt;module &#39;IPython.core.shellapp&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/shellapp.py&#39;&gt;,
+ &#39;IPython.core.splitinput&#39;: &lt;module &#39;IPython.core.splitinput&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/splitinput.py&#39;&gt;,
+ &#39;IPython.core.ultratb&#39;: &lt;module &#39;IPython.core.ultratb&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/ultratb.py&#39;&gt;,
+ &#39;IPython.core.usage&#39;: &lt;module &#39;IPython.core.usage&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/core/usage.py&#39;&gt;,
+ &#39;IPython.display&#39;: &lt;module &#39;IPython.display&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/display.py&#39;&gt;,
+ &#39;IPython.extensions&#39;: &lt;module &#39;IPython.extensions&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/extensions/__init__.py&#39;&gt;,
+ &#39;IPython.extensions.storemagic&#39;: &lt;module &#39;IPython.extensions.storemagic&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/extensions/storemagic.py&#39;&gt;,
+ &#39;IPython.lib&#39;: &lt;module &#39;IPython.lib&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/lib/__init__.py&#39;&gt;,
+ &#39;IPython.lib.backgroundjobs&#39;: &lt;module &#39;IPython.lib.backgroundjobs&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/lib/backgroundjobs.py&#39;&gt;,
+ &#39;IPython.lib.clipboard&#39;: &lt;module &#39;IPython.lib.clipboard&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/lib/clipboard.py&#39;&gt;,
+ &#39;IPython.lib.display&#39;: &lt;module &#39;IPython.lib.display&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/lib/display.py&#39;&gt;,
+ &#39;IPython.lib.pretty&#39;: &lt;module &#39;IPython.lib.pretty&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/lib/pretty.py&#39;&gt;,
+ &#39;IPython.lib.security&#39;: &lt;module &#39;IPython.lib.security&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/lib/security.py&#39;&gt;,
+ &#39;IPython.paths&#39;: &lt;module &#39;IPython.paths&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/paths.py&#39;&gt;,
+ &#39;IPython.terminal&#39;: &lt;module &#39;IPython.terminal&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/terminal/__init__.py&#39;&gt;,
+ &#39;IPython.terminal.debugger&#39;: &lt;module &#39;IPython.terminal.debugger&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/terminal/debugger.py&#39;&gt;,
+ &#39;IPython.terminal.embed&#39;: &lt;module &#39;IPython.terminal.embed&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/terminal/embed.py&#39;&gt;,
+ &#39;IPython.terminal.interactiveshell&#39;: &lt;module &#39;IPython.terminal.interactiveshell&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/terminal/interactiveshell.py&#39;&gt;,
+ &#39;IPython.terminal.ipapp&#39;: &lt;module &#39;IPython.terminal.ipapp&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/terminal/ipapp.py&#39;&gt;,
+ &#39;IPython.terminal.magics&#39;: &lt;module &#39;IPython.terminal.magics&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/terminal/magics.py&#39;&gt;,
+ &#39;IPython.terminal.prompts&#39;: &lt;module &#39;IPython.terminal.prompts&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/terminal/prompts.py&#39;&gt;,
+ &#39;IPython.terminal.pt_inputhooks&#39;: &lt;module &#39;IPython.terminal.pt_inputhooks&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/terminal/pt_inputhooks/__init__.py&#39;&gt;,
+ &#39;IPython.terminal.ptutils&#39;: &lt;module &#39;IPython.terminal.ptutils&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/terminal/ptutils.py&#39;&gt;,
+ &#39;IPython.terminal.shortcuts&#39;: &lt;module &#39;IPython.terminal.shortcuts&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/terminal/shortcuts.py&#39;&gt;,
+ &#39;IPython.testing&#39;: &lt;module &#39;IPython.testing&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/testing/__init__.py&#39;&gt;,
+ &#39;IPython.testing.skipdoctest&#39;: &lt;module &#39;IPython.testing.skipdoctest&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/testing/skipdoctest.py&#39;&gt;,
+ &#39;IPython.utils&#39;: &lt;module &#39;IPython.utils&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/utils/__init__.py&#39;&gt;,
+ &#39;IPython.utils.PyColorize&#39;: &lt;module &#39;IPython.utils.PyColorize&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/utils/PyColorize.py&#39;&gt;,
+ &#39;IPython.utils._process_common&#39;: &lt;module &#39;IPython.utils._process_common&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/utils/_process_common.py&#39;&gt;,
+ &#39;IPython.utils._process_posix&#39;: &lt;module &#39;IPython.utils._process_posix&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/utils/_process_posix.py&#39;&gt;,
+ &#39;IPython.utils._sysinfo&#39;: &lt;module &#39;IPython.utils._sysinfo&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/utils/_sysinfo.py&#39;&gt;,
+ &#39;IPython.utils.capture&#39;: &lt;module &#39;IPython.utils.capture&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/utils/capture.py&#39;&gt;,
+ &#39;IPython.utils.colorable&#39;: &lt;module &#39;IPython.utils.colorable&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/utils/colorable.py&#39;&gt;,
+ &#39;IPython.utils.coloransi&#39;: &lt;module &#39;IPython.utils.coloransi&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/utils/coloransi.py&#39;&gt;,
+ &#39;IPython.utils.contexts&#39;: &lt;module &#39;IPython.utils.contexts&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/utils/contexts.py&#39;&gt;,
+ &#39;IPython.utils.data&#39;: &lt;module &#39;IPython.utils.data&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/utils/data.py&#39;&gt;,
+ &#39;IPython.utils.decorators&#39;: &lt;module &#39;IPython.utils.decorators&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/utils/decorators.py&#39;&gt;,
+ &#39;IPython.utils.dir2&#39;: &lt;module &#39;IPython.utils.dir2&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/utils/dir2.py&#39;&gt;,
+ &#39;IPython.utils.encoding&#39;: &lt;module &#39;IPython.utils.encoding&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/utils/encoding.py&#39;&gt;,
+ &#39;IPython.utils.frame&#39;: &lt;module &#39;IPython.utils.frame&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/utils/frame.py&#39;&gt;,
+ &#39;IPython.utils.generics&#39;: &lt;module &#39;IPython.utils.generics&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/utils/generics.py&#39;&gt;,
+ &#39;IPython.utils.importstring&#39;: &lt;module &#39;IPython.utils.importstring&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/utils/importstring.py&#39;&gt;,
+ &#39;IPython.utils.io&#39;: &lt;module &#39;IPython.utils.io&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/utils/io.py&#39;&gt;,
+ &#39;IPython.utils.ipstruct&#39;: &lt;module &#39;IPython.utils.ipstruct&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/utils/ipstruct.py&#39;&gt;,
+ &#39;IPython.utils.module_paths&#39;: &lt;module &#39;IPython.utils.module_paths&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/utils/module_paths.py&#39;&gt;,
+ &#39;IPython.utils.openpy&#39;: &lt;module &#39;IPython.utils.openpy&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/utils/openpy.py&#39;&gt;,
+ &#39;IPython.utils.path&#39;: &lt;module &#39;IPython.utils.path&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/utils/path.py&#39;&gt;,
+ &#39;IPython.utils.process&#39;: &lt;module &#39;IPython.utils.process&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/utils/process.py&#39;&gt;,
+ &#39;IPython.utils.py3compat&#39;: &lt;module &#39;IPython.utils.py3compat&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/utils/py3compat.py&#39;&gt;,
+ &#39;IPython.utils.sentinel&#39;: &lt;module &#39;IPython.utils.sentinel&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/utils/sentinel.py&#39;&gt;,
+ &#39;IPython.utils.strdispatch&#39;: &lt;module &#39;IPython.utils.strdispatch&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/utils/strdispatch.py&#39;&gt;,
+ &#39;IPython.utils.sysinfo&#39;: &lt;module &#39;IPython.utils.sysinfo&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/utils/sysinfo.py&#39;&gt;,
+ &#39;IPython.utils.syspathcontext&#39;: &lt;module &#39;IPython.utils.syspathcontext&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/utils/syspathcontext.py&#39;&gt;,
+ &#39;IPython.utils.tempdir&#39;: &lt;module &#39;IPython.utils.tempdir&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/utils/tempdir.py&#39;&gt;,
+ &#39;IPython.utils.terminal&#39;: &lt;module &#39;IPython.utils.terminal&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/utils/terminal.py&#39;&gt;,
+ &#39;IPython.utils.text&#39;: &lt;module &#39;IPython.utils.text&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/utils/text.py&#39;&gt;,
+ &#39;IPython.utils.timing&#39;: &lt;module &#39;IPython.utils.timing&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/utils/timing.py&#39;&gt;,
+ &#39;IPython.utils.tokenutil&#39;: &lt;module &#39;IPython.utils.tokenutil&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/utils/tokenutil.py&#39;&gt;,
+ &#39;IPython.utils.wildcard&#39;: &lt;module &#39;IPython.utils.wildcard&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/utils/wildcard.py&#39;&gt;,
+ &#39;__future__&#39;: &lt;module &#39;__future__&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/__future__.py&#39;&gt;,
+ &#39;__main__&#39;: &lt;module &#39;__main__&#39;&gt;,
+ &#39;_abc&#39;: &lt;module &#39;_abc&#39; (built-in)&gt;,
+ &#39;_ast&#39;: &lt;module &#39;_ast&#39; (built-in)&gt;,
+ &#39;_asyncio&#39;: &lt;module &#39;_asyncio&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/_asyncio.cpython-37m-darwin.so&#39;&gt;,
+ &#39;_bisect&#39;: &lt;module &#39;_bisect&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/_bisect.cpython-37m-darwin.so&#39;&gt;,
+ &#39;_blake2&#39;: &lt;module &#39;_blake2&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/_blake2.cpython-37m-darwin.so&#39;&gt;,
+ &#39;_bootlocale&#39;: &lt;module &#39;_bootlocale&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/_bootlocale.py&#39;&gt;,
+ &#39;_bz2&#39;: &lt;module &#39;_bz2&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/_bz2.cpython-37m-darwin.so&#39;&gt;,
+ &#39;_codecs&#39;: &lt;module &#39;_codecs&#39; (built-in)&gt;,
+ &#39;_collections&#39;: &lt;module &#39;_collections&#39; (built-in)&gt;,
+ &#39;_collections_abc&#39;: &lt;module &#39;_collections_abc&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/_collections_abc.py&#39;&gt;,
+ &#39;_compat_pickle&#39;: &lt;module &#39;_compat_pickle&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/_compat_pickle.py&#39;&gt;,
+ &#39;_compression&#39;: &lt;module &#39;_compression&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/_compression.py&#39;&gt;,
+ &#39;_contextvars&#39;: &lt;module &#39;_contextvars&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/_contextvars.cpython-37m-darwin.so&#39;&gt;,
+ &#39;_ctypes&#39;: &lt;module &#39;_ctypes&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/_ctypes.cpython-37m-darwin.so&#39;&gt;,
+ &#39;_curses&#39;: &lt;module &#39;_curses&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/_curses.cpython-37m-darwin.so&#39;&gt;,
+ &#39;_cython_0_29_21&#39;: &lt;module &#39;_cython_0_29_21&#39;&gt;,
+ &#39;_datetime&#39;: &lt;module &#39;_datetime&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/_datetime.cpython-37m-darwin.so&#39;&gt;,
+ &#39;_decimal&#39;: &lt;module &#39;_decimal&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/_decimal.cpython-37m-darwin.so&#39;&gt;,
+ &#39;_frozen_importlib&#39;: &lt;module &#39;importlib._bootstrap&#39; (frozen)&gt;,
+ &#39;_frozen_importlib_external&#39;: &lt;module &#39;importlib._bootstrap_external&#39; (frozen)&gt;,
+ &#39;_functools&#39;: &lt;module &#39;_functools&#39; (built-in)&gt;,
+ &#39;_hashlib&#39;: &lt;module &#39;_hashlib&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/_hashlib.cpython-37m-darwin.so&#39;&gt;,
+ &#39;_heapq&#39;: &lt;module &#39;_heapq&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/_heapq.cpython-37m-darwin.so&#39;&gt;,
+ &#39;_imp&#39;: &lt;module &#39;_imp&#39; (built-in)&gt;,
+ &#39;_io&#39;: &lt;module &#39;io&#39; (built-in)&gt;,
+ &#39;_json&#39;: &lt;module &#39;_json&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/_json.cpython-37m-darwin.so&#39;&gt;,
+ &#39;_locale&#39;: &lt;module &#39;_locale&#39; (built-in)&gt;,
+ &#39;_lsprof&#39;: &lt;module &#39;_lsprof&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/_lsprof.cpython-37m-darwin.so&#39;&gt;,
+ &#39;_lzma&#39;: &lt;module &#39;_lzma&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/_lzma.cpython-37m-darwin.so&#39;&gt;,
+ &#39;_opcode&#39;: &lt;module &#39;_opcode&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/_opcode.cpython-37m-darwin.so&#39;&gt;,
+ &#39;_operator&#39;: &lt;module &#39;_operator&#39; (built-in)&gt;,
+ &#39;_pickle&#39;: &lt;module &#39;_pickle&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/_pickle.cpython-37m-darwin.so&#39;&gt;,
+ &#39;_posixsubprocess&#39;: &lt;module &#39;_posixsubprocess&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/_posixsubprocess.cpython-37m-darwin.so&#39;&gt;,
+ &#39;_queue&#39;: &lt;module &#39;_queue&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/_queue.cpython-37m-darwin.so&#39;&gt;,
+ &#39;_random&#39;: &lt;module &#39;_random&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/_random.cpython-37m-darwin.so&#39;&gt;,
+ &#39;_scproxy&#39;: &lt;module &#39;_scproxy&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/_scproxy.cpython-37m-darwin.so&#39;&gt;,
+ &#39;_sha3&#39;: &lt;module &#39;_sha3&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/_sha3.cpython-37m-darwin.so&#39;&gt;,
+ &#39;_signal&#39;: &lt;module &#39;_signal&#39; (built-in)&gt;,
+ &#39;_sitebuiltins&#39;: &lt;module &#39;_sitebuiltins&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/_sitebuiltins.py&#39;&gt;,
+ &#39;_socket&#39;: &lt;module &#39;_socket&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/_socket.cpython-37m-darwin.so&#39;&gt;,
+ &#39;_sqlite3&#39;: &lt;module &#39;_sqlite3&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/_sqlite3.cpython-37m-darwin.so&#39;&gt;,
+ &#39;_sre&#39;: &lt;module &#39;_sre&#39; (built-in)&gt;,
+ &#39;_ssl&#39;: &lt;module &#39;_ssl&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/_ssl.cpython-37m-darwin.so&#39;&gt;,
+ &#39;_stat&#39;: &lt;module &#39;_stat&#39; (built-in)&gt;,
+ &#39;_string&#39;: &lt;module &#39;_string&#39; (built-in)&gt;,
+ &#39;_strptime&#39;: &lt;module &#39;_strptime&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/_strptime.py&#39;&gt;,
+ &#39;_struct&#39;: &lt;module &#39;_struct&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/_struct.cpython-37m-darwin.so&#39;&gt;,
+ &#39;_thread&#39;: &lt;module &#39;_thread&#39; (built-in)&gt;,
+ &#39;_uuid&#39;: &lt;module &#39;_uuid&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/_uuid.cpython-37m-darwin.so&#39;&gt;,
+ &#39;_warnings&#39;: &lt;module &#39;_warnings&#39; (built-in)&gt;,
+ &#39;_weakref&#39;: &lt;module &#39;_weakref&#39; (built-in)&gt;,
+ &#39;_weakrefset&#39;: &lt;module &#39;_weakrefset&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/_weakrefset.py&#39;&gt;,
+ &#39;abc&#39;: &lt;module &#39;abc&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/abc.py&#39;&gt;,
+ &#39;appnope&#39;: &lt;module &#39;appnope&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/appnope/__init__.py&#39;&gt;,
+ &#39;appnope._nope&#39;: &lt;module &#39;appnope._nope&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/appnope/_nope.py&#39;&gt;,
+ &#39;argparse&#39;: &lt;module &#39;argparse&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/argparse.py&#39;&gt;,
+ &#39;array&#39;: &lt;module &#39;array&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/array.cpython-37m-darwin.so&#39;&gt;,
+ &#39;ast&#39;: &lt;module &#39;ast&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/ast.py&#39;&gt;,
+ &#39;asyncio&#39;: &lt;module &#39;asyncio&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/asyncio/__init__.py&#39;&gt;,
+ &#39;asyncio.base_events&#39;: &lt;module &#39;asyncio.base_events&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/asyncio/base_events.py&#39;&gt;,
+ &#39;asyncio.base_futures&#39;: &lt;module &#39;asyncio.base_futures&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/asyncio/base_futures.py&#39;&gt;,
+ &#39;asyncio.base_subprocess&#39;: &lt;module &#39;asyncio.base_subprocess&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/asyncio/base_subprocess.py&#39;&gt;,
+ &#39;asyncio.base_tasks&#39;: &lt;module &#39;asyncio.base_tasks&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/asyncio/base_tasks.py&#39;&gt;,
+ &#39;asyncio.constants&#39;: &lt;module &#39;asyncio.constants&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/asyncio/constants.py&#39;&gt;,
+ &#39;asyncio.coroutines&#39;: &lt;module &#39;asyncio.coroutines&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/asyncio/coroutines.py&#39;&gt;,
+ &#39;asyncio.events&#39;: &lt;module &#39;asyncio.events&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/asyncio/events.py&#39;&gt;,
+ &#39;asyncio.format_helpers&#39;: &lt;module &#39;asyncio.format_helpers&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/asyncio/format_helpers.py&#39;&gt;,
+ &#39;asyncio.futures&#39;: &lt;module &#39;asyncio.futures&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/asyncio/futures.py&#39;&gt;,
+ &#39;asyncio.locks&#39;: &lt;module &#39;asyncio.locks&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/asyncio/locks.py&#39;&gt;,
+ &#39;asyncio.log&#39;: &lt;module &#39;asyncio.log&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/asyncio/log.py&#39;&gt;,
+ &#39;asyncio.protocols&#39;: &lt;module &#39;asyncio.protocols&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/asyncio/protocols.py&#39;&gt;,
+ &#39;asyncio.queues&#39;: &lt;module &#39;asyncio.queues&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/asyncio/queues.py&#39;&gt;,
+ &#39;asyncio.runners&#39;: &lt;module &#39;asyncio.runners&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/asyncio/runners.py&#39;&gt;,
+ &#39;asyncio.selector_events&#39;: &lt;module &#39;asyncio.selector_events&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/asyncio/selector_events.py&#39;&gt;,
+ &#39;asyncio.sslproto&#39;: &lt;module &#39;asyncio.sslproto&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/asyncio/sslproto.py&#39;&gt;,
+ &#39;asyncio.streams&#39;: &lt;module &#39;asyncio.streams&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/asyncio/streams.py&#39;&gt;,
+ &#39;asyncio.subprocess&#39;: &lt;module &#39;asyncio.subprocess&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/asyncio/subprocess.py&#39;&gt;,
+ &#39;asyncio.tasks&#39;: &lt;module &#39;asyncio.tasks&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/asyncio/tasks.py&#39;&gt;,
+ &#39;asyncio.transports&#39;: &lt;module &#39;asyncio.transports&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/asyncio/transports.py&#39;&gt;,
+ &#39;asyncio.unix_events&#39;: &lt;module &#39;asyncio.unix_events&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/asyncio/unix_events.py&#39;&gt;,
+ &#39;atexit&#39;: &lt;module &#39;atexit&#39; (built-in)&gt;,
+ &#39;backcall&#39;: &lt;module &#39;backcall&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/backcall/__init__.py&#39;&gt;,
+ &#39;backcall.backcall&#39;: &lt;module &#39;backcall.backcall&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/backcall/backcall.py&#39;&gt;,
+ &#39;base64&#39;: &lt;module &#39;base64&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/base64.py&#39;&gt;,
+ &#39;bdb&#39;: &lt;module &#39;bdb&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/bdb.py&#39;&gt;,
+ &#39;binascii&#39;: &lt;module &#39;binascii&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/binascii.cpython-37m-darwin.so&#39;&gt;,
+ &#39;bisect&#39;: &lt;module &#39;bisect&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/bisect.py&#39;&gt;,
+ &#39;builtins&#39;: &lt;module &#39;builtins&#39; (built-in)&gt;,
+ &#39;bz2&#39;: &lt;module &#39;bz2&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/bz2.py&#39;&gt;,
+ &#39;cProfile&#39;: &lt;module &#39;cProfile&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/cProfile.py&#39;&gt;,
+ &#39;calendar&#39;: &lt;module &#39;calendar&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/calendar.py&#39;&gt;,
+ &#39;cmd&#39;: &lt;module &#39;cmd&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/cmd.py&#39;&gt;,
+ &#39;code&#39;: &lt;module &#39;code&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/code.py&#39;&gt;,
+ &#39;codecs&#39;: &lt;module &#39;codecs&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/codecs.py&#39;&gt;,
+ &#39;codeop&#39;: &lt;module &#39;codeop&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/codeop.py&#39;&gt;,
+ &#39;collections&#39;: &lt;module &#39;collections&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/collections/__init__.py&#39;&gt;,
+ &#39;collections.abc&#39;: &lt;module &#39;collections.abc&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/collections/abc.py&#39;&gt;,
+ &#39;colorama&#39;: &lt;module &#39;colorama&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/colorama/__init__.py&#39;&gt;,
+ &#39;colorama.ansi&#39;: &lt;module &#39;colorama.ansi&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/colorama/ansi.py&#39;&gt;,
+ &#39;colorama.ansitowin32&#39;: &lt;module &#39;colorama.ansitowin32&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/colorama/ansitowin32.py&#39;&gt;,
+ &#39;colorama.initialise&#39;: &lt;module &#39;colorama.initialise&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/colorama/initialise.py&#39;&gt;,
+ &#39;colorama.win32&#39;: &lt;module &#39;colorama.win32&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/colorama/win32.py&#39;&gt;,
+ &#39;colorama.winterm&#39;: &lt;module &#39;colorama.winterm&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/colorama/winterm.py&#39;&gt;,
+ &#39;colorsys&#39;: &lt;module &#39;colorsys&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/colorsys.py&#39;&gt;,
+ &#39;concurrent&#39;: &lt;module &#39;concurrent&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/concurrent/__init__.py&#39;&gt;,
+ &#39;concurrent.futures&#39;: &lt;module &#39;concurrent.futures&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/concurrent/futures/__init__.py&#39;&gt;,
+ &#39;concurrent.futures._base&#39;: &lt;module &#39;concurrent.futures._base&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/concurrent/futures/_base.py&#39;&gt;,
+ &#39;contextlib&#39;: &lt;module &#39;contextlib&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/contextlib.py&#39;&gt;,
+ &#39;contextvars&#39;: &lt;module &#39;contextvars&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/contextvars.py&#39;&gt;,
+ &#39;copy&#39;: &lt;module &#39;copy&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/copy.py&#39;&gt;,
+ &#39;copyreg&#39;: &lt;module &#39;copyreg&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/copyreg.py&#39;&gt;,
+ &#39;ctypes&#39;: &lt;module &#39;ctypes&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/ctypes/__init__.py&#39;&gt;,
+ &#39;ctypes._endian&#39;: &lt;module &#39;ctypes._endian&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/ctypes/_endian.py&#39;&gt;,
+ &#39;ctypes.macholib&#39;: &lt;module &#39;ctypes.macholib&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/ctypes/macholib/__init__.py&#39;&gt;,
+ &#39;ctypes.macholib.dyld&#39;: &lt;module &#39;ctypes.macholib.dyld&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/ctypes/macholib/dyld.py&#39;&gt;,
+ &#39;ctypes.macholib.dylib&#39;: &lt;module &#39;ctypes.macholib.dylib&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/ctypes/macholib/dylib.py&#39;&gt;,
+ &#39;ctypes.macholib.framework&#39;: &lt;module &#39;ctypes.macholib.framework&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/ctypes/macholib/framework.py&#39;&gt;,
+ &#39;ctypes.util&#39;: &lt;module &#39;ctypes.util&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/ctypes/util.py&#39;&gt;,
+ &#39;curses&#39;: &lt;module &#39;curses&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/curses/__init__.py&#39;&gt;,
+ &#39;cython_runtime&#39;: &lt;module &#39;cython_runtime&#39;&gt;,
+ &#39;datetime&#39;: &lt;module &#39;datetime&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/datetime.py&#39;&gt;,
+ &#39;dateutil&#39;: &lt;module &#39;dateutil&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/dateutil/__init__.py&#39;&gt;,
+ &#39;dateutil._common&#39;: &lt;module &#39;dateutil._common&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/dateutil/_common.py&#39;&gt;,
+ &#39;dateutil._version&#39;: &lt;module &#39;dateutil._version&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/dateutil/_version.py&#39;&gt;,
+ &#39;dateutil.parser&#39;: &lt;module &#39;dateutil.parser&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/dateutil/parser/__init__.py&#39;&gt;,
+ &#39;dateutil.parser._parser&#39;: &lt;module &#39;dateutil.parser._parser&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/dateutil/parser/_parser.py&#39;&gt;,
+ &#39;dateutil.parser.isoparser&#39;: &lt;module &#39;dateutil.parser.isoparser&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/dateutil/parser/isoparser.py&#39;&gt;,
+ &#39;dateutil.relativedelta&#39;: &lt;module &#39;dateutil.relativedelta&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/dateutil/relativedelta.py&#39;&gt;,
+ &#39;dateutil.tz&#39;: &lt;module &#39;dateutil.tz&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/dateutil/tz/__init__.py&#39;&gt;,
+ &#39;dateutil.tz._common&#39;: &lt;module &#39;dateutil.tz._common&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/dateutil/tz/_common.py&#39;&gt;,
+ &#39;dateutil.tz._factories&#39;: &lt;module &#39;dateutil.tz._factories&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/dateutil/tz/_factories.py&#39;&gt;,
+ &#39;dateutil.tz.tz&#39;: &lt;module &#39;dateutil.tz.tz&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/dateutil/tz/tz.py&#39;&gt;,
+ &#39;decimal&#39;: &lt;module &#39;decimal&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/decimal.py&#39;&gt;,
+ &#39;decorator&#39;: &lt;module &#39;decorator&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/decorator.py&#39;&gt;,
+ &#39;difflib&#39;: &lt;module &#39;difflib&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/difflib.py&#39;&gt;,
+ &#39;dis&#39;: &lt;module &#39;dis&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/dis.py&#39;&gt;,
+ &#39;distutils&#39;: &lt;module &#39;distutils&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/distutils/__init__.py&#39;&gt;,
+ &#39;distutils.debug&#39;: &lt;module &#39;distutils.debug&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/distutils/debug.py&#39;&gt;,
+ &#39;distutils.dep_util&#39;: &lt;module &#39;distutils.dep_util&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/distutils/dep_util.py&#39;&gt;,
+ &#39;distutils.errors&#39;: &lt;module &#39;distutils.errors&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/distutils/errors.py&#39;&gt;,
+ &#39;distutils.log&#39;: &lt;module &#39;distutils.log&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/distutils/log.py&#39;&gt;,
+ &#39;distutils.spawn&#39;: &lt;module &#39;distutils.spawn&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/distutils/spawn.py&#39;&gt;,
+ &#39;distutils.sysconfig&#39;: &lt;module &#39;distutils.sysconfig&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/distutils/sysconfig.py&#39;&gt;,
+ &#39;distutils.util&#39;: &lt;module &#39;distutils.util&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/distutils/util.py&#39;&gt;,
+ &#39;distutils.version&#39;: &lt;module &#39;distutils.version&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/distutils/version.py&#39;&gt;,
+ &#39;email&#39;: &lt;module &#39;email&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/email/__init__.py&#39;&gt;,
+ &#39;email._encoded_words&#39;: &lt;module &#39;email._encoded_words&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/email/_encoded_words.py&#39;&gt;,
+ &#39;email._parseaddr&#39;: &lt;module &#39;email._parseaddr&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/email/_parseaddr.py&#39;&gt;,
+ &#39;email._policybase&#39;: &lt;module &#39;email._policybase&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/email/_policybase.py&#39;&gt;,
+ &#39;email.base64mime&#39;: &lt;module &#39;email.base64mime&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/email/base64mime.py&#39;&gt;,
+ &#39;email.charset&#39;: &lt;module &#39;email.charset&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/email/charset.py&#39;&gt;,
+ &#39;email.encoders&#39;: &lt;module &#39;email.encoders&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/email/encoders.py&#39;&gt;,
+ &#39;email.errors&#39;: &lt;module &#39;email.errors&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/email/errors.py&#39;&gt;,
+ &#39;email.feedparser&#39;: &lt;module &#39;email.feedparser&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/email/feedparser.py&#39;&gt;,
+ &#39;email.header&#39;: &lt;module &#39;email.header&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/email/header.py&#39;&gt;,
+ &#39;email.iterators&#39;: &lt;module &#39;email.iterators&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/email/iterators.py&#39;&gt;,
+ &#39;email.message&#39;: &lt;module &#39;email.message&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/email/message.py&#39;&gt;,
+ &#39;email.parser&#39;: &lt;module &#39;email.parser&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/email/parser.py&#39;&gt;,
+ &#39;email.quoprimime&#39;: &lt;module &#39;email.quoprimime&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/email/quoprimime.py&#39;&gt;,
+ &#39;email.utils&#39;: &lt;module &#39;email.utils&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/email/utils.py&#39;&gt;,
+ &#39;encodings&#39;: &lt;module &#39;encodings&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/encodings/__init__.py&#39;&gt;,
+ &#39;encodings.aliases&#39;: &lt;module &#39;encodings.aliases&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/encodings/aliases.py&#39;&gt;,
+ &#39;encodings.latin_1&#39;: &lt;module &#39;encodings.latin_1&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/encodings/latin_1.py&#39;&gt;,
+ &#39;encodings.utf_8&#39;: &lt;module &#39;encodings.utf_8&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/encodings/utf_8.py&#39;&gt;,
+ &#39;enum&#39;: &lt;module &#39;enum&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/enum.py&#39;&gt;,
+ &#39;errno&#39;: &lt;module &#39;errno&#39; (built-in)&gt;,
+ &#39;faulthandler&#39;: &lt;module &#39;faulthandler&#39; (built-in)&gt;,
+ &#39;fcntl&#39;: &lt;module &#39;fcntl&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/fcntl.cpython-37m-darwin.so&#39;&gt;,
+ &#39;filecmp&#39;: &lt;module &#39;filecmp&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/filecmp.py&#39;&gt;,
+ &#39;fnmatch&#39;: &lt;module &#39;fnmatch&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/fnmatch.py&#39;&gt;,
+ &#39;functools&#39;: &lt;module &#39;functools&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/functools.py&#39;&gt;,
+ &#39;gc&#39;: &lt;module &#39;gc&#39; (built-in)&gt;,
+ &#39;genericpath&#39;: &lt;module &#39;genericpath&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/genericpath.py&#39;&gt;,
+ &#39;getopt&#39;: &lt;module &#39;getopt&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/getopt.py&#39;&gt;,
+ &#39;getpass&#39;: &lt;module &#39;getpass&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/getpass.py&#39;&gt;,
+ &#39;gettext&#39;: &lt;module &#39;gettext&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/gettext.py&#39;&gt;,
+ &#39;glob&#39;: &lt;module &#39;glob&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/glob.py&#39;&gt;,
+ &#39;google&#39;: &lt;module &#39;google&#39; (namespace)&gt;,
+ &#39;grp&#39;: &lt;module &#39;grp&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/grp.cpython-37m-darwin.so&#39;&gt;,
+ &#39;hashlib&#39;: &lt;module &#39;hashlib&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/hashlib.py&#39;&gt;,
+ &#39;heapq&#39;: &lt;module &#39;heapq&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/heapq.py&#39;&gt;,
+ &#39;hmac&#39;: &lt;module &#39;hmac&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/hmac.py&#39;&gt;,
+ &#39;html&#39;: &lt;module &#39;html&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/html/__init__.py&#39;&gt;,
+ &#39;html.entities&#39;: &lt;module &#39;html.entities&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/html/entities.py&#39;&gt;,
+ &#39;http&#39;: &lt;module &#39;http&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/http/__init__.py&#39;&gt;,
+ &#39;http.client&#39;: &lt;module &#39;http.client&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/http/client.py&#39;&gt;,
+ &#39;imp&#39;: &lt;module &#39;imp&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/imp.py&#39;&gt;,
+ &#39;importlib&#39;: &lt;module &#39;importlib&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/importlib/__init__.py&#39;&gt;,
+ &#39;importlib._bootstrap&#39;: &lt;module &#39;importlib._bootstrap&#39; (frozen)&gt;,
+ &#39;importlib._bootstrap_external&#39;: &lt;module &#39;importlib._bootstrap_external&#39; (frozen)&gt;,
+ &#39;importlib.abc&#39;: &lt;module &#39;importlib.abc&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/importlib/abc.py&#39;&gt;,
+ &#39;importlib.machinery&#39;: &lt;module &#39;importlib.machinery&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/importlib/machinery.py&#39;&gt;,
+ &#39;importlib.util&#39;: &lt;module &#39;importlib.util&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/importlib/util.py&#39;&gt;,
+ &#39;inspect&#39;: &lt;module &#39;inspect&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/inspect.py&#39;&gt;,
+ &#39;io&#39;: &lt;module &#39;io&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/io.py&#39;&gt;,
+ &#39;ipykernel&#39;: &lt;module &#39;ipykernel&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/ipykernel/__init__.py&#39;&gt;,
+ &#39;ipykernel._version&#39;: &lt;module &#39;ipykernel._version&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/ipykernel/_version.py&#39;&gt;,
+ &#39;ipykernel.codeutil&#39;: &lt;module &#39;ipykernel.codeutil&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/ipykernel/codeutil.py&#39;&gt;,
+ &#39;ipykernel.comm&#39;: &lt;module &#39;ipykernel.comm&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/ipykernel/comm/__init__.py&#39;&gt;,
+ &#39;ipykernel.comm.comm&#39;: &lt;module &#39;ipykernel.comm.comm&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/ipykernel/comm/comm.py&#39;&gt;,
+ &#39;ipykernel.comm.manager&#39;: &lt;module &#39;ipykernel.comm.manager&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/ipykernel/comm/manager.py&#39;&gt;,
+ &#39;ipykernel.connect&#39;: &lt;module &#39;ipykernel.connect&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/ipykernel/connect.py&#39;&gt;,
+ &#39;ipykernel.datapub&#39;: &lt;module &#39;ipykernel.datapub&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/ipykernel/datapub.py&#39;&gt;,
+ &#39;ipykernel.displayhook&#39;: &lt;module &#39;ipykernel.displayhook&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/ipykernel/displayhook.py&#39;&gt;,
+ &#39;ipykernel.eventloops&#39;: &lt;module &#39;ipykernel.eventloops&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/ipykernel/eventloops.py&#39;&gt;,
+ &#39;ipykernel.heartbeat&#39;: &lt;module &#39;ipykernel.heartbeat&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/ipykernel/heartbeat.py&#39;&gt;,
+ &#39;ipykernel.iostream&#39;: &lt;module &#39;ipykernel.iostream&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/ipykernel/iostream.py&#39;&gt;,
+ &#39;ipykernel.ipkernel&#39;: &lt;module &#39;ipykernel.ipkernel&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/ipykernel/ipkernel.py&#39;&gt;,
+ &#39;ipykernel.jsonutil&#39;: &lt;module &#39;ipykernel.jsonutil&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/ipykernel/jsonutil.py&#39;&gt;,
+ &#39;ipykernel.kernelapp&#39;: &lt;module &#39;ipykernel.kernelapp&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/ipykernel/kernelapp.py&#39;&gt;,
+ &#39;ipykernel.kernelbase&#39;: &lt;module &#39;ipykernel.kernelbase&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/ipykernel/kernelbase.py&#39;&gt;,
+ &#39;ipykernel.parentpoller&#39;: &lt;module &#39;ipykernel.parentpoller&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/ipykernel/parentpoller.py&#39;&gt;,
+ &#39;ipykernel.pickleutil&#39;: &lt;module &#39;ipykernel.pickleutil&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/ipykernel/pickleutil.py&#39;&gt;,
+ &#39;ipykernel.serialize&#39;: &lt;module &#39;ipykernel.serialize&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/ipykernel/serialize.py&#39;&gt;,
+ &#39;ipykernel.zmqshell&#39;: &lt;module &#39;ipykernel.zmqshell&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/ipykernel/zmqshell.py&#39;&gt;,
+ &#39;ipython_genutils&#39;: &lt;module &#39;ipython_genutils&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/ipython_genutils/__init__.py&#39;&gt;,
+ &#39;ipython_genutils._version&#39;: &lt;module &#39;ipython_genutils._version&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/ipython_genutils/_version.py&#39;&gt;,
+ &#39;ipython_genutils.encoding&#39;: &lt;module &#39;ipython_genutils.encoding&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/ipython_genutils/encoding.py&#39;&gt;,
+ &#39;ipython_genutils.importstring&#39;: &lt;module &#39;ipython_genutils.importstring&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/ipython_genutils/importstring.py&#39;&gt;,
+ &#39;ipython_genutils.path&#39;: &lt;module &#39;ipython_genutils.path&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/ipython_genutils/path.py&#39;&gt;,
+ &#39;ipython_genutils.py3compat&#39;: &lt;module &#39;ipython_genutils.py3compat&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/ipython_genutils/py3compat.py&#39;&gt;,
+ &#39;ipython_genutils.text&#39;: &lt;module &#39;ipython_genutils.text&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/ipython_genutils/text.py&#39;&gt;,
+ &#39;itertools&#39;: &lt;module &#39;itertools&#39; (built-in)&gt;,
+ &#39;jedi&#39;: &lt;module &#39;jedi&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/__init__.py&#39;&gt;,
+ &#39;jedi._compatibility&#39;: &lt;module &#39;jedi._compatibility&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/_compatibility.py&#39;&gt;,
+ &#39;jedi.api&#39;: &lt;module &#39;jedi.api&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/api/__init__.py&#39;&gt;,
+ &#39;jedi.api.classes&#39;: &lt;module &#39;jedi.api.classes&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/api/classes.py&#39;&gt;,
+ &#39;jedi.api.completion&#39;: &lt;module &#39;jedi.api.completion&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/api/completion.py&#39;&gt;,
+ &#39;jedi.api.completion_cache&#39;: &lt;module &#39;jedi.api.completion_cache&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/api/completion_cache.py&#39;&gt;,
+ &#39;jedi.api.environment&#39;: &lt;module &#39;jedi.api.environment&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/api/environment.py&#39;&gt;,
+ &#39;jedi.api.errors&#39;: &lt;module &#39;jedi.api.errors&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/api/errors.py&#39;&gt;,
+ &#39;jedi.api.exceptions&#39;: &lt;module &#39;jedi.api.exceptions&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/api/exceptions.py&#39;&gt;,
+ &#39;jedi.api.file_name&#39;: &lt;module &#39;jedi.api.file_name&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/api/file_name.py&#39;&gt;,
+ &#39;jedi.api.helpers&#39;: &lt;module &#39;jedi.api.helpers&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/api/helpers.py&#39;&gt;,
+ &#39;jedi.api.interpreter&#39;: &lt;module &#39;jedi.api.interpreter&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/api/interpreter.py&#39;&gt;,
+ &#39;jedi.api.keywords&#39;: &lt;module &#39;jedi.api.keywords&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/api/keywords.py&#39;&gt;,
+ &#39;jedi.api.project&#39;: &lt;module &#39;jedi.api.project&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/api/project.py&#39;&gt;,
+ &#39;jedi.api.refactoring&#39;: &lt;module &#39;jedi.api.refactoring&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/api/refactoring/__init__.py&#39;&gt;,
+ &#39;jedi.api.refactoring.extract&#39;: &lt;module &#39;jedi.api.refactoring.extract&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/api/refactoring/extract.py&#39;&gt;,
+ &#39;jedi.api.strings&#39;: &lt;module &#39;jedi.api.strings&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/api/strings.py&#39;&gt;,
+ &#39;jedi.cache&#39;: &lt;module &#39;jedi.cache&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/cache.py&#39;&gt;,
+ &#39;jedi.common&#39;: &lt;module &#39;jedi.common&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/common.py&#39;&gt;,
+ &#39;jedi.debug&#39;: &lt;module &#39;jedi.debug&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/debug.py&#39;&gt;,
+ &#39;jedi.file_io&#39;: &lt;module &#39;jedi.file_io&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/file_io.py&#39;&gt;,
+ &#39;jedi.inference&#39;: &lt;module &#39;jedi.inference&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/__init__.py&#39;&gt;,
+ &#39;jedi.inference.analysis&#39;: &lt;module &#39;jedi.inference.analysis&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/analysis.py&#39;&gt;,
+ &#39;jedi.inference.arguments&#39;: &lt;module &#39;jedi.inference.arguments&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/arguments.py&#39;&gt;,
+ &#39;jedi.inference.base_value&#39;: &lt;module &#39;jedi.inference.base_value&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/base_value.py&#39;&gt;,
+ &#39;jedi.inference.cache&#39;: &lt;module &#39;jedi.inference.cache&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/cache.py&#39;&gt;,
+ &#39;jedi.inference.compiled&#39;: &lt;module &#39;jedi.inference.compiled&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/compiled/__init__.py&#39;&gt;,
+ &#39;jedi.inference.compiled.access&#39;: &lt;module &#39;jedi.inference.compiled.access&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/compiled/access.py&#39;&gt;,
+ &#39;jedi.inference.compiled.getattr_static&#39;: &lt;module &#39;jedi.inference.compiled.getattr_static&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/compiled/getattr_static.py&#39;&gt;,
+ &#39;jedi.inference.compiled.mixed&#39;: &lt;module &#39;jedi.inference.compiled.mixed&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/compiled/mixed.py&#39;&gt;,
+ &#39;jedi.inference.compiled.subprocess&#39;: &lt;module &#39;jedi.inference.compiled.subprocess&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/compiled/subprocess/__init__.py&#39;&gt;,
+ &#39;jedi.inference.compiled.subprocess.functions&#39;: &lt;module &#39;jedi.inference.compiled.subprocess.functions&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/compiled/subprocess/functions.py&#39;&gt;,
+ &#39;jedi.inference.compiled.value&#39;: &lt;module &#39;jedi.inference.compiled.value&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/compiled/value.py&#39;&gt;,
+ &#39;jedi.inference.context&#39;: &lt;module &#39;jedi.inference.context&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/context.py&#39;&gt;,
+ &#39;jedi.inference.docstrings&#39;: &lt;module &#39;jedi.inference.docstrings&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/docstrings.py&#39;&gt;,
+ &#39;jedi.inference.filters&#39;: &lt;module &#39;jedi.inference.filters&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/filters.py&#39;&gt;,
+ &#39;jedi.inference.flow_analysis&#39;: &lt;module &#39;jedi.inference.flow_analysis&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/flow_analysis.py&#39;&gt;,
+ &#39;jedi.inference.gradual&#39;: &lt;module &#39;jedi.inference.gradual&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/gradual/__init__.py&#39;&gt;,
+ &#39;jedi.inference.gradual.annotation&#39;: &lt;module &#39;jedi.inference.gradual.annotation&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/gradual/annotation.py&#39;&gt;,
+ &#39;jedi.inference.gradual.base&#39;: &lt;module &#39;jedi.inference.gradual.base&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/gradual/base.py&#39;&gt;,
+ &#39;jedi.inference.gradual.conversion&#39;: &lt;module &#39;jedi.inference.gradual.conversion&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/gradual/conversion.py&#39;&gt;,
+ &#39;jedi.inference.gradual.generics&#39;: &lt;module &#39;jedi.inference.gradual.generics&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/gradual/generics.py&#39;&gt;,
+ &#39;jedi.inference.gradual.stub_value&#39;: &lt;module &#39;jedi.inference.gradual.stub_value&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/gradual/stub_value.py&#39;&gt;,
+ &#39;jedi.inference.gradual.type_var&#39;: &lt;module &#39;jedi.inference.gradual.type_var&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/gradual/type_var.py&#39;&gt;,
+ &#39;jedi.inference.gradual.typeshed&#39;: &lt;module &#39;jedi.inference.gradual.typeshed&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/gradual/typeshed.py&#39;&gt;,
+ &#39;jedi.inference.gradual.typing&#39;: &lt;module &#39;jedi.inference.gradual.typing&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/gradual/typing.py&#39;&gt;,
+ &#39;jedi.inference.gradual.utils&#39;: &lt;module &#39;jedi.inference.gradual.utils&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/gradual/utils.py&#39;&gt;,
+ &#39;jedi.inference.helpers&#39;: &lt;module &#39;jedi.inference.helpers&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/helpers.py&#39;&gt;,
+ &#39;jedi.inference.imports&#39;: &lt;module &#39;jedi.inference.imports&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/imports.py&#39;&gt;,
+ &#39;jedi.inference.lazy_value&#39;: &lt;module &#39;jedi.inference.lazy_value&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/lazy_value.py&#39;&gt;,
+ &#39;jedi.inference.names&#39;: &lt;module &#39;jedi.inference.names&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/names.py&#39;&gt;,
+ &#39;jedi.inference.param&#39;: &lt;module &#39;jedi.inference.param&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/param.py&#39;&gt;,
+ &#39;jedi.inference.parser_cache&#39;: &lt;module &#39;jedi.inference.parser_cache&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/parser_cache.py&#39;&gt;,
+ &#39;jedi.inference.recursion&#39;: &lt;module &#39;jedi.inference.recursion&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/recursion.py&#39;&gt;,
+ &#39;jedi.inference.references&#39;: &lt;module &#39;jedi.inference.references&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/references.py&#39;&gt;,
+ &#39;jedi.inference.signature&#39;: &lt;module &#39;jedi.inference.signature&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/signature.py&#39;&gt;,
+ &#39;jedi.inference.syntax_tree&#39;: &lt;module &#39;jedi.inference.syntax_tree&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/syntax_tree.py&#39;&gt;,
+ &#39;jedi.inference.sys_path&#39;: &lt;module &#39;jedi.inference.sys_path&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/sys_path.py&#39;&gt;,
+ &#39;jedi.inference.utils&#39;: &lt;module &#39;jedi.inference.utils&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/utils.py&#39;&gt;,
+ &#39;jedi.inference.value&#39;: &lt;module &#39;jedi.inference.value&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/value/__init__.py&#39;&gt;,
+ &#39;jedi.inference.value.decorator&#39;: &lt;module &#39;jedi.inference.value.decorator&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/value/decorator.py&#39;&gt;,
+ &#39;jedi.inference.value.dynamic_arrays&#39;: &lt;module &#39;jedi.inference.value.dynamic_arrays&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/value/dynamic_arrays.py&#39;&gt;,
+ &#39;jedi.inference.value.function&#39;: &lt;module &#39;jedi.inference.value.function&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/value/function.py&#39;&gt;,
+ &#39;jedi.inference.value.instance&#39;: &lt;module &#39;jedi.inference.value.instance&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/value/instance.py&#39;&gt;,
+ &#39;jedi.inference.value.iterable&#39;: &lt;module &#39;jedi.inference.value.iterable&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/value/iterable.py&#39;&gt;,
+ &#39;jedi.inference.value.klass&#39;: &lt;module &#39;jedi.inference.value.klass&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/value/klass.py&#39;&gt;,
+ &#39;jedi.inference.value.module&#39;: &lt;module &#39;jedi.inference.value.module&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/inference/value/module.py&#39;&gt;,
+ &#39;jedi.parser_utils&#39;: &lt;module &#39;jedi.parser_utils&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/parser_utils.py&#39;&gt;,
+ &#39;jedi.plugins&#39;: &lt;module &#39;jedi.plugins&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/plugins/__init__.py&#39;&gt;,
+ &#39;jedi.plugins.django&#39;: &lt;module &#39;jedi.plugins.django&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/plugins/django.py&#39;&gt;,
+ &#39;jedi.plugins.flask&#39;: &lt;module &#39;jedi.plugins.flask&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/plugins/flask.py&#39;&gt;,
+ &#39;jedi.plugins.pytest&#39;: &lt;module &#39;jedi.plugins.pytest&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/plugins/pytest.py&#39;&gt;,
+ &#39;jedi.plugins.registry&#39;: &lt;module &#39;jedi.plugins.registry&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/plugins/registry.py&#39;&gt;,
+ &#39;jedi.plugins.stdlib&#39;: &lt;module &#39;jedi.plugins.stdlib&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/plugins/stdlib.py&#39;&gt;,
+ &#39;jedi.settings&#39;: &lt;module &#39;jedi.settings&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jedi/settings.py&#39;&gt;,
+ &#39;json&#39;: &lt;module &#39;json&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/json/__init__.py&#39;&gt;,
+ &#39;json.decoder&#39;: &lt;module &#39;json.decoder&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/json/decoder.py&#39;&gt;,
+ &#39;json.encoder&#39;: &lt;module &#39;json.encoder&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/json/encoder.py&#39;&gt;,
+ &#39;json.scanner&#39;: &lt;module &#39;json.scanner&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/json/scanner.py&#39;&gt;,
+ &#39;jupyter_client&#39;: &lt;module &#39;jupyter_client&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jupyter_client/__init__.py&#39;&gt;,
+ &#39;jupyter_client._version&#39;: &lt;module &#39;jupyter_client._version&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jupyter_client/_version.py&#39;&gt;,
+ &#39;jupyter_client.adapter&#39;: &lt;module &#39;jupyter_client.adapter&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jupyter_client/adapter.py&#39;&gt;,
+ &#39;jupyter_client.asynchronous&#39;: &lt;module &#39;jupyter_client.asynchronous&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jupyter_client/asynchronous/__init__.py&#39;&gt;,
+ &#39;jupyter_client.asynchronous.channels&#39;: &lt;module &#39;jupyter_client.asynchronous.channels&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jupyter_client/asynchronous/channels.py&#39;&gt;,
+ &#39;jupyter_client.asynchronous.client&#39;: &lt;module &#39;jupyter_client.asynchronous.client&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jupyter_client/asynchronous/client.py&#39;&gt;,
+ &#39;jupyter_client.blocking&#39;: &lt;module &#39;jupyter_client.blocking&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jupyter_client/blocking/__init__.py&#39;&gt;,
+ &#39;jupyter_client.blocking.channels&#39;: &lt;module &#39;jupyter_client.blocking.channels&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jupyter_client/blocking/channels.py&#39;&gt;,
+ &#39;jupyter_client.blocking.client&#39;: &lt;module &#39;jupyter_client.blocking.client&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jupyter_client/blocking/client.py&#39;&gt;,
+ &#39;jupyter_client.channels&#39;: &lt;module &#39;jupyter_client.channels&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jupyter_client/channels.py&#39;&gt;,
+ &#39;jupyter_client.channelsabc&#39;: &lt;module &#39;jupyter_client.channelsabc&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jupyter_client/channelsabc.py&#39;&gt;,
+ &#39;jupyter_client.client&#39;: &lt;module &#39;jupyter_client.client&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jupyter_client/client.py&#39;&gt;,
+ &#39;jupyter_client.clientabc&#39;: &lt;module &#39;jupyter_client.clientabc&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jupyter_client/clientabc.py&#39;&gt;,
+ &#39;jupyter_client.connect&#39;: &lt;module &#39;jupyter_client.connect&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jupyter_client/connect.py&#39;&gt;,
+ &#39;jupyter_client.jsonutil&#39;: &lt;module &#39;jupyter_client.jsonutil&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jupyter_client/jsonutil.py&#39;&gt;,
+ &#39;jupyter_client.kernelspec&#39;: &lt;module &#39;jupyter_client.kernelspec&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jupyter_client/kernelspec.py&#39;&gt;,
+ &#39;jupyter_client.launcher&#39;: &lt;module &#39;jupyter_client.launcher&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jupyter_client/launcher.py&#39;&gt;,
+ &#39;jupyter_client.localinterfaces&#39;: &lt;module &#39;jupyter_client.localinterfaces&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jupyter_client/localinterfaces.py&#39;&gt;,
+ &#39;jupyter_client.manager&#39;: &lt;module &#39;jupyter_client.manager&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jupyter_client/manager.py&#39;&gt;,
+ &#39;jupyter_client.managerabc&#39;: &lt;module &#39;jupyter_client.managerabc&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jupyter_client/managerabc.py&#39;&gt;,
+ &#39;jupyter_client.multikernelmanager&#39;: &lt;module &#39;jupyter_client.multikernelmanager&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jupyter_client/multikernelmanager.py&#39;&gt;,
+ &#39;jupyter_client.session&#39;: &lt;module &#39;jupyter_client.session&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jupyter_client/session.py&#39;&gt;,
+ &#39;jupyter_core&#39;: &lt;module &#39;jupyter_core&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jupyter_core/__init__.py&#39;&gt;,
+ &#39;jupyter_core.paths&#39;: &lt;module &#39;jupyter_core.paths&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jupyter_core/paths.py&#39;&gt;,
+ &#39;jupyter_core.version&#39;: &lt;module &#39;jupyter_core.version&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/jupyter_core/version.py&#39;&gt;,
+ &#39;keyword&#39;: &lt;module &#39;keyword&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/keyword.py&#39;&gt;,
+ &#39;linecache&#39;: &lt;module &#39;linecache&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/linecache.py&#39;&gt;,
+ &#39;locale&#39;: &lt;module &#39;locale&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/locale.py&#39;&gt;,
+ &#39;logging&#39;: &lt;module &#39;logging&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/logging/__init__.py&#39;&gt;,
+ &#39;logging.handlers&#39;: &lt;module &#39;logging.handlers&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/logging/handlers.py&#39;&gt;,
+ &#39;lzma&#39;: &lt;module &#39;lzma&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lzma.py&#39;&gt;,
+ &#39;marshal&#39;: &lt;module &#39;marshal&#39; (built-in)&gt;,
+ &#39;math&#39;: &lt;module &#39;math&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/math.cpython-37m-darwin.so&#39;&gt;,
+ &#39;mimetypes&#39;: &lt;module &#39;mimetypes&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/mimetypes.py&#39;&gt;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>,
+ &#39;mpl_toolkits&#39;: &lt;module &#39;mpl_toolkits&#39; (namespace)&gt;,
+ &#39;ntpath&#39;: &lt;module &#39;ntpath&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/ntpath.py&#39;&gt;,
+ &#39;numbers&#39;: &lt;module &#39;numbers&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/numbers.py&#39;&gt;,
+ &#39;opcode&#39;: &lt;module &#39;opcode&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/opcode.py&#39;&gt;,
+ &#39;operator&#39;: &lt;module &#39;operator&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/operator.py&#39;&gt;,
+ &#39;os&#39;: &lt;module &#39;os&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/os.py&#39;&gt;,
+ &#39;os.path&#39;: &lt;module &#39;posixpath&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/posixpath.py&#39;&gt;,
+ &#39;parso&#39;: &lt;module &#39;parso&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/parso/__init__.py&#39;&gt;,
+ &#39;parso._compatibility&#39;: &lt;module &#39;parso._compatibility&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/parso/_compatibility.py&#39;&gt;,
+ &#39;parso.cache&#39;: &lt;module &#39;parso.cache&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/parso/cache.py&#39;&gt;,
+ &#39;parso.file_io&#39;: &lt;module &#39;parso.file_io&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/parso/file_io.py&#39;&gt;,
+ &#39;parso.grammar&#39;: &lt;module &#39;parso.grammar&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/parso/grammar.py&#39;&gt;,
+ &#39;parso.normalizer&#39;: &lt;module &#39;parso.normalizer&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/parso/normalizer.py&#39;&gt;,
+ &#39;parso.parser&#39;: &lt;module &#39;parso.parser&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/parso/parser.py&#39;&gt;,
+ &#39;parso.pgen2&#39;: &lt;module &#39;parso.pgen2&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/parso/pgen2/__init__.py&#39;&gt;,
+ &#39;parso.pgen2.generator&#39;: &lt;module &#39;parso.pgen2.generator&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/parso/pgen2/generator.py&#39;&gt;,
+ &#39;parso.pgen2.grammar_parser&#39;: &lt;module &#39;parso.pgen2.grammar_parser&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/parso/pgen2/grammar_parser.py&#39;&gt;,
+ &#39;parso.python&#39;: &lt;module &#39;parso.python&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/parso/python/__init__.py&#39;&gt;,
+ &#39;parso.python.diff&#39;: &lt;module &#39;parso.python.diff&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/parso/python/diff.py&#39;&gt;,
+ &#39;parso.python.errors&#39;: &lt;module &#39;parso.python.errors&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/parso/python/errors.py&#39;&gt;,
+ &#39;parso.python.parser&#39;: &lt;module &#39;parso.python.parser&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/parso/python/parser.py&#39;&gt;,
+ &#39;parso.python.pep8&#39;: &lt;module &#39;parso.python.pep8&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/parso/python/pep8.py&#39;&gt;,
+ &#39;parso.python.prefix&#39;: &lt;module &#39;parso.python.prefix&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/parso/python/prefix.py&#39;&gt;,
+ &#39;parso.python.token&#39;: &lt;module &#39;parso.python.token&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/parso/python/token.py&#39;&gt;,
+ &#39;parso.python.tokenize&#39;: &lt;module &#39;parso.python.tokenize&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/parso/python/tokenize.py&#39;&gt;,
+ &#39;parso.python.tree&#39;: &lt;module &#39;parso.python.tree&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/parso/python/tree.py&#39;&gt;,
+ &#39;parso.tree&#39;: &lt;module &#39;parso.tree&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/parso/tree.py&#39;&gt;,
+ &#39;parso.utils&#39;: &lt;module &#39;parso.utils&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/parso/utils.py&#39;&gt;,
+ &#39;pathlib&#39;: &lt;module &#39;pathlib&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/pathlib.py&#39;&gt;,
+ &#39;pdb&#39;: &lt;module &#39;pdb&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/pdb.py&#39;&gt;,
+ &#39;pexpect&#39;: &lt;module &#39;pexpect&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/pexpect/__init__.py&#39;&gt;,
+ &#39;pexpect.exceptions&#39;: &lt;module &#39;pexpect.exceptions&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/pexpect/exceptions.py&#39;&gt;,
+ &#39;pexpect.expect&#39;: &lt;module &#39;pexpect.expect&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/pexpect/expect.py&#39;&gt;,
+ &#39;pexpect.pty_spawn&#39;: &lt;module &#39;pexpect.pty_spawn&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/pexpect/pty_spawn.py&#39;&gt;,
+ &#39;pexpect.run&#39;: &lt;module &#39;pexpect.run&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/pexpect/run.py&#39;&gt;,
+ &#39;pexpect.spawnbase&#39;: &lt;module &#39;pexpect.spawnbase&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/pexpect/spawnbase.py&#39;&gt;,
+ &#39;pexpect.utils&#39;: &lt;module &#39;pexpect.utils&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/pexpect/utils.py&#39;&gt;,
+ &#39;pickle&#39;: &lt;module &#39;pickle&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/pickle.py&#39;&gt;,
+ &#39;pickleshare&#39;: &lt;module &#39;pickleshare&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/pickleshare.py&#39;&gt;,
+ &#39;pkgutil&#39;: &lt;module &#39;pkgutil&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/pkgutil.py&#39;&gt;,
+ &#39;platform&#39;: &lt;module &#39;platform&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/platform.py&#39;&gt;,
+ &#39;plistlib&#39;: &lt;module &#39;plistlib&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/plistlib.py&#39;&gt;,
+ &#39;posix&#39;: &lt;module &#39;posix&#39; (built-in)&gt;,
+ &#39;posixpath&#39;: &lt;module &#39;posixpath&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/posixpath.py&#39;&gt;,
+ &#39;pprint&#39;: &lt;module &#39;pprint&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/pprint.py&#39;&gt;,
+ &#39;profile&#39;: &lt;module &#39;profile&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/profile.py&#39;&gt;,
+ &#39;prompt_toolkit&#39;: &lt;module &#39;prompt_toolkit&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/__init__.py&#39;&gt;,
+ &#39;prompt_toolkit.application&#39;: &lt;module &#39;prompt_toolkit.application&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/application/__init__.py&#39;&gt;,
+ &#39;prompt_toolkit.application.application&#39;: &lt;module &#39;prompt_toolkit.application.application&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/application/application.py&#39;&gt;,
+ &#39;prompt_toolkit.application.current&#39;: &lt;module &#39;prompt_toolkit.application.current&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/application/current.py&#39;&gt;,
+ &#39;prompt_toolkit.application.dummy&#39;: &lt;module &#39;prompt_toolkit.application.dummy&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/application/dummy.py&#39;&gt;,
+ &#39;prompt_toolkit.application.run_in_terminal&#39;: &lt;module &#39;prompt_toolkit.application.run_in_terminal&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/application/run_in_terminal.py&#39;&gt;,
+ &#39;prompt_toolkit.auto_suggest&#39;: &lt;module &#39;prompt_toolkit.auto_suggest&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/auto_suggest.py&#39;&gt;,
+ &#39;prompt_toolkit.buffer&#39;: &lt;module &#39;prompt_toolkit.buffer&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/buffer.py&#39;&gt;,
+ &#39;prompt_toolkit.cache&#39;: &lt;module &#39;prompt_toolkit.cache&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/cache.py&#39;&gt;,
+ &#39;prompt_toolkit.clipboard&#39;: &lt;module &#39;prompt_toolkit.clipboard&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/clipboard/__init__.py&#39;&gt;,
+ &#39;prompt_toolkit.clipboard.base&#39;: &lt;module &#39;prompt_toolkit.clipboard.base&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/clipboard/base.py&#39;&gt;,
+ &#39;prompt_toolkit.clipboard.in_memory&#39;: &lt;module &#39;prompt_toolkit.clipboard.in_memory&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/clipboard/in_memory.py&#39;&gt;,
+ &#39;prompt_toolkit.completion&#39;: &lt;module &#39;prompt_toolkit.completion&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/completion/__init__.py&#39;&gt;,
+ &#39;prompt_toolkit.completion.base&#39;: &lt;module &#39;prompt_toolkit.completion.base&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/completion/base.py&#39;&gt;,
+ &#39;prompt_toolkit.completion.filesystem&#39;: &lt;module &#39;prompt_toolkit.completion.filesystem&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/completion/filesystem.py&#39;&gt;,
+ &#39;prompt_toolkit.completion.fuzzy_completer&#39;: &lt;module &#39;prompt_toolkit.completion.fuzzy_completer&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/completion/fuzzy_completer.py&#39;&gt;,
+ &#39;prompt_toolkit.completion.nested&#39;: &lt;module &#39;prompt_toolkit.completion.nested&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/completion/nested.py&#39;&gt;,
+ &#39;prompt_toolkit.completion.word_completer&#39;: &lt;module &#39;prompt_toolkit.completion.word_completer&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/completion/word_completer.py&#39;&gt;,
+ &#39;prompt_toolkit.data_structures&#39;: &lt;module &#39;prompt_toolkit.data_structures&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/data_structures.py&#39;&gt;,
+ &#39;prompt_toolkit.document&#39;: &lt;module &#39;prompt_toolkit.document&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/document.py&#39;&gt;,
+ &#39;prompt_toolkit.enums&#39;: &lt;module &#39;prompt_toolkit.enums&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/enums.py&#39;&gt;,
+ &#39;prompt_toolkit.eventloop&#39;: &lt;module &#39;prompt_toolkit.eventloop&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/eventloop/__init__.py&#39;&gt;,
+ &#39;prompt_toolkit.eventloop.async_generator&#39;: &lt;module &#39;prompt_toolkit.eventloop.async_generator&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/eventloop/async_generator.py&#39;&gt;,
+ &#39;prompt_toolkit.eventloop.inputhook&#39;: &lt;module &#39;prompt_toolkit.eventloop.inputhook&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/eventloop/inputhook.py&#39;&gt;,
+ &#39;prompt_toolkit.eventloop.utils&#39;: &lt;module &#39;prompt_toolkit.eventloop.utils&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/eventloop/utils.py&#39;&gt;,
+ &#39;prompt_toolkit.filters&#39;: &lt;module &#39;prompt_toolkit.filters&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/filters/__init__.py&#39;&gt;,
+ &#39;prompt_toolkit.filters.app&#39;: &lt;module &#39;prompt_toolkit.filters.app&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/filters/app.py&#39;&gt;,
+ &#39;prompt_toolkit.filters.base&#39;: &lt;module &#39;prompt_toolkit.filters.base&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/filters/base.py&#39;&gt;,
+ &#39;prompt_toolkit.filters.cli&#39;: &lt;module &#39;prompt_toolkit.filters.cli&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/filters/cli.py&#39;&gt;,
+ &#39;prompt_toolkit.filters.utils&#39;: &lt;module &#39;prompt_toolkit.filters.utils&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/filters/utils.py&#39;&gt;,
+ &#39;prompt_toolkit.formatted_text&#39;: &lt;module &#39;prompt_toolkit.formatted_text&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/formatted_text/__init__.py&#39;&gt;,
+ &#39;prompt_toolkit.formatted_text.ansi&#39;: &lt;module &#39;prompt_toolkit.formatted_text.ansi&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/formatted_text/ansi.py&#39;&gt;,
+ &#39;prompt_toolkit.formatted_text.base&#39;: &lt;module &#39;prompt_toolkit.formatted_text.base&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/formatted_text/base.py&#39;&gt;,
+ &#39;prompt_toolkit.formatted_text.html&#39;: &lt;module &#39;prompt_toolkit.formatted_text.html&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/formatted_text/html.py&#39;&gt;,
+ &#39;prompt_toolkit.formatted_text.pygments&#39;: &lt;module &#39;prompt_toolkit.formatted_text.pygments&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/formatted_text/pygments.py&#39;&gt;,
+ &#39;prompt_toolkit.formatted_text.utils&#39;: &lt;module &#39;prompt_toolkit.formatted_text.utils&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/formatted_text/utils.py&#39;&gt;,
+ &#39;prompt_toolkit.history&#39;: &lt;module &#39;prompt_toolkit.history&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/history.py&#39;&gt;,
+ &#39;prompt_toolkit.input&#39;: &lt;module &#39;prompt_toolkit.input&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/input/__init__.py&#39;&gt;,
+ &#39;prompt_toolkit.input.ansi_escape_sequences&#39;: &lt;module &#39;prompt_toolkit.input.ansi_escape_sequences&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/input/ansi_escape_sequences.py&#39;&gt;,
+ &#39;prompt_toolkit.input.base&#39;: &lt;module &#39;prompt_toolkit.input.base&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/input/base.py&#39;&gt;,
+ &#39;prompt_toolkit.input.defaults&#39;: &lt;module &#39;prompt_toolkit.input.defaults&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/input/defaults.py&#39;&gt;,
+ &#39;prompt_toolkit.input.typeahead&#39;: &lt;module &#39;prompt_toolkit.input.typeahead&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/input/typeahead.py&#39;&gt;,
+ &#39;prompt_toolkit.input.vt100_parser&#39;: &lt;module &#39;prompt_toolkit.input.vt100_parser&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/input/vt100_parser.py&#39;&gt;,
+ &#39;prompt_toolkit.key_binding&#39;: &lt;module &#39;prompt_toolkit.key_binding&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/key_binding/__init__.py&#39;&gt;,
+ &#39;prompt_toolkit.key_binding.bindings&#39;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>: &lt;module &#39;prompt_toolkit.key_binding.bindings&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/key_binding/bindings/__init__.py&#39;&gt;,
+ &#39;prompt_toolkit.key_binding.bindings.auto_suggest&#39;: &lt;module &#39;prompt_toolkit.key_binding.bindings.auto_suggest&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/key_binding/bindings/auto_suggest.py&#39;&gt;,
+ &#39;prompt_toolkit.key_binding.bindings.basic&#39;: &lt;module &#39;prompt_toolkit.key_binding.bindings.basic&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/key_binding/bindings/basic.py&#39;&gt;,
+ &#39;prompt_toolkit.key_binding.bindings.completion&#39;: &lt;module &#39;prompt_toolkit.key_binding.bindings.completion&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/key_binding/bindings/completion.py&#39;&gt;,
+ &#39;prompt_toolkit.key_binding.bindings.cpr&#39;: &lt;module &#39;prompt_toolkit.key_binding.bindings.cpr&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/key_binding/bindings/cpr.py&#39;&gt;,
+ &#39;prompt_toolkit.key_binding.bindings.emacs&#39;: &lt;module &#39;prompt_toolkit.key_binding.bindings.emacs&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/key_binding/bindings/emacs.py&#39;&gt;,
+ &#39;prompt_toolkit.key_binding.bindings.focus&#39;: &lt;module &#39;prompt_toolkit.key_binding.bindings.focus&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/key_binding/bindings/focus.py&#39;&gt;,
+ &#39;prompt_toolkit.key_binding.bindings.mouse&#39;: &lt;module &#39;prompt_toolkit.key_binding.bindings.mouse&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/key_binding/bindings/mouse.py&#39;&gt;,
+ &#39;prompt_toolkit.key_binding.bindings.named_commands&#39;: &lt;module &#39;prompt_toolkit.key_binding.bindings.named_commands&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/key_binding/bindings/named_commands.py&#39;&gt;,
+ &#39;prompt_toolkit.key_binding.bindings.open_in_editor&#39;: &lt;module &#39;prompt_toolkit.key_binding.bindings.open_in_editor&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/key_binding/bindings/open_in_editor.py&#39;&gt;,
+ &#39;prompt_toolkit.key_binding.bindings.page_navigation&#39;: &lt;module &#39;prompt_toolkit.key_binding.bindings.page_navigation&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/key_binding/bindings/page_navigation.py&#39;&gt;,
+ &#39;prompt_toolkit.key_binding.bindings.scroll&#39;: &lt;module &#39;prompt_toolkit.key_binding.bindings.scroll&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/key_binding/bindings/scroll.py&#39;&gt;,
+ &#39;prompt_toolkit.key_binding.bindings.vi&#39;: &lt;module &#39;prompt_toolkit.key_binding.bindings.vi&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/key_binding/bindings/vi.py&#39;&gt;,
+ &#39;prompt_toolkit.key_binding.defaults&#39;: &lt;module &#39;prompt_toolkit.key_binding.defaults&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/key_binding/defaults.py&#39;&gt;,
+ &#39;prompt_toolkit.key_binding.digraphs&#39;: &lt;module &#39;prompt_toolkit.key_binding.digraphs&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/key_binding/digraphs.py&#39;&gt;,
+ &#39;prompt_toolkit.key_binding.emacs_state&#39;: &lt;module &#39;prompt_toolkit.key_binding.emacs_state&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/key_binding/emacs_state.py&#39;&gt;,
+ &#39;prompt_toolkit.key_binding.key_bindings&#39;: &lt;module &#39;prompt_toolkit.key_binding.key_bindings&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/key_binding/key_bindings.py&#39;&gt;,
+ &#39;prompt_toolkit.key_binding.key_processor&#39;: &lt;module &#39;prompt_toolkit.key_binding.key_processor&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/key_binding/key_processor.py&#39;&gt;,
+ &#39;prompt_toolkit.key_binding.vi_state&#39;: &lt;module &#39;prompt_toolkit.key_binding.vi_state&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/key_binding/vi_state.py&#39;&gt;,
+ &#39;prompt_toolkit.keys&#39;: &lt;module &#39;prompt_toolkit.keys&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/keys.py&#39;&gt;,
+ &#39;prompt_toolkit.layout&#39;: &lt;module &#39;prompt_toolkit.layout&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/layout/__init__.py&#39;&gt;,
+ &#39;prompt_toolkit.layout.containers&#39;: &lt;module &#39;prompt_toolkit.layout.containers&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/layout/containers.py&#39;&gt;,
+ &#39;prompt_toolkit.layout.controls&#39;: &lt;module &#39;prompt_toolkit.layout.controls&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/layout/controls.py&#39;&gt;,
+ &#39;prompt_toolkit.layout.dimension&#39;: &lt;module &#39;prompt_toolkit.layout.dimension&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/layout/dimension.py&#39;&gt;,
+ &#39;prompt_toolkit.layout.dummy&#39;: &lt;module &#39;prompt_toolkit.layout.dummy&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/layout/dummy.py&#39;&gt;,
+ &#39;prompt_toolkit.layout.layout&#39;: &lt;module &#39;prompt_toolkit.layout.layout&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/layout/layout.py&#39;&gt;,
+ &#39;prompt_toolkit.layout.margins&#39;: &lt;module &#39;prompt_toolkit.layout.margins&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/layout/margins.py&#39;&gt;,
+ &#39;prompt_toolkit.layout.menus&#39;: &lt;module &#39;prompt_toolkit.layout.menus&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/layout/menus.py&#39;&gt;,
+ &#39;prompt_toolkit.layout.mouse_handlers&#39;: &lt;module &#39;prompt_toolkit.layout.mouse_handlers&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/layout/mouse_handlers.py&#39;&gt;,
+ &#39;prompt_toolkit.layout.processors&#39;: &lt;module &#39;prompt_toolkit.layout.processors&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/layout/processors.py&#39;&gt;,
+ &#39;prompt_toolkit.layout.screen&#39;: &lt;module &#39;prompt_toolkit.layout.screen&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/layout/screen.py&#39;&gt;,
+ &#39;prompt_toolkit.layout.utils&#39;: &lt;module &#39;prompt_toolkit.layout.utils&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/layout/utils.py&#39;&gt;,
+ &#39;prompt_toolkit.lexers&#39;: &lt;module &#39;prompt_toolkit.lexers&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/lexers/__init__.py&#39;&gt;,
+ &#39;prompt_toolkit.lexers.base&#39;: &lt;module &#39;prompt_toolkit.lexers.base&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/lexers/base.py&#39;&gt;,
+ &#39;prompt_toolkit.lexers.pygments&#39;: &lt;module &#39;prompt_toolkit.lexers.pygments&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/lexers/pygments.py&#39;&gt;,
+ &#39;prompt_toolkit.mouse_events&#39;: &lt;module &#39;prompt_toolkit.mouse_events&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/mouse_events.py&#39;&gt;,
+ &#39;prompt_toolkit.output&#39;: &lt;module &#39;prompt_toolkit.output&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/output/__init__.py&#39;&gt;,
+ &#39;prompt_toolkit.output.base&#39;: &lt;module &#39;prompt_toolkit.output.base&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/output/base.py&#39;&gt;,
+ &#39;prompt_toolkit.output.color_depth&#39;: &lt;module &#39;prompt_toolkit.output.color_depth&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/output/color_depth.py&#39;&gt;,
+ &#39;prompt_toolkit.output.defaults&#39;: &lt;module &#39;prompt_toolkit.output.defaults&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/output/defaults.py&#39;&gt;,
+ &#39;prompt_toolkit.output.vt100&#39;: &lt;module &#39;prompt_toolkit.output.vt100&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/output/vt100.py&#39;&gt;,
+ &#39;prompt_toolkit.patch_stdout&#39;: &lt;module &#39;prompt_toolkit.patch_stdout&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/patch_stdout.py&#39;&gt;,
+ &#39;prompt_toolkit.renderer&#39;: &lt;module &#39;prompt_toolkit.renderer&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/renderer.py&#39;&gt;,
+ &#39;prompt_toolkit.search&#39;: &lt;module &#39;prompt_toolkit.search&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/search.py&#39;&gt;,
+ &#39;prompt_toolkit.selection&#39;: &lt;module &#39;prompt_toolkit.selection&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/selection.py&#39;&gt;,
+ &#39;prompt_toolkit.shortcuts&#39;: &lt;module &#39;prompt_toolkit.shortcuts&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/shortcuts/__init__.py&#39;&gt;,
+ &#39;prompt_toolkit.shortcuts.dialogs&#39;: &lt;module &#39;prompt_toolkit.shortcuts.dialogs&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/shortcuts/dialogs.py&#39;&gt;,
+ &#39;prompt_toolkit.shortcuts.progress_bar&#39;: &lt;module &#39;prompt_toolkit.shortcuts.progress_bar&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/shortcuts/progress_bar/__init__.py&#39;&gt;,
+ &#39;prompt_toolkit.shortcuts.progress_bar.base&#39;: &lt;module &#39;prompt_toolkit.shortcuts.progress_bar.base&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/shortcuts/progress_bar/base.py&#39;&gt;,
+ &#39;prompt_toolkit.shortcuts.progress_bar.formatters&#39;: &lt;module &#39;prompt_toolkit.shortcuts.progress_bar.formatters&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/shortcuts/progress_bar/formatters.py&#39;&gt;,
+ &#39;prompt_toolkit.shortcuts.prompt&#39;: &lt;module &#39;prompt_toolkit.shortcuts.prompt&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/shortcuts/prompt.py&#39;&gt;,
+ &#39;prompt_toolkit.shortcuts.utils&#39;: &lt;module &#39;prompt_toolkit.shortcuts.utils&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/shortcuts/utils.py&#39;&gt;,
+ &#39;prompt_toolkit.styles&#39;: &lt;module &#39;prompt_toolkit.styles&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/styles/__init__.py&#39;&gt;,
+ &#39;prompt_toolkit.styles.base&#39;: &lt;module &#39;prompt_toolkit.styles.base&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/styles/base.py&#39;&gt;,
+ &#39;prompt_toolkit.styles.defaults&#39;: &lt;module &#39;prompt_toolkit.styles.defaults&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/styles/defaults.py&#39;&gt;,
+ &#39;prompt_toolkit.styles.named_colors&#39;: &lt;module &#39;prompt_toolkit.styles.named_colors&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/styles/named_colors.py&#39;&gt;,
+ &#39;prompt_toolkit.styles.pygments&#39;: &lt;module &#39;prompt_toolkit.styles.pygments&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/styles/pygments.py&#39;&gt;,
+ &#39;prompt_toolkit.styles.style&#39;: &lt;module &#39;prompt_toolkit.styles.style&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/styles/style.py&#39;&gt;,
+ &#39;prompt_toolkit.styles.style_transformation&#39;: &lt;module &#39;prompt_toolkit.styles.style_transformation&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/styles/style_transformation.py&#39;&gt;,
+ &#39;prompt_toolkit.utils&#39;: &lt;module &#39;prompt_toolkit.utils&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/utils.py&#39;&gt;,
+ &#39;prompt_toolkit.validation&#39;: &lt;module &#39;prompt_toolkit.validation&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/validation.py&#39;&gt;,
+ &#39;prompt_toolkit.widgets&#39;: &lt;module &#39;prompt_toolkit.widgets&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/widgets/__init__.py&#39;&gt;,
+ &#39;prompt_toolkit.widgets.base&#39;: &lt;module &#39;prompt_toolkit.widgets.base&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/widgets/base.py&#39;&gt;,
+ &#39;prompt_toolkit.widgets.dialogs&#39;: &lt;module &#39;prompt_toolkit.widgets.dialogs&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/widgets/dialogs.py&#39;&gt;,
+ &#39;prompt_toolkit.widgets.menus&#39;: &lt;module &#39;prompt_toolkit.widgets.menus&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/widgets/menus.py&#39;&gt;,
+ &#39;prompt_toolkit.widgets.toolbars&#39;: &lt;module &#39;prompt_toolkit.widgets.toolbars&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/widgets/toolbars.py&#39;&gt;,
+ &#39;pstats&#39;: &lt;module &#39;pstats&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/pstats.py&#39;&gt;,
+ &#39;pty&#39;: &lt;module &#39;pty&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/pty.py&#39;&gt;,
+ &#39;ptyprocess&#39;: &lt;module &#39;ptyprocess&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/ptyprocess/__init__.py&#39;&gt;,
+ &#39;ptyprocess.ptyprocess&#39;: &lt;module &#39;ptyprocess.ptyprocess&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/ptyprocess/ptyprocess.py&#39;&gt;,
+ &#39;ptyprocess.util&#39;: &lt;module &#39;ptyprocess.util&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/ptyprocess/util.py&#39;&gt;,
+ &#39;pwd&#39;: &lt;module &#39;pwd&#39; (built-in)&gt;,
+ &#39;pydoc&#39;: &lt;module &#39;pydoc&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/pydoc.py&#39;&gt;,
+ &#39;pydoc_data&#39;: &lt;module &#39;pydoc_data&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/pydoc_data/__init__.py&#39;&gt;,
+ &#39;pydoc_data.topics&#39;: &lt;module &#39;pydoc_data.topics&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/pydoc_data/topics.py&#39;&gt;,
+ &#39;pyexpat&#39;: &lt;module &#39;pyexpat&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/pyexpat.cpython-37m-darwin.so&#39;&gt;,
+ &#39;pyexpat.errors&#39;: &lt;module &#39;pyexpat.errors&#39;&gt;,
+ &#39;pyexpat.model&#39;: &lt;module &#39;pyexpat.model&#39;&gt;,
+ &#39;pygments&#39;: &lt;module &#39;pygments&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/pygments/__init__.py&#39;&gt;,
+ &#39;pygments.filter&#39;: &lt;module &#39;pygments.filter&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/pygments/filter.py&#39;&gt;,
+ &#39;pygments.filters&#39;: &lt;module &#39;pygments.filters&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/pygments/filters/__init__.py&#39;&gt;,
+ &#39;pygments.formatter&#39;: &lt;module &#39;pygments.formatter&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/pygments/formatter.py&#39;&gt;,
+ &#39;pygments.formatters&#39;: &lt;module &#39;pygments.formatters&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/pygments/formatters/__init__.py&#39;&gt;,
+ &#39;pygments.formatters._mapping&#39;: &lt;module &#39;pygments.formatters._mapping&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/pygments/formatters/_mapping.py&#39;&gt;,
+ &#39;pygments.formatters.html&#39;: &lt;module &#39;pygments.formatters.html&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/pygments/formatters/html.py&#39;&gt;,
+ &#39;pygments.lexer&#39;: &lt;module &#39;pygments.lexer&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/pygments/lexer.py&#39;&gt;,
+ &#39;pygments.lexers&#39;: &lt;module &#39;pygments.lexers&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/pygments/lexers/__init__.py&#39;&gt;,
+ &#39;pygments.lexers._mapping&#39;: &lt;module &#39;pygments.lexers._mapping&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/pygments/lexers/_mapping.py&#39;&gt;,
+ &#39;pygments.lexers.python&#39;: &lt;module &#39;pygments.lexers.python&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/pygments/lexers/python.py&#39;&gt;,
+ &#39;pygments.modeline&#39;: &lt;module &#39;pygments.modeline&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/pygments/modeline.py&#39;&gt;,
+ &#39;pygments.plugin&#39;: &lt;module &#39;pygments.plugin&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/pygments/plugin.py&#39;&gt;,
+ &#39;pygments.regexopt&#39;: &lt;module &#39;pygments.regexopt&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/pygments/regexopt.py&#39;&gt;,
+ &#39;pygments.style&#39;: &lt;module &#39;pygments.style&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/pygments/style.py&#39;&gt;,
+ &#39;pygments.styles&#39;: &lt;module &#39;pygments.styles&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/pygments/styles/__init__.py&#39;&gt;,
+ &#39;pygments.token&#39;: &lt;module &#39;pygments.token&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/pygments/token.py&#39;&gt;,
+ &#39;pygments.unistring&#39;: &lt;module &#39;pygments.unistring&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/pygments/unistring.py&#39;&gt;,
+ &#39;pygments.util&#39;: &lt;module &#39;pygments.util&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/pygments/util.py&#39;&gt;,
+ &#39;queue&#39;: &lt;module &#39;queue&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/queue.py&#39;&gt;,
+ &#39;quopri&#39;: &lt;module &#39;quopri&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/quopri.py&#39;&gt;,
+ &#39;random&#39;: &lt;module &#39;random&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/random.py&#39;&gt;,
+ &#39;re&#39;: &lt;module &#39;re&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/re.py&#39;&gt;,
+ &#39;reprlib&#39;: &lt;module &#39;reprlib&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/reprlib.py&#39;&gt;,
+ &#39;resource&#39;: &lt;module &#39;resource&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/resource.cpython-37m-darwin.so&#39;&gt;,
+ &#39;runpy&#39;: &lt;module &#39;runpy&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/runpy.py&#39;&gt;,
+ &#39;select&#39;: &lt;module &#39;select&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/select.cpython-37m-darwin.so&#39;&gt;,
+ &#39;selectors&#39;: &lt;module &#39;selectors&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/selectors.py&#39;&gt;,
+ &#39;shlex&#39;: &lt;module &#39;shlex&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/shlex.py&#39;&gt;,
+ &#39;shutil&#39;: &lt;module &#39;shutil&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/shutil.py&#39;&gt;,
+ &#39;signal&#39;: &lt;module &#39;signal&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/signal.py&#39;&gt;,
+ &#39;site&#39;: &lt;module &#39;site&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/site.py&#39;&gt;,
+ &#39;six&#39;: &lt;module &#39;six&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/six.py&#39;&gt;,
+ &#39;six.moves&#39;: &lt;module &#39;six.moves&#39; (&lt;six._SixMetaPathImporter object at 0x7fccc90aed50&gt;)&gt;,
+ &#39;socket&#39;: &lt;module &#39;socket&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/socket.py&#39;&gt;,
+ &#39;sphinxcontrib&#39;: &lt;module &#39;sphinxcontrib&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/sphinxcontrib/__init__.py&#39;&gt;,
+ &#39;sqlite3&#39;: &lt;module &#39;sqlite3&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/sqlite3/__init__.py&#39;&gt;,
+ &#39;sqlite3.dbapi2&#39;: &lt;module &#39;sqlite3.dbapi2&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/sqlite3/dbapi2.py&#39;&gt;,
+ &#39;sre_compile&#39;: &lt;module &#39;sre_compile&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/sre_compile.py&#39;&gt;,
+ &#39;sre_constants&#39;: &lt;module &#39;sre_constants&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/sre_constants.py&#39;&gt;,
+ &#39;sre_parse&#39;: &lt;module &#39;sre_parse&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/sre_parse.py&#39;&gt;,
+ &#39;ssl&#39;: &lt;module &#39;ssl&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/ssl.py&#39;&gt;,
+ &#39;stat&#39;: &lt;module &#39;stat&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/stat.py&#39;&gt;,
+ &#39;storemagic&#39;: &lt;module &#39;storemagic&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/IPython/extensions/storemagic.py&#39;&gt;,
+ &#39;string&#39;: &lt;module &#39;string&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/string.py&#39;&gt;,
+ &#39;struct&#39;: &lt;module &#39;struct&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/struct.py&#39;&gt;,
+ &#39;subprocess&#39;: &lt;module &#39;subprocess&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/subprocess.py&#39;&gt;,
+ &#39;sys&#39;: &lt;module &#39;sys&#39; (built-in)&gt;,
+ &#39;tempfile&#39;: &lt;module &#39;tempfile&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/tempfile.py&#39;&gt;,
+ &#39;termios&#39;: &lt;module &#39;termios&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/termios.cpython-37m-darwin.so&#39;&gt;,
+ &#39;textwrap&#39;: &lt;module &#39;textwrap&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/textwrap.py&#39;&gt;,
+ &#39;threading&#39;: &lt;module &#39;threading&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/threading.py&#39;&gt;,
+ &#39;time&#39;: &lt;module &#39;time&#39; (built-in)&gt;,
+ &#39;timeit&#39;: &lt;module &#39;timeit&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/timeit.py&#39;&gt;,
+ &#39;token&#39;: &lt;module &#39;token&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/token.py&#39;&gt;,
+ &#39;tokenize&#39;: &lt;module &#39;tokenize&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/tokenize.py&#39;&gt;,
+ &#39;tornado&#39;: &lt;module &#39;tornado&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/tornado/__init__.py&#39;&gt;,
+ &#39;tornado.concurrent&#39;: &lt;module &#39;tornado.concurrent&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/tornado/concurrent.py&#39;&gt;,
+ &#39;tornado.escape&#39;: &lt;module &#39;tornado.escape&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/tornado/escape.py&#39;&gt;,
+ &#39;tornado.gen&#39;: &lt;module &#39;tornado.gen&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/tornado/gen.py&#39;&gt;,
+ &#39;tornado.ioloop&#39;: &lt;module &#39;tornado.ioloop&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/tornado/ioloop.py&#39;&gt;,
+ &#39;tornado.locks&#39;: &lt;module &#39;tornado.locks&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/tornado/locks.py&#39;&gt;,
+ &#39;tornado.log&#39;: &lt;module &#39;tornado.log&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/tornado/log.py&#39;&gt;,
+ &#39;tornado.platform&#39;: &lt;module &#39;tornado.platform&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/tornado/platform/__init__.py&#39;&gt;,
+ &#39;tornado.platform.asyncio&#39;: &lt;module &#39;tornado.platform.asyncio&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/tornado/platform/asyncio.py&#39;&gt;,
+ &#39;tornado.queues&#39;: &lt;module &#39;tornado.queues&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/tornado/queues.py&#39;&gt;,
+ &#39;tornado.speedups&#39;: &lt;module &#39;tornado.speedups&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/tornado/speedups.cpython-37m-darwin.so&#39;&gt;,
+ &#39;tornado.util&#39;: &lt;module &#39;tornado.util&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/tornado/util.py&#39;&gt;,
+ &#39;traceback&#39;: &lt;module &#39;traceback&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/traceback.py&#39;&gt;,
+ &#39;traitlets&#39;: &lt;module &#39;traitlets&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/traitlets/__init__.py&#39;&gt;,
+ &#39;traitlets._version&#39;: &lt;module &#39;traitlets._version&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/traitlets/_version.py&#39;&gt;,
+ &#39;traitlets.config&#39;: &lt;module &#39;traitlets.config&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/traitlets/config/__init__.py&#39;&gt;,
+ &#39;traitlets.config.application&#39;: &lt;module &#39;traitlets.config.application&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/traitlets/config/application.py&#39;&gt;,
+ &#39;traitlets.config.configurable&#39;: &lt;module &#39;traitlets.config.configurable&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/traitlets/config/configurable.py&#39;&gt;,
+ &#39;traitlets.config.loader&#39;: &lt;module &#39;traitlets.config.loader&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/traitlets/config/loader.py&#39;&gt;,
+ &#39;traitlets.log&#39;: &lt;module &#39;traitlets.log&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/traitlets/log.py&#39;&gt;,
+ &#39;traitlets.traitlets&#39;: &lt;module &#39;traitlets.traitlets&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/traitlets/traitlets.py&#39;&gt;,
+ &#39;traitlets.utils&#39;: &lt;module &#39;traitlets.utils&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/traitlets/utils/__init__.py&#39;&gt;,
+ &#39;traitlets.utils.bunch&#39;: &lt;module &#39;traitlets.utils.bunch&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/traitlets/utils/bunch.py&#39;&gt;,
+ &#39;traitlets.utils.decorators&#39;: &lt;module &#39;traitlets.utils.decorators&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/traitlets/utils/decorators.py&#39;&gt;,
+ &#39;traitlets.utils.descriptions&#39;: &lt;module &#39;traitlets.utils.descriptions&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/traitlets/utils/descriptions.py&#39;&gt;,
+ &#39;traitlets.utils.getargspec&#39;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>: &lt;module &#39;traitlets.utils.getargspec&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/traitlets/utils/getargspec.py&#39;&gt;,
+ &#39;traitlets.utils.importstring&#39;: &lt;module &#39;traitlets.utils.importstring&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/traitlets/utils/importstring.py&#39;&gt;,
+ &#39;traitlets.utils.sentinel&#39;: &lt;module &#39;traitlets.utils.sentinel&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/traitlets/utils/sentinel.py&#39;&gt;,
+ &#39;tty&#39;: &lt;module &#39;tty&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/tty.py&#39;&gt;,
+ &#39;types&#39;: &lt;module &#39;types&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/types.py&#39;&gt;,
+ &#39;typing&#39;: &lt;module &#39;typing&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/typing.py&#39;&gt;,
+ &#39;typing.io&#39;: &lt;class &#39;typing.io&#39;&gt;,
+ &#39;typing.re&#39;: &lt;class &#39;typing.re&#39;&gt;,
+ &#39;unicodedata&#39;: &lt;module &#39;unicodedata&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/unicodedata.cpython-37m-darwin.so&#39;&gt;,
+ &#39;urllib&#39;: &lt;module &#39;urllib&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/urllib/__init__.py&#39;&gt;,
+ &#39;urllib.error&#39;: &lt;module &#39;urllib.error&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/urllib/error.py&#39;&gt;,
+ &#39;urllib.parse&#39;: &lt;module &#39;urllib.parse&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/urllib/parse.py&#39;&gt;,
+ &#39;urllib.request&#39;: &lt;module &#39;urllib.request&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/urllib/request.py&#39;&gt;,
+ &#39;urllib.response&#39;: &lt;module &#39;urllib.response&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/urllib/response.py&#39;&gt;,
+ &#39;uu&#39;: &lt;module &#39;uu&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/uu.py&#39;&gt;,
+ &#39;uuid&#39;: &lt;module &#39;uuid&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/uuid.py&#39;&gt;,
+ &#39;warnings&#39;: &lt;module &#39;warnings&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/warnings.py&#39;&gt;,
+ &#39;wcwidth&#39;: &lt;module &#39;wcwidth&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/wcwidth/__init__.py&#39;&gt;,
+ &#39;wcwidth.table_wide&#39;: &lt;module &#39;wcwidth.table_wide&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/wcwidth/table_wide.py&#39;&gt;,
+ &#39;wcwidth.table_zero&#39;: &lt;module &#39;wcwidth.table_zero&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/wcwidth/table_zero.py&#39;&gt;,
+ &#39;wcwidth.unicode_versions&#39;: &lt;module &#39;wcwidth.unicode_versions&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/wcwidth/unicode_versions.py&#39;&gt;,
+ &#39;wcwidth.wcwidth&#39;: &lt;module &#39;wcwidth.wcwidth&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/wcwidth/wcwidth.py&#39;&gt;,
+ &#39;weakref&#39;: &lt;module &#39;weakref&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/weakref.py&#39;&gt;,
+ &#39;xml&#39;: &lt;module &#39;xml&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/xml/__init__.py&#39;&gt;,
+ &#39;xml.dom&#39;: &lt;module &#39;xml.dom&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/xml/dom/__init__.py&#39;&gt;,
+ &#39;xml.dom.NodeFilter&#39;: &lt;module &#39;xml.dom.NodeFilter&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/xml/dom/NodeFilter.py&#39;&gt;,
+ &#39;xml.dom.domreg&#39;: &lt;module &#39;xml.dom.domreg&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/xml/dom/domreg.py&#39;&gt;,
+ &#39;xml.dom.minicompat&#39;: &lt;module &#39;xml.dom.minicompat&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/xml/dom/minicompat.py&#39;&gt;,
+ &#39;xml.dom.minidom&#39;: &lt;module &#39;xml.dom.minidom&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/xml/dom/minidom.py&#39;&gt;,
+ &#39;xml.dom.xmlbuilder&#39;: &lt;module &#39;xml.dom.xmlbuilder&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/xml/dom/xmlbuilder.py&#39;&gt;,
+ &#39;xml.parsers&#39;: &lt;module &#39;xml.parsers&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/xml/parsers/__init__.py&#39;&gt;,
+ &#39;xml.parsers.expat&#39;: &lt;module &#39;xml.parsers.expat&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/xml/parsers/expat.py&#39;&gt;,
+ &#39;xml.parsers.expat.errors&#39;: &lt;module &#39;pyexpat.errors&#39;&gt;,
+ &#39;xml.parsers.expat.model&#39;: &lt;module &#39;pyexpat.model&#39;&gt;,
+ &#39;zipimport&#39;: &lt;module &#39;zipimport&#39; (built-in)&gt;,
+ &#39;zlib&#39;: &lt;module &#39;zlib&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/zlib.cpython-37m-darwin.so&#39;&gt;,
+ &#39;zmq&#39;: &lt;module &#39;zmq&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/__init__.py&#39;&gt;,
+ &#39;zmq._future&#39;: &lt;module &#39;zmq._future&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/_future.py&#39;&gt;,
+ &#39;zmq.asyncio&#39;: &lt;module &#39;zmq.asyncio&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/asyncio/__init__.py&#39;&gt;,
+ &#39;zmq.backend&#39;: &lt;module &#39;zmq.backend&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/backend/__init__.py&#39;&gt;,
+ &#39;zmq.backend.cython&#39;: &lt;module &#39;zmq.backend.cython&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/backend/cython/__init__.py&#39;&gt;,
+ &#39;zmq.backend.cython._device&#39;: &lt;module &#39;zmq.backend.cython._device&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/backend/cython/_device.cpython-37m-darwin.so&#39;&gt;,
+ &#39;zmq.backend.cython._poll&#39;: &lt;module &#39;zmq.backend.cython._poll&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/backend/cython/_poll.cpython-37m-darwin.so&#39;&gt;,
+ &#39;zmq.backend.cython._proxy_steerable&#39;: &lt;module &#39;zmq.backend.cython._proxy_steerable&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/backend/cython/_proxy_steerable.cpython-37m-darwin.so&#39;&gt;,
+ &#39;zmq.backend.cython._version&#39;: &lt;module &#39;zmq.backend.cython._version&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/backend/cython/_version.cpython-37m-darwin.so&#39;&gt;,
+ &#39;zmq.backend.cython.constants&#39;: &lt;module &#39;zmq.backend.cython.constants&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/backend/cython/constants.cpython-37m-darwin.so&#39;&gt;,
+ &#39;zmq.backend.cython.context&#39;: &lt;module &#39;zmq.backend.cython.context&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/backend/cython/context.cpython-37m-darwin.so&#39;&gt;,
+ &#39;zmq.backend.cython.error&#39;: &lt;module &#39;zmq.backend.cython.error&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/backend/cython/error.cpython-37m-darwin.so&#39;&gt;,
+ &#39;zmq.backend.cython.message&#39;: &lt;module &#39;zmq.backend.cython.message&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/backend/cython/message.cpython-37m-darwin.so&#39;&gt;,
+ &#39;zmq.backend.cython.socket&#39;: &lt;module &#39;zmq.backend.cython.socket&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/backend/cython/socket.cpython-37m-darwin.so&#39;&gt;,
+ &#39;zmq.backend.cython.utils&#39;: &lt;module &#39;zmq.backend.cython.utils&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/backend/cython/utils.cpython-37m-darwin.so&#39;&gt;,
+ &#39;zmq.backend.select&#39;: &lt;module &#39;zmq.backend.select&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/backend/select.py&#39;&gt;,
+ &#39;zmq.error&#39;: &lt;module &#39;zmq.error&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/error.py&#39;&gt;,
+ &#39;zmq.eventloop&#39;: &lt;module &#39;zmq.eventloop&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/eventloop/__init__.py&#39;&gt;,
+ &#39;zmq.eventloop.ioloop&#39;: &lt;module &#39;zmq.eventloop.ioloop&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/eventloop/ioloop.py&#39;&gt;,
+ &#39;zmq.eventloop.zmqstream&#39;: &lt;module &#39;zmq.eventloop.zmqstream&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/eventloop/zmqstream.py&#39;&gt;,
+ &#39;zmq.libzmq&#39;: &lt;module &#39;zmq.libzmq&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/libzmq.cpython-37m-darwin.so&#39;&gt;,
+ &#39;zmq.sugar&#39;: &lt;module &#39;zmq.sugar&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/sugar/__init__.py&#39;&gt;,
+ &#39;zmq.sugar.attrsettr&#39;: &lt;module &#39;zmq.sugar.attrsettr&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/sugar/attrsettr.py&#39;&gt;,
+ &#39;zmq.sugar.constants&#39;: &lt;module &#39;zmq.sugar.constants&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/sugar/constants.py&#39;&gt;,
+ &#39;zmq.sugar.context&#39;: &lt;module &#39;zmq.sugar.context&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/sugar/context.py&#39;&gt;,
+ &#39;zmq.sugar.frame&#39;: &lt;module &#39;zmq.sugar.frame&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/sugar/frame.py&#39;&gt;,
+ &#39;zmq.sugar.poll&#39;: &lt;module &#39;zmq.sugar.poll&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/sugar/poll.py&#39;&gt;,
+ &#39;zmq.sugar.socket&#39;: &lt;module &#39;zmq.sugar.socket&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/sugar/socket.py&#39;&gt;,
+ &#39;zmq.sugar.stopwatch&#39;: &lt;module &#39;zmq.sugar.stopwatch&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/sugar/stopwatch.py&#39;&gt;,
+ &#39;zmq.sugar.tracker&#39;: &lt;module &#39;zmq.sugar.tracker&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/sugar/tracker.py&#39;&gt;,
+ &#39;zmq.sugar.version&#39;: &lt;module &#39;zmq.sugar.version&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/sugar/version.py&#39;&gt;,
+ &#39;zmq.utils&#39;: &lt;module &#39;zmq.utils&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/utils/__init__.py&#39;&gt;,
+ &#39;zmq.utils.constant_names&#39;: &lt;module &#39;zmq.utils.constant_names&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/utils/constant_names.py&#39;&gt;,
+ &#39;zmq.utils.jsonapi&#39;: &lt;module &#39;zmq.utils.jsonapi&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/utils/jsonapi.py&#39;&gt;,
+ &#39;zmq.utils.strtypes&#39;: &lt;module &#39;zmq.utils.strtypes&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/utils/strtypes.py&#39;&gt;,
+ &#39;zope&#39;: &lt;module &#39;zope&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/zope/__init__.py&#39;&gt;}
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="format-dict-output">
+<h2>Format Dict Output<a class="headerlink" href="#format-dict-output" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## How to output a dictionary</span>
+<span class="n">my_mapping</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">23</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mh">0xc0ffee</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_mapping</span><span class="p">)</span>
+<span class="c1"># The &quot;json&quot; module can do a much better job:</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">pprint</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">my_mapping</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+
+
+<span class="c1"># # Note this only works with dicts containing</span>
+<span class="c1"># # primitive types (check out the &quot;pprint&quot; module):</span>
+<span class="c1"># json.dumps({all: &#39;yup&#39;})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;a&#39;: 23, &#39;b&#39;: 42, &#39;c&#39;: 12648430}
+{
+    &quot;a&quot;: 23,
+    &quot;b&quot;: 42,
+    &quot;c&quot;: 12648430
+}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pprint</span>
+<span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">my_mapping</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">mPP</span> <span class="o">=</span> <span class="n">pprint</span><span class="o">.</span><span class="n">PrettyPrinter</span><span class="p">()</span>
+<span class="n">mPP</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">my_mapping</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;a&#39;: 23, &#39;b&#39;: 42, &#39;c&#39;: 12648430}
+{&#39;a&#39;: 23, &#39;b&#39;: 42, &#39;c&#39;: 12648430}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_mapping</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;a&#39;: 23, &#39;b&#39;: 42, &#39;c&#39;: 12648430}
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="unpacking-tuples">
+<h2>Unpacking Tuples<a class="headerlink" href="#unpacking-tuples" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Unpacking function arguments</span>
+
+<span class="k">def</span> <span class="nf">myfunc</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+
+<span class="n">tuple_vec</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">dict_vec</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+<span class="n">dict_vec2</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;z&#39;</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="n">myfunc</span><span class="p">(</span><span class="o">*</span><span class="n">tuple_vec</span><span class="p">)</span> <span class="c1"># pass all necessary function arguments all at once, using a tuple</span>
+<span class="n">myfunc</span><span class="p">(</span><span class="o">**</span><span class="n">dict_vec</span><span class="p">)</span> <span class="c1"># pass all necessary function arguments all at once, using a dict</span>
+<span class="n">myfunc</span><span class="p">(</span><span class="o">**</span><span class="n">dict_vec2</span><span class="p">)</span> <span class="c1"># dict would help match which values go with which function argument!</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 0 1
+1 0 1
+1 2 3
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="filter">
+<h2><code class="docutils literal notranslate"><span class="pre">filter()</span></code><a class="headerlink" href="#filter" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">filter(function,</span> <span class="pre">iterable)</span></code> is useful when you need to filter elements in a sequence by using self-defined methods (which returns either True or False.</p></li>
+<li><p>If function is <code class="docutils literal notranslate"><span class="pre">None</span></code>, then the <code class="docutils literal notranslate"><span class="pre">fiter()</span></code> returns only <code class="docutils literal notranslate"><span class="pre">True</span></code> elements from the <code class="docutils literal notranslate"><span class="pre">iterable</span></code>.</p></li>
+<li><p><a class="reference external" href="https://www.programiz.com/python-programming/methods/built-in/filter">Source</a></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># list of letters</span>
+<span class="n">letters</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;j&#39;</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">]</span>
+
+<span class="c1"># function that filters vowels</span>
+<span class="k">def</span> <span class="nf">filterVowels</span><span class="p">(</span><span class="n">letter</span><span class="p">):</span>
+    <span class="n">vowels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="s1">&#39;u&#39;</span><span class="p">]</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">letter</span> <span class="ow">in</span> <span class="n">vowels</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+<span class="n">filteredVowels</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="n">filterVowels</span><span class="p">,</span> <span class="n">letters</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The filtered vowels are:&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">vowel</span> <span class="ow">in</span> <span class="n">filteredVowels</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">vowel</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The filtered vowels are:
+a
+e
+i
+o
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># random list</span>
+<span class="n">randomList</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">]</span>
+
+<span class="n">filteredList</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">randomList</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The filtered elements are:&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">filteredList</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The filtered elements are:
+1
+a
+True
+0
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="asterisk">
+<h2>Asterisk <code class="docutils literal notranslate"><span class="pre">*</span></code><a class="headerlink" href="#asterisk" title="Permalink to this headline">¶</a></h2>
+<p>That <code class="docutils literal notranslate"><span class="pre">FUNCTION(*iterable)</span></code> is passing all of the items in the <code class="docutils literal notranslate"><span class="pre">iterable</span></code> into the <code class="docutils literal notranslate"><span class="pre">function</span></code> call as separate arguments, without us even needing to know how many arguments are in the list.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lemon&#39;</span><span class="p">,</span> <span class="s1">&#39;pear&#39;</span><span class="p">,</span> <span class="s1">&#39;watermelon&#39;</span><span class="p">,</span> <span class="s1">&#39;tomato&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fruits</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fruits</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">fruits</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">fruits</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">fruits</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">fruits</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;lemon&#39;, &#39;pear&#39;, &#39;watermelon&#39;, &#39;tomato&#39;]
+lemon pear watermelon tomato
+lemon pear watermelon tomato
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">transpose_list</span><span class="p">(</span><span class="n">list_of_lists</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="nb">list</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">list_of_lists</span><span class="p">)</span>
+    <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">transpose_list</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">]])</span>
+<span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./python-basics"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="magic-r.html" title="previous page">Magic R</a>
+    <a class='right-next' id="next-link" href="web-applications.html" title="next page">Web Applications</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alvin Chen<br/>
+        
+            &copy; Copyright 2020 Alvin Chen.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>
