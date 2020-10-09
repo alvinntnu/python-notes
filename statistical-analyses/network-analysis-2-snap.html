@@ -1,0 +1,632 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stanford Network Analysis Package &#8212; Python Notes for Linguistics</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/ntnu03.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Python Notes for Linguistics</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python-basics/python-basics.html">
+   Python Basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../corpus/corpus-processing.html">
+   Corpus Linguistics with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="statistical-analyses.html">
+   Statistical Analyses
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../nlp/nlp.html">
+   Natural Language Processing with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <div style="text-align:left">
+    <a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
+</div>
+
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/statistical-analyses/network-analysis-2-snap.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/alvinntnu/python-notes/master?urlpath=tree/statistical-analyses/network-analysis-2-snap.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/statistical-analyses/network-analysis-2-snap.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-types">
+   Data Types
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="stanford-network-analysis-package">
+<h1>Stanford Network Analysis Package<a class="headerlink" href="#stanford-network-analysis-package" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">snap</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="data-types">
+<h2>Data Types<a class="headerlink" href="#data-types" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">snap</span><span class="o">.</span><span class="n">LoadEdgeList</span><span class="p">(</span><span class="n">snap</span><span class="o">.</span><span class="n">PNGraph</span><span class="p">,</span> <span class="s2">&quot;../../RepositoryData/data/cit-HepTh.txt&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">RuntimeError</span><span class="g g-Whitespace">                              </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="mi">323199278</span><span class="n">a06</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">G</span> <span class="o">=</span> <span class="n">snap</span><span class="o">.</span><span class="n">LoadEdgeList</span><span class="p">(</span><span class="n">snap</span><span class="o">.</span><span class="n">PNGraph</span><span class="p">,</span> <span class="s2">&quot;../../RepositoryData/data/cit-HepTh.txt&quot;</span><span class="p">)</span>
+
+<span class="nn">~/opt/anaconda3/envs/python-notes/lib/python3.7/site-packages/snap.py</span> in <span class="ni">LoadEdgeList</span><span class="nt">(tspec, *args)</span>
+<span class="g g-Whitespace">  </span><span class="mi">83399</span>     <span class="k">if</span> <span class="n">tspec</span> <span class="o">==</span> <span class="n">PUndirNet</span><span class="p">:</span> <span class="k">return</span> <span class="n">LoadEdgeList_PUndirNet</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+<span class="g g-Whitespace">  </span><span class="mi">83400</span>     <span class="k">if</span> <span class="n">tspec</span> <span class="o">==</span> <span class="n">PDirNet</span><span class="p">:</span> <span class="k">return</span> <span class="n">LoadEdgeList_PDirNet</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+<span class="ne">&gt; </span><span class="mi">83401</span>     <span class="k">if</span> <span class="n">tspec</span> <span class="o">==</span> <span class="n">PNGraph</span> <span class="p">:</span> <span class="k">return</span> <span class="n">LoadEdgeList_PNGraph</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+<span class="g g-Whitespace">  </span><span class="mi">83402</span>     <span class="k">if</span> <span class="n">tspec</span> <span class="o">==</span> <span class="n">PNEANet</span> <span class="p">:</span> <span class="k">return</span> <span class="n">LoadEdgeList_PNEANet</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+<span class="g g-Whitespace">  </span><span class="mi">83403</span>     <span class="k">if</span> <span class="n">tspec</span> <span class="o">==</span> <span class="n">PNGraphMP</span><span class="p">:</span> <span class="k">return</span> <span class="n">LoadEdgeList_PNGraphMP</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+
+<span class="nn">~/opt/anaconda3/envs/python-notes/lib/python3.7/site-packages/snap.py</span> in <span class="ni">LoadEdgeList_PNGraph</span><span class="nt">(*args)</span>
+<span class="g g-Whitespace">  </span><span class="mi">71940</span> 
+<span class="g g-Whitespace">  </span><span class="mi">71941</span>     <span class="s2">&quot;&quot;&quot;</span>
+<span class="ne">&gt; </span><span class="mi">71942</span><span class="s2">     return _snap.LoadEdgeList_PNGraph(*args)</span>
+<span class="g g-Whitespace">  </span><span class="mi">71943</span><span class="s2"> </span>
+<span class="g g-Whitespace">  </span><span class="mi">71944</span><span class="s2"> def LoadEdgeListStr_PNGraph(*args) -&gt; &quot;TPt&lt; TNGraph &gt;&quot;:</span>
+
+<span class="ne">RuntimeError</span>: Can not open file &#39;../../RepositoryData/data/cit-HepTh.txt&#39;.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Get node degrees</span>
+<span class="n">CntV</span> <span class="o">=</span> <span class="n">snap</span><span class="o">.</span><span class="n">TIntPrV</span><span class="p">()</span>
+<span class="n">snap</span><span class="o">.</span><span class="n">GetOutDegCnt</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">CntV</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">CntV</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;degree </span><span class="si">%d</span><span class="s2">: count </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">GetVal1</span><span class="p">(),</span> <span class="n">p</span><span class="o">.</span><span class="n">GetVal2</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>degree 0: count 2711
+degree 1: count 2449
+degree 2: count 1951
+degree 3: count 1657
+degree 4: count 1405
+degree 5: count 1272
+degree 6: count 1172
+degree 7: count 1087
+degree 8: count 975
+degree 9: count 847
+degree 10: count 790
+degree 11: count 771
+degree 12: count 651
+degree 13: count 640
+degree 14: count 622
+degree 15: count 556
+degree 16: count 519
+degree 17: count 503
+degree 18: count 498
+degree 19: count 429
+degree 20: count 412
+degree 21: count 398
+degree 22: count 384
+degree 23: count 339
+degree 24: count 304
+degree 25: count 333
+degree 26: count 284
+degree 27: count 250
+degree 28: count 244
+degree 29: count 246
+degree 30: count 240
+degree 31: count 184
+degree 32: count 194
+degree 33: count 160
+degree 34: count 166
+degree 35: count 162
+degree 36: count 149
+degree 37: count 135
+degree 38: count 111
+degree 39: count 114
+degree 40: count 104
+degree 41: count 98
+degree 42: count 91
+degree 43: count 81
+degree 44: count 77
+degree 45: count 61
+degree 46: count 55
+degree 47: count 60
+degree 48: count 51
+degree 49: count 48
+degree 50: count 45
+degree 51: count 45
+degree 52: count 39
+degree 53: count 32
+degree 54: count 34
+degree 55: count 37
+degree 56: count 31
+degree 57: count 33
+degree 58: count 35
+degree 59: count 23
+degree 60: count 14
+degree 61: count 10
+degree 62: count 16
+degree 63: count 23
+degree 64: count 17
+degree 65: count 17
+degree 66: count 15
+degree 67: count 14
+degree 68: count 10
+degree 69: count 13
+degree 70: count 14
+degree 71: count 13
+degree 72: count 6
+degree 73: count 11
+degree 74: count 7
+degree 75: count 8
+degree 76: count 4
+degree 77: count 8
+degree 78: count 7
+degree 79: count 6
+degree 80: count 5
+degree 81: count 5
+degree 82: count 5
+degree 83: count 6
+degree 84: count 4
+degree 85: count 3
+degree 86: count 5
+degree 87: count 1
+degree 88: count 3
+degree 89: count 4
+degree 90: count 5
+degree 91: count 2
+degree 92: count 1
+degree 93: count 4
+degree 94: count 1
+degree 95: count 3
+degree 96: count 3
+degree 97: count 2
+degree 98: count 1
+degree 99: count 4
+degree 100: count 1
+degree 101: count 2
+degree 102: count 1
+degree 103: count 1
+degree 104: count 4
+degree 106: count 4
+degree 107: count 1
+degree 108: count 2
+degree 109: count 2
+degree 112: count 1
+degree 115: count 2
+degree 120: count 2
+degree 121: count 4
+degree 122: count 2
+degree 123: count 1
+degree 124: count 1
+degree 125: count 1
+degree 126: count 2
+degree 134: count 3
+degree 135: count 1
+degree 136: count 1
+degree 139: count 1
+degree 142: count 1
+degree 143: count 1
+degree 146: count 1
+degree 149: count 1
+degree 154: count 3
+degree 156: count 1
+degree 157: count 1
+degree 158: count 1
+degree 159: count 1
+degree 160: count 1
+degree 165: count 1
+degree 167: count 1
+degree 169: count 1
+degree 170: count 1
+degree 175: count 1
+degree 177: count 1
+degree 180: count 1
+degree 181: count 1
+degree 198: count 1
+degree 200: count 1
+degree 201: count 1
+degree 207: count 1
+degree 211: count 1
+degree 212: count 1
+degree 214: count 1
+degree 216: count 1
+degree 226: count 1
+degree 246: count 1
+degree 263: count 1
+degree 274: count 1
+degree 289: count 1
+degree 302: count 1
+degree 359: count 1
+degree 562: count 1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">snap</span><span class="o">.</span><span class="n">GetClustCf</span><span class="p">(</span><span class="n">G</span><span class="p">))</span> <span class="c1"># clustering coefficient</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">snap</span><span class="o">.</span><span class="n">GetTriads</span><span class="p">(</span><span class="n">G</span><span class="p">))</span><span class="c1"># diameter</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">snap</span><span class="o">.</span><span class="n">GetBfsFullDiam</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.3120194958062244
+1478735
+11
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Betweenness centrality</span>
+<span class="n">Nodes</span> <span class="o">=</span> <span class="n">snap</span><span class="o">.</span><span class="n">TIntFltH</span><span class="p">()</span>
+<span class="n">Edges</span> <span class="o">=</span> <span class="n">snap</span><span class="o">.</span><span class="n">TIntPrFltH</span><span class="p">()</span>
+<span class="n">snap</span><span class="o">.</span><span class="n">GetBetweennessCentr</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">Nodes</span><span class="p">,</span> <span class="n">Edges</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="c1"># for node in Nodes:</span>
+<span class="c1">#     print(&quot;node: %d centrality: %f&quot; % (node, Nodes[node]))</span>
+<span class="c1"># for edge in Edges:</span>
+<span class="c1">#     print(&quot;edge: (%d, %d) centrality: %f&quot; % (edge.GetVal1(), edge.GetVal2(), Edges[edge]))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Graph</span> <span class="o">=</span> <span class="n">snap</span><span class="o">.</span><span class="n">GenRndGnm</span><span class="p">(</span><span class="n">snap</span><span class="o">.</span><span class="n">PNGraph</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">Nodes</span> <span class="o">=</span> <span class="n">snap</span><span class="o">.</span><span class="n">TIntFltH</span><span class="p">()</span>
+<span class="n">Edges</span> <span class="o">=</span> <span class="n">snap</span><span class="o">.</span><span class="n">TIntPrFltH</span><span class="p">()</span>
+<span class="n">snap</span><span class="o">.</span><span class="n">GetBetweennessCentr</span><span class="p">(</span><span class="n">Graph</span><span class="p">,</span> <span class="n">Nodes</span><span class="p">,</span> <span class="n">Edges</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">Nodes</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;node: </span><span class="si">%d</span><span class="s2"> centrality: </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">Nodes</span><span class="p">[</span><span class="n">node</span><span class="p">]))</span>
+<span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">Edges</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;edge: (</span><span class="si">%d</span><span class="s2">, </span><span class="si">%d</span><span class="s2">) centrality: </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">edge</span><span class="o">.</span><span class="n">GetVal1</span><span class="p">(),</span> <span class="n">edge</span><span class="o">.</span><span class="n">GetVal2</span><span class="p">(),</span> <span class="n">Edges</span><span class="p">[</span><span class="n">edge</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>node: 0 centrality: 3.916667
+node: 1 centrality: 0.000000
+node: 2 centrality: 0.833333
+node: 3 centrality: 11.833333
+node: 4 centrality: 0.583333
+node: 5 centrality: 0.500000
+node: 6 centrality: 4.166667
+node: 7 centrality: 9.416667
+node: 8 centrality: 2.333333
+node: 9 centrality: 1.416667
+edge: (0, 2) centrality: 7.833333
+edge: (0, 3) centrality: 17.166667
+edge: (0, 5) centrality: 8.666667
+edge: (1, 3) centrality: 10.333333
+edge: (1, 8) centrality: 4.000000
+edge: (1, 9) centrality: 3.666667
+edge: (2, 7) centrality: 13.500000
+edge: (3, 6) centrality: 11.666667
+edge: (3, 8) centrality: 11.333333
+edge: (3, 9) centrality: 6.333333
+edge: (3, 7) centrality: 8.500000
+edge: (4, 7) centrality: 12.500000
+edge: (4, 8) centrality: 7.833333
+edge: (5, 6) centrality: 11.333333
+edge: (6, 7) centrality: 11.666667
+edge: (7, 9) centrality: 9.500000
+edge: (8, 9) centrality: 4.166667
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">snap</span><span class="o">.</span><span class="n">PlotClustCf</span><span class="p">(</span><span class="n">Graph</span><span class="p">,</span> <span class="s2">&quot;example&quot;</span><span class="p">,</span> <span class="s2">&quot;Directed graph - clustering coefficient&quot;</span><span class="p">)</span>
+<span class="n">snap</span><span class="o">.</span><span class="n">DrawGViz</span><span class="p">(</span><span class="n">Graph</span><span class="p">,</span> <span class="n">snap</span><span class="o">.</span><span class="n">gvlDot</span><span class="p">,</span> <span class="s2">&quot;graph.png&quot;</span><span class="p">,</span> <span class="s2">&quot;graph 1&quot;</span><span class="p">)</span>
+<span class="n">Image</span><span class="p">(</span><span class="s1">&#39;graph.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/network-analysis-2-snap_8_0.png" src="../_images/network-analysis-2-snap_8_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">NIdColorH</span> <span class="o">=</span> <span class="n">snap</span><span class="o">.</span><span class="n">TIntStrH</span><span class="p">()</span>
+<span class="n">NIdColorH</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;green&quot;</span>
+<span class="n">NIdColorH</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;red&quot;</span>
+<span class="n">NIdColorH</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;purple&quot;</span>
+<span class="n">NIdColorH</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;blue&quot;</span>
+<span class="n">NIdColorH</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;yellow&quot;</span>
+<span class="n">Network</span> <span class="o">=</span> <span class="n">snap</span><span class="o">.</span><span class="n">GenRndGnm</span><span class="p">(</span><span class="n">snap</span><span class="o">.</span><span class="n">PNEANet</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">snap</span><span class="o">.</span><span class="n">DrawGViz</span><span class="p">(</span><span class="n">Network</span><span class="p">,</span> <span class="n">snap</span><span class="o">.</span><span class="n">gvlSfdp</span><span class="p">,</span> <span class="s2">&quot;network.png&quot;</span><span class="p">,</span> <span class="s2">&quot;graph 3&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">NIdColorH</span><span class="p">)</span>
+<span class="n">Image</span><span class="p">(</span><span class="s1">&#39;network.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/network-analysis-2-snap_9_0.png" src="../_images/network-analysis-2-snap_9_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">UGraph</span> <span class="o">=</span> <span class="n">snap</span><span class="o">.</span><span class="n">GenRndGnm</span><span class="p">(</span><span class="n">snap</span><span class="o">.</span><span class="n">PUNGraph</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+<span class="n">snap</span><span class="o">.</span><span class="n">DrawGViz</span><span class="p">(</span><span class="n">UGraph</span><span class="p">,</span> <span class="n">snap</span><span class="o">.</span><span class="n">gvlNeato</span><span class="p">,</span> <span class="s2">&quot;graph_undirected.png&quot;</span><span class="p">,</span> <span class="s2">&quot;graph 2&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">Image</span><span class="p">(</span><span class="s1">&#39;graph_undirected.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/network-analysis-2-snap_10_0.png" src="../_images/network-analysis-2-snap_10_0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">snap.TintV()</span></code></p></li>
+<li><p>`snap.T</p></li>
+</ul>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://snap.stanford.edu/snap/index.html">SNAP</a></p></li>
+<li><p><a class="reference external" href="https://snap.stanford.edu/snappy/doc/index.html">SNAP Tutorial/Documentation</a></p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python-notes",
+            path: "./statistical-analyses"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python-notes'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alvin Chen<br/>
+        
+            &copy; Copyright 2020 Alvin Chen.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

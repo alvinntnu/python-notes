@@ -1,0 +1,557 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chinese Word Segmentation (ckiptagger) &#8212; Python Notes for Linguistics</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Statistical Analyses" href="../statistical-analyses/statistical-analyses.html" />
+    <link rel="prev" title="Chinese Word Segmentation (jieba)" href="../jieba.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/ntnu03.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Python Notes for Linguistics</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python-basics/python-basics.html">
+   Python Basics
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="corpus-processing.html">
+   Corpus Linguistics with Python
+  </a>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../nltk.html">
+     Natural Language Tool-Kits (NLTK)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../web-crawler.html">
+     Web Crawler
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../corpus-linguistics-methods.html">
+     Corpus Lingustics Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tokenization.html">
+     Tokenization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../word-cloud.html">
+     Word Cloud
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../patterns-constructions.html">
+     Patterns and Constructions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../bnc.html">
+     BNC-XML
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="childes.html">
+     CHILDES Corpus
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../praat-textgrid.html">
+     Praat TextGrid Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../vectorizing-text.html">
+     Vectorizing Texts
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../jieba.html">
+     Chinese Word Segmentation (jieba)
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Chinese Word Segmentation (ckiptagger)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../statistical-analyses/statistical-analyses.html">
+   Statistical Analyses
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../nlp/nlp.html">
+   Natural Language Processing with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <div style="text-align:left">
+    <a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
+</div>
+
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/corpus/ckiptagger.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/alvinntnu/python-notes/master?urlpath=tree/corpus/ckiptagger.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/corpus/ckiptagger.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#installation">
+   Installation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#download-the-model-files">
+   Download the Model Files
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#segmenting-texts">
+   Segmenting Texts
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-own-dictionary">
+   Define Own Dictionary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convert-ckiptagger-output-into-a-data-frame">
+   Convert ckiptagger output into a Data Frame?
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="chinese-word-segmentation-ckiptagger">
+<h1>Chinese Word Segmentation (ckiptagger)<a class="headerlink" href="#chinese-word-segmentation-ckiptagger" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">DEMO_DATA_ROOT</span><span class="o">=</span><span class="s2">&quot;../../../RepositoryData/data&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The current state-of-art Chinese segmenter for Taiwan Mandarin available is probably the <a class="reference external" href="https://github.com/ckiplab/ckiptagger">CKIP tagger</a>, created by the <a class="reference external" href="https://ckip.iis.sinica.edu.tw/">Chinese Knowledge and Information Processing (CKIP)</a> group at the Academia Sinica.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ckiptagger</span></code> is released as a python module.</p>
+<p>The normal CPU version is very slow. Not sure if it is the case for GPU version.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!pip install ckiptagger
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Remember to download the model files. Very big.</p>
+</div>
+</div>
+<div class="section" id="download-the-model-files">
+<h2>Download the Model Files<a class="headerlink" href="#download-the-model-files" title="Permalink to this headline">¶</a></h2>
+<p>All NLP applications have their models behind their fancy performances. To use the tagger provided in <code class="docutils literal notranslate"><span class="pre">ckiptagger</span></code>, we need to download their pre-trained model files.</p>
+<p>Please go to the <a class="reference external" href="https://github.com/ckiplab/ckiptagger">github of CKIP tagger</a> to download the model files, which is provided as a zipped file. (The file is very big. It takes a while.)</p>
+<p>After you download the zipped file, unzip it under your working directory to the <code class="docutils literal notranslate"><span class="pre">data/</span></code> directory.</p>
+</div>
+<div class="section" id="segmenting-texts">
+<h2>Segmenting Texts<a class="headerlink" href="#segmenting-texts" title="Permalink to this headline">¶</a></h2>
+<p>The initialized word segmenter object, <code class="docutils literal notranslate"><span class="pre">ws()</span></code>, can tokenize any input <strong>character vectors</strong> into a list of <strong>word vectors</strong> of the same size.</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ckiptagger</span> <span class="kn">import</span> <span class="n">data_utils</span><span class="p">,</span> <span class="n">construct_dictionary</span><span class="p">,</span> <span class="n">WS</span><span class="p">,</span> <span class="n">POS</span><span class="p">,</span> <span class="n">NER</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:526: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_qint8 = np.dtype([(&quot;qint8&quot;, np.int8, 1)])
+/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:527: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_quint8 = np.dtype([(&quot;quint8&quot;, np.uint8, 1)])
+/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:528: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_qint16 = np.dtype([(&quot;qint16&quot;, np.int16, 1)])
+/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:529: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_quint16 = np.dtype([(&quot;quint16&quot;, np.uint16, 1)])
+/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:530: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_qint32 = np.dtype([(&quot;qint32&quot;, np.int32, 1)])
+/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:535: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  np_resource = np.dtype([(&quot;resource&quot;, np.ubyte, 1)])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please use own model path. The model files are very big. They are probably not on the Drive.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set Parameter Path</span>
+<span class="n">MODEL_PATH</span> <span class="o">=</span> <span class="s1">&#39;/Users/Alvin/Dropbox/Corpus/CKIP_WordSeg/data/&#39;</span>
+<span class="n">ws</span> <span class="o">=</span> <span class="n">WS</span><span class="p">(</span><span class="n">MODEL_PATH</span><span class="p">)</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="n">POS</span><span class="p">(</span><span class="n">MODEL_PATH</span><span class="p">)</span>
+<span class="n">ner</span> <span class="o">=</span> <span class="n">NER</span><span class="p">(</span><span class="n">MODEL_PATH</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Raw text corpus </span>
+<span class="n">sentence_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;傅達仁今將執行安樂死，卻突然爆出自己20年前遭緯來體育台封殺，他不懂自己哪裡得罪到電視台。&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;美國參議院針對今天總統布什所提名的勞工部長趙小蘭展開認可聽證會，預料她將會很順利通過參議院支持，成為該國有史以來第一位的華裔女性內閣成員。&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;土地公有政策?？還是土地婆有政策。&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;… 你確定嗎… 不要再騙了……他來亂的啦&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;最多容納59,000個人,或5.9萬人,再多就不行了.這是環評的結論.&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;科長說:1,坪數對人數為1:3。2,可以再增加。&#39;</span><span class="p">]</span>
+    <span class="c1">## other parameters</span>
+    <span class="c1"># sentence_segmentation = True, # To consider delimiters</span>
+    <span class="c1"># segment_delimiter_set = {&quot;,&quot;, &quot;。&quot;, &quot;:&quot;, &quot;?&quot;, &quot;!&quot;, &quot;;&quot;}), # This is the defualt set of delimiters</span>
+    <span class="c1"># recommend_dictionary = dictionary1, # words in this dictionary are encouraged</span>
+    <span class="c1"># coerce_dictionary = dictionary2, # words in this dictionary are forced</span>
+
+<span class="n">word_list</span> <span class="o">=</span> <span class="n">ws</span><span class="p">(</span><span class="n">sentence_list</span><span class="p">)</span>
+<span class="n">pos_list</span> <span class="o">=</span> <span class="n">pos</span><span class="p">(</span><span class="n">word_list</span><span class="p">)</span>
+<span class="n">entity_list</span> <span class="o">=</span> <span class="n">ner</span><span class="p">(</span><span class="n">word_list</span><span class="p">,</span> <span class="n">pos_list</span><span class="p">)</span>
+    
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">print_word_pos_sentence</span><span class="p">(</span><span class="n">word_sentence</span><span class="p">,</span> <span class="n">pos_sentence</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">word_sentence</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">pos_sentence</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">pos</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">word_sentence</span><span class="p">,</span> <span class="n">pos_sentence</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="n">pos</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\u3000</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="k">return</span>
+    
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sentence_list</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">sentence</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+    <span class="n">print_word_pos_sentence</span><span class="p">(</span><span class="n">word_list</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>  <span class="n">pos_list</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">entity_list</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">entity</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;傅達仁今將執行安樂死，卻突然爆出自己20年前遭緯來體育台封殺，他不懂自己哪裡得罪到電視台。&#39;
+傅達仁(Nb)　今(Nd)　將(D)　執行(VC)　安樂死(Na)　，(COMMACATEGORY)　卻(D)　突然(D)　爆出(VJ)　自己(Nh)　20(Neu)　年(Nf)　前(Ng)　遭(P)　緯來(Nb)　體育台(Na)　封殺(VC)　，(COMMACATEGORY)　他(Nh)　不(D)　懂(VK)　自己(Nh)　哪裡(Ncd)　得罪到(VJ)　電視台(Nc)　。(PERIODCATEGORY)　
+(0, 3, &#39;PERSON&#39;, &#39;傅達仁&#39;)
+(18, 22, &#39;DATE&#39;, &#39;20年前&#39;)
+(23, 28, &#39;ORG&#39;, &#39;緯來體育台&#39;)
+
+&#39;美國參議院針對今天總統布什所提名的勞工部長趙小蘭展開認可聽證會，預料她將會很順利通過參議院支持，成為該國有史以來第一位的華裔女性內閣成員。&#39;
+美國(Nc)　參議院(Nc)　針對(P)　今天(Nd)　總統(Na)　布什(Nb)　所(D)　提名(VC)　的(DE)　勞工部長(Na)　趙小蘭(Nb)　展開(VC)　認可(VC)　聽證會(Na)　，(COMMACATEGORY)　預料(VE)　她(Nh)　將(D)　會(D)　很(Dfa)　順利(VH)　通過(VC)　參議院(Nc)　支持(VC)　，(COMMACATEGORY)　成為(VG)　該(Nes)　國(Nc)　有史以來(D)　第一(Neu)　位(Nf)　的(DE)　華裔(Na)　女性(Na)　內閣(Na)　成員(Na)　。(PERIODCATEGORY)　
+(0, 2, &#39;GPE&#39;, &#39;美國&#39;)
+(2, 5, &#39;ORG&#39;, &#39;參議院&#39;)
+(7, 9, &#39;DATE&#39;, &#39;今天&#39;)
+(11, 13, &#39;PERSON&#39;, &#39;布什&#39;)
+(17, 21, &#39;ORG&#39;, &#39;勞工部長&#39;)
+(21, 24, &#39;PERSON&#39;, &#39;趙小蘭&#39;)
+(42, 45, &#39;ORG&#39;, &#39;參議院&#39;)
+(56, 58, &#39;ORDINAL&#39;, &#39;第一&#39;)
+(60, 62, &#39;NORP&#39;, &#39;華裔&#39;)
+
+&#39;土地公有政策?？還是土地婆有政策。&#39;
+土地公有(VH)　政策(Na)　?(QUESTIONCATEGORY)　？(QUESTIONCATEGORY)　還是(Caa)　土地(Na)　婆(Na)　有(V_2)　政策(Na)　。(PERIODCATEGORY)　
+
+&#39;… 你確定嗎… 不要再騙了……他來亂的啦&#39;
+…(ETCCATEGORY)　 (WHITESPACE)　你(Nh)　確定(VK)　嗎(T)　…(ETCCATEGORY)　 (WHITESPACE)　不要(D)　再(D)　騙(VC)　了(Di)　…(ETCCATEGORY)　…(ETCCATEGORY)　他(Nh)　來(D)　亂(VH)　的(T)　啦(T)　
+
+&#39;最多容納59,000個人,或5.9萬人,再多就不行了.這是環評的結論.&#39;
+最多(VH)　容納(VJ)　59,000(Neu)　個(Nf)　人(Na)　,(COMMACATEGORY)　或(Caa)　5.9萬(Neu)　人(Na)　,(COMMACATEGORY)　再(D)　多(D)　就(D)　不行(VH)　了(T)　.(PERIODCATEGORY)　這(Nep)　是(SHI)　環評(Na)　的(DE)　結論(Na)　.(PERIODCATEGORY)　
+(4, 10, &#39;CARDINAL&#39;, &#39;59,000&#39;)
+(14, 18, &#39;CARDINAL&#39;, &#39;5.9萬&#39;)
+
+&#39;科長說:1,坪數對人數為1:3。2,可以再增加。&#39;
+科長(Na)　說(VE)　:1,(Neu)　坪數(Na)　對(P)　人數(Na)　為(VG)　1:3(Neu)　。(PERIODCATEGORY)　2(Neu)　,(COMMACATEGORY)　可以(D)　再(D)　增加(VHC)　。(PERIODCATEGORY)　
+(4, 6, &#39;CARDINAL&#39;, &#39;1,&#39;)
+(12, 13, &#39;CARDINAL&#39;, &#39;1&#39;)
+(14, 15, &#39;CARDINAL&#39;, &#39;3&#39;)
+(16, 17, &#39;CARDINAL&#39;, &#39;2&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="define-own-dictionary">
+<h2>Define Own Dictionary<a class="headerlink" href="#define-own-dictionary" title="Permalink to this headline">¶</a></h2>
+<p>The performance of Chinese word segmenter depends highly on the dictionary. Texts in different disciplines may have very domain-specific vocabulary. To prioritize a set of words in a dictionary, we can further ensure the accuracy of the word segmentation.</p>
+<p>To create a dictionary for <code class="docutils literal notranslate"><span class="pre">ckiptagger</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">word_to_weight</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;土地公&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;土地婆&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;公有&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;來亂的&quot;</span><span class="p">:</span> <span class="s2">&quot;啦&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;緯來體育台&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">dictionary</span> <span class="o">=</span> <span class="n">construct_dictionary</span><span class="p">(</span><span class="n">word_to_weight</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dictionary</span><span class="p">)</span>
+
+<span class="n">word_list_2</span> <span class="o">=</span> <span class="n">ws</span><span class="p">(</span><span class="n">sentence_list</span><span class="p">,</span>
+                <span class="n">recommend_dictionary</span><span class="o">=</span><span class="n">dictionary</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word_list</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word_list_2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(2, {&#39;公有&#39;: 2.0}), (3, {&#39;土地公&#39;: 1.0, &#39;土地婆&#39;: 1.0}), (5, {&#39;緯來體育台&#39;: 1.0})]
+[[&#39;傅達仁&#39;, &#39;今&#39;, &#39;將&#39;, &#39;執行&#39;, &#39;安樂死&#39;, &#39;，&#39;, &#39;卻&#39;, &#39;突然&#39;, &#39;爆出&#39;, &#39;自己&#39;, &#39;20&#39;, &#39;年&#39;, &#39;前&#39;, &#39;遭&#39;, &#39;緯來&#39;, &#39;體育台&#39;, &#39;封殺&#39;, &#39;，&#39;, &#39;他&#39;, &#39;不&#39;, &#39;懂&#39;, &#39;自己&#39;, &#39;哪裡&#39;, &#39;得罪到&#39;, &#39;電視台&#39;, &#39;。&#39;], [&#39;美國&#39;, &#39;參議院&#39;, &#39;針對&#39;, &#39;今天&#39;, &#39;總統&#39;, &#39;布什&#39;, &#39;所&#39;, &#39;提名&#39;, &#39;的&#39;, &#39;勞工部長&#39;, &#39;趙小蘭&#39;, &#39;展開&#39;, &#39;認可&#39;, &#39;聽證會&#39;, &#39;，&#39;, &#39;預料&#39;, &#39;她&#39;, &#39;將&#39;, &#39;會&#39;, &#39;很&#39;, &#39;順利&#39;, &#39;通過&#39;, &#39;參議院&#39;, &#39;支持&#39;, &#39;，&#39;, &#39;成為&#39;, &#39;該&#39;, &#39;國&#39;, &#39;有史以來&#39;, &#39;第一&#39;, &#39;位&#39;, &#39;的&#39;, &#39;華裔&#39;, &#39;女性&#39;, &#39;內閣&#39;, &#39;成員&#39;, &#39;。&#39;], [&#39;土地公有&#39;, &#39;政策&#39;, &#39;?&#39;, &#39;？&#39;, &#39;還是&#39;, &#39;土地&#39;, &#39;婆&#39;, &#39;有&#39;, &#39;政策&#39;, &#39;。&#39;], [&#39;…&#39;, &#39; &#39;, &#39;你&#39;, &#39;確定&#39;, &#39;嗎&#39;, &#39;…&#39;, &#39; &#39;, &#39;不要&#39;, &#39;再&#39;, &#39;騙&#39;, &#39;了&#39;, &#39;…&#39;, &#39;…&#39;, &#39;他&#39;, &#39;來&#39;, &#39;亂&#39;, &#39;的&#39;, &#39;啦&#39;], [&#39;最多&#39;, &#39;容納&#39;, &#39;59,000&#39;, &#39;個&#39;, &#39;人&#39;, &#39;,&#39;, &#39;或&#39;, &#39;5.9萬&#39;, &#39;人&#39;, &#39;,&#39;, &#39;再&#39;, &#39;多&#39;, &#39;就&#39;, &#39;不行&#39;, &#39;了&#39;, &#39;.&#39;, &#39;這&#39;, &#39;是&#39;, &#39;環評&#39;, &#39;的&#39;, &#39;結論&#39;, &#39;.&#39;], [&#39;科長&#39;, &#39;說&#39;, &#39;:1,&#39;, &#39;坪數&#39;, &#39;對&#39;, &#39;人數&#39;, &#39;為&#39;, &#39;1:3&#39;, &#39;。&#39;, &#39;2&#39;, &#39;,&#39;, &#39;可以&#39;, &#39;再&#39;, &#39;增加&#39;, &#39;。&#39;]]
+[[&#39;傅達仁&#39;, &#39;今&#39;, &#39;將&#39;, &#39;執行&#39;, &#39;安樂死&#39;, &#39;，&#39;, &#39;卻&#39;, &#39;突然&#39;, &#39;爆出&#39;, &#39;自己&#39;, &#39;20&#39;, &#39;年&#39;, &#39;前&#39;, &#39;遭&#39;, &#39;緯來體育台&#39;, &#39;封殺&#39;, &#39;，&#39;, &#39;他&#39;, &#39;不&#39;, &#39;懂&#39;, &#39;自己&#39;, &#39;哪裡&#39;, &#39;得罪到&#39;, &#39;電視台&#39;, &#39;。&#39;], [&#39;美國&#39;, &#39;參議院&#39;, &#39;針對&#39;, &#39;今天&#39;, &#39;總統&#39;, &#39;布什&#39;, &#39;所&#39;, &#39;提名&#39;, &#39;的&#39;, &#39;勞工部長&#39;, &#39;趙小蘭&#39;, &#39;展開&#39;, &#39;認可&#39;, &#39;聽證會&#39;, &#39;，&#39;, &#39;預料&#39;, &#39;她&#39;, &#39;將&#39;, &#39;會&#39;, &#39;很&#39;, &#39;順利&#39;, &#39;通過&#39;, &#39;參議院&#39;, &#39;支持&#39;, &#39;，&#39;, &#39;成為&#39;, &#39;該&#39;, &#39;國&#39;, &#39;有史以來&#39;, &#39;第一&#39;, &#39;位&#39;, &#39;的&#39;, &#39;華裔&#39;, &#39;女性&#39;, &#39;內閣&#39;, &#39;成員&#39;, &#39;。&#39;], [&#39;土地公有&#39;, &#39;政策&#39;, &#39;?&#39;, &#39;？&#39;, &#39;還是&#39;, &#39;土地婆&#39;, &#39;有&#39;, &#39;政策&#39;, &#39;。&#39;], [&#39;…&#39;, &#39; &#39;, &#39;你&#39;, &#39;確定&#39;, &#39;嗎&#39;, &#39;…&#39;, &#39; &#39;, &#39;不要&#39;, &#39;再&#39;, &#39;騙&#39;, &#39;了&#39;, &#39;…&#39;, &#39;…&#39;, &#39;他&#39;, &#39;來&#39;, &#39;亂&#39;, &#39;的&#39;, &#39;啦&#39;], [&#39;最多&#39;, &#39;容納&#39;, &#39;59,000&#39;, &#39;個&#39;, &#39;人&#39;, &#39;,&#39;, &#39;或&#39;, &#39;5.9萬&#39;, &#39;人&#39;, &#39;,&#39;, &#39;再&#39;, &#39;多&#39;, &#39;就&#39;, &#39;不行&#39;, &#39;了&#39;, &#39;.&#39;, &#39;這&#39;, &#39;是&#39;, &#39;環評&#39;, &#39;的&#39;, &#39;結論&#39;, &#39;.&#39;], [&#39;科長&#39;, &#39;說&#39;, &#39;:1,&#39;, &#39;坪數&#39;, &#39;對&#39;, &#39;人數&#39;, &#39;為&#39;, &#39;1:3&#39;, &#39;。&#39;, &#39;2&#39;, &#39;,&#39;, &#39;可以&#39;, &#39;再&#39;, &#39;增加&#39;, &#39;。&#39;]]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="convert-ckiptagger-output-into-a-data-frame">
+<h2>Convert ckiptagger output into a Data Frame?<a class="headerlink" href="#convert-ckiptagger-output-into-a-data-frame" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ckiptagger"
+        },
+        kernelOptions: {
+            kernelName: "ckiptagger",
+            path: "./corpus"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ckiptagger'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="../jieba.html" title="previous page">Chinese Word Segmentation (jieba)</a>
+    <a class='right-next' id="next-link" href="../statistical-analyses/statistical-analyses.html" title="next page">Statistical Analyses</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alvin Chen<br/>
+        
+            &copy; Copyright 2020 Alvin Chen.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

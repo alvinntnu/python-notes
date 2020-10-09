@@ -1,20 +1,40 @@
 
-
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Magic R &#8212; Python Notes for Linguistics</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
-    <link href="_static/css/index.css" rel="stylesheet">
-    <link rel="stylesheet" href="_static/sphinx-book-theme.css" type="text/css" />
+    
+  <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-dropdown.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.3da636dd464baa7582d2.js">
+
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
@@ -23,9 +43,9 @@
     <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/sphinx-book-theme.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
@@ -37,10 +57,10 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Python Tricks" href="python-tricks.html" />
-    <link rel="prev" title="Data Visualization 2" href="data-visualization-2.html" />
+    <link rel="prev" title="Data Visualization 2" href="python-basics/data-visualization-2.html" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="docsearch:language" content="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
 
 
 
@@ -127,12 +147,12 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="data-visualization-1.html">
+    <a class="reference internal" href="python-basics/data-visualization-1.html">
      Data Visualization I
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="data-visualization-2.html">
+    <a class="reference internal" href="python-basics/data-visualization-2.html">
      Data Visualization 2
     </a>
    </li>
@@ -166,6 +186,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="corpus/corpus-processing.html">
    Corpus Linguistics with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="statistical-analyses/statistical-analyses.html">
+   Statistical Analyses
   </a>
  </li>
  <li class="toctree-l1">
@@ -237,7 +262,8 @@
 
         <!-- Full screen (wrap in <a> to have style consistency -->
         <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
                     class="fas fa-expand"></i></button></a>
 
         <!-- Launch buttons -->
@@ -268,6 +294,7 @@
 
     <!-- Table of contents -->
     <div class="d-none d-md-block col-md-2 bd-toc show">
+        
         <div class="tocsection onthispage pt-5 pb-3">
             <i class="fas fa-list"></i> Contents
         </div>
@@ -281,6 +308,7 @@
 </ul>
 
         </nav>
+        
     </div>
 </div>
     <div id="main-content" class="row">
@@ -342,10 +370,12 @@ IRkernel::installspec()
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>── <span class=" -Color -Color-Bold">Attaching packages</span> ─────────────────────────────────────── tidyverse 1.3.0 ──
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message:
+“replacing previous import ‘vctrs::data_frame’ by ‘tibble::data_frame’ when loading ‘dplyr’”
+── <span class=" -Color -Color-Bold">Attaching packages</span> ─────────────────────────────────────── tidyverse 1.3.0 ──
 
-<span class=" -Color -Color-Green">✔</span> <span class=" -Color -Color-Blue">tibble </span> 3.0.1     <span class=" -Color -Color-Green">✔</span> <span class=" -Color -Color-Blue">dplyr  </span> 1.0.0
-<span class=" -Color -Color-Green">✔</span> <span class=" -Color -Color-Blue">tidyr  </span> 1.0.2     <span class=" -Color -Color-Green">✔</span> <span class=" -Color -Color-Blue">stringr</span> 1.4.0
+<span class=" -Color -Color-Green">✔</span> <span class=" -Color -Color-Blue">tibble </span> 3.0.3     <span class=" -Color -Color-Green">✔</span> <span class=" -Color -Color-Blue">dplyr  </span> 1.0.0
+<span class=" -Color -Color-Green">✔</span> <span class=" -Color -Color-Blue">tidyr  </span> 1.1.2     <span class=" -Color -Color-Green">✔</span> <span class=" -Color -Color-Blue">stringr</span> 1.4.0
 <span class=" -Color -Color-Green">✔</span> <span class=" -Color -Color-Blue">readr  </span> 1.3.1     <span class=" -Color -Color-Green">✔</span> <span class=" -Color -Color-Blue">forcats</span> 0.5.0
 <span class=" -Color -Color-Green">✔</span> <span class=" -Color -Color-Blue">purrr  </span> 0.3.4     
 
@@ -355,7 +385,7 @@ IRkernel::installspec()
 
 Package version: 2.0.1
 
-Parallel computing: 2 of 16 threads used.
+Parallel computing: 2 of 4 threads used.
 
 See https://quanteda.io for tutorials and examples.
 
@@ -384,26 +414,26 @@ The following object is masked from ‘package:utils’:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">'/Users/alvinchen/Dropbox/Python/PythonTricksTheBook/PythonTricksJupyterBook'</div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>               _                           
+<div class="output text_html">'/Users/Alvin/GoogleDrive/_MySyncDrive/Repository/python-notes'</div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>               _                           
 platform       x86_64-apple-darwin15.6.0   
 arch           x86_64                      
 os             darwin15.6.0                
 system         x86_64, darwin15.6.0        
 status                                     
 major          3                           
-minor          6.2                         
-year           2019                        
-month          12                          
-day            12                          
-svn rev        77560                       
+minor          6.3                         
+year           2020                        
+month          02                          
+day            29                          
+svn rev        77875                       
 language       R                           
-version.string R version 3.6.2 (2019-12-12)
-nickname       Dark and Stormy Night       
+version.string R version 3.6.3 (2020-02-29)
+nickname       Holding the Windsock        
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R version 3.6.2 (2019-12-12)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R version 3.6.3 (2020-02-29)
 Platform: x86_64-apple-darwin15.6.0 (64-bit)
-Running under: macOS Catalina 10.15.6
+Running under: macOS Catalina 10.15.7
 
 Matrix products: default
 BLAS:   /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRblas.0.dylib
@@ -417,25 +447,25 @@ attached base packages:
 
 other attached packages:
  [1] quanteda_2.0.1  forcats_0.5.0   stringr_1.4.0   dplyr_1.0.0    
- [5] purrr_0.3.4     readr_1.3.1     tidyr_1.0.2     tibble_3.0.1   
- [9] tidyverse_1.3.0 ggplot2_3.3.0  
+ [5] purrr_0.3.4     readr_1.3.1     tidyr_1.1.2     tibble_3.0.3   
+ [9] tidyverse_1.3.0 ggplot2_3.3.2  
 
 loaded via a namespace (and not attached):
- [1] pbdZMQ_0.3-3       tidyselect_1.1.0   repr_1.1.0         haven_2.2.0       
- [5] lattice_0.20-41    colorspace_1.4-1   vctrs_0.3.1        generics_0.0.2    
- [9] usethis_1.6.0      htmltools_0.4.0    base64enc_0.1-3    rlang_0.4.6       
-[13] pillar_1.4.3       glue_1.4.0         withr_2.2.0        DBI_1.1.0         
-[17] dbplyr_1.4.3       modelr_0.1.6       readxl_1.3.1       uuid_0.1-4        
+ [1] pbdZMQ_0.3-3       tidyselect_1.1.0   repr_1.1.0         lattice_0.20-41   
+ [5] haven_2.2.0        colorspace_1.4-1   vctrs_0.3.4        generics_0.0.2    
+ [9] usethis_1.6.1      htmltools_0.5.0    base64enc_0.1-3    rlang_0.4.7       
+[13] pillar_1.4.6       glue_1.4.2         withr_2.2.0        DBI_1.1.0         
+[17] dbplyr_1.4.3       modelr_0.1.7       readxl_1.3.1       uuid_0.1-4        
 [21] lifecycle_0.2.0    munsell_0.5.0      gtable_0.3.0       cellranger_1.1.0  
-[25] rvest_0.3.5        evaluate_0.14      fansi_0.4.1        broom_0.5.6       
-[29] IRdisplay_0.7.0    Rcpp_1.0.4.6       scales_1.1.0       backports_1.1.6   
-[33] IRkernel_1.1.1     RcppParallel_5.0.1 jsonlite_1.6.1     fs_1.4.1          
+[25] rvest_0.3.5        evaluate_0.14      fansi_0.4.1        broom_0.7.1       
+[29] IRdisplay_0.7.0    Rcpp_1.0.4.6       backports_1.1.9    scales_1.1.1      
+[33] IRkernel_1.1.1     RcppParallel_5.0.1 jsonlite_1.7.0     fs_1.4.1          
 [37] fastmatch_1.1-0    stopwords_2.0      hms_0.5.3          digest_0.6.25     
-[41] stringi_1.4.6      getPass_0.2-2      grid_3.6.2         cli_2.0.2         
-[45] tools_3.6.2        magrittr_1.5       crayon_1.3.4       pkgconfig_2.0.3   
-[49] Matrix_1.2-18      ellipsis_0.3.0     data.table_1.12.8  xml2_1.3.2        
-[53] reprex_0.3.0       lubridate_1.7.8    assertthat_0.2.1   httr_1.4.1        
-[57] rstudioapi_0.11    R6_2.4.1           nlme_3.1-147       compiler_3.6.2    
+[41] stringi_1.4.6      grid_3.6.3         cli_2.0.2          tools_3.6.3       
+[45] magrittr_1.5       crayon_1.3.4       pkgconfig_2.0.3    ellipsis_0.3.1    
+[49] Matrix_1.2-18      data.table_1.12.8  xml2_1.3.2         reprex_0.3.0      
+[53] lubridate_1.7.9    assertthat_0.2.1   httr_1.4.1         rstudioapi_0.11   
+[57] R6_2.4.1           compiler_3.6.3    
 </pre></div>
 </div>
 </div>
@@ -478,79 +508,29 @@ loaded via a namespace (and not attached):
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span> <span class="o">%&gt;%</span> 
-<span class="nf">filter</span><span class="p">(</span><span class="n">Sepal.Length</span> <span class="o">&gt;</span> <span class="m">5</span><span class="p">)</span>
+<span class="nf">filter</span><span class="p">(</span><span class="n">Sepal.Length</span> <span class="o">&gt;</span> <span class="m">5</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+<span class="nf">head</span><span class="p">(</span><span class="m">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><table>
-<caption>A data.frame: 118 × 5</caption>
+<caption>A data.frame: 10 × 5</caption>
 <thead>
-	<tr><th scope=col>Sepal.Length</th><th scope=col>Sepal.Width</th><th scope=col>Petal.Length</th><th scope=col>Petal.Width</th><th scope=col>Species</th></tr>
-	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;fct&gt;</th></tr>
+	<tr><th></th><th scope=col>Sepal.Length</th><th scope=col>Sepal.Width</th><th scope=col>Petal.Length</th><th scope=col>Petal.Width</th><th scope=col>Species</th></tr>
+	<tr><th></th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;fct&gt;</th></tr>
 </thead>
 <tbody>
-	<tr><td>5.1</td><td>3.5</td><td>1.4</td><td>0.2</td><td>setosa    </td></tr>
-	<tr><td>5.4</td><td>3.9</td><td>1.7</td><td>0.4</td><td>setosa    </td></tr>
-	<tr><td>5.4</td><td>3.7</td><td>1.5</td><td>0.2</td><td>setosa    </td></tr>
-	<tr><td>5.8</td><td>4.0</td><td>1.2</td><td>0.2</td><td>setosa    </td></tr>
-	<tr><td>5.7</td><td>4.4</td><td>1.5</td><td>0.4</td><td>setosa    </td></tr>
-	<tr><td>5.4</td><td>3.9</td><td>1.3</td><td>0.4</td><td>setosa    </td></tr>
-	<tr><td>5.1</td><td>3.5</td><td>1.4</td><td>0.3</td><td>setosa    </td></tr>
-	<tr><td>5.7</td><td>3.8</td><td>1.7</td><td>0.3</td><td>setosa    </td></tr>
-	<tr><td>5.1</td><td>3.8</td><td>1.5</td><td>0.3</td><td>setosa    </td></tr>
-	<tr><td>5.4</td><td>3.4</td><td>1.7</td><td>0.2</td><td>setosa    </td></tr>
-	<tr><td>5.1</td><td>3.7</td><td>1.5</td><td>0.4</td><td>setosa    </td></tr>
-	<tr><td>5.1</td><td>3.3</td><td>1.7</td><td>0.5</td><td>setosa    </td></tr>
-	<tr><td>5.2</td><td>3.5</td><td>1.5</td><td>0.2</td><td>setosa    </td></tr>
-	<tr><td>5.2</td><td>3.4</td><td>1.4</td><td>0.2</td><td>setosa    </td></tr>
-	<tr><td>5.4</td><td>3.4</td><td>1.5</td><td>0.4</td><td>setosa    </td></tr>
-	<tr><td>5.2</td><td>4.1</td><td>1.5</td><td>0.1</td><td>setosa    </td></tr>
-	<tr><td>5.5</td><td>4.2</td><td>1.4</td><td>0.2</td><td>setosa    </td></tr>
-	<tr><td>5.5</td><td>3.5</td><td>1.3</td><td>0.2</td><td>setosa    </td></tr>
-	<tr><td>5.1</td><td>3.4</td><td>1.5</td><td>0.2</td><td>setosa    </td></tr>
-	<tr><td>5.1</td><td>3.8</td><td>1.9</td><td>0.4</td><td>setosa    </td></tr>
-	<tr><td>5.1</td><td>3.8</td><td>1.6</td><td>0.2</td><td>setosa    </td></tr>
-	<tr><td>5.3</td><td>3.7</td><td>1.5</td><td>0.2</td><td>setosa    </td></tr>
-	<tr><td>7.0</td><td>3.2</td><td>4.7</td><td>1.4</td><td>versicolor</td></tr>
-	<tr><td>6.4</td><td>3.2</td><td>4.5</td><td>1.5</td><td>versicolor</td></tr>
-	<tr><td>6.9</td><td>3.1</td><td>4.9</td><td>1.5</td><td>versicolor</td></tr>
-	<tr><td>5.5</td><td>2.3</td><td>4.0</td><td>1.3</td><td>versicolor</td></tr>
-	<tr><td>6.5</td><td>2.8</td><td>4.6</td><td>1.5</td><td>versicolor</td></tr>
-	<tr><td>5.7</td><td>2.8</td><td>4.5</td><td>1.3</td><td>versicolor</td></tr>
-	<tr><td>6.3</td><td>3.3</td><td>4.7</td><td>1.6</td><td>versicolor</td></tr>
-	<tr><td>6.6</td><td>2.9</td><td>4.6</td><td>1.3</td><td>versicolor</td></tr>
-	<tr><td>⋮</td><td>⋮</td><td>⋮</td><td>⋮</td><td>⋮</td></tr>
-	<tr><td>6.9</td><td>3.2</td><td>5.7</td><td>2.3</td><td>virginica</td></tr>
-	<tr><td>5.6</td><td>2.8</td><td>4.9</td><td>2.0</td><td>virginica</td></tr>
-	<tr><td>7.7</td><td>2.8</td><td>6.7</td><td>2.0</td><td>virginica</td></tr>
-	<tr><td>6.3</td><td>2.7</td><td>4.9</td><td>1.8</td><td>virginica</td></tr>
-	<tr><td>6.7</td><td>3.3</td><td>5.7</td><td>2.1</td><td>virginica</td></tr>
-	<tr><td>7.2</td><td>3.2</td><td>6.0</td><td>1.8</td><td>virginica</td></tr>
-	<tr><td>6.2</td><td>2.8</td><td>4.8</td><td>1.8</td><td>virginica</td></tr>
-	<tr><td>6.1</td><td>3.0</td><td>4.9</td><td>1.8</td><td>virginica</td></tr>
-	<tr><td>6.4</td><td>2.8</td><td>5.6</td><td>2.1</td><td>virginica</td></tr>
-	<tr><td>7.2</td><td>3.0</td><td>5.8</td><td>1.6</td><td>virginica</td></tr>
-	<tr><td>7.4</td><td>2.8</td><td>6.1</td><td>1.9</td><td>virginica</td></tr>
-	<tr><td>7.9</td><td>3.8</td><td>6.4</td><td>2.0</td><td>virginica</td></tr>
-	<tr><td>6.4</td><td>2.8</td><td>5.6</td><td>2.2</td><td>virginica</td></tr>
-	<tr><td>6.3</td><td>2.8</td><td>5.1</td><td>1.5</td><td>virginica</td></tr>
-	<tr><td>6.1</td><td>2.6</td><td>5.6</td><td>1.4</td><td>virginica</td></tr>
-	<tr><td>7.7</td><td>3.0</td><td>6.1</td><td>2.3</td><td>virginica</td></tr>
-	<tr><td>6.3</td><td>3.4</td><td>5.6</td><td>2.4</td><td>virginica</td></tr>
-	<tr><td>6.4</td><td>3.1</td><td>5.5</td><td>1.8</td><td>virginica</td></tr>
-	<tr><td>6.0</td><td>3.0</td><td>4.8</td><td>1.8</td><td>virginica</td></tr>
-	<tr><td>6.9</td><td>3.1</td><td>5.4</td><td>2.1</td><td>virginica</td></tr>
-	<tr><td>6.7</td><td>3.1</td><td>5.6</td><td>2.4</td><td>virginica</td></tr>
-	<tr><td>6.9</td><td>3.1</td><td>5.1</td><td>2.3</td><td>virginica</td></tr>
-	<tr><td>5.8</td><td>2.7</td><td>5.1</td><td>1.9</td><td>virginica</td></tr>
-	<tr><td>6.8</td><td>3.2</td><td>5.9</td><td>2.3</td><td>virginica</td></tr>
-	<tr><td>6.7</td><td>3.3</td><td>5.7</td><td>2.5</td><td>virginica</td></tr>
-	<tr><td>6.7</td><td>3.0</td><td>5.2</td><td>2.3</td><td>virginica</td></tr>
-	<tr><td>6.3</td><td>2.5</td><td>5.0</td><td>1.9</td><td>virginica</td></tr>
-	<tr><td>6.5</td><td>3.0</td><td>5.2</td><td>2.0</td><td>virginica</td></tr>
-	<tr><td>6.2</td><td>3.4</td><td>5.4</td><td>2.3</td><td>virginica</td></tr>
-	<tr><td>5.9</td><td>3.0</td><td>5.1</td><td>1.8</td><td>virginica</td></tr>
+	<tr><th scope=row>1</th><td>5.1</td><td>3.5</td><td>1.4</td><td>0.2</td><td>setosa</td></tr>
+	<tr><th scope=row>2</th><td>5.4</td><td>3.9</td><td>1.7</td><td>0.4</td><td>setosa</td></tr>
+	<tr><th scope=row>3</th><td>5.4</td><td>3.7</td><td>1.5</td><td>0.2</td><td>setosa</td></tr>
+	<tr><th scope=row>4</th><td>5.8</td><td>4.0</td><td>1.2</td><td>0.2</td><td>setosa</td></tr>
+	<tr><th scope=row>5</th><td>5.7</td><td>4.4</td><td>1.5</td><td>0.4</td><td>setosa</td></tr>
+	<tr><th scope=row>6</th><td>5.4</td><td>3.9</td><td>1.3</td><td>0.4</td><td>setosa</td></tr>
+	<tr><th scope=row>7</th><td>5.1</td><td>3.5</td><td>1.4</td><td>0.3</td><td>setosa</td></tr>
+	<tr><th scope=row>8</th><td>5.7</td><td>3.8</td><td>1.7</td><td>0.3</td><td>setosa</td></tr>
+	<tr><th scope=row>9</th><td>5.1</td><td>3.8</td><td>1.5</td><td>0.3</td><td>setosa</td></tr>
+	<tr><th scope=row>10</th><td>5.4</td><td>3.4</td><td>1.7</td><td>0.2</td><td>setosa</td></tr>
 </tbody>
 </table>
 </div></div>
@@ -586,7 +566,7 @@ loaded via a namespace (and not attached):
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="data-visualization-2.html" title="previous page">Data Visualization 2</a>
+    <a class='left-prev' id="prev-link" href="python-basics/data-visualization-2.html" title="previous page">Data Visualization 2</a>
     <a class='right-next' id="next-link" href="python-tricks.html" title="next page">Python Tricks</a>
 
     </div>
@@ -606,7 +586,10 @@ loaded via a namespace (and not attached):
       </div>
     </div>
 
-    <script src="_static/js/index.js"></script>
+    
+  <script src="_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
     
   </body>
 </html>

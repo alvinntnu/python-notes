@@ -1,20 +1,40 @@
 
-
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Web Crawler &#8212; Python Notes for Linguistics</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
-    <link href="_static/css/index.css" rel="stylesheet">
-    <link rel="stylesheet" href="_static/sphinx-book-theme.css" type="text/css" />
+    
+  <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-dropdown.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.3da636dd464baa7582d2.js">
+
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
@@ -23,9 +43,9 @@
     <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/sphinx-book-theme.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
@@ -39,8 +59,8 @@
     <link rel="next" title="Corpus Lingustics Methods" href="corpus-linguistics-methods.html" />
     <link rel="prev" title="Natural Language Tool-Kits (NLTK)" href="nltk.html" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="docsearch:language" content="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
 
 
 
@@ -117,7 +137,7 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="childes.html">
+    <a class="reference internal" href="corpus/childes.html">
      CHILDES Corpus
     </a>
    </li>
@@ -137,11 +157,16 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="ckiptagger.html">
+    <a class="reference internal" href="corpus/ckiptagger.html">
      Chinese Word Segmentation (ckiptagger)
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="statistical-analyses/statistical-analyses.html">
+   Statistical Analyses
+  </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="nlp/nlp.html">
@@ -212,7 +237,8 @@
 
         <!-- Full screen (wrap in <a> to have style consistency -->
         <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
                     class="fas fa-expand"></i></button></a>
 
         <!-- Launch buttons -->
@@ -243,12 +269,7 @@
 
     <!-- Table of contents -->
     <div class="d-none d-md-block col-md-2 bd-toc show">
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> Contents
-        </div>
-        <nav id="bd-toc-nav">
-            
-        </nav>
+        
     </div>
 </div>
     <div id="main-content" class="row">
@@ -325,7 +346,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17
 </pre></div>
 </div>
 </div>
@@ -338,7 +359,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;push&#39;: &#39;&#39;, &#39;title&#39;: &#39;Fw: [食記] 高雄 小城牛排館，鐵板麵可全換蛋&#39;, &#39;date&#39;: &#39;10/06&#39;, &#39;author&#39;: &#39;ctx705f&#39;, &#39;link&#39;: &#39;/bbs/Food/M.1601967402.A.E42.html&#39;, &#39;text&#39;: &#39;作者ctx705f (鍵盤小妹)看板Food標題Fw: [食記] 高雄 小城牛排館，鐵板麵可全換蛋時間Tue Oct  6 14:56:41 2020\n※ [本文轉錄自 Kaohsiung 看板 #1VV1KTHX ]\n\n作者: ctx705f (鍵盤小妹) 看板: Kaohsiung\n標題: [食記] 小城牛排館，鐵板麵可全換蛋\n時間: Tue Oct  6 13:25:09 2020\n\n地址：80788高雄市三民區鼎強街131號\n\n電話：(07)350-9162\n\n營業時間：11:00~14:00、17:00~21:00，週日公休\n\n每人消費：200元左右\n\n消費時間：2020年10月\n\n無音樂圖文：https://chaos810126.pixnet.net/blog/post/353030468\n\n==\n\n小城牛排館位在鼎強街與天祥一路的交叉口。招牌雖然小，但可以認對面的加油站，看到\n加油站就知道到了。\n\n\n前檯是料理區，右手邊則提供的可以自取的紅茶以及玉米濃湯。\n\n\n店內空間簡單明亮，整潔看起來也做得不錯，而且有冷氣可以吹。在走道的中央則擺放的\n需要用到的餐具及各式調味料，常見的番茄醬、辣椒醬、胡椒粉與梅林醬都有了。如果有\n海鹽的話會更完美。\n\n\n菜單。百元以下有鐵板麵以及豬排兩種選擇，常見的排餐大約在150元左右，幾個較高檔\n的牛排則在200~300元左右，整體平價。小城可以進行加麵加蛋，而且麵也可以單換成蛋\n。\n\n\n舉例說明，一份餐點中本來就有一顆蛋、一份鐵板麵和一份肉。鐵板麵在套餐中佔30元，\n可以把這30元以10元/顆的方式換成蛋，簡單說就是如果全部換成蛋的話，餐點就會變成\n原本的一顆蛋+一份肉+交換過後的三顆蛋=四顆蛋！對於在澱粉控制的人來說是一大福音\n。\n\n\n自取的玉米濃湯。勾芡的口感比較濃一些，但香味十分足夠，可以再加點胡椒調味。但我\n個人覺得喝一碗就夠了，再多會膩。\n\n\n自取的紅茶。甜度適中，當作解渴用或解膩用都不錯。\n\n\n我點的是沙朗牛排(200元)。因為牛排比較大所以分開放，在視覺上少了些震撼，可以自\n己堆上去。分開來擺也讓鐵板麵的醬汁比較不足，可以自己另外配沾醬，但不影響鐵板麵\nQQ的口感。這麵做得滿好吃的，但這種夜市鐵板牛排的鐵板麵總覺得要稍微被鐵板弄到焦\n掉更有FU一點？\n\n\n沙朗的份量如圖所示，還滿大一塊的，小城處理得比較偏熟一些，我個人口味喜歡更生一\n點點，但友人覺得很夠了。\n\n\n友人點的是雞腿排(130元)，麵全部換成蛋。一大塊雞腿排下面就是四顆荷包蛋真的相當\n壯觀！而雞腿排也是在這種店的安全牌之一，香脆的表皮與雞腿的肉質非常難踩雷，滿足\n度相當高。\n\n\n結論。內用有冷氣、價格合理，自取的湯和紅茶也不錯。重點是友人跟店家提出的換蛋需\n求成功，有了一個低澱粉的蛋白質大餐。如果有健身族或正在控制澱粉，不妨都向店家問\n問能否換成蛋吧！\n\n\n--------------本文警語------------------------\n本篇推文禁止出現政治人物或與其有關之內容，\n 違者將向板主以高雄板規 6-1 或 6-5 檢舉。\n----以上警語請自行決定是否刪除---------------- \n\n--\n┌─── ▲◣▂▄▆◤ ──▲◣▂▄▆◤ ──▲◣▂▄▆◤ ──▲◣▂▄▆◤ ──┐\n│這讓 ◤      │  ha   ◤      │  cool ◤      │  man  ◤      │      │\n│篇您 ◢●  ●  \\      ◢●  ●  \\      ◢●  ●  \\      ◢●  ●  \\      │\n│文覺  人 ︸ ＿◤ 新    人 ︸ ＿◤ 溫    人 ︸ ＿◤ 難    人 ︸ ＿◤ 生   │\n│章得   █◣◥ ◣ 奇   █◣◥ ◣ 馨   █◣◥ ◣ 過   █◣◥ ◣ 氣   │\n└───  ◣▲▍ /  \\──  ◣▲▍ /  \\──  ◣▲▍ /  \\──  ◣▲▍ /  \\ ──┘\n\n--\n※ 發信站: 批踢踢實業坊(ptt.cc), 來自: 36.236.42.97 (臺灣)\n※ 文章網址: https://www.ptt.cc/bbs/Kaohsiung/M.1601967389.A.461.html\n\n※ 發信站: 批踢踢實業坊(ptt.cc)\n※ 轉錄者: ctx705f (36.236.42.97 臺灣), 10/06/2020 14:56:41\n&#39;}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;push&#39;: &#39;&#39;, &#39;title&#39;: &#39;[食記] 台北中山 神田橋和食 初訪 - 道地日本味&#39;, &#39;date&#39;: &#39;10/09&#39;, &#39;author&#39;: &#39;scissorstone&#39;, &#39;link&#39;: &#39;/bbs/Food/M.1602202133.A.FEB.html&#39;, &#39;text&#39;: &#39;作者scissorstone (剪刀石頭布)看板Food標題[食記] 台北中山 神田橋和食 初訪 - 道地日本味時間Fri Oct  9 08:08:50 2020\n   餐廳名稱：神田橋和食\n   消費時間：2020年/8月\n   地址：台北市中山區吉林路26巷21號\n   電話：02 2542 6085\n   營業時間：17:00–22:00 (星期日公休)\n   每人平均價位：300-1000\n   推薦菜色：茄子麻糬煮\n   圖文連結: https://tinyurl.com/yy3ab7cs\n\n--\n\n碎碎念:\n\n這是間有點年紀的日本料理，最早位於一江街\n日本老闆堅持提供道地日本味的食物\n鹹度偏高，搭配米飯或下酒非常合適\n\n--\n\n菜色介紹:\n\n竹筴魚たたき\n今天的竹筴魚特別肥美\n為了凸顯魚肉本身的美味\n選擇厚切，並減少薑蔥的比例\n\n\n海鮮奶油可樂餅\n對這種外皮酥脆，內心滑嫩的食物\n沒有抵抗力阿\n濃郁的白醬跟海鮮的鮮味完美融合在一起\n\n\n茄子麻糬煮\n一道暖心的料理\n炸過的麻糬與茄子\n吸飽沉鹹的柴魚高湯\n\n\n炸豆腐\n高湯本身跟茄子麻糬的一樣\n外皮的粉漿一樣有吸附湯汁的功能\n但口味跟茄子麻糬重複了，建議點一種就好\n\n\n明太子里肌肉串、蔥雞肉串\n熟度烤得剛好，汁水都有保留住\n重鹹的調味好想來杯啤酒\n\n--\n\n總結:\n\n跟小島食堂老闆聊到神田橋時\n他印象最深刻的是店主一絲不苟的料理態度\n的確，今天呈現出的料理夠水準\n而且能感受到食物的溫暖\n\n--\nDr. ERIC 的飲食札記：https://www.facebook.com/ericfoodblog\n\n--\n※ 發信站: 批踢踢實業坊(ptt.cc), 來自: 223.136.7.205 (臺灣)\n※ 文章網址: https://www.ptt.cc/bbs/Food/M.1602202133.A.FEB.html\n&#39;}
 </pre></div>
 </div>
 </div>
@@ -356,11 +377,11 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Push:  
-title: Fw: [食記] 高雄 小城牛排館，鐵板麵可全換蛋 
-date: 10/06 
-author: ctx705f 
-link: /bbs/Food/M.1601967402.A.E42.html 
-text: 作者ctx 
+title: [食記] 台北中山 神田橋和食 初訪 - 道地日本味 
+date: 10/09 
+author: scissorstone 
+link: /bbs/Food/M.1602202133.A.FEB.html 
+text: 作者sci 
 </pre></div>
 </div>
 </div>
@@ -419,7 +440,10 @@ text: 作者ctx
       </div>
     </div>
 
-    <script src="_static/js/index.js"></script>
+    
+  <script src="_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
     
   </body>
 </html>
