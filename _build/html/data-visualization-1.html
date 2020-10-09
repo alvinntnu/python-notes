@@ -1,20 +1,40 @@
 
-
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Data Visualization I &#8212; Python Notes for Linguistics</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
-    <link href="_static/css/index.css" rel="stylesheet">
-    <link rel="stylesheet" href="_static/sphinx-book-theme.css" type="text/css" />
+    
+  <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-dropdown.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.3da636dd464baa7582d2.js">
+
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
@@ -23,9 +43,9 @@
     <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/sphinx-book-theme.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
@@ -39,8 +59,8 @@
     <link rel="next" title="Data Visualization 2" href="data-visualization-2.html" />
     <link rel="prev" title="Object Serialization" href="pickle.html" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="docsearch:language" content="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
 
 
 
@@ -169,6 +189,11 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="statistical-analyses/statistical-analyses.html">
+   Statistical Analyses
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="nlp/nlp.html">
    Natural Language Processing with Python
   </a>
@@ -237,7 +262,8 @@
 
         <!-- Full screen (wrap in <a> to have style consistency -->
         <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
                     class="fas fa-expand"></i></button></a>
 
         <!-- Launch buttons -->
@@ -268,6 +294,7 @@
 
     <!-- Table of contents -->
     <div class="d-none d-md-block col-md-2 bd-toc show">
+        
         <div class="tocsection onthispage pt-5 pb-3">
             <i class="fas fa-list"></i> Contents
         </div>
@@ -370,6 +397,7 @@
 </ul>
 
         </nav>
+        
     </div>
 </div>
     <div id="main-content" class="row">
@@ -448,142 +476,142 @@ dtype: object
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>1.622295</td>
-      <td>2.008054</td>
-      <td>9.923439</td>
-      <td>4.459518</td>
-      <td>5.226300</td>
-      <td>3.274124</td>
-      <td>5.194597</td>
-      <td>3.344952</td>
-      <td>3.918283</td>
-      <td>1.218355</td>
+      <td>-0.857336</td>
+      <td>1.002215</td>
+      <td>10.632975</td>
+      <td>5.088772</td>
+      <td>4.421734</td>
+      <td>3.316938</td>
+      <td>5.702647</td>
+      <td>3.420617</td>
+      <td>3.471385</td>
+      <td>3.932038</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
-      <td>0.204273</td>
-      <td>2.134312</td>
-      <td>13.080209</td>
-      <td>7.861488</td>
-      <td>4.862482</td>
-      <td>2.826363</td>
-      <td>6.869586</td>
-      <td>4.873809</td>
-      <td>2.701227</td>
-      <td>1.500656</td>
+      <td>-1.986474</td>
+      <td>3.454714</td>
+      <td>10.902967</td>
+      <td>8.479823</td>
+      <td>5.146986</td>
+      <td>4.900538</td>
+      <td>6.150332</td>
+      <td>5.341808</td>
+      <td>7.039569</td>
+      <td>3.009307</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
-      <td>-0.875344</td>
-      <td>3.280178</td>
-      <td>13.571407</td>
-      <td>8.617541</td>
-      <td>4.865045</td>
-      <td>4.501043</td>
-      <td>6.572270</td>
-      <td>4.868194</td>
-      <td>6.229813</td>
-      <td>5.858215</td>
+      <td>-1.238920</td>
+      <td>4.680186</td>
+      <td>12.643187</td>
+      <td>9.481737</td>
+      <td>6.613302</td>
+      <td>4.390511</td>
+      <td>5.516791</td>
+      <td>6.012596</td>
+      <td>5.493854</td>
+      <td>3.710508</td>
     </tr>
     <tr>
       <th>3</th>
       <td>4</td>
-      <td>-0.250563</td>
-      <td>4.057166</td>
-      <td>15.251937</td>
-      <td>6.280055</td>
-      <td>7.478215</td>
-      <td>6.290507</td>
-      <td>8.125758</td>
-      <td>6.850738</td>
-      <td>7.638645</td>
-      <td>5.104826</td>
+      <td>0.509918</td>
+      <td>2.864286</td>
+      <td>13.161306</td>
+      <td>8.920101</td>
+      <td>8.571566</td>
+      <td>6.676207</td>
+      <td>8.685538</td>
+      <td>6.845082</td>
+      <td>6.992131</td>
+      <td>4.505575</td>
     </tr>
     <tr>
       <th>4</th>
       <td>5</td>
-      <td>0.170400</td>
-      <td>5.530868</td>
-      <td>16.447577</td>
-      <td>8.649350</td>
-      <td>8.144162</td>
-      <td>4.981461</td>
-      <td>7.644509</td>
-      <td>8.680892</td>
-      <td>7.439734</td>
-      <td>5.764627</td>
+      <td>-0.111503</td>
+      <td>5.163105</td>
+      <td>14.193348</td>
+      <td>11.302972</td>
+      <td>8.054183</td>
+      <td>5.264811</td>
+      <td>8.833866</td>
+      <td>7.823426</td>
+      <td>6.745524</td>
+      <td>7.255000</td>
     </tr>
     <tr>
       <th>5</th>
       <td>6</td>
-      <td>0.876695</td>
-      <td>5.158545</td>
-      <td>17.108765</td>
-      <td>9.787989</td>
-      <td>11.058978</td>
-      <td>6.153611</td>
-      <td>9.466417</td>
-      <td>10.638259</td>
-      <td>6.412649</td>
-      <td>6.738338</td>
+      <td>1.027075</td>
+      <td>6.528921</td>
+      <td>15.797006</td>
+      <td>9.857317</td>
+      <td>8.352952</td>
+      <td>7.407613</td>
+      <td>9.593200</td>
+      <td>10.049122</td>
+      <td>9.572660</td>
+      <td>5.947944</td>
     </tr>
     <tr>
       <th>6</th>
       <td>7</td>
-      <td>1.431544</td>
-      <td>7.967783</td>
-      <td>18.266822</td>
-      <td>12.973439</td>
-      <td>9.717198</td>
-      <td>9.204987</td>
-      <td>11.298751</td>
-      <td>10.517505</td>
-      <td>9.680560</td>
-      <td>6.593412</td>
+      <td>0.635200</td>
+      <td>6.160020</td>
+      <td>17.188053</td>
+      <td>12.474650</td>
+      <td>12.073508</td>
+      <td>7.669900</td>
+      <td>10.427957</td>
+      <td>10.993987</td>
+      <td>10.051708</td>
+      <td>6.701792</td>
     </tr>
     <tr>
       <th>7</th>
       <td>8</td>
-      <td>1.140595</td>
-      <td>8.406493</td>
-      <td>17.944106</td>
-      <td>12.637571</td>
-      <td>6.478519</td>
-      <td>10.379340</td>
-      <td>12.619085</td>
-      <td>9.963317</td>
-      <td>11.790336</td>
-      <td>9.744259</td>
+      <td>-1.222375</td>
+      <td>8.482797</td>
+      <td>19.203024</td>
+      <td>13.684139</td>
+      <td>10.024579</td>
+      <td>9.905712</td>
+      <td>12.608821</td>
+      <td>10.321264</td>
+      <td>10.869501</td>
+      <td>8.870883</td>
     </tr>
     <tr>
       <th>8</th>
       <td>9</td>
-      <td>1.984232</td>
-      <td>10.204245</td>
-      <td>17.778536</td>
-      <td>14.541481</td>
-      <td>4.337527</td>
-      <td>9.677515</td>
-      <td>14.104200</td>
-      <td>12.108773</td>
-      <td>11.429180</td>
-      <td>10.339810</td>
+      <td>0.218887</td>
+      <td>9.498886</td>
+      <td>22.093689</td>
+      <td>14.691465</td>
+      <td>2.540067</td>
+      <td>10.650859</td>
+      <td>12.942607</td>
+      <td>10.606869</td>
+      <td>12.881816</td>
+      <td>9.515982</td>
     </tr>
     <tr>
       <th>9</th>
       <td>10</td>
-      <td>-0.903253</td>
-      <td>10.661175</td>
-      <td>20.825625</td>
-      <td>14.043558</td>
-      <td>6.908403</td>
-      <td>12.413022</td>
-      <td>13.310509</td>
-      <td>13.081938</td>
-      <td>13.710187</td>
-      <td>10.233226</td>
+      <td>-0.348709</td>
+      <td>9.806805</td>
+      <td>21.255589</td>
+      <td>15.169296</td>
+      <td>8.297478</td>
+      <td>10.083607</td>
+      <td>13.759533</td>
+      <td>12.271797</td>
+      <td>13.892411</td>
+      <td>11.365917</td>
     </tr>
   </tbody>
 </table>
@@ -802,142 +830,142 @@ dtype: object
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>1.622295</td>
-      <td>2.008054</td>
-      <td>9.923439</td>
-      <td>4.459518</td>
-      <td>5.226300</td>
-      <td>3.274124</td>
-      <td>5.194597</td>
-      <td>3.344952</td>
-      <td>3.918283</td>
-      <td>1.218355</td>
+      <td>-0.857336</td>
+      <td>1.002215</td>
+      <td>10.632975</td>
+      <td>5.088772</td>
+      <td>4.421734</td>
+      <td>3.316938</td>
+      <td>5.702647</td>
+      <td>3.420617</td>
+      <td>3.471385</td>
+      <td>3.932038</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
-      <td>0.204273</td>
-      <td>2.134312</td>
-      <td>13.080209</td>
-      <td>7.861488</td>
-      <td>4.862482</td>
-      <td>2.826363</td>
-      <td>6.869586</td>
-      <td>4.873809</td>
-      <td>2.701227</td>
-      <td>1.500656</td>
+      <td>-1.986474</td>
+      <td>3.454714</td>
+      <td>10.902967</td>
+      <td>8.479823</td>
+      <td>5.146986</td>
+      <td>4.900538</td>
+      <td>6.150332</td>
+      <td>5.341808</td>
+      <td>7.039569</td>
+      <td>3.009307</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
-      <td>-0.875344</td>
-      <td>3.280178</td>
-      <td>13.571407</td>
-      <td>8.617541</td>
-      <td>4.865045</td>
-      <td>4.501043</td>
-      <td>6.572270</td>
-      <td>4.868194</td>
-      <td>6.229813</td>
-      <td>5.858215</td>
+      <td>-1.238920</td>
+      <td>4.680186</td>
+      <td>12.643187</td>
+      <td>9.481737</td>
+      <td>6.613302</td>
+      <td>4.390511</td>
+      <td>5.516791</td>
+      <td>6.012596</td>
+      <td>5.493854</td>
+      <td>3.710508</td>
     </tr>
     <tr>
       <th>3</th>
       <td>4</td>
-      <td>-0.250563</td>
-      <td>4.057166</td>
-      <td>15.251937</td>
-      <td>6.280055</td>
-      <td>7.478215</td>
-      <td>6.290507</td>
-      <td>8.125758</td>
-      <td>6.850738</td>
-      <td>7.638645</td>
-      <td>5.104826</td>
+      <td>0.509918</td>
+      <td>2.864286</td>
+      <td>13.161306</td>
+      <td>8.920101</td>
+      <td>8.571566</td>
+      <td>6.676207</td>
+      <td>8.685538</td>
+      <td>6.845082</td>
+      <td>6.992131</td>
+      <td>4.505575</td>
     </tr>
     <tr>
       <th>4</th>
       <td>5</td>
-      <td>0.170400</td>
-      <td>5.530868</td>
-      <td>16.447577</td>
-      <td>8.649350</td>
-      <td>8.144162</td>
-      <td>4.981461</td>
-      <td>7.644509</td>
-      <td>8.680892</td>
-      <td>7.439734</td>
-      <td>5.764627</td>
+      <td>-0.111503</td>
+      <td>5.163105</td>
+      <td>14.193348</td>
+      <td>11.302972</td>
+      <td>8.054183</td>
+      <td>5.264811</td>
+      <td>8.833866</td>
+      <td>7.823426</td>
+      <td>6.745524</td>
+      <td>7.255000</td>
     </tr>
     <tr>
       <th>5</th>
       <td>6</td>
-      <td>0.876695</td>
-      <td>5.158545</td>
-      <td>17.108765</td>
-      <td>9.787989</td>
-      <td>11.058978</td>
-      <td>6.153611</td>
-      <td>9.466417</td>
-      <td>10.638259</td>
-      <td>6.412649</td>
-      <td>6.738338</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>9</td>
-      <td>1.984232</td>
-      <td>10.204245</td>
-      <td>17.778536</td>
-      <td>14.541481</td>
-      <td>4.337527</td>
-      <td>9.677515</td>
-      <td>14.104200</td>
-      <td>12.108773</td>
-      <td>11.429180</td>
-      <td>10.339810</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>8</td>
-      <td>1.140595</td>
-      <td>8.406493</td>
-      <td>17.944106</td>
-      <td>12.637571</td>
-      <td>6.478519</td>
-      <td>10.379340</td>
-      <td>12.619085</td>
-      <td>9.963317</td>
-      <td>11.790336</td>
-      <td>9.744259</td>
+      <td>1.027075</td>
+      <td>6.528921</td>
+      <td>15.797006</td>
+      <td>9.857317</td>
+      <td>8.352952</td>
+      <td>7.407613</td>
+      <td>9.593200</td>
+      <td>10.049122</td>
+      <td>9.572660</td>
+      <td>5.947944</td>
     </tr>
     <tr>
       <th>6</th>
       <td>7</td>
-      <td>1.431544</td>
-      <td>7.967783</td>
-      <td>18.266822</td>
-      <td>12.973439</td>
-      <td>9.717198</td>
-      <td>9.204987</td>
-      <td>11.298751</td>
-      <td>10.517505</td>
-      <td>9.680560</td>
-      <td>6.593412</td>
+      <td>0.635200</td>
+      <td>6.160020</td>
+      <td>17.188053</td>
+      <td>12.474650</td>
+      <td>12.073508</td>
+      <td>7.669900</td>
+      <td>10.427957</td>
+      <td>10.993987</td>
+      <td>10.051708</td>
+      <td>6.701792</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>-1.222375</td>
+      <td>8.482797</td>
+      <td>19.203024</td>
+      <td>13.684139</td>
+      <td>10.024579</td>
+      <td>9.905712</td>
+      <td>12.608821</td>
+      <td>10.321264</td>
+      <td>10.869501</td>
+      <td>8.870883</td>
     </tr>
     <tr>
       <th>9</th>
       <td>10</td>
-      <td>-0.903253</td>
-      <td>10.661175</td>
-      <td>20.825625</td>
-      <td>14.043558</td>
-      <td>6.908403</td>
-      <td>12.413022</td>
-      <td>13.310509</td>
-      <td>13.081938</td>
-      <td>13.710187</td>
-      <td>10.233226</td>
+      <td>-0.348709</td>
+      <td>9.806805</td>
+      <td>21.255589</td>
+      <td>15.169296</td>
+      <td>8.297478</td>
+      <td>10.083607</td>
+      <td>13.759533</td>
+      <td>12.271797</td>
+      <td>13.892411</td>
+      <td>11.365917</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>0.218887</td>
+      <td>9.498886</td>
+      <td>22.093689</td>
+      <td>14.691465</td>
+      <td>2.540067</td>
+      <td>10.650859</td>
+      <td>12.942607</td>
+      <td>10.606869</td>
+      <td>12.881816</td>
+      <td>9.515982</td>
     </tr>
   </tbody>
 </table>
@@ -1133,142 +1161,142 @@ dtype: object
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>1.622295</td>
-      <td>2.008054</td>
-      <td>9.923439</td>
-      <td>4.459518</td>
-      <td>5.226300</td>
-      <td>3.274124</td>
-      <td>5.194597</td>
-      <td>3.344952</td>
-      <td>3.918283</td>
-      <td>1.218355</td>
+      <td>-0.857336</td>
+      <td>1.002215</td>
+      <td>10.632975</td>
+      <td>5.088772</td>
+      <td>4.421734</td>
+      <td>3.316938</td>
+      <td>5.702647</td>
+      <td>3.420617</td>
+      <td>3.471385</td>
+      <td>3.932038</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
-      <td>0.204273</td>
-      <td>2.134312</td>
-      <td>13.080209</td>
-      <td>7.861488</td>
-      <td>4.862482</td>
-      <td>2.826363</td>
-      <td>6.869586</td>
-      <td>4.873809</td>
-      <td>2.701227</td>
-      <td>1.500656</td>
+      <td>-1.986474</td>
+      <td>3.454714</td>
+      <td>10.902967</td>
+      <td>8.479823</td>
+      <td>5.146986</td>
+      <td>4.900538</td>
+      <td>6.150332</td>
+      <td>5.341808</td>
+      <td>7.039569</td>
+      <td>3.009307</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
-      <td>-0.875344</td>
-      <td>3.280178</td>
-      <td>13.571407</td>
-      <td>8.617541</td>
-      <td>4.865045</td>
-      <td>4.501043</td>
-      <td>6.572270</td>
-      <td>4.868194</td>
-      <td>6.229813</td>
-      <td>5.858215</td>
+      <td>-1.238920</td>
+      <td>4.680186</td>
+      <td>12.643187</td>
+      <td>9.481737</td>
+      <td>6.613302</td>
+      <td>4.390511</td>
+      <td>5.516791</td>
+      <td>6.012596</td>
+      <td>5.493854</td>
+      <td>3.710508</td>
     </tr>
     <tr>
       <th>3</th>
       <td>4</td>
-      <td>-0.250563</td>
-      <td>4.057166</td>
-      <td>15.251937</td>
-      <td>6.280055</td>
-      <td>7.478215</td>
-      <td>6.290507</td>
-      <td>8.125758</td>
-      <td>6.850738</td>
-      <td>7.638645</td>
-      <td>5.104826</td>
+      <td>0.509918</td>
+      <td>2.864286</td>
+      <td>13.161306</td>
+      <td>8.920101</td>
+      <td>8.571566</td>
+      <td>6.676207</td>
+      <td>8.685538</td>
+      <td>6.845082</td>
+      <td>6.992131</td>
+      <td>4.505575</td>
     </tr>
     <tr>
       <th>4</th>
       <td>5</td>
-      <td>0.170400</td>
-      <td>5.530868</td>
-      <td>16.447577</td>
-      <td>8.649350</td>
-      <td>8.144162</td>
-      <td>4.981461</td>
-      <td>7.644509</td>
-      <td>8.680892</td>
-      <td>7.439734</td>
-      <td>5.764627</td>
+      <td>-0.111503</td>
+      <td>5.163105</td>
+      <td>14.193348</td>
+      <td>11.302972</td>
+      <td>8.054183</td>
+      <td>5.264811</td>
+      <td>8.833866</td>
+      <td>7.823426</td>
+      <td>6.745524</td>
+      <td>7.255000</td>
     </tr>
     <tr>
       <th>5</th>
       <td>6</td>
-      <td>0.876695</td>
-      <td>5.158545</td>
-      <td>17.108765</td>
-      <td>9.787989</td>
-      <td>11.058978</td>
-      <td>6.153611</td>
-      <td>9.466417</td>
-      <td>10.638259</td>
-      <td>6.412649</td>
-      <td>6.738338</td>
+      <td>1.027075</td>
+      <td>6.528921</td>
+      <td>15.797006</td>
+      <td>9.857317</td>
+      <td>8.352952</td>
+      <td>7.407613</td>
+      <td>9.593200</td>
+      <td>10.049122</td>
+      <td>9.572660</td>
+      <td>5.947944</td>
     </tr>
     <tr>
       <th>6</th>
       <td>7</td>
-      <td>1.431544</td>
-      <td>7.967783</td>
-      <td>18.266822</td>
-      <td>12.973439</td>
-      <td>9.717198</td>
-      <td>9.204987</td>
-      <td>11.298751</td>
-      <td>10.517505</td>
-      <td>9.680560</td>
-      <td>6.593412</td>
+      <td>0.635200</td>
+      <td>6.160020</td>
+      <td>17.188053</td>
+      <td>12.474650</td>
+      <td>12.073508</td>
+      <td>7.669900</td>
+      <td>10.427957</td>
+      <td>10.993987</td>
+      <td>10.051708</td>
+      <td>6.701792</td>
     </tr>
     <tr>
       <th>7</th>
       <td>8</td>
-      <td>1.140595</td>
-      <td>8.406493</td>
-      <td>17.944106</td>
-      <td>12.637571</td>
-      <td>6.478519</td>
-      <td>10.379340</td>
-      <td>12.619085</td>
-      <td>9.963317</td>
-      <td>11.790336</td>
-      <td>9.744259</td>
+      <td>-1.222375</td>
+      <td>8.482797</td>
+      <td>19.203024</td>
+      <td>13.684139</td>
+      <td>10.024579</td>
+      <td>9.905712</td>
+      <td>12.608821</td>
+      <td>10.321264</td>
+      <td>10.869501</td>
+      <td>8.870883</td>
     </tr>
     <tr>
       <th>8</th>
       <td>9</td>
-      <td>1.984232</td>
-      <td>10.204245</td>
-      <td>17.778536</td>
-      <td>14.541481</td>
-      <td>4.337527</td>
-      <td>9.677515</td>
-      <td>14.104200</td>
-      <td>12.108773</td>
-      <td>11.429180</td>
-      <td>10.339810</td>
+      <td>0.218887</td>
+      <td>9.498886</td>
+      <td>22.093689</td>
+      <td>14.691465</td>
+      <td>2.540067</td>
+      <td>10.650859</td>
+      <td>12.942607</td>
+      <td>10.606869</td>
+      <td>12.881816</td>
+      <td>9.515982</td>
     </tr>
     <tr>
       <th>9</th>
       <td>10</td>
-      <td>-0.903253</td>
-      <td>10.661175</td>
-      <td>20.825625</td>
-      <td>14.043558</td>
-      <td>6.908403</td>
-      <td>12.413022</td>
-      <td>13.310509</td>
-      <td>13.081938</td>
-      <td>13.710187</td>
-      <td>10.233226</td>
+      <td>-0.348709</td>
+      <td>9.806805</td>
+      <td>21.255589</td>
+      <td>15.169296</td>
+      <td>8.297478</td>
+      <td>10.083607</td>
+      <td>13.759533</td>
+      <td>12.271797</td>
+      <td>13.892411</td>
+      <td>11.365917</td>
     </tr>
   </tbody>
 </table>
@@ -1454,7 +1482,7 @@ dtype: object
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.11.0
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f7fb214f9d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7fc359bbea50&gt;
 </pre></div>
 </div>
 <img alt="_images/data-visualization-1_38_2.png" src="_images/data-visualization-1_38_2.png" />
@@ -1467,7 +1495,7 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f7f80a0c210&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7fc348ccd7d0&gt;
 </pre></div>
 </div>
 <img alt="_images/data-visualization-1_39_1.png" src="_images/data-visualization-1_39_1.png" />
@@ -1480,7 +1508,7 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f7fb2214f90&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7fc3798136d0&gt;
 </pre></div>
 </div>
 <img alt="_images/data-visualization-1_40_1.png" src="_images/data-visualization-1_40_1.png" />
@@ -1507,7 +1535,7 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f7fa1752a90&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7fc368de7d10&gt;
 </pre></div>
 </div>
 <img alt="_images/data-visualization-1_42_1.png" src="_images/data-visualization-1_42_1.png" />
@@ -1523,7 +1551,7 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.lines._AxLine at 0x7f7f809ef410&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.lines._AxLine at 0x7fc348ccd190&gt;
 </pre></div>
 </div>
 <img alt="_images/data-visualization-1_43_1.png" src="_images/data-visualization-1_43_1.png" />
@@ -1537,7 +1565,7 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f7f90cb4710&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7fc359e97490&gt;
 </pre></div>
 </div>
 <img alt="_images/data-visualization-1_44_1.png" src="_images/data-visualization-1_44_1.png" />
@@ -1550,7 +1578,7 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f7fa18f1210&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7fc369328490&gt;
 </pre></div>
 </div>
 <img alt="_images/data-visualization-1_45_1.png" src="_images/data-visualization-1_45_1.png" />
@@ -1566,7 +1594,7 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.JointGrid at 0x7f7fa193ad90&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.JointGrid at 0x7fc3692b8d50&gt;
 </pre></div>
 </div>
 <img alt="_images/data-visualization-1_47_1.png" src="_images/data-visualization-1_47_1.png" />
@@ -1582,7 +1610,7 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f7f80d9a6d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7fc359d4fe90&gt;
 </pre></div>
 </div>
 <img alt="_images/data-visualization-1_49_1.png" src="_images/data-visualization-1_49_1.png" />
@@ -1664,7 +1692,7 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f7f91753310&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7fc34998b310&gt;
 </pre></div>
 </div>
 <img alt="_images/data-visualization-1_52_1.png" src="_images/data-visualization-1_52_1.png" />
@@ -1677,7 +1705,7 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f7f91783fd0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7fc349ccc1d0&gt;
 </pre></div>
 </div>
 <img alt="_images/data-visualization-1_53_1.png" src="_images/data-visualization-1_53_1.png" />
@@ -1837,7 +1865,7 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f7f91751350&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7fc37a373d10&gt;
 </pre></div>
 </div>
 <img alt="_images/data-visualization-1_56_1.png" src="_images/data-visualization-1_56_1.png" />
@@ -1914,7 +1942,7 @@ dtype: object
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Source Han Sans
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f7fa2203110&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fc3697c5110&gt;
 </pre></div>
 </div>
 <img alt="_images/data-visualization-1_60_2.png" src="_images/data-visualization-1_60_2.png" />
@@ -1975,7 +2003,7 @@ dtype: object
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>seaborn==0.11.0
 pandas==1.1.2
-numpy==1.18.1
+numpy==1.19.1
 matplotlib==3.3.2
 </pre></div>
 </div>
@@ -2032,7 +2060,10 @@ matplotlib==3.3.2
       </div>
     </div>
 
-    <script src="_static/js/index.js"></script>
+    
+  <script src="_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
     
   </body>
 </html>

@@ -11,8 +11,8 @@
     - file: program-structure
     - file: input-output
     - file: pickle
-    - file: data-visualization-1
-    - file: data-visualization-2
+    - file: python-basics/data-visualization-1
+    - file: python-basics/data-visualization-2
     - file: magic-r
     - file: python-tricks
     - file: web-applications
@@ -27,11 +27,15 @@
     - file: word-cloud
     - file: patterns-constructions
     - file: bnc
-    - file: childes
+    - file: corpus/childes
     - file: praat-textgrid
     - file: vectorizing-text
     - file: jieba
-    - file: ckiptagger
+    - file: corpus/ckiptagger
+- file: statistical-analyses/statistical-analyses
+  sections:
+    - file: statistical-analyses/network-analysis
+    - file: statistical-analyses/network-analysis-igraph
 - file: nlp/nlp
   sections:
     - file: nlp-spacy

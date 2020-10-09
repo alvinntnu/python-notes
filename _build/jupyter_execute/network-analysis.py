@@ -7,7 +7,7 @@ drive.mount('/content/drive')
 
 ## Word Similarities from Embeddings
 
-If necessary, install `spacy` and the Chinese language model `zh_core_web_lg` (glove embeddings).
+If necessary, install `spacy` and the Chinese language model `zh_core_web_lg` (glove embeddings). 
 
 !pip install spacy==2.3
 !spacy download zh_core_web_lg

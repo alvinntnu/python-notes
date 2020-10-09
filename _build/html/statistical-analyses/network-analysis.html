@@ -1,0 +1,1316 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Network Analysis &#8212; Python Notes for Linguistics</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Network Analysis Using Igraph" href="network-analysis-igraph.html" />
+    <link rel="prev" title="Statistical Analyses" href="statistical-analyses.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/ntnu03.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Python Notes for Linguistics</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python-basics/python-basics.html">
+   Python Basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../corpus/corpus-processing.html">
+   Corpus Linguistics with Python
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="statistical-analyses.html">
+   Statistical Analyses
+  </a>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Network Analysis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="network-analysis-igraph.html">
+     Network Analysis Using Igraph
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../nlp/nlp.html">
+   Natural Language Processing with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <div style="text-align:left">
+    <a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
+</div>
+
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/statistical-analyses/network-analysis.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/alvinntnu/python-notes/master?urlpath=tree/statistical-analyses/network-analysis.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/statistical-analyses/network-analysis.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#word-similarities-from-embeddings">
+   Word Similarities from Embeddings
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#defining-nodes-for-the-network">
+   Defining Nodes for the Network
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-connections-in-between-nodes">
+   Define Connections in-between Nodes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#creating-a-network">
+   Creating a Network
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualizing-a-network">
+   Visualizing a Network
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="network-analysis">
+<h1>Network Analysis<a class="headerlink" href="#network-analysis" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">DEMO_DATA_ROOT</span> <span class="o">=</span> <span class="s2">&quot;../../../RepositoryData/data&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># from google.colab import drive</span>
+<span class="c1"># drive.mount(&#39;/content/drive&#39;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="word-similarities-from-embeddings">
+<h2>Word Similarities from Embeddings<a class="headerlink" href="#word-similarities-from-embeddings" title="Permalink to this headline">¶</a></h2>
+<p>If necessary, install <code class="docutils literal notranslate"><span class="pre">spacy</span></code> and the Chinese language model <code class="docutils literal notranslate"><span class="pre">zh_core_web_lg</span></code> (glove embeddings).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># !pip install spacy==2.3</span>
+<span class="c1"># !spacy download zh_core_web_lg</span>
+<span class="c1"># !pip install pyvis</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Load the packages.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">spacy</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">unicodedata</span>
+<span class="n">nlp_zh</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;zh_core_web_lg&#39;</span><span class="p">)</span>
+
+<span class="n">near_syns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;覺得&#39;</span><span class="p">,</span><span class="s1">&#39;認為&#39;</span><span class="p">,</span><span class="s1">&#39;宣稱&#39;</span><span class="p">,</span><span class="s1">&#39;表示&#39;</span><span class="p">,</span><span class="s1">&#39;強調&#39;</span><span class="p">,</span><span class="s1">&#39;顯示&#39;</span><span class="p">,</span> <span class="s1">&#39;說明&#39;</span><span class="p">,</span><span class="s1">&#39;指出&#39;</span><span class="p">,</span><span class="s1">&#39;提出&#39;</span><span class="p">,</span><span class="s1">&#39;主張&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Building prefix dict from the default dictionary ...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading model from cache /var/folders/n7/ltpzwx813c599nfxfb94s_640000gn/T/jieba.cache
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading model cost 0.743 seconds.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Prefix dict has been built successfully.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Inspect the word vectors matrix from the spacy model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">glove_word_vectors</span> <span class="o">=</span> <span class="n">nlp_zh</span><span class="o">.</span><span class="n">vocab</span><span class="o">.</span><span class="n">vectors</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Spacy GloVe word vectors Shape: (vocab_size, embedding_dim)&#39;</span><span class="p">,</span><span class="n">glove_word_vectors</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">glove_word_vectors</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Spacy GloVe word vectors Shape: (vocab_size, embedding_dim) (500000, 300)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>500000
+</pre></div>
+</div>
+</div>
+</div>
+<p>Pairwise similarities of the words in the near-syns</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w1</span> <span class="o">=</span> <span class="n">nlp_zh</span><span class="o">.</span><span class="n">vocab</span><span class="p">[</span><span class="s1">&#39;認為&#39;</span><span class="p">]</span>
+<span class="n">w2</span> <span class="o">=</span> <span class="n">nlp_zh</span><span class="o">.</span><span class="n">vocab</span><span class="p">[</span><span class="s1">&#39;覺得&#39;</span><span class="p">]</span>
+
+<span class="c1"># pairwise similarities of near-syns</span>
+
+
+<span class="k">def</span> <span class="nf">pairwise_similarity</span><span class="p">(</span><span class="n">word_list</span><span class="p">,</span> <span class="n">nlp</span><span class="p">):</span>
+    <span class="n">word_sim_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">word_list</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">word_list</span><span class="p">)))</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">w1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">word_list</span><span class="p">):</span>
+        <span class="c1">#print(str(i) + &#39; &#39;+w1)</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">w2</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">word_list</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">w1</span> <span class="o">!=</span><span class="n">w2</span><span class="p">:</span>
+                <span class="n">word_sim_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">vocab</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">w1</span><span class="p">)]</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="n">nlp</span><span class="o">.</span><span class="n">vocab</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">w2</span><span class="p">)])</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">word_sim_matrix</span><span class="p">)</span>
+        
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">pairwise_similarity</span><span class="p">(</span><span class="n">near_syns</span><span class="p">,</span> <span class="n">nlp_zh</span><span class="p">),</span><span class="mi">2</span><span class="p">),</span>
+             <span class="n">index</span><span class="o">=</span><span class="n">near_syns</span><span class="p">,</span>
+             <span class="n">columns</span><span class="o">=</span><span class="n">near_syns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>覺得</th>
+      <th>認為</th>
+      <th>宣稱</th>
+      <th>表示</th>
+      <th>強調</th>
+      <th>顯示</th>
+      <th>說明</th>
+      <th>指出</th>
+      <th>提出</th>
+      <th>主張</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>覺得</th>
+      <td>1.00</td>
+      <td>0.69</td>
+      <td>0.47</td>
+      <td>0.18</td>
+      <td>0.55</td>
+      <td>0.37</td>
+      <td>0.48</td>
+      <td>0.16</td>
+      <td>0.01</td>
+      <td>0.46</td>
+    </tr>
+    <tr>
+      <th>認為</th>
+      <td>0.69</td>
+      <td>1.00</td>
+      <td>0.72</td>
+      <td>0.39</td>
+      <td>0.77</td>
+      <td>0.58</td>
+      <td>0.59</td>
+      <td>0.45</td>
+      <td>0.19</td>
+      <td>0.73</td>
+    </tr>
+    <tr>
+      <th>宣稱</th>
+      <td>0.47</td>
+      <td>0.72</td>
+      <td>1.00</td>
+      <td>0.38</td>
+      <td>0.71</td>
+      <td>0.58</td>
+      <td>0.60</td>
+      <td>0.38</td>
+      <td>0.20</td>
+      <td>0.70</td>
+    </tr>
+    <tr>
+      <th>表示</th>
+      <td>0.18</td>
+      <td>0.39</td>
+      <td>0.38</td>
+      <td>1.00</td>
+      <td>0.43</td>
+      <td>0.27</td>
+      <td>0.23</td>
+      <td>0.78</td>
+      <td>0.48</td>
+      <td>0.22</td>
+    </tr>
+    <tr>
+      <th>強調</th>
+      <td>0.55</td>
+      <td>0.77</td>
+      <td>0.71</td>
+      <td>0.43</td>
+      <td>1.00</td>
+      <td>0.55</td>
+      <td>0.69</td>
+      <td>0.49</td>
+      <td>0.28</td>
+      <td>0.73</td>
+    </tr>
+    <tr>
+      <th>顯示</th>
+      <td>0.37</td>
+      <td>0.58</td>
+      <td>0.58</td>
+      <td>0.27</td>
+      <td>0.55</td>
+      <td>1.00</td>
+      <td>0.62</td>
+      <td>0.30</td>
+      <td>0.06</td>
+      <td>0.37</td>
+    </tr>
+    <tr>
+      <th>說明</th>
+      <td>0.48</td>
+      <td>0.59</td>
+      <td>0.60</td>
+      <td>0.23</td>
+      <td>0.69</td>
+      <td>0.62</td>
+      <td>1.00</td>
+      <td>0.29</td>
+      <td>0.19</td>
+      <td>0.54</td>
+    </tr>
+    <tr>
+      <th>指出</th>
+      <td>0.16</td>
+      <td>0.45</td>
+      <td>0.38</td>
+      <td>0.78</td>
+      <td>0.49</td>
+      <td>0.30</td>
+      <td>0.29</td>
+      <td>1.00</td>
+      <td>0.62</td>
+      <td>0.27</td>
+    </tr>
+    <tr>
+      <th>提出</th>
+      <td>0.01</td>
+      <td>0.19</td>
+      <td>0.20</td>
+      <td>0.48</td>
+      <td>0.28</td>
+      <td>0.06</td>
+      <td>0.19</td>
+      <td>0.62</td>
+      <td>1.00</td>
+      <td>0.27</td>
+    </tr>
+    <tr>
+      <th>主張</th>
+      <td>0.46</td>
+      <td>0.73</td>
+      <td>0.70</td>
+      <td>0.22</td>
+      <td>0.73</td>
+      <td>0.37</td>
+      <td>0.54</td>
+      <td>0.27</td>
+      <td>0.27</td>
+      <td>1.00</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>To reduce the computation cost, extract the vocabulary of the Chinense model by excluding:</p>
+<ul class="simple">
+<li><p>ascii characters</p></li>
+<li><p>digits</p></li>
+<li><p>punctuations</p></li>
+</ul>
+<p>And also, consider only two-character words.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vocab</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">nlp_zh</span><span class="o">.</span><span class="n">vocab</span><span class="o">.</span><span class="n">strings</span><span class="p">)</span>
+<span class="c1">#vocab = [w.text for w in nlp_zh.vocab if np.count_nonzero(w.vector) and not w.is_ascii and not w.is_punct]</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vocab</span><span class="p">[</span><span class="mi">20000</span><span class="p">:</span><span class="mi">20200</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>544337
+[&#39;2022&#39;, &#39;022&#39;, &#39;乌拉特后旗&#39;, &#39;特后旗&#39;, &#39;温差&#39;, &#39;湘潭&#39;, &#39;play&#39;, &#39;留學&#39;, &#39;索取&#39;, &#39;透明度&#39;, &#39;孤立&#39;, &#39;伊始&#39;, &#39;安全法&#39;, &#39;故居&#39;, &#39;中医院&#39;, &#39;番茄&#39;, &#39;07月&#39;, &#39;历任&#39;, &#39;預算&#39;, &#39;十字&#39;, &#39;手柄&#39;, &#39;利润率&#39;, &#39;133&#39;, &#39;涛&#39;, &#39;Office&#39;, &#39;宝博&#39;, &#39;企稳&#39;, &#39;加�&#39;, &#39;代辦&#39;, &#39;紧缺&#39;, &#39;重现&#39;, &#39;冲着&#39;, &#39;大利&#39;, &#39;播种&#39;, &#39;随手&#39;, &#39;克什克腾旗&#39;, &#39;克腾旗&#39;, &quot;&#39;s&quot;, &quot;&#39;x&quot;, &#39;换来&#39;, &#39;受灾&#39;, &#39;亮眼&#39;, &#39;峦�&#39;, &#39;峦&#39;, &#39;计数&#39;, &#39;操穴&#39;, &#39;100米&#39;, &#39;00米&#39;, &#39;展品&#39;, &#39;帶動&#39;, &#39;前任&#39;, &#39;a站&#39;, &#39;表率&#39;, &#39;社科&#39;, &#39;供奉&#39;, &#39;安检&#39;, &#39;吉泽明&#39;, &#39;学生会&#39;, &#39;三线&#39;, &#39;清凉&#39;, &#39;取暖&#39;, &#39;隐蔽&#39;, &#39;无所谓&#39;, &#39;不在乎&#39;, &#39;粗大&#39;, &#39;串联&#39;, &#39;切尔西&#39;, &#39;時光&#39;, &#39;增殖&#39;, &#39;宜宾市&#39;, &#39;溫暖&#39;, &#39;燕子&#39;, &#39;燕&#39;, &#39;后天&#39;, &#39;冒出&#39;, &#39;權力&#39;, &#39;倫敦&#39;, &#39;波司登&#39;, &#39;胜地&#39;, &#39;值当&#39;, &#39;康健&#39;, &#39;协和&#39;, &#39;朴素&#39;, &#39;胸口&#39;, &#39;樱花&#39;, &#39;樱&#39;, &#39;孔明&#39;, &#39;少许&#39;, &#39;嵌入&#39;, &#39;镍&#39;, &#39;掘金&#39;, &#39;掘&#39;, &#39;推�&#39;, &#39;项链&#39;, &#39;包赢&#39;, &#39;制作人&#39;, &#39;增产&#39;, &#39;交流区&#39;, &#39;妆品&#39;, &#39;妆&#39;, &#39;温恒&#39;, &#39;未婚&#39;, &#39;非金属&#39;, &#39;事前&#39;, &#39;台账&#39;, &#39;强强&#39;, &#39;银行家&#39;, &#39;大树&#39;, &#39;小哥&#39;, &#39;纱&#39;, &#39;肤色&#39;, &#39;肤&#39;, &#39;陡然&#39;, &#39;陡&#39;, &#39;打水&#39;, &#39;電源&#39;, &#39;项目部&#39;, &#39;樂團&#39;, &#39;兩位&#39;, &#39;来不及&#39;, &#39;邻家&#39;, &#39;外星人&#39;, &#39;黄网站&#39;, &#39;南充&#39;, &#39;市直&#39;, &#39;带入&#39;, &#39;電影院&#39;, &#39;摔倒&#39;, &#39;礼服&#39;, &#39;建造师&#39;, &#39;５&#39;, &#39;自拍区&#39;, &#39;贯通&#39;, &#39;沿岸&#39;, &#39;透玩&#39;, &#39;LOGO&#39;, &#39;logo&#39;, &#39;OGO&#39;, &#39;他家&#39;, &#39;领空&#39;, &#39;稀少&#39;, &#39;13%&#39;, &#39;山林&#39;, &#39;频w&#39;, &#39;算单&#39;, &#39;田野&#39;, &#39;猜想&#39;, &#39;這裏&#39;, &#39;增強&#39;, &#39;文山&#39;, &#39;不俗&#39;, &#39;收費&#39;, &#39;配电&#39;, &#39;利害&#39;, &#39;萌&#39;, &#39;捡&#39;, &#39;开播&#39;, &#39;依规&#39;, &#39;深知&#39;, &#39;株洲&#39;, &#39;产视&#39;, &#39;\x07\x06\x05&#39;, &#39;玩场&#39;, &#39;事務&#39;, &#39;常州市&#39;, &#39;MB&#39;, &#39;mb&#39;, &#39;一早&#39;, &#39;乐网&#39;, &#39;祖母&#39;, &#39;二季度&#39;, &#39;AV天堂&#39;, &#39;V天堂&#39;, &#39;XXxx&#39;, &#39;石川&#39;, &#39;解散&#39;, &#39;天国&#39;, &#39;开房&#39;, &#39;野狼&#39;, &#39;法语&#39;, &#39;承德市&#39;, &#39;赶来&#39;, &#39;光临&#39;, &#39;涉事&#39;, &#39;著作权&#39;, &#39;老人们&#39;, &#39;怀化&#39;, &#39;节水&#39;, &#39;米兜&#39;, &#39;腰部&#39;, &#39;尤物&#39;, &#39;频自&#39;, &#39;黑洞&#39;, &#39;编导&#39;, &#39;永利网&#39;, &#39;乾淨&#39;, &#39;戀愛&#39;, &#39;戀&#39;, &#39;私阴&#39;, &#39;脱水&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>For each near-syn, we should find the word similarities between the near-syn and all the other words in the NLP vocabulary.</p>
+<p>Take the first near-syn for example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+
+<span class="n">target_word</span> <span class="o">=</span> <span class="s1">&#39;覺得&#39;</span>
+<span class="n">word_sim</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># check each word in vocab its simi with target_Word</span>
+
+<span class="n">target_word_vocab</span> <span class="o">=</span> <span class="n">nlp_zh</span><span class="o">.</span><span class="n">vocab</span><span class="p">[</span><span class="n">target_word</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">vocab</span><span class="p">:</span>
+    <span class="n">w_vocab</span> <span class="o">=</span> <span class="n">nlp_zh</span><span class="o">.</span><span class="n">vocab</span><span class="p">[</span><span class="n">w</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">w_vocab</span><span class="o">.</span><span class="n">vector</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">w_vocab</span><span class="o">.</span><span class="n">vector</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">w_vocab</span><span class="o">.</span><span class="n">is_ascii</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">w_vocab</span><span class="o">.</span><span class="n">is_punct</span> <span class="ow">and</span> <span class="n">w</span><span class="o">!=</span><span class="n">target_word</span><span class="p">:</span>
+        <span class="n">word_sim</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">w</span><span class="p">,</span> <span class="n">target_word_vocab</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="n">w_vocab</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 42.6 s, sys: 761 ms, total: 43.3 s
+Wall time: 42.9 s
+</pre></div>
+</div>
+</div>
+</div>
+<p>Extract the top 10 words that are similar to the first near syn.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">sorted</span><span class="p">(</span><span class="n">word_sim</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;覺&#39;, 0.84788847),
+ (&#39;其實&#39;, 0.79569775),
+ (&#39;會覺&#39;, 0.788269),
+ (&#39;以為&#39;, 0.78638524),
+ (&#39;感覺&#39;, 0.7840089),
+ (&#39;看來&#39;, 0.7798325),
+ (&#39;畢竟&#39;, 0.7633344),
+ (&#39;看起來&#39;, 0.7629494),
+ (&#39;因為&#39;, 0.7625315),
+ (&#39;討厭&#39;, 0.74918205)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Each <code class="docutils literal notranslate"><span class="pre">vocab</span></code> has several properties defined in <em>spacy</em> that are useful for filtering irrelevant words before computing the word similarities</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Chinese spacy language model does not seem to include the word probability information.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#w.is_lower == word.is_lower and w.prob &gt;= -15</span>
+<span class="n">w1</span> <span class="o">=</span> <span class="n">nlp_zh</span><span class="o">.</span><span class="n">vocab</span><span class="p">[</span><span class="s1">&#39;覺得&#39;</span><span class="p">]</span>
+<span class="n">w2</span> <span class="o">=</span> <span class="n">nlp_zh</span><span class="o">.</span><span class="n">vocab</span><span class="p">[</span><span class="s1">&#39;ship&#39;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">w2</span><span class="o">.</span><span class="n">is_ascii</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">w2</span><span class="o">.</span><span class="n">is_currency</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">w2</span><span class="o">.</span><span class="n">is_punct</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+False
+False
+</pre></div>
+</div>
+</div>
+</div>
+<p>Define functions to extract top-N similar words</p>
+<ul class="simple">
+<li><p>Functions taken from <a class="reference external" href="https://stackoverflow.com/questions/57697374/list-most-similar-words-in-spacy-in-pretrained-model">this SO discussion thread</a></p></li>
+<li><p>Deal with the computation efficiency problems (big matrices)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numba</span>
+<span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">jit</span>
+
+<span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">cosine_similarity_numba</span><span class="p">(</span><span class="n">u</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">v</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">uv</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">uu</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">vv</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="n">uv</span> <span class="o">+=</span> <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">uu</span> <span class="o">+=</span> <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">vv</span> <span class="o">+=</span> <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">cos_theta</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">uu</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">vv</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">cos_theta</span> <span class="o">=</span> <span class="n">uv</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">uu</span><span class="o">*</span><span class="n">vv</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">cos_theta</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Efficient version</span>
+<span class="k">def</span> <span class="nf">most_similar_v1</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">topn</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+  <span class="n">word</span> <span class="o">=</span> <span class="n">nlp_zh</span><span class="o">.</span><span class="n">vocab</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">word</span><span class="p">)]</span>
+  <span class="n">queries</span> <span class="o">=</span> <span class="p">[</span>
+      <span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">nlp_zh</span><span class="o">.</span><span class="n">vocab</span> 
+      <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">vector</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">w</span><span class="o">.</span><span class="n">is_ascii</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">w</span><span class="o">.</span><span class="n">is_punct</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">text</span><span class="p">)</span><span class="o">==</span><span class="mi">2</span>
+  <span class="p">]</span>
+
+  <span class="c1">#by_similarity = sorted(queries, key=lambda w: word.similarity(w), reverse=True)</span>
+
+  <span class="n">by_similarity</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">queries</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">w</span><span class="p">:</span> <span class="n">cosine_similarity_numba</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">vector</span><span class="p">,</span> <span class="n">word</span><span class="o">.</span><span class="n">vector</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    
+  <span class="k">return</span> <span class="p">[(</span><span class="n">w</span><span class="o">.</span><span class="n">text</span><span class="p">,</span><span class="n">w</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="n">word</span><span class="p">))</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">by_similarity</span><span class="p">[:</span><span class="n">topn</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">w</span><span class="o">.</span><span class="n">text</span> <span class="o">!=</span> <span class="n">word</span><span class="o">.</span><span class="n">text</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Naive version</span>
+
+<span class="k">def</span> <span class="nf">most_similar_v2</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">topn</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+  <span class="n">word</span> <span class="o">=</span> <span class="n">nlp_zh</span><span class="o">.</span><span class="n">vocab</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">word</span><span class="p">)]</span>
+  <span class="n">queries</span> <span class="o">=</span> <span class="p">[</span>
+      <span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">nlp_zh</span><span class="o">.</span><span class="n">vocab</span> 
+      <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">vector</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">w</span><span class="o">.</span><span class="n">is_ascii</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">w</span><span class="o">.</span><span class="n">is_punct</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">text</span><span class="p">)</span><span class="o">==</span><span class="mi">2</span>
+  <span class="p">]</span>
+
+  <span class="n">by_similarity</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">queries</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">w</span><span class="p">:</span> <span class="n">word</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="n">w</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+  <span class="c1">#by_similarity = sorted(queries, key=lambda w: cosine_similarity_numba(w.vector, word.vector), reverse=True)</span>
+
+  <span class="k">return</span> <span class="p">[(</span><span class="n">w</span><span class="o">.</span><span class="n">text</span><span class="p">,</span><span class="n">w</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="n">word</span><span class="p">))</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">by_similarity</span><span class="p">[:</span><span class="n">topn</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">w</span><span class="o">.</span><span class="n">text</span> <span class="o">!=</span> <span class="n">word</span><span class="o">.</span><span class="n">text</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Test the time needed in different versions</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="n">most_similar_v1</span><span class="p">(</span><span class="s2">&quot;覺得&quot;</span><span class="p">,</span> <span class="n">topn</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 7.42 s, sys: 309 ms, total: 7.73 s
+Wall time: 14.9 s
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;其實&#39;, 0.79569775), (&#39;會覺&#39;, 0.788269), (&#39;以為&#39;, 0.78638524)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="n">most_similar_v2</span><span class="p">(</span><span class="s2">&quot;覺得&quot;</span><span class="p">,</span> <span class="n">topn</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 29.3 s, sys: 692 ms, total: 30 s
+Wall time: 29.7 s
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;其實&#39;, 0.79569775), (&#39;會覺&#39;, 0.788269), (&#39;以為&#39;, 0.78638524)]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="defining-nodes-for-the-network">
+<h2>Defining Nodes for the Network<a class="headerlink" href="#defining-nodes-for-the-network" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Extract top 1000 similar words for each near-syn</p></li>
+<li><p>These top 1000 context words will form the basis for the nodes of the network</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="n">near_syn_topn</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([(</span><span class="n">w</span><span class="p">,</span> <span class="n">most_similar_v1</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">topn</span><span class="o">=</span><span class="mi">1000</span><span class="p">))</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">near_syns</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 1min 8s, sys: 619 ms, total: 1min 9s
+Wall time: 1min 9s
+</pre></div>
+</div>
+</div>
+</div>
+<p>Top 10 similar words for each synonym in the list.</p>
+<p>For example, the top 10 similar words for 覺得:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">near_syn_topn</span><span class="p">[</span><span class="n">near_syns</span><span class="p">[</span><span class="mi">0</span><span class="p">]][:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;其實&#39;, 0.79569775),
+ (&#39;會覺&#39;, 0.788269),
+ (&#39;以為&#39;, 0.78638524),
+ (&#39;感覺&#39;, 0.7840089),
+ (&#39;看來&#39;, 0.7798325),
+ (&#39;畢竟&#39;, 0.7633344),
+ (&#39;因為&#39;, 0.7625315),
+ (&#39;討厭&#39;, 0.74918205),
+ (&#39;總覺&#39;, 0.743788),
+ (&#39;們覺&#39;, 0.74213)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Convert the tuples into a list, which is easier to be imported into the graph structure.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">near_syn_topn_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">w</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">near_syn_topn</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">s_w</span><span class="p">,</span> <span class="n">s_s</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+        <span class="n">near_syn_topn_list</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">w</span><span class="p">,</span> <span class="n">s_w</span><span class="p">,</span> <span class="n">s_s</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">near_syn_topn_list</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">near_syn_topn_list</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;覺得&#39;, &#39;其實&#39;, 0.79569775), (&#39;覺得&#39;, &#39;會覺&#39;, 0.788269), (&#39;覺得&#39;, &#39;以為&#39;, 0.78638524), (&#39;覺得&#39;, &#39;感覺&#39;, 0.7840089), (&#39;覺得&#39;, &#39;看來&#39;, 0.7798325), (&#39;覺得&#39;, &#39;畢竟&#39;, 0.7633344), (&#39;覺得&#39;, &#39;因為&#39;, 0.7625315), (&#39;覺得&#39;, &#39;討厭&#39;, 0.74918205), (&#39;覺得&#39;, &#39;總覺&#39;, 0.743788), (&#39;覺得&#39;, &#39;們覺&#39;, 0.74213)]
+10000
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">near_syn_topn_list</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;w1&#39;</span><span class="p">,</span><span class="s1">&#39;w2&#39;</span><span class="p">,</span><span class="s1">&#39;sim&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;sim&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mf">0.6</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>w1</th>
+      <th>w2</th>
+      <th>sim</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>覺得</td>
+      <td>其實</td>
+      <td>0.795698</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>覺得</td>
+      <td>會覺</td>
+      <td>0.788269</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>覺得</td>
+      <td>以為</td>
+      <td>0.786385</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>覺得</td>
+      <td>感覺</td>
+      <td>0.784009</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>覺得</td>
+      <td>看來</td>
+      <td>0.779832</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>9069</th>
+      <td>主張</td>
+      <td>方針</td>
+      <td>0.602148</td>
+    </tr>
+    <tr>
+      <th>9070</th>
+      <td>主張</td>
+      <td>這與</td>
+      <td>0.601582</td>
+    </tr>
+    <tr>
+      <th>9071</th>
+      <td>主張</td>
+      <td>迴避</td>
+      <td>0.601496</td>
+    </tr>
+    <tr>
+      <th>9072</th>
+      <td>主張</td>
+      <td>體制</td>
+      <td>0.601390</td>
+    </tr>
+    <tr>
+      <th>9073</th>
+      <td>主張</td>
+      <td>意見</td>
+      <td>0.601044</td>
+    </tr>
+  </tbody>
+</table>
+<p>669 rows × 3 columns</p>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="define-connections-in-between-nodes">
+<h2>Define Connections in-between Nodes<a class="headerlink" href="#define-connections-in-between-nodes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>While context nodes have already had connections (i.e., edges) to the key nodes (i.e., near-syns), these context nodes may themselves be inter-connected due to their semantic similarity</p></li>
+<li><p>We again utilize the <code class="docutils literal notranslate"><span class="pre">spacy</span></code> language model to determine their semantic similarities.</p></li>
+<li><p>These similarities serve as the basis for the edges of the network</p></li>
+</ul>
+<p>We first identify all potential nodes for the network and then compute their pairwise similarities based on <code class="docutils literal notranslate"><span class="pre">spacy</span></code> Glove embeddings.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">nodes_id</span></code>: include all the possible nodes of the graph.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">edges_df</span></code>: include all the context-key and context-context edges of the graph.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">WORD_SIMILARITY_CUTOFF</span> <span class="o">=</span> <span class="mf">0.65</span> <span class="c1"># collexemes and target words</span>
+<span class="n">df2</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;sim&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">WORD_SIMILARITY_CUTOFF</span><span class="p">]</span>
+<span class="n">nodes_id</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">df2</span><span class="p">[</span><span class="s1">&#39;w2&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">df2</span><span class="p">[</span><span class="s1">&#39;w1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)))</span>
+
+<span class="c1"># nodes_similarities = pairwise_similarity(nodes_id, nlp_zh)</span>
+<span class="c1"># nodes_similarities_df = pd.DataFrame(nodes_similarities, index=nodes_id,columns=nodes_id)</span>
+<span class="c1"># nodes_similarities_df</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Creating nodes pairwise similarity matrix</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes_id</span><span class="p">))</span>
+<span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodes_id</span><span class="p">)</span>
+<span class="n">distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">m</span><span class="p">,</span><span class="n">m</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>  
+        <span class="n">distances</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">nlp_zh</span><span class="o">.</span><span class="n">vocab</span><span class="p">[</span><span class="n">nodes_id</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="n">nlp_zh</span><span class="o">.</span><span class="n">vocab</span><span class="p">[</span><span class="n">nodes_id</span><span class="p">[</span><span class="n">j</span><span class="p">]])</span>
+
+<span class="c1">## Flattening the matrix</span>
+<span class="n">EMBEDDING_CUTOFF</span> <span class="o">=</span> <span class="mf">0.75</span>
+
+<span class="c1">#print(node_names)</span>
+<span class="n">distances_flat</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">distances</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">&gt;</span> <span class="n">EMBEDDING_CUTOFF</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
+            <span class="n">distances_flat</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">nodes_id</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nodes_id</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">distances</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]))</span>
+
+<span class="n">edges_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">distances_flat</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;w1&#39;</span><span class="p">,</span><span class="s1">&#39;w2&#39;</span><span class="p">,</span><span class="s1">&#39;sim&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">edges_df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>180
+(582, 3)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We then combine the context-key edges with the context-context edges. These edges are the final edges for the graph.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">edges_df</span> <span class="o">=</span> <span class="n">edges_df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df2</span><span class="p">)</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">edges_df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">edges_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">100</span><span class="p">:</span><span class="mi">120</span><span class="p">,:]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(785, 3)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>w1</th>
+      <th>w2</th>
+      <th>sim</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>100</th>
+      <td>這樣</td>
+      <td>因為</td>
+      <td>0.799578</td>
+    </tr>
+    <tr>
+      <th>101</th>
+      <td>這樣</td>
+      <td>還是</td>
+      <td>0.754334</td>
+    </tr>
+    <tr>
+      <th>102</th>
+      <td>這樣</td>
+      <td>同樣</td>
+      <td>0.791491</td>
+    </tr>
+    <tr>
+      <th>103</th>
+      <td>這樣</td>
+      <td>這個</td>
+      <td>0.851545</td>
+    </tr>
+    <tr>
+      <th>104</th>
+      <td>這樣</td>
+      <td>應該</td>
+      <td>0.806186</td>
+    </tr>
+    <tr>
+      <th>105</th>
+      <td>這樣</td>
+      <td>其實</td>
+      <td>0.807909</td>
+    </tr>
+    <tr>
+      <th>106</th>
+      <td>這樣</td>
+      <td>畢竟</td>
+      <td>0.771049</td>
+    </tr>
+    <tr>
+      <th>107</th>
+      <td>這樣</td>
+      <td>這點</td>
+      <td>0.763548</td>
+    </tr>
+    <tr>
+      <th>108</th>
+      <td>這樣</td>
+      <td>沒有</td>
+      <td>0.756848</td>
+    </tr>
+    <tr>
+      <th>109</th>
+      <td>這樣</td>
+      <td>當然</td>
+      <td>0.778150</td>
+    </tr>
+    <tr>
+      <th>110</th>
+      <td>這樣</td>
+      <td>確實</td>
+      <td>0.770117</td>
+    </tr>
+    <tr>
+      <th>111</th>
+      <td>這樣</td>
+      <td>本來</td>
+      <td>0.769549</td>
+    </tr>
+    <tr>
+      <th>112</th>
+      <td>這樣</td>
+      <td>這麼</td>
+      <td>0.816209</td>
+    </tr>
+    <tr>
+      <th>113</th>
+      <td>所謂</td>
+      <td>其實</td>
+      <td>0.751369</td>
+    </tr>
+    <tr>
+      <th>114</th>
+      <td>所謂</td>
+      <td>並非</td>
+      <td>0.758192</td>
+    </tr>
+    <tr>
+      <th>115</th>
+      <td>納悶</td>
+      <td>驚訝</td>
+      <td>0.788380</td>
+    </tr>
+    <tr>
+      <th>116</th>
+      <td>納悶</td>
+      <td>訝異</td>
+      <td>0.826738</td>
+    </tr>
+    <tr>
+      <th>117</th>
+      <td>還是</td>
+      <td>總之</td>
+      <td>0.761258</td>
+    </tr>
+    <tr>
+      <th>118</th>
+      <td>還是</td>
+      <td>因為</td>
+      <td>0.808997</td>
+    </tr>
+    <tr>
+      <th>119</th>
+      <td>還是</td>
+      <td>總是</td>
+      <td>0.821862</td>
+    </tr>
+    <tr>
+      <th>120</th>
+      <td>還是</td>
+      <td>這樣</td>
+      <td>0.754334</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="creating-a-network">
+<h2>Creating a Network<a class="headerlink" href="#creating-a-network" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>We use <code class="docutils literal notranslate"><span class="pre">networkx</span></code> to first create a graph and compute relevant node-level metrics, e.g., centralities.</p></li>
+<li><p>We then create two data frames for aesthetic specification of the graph:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">nodes_df</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">edges_df</span></code></p></li>
+</ul>
+</li>
+<li><p>We use <code class="docutils literal notranslate"><span class="pre">pyvis</span></code> to visualizae the network</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">from</span> <span class="nn">pyvis.network</span> <span class="kn">import</span> <span class="n">Network</span>
+<span class="c1">#import pyvis.options as options</span>
+<span class="c1">#from sklearn.preprocessing import MinMaxScaler</span>
+<span class="c1">#from scipy.spatial.distance import cosine</span>
+<span class="c1">#G = nx.Graph()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## A function to rescale metrics for plotting</span>
+<span class="k">def</span> <span class="nf">myRescaler</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">x</span><span class="o">.</span><span class="n">max</span><span class="p">()),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Create <code class="docutils literal notranslate"><span class="pre">nodes_df</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span><span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">from_pandas_edgelist</span><span class="p">(</span><span class="n">edges_df</span><span class="p">,</span> <span class="s1">&#39;w1&#39;</span><span class="p">,</span><span class="s1">&#39;w2&#39;</span><span class="p">,</span><span class="s1">&#39;sim&#39;</span><span class="p">)</span>
+
+<span class="n">nodes_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span><span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">),</span>
+                         <span class="s1">&#39;betweenness&#39;</span><span class="p">:</span> <span class="n">myRescaler</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">betweenness_centrality</span><span class="p">(</span><span class="n">G</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">())),</span>
+                         <span class="s1">&#39;eigenvector&#39;</span><span class="p">:</span> <span class="n">myRescaler</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">eigenvector_centrality</span><span class="p">(</span><span class="n">G</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">()))})</span>
+<span class="n">nodes_df</span><span class="p">[</span><span class="s1">&#39;size&#39;</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">near_syns</span> <span class="k">else</span> <span class="mi">10</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nodes_id</span><span class="p">]</span>
+<span class="n">nodes_df</span><span class="p">[</span><span class="s1">&#39;size2&#39;</span><span class="p">]</span><span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">near_syns</span> <span class="k">else</span> <span class="mi">30</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nodes_df</span><span class="p">[</span><span class="s1">&#39;eigenvector&#39;</span><span class="p">]]</span>
+<span class="n">nodes_df</span><span class="p">[</span><span class="s1">&#39;group&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;KEY&#39;</span> <span class="k">if</span> <span class="n">nodes_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">near_syns</span> <span class="k">else</span> <span class="s1">&#39;CONTEXT&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nodes_df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
+<span class="n">nodes_df</span><span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lightpink&#39;</span> <span class="k">if</span> <span class="n">nodes_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s1">&#39;group&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;KEY&#39;</span> <span class="k">else</span> <span class="s1">&#39;lightblue&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nodes_df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
+<span class="n">nodes_df</span><span class="p">[</span><span class="s1">&#39;borderWidthSelected&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mf">20.0</span><span class="p">,</span> <span class="n">nodes_df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="visualizing-a-network">
+<h2>Visualizing a Network<a class="headerlink" href="#visualizing-a-network" title="Permalink to this headline">¶</a></h2>
+<p>Plotting the network using <code class="docutils literal notranslate"><span class="pre">pyvis</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Gvis</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span><span class="s2">&quot;768px&quot;</span><span class="p">,</span><span class="s2">&quot;1600px&quot;</span><span class="p">,</span> <span class="n">notebook</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">heading</span><span class="o">=</span><span class="s2">&quot;Semantic Network&quot;</span><span class="p">)</span>
+<span class="c1"># # Gvis.from_nx(G)</span>
+<span class="n">edges_in</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">edges_df</span><span class="o">.</span><span class="n">to_records</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="c1">#Gvis.add_nodes(list(G.nodes), value=nodes_df[&#39;size2&#39;], color=nodes_df[&#39;color&#39;], borderWidthSelected = nodes_df[&#39;borderWidthSelected&#39;])</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nodes_df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+  <span class="n">Gvis</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">)[</span><span class="n">i</span><span class="p">],</span> <span class="n">value</span><span class="o">=</span><span class="n">nodes_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s1">&#39;size2&#39;</span><span class="p">],</span> <span class="n">group</span><span class="o">=</span><span class="n">nodes_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s1">&#39;group&#39;</span><span class="p">])</span><span class="c1">#, color=nodes_df.loc[i,&#39;color&#39;], borderWidthSelected = nodes_df.loc[i,&#39;borderWidthSelected&#39;])</span>
+
+<span class="n">Gvis</span><span class="o">.</span><span class="n">add_edges</span><span class="p">(</span><span class="n">edges_in</span><span class="p">)</span>
+<span class="c1">#Gvis.show_buttons()</span>
+<span class="n">Gvis</span><span class="o">.</span><span class="n">set_options</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">  var options = {</span>
+<span class="s2">    &quot;nodes&quot;: {</span>
+<span class="s2">      &quot;borderWidth&quot;: 0,</span>
+<span class="s2">      &quot;color&quot;: {</span>
+<span class="s2">        &quot;highlight&quot;: {</span>
+<span class="s2">          &quot;border&quot;: &quot;rgba(221,171,197,1)&quot;,</span>
+<span class="s2">          &quot;background&quot;: &quot;rgba(248,178,255,1)&quot;</span>
+<span class="s2">        }</span>
+<span class="s2">      },</span>
+<span class="s2">      &quot;shadow&quot;: {</span>
+<span class="s2">        &quot;enabled&quot;: true</span>
+<span class="s2">      }</span>
+<span class="s2">    },</span>
+<span class="s2">    &quot;edges&quot;: {</span>
+<span class="s2">      &quot;color&quot;: {</span>
+<span class="s2">        &quot;highlight&quot;: &quot;rgba(255,192,200,1)&quot;,</span>
+<span class="s2">        &quot;inherit&quot;: false</span>
+<span class="s2">      },</span>
+<span class="s2">      &quot;smooth&quot;: false</span>
+<span class="s2">    },</span>
+<span class="s2">    &quot;interaction&quot;: {</span>
+<span class="s2">      &quot;hover&quot;: true,</span>
+<span class="s2">      &quot;navigationButtons&quot;: true</span>
+<span class="s2">    },</span>
+<span class="s2">    &quot;manipulation&quot;: {</span>
+<span class="s2">      &quot;enabled&quot;: true</span>
+<span class="s2">    },</span>
+<span class="s2">    &quot;physics&quot;: {</span>
+<span class="s2">      &quot;barnesHut&quot;: {</span>
+<span class="s2">        &quot;springLength&quot;: 270</span>
+<span class="s2">      },</span>
+<span class="s2">      &quot;minVelocity&quot;: 0.75</span>
+<span class="s2">    }</span>
+<span class="s2">  }</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+
+
+  <span class="c1"># groups: {</span>
+  <span class="c1">#   myGroup: {color:{background:&#39;red&#39;}, borderWidth:3}</span>
+  <span class="c1"># }</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Gvis</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">DEMO_DATA_ROOT</span> <span class="o">+</span> <span class="s1">&#39;/reporting_verbs_chinese_Gvis.html&#39;</span><span class="p">)</span>
+<span class="n">edges_df</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">DEMO_DATA_ROOT</span><span class="o">+</span><span class="s1">&#39;/reporting_verbs_chinese_edges_df.pickle&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://visjs.github.io/vis-network/docs/network/index.html"><code class="docutils literal notranslate"><span class="pre">vis.js</span></code> Documentation</a></p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python-notes",
+            path: "./statistical-analyses"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python-notes'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="statistical-analyses.html" title="previous page">Statistical Analyses</a>
+    <a class='right-next' id="next-link" href="network-analysis-igraph.html" title="next page">Network Analysis Using Igraph</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alvin Chen<br/>
+        
+            &copy; Copyright 2020 Alvin Chen.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

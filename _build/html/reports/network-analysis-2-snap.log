@@ -1,0 +1,44 @@
+Traceback (most recent call last):
+  File "/Users/Alvin/opt/anaconda3/envs/python-notes/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 56, in single_nb_execution
+    record_timing=False,
+  File "/Users/Alvin/opt/anaconda3/envs/python-notes/lib/python3.7/site-packages/nbclient/client.py", line 1082, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Users/Alvin/opt/anaconda3/envs/python-notes/lib/python3.7/site-packages/nbclient/util.py", line 74, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/Users/Alvin/opt/anaconda3/envs/python-notes/lib/python3.7/site-packages/nbclient/util.py", line 53, in just_run
+    return loop.run_until_complete(coro)
+  File "/Users/Alvin/opt/anaconda3/envs/python-notes/lib/python3.7/asyncio/base_events.py", line 568, in run_until_complete
+    return future.result()
+  File "/Users/Alvin/opt/anaconda3/envs/python-notes/lib/python3.7/site-packages/nbclient/client.py", line 536, in async_execute
+    cell, index, execution_count=self.code_cells_executed + 1
+  File "/Users/Alvin/opt/anaconda3/envs/python-notes/lib/python3.7/site-packages/nbclient/client.py", line 827, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/Users/Alvin/opt/anaconda3/envs/python-notes/lib/python3.7/site-packages/nbclient/client.py", line 735, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply['content'])
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+G = snap.LoadEdgeList(snap.PNGraph, "../../RepositoryData/data/cit-HepTh.txt")
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mRuntimeError[0m                              Traceback (most recent call last)
+[0;32m<ipython-input-2-323199278a06>[0m in [0;36m<module>[0;34m[0m
+[0;32m----> 1[0;31m [0mG[0m [0;34m=[0m [0msnap[0m[0;34m.[0m[0mLoadEdgeList[0m[0;34m([0m[0msnap[0m[0;34m.[0m[0mPNGraph[0m[0;34m,[0m [0;34m"../../RepositoryData/data/cit-HepTh.txt"[0m[0;34m)[0m[0;34m[0m[0m
+[0m
+[0;32m~/opt/anaconda3/envs/python-notes/lib/python3.7/site-packages/snap.py[0m in [0;36mLoadEdgeList[0;34m(tspec, *args)[0m
+[1;32m  83399[0m     [0;32mif[0m [0mtspec[0m [0;34m==[0m [0mPUndirNet[0m[0;34m:[0m [0;32mreturn[0m [0mLoadEdgeList_PUndirNet[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m)[0m[0;34m[0m[0m
+[1;32m  83400[0m     [0;32mif[0m [0mtspec[0m [0;34m==[0m [0mPDirNet[0m[0;34m:[0m [0;32mreturn[0m [0mLoadEdgeList_PDirNet[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m)[0m[0;34m[0m[0m
+[0;32m> 83401[0;31m     [0;32mif[0m [0mtspec[0m [0;34m==[0m [0mPNGraph[0m [0;34m:[0m [0;32mreturn[0m [0mLoadEdgeList_PNGraph[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m)[0m[0;34m[0m[0m
+[0m[1;32m  83402[0m     [0;32mif[0m [0mtspec[0m [0;34m==[0m [0mPNEANet[0m [0;34m:[0m [0;32mreturn[0m [0mLoadEdgeList_PNEANet[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m)[0m[0;34m[0m[0m
+[1;32m  83403[0m     [0;32mif[0m [0mtspec[0m [0;34m==[0m [0mPNGraphMP[0m[0;34m:[0m [0;32mreturn[0m [0mLoadEdgeList_PNGraphMP[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m)[0m[0;34m[0m[0m
+
+[0;32m~/opt/anaconda3/envs/python-notes/lib/python3.7/site-packages/snap.py[0m in [0;36mLoadEdgeList_PNGraph[0;34m(*args)[0m
+[1;32m  71940[0m [0;34m[0m[0m
+[1;32m  71941[0m     """
+[0;32m> 71942[0;31m     [0;32mreturn[0m [0m_snap[0m[0;34m.[0m[0mLoadEdgeList_PNGraph[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m)[0m[0;34m[0m[0m
+[0m[1;32m  71943[0m [0;34m[0m[0m
+[1;32m  71944[0m [0;32mdef[0m [0mLoadEdgeListStr_PNGraph[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m)[0m [0;34m->[0m [0;34m"TPt< TNGraph >"[0m[0;34m:[0m[0;34m[0m[0m
+
+[0;31mRuntimeError[0m: Can not open file '../../RepositoryData/data/cit-HepTh.txt'.
+RuntimeError: Can not open file '../../RepositoryData/data/cit-HepTh.txt'.
+

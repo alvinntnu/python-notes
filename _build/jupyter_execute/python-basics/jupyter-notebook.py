@@ -221,6 +221,12 @@ $ jupyter kernelspec uninstall myenv
 Sometimes, the pre-existing conda environment does not work properly. An easy solution is to create the environment again after you set up the jupyter notebook. It is recommended to always create a new virtual environment for a new project.
 ```
 
+- Update `conda`:
+
+```
+!conda update -n base -c defaults conda
+```
+
 
 (nbextensions)=
 

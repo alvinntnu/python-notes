@@ -47,4 +47,5 @@ ggplot(iris, aes(Species, Sepal.Length, fill=Species)) +
 geom_boxplot(notch=T)
 
 iris %>% 
-filter(Sepal.Length > 5)
+filter(Sepal.Length > 5) %>% 
+head(10)

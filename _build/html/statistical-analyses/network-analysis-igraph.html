@@ -1,0 +1,1276 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Network Analysis Using Igraph &#8212; Python Notes for Linguistics</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Natural Language Processing with Python" href="../nlp/nlp.html" />
+    <link rel="prev" title="Network Analysis" href="network-analysis.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/ntnu03.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Python Notes for Linguistics</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python-basics/python-basics.html">
+   Python Basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../corpus/corpus-processing.html">
+   Corpus Linguistics with Python
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="statistical-analyses.html">
+   Statistical Analyses
+  </a>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="network-analysis.html">
+     Network Analysis
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Network Analysis Using Igraph
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../nlp/nlp.html">
+   Natural Language Processing with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <div style="text-align:left">
+    <a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
+</div>
+
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/statistical-analyses/network-analysis-igraph.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/alvinntnu/python-notes/master?urlpath=tree/statistical-analyses/network-analysis-igraph.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/statistical-analyses/network-analysis-igraph.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#installation">
+   Installation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#creating-graphs">
+   Creating Graphs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generating-graphs">
+   Generating Graphs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#graph-attributes">
+   Graph Attributes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loading-data">
+   Loading Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#querying-vertices-and-edges-based-on-attributes">
+   Querying vertices and edges based on attributes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#finding-one-vertex-edge-with-some-attributes">
+   Finding one vertex/edge with some attributes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#structural-properties-of-graphs">
+   Structural Properties of Graphs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#degree-distribution">
+   Degree Distribution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#layout">
+   Layout
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#word-network-example">
+   Word Network Example
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#referneces">
+   Referneces
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="network-analysis-using-igraph">
+<h1>Network Analysis Using Igraph<a class="headerlink" href="#network-analysis-using-igraph" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Install <code class="docutils literal notranslate"><span class="pre">igraph</span></code></p></li>
+<li><p>Install <code class="docutils literal notranslate"><span class="pre">pycairo</span></code> for plotting</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># pip not working</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="n">pycairo</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">DEMO_DATA_ROOT</span> <span class="o">=</span> <span class="s2">&quot;../../../RepositoryData/data&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="creating-graphs">
+<h2>Creating Graphs<a class="headerlink" href="#creating-graphs" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#import igraph</span>
+<span class="kn">from</span> <span class="nn">igraph</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">cairo</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>IGRAPH U--- 0 0 --
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This summary consists of IGRAPH, followed by a four-character long code, the number of vertices, the number of edges, two dashes (–) and the name of the graph (i.e. the contents of the name attribute, if any)</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">add_vertices</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">add_edges</span><span class="p">([(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">)])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>IGRAPH U--- 10 4 --
++ edges:
+2--3 3--4 4--5 3--5
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Vertex IDs will always be continuous. If edges are deleted, vertices may be re-numbered.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">get_eid</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">delete_edges</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">summary</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>IGRAPH U--- 10 3 -- 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Use <em>summary()</em> instead of <em>print()</em> to avoid printing the edge lists.</p>
+</div>
+</div>
+<div class="section" id="generating-graphs">
+<h2>Generating Graphs<a class="headerlink" href="#generating-graphs" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Deterministic graph generator</p></li>
+<li><p>Stochastic graph generator</p>
+<ul>
+<li><p>Erdős-Rényi random networks</p></li>
+<li><p>Barabási-Albert networks</p></li>
+<li><p>Geometric random graphs</p></li>
+</ul>
+</li>
+</ul>
+<p>Create a tree with 20 vertices and each vertex has two children. The tree is deterministic.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Deterministic example</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="o">.</span><span class="n">Tree</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># </span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">bbox</span><span class="o">=</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="mi">200</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/network-analysis-igraph_16_0.svg" src="../_images/network-analysis-igraph_16_0.svg" /></div>
+</div>
+<p>Create geometric random graph which has <em>n</em> points chosen randomly and uniformly inside the unit square and pairs of points closer to each other than a predefined distance <em>d</em> are connected by an edge.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">isomorphic()</span></code> checks if two graphs are isomorphic or not.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="o">.</span><span class="n">GRG</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">)</span>
+<span class="n">summary</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">bbox</span><span class="o">=</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="mi">200</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>IGRAPH U--- 20 31 -- 
++ attr: x (v), y (v)
+</pre></div>
+</div>
+<img alt="../_images/network-analysis-igraph_19_1.svg" src="../_images/network-analysis-igraph_19_1.svg" /></div>
+</div>
+<p>Create an Erdos-Renyi random graph, with (n, p, m) parameters</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="o">.</span><span class="n">Erdos_Renyi</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span> 
+<span class="n">plot</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">bbox</span><span class="o">=</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="mi">200</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/network-analysis-igraph_21_0.svg" src="../_images/network-analysis-igraph_21_0.svg" /></div>
+</div>
+</div>
+<div class="section" id="graph-attributes">
+<h2>Graph Attributes<a class="headerlink" href="#graph-attributes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Vertices/Edges ID change when the number of vertices/edges changes in the Graph</p></li>
+<li><p>These ID’s are always continuous or renumbered to be continuous.</p></li>
+<li><p>Access vertices and edges:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Graph</span><span class="o">.</span><span class="n">vs</span>
+<span class="n">Graph</span><span class="o">.</span><span class="n">es</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Access attributes:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Graph</span><span class="o">.</span><span class="n">vs</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="o">.</span><span class="n">Tree</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">bbox</span><span class="o">=</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="mi">200</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/network-analysis-igraph_24_0.svg" src="../_images/network-analysis-igraph_24_0.svg" /></div>
+</div>
+<p>Add attributes to vertices/edges</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">vs</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;John&quot;</span><span class="p">,</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span><span class="s2">&quot;Claire&quot;</span><span class="p">,</span><span class="s2">&quot;Emily&quot;</span><span class="p">,</span><span class="s2">&quot;Dennis&quot;</span><span class="p">,</span><span class="s2">&quot;Esther&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">vs</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;John&#39;, &#39;Alice&#39;, &#39;Claire&#39;, &#39;Emily&#39;, &#39;Dennis&#39;, &#39;Esther&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Check attributes of specific vertices/edges</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">vs</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">attributes</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;name&#39;: &#39;Emily&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Add graph-level attributes</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;2020-10-10&quot;</span>
+<span class="n">g</span><span class="o">.</span><span class="n">vs</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">attributes</span><span class="p">()</span>
+<span class="n">g</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;2020-10-10&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">bbox</span><span class="o">=</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="mi">200</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/network-analysis-igraph_32_0.svg" src="../_images/network-analysis-igraph_32_0.svg" /></div>
+</div>
+</div>
+<div class="section" id="loading-data">
+<h2>Loading Data<a class="headerlink" href="#loading-data" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="http://vlado.fmf.uni-lj.si/pub/networks/data/DIC/TG/glossTG.htm">Graph and Digraph Glossary</a></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="o">.</span><span class="n">Read_Pajek</span><span class="p">(</span><span class="n">DEMO_DATA_ROOT</span> <span class="o">+</span> <span class="s2">&quot;/glossTG.paj&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summary</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>IGRAPH UN-- 72 118 -- 
++ attr: id (v), name (v), x (v), y (v)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="querying-vertices-and-edges-based-on-attributes">
+<h2>Querying vertices and edges based on attributes<a class="headerlink" href="#querying-vertices-and-edges-based-on-attributes" title="Permalink to this headline">¶</a></h2>
+<p>Check vertice-, edge-, and graph-level attributes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">vs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">attributes</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;id&#39;: &#39;Acyclic Graph&#39;, &#39;name&#39;: &#39;Acyclic Graph&#39;, &#39;x&#39;: 0.6519, &#39;y&#39;: 0.8284}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">es</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">attributes</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">attributes</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Selecting vertices and edges</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">vs</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span><span class="n">v</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">==</span><span class="s2">&quot;Tree&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">attributes</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;id&#39;, &#39;name&#39;, &#39;x&#39;, &#39;y&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Predefined keyword arguments for querying:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">name_eq</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name_neq</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name_lt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name_le</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name_gt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name_ge</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name_in</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name_notin</span></code></p></li>
+</ul>
+<p>All the above <code class="docutils literal notranslate"><span class="pre">name</span></code> could be any of the attributes on which the query is made.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">vs</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">name_in</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Tree&quot;</span><span class="p">,</span><span class="s2">&quot;Graph&quot;</span><span class="p">,</span><span class="s2">&quot;Bipartite&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;igraph.VertexSeq at 0x7fa3207bfa48&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The query can also be made on the <strong>structural properties</strong> of the vertices/edges.</p>
+<p>All structural properties need to be precded by an underscore (_).</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">_degree</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_source</span></code>/<code class="docutils literal notranslate"><span class="pre">_from</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_target</span></code>/<code class="docutils literal notranslate"><span class="pre">_to</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_within</span></code>: get vertices within the indices</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_between</span></code>: get all edges in-between two nodes</p></li>
+</ul>
+<p>Identify all vertices whose degrees are greater than 6.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">vs</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">_degree_gt</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span> <span class="c1"># find nodes whose degress &gt; 3</span>
+
+<span class="nb">print</span><span class="p">([</span><span class="n">v</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">r</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Arc&#39;, &#39;Digraph&#39;, &#39;Edge&#39;, &#39;Graph&#39;, &#39;Tree&#39;, &#39;Vertex&#39;, &#39;Walk&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Identify all edges that connect Tree and Graph</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n1</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">vs</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Graph&#39;</span><span class="p">)</span>
+<span class="n">n2</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">vs</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Edge&#39;</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">es</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">_between</span><span class="o">=</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span><span class="n">n2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">([</span><span class="n">e</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">r</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+[igraph.Edge(&lt;igraph.Graph object at 0x7fa300608d68&gt;, 42, {})]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="finding-one-vertex-edge-with-some-attributes">
+<h2>Finding one vertex/edge with some attributes<a class="headerlink" href="#finding-one-vertex-edge-with-some-attributes" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">vs</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Tree&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>igraph.Vertex(&lt;igraph.Graph object at 0x7fa300608d68&gt;, 68, {&#39;id&#39;: &#39;Tree&#39;, &#39;name&#39;: &#39;Tree&#39;, &#39;x&#39;: 0.5646, &#39;y&#39;: 0.8624})
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">degree</span><span class="p">(</span><span class="s2">&quot;Vertex&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="structural-properties-of-graphs">
+<h2>Structural Properties of Graphs<a class="headerlink" href="#structural-properties-of-graphs" title="Permalink to this headline">¶</a></h2>
+<p>Centrality Metrics:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">g.degree()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">g.evcent()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">g.betweenness()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">g.edge_betweenness()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">g.pagerank()</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># node degrees</span>
+<span class="n">g</span><span class="o">.</span><span class="n">degree</span><span class="p">()[:</span><span class="mi">10</span><span class="p">]</span>
+<span class="n">g</span><span class="o">.</span><span class="n">betweenness</span><span class="p">(</span><span class="s2">&quot;Vertex&quot;</span><span class="p">)</span> <span class="c1"># btwness centrality for ID &quot;Vertex&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>585.4799083183758
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Find out edge of highest cenrality</span>
+<span class="n">ebs</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">edge_betweenness</span><span class="p">()</span>
+<span class="n">max_eb</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">ebs</span><span class="p">)</span>
+<span class="p">[</span><span class="n">g</span><span class="o">.</span><span class="n">es</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">tuple</span> <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">eb</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ebs</span><span class="p">)</span> <span class="k">if</span> <span class="n">eb</span> <span class="o">==</span> <span class="n">max_eb</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(57, 68)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># same functions</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge_betweenness</span><span class="p">()[:</span><span class="mi">10</span><span class="p">]</span>
+<span class="n">g</span><span class="o">.</span><span class="n">es</span><span class="o">.</span><span class="n">edge_betweenness</span><span class="p">()[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[26.372757651705022,
+ 60.53942431837168,
+ 21.082828282828277,
+ 37.917171717171705,
+ 59.0,
+ 91.11305726437305,
+ 109.57099377230959,
+ 25.868358438946682,
+ 11.31190476190476,
+ 42.78978701037525]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">vs</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">_degree_gt</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;igraph.VertexSeq at 0x7fa3207c64a8&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="degree-distribution">
+<h2>Degree Distribution<a class="headerlink" href="#degree-distribution" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;fivethirtyeight&#39;</span><span class="p">)</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span><span class="o">=</span> <span class="mi">150</span>
+
+<span class="n">v_degree</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">degree</span><span class="p">()</span>
+<span class="n">v_betweenness</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">betweenness</span><span class="p">()</span>
+<span class="n">v_pagerank</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">pagerank</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Correlation</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># correlation</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">v_degree</span><span class="p">,</span> <span class="n">v_betweenness</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7fa30081c710&gt;
+</pre></div>
+</div>
+<img alt="../_images/network-analysis-igraph_64_1.png" src="../_images/network-analysis-igraph_64_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">v_degree</span><span class="p">,</span> <span class="n">v_pagerank</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7fa33070b860&gt;
+</pre></div>
+</div>
+<img alt="../_images/network-analysis-igraph_65_1.png" src="../_images/network-analysis-igraph_65_1.png" />
+</div>
+</div>
+<p>Degree Distribution ECDF</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ecdf</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># percentiles</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">plot_ecdf</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Cummulative Percentage&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">ecdf</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">markerscale</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">xlabel</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">margins</span><span class="p">(</span><span class="mf">0.02</span><span class="p">)</span>
+    
+    <span class="n">x_50</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+    <span class="n">y_50</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+    <span class="c1"># mark 50th</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_50</span><span class="p">,</span> <span class="n">y_50</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span>
+         <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+
+<span class="n">plot_ecdf</span><span class="p">(</span><span class="n">v_degree</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Vertex Degrees&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Vertex Degree ECDF&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/network-analysis-igraph_67_0.png" src="../_images/network-analysis-igraph_67_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="layout">
+<h2>Layout<a class="headerlink" href="#layout" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">layout</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">layout_kamada_kawai</span><span class="p">()</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">layout</span> <span class="o">=</span> <span class="n">layout</span><span class="p">,</span> <span class="n">bbox</span><span class="o">=</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="mi">800</span><span class="p">),</span> <span class="n">margin</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/network-analysis-igraph_69_0.svg" src="../_images/network-analysis-igraph_69_0.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v_colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lightblue&#39;</span> <span class="k">if</span> <span class="n">vd</span><span class="o">&gt;</span><span class="mi">6</span> <span class="k">else</span> <span class="s1">&#39;pink&#39;</span> <span class="k">for</span> <span class="n">vd</span> <span class="ow">in</span> <span class="n">v_degree</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is recommended to have aesthetic properties of the vertices and edges independent of their attributes.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">layout</span><span class="p">,</span> <span class="n">vertex_color</span> <span class="o">=</span> <span class="n">v_colors</span><span class="p">,</span>
+     <span class="n">bbox</span><span class="o">=</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="mi">800</span><span class="p">),</span> <span class="n">margin</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/network-analysis-igraph_72_0.svg" src="../_images/network-analysis-igraph_72_0.svg" /></div>
+</div>
+<p>All the visual styles can be stored in a Python dictionary object and passed to <code class="docutils literal notranslate"><span class="pre">plot()</span></code> all at once.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">visual_style</span><span class="o">=</span><span class="p">{}</span>
+<span class="n">visual_style</span><span class="p">[</span><span class="s2">&quot;vertex_size&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">30</span> <span class="k">if</span> <span class="n">vd</span><span class="o">&gt;</span><span class="mi">6</span> <span class="k">else</span> <span class="mi">20</span> <span class="k">for</span> <span class="n">vd</span> <span class="ow">in</span> <span class="n">v_degree</span><span class="p">]</span>
+<span class="n">visual_style</span><span class="p">[</span><span class="s2">&quot;vertex_color&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">v_colors</span>
+<span class="n">visual_style</span><span class="p">[</span><span class="s2">&quot;vertex_label&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">vs</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+<span class="n">visual_style</span><span class="p">[</span><span class="s2">&quot;vertex_label_size&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">12</span> <span class="k">if</span> <span class="n">vd</span><span class="o">&gt;</span><span class="mi">6</span> <span class="k">else</span> <span class="mi">6</span> <span class="k">for</span> <span class="n">vd</span> <span class="ow">in</span> <span class="n">v_degree</span><span class="p">]</span>
+<span class="n">visual_style</span><span class="p">[</span><span class="s2">&quot;vertex_shape&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;circle&quot;</span>
+<span class="n">visual_style</span><span class="p">[</span><span class="s2">&quot;layout&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">layout</span>
+<span class="n">visual_style</span><span class="p">[</span><span class="s2">&quot;bbox&quot;</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span><span class="mi">800</span><span class="p">)</span>
+<span class="n">visual_style</span><span class="p">[</span><span class="s2">&quot;margin&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">40</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="o">**</span><span class="n">visual_style</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/network-analysis-igraph_74_0.svg" src="../_images/network-analysis-igraph_74_0.svg" /></div>
+</div>
+</div>
+<div class="section" id="word-network-example">
+<h2>Word Network Example<a class="headerlink" href="#word-network-example" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pickle</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">DEMO_DATA_ROOT</span><span class="o">+</span><span class="s1">&#39;/reporting_verbs_chinese_edges_df.pickle&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">edges_df</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="n">edges_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>w1</th>
+      <th>w2</th>
+      <th>sim</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>認為</td>
+      <td>強調</td>
+      <td>0.768714</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>認為</td>
+      <td>因為</td>
+      <td>0.768123</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>認為</td>
+      <td>認爲</td>
+      <td>0.824715</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>認為</td>
+      <td>對於</td>
+      <td>0.757404</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>現在</td>
+      <td>因為</td>
+      <td>0.773691</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>9014</th>
+      <td>主張</td>
+      <td>提議</td>
+      <td>0.664787</td>
+    </tr>
+    <tr>
+      <th>9015</th>
+      <td>主張</td>
+      <td>見解</td>
+      <td>0.663773</td>
+    </tr>
+    <tr>
+      <th>9016</th>
+      <td>主張</td>
+      <td>權利</td>
+      <td>0.658277</td>
+    </tr>
+    <tr>
+      <th>9017</th>
+      <td>主張</td>
+      <td>言論</td>
+      <td>0.658076</td>
+    </tr>
+    <tr>
+      <th>9018</th>
+      <td>主張</td>
+      <td>認同</td>
+      <td>0.655625</td>
+    </tr>
+  </tbody>
+</table>
+<p>785 rows × 3 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">edges_tuples</span> <span class="o">=</span> <span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">edges_df</span><span class="o">.</span><span class="n">values</span><span class="p">]</span>
+<span class="n">g2</span> <span class="o">=</span> <span class="n">Graph</span><span class="o">.</span><span class="n">TupleList</span><span class="p">(</span><span class="n">edges_tuples</span><span class="p">,</span> <span class="n">directed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">summary</span><span class="p">(</span><span class="n">g2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>IGRAPH UN-- 180 785 -- 
++ attr: name (v)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">g2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/network-analysis-igraph_78_0.svg" src="../_images/network-analysis-igraph_78_0.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g2</span> <span class="o">=</span> <span class="n">g2</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span>
+<span class="n">g2_fg</span> <span class="o">=</span> <span class="n">g2</span><span class="o">.</span><span class="n">community_fastgreedy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g2_fg</span><span class="o">.</span><span class="n">optimal_count</span>
+<span class="n">nodes_membership</span> <span class="o">=</span> <span class="n">g2_fg</span><span class="o">.</span><span class="n">as_clustering</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span><span class="o">.</span><span class="n">membership</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nodes_membership</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 1, 0, 1, 0, 0, 0, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 2, 1, 1, 1, 1, 1, 5, 5, 5, 5, 1, 6, 6, 0, 0, 0, 2, 0, 0, 2, 2, 2, 1, 1, 2, 0, 0, 2, 2, 2, 2, 1, 2, 7, 7, 2, 2, 2, 2, 2, 5, 2, 2, 1, 4, 4, 0, 2, 2, 1, 0, 5, 0, 0, 0, 2, 2, 0, 5, 5, 4, 7, 7, 2, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 4, 0, 0, 0, 7, 0, 0, 0, 0, 6, 6, 6, 6, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 7, 4, 4, 4, 4, 4, 4]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="c1"># # from seaborn import color_palette</span>
+<span class="c1"># palette = plt.get_cmap(&quot;Set3&quot;)</span>
+<span class="c1"># palette(11)[1]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;PingFang HK&quot;</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.unicode_minus&#39;</span><span class="p">]</span><span class="o">=</span> <span class="kc">False</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="n">palette</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s1">&#39;tab10&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">xpinyin</span> <span class="kn">import</span> <span class="n">Pinyin</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">Pinyin</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">get_pinyin</span><span class="p">(</span><span class="n">g2</span><span class="o">.</span><span class="n">vs</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">tone_marks</span><span class="o">=</span><span class="s1">&#39;numbers&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;qiang2-diao4&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># WIDTH = 3</span>
+<span class="c1"># HEIGHT = 2</span>
+<span class="c1"># PIXEL_SCALE = 200</span>
+
+<span class="c1"># surface = cairo.ImageSurface(cairo.FORMAT_RGB24,</span>
+<span class="c1">#                              WIDTH*PIXEL_SCALE,</span>
+<span class="c1">#                              HEIGHT*PIXEL_SCALE)</span>
+<span class="c1"># ctx = cairo.Context(surface)</span>
+<span class="c1"># ctx.scale(PIXEL_SCALE, PIXEL_SCALE)</span>
+
+<span class="c1"># ctx.rectangle(0, 0, WIDTH, HEIGHT)</span>
+<span class="c1"># ctx.set_source_rgb(0.8, 0.8, 1)</span>
+<span class="c1"># ctx.fill()</span>
+
+<span class="c1"># # Drawing code</span>
+<span class="c1"># ctx.set_source_rgb(1, 0, 0)</span>
+<span class="c1"># ctx.set_font_size(0.25)</span>
+<span class="c1"># ctx.select_font_face(&quot;Arial Unicode MS&quot;,</span>
+<span class="c1">#                      cairo.FONT_SLANT_NORMAL,</span>
+<span class="c1">#                      cairo.FONT_WEIGHT_NORMAL)</span>
+<span class="c1"># ctx.move_to(0.5, 0.5)</span>
+<span class="c1"># ctx.show_text(&quot;我是中文&quot;)</span>
+<span class="c1"># # End of drawing code</span>
+
+<span class="c1"># surface.write_to_png(&#39;text.png&#39;) </span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># WIDTH = 10</span>
+<span class="c1"># HEIGHT = 8</span>
+<span class="c1"># PIXEL_SCALE = 200</span>
+
+<span class="c1"># surface = cairo.ImageSurface(cairo.FORMAT_RGB24,</span>
+<span class="c1">#                              WIDTH*PIXEL_SCALE,</span>
+<span class="c1">#                              HEIGHT*PIXEL_SCALE)</span>
+<span class="c1"># ctx = cairo.Context(surface)</span>
+<span class="c1"># ctx.scale(PIXEL_SCALE, PIXEL_SCALE)</span>
+
+<span class="c1"># ctx.rectangle(0, 0, WIDTH, HEIGHT)</span>
+<span class="c1">#ctx.set_source_rgb(0.8, 0.8, 1)</span>
+<span class="c1">#ctx.fill()</span>
+
+<span class="c1"># Drawing code</span>
+<span class="c1"># ctx.set_source_rgb(1, 0, 0)</span>
+<span class="c1"># ctx.set_font_size(0.25)</span>
+<span class="c1"># ctx.select_font_face(&quot;sans&quot;,</span>
+<span class="c1">#                      cairo.FONT_SLANT_NORMAL,</span>
+<span class="c1">#                      cairo.FONT_WEIGHT_NORMAL)</span>
+
+<span class="n">layout</span> <span class="o">=</span> <span class="n">g2</span><span class="o">.</span><span class="n">layout_fruchterman_reingold</span><span class="p">()</span>
+
+<span class="n">visual_style</span><span class="o">=</span><span class="p">{}</span>
+<span class="n">visual_style</span><span class="p">[</span><span class="s2">&quot;vertex_size&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">visual_style</span><span class="p">[</span><span class="s2">&quot;vertex_color&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">palette</span><span class="p">[</span><span class="n">m</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">nodes_membership</span><span class="p">]</span>
+
+<span class="c1">#visual_style[&quot;vertex_label&quot;] = [p.get_pinyin(n, &quot;&quot;,tone_marks=&#39;numbers&#39;) for n in g2.vs[&#39;name&#39;]]</span>
+<span class="n">visual_style</span><span class="p">[</span><span class="s2">&quot;vertex_label&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">g2</span><span class="o">.</span><span class="n">vs</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+<span class="n">visual_style</span><span class="p">[</span><span class="s2">&quot;labels&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">g2</span><span class="o">.</span><span class="n">vs</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+<span class="n">visual_style</span><span class="p">[</span><span class="s2">&quot;vertex_label_dist&quot;</span><span class="p">]</span> <span class="o">=</span><span class="mi">1</span>
+<span class="n">visual_style</span><span class="p">[</span><span class="s2">&quot;vertex_label_size&quot;</span><span class="p">]</span><span class="o">=</span> <span class="mi">8</span>
+<span class="c1">#visual_style[&quot;vertex_label_size&quot;] = [12 if vd&gt;6 else 6 for vd in v_degree]</span>
+<span class="c1">#visual_style[&quot;vertex_shape&quot;] = &quot;circle&quot;</span>
+
+<span class="n">visual_style</span><span class="p">[</span><span class="s2">&quot;edge_color&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;lightgrey&quot;</span>
+<span class="n">visual_style</span><span class="p">[</span><span class="s2">&quot;edge_width&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">visual_style</span><span class="p">[</span><span class="s2">&quot;edge_curved&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.1</span>
+
+<span class="n">visual_style</span><span class="p">[</span><span class="s2">&quot;layout&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">layout</span>
+<span class="n">visual_style</span><span class="p">[</span><span class="s2">&quot;bbox&quot;</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span><span class="mi">800</span><span class="p">)</span>
+<span class="n">visual_style</span><span class="p">[</span><span class="s2">&quot;margin&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">40</span>
+
+<span class="n">plot</span><span class="p">(</span><span class="n">g2</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s2">&quot;text.png&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">visual_style</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/network-analysis-igraph_84_0.svg" src="../_images/network-analysis-igraph_84_0.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">svg_colors</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;aqua&#39;</span><span class="p">,</span><span class="s1">&#39;aquamarine&#39;</span><span class="p">,</span><span class="s1">&#39;coral&#39;</span><span class="p">,</span><span class="s1">&#39;cornsilk&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;honeydew&#39;</span><span class="p">,</span><span class="s1">&#39;lemonchiffon&#39;</span><span class="p">,</span><span class="s1">&#39;lightpink&#39;</span><span class="p">,</span><span class="s1">&#39;plum&#39;</span><span class="p">]</span>
+<span class="n">visual_style</span><span class="p">[</span><span class="s2">&quot;colors&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">svg_colors</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">nodes_membership</span><span class="p">]</span>
+
+
+<span class="n">g2</span><span class="o">.</span><span class="n">write_svg</span><span class="p">(</span><span class="s2">&quot;text.svg&quot;</span><span class="p">,</span> 
+             <span class="n">labels</span><span class="o">=</span><span class="n">visual_style</span><span class="p">[</span><span class="s2">&quot;vertex_label&quot;</span><span class="p">],</span>
+             <span class="n">layout</span><span class="o">=</span><span class="n">layout</span><span class="p">,</span>
+             <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span>
+             <span class="n">height</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span>
+             <span class="n">colors</span><span class="o">=</span><span class="n">visual_style</span><span class="p">[</span><span class="s2">&quot;colors&quot;</span><span class="p">],</span>
+             <span class="n">vertex_size</span><span class="o">=</span><span class="n">visual_style</span><span class="p">[</span><span class="s2">&quot;vertex_size&quot;</span><span class="p">],</span>
+             <span class="n">edge_colors</span><span class="o">=</span> <span class="p">[</span><span class="s1">&#39;whitesmoke&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">g2</span><span class="o">.</span><span class="n">es</span><span class="p">))],</span>
+             <span class="c1">#edge_stroke_widths=visual_style[&quot;edge_width&quot;],</span>
+             <span class="n">font_size</span><span class="o">=</span> <span class="mi">8</span>
+            <span class="p">)</span>
+<span class="c1"># # g2_plot.save(&#39;text2.png&#39;)</span>
+<span class="c1"># # surface.write_to_png(&#39;text.png&#39;)</span>
+
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">SVG</span><span class="p">,</span> <span class="n">display</span>
+<span class="n">display</span><span class="p">(</span><span class="n">SVG</span><span class="p">(</span><span class="s1">&#39;text.svg&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/network-analysis-igraph_85_0.svg" src="../_images/network-analysis-igraph_85_0.svg" /></div>
+</div>
+<ul class="simple">
+<li><p>Chinese characters are not showing up in igraph due to the issues of <code class="docutils literal notranslate"><span class="pre">cairo</span></code> Chinese support.</p></li>
+<li><p>A workaround is to save the graph in <code class="docutils literal notranslate"><span class="pre">SVG</span></code></p></li>
+<li><p>Then open the SVG with text editor</p></li>
+<li><p>Then find all <code class="docutils literal notranslate"><span class="pre">font-family:...</span></code> setting and replace the font name with system-compatible Chinese font names.</p></li>
+</ul>
+</div>
+<div class="section" id="referneces">
+<h2>Referneces<a class="headerlink" href="#referneces" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://igraph.org/python/doc/tutorial/tutorial.html">igraph tutorials</a></p></li>
+<li><p><a class="reference external" href="https://igraph.org/python/doc/igraph-module.html">igraph API documentation</a></p></li>
+<li><p><a class="reference external" href="http://snap.stanford.edu/data/links.html">SNAP datasets</a></p></li>
+<li><p><a class="reference external" href="https://www.december.com/html/spec/colorsvgsvg.html">SVG Colors</a></p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python-notes",
+            path: "./statistical-analyses"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python-notes'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="network-analysis.html" title="previous page">Network Analysis</a>
+    <a class='right-next' id="next-link" href="../nlp/nlp.html" title="next page">Natural Language Processing with Python</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alvin Chen<br/>
+        
+            &copy; Copyright 2020 Alvin Chen.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>
