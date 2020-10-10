@@ -174,8 +174,8 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../appendix/references.html">
-   References
+  <a class="reference internal" href="../appendix/todo.html">
+   To-do List
   </a>
  </li>
 </ul>
@@ -286,8 +286,18 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dispersion">
+   Dispersion
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#delta-p">
    Delta P
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#checking-computation-accuracy">
+   Checking Computation Accuracy
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -321,7 +331,7 @@
 <ul class="simple">
 <li><p>With <code class="docutils literal notranslate"><span class="pre">nltk</span></code>, we can easily implement quite a few corpus-linguistic methods</p>
 <ul>
-<li><p>Concordance Analysis (Simple Words)</p></li>
+<li><p>Concordance Analysis (Simple Word Search)</p></li>
 <li><p>Frequency Lists</p></li>
 <li><p>Collocations</p></li>
 <li><p>Data Analysis with R</p></li>
@@ -518,6 +528,13 @@
 </div>
 </div>
 </div>
+</div>
+<div class="section" id="dispersion">
+<h2>Dispersion<a class="headerlink" href="#dispersion" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Dispersion of a linguistic unit is also important.</p></li>
+<li><p>There should be a metric that indicates how evenly distributed the linguistic unit is.</p></li>
+</ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>How to get the document frequency of the bigrams???</p>
@@ -532,7 +549,8 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unigram_freq_per_file</span> <span class="o">=</span> <span class="p">[</span><span class="n">nltk</span><span class="o">.</span><span class="n">FreqDist</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ngram freq list of each file in the corpus</span>
+<span class="n">unigram_freq_per_file</span> <span class="o">=</span> <span class="p">[</span><span class="n">nltk</span><span class="o">.</span><span class="n">FreqDist</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> 
                          <span class="k">for</span> <span class="n">words</span> <span class="ow">in</span> <span class="p">[</span><span class="n">brown</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="n">fileids</span><span class="o">=</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">brown</span><span class="o">.</span><span class="n">fileids</span><span class="p">()]]</span>
 <span class="n">bigram_freq_per_file</span> <span class="o">=</span> <span class="p">[</span><span class="n">nltk</span><span class="o">.</span><span class="n">FreqDist</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nltk</span><span class="o">.</span><span class="n">bigrams</span><span class="p">(</span><span class="n">words</span><span class="p">))</span>
                          <span class="k">for</span> <span class="n">words</span> <span class="ow">in</span> <span class="p">[</span><span class="n">brown</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="n">fileids</span><span class="o">=</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">brown</span><span class="o">.</span><span class="n">fileids</span><span class="p">()]]</span>
@@ -543,7 +561,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Function to get unigram dispersion</span>
-<span class="k">def</span> <span class="nf">createUnigramDipsersionDist</span><span class="p">(</span><span class="n">uni_freq</span><span class="p">,</span> <span class="n">uni_freq_per_file</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">createDipsersionDist</span><span class="p">(</span><span class="n">uni_freq</span><span class="p">,</span> <span class="n">uni_freq_per_file</span><span class="p">):</span>
     <span class="nb">len</span><span class="p">(</span><span class="n">uni_freq_per_file</span><span class="p">)</span>
     <span class="n">unigram_dispersion</span> <span class="o">=</span> <span class="p">{}</span>
 
@@ -560,7 +578,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unigram_dispersion</span> <span class="o">=</span> <span class="n">createUnigramDipsersionDist</span><span class="p">(</span><span class="n">unigram_freq</span><span class="p">,</span> <span class="n">unigram_freq_per_file</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unigram_dispersion</span> <span class="o">=</span> <span class="n">createDipsersionDist</span><span class="p">(</span><span class="n">unigram_freq</span><span class="p">,</span> <span class="n">unigram_freq_per_file</span><span class="p">)</span>
 <span class="c1"># Dictionary cannot be sliced/subset</span>
 <span class="c1"># Get the items() and convert to list for subsetting</span>
 <span class="nb">list</span><span class="p">(</span><span class="n">unigram_dispersion</span><span class="o">.</span><span class="n">items</span><span class="p">())[:</span><span class="mi">20</span><span class="p">]</span>
@@ -626,7 +644,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bigram_dispersion</span> <span class="o">=</span> <span class="n">createUnigramDipsersionDist</span><span class="p">(</span><span class="n">bigram_freq</span><span class="p">,</span> <span class="n">bigram_freq_per_file</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bigram_dispersion</span> <span class="o">=</span> <span class="n">createDipsersionDist</span><span class="p">(</span><span class="n">bigram_freq</span><span class="p">,</span> <span class="n">bigram_freq_per_file</span><span class="p">)</span>
 <span class="nb">list</span><span class="p">(</span><span class="n">bigram_dispersion</span><span class="o">.</span><span class="n">items</span><span class="p">())[:</span><span class="mi">20</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -669,15 +687,28 @@
 </div>
 </div>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We can implement the Delta P dispersion metric proposed by <a class="reference external" href="https://www.researchgate.net/publication/233685362_Dispersions_and_adjusted_frequencies_in_corpora">Gries (2008)</a>.</p>
+</div>
 </div>
 <div class="section" id="delta-p">
 <h2>Delta P<a class="headerlink" href="#delta-p" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>This is a directional association metric.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Inherit BigramAssocMeasures</span>
 <span class="k">class</span> <span class="nc">AugmentedBigramAssocMeasures</span><span class="p">(</span><span class="n">BigramAssocMeasures</span><span class="p">):</span>
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">dp_fwd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">marginals</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">raw_freq2</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span><span class="o">*</span><span class="n">marginals</span><span class="p">):</span>          
+        <span class="sd">&quot;&quot;&quot;Scores ngrams by their frequency&quot;&quot;&quot;</span>
+        <span class="n">n_ii</span><span class="p">,</span> <span class="n">n_io</span><span class="p">,</span> <span class="n">n_oi</span><span class="p">,</span> <span class="n">n_oo</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_contingency</span><span class="p">(</span><span class="o">*</span><span class="n">marginals</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">n_ii</span>
+    
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">dp_fwd</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">marginals</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Scores bigrams using DP forward</span>
 <span class="sd">        This may be shown with respect to a contingency table::</span>
 
@@ -690,12 +721,12 @@
 <span class="sd">             = n_ix        TOTAL = n_xx</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         
-        <span class="n">n_ii</span><span class="p">,</span> <span class="n">n_io</span><span class="p">,</span> <span class="n">n_oi</span><span class="p">,</span> <span class="n">n_oo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contingency</span><span class="p">(</span><span class="o">*</span><span class="n">marginals</span><span class="p">)</span>
+        <span class="n">n_ii</span><span class="p">,</span> <span class="n">n_oi</span><span class="p">,</span> <span class="n">n_io</span><span class="p">,</span> <span class="n">n_oo</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_contingency</span><span class="p">(</span><span class="o">*</span><span class="n">marginals</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="p">(</span><span class="n">n_ii</span><span class="o">/</span><span class="p">(</span><span class="n">n_ii</span><span class="o">+</span><span class="n">n_io</span><span class="p">))</span> <span class="o">-</span> <span class="p">(</span><span class="n">n_oi</span><span class="o">/</span><span class="p">(</span><span class="n">n_oi</span><span class="o">+</span><span class="n">n_oo</span><span class="p">))</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">dp_bwd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">marginals</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">dp_bwd</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">marginals</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Scores bigrams using DP backward</span>
 <span class="sd">        This may be shown with respect to a contingency table::</span>
 
@@ -708,7 +739,7 @@
 <span class="sd">             = n_ix        TOTAL = n_xx</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         
-        <span class="n">n_ii</span><span class="p">,</span> <span class="n">n_io</span><span class="p">,</span> <span class="n">n_oi</span><span class="p">,</span> <span class="n">n_oo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contingency</span><span class="p">(</span><span class="o">*</span><span class="n">marginals</span><span class="p">)</span>
+        <span class="n">n_ii</span><span class="p">,</span> <span class="n">n_oi</span><span class="p">,</span> <span class="n">n_io</span><span class="p">,</span> <span class="n">n_oo</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_contingency</span><span class="p">(</span><span class="o">*</span><span class="n">marginals</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="p">(</span><span class="n">n_ii</span><span class="o">/</span><span class="p">(</span><span class="n">n_ii</span><span class="o">+</span><span class="n">n_oi</span><span class="p">))</span> <span class="o">-</span> <span class="p">(</span><span class="n">n_io</span><span class="o">/</span><span class="p">(</span><span class="n">n_io</span><span class="o">+</span><span class="n">n_oo</span><span class="p">))</span>
 </pre></div>
@@ -725,7 +756,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">finder</span><span class="o">.</span><span class="n">apply_freq_filter</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#finder.apply_freq_filter(10)</span>
 </pre></div>
 </div>
 </div>
@@ -738,16 +769,16 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[((&#39;Hong&#39;, &#39;Kong&#39;), 1.0),
- ((&#39;Lo&#39;, &#39;Shu&#39;), 1.0),
- ((&#39;Viet&#39;, &#39;Nam&#39;), 0.9999974164190018),
- ((&#39;Puerto&#39;, &#39;Rico&#39;), 0.9999974164012019),
- ((&#39;Los&#39;, &#39;Angeles&#39;), 0.9999965551244676),
- ((&#39;Simms&#39;, &#39;Purdew&#39;), 0.9999956940353778),
- ((&#39;El&#39;, &#39;Paso&#39;), 0.9999913880855886),
- ((&#39;Blue&#39;, &#39;Throat&#39;), 0.9999698582736025),
- ((&#39;Du&#39;, &quot;Pont&#39;s&quot;), 0.999955217852231),
- ((&#39;sweet&#39;, &#39;clover&#39;), 0.9999552178136648)]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[((&#39;$10,000-per-year&#39;, &#39;French-born&#39;), 1.0),
+ ((&#39;$79.89&#39;, &#39;nothing-down&#39;), 1.0),
+ ((&#39;$8.50&#39;, &#39;tab&#39;), 1.0),
+ ((&quot;&#39;low&quot;, &#39;nigras&#39;), 1.0),
+ ((&#39;0.5-mv./m.&#39;, &#39;50-percent&#39;), 1.0),
+ ((&#39;0.78&#39;, &#39;mEq&#39;), 1.0),
+ ((&#39;1,100&#39;, &#39;circumscriptions&#39;), 1.0),
+ ((&#39;1,257,700&#39;, &#39;non-farm&#39;), 1.0),
+ ((&#39;11-inch&#39;, &#39;headroom&#39;), 1.0),
+ ((&#39;11-shot&#39;, &#39;hammerless&#39;), 1.0)]
 </pre></div>
 </div>
 </div>
@@ -760,16 +791,245 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[((&#39;Hong&#39;, &#39;Kong&#39;), 1.0),
- ((&#39;Lo&#39;, &#39;Shu&#39;), 1.0),
- ((&#39;Pathet&#39;, &#39;Lao&#39;), 0.9999939716599121),
- ((&#39;Export-Import&#39;, &#39;Bank&#39;), 0.9999870820838838),
- ((&quot;Drug&#39;s&quot;, &#39;chemical&#39;), 0.999963829803725),
- ((&#39;text-form&#39;, &#39;list&#39;), 0.9998966570270638),
- ((&#39;Inquirer&#39;, &#39;:&#39;), 0.9984653528870225),
- ((&#39;AP&#39;, &#39;)&#39;), 0.9978883513122019),
- ((&#39;accordance&#39;, &#39;with&#39;), 0.9939784975869208),
- ((&#39;compatible&#39;, &#39;with&#39;), 0.9939750735461291)]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[((&#39;$10,000-per-year&#39;, &#39;French-born&#39;), 1.0),
+ ((&#39;$79.89&#39;, &#39;nothing-down&#39;), 1.0),
+ ((&#39;$8.50&#39;, &#39;tab&#39;), 1.0),
+ ((&quot;&#39;low&quot;, &#39;nigras&#39;), 1.0),
+ ((&#39;0.5-mv./m.&#39;, &#39;50-percent&#39;), 1.0),
+ ((&#39;0.78&#39;, &#39;mEq&#39;), 1.0),
+ ((&#39;1,100&#39;, &#39;circumscriptions&#39;), 1.0),
+ ((&#39;1,257,700&#39;, &#39;non-farm&#39;), 1.0),
+ ((&#39;11-inch&#39;, &#39;headroom&#39;), 1.0),
+ ((&#39;11-shot&#39;, &#39;hammerless&#39;), 1.0)]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="checking-computation-accuracy">
+<h2>Checking Computation Accuracy<a class="headerlink" href="#checking-computation-accuracy" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Check if DP is correctly computed.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bigrams_rawfreq</span> <span class="o">=</span> <span class="n">finder</span><span class="o">.</span><span class="n">score_ngrams</span><span class="p">(</span><span class="n">bigram_measures</span><span class="o">.</span><span class="n">raw_freq2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bigrams_rawfreq</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[((&#39;of&#39;, &#39;the&#39;), 9625.0),
+ ((&#39;,&#39;, &#39;and&#39;), 6288.0),
+ ((&#39;.&#39;, &#39;The&#39;), 6081.0),
+ ((&#39;in&#39;, &#39;the&#39;), 5546.0),
+ ((&#39;,&#39;, &#39;the&#39;), 3754.0),
+ ((&#39;.&#39;, &#39;``&#39;), 3515.0),
+ ((&#39;to&#39;, &#39;the&#39;), 3426.0),
+ ((&quot;&#39;&#39;&quot;, &#39;.&#39;), 3332.0),
+ ((&#39;;&#39;, &#39;;&#39;), 2784.0),
+ ((&#39;.&#39;, &#39;He&#39;), 2660.0)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unigrams_rawfreq</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">FreqDist</span><span class="p">(</span><span class="n">brown</span><span class="o">.</span><span class="n">words</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w1f</span> <span class="o">=</span> <span class="n">unigrams_rawfreq</span><span class="p">[</span><span class="s1">&#39;of&#39;</span><span class="p">]</span>
+<span class="n">w2f</span> <span class="o">=</span> <span class="n">unigrams_rawfreq</span><span class="p">[</span><span class="s1">&#39;the&#39;</span><span class="p">]</span>
+<span class="n">w1w2</span> <span class="o">=</span> <span class="p">[</span><span class="n">freq</span> <span class="k">for</span> <span class="p">(</span><span class="n">w1</span><span class="p">,</span><span class="n">w2</span><span class="p">),</span><span class="n">freq</span> <span class="ow">in</span> <span class="n">bigrams_rawfreq</span> <span class="k">if</span> <span class="n">w1</span><span class="o">==</span><span class="s2">&quot;of&quot;</span> <span class="ow">and</span> <span class="n">w2</span><span class="o">==</span><span class="s2">&quot;the&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">corpus_size</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">unigrams_rawfreq</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        w1     _w1</span>
+<span class="sd">w2      w1w2   ____    w2f</span>
+<span class="sd">_w2     ____   ____</span>
+<span class="sd">        w1f            corpus_size</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">w1f</span><span class="p">,</span> <span class="n">w2f</span><span class="p">,</span> <span class="n">w1w2</span><span class="p">,</span><span class="n">corpus_size</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">24</span><span class="o">-</span><span class="n">b6a2adc52b34</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">w2f</span> <span class="o">=</span> <span class="n">unigrams_rawfreq</span><span class="p">[</span><span class="s1">&#39;the&#39;</span><span class="p">]</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">w1w2</span> <span class="o">=</span> <span class="p">[</span><span class="n">freq</span> <span class="k">for</span> <span class="p">(</span><span class="n">w1</span><span class="p">,</span><span class="n">w2</span><span class="p">),</span><span class="n">freq</span> <span class="ow">in</span> <span class="n">bigrams_rawfreq</span> <span class="k">if</span> <span class="n">w1</span><span class="o">==</span><span class="s2">&quot;of&quot;</span> <span class="ow">and</span> <span class="n">w2</span><span class="o">==</span><span class="s2">&quot;the&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">corpus_size</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">unigrams_rawfreq</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> 
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="s2">&quot;&quot;&quot;</span>
+
+<span class="ne">NameError</span>: name &#39;np&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Delta P Forward for `of the`:&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">w1w2</span><span class="o">/</span><span class="p">(</span><span class="n">w1f</span><span class="p">))</span><span class="o">-</span><span class="p">((</span><span class="n">w2f</span><span class="o">-</span><span class="n">w1w2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">corpus_size</span><span class="o">-</span><span class="n">w1f</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Delta P Backward for `of the`:&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">w1w2</span><span class="o">/</span><span class="p">(</span><span class="n">w2f</span><span class="p">))</span><span class="o">-</span><span class="p">((</span><span class="n">w1f</span><span class="o">-</span><span class="n">w1w2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">corpus_size</span><span class="o">-</span><span class="n">w2f</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Delta P Forward for `of the`: 0.2195836568422283
+Delta P Backward for `of the`: 0.12939364991590951
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">([</span><span class="n">dp</span> <span class="k">for</span> <span class="p">(</span><span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">),</span><span class="n">dp</span> <span class="ow">in</span> <span class="n">bigrams_dpfwd</span> <span class="k">if</span> <span class="n">w1</span><span class="o">==</span><span class="s2">&quot;of&quot;</span> <span class="ow">and</span> <span class="n">w2</span><span class="o">==</span><span class="s2">&quot;the&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">([</span><span class="n">dp</span> <span class="k">for</span> <span class="p">(</span><span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">),</span><span class="n">dp</span> <span class="ow">in</span> <span class="n">bigrams_dpbwd</span> <span class="k">if</span> <span class="n">w1</span><span class="o">==</span><span class="s2">&quot;of&quot;</span> <span class="ow">and</span> <span class="n">w2</span><span class="o">==</span><span class="s2">&quot;the&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.2195836568422283]
+[0.12939364991590951]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>How to implement the delta P of trigrams?</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># inherit Trigram</span>
+<span class="kn">from</span> <span class="nn">nltk.collocations</span> <span class="kn">import</span> <span class="n">TrigramAssocMeasures</span><span class="p">,</span> <span class="n">TrigramCollocationFinder</span>
+<span class="k">class</span> <span class="nc">AugmentedTrigramAssocMeasures</span><span class="p">(</span><span class="n">TrigramAssocMeasures</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A collection of trigram association measures. Each association measure</span>
+<span class="sd">        is provided as a function with four arguments::</span>
+
+<span class="sd">            trigram_score_fn(n_iii,</span>
+<span class="sd">                             (n_iix, n_ixi, n_xii),</span>
+<span class="sd">                             (n_ixx, n_xix, n_xxi),</span>
+<span class="sd">                             n_xxx)</span>
+
+<span class="sd">        The arguments constitute the marginals of a contingency table, counting</span>
+<span class="sd">        the occurrences of particular events in a corpus. The letter i in the</span>
+<span class="sd">        suffix refers to the appearance of the word in question, while x indicates</span>
+<span class="sd">        the appearance of any word. Thus, for example:</span>
+<span class="sd">        n_iii counts (w1, w2, w3), i.e. the trigram being scored</span>
+<span class="sd">        n_ixx counts (w1, *, *)</span>
+<span class="sd">        n_xxx counts (*, *, *), i.e. any trigram</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">dp_fwd</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">marginals</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Scores trigrams using delta P forward, i.e. conditional prob of w3 given w1,w2</span>
+<span class="sd">        minus conditional prob of w3, in the absence of w1,w2</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">n_iii</span><span class="p">,</span> <span class="n">n_oii</span><span class="p">,</span> <span class="n">n_ioi</span><span class="p">,</span> <span class="n">n_ooi</span><span class="p">,</span> <span class="n">n_iio</span><span class="p">,</span> <span class="n">n_oio</span><span class="p">,</span> <span class="n">n_ioo</span><span class="p">,</span> <span class="n">n_ooo</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_contingency</span><span class="p">(</span><span class="o">*</span><span class="n">marginals</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">((</span><span class="n">n_iii</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">n_iii</span><span class="o">+</span><span class="n">n_iio</span><span class="p">))</span> <span class="o">-</span> <span class="p">((</span><span class="n">n_ooi</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">n_ooi</span><span class="o">+</span><span class="n">n_ooo</span><span class="p">))</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">dp_bwd</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">marginals</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Scores trigrams using delta P backward, i.e. conditional prob of w1 given w2,w3</span>
+<span class="sd">        minus conditional prob of w1, in the absence of w2,w3</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">n_iii</span><span class="p">,</span> <span class="n">n_oii</span><span class="p">,</span> <span class="n">n_ioi</span><span class="p">,</span> <span class="n">n_ooi</span><span class="p">,</span> <span class="n">n_iio</span><span class="p">,</span> <span class="n">n_oio</span><span class="p">,</span> <span class="n">n_ioo</span><span class="p">,</span> <span class="n">n_ooo</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_contingency</span><span class="p">(</span><span class="o">*</span><span class="n">marginals</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">((</span><span class="n">n_iii</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">n_iii</span><span class="o">+</span><span class="n">n_oii</span><span class="p">))</span> <span class="o">-</span> <span class="p">((</span><span class="n">n_ioo</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">n_ioo</span><span class="o">+</span><span class="n">n_ooo</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trigram_measures</span> <span class="o">=</span> <span class="n">AugmentedTrigramAssocMeasures</span><span class="p">()</span>
+<span class="n">finder3</span> <span class="o">=</span> <span class="n">TrigramCollocationFinder</span><span class="o">.</span><span class="n">from_words</span><span class="p">(</span><span class="n">brown</span><span class="o">.</span><span class="n">words</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">finder3</span><span class="o">.</span><span class="n">apply_freq_filter</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">finder3</span><span class="o">.</span><span class="n">nbest</span><span class="p">(</span><span class="n">trigram_measures</span><span class="o">.</span><span class="n">pmi</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&quot;Drug&#39;s&quot;, &#39;chemical&#39;, &#39;name&#39;),
+ (&#39;Brown&#39;, &#39;&amp;&#39;, &#39;Sharpe&#39;),
+ (&#39;B.&#39;, &#39;&amp;&#39;, &#39;O.&#39;),
+ (&#39;per&#39;, &#39;capita&#39;, &#39;income&#39;),
+ (&#39;John&#39;, &#39;A.&#39;, &#39;Notte&#39;),
+ (&#39;average&#39;, &#39;per&#39;, &#39;capita&#39;),
+ (&#39;General&#39;, &#39;Motors&#39;, &#39;stock&#39;),
+ (&#39;basic&#39;, &#39;wage&#39;, &#39;rate&#39;),
+ (&#39;World&#39;, &#39;War&#39;, &#39;2&#39;),
+ (&#39;New&#39;, &#39;York&#39;, &#39;Times&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">finder3</span><span class="o">.</span><span class="n">nbest</span><span class="p">(</span><span class="n">trigram_measures</span><span class="o">.</span><span class="n">dp_fwd</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;the&#39;, &#39;Lo&#39;, &#39;Shu&#39;),
+ (&#39;average&#39;, &#39;per&#39;, &#39;capita&#39;),
+ (&#39;of&#39;, &#39;Economic&#39;, &#39;Affairs&#39;),
+ (&#39;the&#39;, &#39;minimal&#39;, &#39;polynomial&#39;),
+ (&#39;B.&#39;, &#39;&amp;&#39;, &#39;O.&#39;),
+ (&#39;the&#39;, &#39;Export-Import&#39;, &#39;Bank&#39;),
+ (&#39;Chamber&#39;, &#39;of&#39;, &#39;Commerce&#39;),
+ (&#39;Notte&#39;, &#39;,&#39;, &#39;Jr.&#39;),
+ (&#39;.&#39;, &quot;Drug&#39;s&quot;, &#39;chemical&#39;),
+ (&#39;v.&#39;, &#39;United&#39;, &#39;States&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">finder3</span><span class="o">.</span><span class="n">nbest</span><span class="p">(</span><span class="n">trigram_measures</span><span class="o">.</span><span class="n">dp_bwd</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;Puerto&#39;, &#39;Rico&#39;, &#39;,&#39;),
+ (&#39;Los&#39;, &#39;Angeles&#39;, &#39;,&#39;),
+ (&#39;dominant&#39;, &#39;stress&#39;, &#39;will&#39;),
+ (&#39;couple&#39;, &#39;of&#39;, &#39;weeks&#39;),
+ (&#39;A.&#39;, &#39;Notte&#39;, &#39;,&#39;),
+ (&#39;United&#39;, &#39;States&#39;, &#39;is&#39;),
+ (&#39;Brown&#39;, &#39;&amp;&#39;, &#39;Sharpe&#39;),
+ (&#39;Department&#39;, &#39;of&#39;, &#39;Economic&#39;),
+ (&#39;boys&#39;, &#39;and&#39;, &#39;girls&#39;),
+ (&#39;General&#39;, &#39;Motors&#39;, &#39;stock&#39;)]
 </pre></div>
 </div>
 </div>
@@ -977,478 +1237,69 @@ head(50)
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R[write to console]: 
 Attaching package: ‘dplyr’
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R[write to console]: The following objects are masked from ‘package:stats’:
+
+
+R[write to console]: The following objects are masked from ‘package:stats’:
 
     filter, lag
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R[write to console]: The following objects are masked from ‘package:base’:
+
+
+R[write to console]: The following objects are masked from ‘package:base’:
 
     intersect, setdiff, setequal, union
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        word
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> freq
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>243 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        time
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1597
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>174 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         man
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1203
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5114
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          af
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  995
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>248 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       years
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  949
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>779 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         way
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  899
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>486 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      people
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  845
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1011
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         mr.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  844
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>63  
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       state
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  787
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1099
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       world
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  787
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1227
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         men
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  763
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1438
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        life
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  715
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>303 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         day
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  687
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>175 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        year
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  656
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>875 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      states
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  586
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>278 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        work
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  583
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>299 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       house
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  582
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>158 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        mrs.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  534
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>865 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        part
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  496
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9   
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       place
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  496
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>340 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      school
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  489
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32  
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      number
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  470
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1801
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      course
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  465
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1173
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         war
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  463
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>101 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        fact
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  447
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>590 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       water
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  444
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1343
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        hand
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  423
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>896 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  government
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  418
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>229 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      system
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  416
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>121 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       night
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  411
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1217
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        head
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  407
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1869
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        eyes
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  401
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>756 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    business
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  393
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12  
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        city
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  393
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>72  
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     program
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  388
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>525 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       group
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  386
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>371 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        days
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  384
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>819 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        room
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  383
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>656 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   president
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  382
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1001
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        side
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  375
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>39  
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         end
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  369
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1246
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       point
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  369
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1254
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      things
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  368
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>212 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        john
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  362
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1061
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         use
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  361
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>701 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        case
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  360
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>354 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       order
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  359
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>459 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    children
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  355
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>356 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      church
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  348
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1108
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       power
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  340
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>595 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> development
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  333
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            word freq
+243         time 1597
+174          man 1203
+5114          af  995
+248        years  949
+779          way  899
+486       people  845
+1011         mr.  844
+63         state  787
+1099       world  787
+1227         men  763
+1438        life  715
+303          day  687
+175         year  656
+875       states  586
+278         work  583
+299        house  582
+158         mrs.  534
+865         part  496
+9          place  496
+340       school  489
+32        number  470
+1801      course  465
+1173         war  463
+101         fact  447
+590        water  444
+1343        hand  423
+896   government  418
+229       system  416
+121        night  411
+1217        head  407
+1869        eyes  401
+756     business  393
+12          city  393
+72       program  388
+525        group  386
+371         days  384
+819         room  383
+656    president  382
+1001        side  375
+39           end  369
+1246       point  369
+1254      things  368
+212         john  362
+1061         use  361
+701         case  360
+354        order  359
+459     children  355
+356       church  348
+1108       power  340
+595  development  333
 </pre></div>
 </div>
 </div>

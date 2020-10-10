@@ -110,8 +110,8 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../appendix/references.html">
-   References
+  <a class="reference internal" href="../appendix/todo.html">
+   To-do List
   </a>
  </li>
 </ul>
@@ -242,6 +242,55 @@
   <a class="reference internal nav-link" href="#topic-modeling">
    Topic Modeling
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-data">
+     Load  Data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#preprocess-data">
+     Preprocess Data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#feature-enginerring">
+   Feature Enginerring
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#topic-models-with-latent-semantic-indexing-lsi">
+     Topic Models with Latent Semantic Indexing (LSI)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#topic-models-with-latent-dirichlet-allocation-lda">
+     Topic Models with Latent Dirichlet Allocation (LDA)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lda-with-mallet">
+     LDA with Mallet
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lda-tuning-finading-optimal-number-of-topics">
+     LDA Tuning - Finading Optimal Number of Topics
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#interpreting-topic-model-results">
+     Interpreting Topic Model Results
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#predicting-topics-for-new-paper">
+     Predicting Topics for New Paper
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#document-summarization">
@@ -443,7 +492,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nltk.collocations.BigramCollocationFinder at 0x7ffc66265b70&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nltk.collocations.BigramCollocationFinder at 0x7fd6837ea588&gt;
 </pre></div>
 </div>
 </div>
@@ -461,9 +510,9 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Inherit BigramAssocMeasures</span>
 <span class="k">class</span> <span class="nc">AugmentedBigramAssocMeasures</span><span class="p">(</span><span class="n">BigramAssocMeasures</span><span class="p">):</span>
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">dp_fwd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">marginals</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Scores bigrams using phi-square, the square of the Pearson correlation</span>
-<span class="sd">        coefficient.</span>
+    <span class="k">def</span> <span class="nf">dp_fwd</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">marginals</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Scores bigrams using delta P forward, the normalized </span>
+<span class="sd">        conditional prob of w2 given w1: p(w2/w1)-p(w2/_w1)</span>
 <span class="sd">        This may be shown with respect to a contingency table::</span>
 
 <span class="sd">                w1    ~w1</span>
@@ -475,14 +524,14 @@
 <span class="sd">             = n_ix        TOTAL = n_xx</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         
-        <span class="n">n_ii</span><span class="p">,</span> <span class="n">n_io</span><span class="p">,</span> <span class="n">n_oi</span><span class="p">,</span> <span class="n">n_oo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contingency</span><span class="p">(</span><span class="o">*</span><span class="n">marginals</span><span class="p">)</span>
+        <span class="n">n_ii</span><span class="p">,</span> <span class="n">n_oi</span><span class="p">,</span> <span class="n">n_io</span><span class="p">,</span> <span class="n">n_oo</span>  <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_contingency</span><span class="p">(</span><span class="o">*</span><span class="n">marginals</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="p">(</span><span class="n">n_ii</span><span class="o">/</span><span class="p">(</span><span class="n">n_ii</span><span class="o">+</span><span class="n">n_io</span><span class="p">))</span> <span class="o">-</span> <span class="p">(</span><span class="n">n_oi</span><span class="o">/</span><span class="p">(</span><span class="n">n_oi</span><span class="o">+</span><span class="n">n_oo</span><span class="p">))</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">dp_bwd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">marginals</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Scores bigrams using phi-square, the square of the Pearson correlation</span>
-<span class="sd">        coefficient.</span>
+    <span class="k">def</span> <span class="nf">dp_bwd</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">marginals</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Scores bigrams using delta P forward, the normalized </span>
+<span class="sd">        conditional prob of w1 given w2: p(w1/w2)-p(w1/_w2)</span>
 <span class="sd">        This may be shown with respect to a contingency table::</span>
 
 <span class="sd">                w1    ~w1</span>
@@ -494,7 +543,7 @@
 <span class="sd">             = n_ix        TOTAL = n_xx</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         
-        <span class="n">n_ii</span><span class="p">,</span> <span class="n">n_io</span><span class="p">,</span> <span class="n">n_oi</span><span class="p">,</span> <span class="n">n_oo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contingency</span><span class="p">(</span><span class="o">*</span><span class="n">marginals</span><span class="p">)</span>
+        <span class="n">n_ii</span><span class="p">,</span> <span class="n">n_oi</span><span class="p">,</span> <span class="n">n_io</span><span class="p">,</span> <span class="n">n_oo</span>  <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_contingency</span><span class="p">(</span><span class="o">*</span><span class="n">marginals</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="p">(</span><span class="n">n_ii</span><span class="o">/</span><span class="p">(</span><span class="n">n_ii</span><span class="o">+</span><span class="n">n_oi</span><span class="p">))</span> <span class="o">-</span> <span class="p">(</span><span class="n">n_io</span><span class="o">/</span><span class="p">(</span><span class="n">n_io</span><span class="o">+</span><span class="n">n_oo</span><span class="p">))</span>
 </pre></div>
@@ -532,16 +581,16 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;soo&#39;, &#39;oop&#39;),
- (&#39;beg&#39;, &#39;pardon&#39;),
- (&#39;bread&#39;, &#39;butter&#39;),
- (&#39;golden&#39;, &#39;key&#39;),
- (&#39;kid&#39;, &#39;gloves&#39;),
- (&#39;twinkle&#39;, &#39;twinkle&#39;),
- (&#39;evening&#39;, &#39;beautiful&#39;),
- (&#39;join&#39;, &#39;dance&#39;),
- (&#39;play&#39;, &#39;croquet&#39;),
- (&#39;set&#39;, &#39;work&#39;)]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;accustomed&#39;, &#39;usurpation&#39;, &#39;conquest&#39;),
+ (&#39;adjourn&#39;, &#39;immediate&#39;, &#39;adoption&#39;),
+ (&#39;adoption&#39;, &#39;energetic&#39;, &#39;remedies&#39;),
+ (&#39;ancient&#39;, &#39;modern&#39;, &#39;seaography&#39;),
+ (&#39;apple&#39;, &#39;roast&#39;, &#39;turkey&#39;),
+ (&#39;arithmetic&#39;, &#39;ambition&#39;, &#39;distraction&#39;),
+ (&#39;brother&#39;, &#39;latin&#39;, &#39;grammar&#39;),
+ (&#39;canvas&#39;, &#39;bag&#39;, &#39;tied&#39;),
+ (&#39;cherry&#39;, &#39;tart&#39;, &#39;custard&#39;),
+ (&#39;circle&#39;, &#39;exact&#39;, &#39;shape&#39;)]
 </pre></div>
 </div>
 </div>
@@ -958,6 +1007,2427 @@
 </div>
 <div class="section" id="topic-modeling">
 <h2>Topic Modeling<a class="headerlink" href="#topic-modeling" title="Permalink to this headline">¶</a></h2>
+<p>Download corpus and unzip the corpus files.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!wget https://cs.nyu.edu/~roweis/data/nips12raw_str602.tgz</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2020-10-10 11:45:38--  https://cs.nyu.edu/~roweis/data/nips12raw_str602.tgz
+Resolving cs.nyu.edu... 128.122.49.30
+Connecting to cs.nyu.edu|128.122.49.30|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 12851423 (12M) [application/x-gzip]
+Saving to: ‘nips12raw_str602.tgz’
+
+nips12raw_str602.tg 100%[===================&gt;]  12.26M  2.69MB/s    in 5.9s    
+
+2020-10-10 11:45:45 (2.07 MB/s) - ‘nips12raw_str602.tgz’ saved [12851423/12851423]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!tar -xzf nips12raw_str602.tgz</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="load-data">
+<h3>Load  Data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">DATA_PATH</span> <span class="o">=</span> <span class="s1">&#39;nipstxt/&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">DATA_PATH</span><span class="p">))</span>
+<span class="n">folders</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;nips</span><span class="si">{0:02}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">13</span><span class="p">)]</span>
+<span class="c1"># Read all texts into a list.</span>
+<span class="n">papers</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">folder</span> <span class="ow">in</span> <span class="n">folders</span><span class="p">:</span>
+    <span class="n">file_names</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">DATA_PATH</span> <span class="o">+</span> <span class="n">folder</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">file_name</span> <span class="ow">in</span> <span class="n">file_names</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">DATA_PATH</span> <span class="o">+</span> <span class="n">folder</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">file_name</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r+&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">papers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">papers</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;RAW_DATA_NOTES&#39;, &#39;idx&#39;, &#39;nips12&#39;, &#39;nips09&#39;, &#39;nips00&#39;, &#39;nips07&#39;, &#39;nips06&#39;, &#39;nips01&#39;, &#39;nips08&#39;, &#39;README_yann&#39;, &#39;MATLAB_NOTES&#39;, &#39;nips11&#39;, &#39;nips10&#39;, &#39;nips04&#39;, &#39;nips03&#39;, &#39;nips02&#39;, &#39;nips05&#39;, &#39;orig&#39;]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1740
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">papers</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">100</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>775 
+A NEURAL-NETWORK SOLUTION TO THE CONCENTRATOR 
+ASSIGNMENT PROBLEM 
+Gene A. Tagliarini 
+Edward W
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="preprocess-data">
+<h3>Preprocess Data<a class="headerlink" href="#preprocess-data" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="kn">import</span> <span class="nn">nltk</span>
+
+<span class="n">stop_words</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">corpus</span><span class="o">.</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">)</span>
+<span class="n">wtk</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">tokenize</span><span class="o">.</span><span class="n">RegexpTokenizer</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\w+&#39;</span><span class="p">)</span>
+<span class="n">wnl</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">stem</span><span class="o">.</span><span class="n">wordnet</span><span class="o">.</span><span class="n">WordNetLemmatizer</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">normalize_corpus</span><span class="p">(</span><span class="n">papers</span><span class="p">):</span>
+    <span class="n">norm_papers</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">paper</span> <span class="ow">in</span> <span class="n">papers</span><span class="p">:</span>
+        <span class="n">paper</span> <span class="o">=</span> <span class="n">paper</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">paper_tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">token</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">wtk</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">paper</span><span class="p">)]</span>
+        <span class="n">paper_tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">wnl</span><span class="o">.</span><span class="n">lemmatize</span><span class="p">(</span><span class="n">token</span><span class="p">)</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">paper_tokens</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">token</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">()]</span>
+        <span class="n">paper_tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">token</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">paper_tokens</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">token</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">paper_tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">token</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">paper_tokens</span> <span class="k">if</span> <span class="n">token</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stop_words</span><span class="p">]</span>
+        <span class="n">paper_tokens</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">paper_tokens</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">paper_tokens</span><span class="p">:</span>
+            <span class="n">norm_papers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">paper_tokens</span><span class="p">)</span>
+            
+    <span class="k">return</span> <span class="n">norm_papers</span>
+    
+<span class="n">norm_papers</span> <span class="o">=</span> <span class="n">normalize_corpus</span><span class="p">(</span><span class="n">papers</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">norm_papers</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1740
+CPU times: user 38.1 s, sys: 271 ms, total: 38.4 s
+Wall time: 39.4 s
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="feature-enginerring">
+<h2>Feature Enginerring<a class="headerlink" href="#feature-enginerring" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gensim</span>
+
+<span class="n">bigram</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Phrases</span><span class="p">(</span><span class="n">norm_papers</span><span class="p">,</span> <span class="n">min_count</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="sa">b</span><span class="s1">&#39;_&#39;</span><span class="p">)</span> <span class="c1"># higher threshold fewer phrases.</span>
+<span class="n">bigram_model</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">phrases</span><span class="o">.</span><span class="n">Phraser</span><span class="p">(</span><span class="n">bigram</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">bigram_model</span><span class="p">[</span><span class="n">norm_papers</span><span class="p">[</span><span class="mi">0</span><span class="p">]][:</span><span class="mi">50</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;neural_network&#39;, &#39;solution&#39;, &#39;concentrator&#39;, &#39;assignment&#39;, &#39;problem&#39;, &#39;gene&#39;, &#39;tagliarini&#39;, &#39;edward&#39;, &#39;page&#39;, &#39;department_computer&#39;, &#39;science&#39;, &#39;clemson&#39;, &#39;university&#39;, &#39;clemson&#39;, &#39;sc&#39;, &#39;abstract&#39;, &#39;network&#39;, &#39;simple&#39;, &#39;analog&#39;, &#39;processor&#39;, &#39;neuron&#39;, &#39;like&#39;, &#39;property&#39;, &#39;employed&#39;, &#39;compute&#39;, &#39;good&#39;, &#39;solution&#39;, &#39;variety&#39;, &#39;optimization&#39;, &#39;prob_lem&#39;, &#39;paper_present&#39;, &#39;neural_net&#39;, &#39;solution&#39;, &#39;resource&#39;, &#39;allocation&#39;, &#39;prob_lem&#39;, &#39;arises&#39;, &#39;providing&#39;, &#39;local&#39;, &#39;access&#39;, &#39;backbone&#39;, &#39;wide&#39;, &#39;area&#39;, &#39;com&#39;, &#39;munication&#39;, &#39;network&#39;, &#39;problem&#39;, &#39;described&#39;, &#39;term&#39;, &#39;energy&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">norm_corpus_bigrams</span> <span class="o">=</span> <span class="p">[</span><span class="n">bigram_model</span><span class="p">[</span><span class="n">doc</span><span class="p">]</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">norm_papers</span><span class="p">]</span>
+
+<span class="c1"># Create a dictionary representation of the documents.</span>
+<span class="n">dictionary</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">corpora</span><span class="o">.</span><span class="n">Dictionary</span><span class="p">(</span><span class="n">norm_corpus_bigrams</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sample word to number mappings:&#39;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">dictionary</span><span class="o">.</span><span class="n">items</span><span class="p">())[:</span><span class="mi">15</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total Vocabulary Size:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dictionary</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sample word to number mappings: [(0, &#39;able&#39;), (1, &#39;abstract&#39;), (2, &#39;acad_sci&#39;), (3, &#39;access&#39;), (4, &#39;accommodated&#39;), (5, &#39;actu&#39;), (6, &#39;actually&#39;), (7, &#39;added&#39;), (8, &#39;additionally&#39;), (9, &#39;algebraic&#39;), (10, &#39;algo_rithm&#39;), (11, &#39;allocation&#39;), (12, &#39;allow&#39;), (13, &#39;allows&#39;), (14, &#39;ally&#39;)]
+Total Vocabulary Size: 78892
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Filter out words that occur less than 20 documents, or more than 50% of the documents.</span>
+<span class="n">dictionary</span><span class="o">.</span><span class="n">filter_extremes</span><span class="p">(</span><span class="n">no_below</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">no_above</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total Vocabulary Size:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dictionary</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total Vocabulary Size: 7756
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Transforming corpus into bag of words vectors</span>
+<span class="n">bow_corpus</span> <span class="o">=</span> <span class="p">[</span><span class="n">dictionary</span><span class="o">.</span><span class="n">doc2bow</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">norm_corpus_bigrams</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bow_corpus</span><span class="p">[</span><span class="mi">1</span><span class="p">][:</span><span class="mi">50</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(2, 1), (10, 1), (13, 1), (15, 1), (16, 1), (19, 1), (20, 1), (33, 3), (39, 6), (40, 1), (56, 1), (57, 1), (66, 1), (71, 1), (75, 1), (77, 4), (79, 1), (89, 2), (93, 2), (102, 2), (105, 3), (111, 1), (112, 6), (114, 2), (115, 1), (117, 1), (127, 9), (128, 1), (134, 2), (143, 1), (147, 1), (149, 7), (151, 2), (152, 4), (157, 1), (158, 1), (159, 3), (163, 1), (164, 1), (166, 2), (170, 1), (181, 2), (182, 3), (183, 2), (187, 5), (189, 3), (190, 1), (193, 2), (203, 2), (210, 1)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">([(</span><span class="n">dictionary</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="p">,</span> <span class="n">freq</span><span class="p">)</span> <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">freq</span> <span class="ow">in</span> <span class="n">bow_corpus</span><span class="p">[</span><span class="mi">1</span><span class="p">][:</span><span class="mi">50</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;acad_sci&#39;, 1), (&#39;allow&#39;, 1), (&#39;although&#39;, 1), (&#39;american_institute&#39;, 1), (&#39;among&#39;, 1), (&#39;another&#39;, 1), (&#39;appropriate&#39;, 1), (&#39;assume&#39;, 3), (&#39;capacity&#39;, 6), (&#39;cause&#39;, 1), (&#39;comparison&#39;, 1), (&#39;complete&#39;, 1), (&#39;connection&#39;, 1), (&#39;consider&#39;, 1), (&#39;construction&#39;, 1), (&#39;convergence&#39;, 4), (&#39;corresponding&#39;, 1), (&#39;defined&#39;, 2), (&#39;detail&#39;, 2), (&#39;either&#39;, 2), (&#39;energy&#39;, 3), (&#39;equal&#39;, 1), (&#39;equation&#39;, 6), (&#39;even&#39;, 2), (&#39;exactly&#39;, 1), (&#39;except&#39;, 1), (&#39;field&#39;, 9), (&#39;fig&#39;, 1), (&#39;follows&#39;, 2), (&#39;global_minimum&#39;, 1), (&#39;guarantee&#39;, 1), (&#39;high&#39;, 7), (&#39;hop_field&#39;, 2), (&#39;hopfield&#39;, 4), (&#39;i2&#39;, 1), (&#39;ieee_trans&#39;, 1), (&#39;ii&#39;, 3), (&#39;implement&#39;, 1), (&#39;implemented&#39;, 1), (&#39;include&#39;, 2), (&#39;individual&#39;, 1), (&#39;le&#39;, 2), (&#39;least&#39;, 3), (&#39;like&#39;, 2), (&#39;local_minimum&#39;, 5), (&#39;location&#39;, 3), (&#39;low&#39;, 1), (&#39;made&#39;, 2), (&#39;minimum&#39;, 2), (&#39;necessary&#39;, 1)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total number of papers:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">bow_corpus</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total number of papers: 1740
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="topic-models-with-latent-semantic-indexing-lsi">
+<h3>Topic Models with Latent Semantic Indexing (LSI)<a class="headerlink" href="#topic-models-with-latent-semantic-indexing-lsi" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">TOTAL_TOPICS</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">lsi_bow</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">LsiModel</span><span class="p">(</span><span class="n">bow_corpus</span><span class="p">,</span> <span class="n">id2word</span><span class="o">=</span><span class="n">dictionary</span><span class="p">,</span> <span class="n">num_topics</span><span class="o">=</span><span class="n">TOTAL_TOPICS</span><span class="p">,</span>
+                                 <span class="n">onepass</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">chunksize</span><span class="o">=</span><span class="mi">1740</span><span class="p">,</span> <span class="n">power_iters</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">topic_id</span><span class="p">,</span> <span class="n">topic</span> <span class="ow">in</span> <span class="n">lsi_bow</span><span class="o">.</span><span class="n">print_topics</span><span class="p">(</span><span class="n">num_topics</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">num_words</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Topic #&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">topic_id</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">topic</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Topic #1:
+0.215*&quot;unit&quot; + 0.212*&quot;state&quot; + 0.187*&quot;training&quot; + 0.177*&quot;neuron&quot; + 0.162*&quot;pattern&quot; + 0.145*&quot;image&quot; + 0.140*&quot;vector&quot; + 0.125*&quot;feature&quot; + 0.122*&quot;cell&quot; + 0.110*&quot;layer&quot; + 0.101*&quot;task&quot; + 0.097*&quot;class&quot; + 0.091*&quot;probability&quot; + 0.089*&quot;signal&quot; + 0.087*&quot;step&quot; + 0.086*&quot;response&quot; + 0.085*&quot;representation&quot; + 0.083*&quot;noise&quot; + 0.082*&quot;rule&quot; + 0.081*&quot;distribution&quot;
+
+Topic #2:
+0.487*&quot;neuron&quot; + 0.396*&quot;cell&quot; + -0.257*&quot;state&quot; + 0.191*&quot;response&quot; + -0.187*&quot;training&quot; + 0.170*&quot;stimulus&quot; + 0.117*&quot;activity&quot; + -0.109*&quot;class&quot; + 0.099*&quot;spike&quot; + 0.097*&quot;pattern&quot; + 0.096*&quot;circuit&quot; + 0.096*&quot;synaptic&quot; + -0.095*&quot;vector&quot; + 0.090*&quot;signal&quot; + 0.090*&quot;firing&quot; + 0.088*&quot;visual&quot; + -0.084*&quot;classifier&quot; + -0.083*&quot;action&quot; + -0.078*&quot;word&quot; + 0.078*&quot;cortical&quot;
+
+Topic #3:
+-0.627*&quot;state&quot; + 0.395*&quot;image&quot; + -0.219*&quot;neuron&quot; + 0.209*&quot;feature&quot; + -0.188*&quot;action&quot; + 0.137*&quot;unit&quot; + 0.131*&quot;object&quot; + -0.130*&quot;control&quot; + 0.129*&quot;training&quot; + -0.109*&quot;policy&quot; + 0.103*&quot;classifier&quot; + 0.090*&quot;class&quot; + -0.081*&quot;step&quot; + -0.081*&quot;dynamic&quot; + 0.080*&quot;classification&quot; + 0.078*&quot;layer&quot; + 0.076*&quot;recognition&quot; + -0.074*&quot;reinforcement_learning&quot; + 0.069*&quot;representation&quot; + 0.068*&quot;pattern&quot;
+
+Topic #4:
+0.686*&quot;unit&quot; + -0.433*&quot;image&quot; + 0.182*&quot;pattern&quot; + 0.131*&quot;layer&quot; + 0.123*&quot;hidden_unit&quot; + 0.121*&quot;net&quot; + 0.114*&quot;training&quot; + -0.112*&quot;feature&quot; + 0.109*&quot;activation&quot; + 0.107*&quot;rule&quot; + -0.097*&quot;neuron&quot; + 0.078*&quot;word&quot; + -0.070*&quot;pixel&quot; + 0.070*&quot;connection&quot; + -0.067*&quot;object&quot; + -0.065*&quot;state&quot; + -0.060*&quot;distribution&quot; + -0.059*&quot;face&quot; + 0.057*&quot;architecture&quot; + -0.055*&quot;estimate&quot;
+
+Topic #5:
+-0.428*&quot;image&quot; + -0.348*&quot;state&quot; + 0.266*&quot;neuron&quot; + -0.264*&quot;unit&quot; + 0.181*&quot;training&quot; + 0.174*&quot;class&quot; + -0.168*&quot;object&quot; + 0.167*&quot;classifier&quot; + -0.147*&quot;action&quot; + -0.122*&quot;visual&quot; + 0.117*&quot;vector&quot; + 0.115*&quot;node&quot; + 0.105*&quot;distribution&quot; + -0.103*&quot;motion&quot; + -0.099*&quot;feature&quot; + 0.097*&quot;classification&quot; + -0.097*&quot;control&quot; + -0.095*&quot;task&quot; + -0.087*&quot;cell&quot; + -0.083*&quot;representation&quot;
+
+Topic #6:
+0.660*&quot;cell&quot; + -0.508*&quot;neuron&quot; + -0.213*&quot;image&quot; + -0.103*&quot;chip&quot; + -0.097*&quot;unit&quot; + 0.093*&quot;response&quot; + -0.090*&quot;object&quot; + 0.083*&quot;rat&quot; + 0.076*&quot;distribution&quot; + -0.070*&quot;circuit&quot; + 0.069*&quot;probability&quot; + 0.064*&quot;stimulus&quot; + -0.061*&quot;memory&quot; + -0.058*&quot;analog&quot; + -0.058*&quot;activation&quot; + 0.055*&quot;class&quot; + -0.053*&quot;bit&quot; + -0.052*&quot;net&quot; + 0.051*&quot;cortical&quot; + 0.050*&quot;firing&quot;
+
+Topic #7:
+-0.353*&quot;word&quot; + 0.281*&quot;unit&quot; + -0.272*&quot;training&quot; + -0.257*&quot;classifier&quot; + -0.177*&quot;recognition&quot; + 0.159*&quot;distribution&quot; + -0.152*&quot;feature&quot; + -0.144*&quot;state&quot; + -0.142*&quot;pattern&quot; + 0.141*&quot;vector&quot; + -0.128*&quot;cell&quot; + -0.128*&quot;task&quot; + 0.122*&quot;approximation&quot; + 0.121*&quot;variable&quot; + 0.110*&quot;equation&quot; + -0.107*&quot;classification&quot; + 0.106*&quot;noise&quot; + -0.103*&quot;class&quot; + 0.101*&quot;matrix&quot; + -0.098*&quot;neuron&quot;
+
+Topic #8:
+-0.303*&quot;pattern&quot; + 0.243*&quot;signal&quot; + 0.236*&quot;control&quot; + 0.202*&quot;training&quot; + -0.181*&quot;rule&quot; + -0.178*&quot;state&quot; + 0.167*&quot;noise&quot; + -0.166*&quot;class&quot; + 0.162*&quot;word&quot; + -0.155*&quot;cell&quot; + -0.154*&quot;feature&quot; + 0.147*&quot;motion&quot; + 0.140*&quot;task&quot; + -0.127*&quot;node&quot; + -0.124*&quot;neuron&quot; + 0.116*&quot;target&quot; + 0.114*&quot;circuit&quot; + -0.114*&quot;probability&quot; + -0.110*&quot;classifier&quot; + -0.109*&quot;image&quot;
+
+Topic #9:
+-0.472*&quot;node&quot; + -0.254*&quot;circuit&quot; + 0.214*&quot;word&quot; + -0.201*&quot;chip&quot; + 0.190*&quot;neuron&quot; + 0.172*&quot;stimulus&quot; + -0.160*&quot;classifier&quot; + -0.152*&quot;current&quot; + 0.147*&quot;feature&quot; + -0.146*&quot;voltage&quot; + 0.145*&quot;distribution&quot; + -0.141*&quot;control&quot; + -0.124*&quot;rule&quot; + -0.110*&quot;layer&quot; + -0.105*&quot;analog&quot; + -0.091*&quot;tree&quot; + 0.084*&quot;response&quot; + 0.080*&quot;state&quot; + 0.079*&quot;probability&quot; + 0.079*&quot;estimate&quot;
+
+Topic #10:
+-0.518*&quot;word&quot; + 0.254*&quot;training&quot; + -0.236*&quot;vector&quot; + 0.222*&quot;task&quot; + 0.194*&quot;pattern&quot; + 0.156*&quot;classifier&quot; + -0.149*&quot;node&quot; + -0.146*&quot;recognition&quot; + 0.139*&quot;control&quot; + -0.138*&quot;sequence&quot; + 0.126*&quot;rule&quot; + -0.125*&quot;circuit&quot; + -0.123*&quot;cell&quot; + 0.113*&quot;action&quot; + 0.105*&quot;neuron&quot; + -0.094*&quot;hmm&quot; + -0.093*&quot;character&quot; + -0.088*&quot;chip&quot; + -0.088*&quot;matrix&quot; + -0.085*&quot;structure&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">TOTAL_TOPICS</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Topic #&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+    <span class="n">d1</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">d2</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">term</span><span class="p">,</span> <span class="n">wt</span> <span class="ow">in</span> <span class="n">lsi_bow</span><span class="o">.</span><span class="n">show_topic</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">topn</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">wt</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">d1</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">term</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">wt</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">d2</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">term</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">wt</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Direction 1:&#39;</span><span class="p">,</span> <span class="n">d1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Direction 2:&#39;</span><span class="p">,</span> <span class="n">d2</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Topic #1:
+==================================================
+Direction 1: [(&#39;unit&#39;, 0.215), (&#39;state&#39;, 0.212), (&#39;training&#39;, 0.187), (&#39;neuron&#39;, 0.177), (&#39;pattern&#39;, 0.162), (&#39;image&#39;, 0.145), (&#39;vector&#39;, 0.14), (&#39;feature&#39;, 0.125), (&#39;cell&#39;, 0.122), (&#39;layer&#39;, 0.11), (&#39;task&#39;, 0.101), (&#39;class&#39;, 0.097), (&#39;probability&#39;, 0.091), (&#39;signal&#39;, 0.089), (&#39;step&#39;, 0.087), (&#39;response&#39;, 0.086), (&#39;representation&#39;, 0.085), (&#39;noise&#39;, 0.083), (&#39;rule&#39;, 0.082), (&#39;distribution&#39;, 0.081)]
+--------------------------------------------------
+Direction 2: []
+--------------------------------------------------
+
+Topic #2:
+==================================================
+Direction 1: [(&#39;neuron&#39;, 0.487), (&#39;cell&#39;, 0.396), (&#39;response&#39;, 0.191), (&#39;stimulus&#39;, 0.17), (&#39;activity&#39;, 0.117), (&#39;spike&#39;, 0.099), (&#39;pattern&#39;, 0.097), (&#39;circuit&#39;, 0.096), (&#39;synaptic&#39;, 0.096), (&#39;signal&#39;, 0.09), (&#39;firing&#39;, 0.09), (&#39;visual&#39;, 0.088), (&#39;cortical&#39;, 0.078)]
+--------------------------------------------------
+Direction 2: [(&#39;state&#39;, -0.257), (&#39;training&#39;, -0.187), (&#39;class&#39;, -0.109), (&#39;vector&#39;, -0.095), (&#39;classifier&#39;, -0.084), (&#39;action&#39;, -0.083), (&#39;word&#39;, -0.078)]
+--------------------------------------------------
+
+Topic #3:
+==================================================
+Direction 1: [(&#39;image&#39;, 0.395), (&#39;feature&#39;, 0.209), (&#39;unit&#39;, 0.137), (&#39;object&#39;, 0.131), (&#39;training&#39;, 0.129), (&#39;classifier&#39;, 0.103), (&#39;class&#39;, 0.09), (&#39;classification&#39;, 0.08), (&#39;layer&#39;, 0.078), (&#39;recognition&#39;, 0.076), (&#39;representation&#39;, 0.069), (&#39;pattern&#39;, 0.068)]
+--------------------------------------------------
+Direction 2: [(&#39;state&#39;, -0.627), (&#39;neuron&#39;, -0.219), (&#39;action&#39;, -0.188), (&#39;control&#39;, -0.13), (&#39;policy&#39;, -0.109), (&#39;step&#39;, -0.081), (&#39;dynamic&#39;, -0.081), (&#39;reinforcement_learning&#39;, -0.074)]
+--------------------------------------------------
+
+Topic #4:
+==================================================
+Direction 1: [(&#39;unit&#39;, 0.686), (&#39;pattern&#39;, 0.182), (&#39;layer&#39;, 0.131), (&#39;hidden_unit&#39;, 0.123), (&#39;net&#39;, 0.121), (&#39;training&#39;, 0.114), (&#39;activation&#39;, 0.109), (&#39;rule&#39;, 0.107), (&#39;word&#39;, 0.078), (&#39;connection&#39;, 0.07), (&#39;architecture&#39;, 0.057)]
+--------------------------------------------------
+Direction 2: [(&#39;image&#39;, -0.433), (&#39;feature&#39;, -0.112), (&#39;neuron&#39;, -0.097), (&#39;pixel&#39;, -0.07), (&#39;object&#39;, -0.067), (&#39;state&#39;, -0.065), (&#39;distribution&#39;, -0.06), (&#39;face&#39;, -0.059), (&#39;estimate&#39;, -0.055)]
+--------------------------------------------------
+
+Topic #5:
+==================================================
+Direction 1: [(&#39;neuron&#39;, 0.266), (&#39;training&#39;, 0.181), (&#39;class&#39;, 0.174), (&#39;classifier&#39;, 0.167), (&#39;vector&#39;, 0.117), (&#39;node&#39;, 0.115), (&#39;distribution&#39;, 0.105), (&#39;classification&#39;, 0.097)]
+--------------------------------------------------
+Direction 2: [(&#39;image&#39;, -0.428), (&#39;state&#39;, -0.348), (&#39;unit&#39;, -0.264), (&#39;object&#39;, -0.168), (&#39;action&#39;, -0.147), (&#39;visual&#39;, -0.122), (&#39;motion&#39;, -0.103), (&#39;feature&#39;, -0.099), (&#39;control&#39;, -0.097), (&#39;task&#39;, -0.095), (&#39;cell&#39;, -0.087), (&#39;representation&#39;, -0.083)]
+--------------------------------------------------
+
+Topic #6:
+==================================================
+Direction 1: [(&#39;cell&#39;, 0.66), (&#39;response&#39;, 0.093), (&#39;rat&#39;, 0.083), (&#39;distribution&#39;, 0.076), (&#39;probability&#39;, 0.069), (&#39;stimulus&#39;, 0.064), (&#39;class&#39;, 0.055), (&#39;cortical&#39;, 0.051), (&#39;firing&#39;, 0.05)]
+--------------------------------------------------
+Direction 2: [(&#39;neuron&#39;, -0.508), (&#39;image&#39;, -0.213), (&#39;chip&#39;, -0.103), (&#39;unit&#39;, -0.097), (&#39;object&#39;, -0.09), (&#39;circuit&#39;, -0.07), (&#39;memory&#39;, -0.061), (&#39;analog&#39;, -0.058), (&#39;activation&#39;, -0.058), (&#39;bit&#39;, -0.053), (&#39;net&#39;, -0.052)]
+--------------------------------------------------
+
+Topic #7:
+==================================================
+Direction 1: [(&#39;unit&#39;, 0.281), (&#39;distribution&#39;, 0.159), (&#39;vector&#39;, 0.141), (&#39;approximation&#39;, 0.122), (&#39;variable&#39;, 0.121), (&#39;equation&#39;, 0.11), (&#39;noise&#39;, 0.106), (&#39;matrix&#39;, 0.101)]
+--------------------------------------------------
+Direction 2: [(&#39;word&#39;, -0.353), (&#39;training&#39;, -0.272), (&#39;classifier&#39;, -0.257), (&#39;recognition&#39;, -0.177), (&#39;feature&#39;, -0.152), (&#39;state&#39;, -0.144), (&#39;pattern&#39;, -0.142), (&#39;cell&#39;, -0.128), (&#39;task&#39;, -0.128), (&#39;classification&#39;, -0.107), (&#39;class&#39;, -0.103), (&#39;neuron&#39;, -0.098)]
+--------------------------------------------------
+
+Topic #8:
+==================================================
+Direction 1: [(&#39;signal&#39;, 0.243), (&#39;control&#39;, 0.236), (&#39;training&#39;, 0.202), (&#39;noise&#39;, 0.167), (&#39;word&#39;, 0.162), (&#39;motion&#39;, 0.147), (&#39;task&#39;, 0.14), (&#39;target&#39;, 0.116), (&#39;circuit&#39;, 0.114)]
+--------------------------------------------------
+Direction 2: [(&#39;pattern&#39;, -0.303), (&#39;rule&#39;, -0.181), (&#39;state&#39;, -0.178), (&#39;class&#39;, -0.166), (&#39;cell&#39;, -0.155), (&#39;feature&#39;, -0.154), (&#39;node&#39;, -0.127), (&#39;neuron&#39;, -0.124), (&#39;probability&#39;, -0.114), (&#39;classifier&#39;, -0.11), (&#39;image&#39;, -0.109)]
+--------------------------------------------------
+
+Topic #9:
+==================================================
+Direction 1: [(&#39;word&#39;, 0.214), (&#39;neuron&#39;, 0.19), (&#39;stimulus&#39;, 0.172), (&#39;feature&#39;, 0.147), (&#39;distribution&#39;, 0.145), (&#39;response&#39;, 0.084), (&#39;state&#39;, 0.08), (&#39;probability&#39;, 0.079), (&#39;estimate&#39;, 0.079)]
+--------------------------------------------------
+Direction 2: [(&#39;node&#39;, -0.472), (&#39;circuit&#39;, -0.254), (&#39;chip&#39;, -0.201), (&#39;classifier&#39;, -0.16), (&#39;current&#39;, -0.152), (&#39;voltage&#39;, -0.146), (&#39;control&#39;, -0.141), (&#39;rule&#39;, -0.124), (&#39;layer&#39;, -0.11), (&#39;analog&#39;, -0.105), (&#39;tree&#39;, -0.091)]
+--------------------------------------------------
+
+Topic #10:
+==================================================
+Direction 1: [(&#39;training&#39;, 0.254), (&#39;task&#39;, 0.222), (&#39;pattern&#39;, 0.194), (&#39;classifier&#39;, 0.156), (&#39;control&#39;, 0.139), (&#39;rule&#39;, 0.126), (&#39;action&#39;, 0.113), (&#39;neuron&#39;, 0.105)]
+--------------------------------------------------
+Direction 2: [(&#39;word&#39;, -0.518), (&#39;vector&#39;, -0.236), (&#39;node&#39;, -0.149), (&#39;recognition&#39;, -0.146), (&#39;sequence&#39;, -0.138), (&#39;circuit&#39;, -0.125), (&#39;cell&#39;, -0.123), (&#39;hmm&#39;, -0.094), (&#39;character&#39;, -0.093), (&#39;chip&#39;, -0.088), (&#39;matrix&#39;, -0.088), (&#39;structure&#39;, -0.085)]
+--------------------------------------------------
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">term_topic</span> <span class="o">=</span> <span class="n">lsi_bow</span><span class="o">.</span><span class="n">projection</span><span class="o">.</span><span class="n">u</span>
+<span class="n">singular_values</span> <span class="o">=</span> <span class="n">lsi_bow</span><span class="o">.</span><span class="n">projection</span><span class="o">.</span><span class="n">s</span>
+<span class="n">topic_document</span> <span class="o">=</span> <span class="p">(</span><span class="n">gensim</span><span class="o">.</span><span class="n">matutils</span><span class="o">.</span><span class="n">corpus2dense</span><span class="p">(</span><span class="n">lsi_bow</span><span class="p">[</span><span class="n">bow_corpus</span><span class="p">],</span> <span class="nb">len</span><span class="p">(</span><span class="n">singular_values</span><span class="p">))</span><span class="o">.</span><span class="n">T</span> <span class="o">/</span> <span class="n">singular_values</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+<span class="n">term_topic</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">singular_values</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">topic_document</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((7756, 10), (10,), (10, 1740))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">document_topics</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">topic_document</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> 
+                               <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;T&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">TOTAL_TOPICS</span><span class="o">+</span><span class="mi">1</span><span class="p">)])</span>
+<span class="n">document_topics</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>T1</th>
+      <th>T2</th>
+      <th>T3</th>
+      <th>T4</th>
+      <th>T5</th>
+      <th>T6</th>
+      <th>T7</th>
+      <th>T8</th>
+      <th>T9</th>
+      <th>T10</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.019</td>
+      <td>0.026</td>
+      <td>-0.029</td>
+      <td>-0.012</td>
+      <td>0.022</td>
+      <td>-0.047</td>
+      <td>0.005</td>
+      <td>-0.020</td>
+      <td>0.011</td>
+      <td>0.002</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.016</td>
+      <td>0.004</td>
+      <td>-0.012</td>
+      <td>-0.001</td>
+      <td>0.007</td>
+      <td>-0.015</td>
+      <td>0.012</td>
+      <td>-0.007</td>
+      <td>-0.003</td>
+      <td>-0.002</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.019</td>
+      <td>-0.003</td>
+      <td>0.014</td>
+      <td>0.032</td>
+      <td>0.011</td>
+      <td>-0.002</td>
+      <td>-0.011</td>
+      <td>-0.041</td>
+      <td>-0.029</td>
+      <td>0.016</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.021</td>
+      <td>0.028</td>
+      <td>-0.004</td>
+      <td>-0.003</td>
+      <td>-0.003</td>
+      <td>0.000</td>
+      <td>-0.008</td>
+      <td>0.009</td>
+      <td>0.008</td>
+      <td>0.014</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.032</td>
+      <td>-0.011</td>
+      <td>0.007</td>
+      <td>0.030</td>
+      <td>-0.015</td>
+      <td>-0.018</td>
+      <td>0.042</td>
+      <td>-0.015</td>
+      <td>0.004</td>
+      <td>-0.017</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.032</td>
+      <td>-0.009</td>
+      <td>-0.022</td>
+      <td>0.026</td>
+      <td>0.001</td>
+      <td>-0.018</td>
+      <td>0.038</td>
+      <td>-0.015</td>
+      <td>0.007</td>
+      <td>0.002</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.012</td>
+      <td>0.005</td>
+      <td>-0.009</td>
+      <td>-0.008</td>
+      <td>0.014</td>
+      <td>-0.006</td>
+      <td>0.012</td>
+      <td>0.006</td>
+      <td>0.006</td>
+      <td>0.002</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.040</td>
+      <td>-0.001</td>
+      <td>0.058</td>
+      <td>-0.073</td>
+      <td>-0.051</td>
+      <td>-0.038</td>
+      <td>0.037</td>
+      <td>-0.031</td>
+      <td>0.015</td>
+      <td>-0.034</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.015</td>
+      <td>0.023</td>
+      <td>-0.010</td>
+      <td>0.005</td>
+      <td>0.010</td>
+      <td>-0.013</td>
+      <td>0.001</td>
+      <td>-0.005</td>
+      <td>-0.004</td>
+      <td>-0.004</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>0.023</td>
+      <td>0.040</td>
+      <td>-0.017</td>
+      <td>-0.007</td>
+      <td>-0.019</td>
+      <td>0.065</td>
+      <td>-0.024</td>
+      <td>0.007</td>
+      <td>-0.022</td>
+      <td>-0.001</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>0.035</td>
+      <td>0.017</td>
+      <td>0.032</td>
+      <td>-0.056</td>
+      <td>-0.037</td>
+      <td>-0.059</td>
+      <td>-0.005</td>
+      <td>-0.013</td>
+      <td>-0.021</td>
+      <td>0.017</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>0.025</td>
+      <td>-0.010</td>
+      <td>0.019</td>
+      <td>-0.023</td>
+      <td>-0.014</td>
+      <td>-0.006</td>
+      <td>0.001</td>
+      <td>0.001</td>
+      <td>-0.017</td>
+      <td>-0.014</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>0.016</td>
+      <td>0.017</td>
+      <td>-0.013</td>
+      <td>-0.008</td>
+      <td>0.024</td>
+      <td>-0.028</td>
+      <td>0.000</td>
+      <td>-0.019</td>
+      <td>0.008</td>
+      <td>0.006</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>0.028</td>
+      <td>0.050</td>
+      <td>-0.031</td>
+      <td>-0.016</td>
+      <td>0.028</td>
+      <td>-0.067</td>
+      <td>-0.010</td>
+      <td>0.006</td>
+      <td>-0.058</td>
+      <td>-0.026</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>0.025</td>
+      <td>-0.006</td>
+      <td>-0.028</td>
+      <td>-0.018</td>
+      <td>0.007</td>
+      <td>-0.013</td>
+      <td>0.035</td>
+      <td>0.002</td>
+      <td>-0.006</td>
+      <td>-0.015</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">document_numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">13</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">500</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">document_number</span> <span class="ow">in</span> <span class="n">document_numbers</span><span class="p">:</span>
+    <span class="n">top_topics</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">document_topics</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">absolute</span><span class="p">(</span><span class="n">document_topics</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">document_number</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">))[:</span><span class="mi">3</span><span class="p">]])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Document #&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">document_number</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dominant Topics (top 3):&#39;</span><span class="p">,</span> <span class="n">top_topics</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Paper Summary:&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">papers</span><span class="p">[</span><span class="n">document_number</span><span class="p">][:</span><span class="mi">500</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Document #13:
+Dominant Topics (top 3): [&#39;T6&#39;, &#39;T9&#39;, &#39;T2&#39;]
+Paper Summary:
+564 
+PROGRAMMABLE SYNAPTIC CHIP FOR 
+ELECTRONIC NEURAL NETWORKS 
+A. Moopenn, H. Langenbacher, A.P. Thakoor, and S.K. Khanna 
+Jet Propulsion Laboratory 
+California Institute of Technology 
+Pasadena, CA 91009 
+ABSTRACT 
+A binary synaptic matrix chip has been developed for electronic 
+neural networks. The matrix chip contains a programmable 32X32 
+array of &quot;long channel&quot; NMOSFET binary connection elements imple- 
+mented in a 3-um bulk CMOS process. Since the neurons are kept off- 
+chip, the synapti
+
+Document #250:
+Dominant Topics (top 3): [&#39;T8&#39;, &#39;T1&#39;, &#39;T5&#39;]
+Paper Summary:
+308 Donnett and Smithers 
+Neuronal Group Selection Theory: 
+A Grounding in Robotics 
+Jim Donnett nd Tim Smithers 
+Department of Artificial Intelligence 
+University of Edinburgh 
+5 Forrest Hill 
+Edinburgh EH1 2QL 
+S COTLAND 
+ABSTRACT 
+In this paper, we discuss a current attempt at applying the organi- 
+zational principle Edelman calls Neuronal Group Selection to the 
+control of a real, two-link robotic manipulator. We begin by moti- 
+vating the need for an alternative to the position-control par
+
+Document #500:
+Dominant Topics (top 3): [&#39;T4&#39;, &#39;T1&#39;, &#39;T3&#39;]
+Paper Summary:
+A Self-Organizing Integrated Segmentation And 
+Recognition Neural Net 
+Jim Keeler * 
+MCC 
+3500 West Balcones Center Drive 
+Austin, TX 78729 
+David E. Rumelhart 
+Psychology Department 
+Stanford University 
+Stanford, CA 94305 
+Abstract 
+We present a neural network algorithm that simultaneously performs seg- 
+mentation and recognition of input patterns that self-organizes to detect 
+input pattern locations and pattern boundaries. We demonstrate this neu- 
+ral network architecture on character recog
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="topic-models-with-latent-dirichlet-allocation-lda">
+<h3>Topic Models with Latent Dirichlet Allocation (LDA)<a class="headerlink" href="#topic-models-with-latent-dirichlet-allocation-lda" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="n">lda_model</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">LdaModel</span><span class="p">(</span><span class="n">corpus</span><span class="o">=</span><span class="n">bow_corpus</span><span class="p">,</span> <span class="n">id2word</span><span class="o">=</span><span class="n">dictionary</span><span class="p">,</span> <span class="n">chunksize</span><span class="o">=</span><span class="mi">1740</span><span class="p">,</span> 
+                                   <span class="n">alpha</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">eta</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+                                   <span class="n">iterations</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">num_topics</span><span class="o">=</span><span class="n">TOTAL_TOPICS</span><span class="p">,</span> 
+                                   <span class="n">passes</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">eval_every</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 3min 3s, sys: 1.88 s, total: 3min 5s
+Wall time: 3min 6s
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">topic_id</span><span class="p">,</span> <span class="n">topic</span> <span class="ow">in</span> <span class="n">lda_model</span><span class="o">.</span><span class="n">print_topics</span><span class="p">(</span><span class="n">num_topics</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">num_words</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Topic #&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">topic_id</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">topic</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Topic #1:
+0.008*&quot;noise&quot; + 0.008*&quot;linear&quot; + 0.008*&quot;solution&quot; + 0.008*&quot;vector&quot; + 0.008*&quot;equation&quot; + 0.006*&quot;matrix&quot; + 0.005*&quot;training&quot; + 0.005*&quot;rule&quot; + 0.004*&quot;optimal&quot; + 0.004*&quot;signal&quot; + 0.004*&quot;eq&quot; + 0.004*&quot;distribution&quot; + 0.004*&quot;component&quot; + 0.004*&quot;filter&quot; + 0.004*&quot;line&quot; + 0.004*&quot;local&quot; + 0.004*&quot;rate&quot; + 0.004*&quot;average&quot; + 0.004*&quot;surface&quot; + 0.004*&quot;ica&quot;
+
+Topic #2:
+0.009*&quot;vector&quot; + 0.007*&quot;let&quot; + 0.006*&quot;theorem&quot; + 0.006*&quot;class&quot; + 0.006*&quot;bound&quot; + 0.006*&quot;node&quot; + 0.005*&quot;threshold&quot; + 0.005*&quot;linear&quot; + 0.005*&quot;matrix&quot; + 0.005*&quot;size&quot; + 0.004*&quot;proof&quot; + 0.004*&quot;complexity&quot; + 0.004*&quot;consider&quot; + 0.004*&quot;polynomial&quot; + 0.004*&quot;unit&quot; + 0.004*&quot;bit&quot; + 0.004*&quot;layer&quot; + 0.004*&quot;defined&quot; + 0.004*&quot;probability&quot; + 0.003*&quot;approximation&quot;
+
+Topic #3:
+0.033*&quot;state&quot; + 0.010*&quot;action&quot; + 0.008*&quot;step&quot; + 0.007*&quot;control&quot; + 0.006*&quot;policy&quot; + 0.006*&quot;task&quot; + 0.005*&quot;reinforcement_learning&quot; + 0.005*&quot;optimal&quot; + 0.004*&quot;convergence&quot; + 0.004*&quot;rate&quot; + 0.004*&quot;stochastic&quot; + 0.004*&quot;sequence&quot; + 0.004*&quot;environment&quot; + 0.003*&quot;dynamic&quot; + 0.003*&quot;transition&quot; + 0.003*&quot;probability&quot; + 0.003*&quot;goal&quot; + 0.003*&quot;reward&quot; + 0.003*&quot;update&quot; + 0.003*&quot;iteration&quot;
+
+Topic #4:
+0.009*&quot;distribution&quot; + 0.007*&quot;training&quot; + 0.006*&quot;estimate&quot; + 0.006*&quot;variable&quot; + 0.006*&quot;class&quot; + 0.006*&quot;gaussian&quot; + 0.005*&quot;probability&quot; + 0.005*&quot;approximation&quot; + 0.005*&quot;prior&quot; + 0.005*&quot;sample&quot; + 0.004*&quot;mixture&quot; + 0.004*&quot;density&quot; + 0.004*&quot;bayesian&quot; + 0.004*&quot;prediction&quot; + 0.004*&quot;kernel&quot; + 0.004*&quot;vector&quot; + 0.004*&quot;variance&quot; + 0.004*&quot;feature&quot; + 0.004*&quot;regression&quot; + 0.003*&quot;estimation&quot;
+
+Topic #5:
+0.014*&quot;control&quot; + 0.006*&quot;movement&quot; + 0.006*&quot;motor&quot; + 0.005*&quot;trajectory&quot; + 0.005*&quot;controller&quot; + 0.005*&quot;processor&quot; + 0.005*&quot;position&quot; + 0.004*&quot;change&quot; + 0.004*&quot;dynamic&quot; + 0.004*&quot;hand&quot; + 0.004*&quot;chip&quot; + 0.004*&quot;arm&quot; + 0.004*&quot;state&quot; + 0.004*&quot;architecture&quot; + 0.004*&quot;parallel&quot; + 0.004*&quot;training&quot; + 0.004*&quot;application&quot; + 0.004*&quot;target&quot; + 0.003*&quot;forward&quot; + 0.003*&quot;feedback&quot;
+
+Topic #6:
+0.016*&quot;training&quot; + 0.011*&quot;word&quot; + 0.009*&quot;recognition&quot; + 0.008*&quot;vector&quot; + 0.008*&quot;unit&quot; + 0.007*&quot;speech&quot; + 0.006*&quot;trained&quot; + 0.005*&quot;layer&quot; + 0.005*&quot;net&quot; + 0.005*&quot;architecture&quot; + 0.005*&quot;classification&quot; + 0.004*&quot;feature&quot; + 0.004*&quot;hmm&quot; + 0.004*&quot;task&quot; + 0.004*&quot;pattern&quot; + 0.004*&quot;class&quot; + 0.004*&quot;classifier&quot; + 0.004*&quot;sequence&quot; + 0.004*&quot;speaker&quot; + 0.004*&quot;experiment&quot;
+
+Topic #7:
+0.034*&quot;image&quot; + 0.014*&quot;feature&quot; + 0.013*&quot;object&quot; + 0.008*&quot;pixel&quot; + 0.006*&quot;visual&quot; + 0.005*&quot;representation&quot; + 0.004*&quot;view&quot; + 0.004*&quot;location&quot; + 0.004*&quot;region&quot; + 0.004*&quot;position&quot; + 0.004*&quot;filter&quot; + 0.004*&quot;field&quot; + 0.004*&quot;recognition&quot; + 0.004*&quot;edge&quot; + 0.004*&quot;scale&quot; + 0.004*&quot;part&quot; + 0.004*&quot;human&quot; + 0.003*&quot;signal&quot; + 0.003*&quot;target&quot; + 0.003*&quot;face&quot;
+
+Topic #8:
+0.024*&quot;neuron&quot; + 0.009*&quot;cell&quot; + 0.007*&quot;circuit&quot; + 0.006*&quot;signal&quot; + 0.006*&quot;current&quot; + 0.005*&quot;synaptic&quot; + 0.005*&quot;spike&quot; + 0.005*&quot;response&quot; + 0.005*&quot;neural&quot; + 0.005*&quot;pattern&quot; + 0.005*&quot;voltage&quot; + 0.005*&quot;dynamic&quot; + 0.004*&quot;activity&quot; + 0.004*&quot;noise&quot; + 0.004*&quot;chip&quot; + 0.004*&quot;synapsis&quot; + 0.004*&quot;state&quot; + 0.003*&quot;frequency&quot; + 0.003*&quot;effect&quot; + 0.003*&quot;connection&quot;
+
+Topic #9:
+0.026*&quot;unit&quot; + 0.012*&quot;cell&quot; + 0.012*&quot;pattern&quot; + 0.009*&quot;stimulus&quot; + 0.009*&quot;layer&quot; + 0.008*&quot;response&quot; + 0.008*&quot;activity&quot; + 0.006*&quot;representation&quot; + 0.006*&quot;activation&quot; + 0.005*&quot;connection&quot; + 0.005*&quot;neuron&quot; + 0.005*&quot;visual&quot; + 0.004*&quot;hidden_unit&quot; + 0.004*&quot;motion&quot; + 0.004*&quot;structure&quot; + 0.004*&quot;direction&quot; + 0.004*&quot;receptive_field&quot; + 0.003*&quot;task&quot; + 0.003*&quot;simulation&quot; + 0.003*&quot;training&quot;
+
+Topic #10:
+0.009*&quot;rule&quot; + 0.008*&quot;node&quot; + 0.007*&quot;pattern&quot; + 0.007*&quot;training&quot; + 0.006*&quot;tree&quot; + 0.005*&quot;structure&quot; + 0.005*&quot;memory&quot; + 0.005*&quot;class&quot; + 0.004*&quot;probability&quot; + 0.004*&quot;representation&quot; + 0.004*&quot;cluster&quot; + 0.004*&quot;classifier&quot; + 0.004*&quot;graph&quot; + 0.004*&quot;classification&quot; + 0.004*&quot;feature&quot; + 0.004*&quot;size&quot; + 0.004*&quot;task&quot; + 0.003*&quot;training_set&quot; + 0.003*&quot;clustering&quot; + 0.003*&quot;table&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">topics_coherences</span> <span class="o">=</span> <span class="n">lda_model</span><span class="o">.</span><span class="n">top_topics</span><span class="p">(</span><span class="n">bow_corpus</span><span class="p">,</span> <span class="n">topn</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">avg_coherence_score</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">topics_coherences</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Avg. Coherence Score:&#39;</span><span class="p">,</span> <span class="n">avg_coherence_score</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Avg. Coherence Score: -1.0446050148659014
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">topics_with_wts</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">topics_coherences</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;LDA Topics with Weights&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">topic</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">topics_with_wts</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Topic #&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">([(</span><span class="n">term</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">wt</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span> <span class="k">for</span> <span class="n">wt</span><span class="p">,</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">topic</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LDA Topics with Weights
+==================================================
+Topic #1:
+[(&#39;vector&#39;, 0.009), (&#39;let&#39;, 0.007), (&#39;theorem&#39;, 0.006), (&#39;class&#39;, 0.006), (&#39;bound&#39;, 0.006), (&#39;node&#39;, 0.006), (&#39;threshold&#39;, 0.005), (&#39;linear&#39;, 0.005), (&#39;matrix&#39;, 0.005), (&#39;size&#39;, 0.005), (&#39;proof&#39;, 0.004), (&#39;complexity&#39;, 0.004), (&#39;consider&#39;, 0.004), (&#39;polynomial&#39;, 0.004), (&#39;unit&#39;, 0.004), (&#39;bit&#39;, 0.004), (&#39;layer&#39;, 0.004), (&#39;defined&#39;, 0.004), (&#39;probability&#39;, 0.004), (&#39;approximation&#39;, 0.003)]
+
+Topic #2:
+[(&#39;unit&#39;, 0.026), (&#39;cell&#39;, 0.012), (&#39;pattern&#39;, 0.012), (&#39;stimulus&#39;, 0.009), (&#39;layer&#39;, 0.009), (&#39;response&#39;, 0.008), (&#39;activity&#39;, 0.008), (&#39;representation&#39;, 0.006), (&#39;activation&#39;, 0.006), (&#39;connection&#39;, 0.005), (&#39;neuron&#39;, 0.005), (&#39;visual&#39;, 0.005), (&#39;hidden_unit&#39;, 0.004), (&#39;motion&#39;, 0.004), (&#39;structure&#39;, 0.004), (&#39;direction&#39;, 0.004), (&#39;receptive_field&#39;, 0.004), (&#39;task&#39;, 0.003), (&#39;simulation&#39;, 0.003), (&#39;training&#39;, 0.003)]
+
+Topic #3:
+[(&#39;neuron&#39;, 0.024), (&#39;cell&#39;, 0.009), (&#39;circuit&#39;, 0.007), (&#39;signal&#39;, 0.006), (&#39;current&#39;, 0.006), (&#39;synaptic&#39;, 0.005), (&#39;spike&#39;, 0.005), (&#39;response&#39;, 0.005), (&#39;neural&#39;, 0.005), (&#39;pattern&#39;, 0.005), (&#39;voltage&#39;, 0.005), (&#39;dynamic&#39;, 0.005), (&#39;activity&#39;, 0.004), (&#39;noise&#39;, 0.004), (&#39;chip&#39;, 0.004), (&#39;synapsis&#39;, 0.004), (&#39;state&#39;, 0.004), (&#39;frequency&#39;, 0.003), (&#39;effect&#39;, 0.003), (&#39;connection&#39;, 0.003)]
+
+Topic #4:
+[(&#39;training&#39;, 0.016), (&#39;word&#39;, 0.011), (&#39;recognition&#39;, 0.009), (&#39;vector&#39;, 0.008), (&#39;unit&#39;, 0.008), (&#39;speech&#39;, 0.007), (&#39;trained&#39;, 0.006), (&#39;layer&#39;, 0.005), (&#39;net&#39;, 0.005), (&#39;architecture&#39;, 0.005), (&#39;classification&#39;, 0.005), (&#39;feature&#39;, 0.004), (&#39;hmm&#39;, 0.004), (&#39;task&#39;, 0.004), (&#39;pattern&#39;, 0.004), (&#39;class&#39;, 0.004), (&#39;classifier&#39;, 0.004), (&#39;sequence&#39;, 0.004), (&#39;speaker&#39;, 0.004), (&#39;experiment&#39;, 0.004)]
+
+Topic #5:
+[(&#39;rule&#39;, 0.009), (&#39;node&#39;, 0.008), (&#39;pattern&#39;, 0.007), (&#39;training&#39;, 0.007), (&#39;tree&#39;, 0.006), (&#39;structure&#39;, 0.005), (&#39;memory&#39;, 0.005), (&#39;class&#39;, 0.005), (&#39;probability&#39;, 0.004), (&#39;representation&#39;, 0.004), (&#39;cluster&#39;, 0.004), (&#39;classifier&#39;, 0.004), (&#39;graph&#39;, 0.004), (&#39;classification&#39;, 0.004), (&#39;feature&#39;, 0.004), (&#39;size&#39;, 0.004), (&#39;task&#39;, 0.004), (&#39;training_set&#39;, 0.003), (&#39;clustering&#39;, 0.003), (&#39;table&#39;, 0.003)]
+
+Topic #6:
+[(&#39;distribution&#39;, 0.009), (&#39;training&#39;, 0.007), (&#39;estimate&#39;, 0.006), (&#39;variable&#39;, 0.006), (&#39;class&#39;, 0.006), (&#39;gaussian&#39;, 0.006), (&#39;probability&#39;, 0.005), (&#39;approximation&#39;, 0.005), (&#39;prior&#39;, 0.005), (&#39;sample&#39;, 0.005), (&#39;mixture&#39;, 0.004), (&#39;density&#39;, 0.004), (&#39;bayesian&#39;, 0.004), (&#39;prediction&#39;, 0.004), (&#39;kernel&#39;, 0.004), (&#39;vector&#39;, 0.004), (&#39;variance&#39;, 0.004), (&#39;feature&#39;, 0.004), (&#39;regression&#39;, 0.004), (&#39;estimation&#39;, 0.003)]
+
+Topic #7:
+[(&#39;image&#39;, 0.034), (&#39;feature&#39;, 0.014), (&#39;object&#39;, 0.013), (&#39;pixel&#39;, 0.008), (&#39;visual&#39;, 0.006), (&#39;representation&#39;, 0.005), (&#39;view&#39;, 0.004), (&#39;location&#39;, 0.004), (&#39;region&#39;, 0.004), (&#39;position&#39;, 0.004), (&#39;filter&#39;, 0.004), (&#39;field&#39;, 0.004), (&#39;recognition&#39;, 0.004), (&#39;edge&#39;, 0.004), (&#39;scale&#39;, 0.004), (&#39;part&#39;, 0.004), (&#39;human&#39;, 0.004), (&#39;signal&#39;, 0.003), (&#39;target&#39;, 0.003), (&#39;face&#39;, 0.003)]
+
+Topic #8:
+[(&#39;state&#39;, 0.033), (&#39;action&#39;, 0.01), (&#39;step&#39;, 0.008), (&#39;control&#39;, 0.007), (&#39;policy&#39;, 0.006), (&#39;task&#39;, 0.006), (&#39;reinforcement_learning&#39;, 0.005), (&#39;optimal&#39;, 0.005), (&#39;convergence&#39;, 0.004), (&#39;rate&#39;, 0.004), (&#39;stochastic&#39;, 0.004), (&#39;sequence&#39;, 0.004), (&#39;environment&#39;, 0.004), (&#39;dynamic&#39;, 0.003), (&#39;transition&#39;, 0.003), (&#39;probability&#39;, 0.003), (&#39;goal&#39;, 0.003), (&#39;reward&#39;, 0.003), (&#39;update&#39;, 0.003), (&#39;iteration&#39;, 0.003)]
+
+Topic #9:
+[(&#39;control&#39;, 0.014), (&#39;movement&#39;, 0.006), (&#39;motor&#39;, 0.006), (&#39;trajectory&#39;, 0.005), (&#39;controller&#39;, 0.005), (&#39;processor&#39;, 0.005), (&#39;position&#39;, 0.005), (&#39;change&#39;, 0.004), (&#39;dynamic&#39;, 0.004), (&#39;hand&#39;, 0.004), (&#39;chip&#39;, 0.004), (&#39;arm&#39;, 0.004), (&#39;state&#39;, 0.004), (&#39;architecture&#39;, 0.004), (&#39;parallel&#39;, 0.004), (&#39;training&#39;, 0.004), (&#39;application&#39;, 0.004), (&#39;target&#39;, 0.004), (&#39;forward&#39;, 0.003), (&#39;feedback&#39;, 0.003)]
+
+Topic #10:
+[(&#39;noise&#39;, 0.008), (&#39;linear&#39;, 0.008), (&#39;solution&#39;, 0.008), (&#39;vector&#39;, 0.008), (&#39;equation&#39;, 0.008), (&#39;matrix&#39;, 0.006), (&#39;training&#39;, 0.005), (&#39;rule&#39;, 0.005), (&#39;optimal&#39;, 0.004), (&#39;signal&#39;, 0.004), (&#39;eq&#39;, 0.004), (&#39;distribution&#39;, 0.004), (&#39;component&#39;, 0.004), (&#39;filter&#39;, 0.004), (&#39;line&#39;, 0.004), (&#39;local&#39;, 0.004), (&#39;rate&#39;, 0.004), (&#39;average&#39;, 0.004), (&#39;surface&#39;, 0.004), (&#39;ica&#39;, 0.004)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;LDA Topics without Weights&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">topic</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">topics_with_wts</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Topic #&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">([</span><span class="n">term</span> <span class="k">for</span> <span class="n">wt</span><span class="p">,</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">topic</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LDA Topics without Weights
+==================================================
+Topic #1:
+[&#39;vector&#39;, &#39;let&#39;, &#39;theorem&#39;, &#39;class&#39;, &#39;bound&#39;, &#39;node&#39;, &#39;threshold&#39;, &#39;linear&#39;, &#39;matrix&#39;, &#39;size&#39;, &#39;proof&#39;, &#39;complexity&#39;, &#39;consider&#39;, &#39;polynomial&#39;, &#39;unit&#39;, &#39;bit&#39;, &#39;layer&#39;, &#39;defined&#39;, &#39;probability&#39;, &#39;approximation&#39;]
+
+Topic #2:
+[&#39;unit&#39;, &#39;cell&#39;, &#39;pattern&#39;, &#39;stimulus&#39;, &#39;layer&#39;, &#39;response&#39;, &#39;activity&#39;, &#39;representation&#39;, &#39;activation&#39;, &#39;connection&#39;, &#39;neuron&#39;, &#39;visual&#39;, &#39;hidden_unit&#39;, &#39;motion&#39;, &#39;structure&#39;, &#39;direction&#39;, &#39;receptive_field&#39;, &#39;task&#39;, &#39;simulation&#39;, &#39;training&#39;]
+
+Topic #3:
+[&#39;neuron&#39;, &#39;cell&#39;, &#39;circuit&#39;, &#39;signal&#39;, &#39;current&#39;, &#39;synaptic&#39;, &#39;spike&#39;, &#39;response&#39;, &#39;neural&#39;, &#39;pattern&#39;, &#39;voltage&#39;, &#39;dynamic&#39;, &#39;activity&#39;, &#39;noise&#39;, &#39;chip&#39;, &#39;synapsis&#39;, &#39;state&#39;, &#39;frequency&#39;, &#39;effect&#39;, &#39;connection&#39;]
+
+Topic #4:
+[&#39;training&#39;, &#39;word&#39;, &#39;recognition&#39;, &#39;vector&#39;, &#39;unit&#39;, &#39;speech&#39;, &#39;trained&#39;, &#39;layer&#39;, &#39;net&#39;, &#39;architecture&#39;, &#39;classification&#39;, &#39;feature&#39;, &#39;hmm&#39;, &#39;task&#39;, &#39;pattern&#39;, &#39;class&#39;, &#39;classifier&#39;, &#39;sequence&#39;, &#39;speaker&#39;, &#39;experiment&#39;]
+
+Topic #5:
+[&#39;rule&#39;, &#39;node&#39;, &#39;pattern&#39;, &#39;training&#39;, &#39;tree&#39;, &#39;structure&#39;, &#39;memory&#39;, &#39;class&#39;, &#39;probability&#39;, &#39;representation&#39;, &#39;cluster&#39;, &#39;classifier&#39;, &#39;graph&#39;, &#39;classification&#39;, &#39;feature&#39;, &#39;size&#39;, &#39;task&#39;, &#39;training_set&#39;, &#39;clustering&#39;, &#39;table&#39;]
+
+Topic #6:
+[&#39;distribution&#39;, &#39;training&#39;, &#39;estimate&#39;, &#39;variable&#39;, &#39;class&#39;, &#39;gaussian&#39;, &#39;probability&#39;, &#39;approximation&#39;, &#39;prior&#39;, &#39;sample&#39;, &#39;mixture&#39;, &#39;density&#39;, &#39;bayesian&#39;, &#39;prediction&#39;, &#39;kernel&#39;, &#39;vector&#39;, &#39;variance&#39;, &#39;feature&#39;, &#39;regression&#39;, &#39;estimation&#39;]
+
+Topic #7:
+[&#39;image&#39;, &#39;feature&#39;, &#39;object&#39;, &#39;pixel&#39;, &#39;visual&#39;, &#39;representation&#39;, &#39;view&#39;, &#39;location&#39;, &#39;region&#39;, &#39;position&#39;, &#39;filter&#39;, &#39;field&#39;, &#39;recognition&#39;, &#39;edge&#39;, &#39;scale&#39;, &#39;part&#39;, &#39;human&#39;, &#39;signal&#39;, &#39;target&#39;, &#39;face&#39;]
+
+Topic #8:
+[&#39;state&#39;, &#39;action&#39;, &#39;step&#39;, &#39;control&#39;, &#39;policy&#39;, &#39;task&#39;, &#39;reinforcement_learning&#39;, &#39;optimal&#39;, &#39;convergence&#39;, &#39;rate&#39;, &#39;stochastic&#39;, &#39;sequence&#39;, &#39;environment&#39;, &#39;dynamic&#39;, &#39;transition&#39;, &#39;probability&#39;, &#39;goal&#39;, &#39;reward&#39;, &#39;update&#39;, &#39;iteration&#39;]
+
+Topic #9:
+[&#39;control&#39;, &#39;movement&#39;, &#39;motor&#39;, &#39;trajectory&#39;, &#39;controller&#39;, &#39;processor&#39;, &#39;position&#39;, &#39;change&#39;, &#39;dynamic&#39;, &#39;hand&#39;, &#39;chip&#39;, &#39;arm&#39;, &#39;state&#39;, &#39;architecture&#39;, &#39;parallel&#39;, &#39;training&#39;, &#39;application&#39;, &#39;target&#39;, &#39;forward&#39;, &#39;feedback&#39;]
+
+Topic #10:
+[&#39;noise&#39;, &#39;linear&#39;, &#39;solution&#39;, &#39;vector&#39;, &#39;equation&#39;, &#39;matrix&#39;, &#39;training&#39;, &#39;rule&#39;, &#39;optimal&#39;, &#39;signal&#39;, &#39;eq&#39;, &#39;distribution&#39;, &#39;component&#39;, &#39;filter&#39;, &#39;line&#39;, &#39;local&#39;, &#39;rate&#39;, &#39;average&#39;, &#39;surface&#39;, &#39;ica&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cv_coherence_model_lda</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">CoherenceModel</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">lda_model</span><span class="p">,</span> <span class="n">corpus</span><span class="o">=</span><span class="n">bow_corpus</span><span class="p">,</span> 
+                                                      <span class="n">texts</span><span class="o">=</span><span class="n">norm_corpus_bigrams</span><span class="p">,</span>
+                                                      <span class="n">dictionary</span><span class="o">=</span><span class="n">dictionary</span><span class="p">,</span> 
+                                                      <span class="n">coherence</span><span class="o">=</span><span class="s1">&#39;c_v&#39;</span><span class="p">)</span>
+<span class="n">avg_coherence_cv</span> <span class="o">=</span> <span class="n">cv_coherence_model_lda</span><span class="o">.</span><span class="n">get_coherence</span><span class="p">()</span>
+
+<span class="n">umass_coherence_model_lda</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">CoherenceModel</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">lda_model</span><span class="p">,</span> <span class="n">corpus</span><span class="o">=</span><span class="n">bow_corpus</span><span class="p">,</span> 
+                                                         <span class="n">texts</span><span class="o">=</span><span class="n">norm_corpus_bigrams</span><span class="p">,</span>
+                                                         <span class="n">dictionary</span><span class="o">=</span><span class="n">dictionary</span><span class="p">,</span> 
+                                                         <span class="n">coherence</span><span class="o">=</span><span class="s1">&#39;u_mass&#39;</span><span class="p">)</span>
+<span class="n">avg_coherence_umass</span> <span class="o">=</span> <span class="n">umass_coherence_model_lda</span><span class="o">.</span><span class="n">get_coherence</span><span class="p">()</span>
+
+<span class="n">perplexity</span> <span class="o">=</span> <span class="n">lda_model</span><span class="o">.</span><span class="n">log_perplexity</span><span class="p">(</span><span class="n">bow_corpus</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Avg. Coherence Score (Cv):&#39;</span><span class="p">,</span> <span class="n">avg_coherence_cv</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Avg. Coherence Score (UMass):&#39;</span><span class="p">,</span> <span class="n">avg_coherence_umass</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Model Perplexity:&#39;</span><span class="p">,</span> <span class="n">perplexity</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Avg. Coherence Score (Cv): 0.4603294946568357
+Avg. Coherence Score (UMass): -1.0446050148659014
+Model Perplexity: -7.800904216105166
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="lda-with-mallet">
+<h3>LDA with Mallet<a class="headerlink" href="#lda-with-mallet" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>wget http://mallet.cs.umass.edu/dist/mallet-2.0.8.zip
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2020-10-10 12:08:45--  http://mallet.cs.umass.edu/dist/mallet-2.0.8.zip
+Resolving mallet.cs.umass.edu... 128.119.246.70
+Connecting to mallet.cs.umass.edu|128.119.246.70|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 16184794 (15M) [application/zip]
+Saving to: ‘mallet-2.0.8.zip’
+
+mallet-2.0.8.zip    100%[===================&gt;]  15.43M  4.00MB/s    in 3.9s    
+
+2020-10-10 12:08:50 (4.00 MB/s) - ‘mallet-2.0.8.zip’ saved [16184794/16184794]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>unzip -q mallet-2.0.8.zip
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MALLET_PATH</span> <span class="o">=</span> <span class="s1">&#39;mallet-2.0.8/bin/mallet&#39;</span>
+<span class="n">lda_mallet</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">wrappers</span><span class="o">.</span><span class="n">LdaMallet</span><span class="p">(</span><span class="n">mallet_path</span><span class="o">=</span><span class="n">MALLET_PATH</span><span class="p">,</span> <span class="n">corpus</span><span class="o">=</span><span class="n">bow_corpus</span><span class="p">,</span> 
+                                              <span class="n">num_topics</span><span class="o">=</span><span class="n">TOTAL_TOPICS</span><span class="p">,</span> <span class="n">id2word</span><span class="o">=</span><span class="n">dictionary</span><span class="p">,</span>
+                                              <span class="n">iterations</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">workers</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">topics</span> <span class="o">=</span> <span class="p">[[(</span><span class="n">term</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">wt</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span> 
+               <span class="k">for</span> <span class="n">term</span><span class="p">,</span> <span class="n">wt</span> <span class="ow">in</span> <span class="n">lda_mallet</span><span class="o">.</span><span class="n">show_topic</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">topn</span><span class="o">=</span><span class="mi">20</span><span class="p">)]</span> 
+                   <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">TOTAL_TOPICS</span><span class="p">)]</span>
+
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">topic</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">topics</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Topic #&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">([</span><span class="n">term</span> <span class="k">for</span> <span class="n">term</span><span class="p">,</span> <span class="n">wt</span> <span class="ow">in</span> <span class="n">topic</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Topic #1:
+[&#39;neuron&#39;, &#39;cell&#39;, &#39;response&#39;, &#39;stimulus&#39;, &#39;activity&#39;, &#39;pattern&#39;, &#39;signal&#39;, &#39;spike&#39;, &#39;effect&#39;, &#39;frequency&#39;, &#39;neural&#39;, &#39;synaptic&#39;, &#39;cortical&#39;, &#39;firing&#39;, &#39;connection&#39;, &#39;et_al&#39;, &#39;brain&#39;, &#39;temporal&#39;, &#39;cortex&#39;, &#39;change&#39;]
+
+Topic #2:
+[&#39;search&#39;, &#39;experiment&#39;, &#39;cluster&#39;, &#39;feature&#39;, &#39;technique&#39;, &#39;graph&#39;, &#39;measure&#39;, &#39;size&#39;, &#39;cost&#39;, &#39;clustering&#39;, &#39;test&#39;, &#39;run&#39;, &#39;local&#39;, &#39;random&#39;, &#39;solution&#39;, &#39;table&#39;, &#39;region&#39;, &#39;distance&#39;, &#39;average&#39;, &#39;instance&#39;]
+
+Topic #3:
+[&#39;image&#39;, &#39;object&#39;, &#39;feature&#39;, &#39;visual&#39;, &#39;motion&#39;, &#39;position&#39;, &#39;direction&#39;, &#39;pixel&#39;, &#39;map&#39;, &#39;location&#39;, &#39;field&#39;, &#39;representation&#39;, &#39;region&#39;, &#39;view&#39;, &#39;target&#39;, &#39;face&#39;, &#39;filter&#39;, &#39;human&#39;, &#39;local&#39;, &#39;subject&#39;]
+
+Topic #4:
+[&#39;class&#39;, &#39;bound&#39;, &#39;size&#39;, &#39;probability&#39;, &#39;theorem&#39;, &#39;tree&#39;, &#39;node&#39;, &#39;theory&#39;, &#39;linear&#39;, &#39;threshold&#39;, &#39;complexity&#39;, &#39;defined&#39;, &#39;constant&#39;, &#39;approximation&#39;, &#39;loss&#39;, &#39;proof&#39;, &#39;hypothesis&#39;, &#39;polynomial&#39;, &#39;machine&#39;, &#39;distribution&#39;]
+
+Topic #5:
+[&#39;unit&#39;, &#39;pattern&#39;, &#39;layer&#39;, &#39;training&#39;, &#39;hidden_unit&#39;, &#39;rule&#39;, &#39;net&#39;, &#39;architecture&#39;, &#39;node&#39;, &#39;activation&#39;, &#39;representation&#39;, &#39;task&#39;, &#39;recurrent&#39;, &#39;trained&#39;, &#39;structure&#39;, &#39;connection&#39;, &#39;sequence&#39;, &#39;module&#39;, &#39;back_propagation&#39;, &#39;learn&#39;]
+
+Topic #6:
+[&#39;neuron&#39;, &#39;circuit&#39;, &#39;memory&#39;, &#39;current&#39;, &#39;signal&#39;, &#39;chip&#39;, &#39;analog&#39;, &#39;bit&#39;, &#39;voltage&#39;, &#39;noise&#39;, &#39;code&#39;, &#39;channel&#39;, &#39;neural&#39;, &#39;implementation&#39;, &#39;processor&#39;, &#39;parallel&#39;, &#39;operation&#39;, &#39;design&#39;, &#39;connection&#39;, &#39;computation&#39;]
+
+Topic #7:
+[&#39;state&#39;, &#39;control&#39;, &#39;action&#39;, &#39;step&#39;, &#39;trajectory&#39;, &#39;policy&#39;, &#39;task&#39;, &#39;dynamic&#39;, &#39;environment&#39;, &#39;controller&#39;, &#39;optimal&#39;, &#39;reinforcement_learning&#39;, &#39;transition&#39;, &#39;change&#39;, &#39;goal&#39;, &#39;robot&#39;, &#39;sequence&#39;, &#39;path&#39;, &#39;rate&#39;, &#39;adaptive&#39;]
+
+Topic #8:
+[&#39;distribution&#39;, &#39;estimate&#39;, &#39;noise&#39;, &#39;gaussian&#39;, &#39;variable&#39;, &#39;probability&#39;, &#39;prior&#39;, &#39;prediction&#39;, &#39;approximation&#39;, &#39;density&#39;, &#39;mixture&#39;, &#39;variance&#39;, &#39;sample&#39;, &#39;estimation&#39;, &#39;training&#39;, &#39;bayesian&#39;, &#39;regression&#39;, &#39;average&#39;, &#39;log&#39;, &#39;likelihood&#39;]
+
+Topic #9:
+[&#39;training&#39;, &#39;classification&#39;, &#39;word&#39;, &#39;class&#39;, &#39;classifier&#39;, &#39;recognition&#39;, &#39;feature&#39;, &#39;pattern&#39;, &#39;speech&#39;, &#39;trained&#39;, &#39;test&#39;, &#39;vector&#39;, &#39;training_set&#39;, &#39;character&#39;, &#39;sequence&#39;, &#39;experiment&#39;, &#39;hmm&#39;, &#39;context&#39;, &#39;test_set&#39;, &#39;table&#39;]
+
+Topic #10:
+[&#39;vector&#39;, &#39;matrix&#39;, &#39;equation&#39;, &#39;solution&#39;, &#39;linear&#39;, &#39;dynamic&#39;, &#39;nonlinear&#39;, &#39;eq&#39;, &#39;gradient&#39;, &#39;convergence&#39;, &#39;component&#39;, &#39;rate&#39;, &#39;rule&#39;, &#39;source&#39;, &#39;constraint&#39;, &#39;dimensional&#39;, &#39;energy&#39;, &#39;property&#39;, &#39;optimal&#39;, &#39;line&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cv_coherence_model_lda_mallet</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">CoherenceModel</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">lda_mallet</span><span class="p">,</span> <span class="n">corpus</span><span class="o">=</span><span class="n">bow_corpus</span><span class="p">,</span> 
+                                                             <span class="n">texts</span><span class="o">=</span><span class="n">norm_corpus_bigrams</span><span class="p">,</span>
+                                                             <span class="n">dictionary</span><span class="o">=</span><span class="n">dictionary</span><span class="p">,</span> 
+                                                             <span class="n">coherence</span><span class="o">=</span><span class="s1">&#39;c_v&#39;</span><span class="p">)</span>
+<span class="n">avg_coherence_cv</span> <span class="o">=</span> <span class="n">cv_coherence_model_lda_mallet</span><span class="o">.</span><span class="n">get_coherence</span><span class="p">()</span>
+
+<span class="n">umass_coherence_model_lda_mallet</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">CoherenceModel</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">lda_mallet</span><span class="p">,</span> <span class="n">corpus</span><span class="o">=</span><span class="n">bow_corpus</span><span class="p">,</span> 
+                                                                <span class="n">texts</span><span class="o">=</span><span class="n">norm_corpus_bigrams</span><span class="p">,</span>
+                                                                <span class="n">dictionary</span><span class="o">=</span><span class="n">dictionary</span><span class="p">,</span>  
+                                                                <span class="n">coherence</span><span class="o">=</span><span class="s1">&#39;u_mass&#39;</span><span class="p">)</span>
+<span class="n">avg_coherence_umass</span> <span class="o">=</span> <span class="n">umass_coherence_model_lda_mallet</span><span class="o">.</span><span class="n">get_coherence</span><span class="p">()</span>
+
+<span class="c1"># from STDOUT: &lt;500&gt; LL/token: -8.53533</span>
+<span class="n">perplexity</span> <span class="o">=</span> <span class="o">-</span><span class="mf">8.53533</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Avg. Coherence Score (Cv):&#39;</span><span class="p">,</span> <span class="n">avg_coherence_cv</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Avg. Coherence Score (UMass):&#39;</span><span class="p">,</span> <span class="n">avg_coherence_umass</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Model Perplexity:&#39;</span><span class="p">,</span> <span class="n">perplexity</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Avg. Coherence Score (Cv): 0.5038963843699132
+Avg. Coherence Score (UMass): -1.0285099132611792
+Model Perplexity: -8.53533
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="lda-tuning-finading-optimal-number-of-topics">
+<h3>LDA Tuning - Finading Optimal Number of Topics<a class="headerlink" href="#lda-tuning-finading-optimal-number-of-topics" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="k">def</span> <span class="nf">topic_model_coherence_generator</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span> <span class="n">texts</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">,</span> 
+                                    <span class="n">start_topic_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">end_topic_count</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                                    <span class="n">cpus</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    
+    <span class="n">models</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">coherence_scores</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">topic_nums</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">start_topic_count</span><span class="p">,</span> <span class="n">end_topic_count</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">step</span><span class="p">)):</span>
+        <span class="n">mallet_lda_model</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">wrappers</span><span class="o">.</span><span class="n">LdaMallet</span><span class="p">(</span><span class="n">mallet_path</span><span class="o">=</span><span class="n">MALLET_PATH</span><span class="p">,</span> <span class="n">corpus</span><span class="o">=</span><span class="n">corpus</span><span class="p">,</span>
+                                                            <span class="n">num_topics</span><span class="o">=</span><span class="n">topic_nums</span><span class="p">,</span> <span class="n">id2word</span><span class="o">=</span><span class="n">dictionary</span><span class="p">,</span>
+                                                            <span class="n">iterations</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">workers</span><span class="o">=</span><span class="n">cpus</span><span class="p">)</span>
+        <span class="n">cv_coherence_model_mallet_lda</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">CoherenceModel</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">mallet_lda_model</span><span class="p">,</span> <span class="n">corpus</span><span class="o">=</span><span class="n">corpus</span><span class="p">,</span> 
+                                                                     <span class="n">texts</span><span class="o">=</span><span class="n">texts</span><span class="p">,</span> <span class="n">dictionary</span><span class="o">=</span><span class="n">dictionary</span><span class="p">,</span> 
+                                                                     <span class="n">coherence</span><span class="o">=</span><span class="s1">&#39;c_v&#39;</span><span class="p">)</span>
+        <span class="n">coherence_score</span> <span class="o">=</span> <span class="n">cv_coherence_model_mallet_lda</span><span class="o">.</span><span class="n">get_coherence</span><span class="p">()</span>
+        <span class="n">coherence_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">coherence_score</span><span class="p">)</span>
+        <span class="n">models</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mallet_lda_model</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">models</span><span class="p">,</span> <span class="n">coherence_scores</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lda_models</span><span class="p">,</span> <span class="n">coherence_scores</span> <span class="o">=</span> <span class="n">topic_model_coherence_generator</span><span class="p">(</span><span class="n">corpus</span><span class="o">=</span><span class="n">bow_corpus</span><span class="p">,</span> <span class="n">texts</span><span class="o">=</span><span class="n">norm_corpus_bigrams</span><span class="p">,</span>
+                                                               <span class="n">dictionary</span><span class="o">=</span><span class="n">dictionary</span><span class="p">,</span> <span class="n">start_topic_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                                                               <span class="n">end_topic_count</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cpus</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 29/29 [51:04&lt;00:00, 105.66s/it]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coherence_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Number of Topics&#39;</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+                             <span class="s1">&#39;Coherence Score&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">coherence_scores</span><span class="p">,</span> <span class="mi">4</span><span class="p">)})</span>
+<span class="n">coherence_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Coherence Score&#39;</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Number of Topics</th>
+      <th>Coherence Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>18</th>
+      <td>20</td>
+      <td>0.5475</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>19</td>
+      <td>0.5438</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>25</td>
+      <td>0.5425</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>24</td>
+      <td>0.5411</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>28</td>
+      <td>0.5410</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>26</td>
+      <td>0.5410</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>18</td>
+      <td>0.5401</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>23</td>
+      <td>0.5375</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>30</td>
+      <td>0.5338</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>29</td>
+      <td>0.5331</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;fivethirtyeight&#39;</span><span class="p">)</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="n">x_ax</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">y_ax</span> <span class="o">=</span> <span class="n">coherence_scores</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_ax</span><span class="p">,</span> <span class="n">y_ax</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mf">0.535</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.facecolor&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;white&#39;</span>
+<span class="n">xl</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of Topics&#39;</span><span class="p">)</span>
+<span class="n">yl</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Coherence Score&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/text-summarization_90_0.png" src="../_images/text-summarization_90_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">best_model_idx</span> <span class="o">=</span> <span class="n">coherence_df</span><span class="p">[</span><span class="n">coherence_df</span><span class="p">[</span><span class="s1">&#39;Number of Topics&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">20</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">best_lda_model</span> <span class="o">=</span> <span class="n">lda_models</span><span class="p">[</span><span class="n">best_model_idx</span><span class="p">]</span>
+<span class="n">best_lda_model</span><span class="o">.</span><span class="n">num_topics</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">topics</span> <span class="o">=</span> <span class="p">[[(</span><span class="n">term</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">wt</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span> 
+               <span class="k">for</span> <span class="n">term</span><span class="p">,</span> <span class="n">wt</span> <span class="ow">in</span> <span class="n">best_lda_model</span><span class="o">.</span><span class="n">show_topic</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">topn</span><span class="o">=</span><span class="mi">20</span><span class="p">)]</span> 
+                   <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">best_lda_model</span><span class="o">.</span><span class="n">num_topics</span><span class="p">)]</span>
+
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">topic</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">topics</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Topic #&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">([</span><span class="n">term</span> <span class="k">for</span> <span class="n">term</span><span class="p">,</span> <span class="n">wt</span> <span class="ow">in</span> <span class="n">topic</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Topic #1:
+[&#39;word&#39;, &#39;recognition&#39;, &#39;training&#39;, &#39;speech&#39;, &#39;context&#39;, &#39;hmm&#39;, &#39;sequence&#39;, &#39;state&#39;, &#39;speaker&#39;, &#39;frame&#39;, &#39;letter&#39;, &#39;speech_recognition&#39;, &#39;phoneme&#39;, &#39;mlp&#39;, &#39;feature&#39;, &#39;experiment&#39;, &#39;vowel&#39;, &#39;trained&#39;, &#39;hybrid&#39;, &#39;segmentation&#39;]
+
+Topic #2:
+[&#39;classification&#39;, &#39;class&#39;, &#39;classifier&#39;, &#39;feature&#39;, &#39;pattern&#39;, &#39;training&#39;, &#39;character&#39;, &#39;face&#39;, &#39;test&#39;, &#39;training_set&#39;, &#39;recognition&#39;, &#39;digit&#39;, &#39;distance&#39;, &#39;database&#39;, &#39;sample&#39;, &#39;error_rate&#39;, &#39;rate&#39;, &#39;size&#39;, &#39;nearest_neighbor&#39;, &#39;trained&#39;]
+
+Topic #3:
+[&#39;training&#39;, &#39;prediction&#39;, &#39;test&#39;, &#39;training_set&#39;, &#39;experiment&#39;, &#39;selection&#39;, &#39;trained&#39;, &#39;table&#39;, &#39;regression&#39;, &#39;average&#39;, &#39;query&#39;, &#39;measure&#39;, &#39;cross_validation&#39;, &#39;technique&#39;, &#39;time_series&#39;, &#39;application&#39;, &#39;expert&#39;, &#39;rbf&#39;, &#39;test_set&#39;, &#39;bias&#39;]
+
+Topic #4:
+[&#39;neuron&#39;, &#39;cell&#39;, &#39;spike&#39;, &#39;synaptic&#39;, &#39;activity&#39;, &#39;response&#39;, &#39;firing&#39;, &#39;stimulus&#39;, &#39;pattern&#39;, &#39;synapsis&#39;, &#39;effect&#39;, &#39;threshold&#39;, &#39;neural&#39;, &#39;et_al&#39;, &#39;neuronal&#39;, &#39;inhibitory&#39;, &#39;simulation&#39;, &#39;firing_rate&#39;, &#39;excitatory&#39;, &#39;current&#39;]
+
+Topic #5:
+[&#39;state&#39;, &#39;control&#39;, &#39;action&#39;, &#39;policy&#39;, &#39;step&#39;, &#39;controller&#39;, &#39;environment&#39;, &#39;reinforcement_learning&#39;, &#39;task&#39;, &#39;robot&#39;, &#39;trajectory&#39;, &#39;optimal&#39;, &#39;goal&#39;, &#39;reward&#39;, &#39;change&#39;, &#39;td&#39;, &#39;agent&#39;, &#39;trial&#39;, &#39;position&#39;, &#39;current&#39;]
+
+Topic #6:
+[&#39;rule&#39;, &#39;representation&#39;, &#39;task&#39;, &#39;human&#39;, &#39;structure&#39;, &#39;feature&#39;, &#39;similarity&#39;, &#39;search&#39;, &#39;subject&#39;, &#39;instance&#39;, &#39;learned&#39;, &#39;knowledge&#39;, &#39;connectionist&#39;, &#39;domain&#39;, &#39;role&#39;, &#39;level&#39;, &#39;theory&#39;, &#39;category&#39;, &#39;position&#39;, &#39;note&#39;]
+
+Topic #7:
+[&#39;vector&#39;, &#39;matrix&#39;, &#39;linear&#39;, &#39;nonlinear&#39;, &#39;dimensional&#39;, &#39;mapping&#39;, &#39;dimension&#39;, &#39;transformation&#39;, &#39;component&#39;, &#39;local&#39;, &#39;map&#39;, &#39;operator&#39;, &#39;distance&#39;, &#39;basis&#39;, &#39;pca&#39;, &#39;structure&#39;, &#39;rule&#39;, &#39;projection&#39;, &#39;inverse&#39;, &#39;principal_component&#39;]
+
+Topic #8:
+[&#39;distribution&#39;, &#39;probability&#39;, &#39;estimate&#39;, &#39;prior&#39;, &#39;gaussian&#39;, &#39;sample&#39;, &#39;density&#39;, &#39;bayesian&#39;, &#39;estimation&#39;, &#39;variance&#39;, &#39;log&#39;, &#39;approximation&#39;, &#39;estimator&#39;, &#39;entropy&#39;, &#39;posterior&#39;, &#39;kernel&#39;, &#39;noise&#39;, &#39;true&#39;, &#39;stochastic&#39;, &#39;statistic&#39;]
+
+Topic #9:
+[&#39;solution&#39;, &#39;convergence&#39;, &#39;gradient&#39;, &#39;constraint&#39;, &#39;equation&#39;, &#39;rate&#39;, &#39;iteration&#39;, &#39;optimization&#39;, &#39;energy&#39;, &#39;minimum&#39;, &#39;update&#39;, &#39;optimal&#39;, &#39;gradient_descent&#39;, &#39;constant&#39;, &#39;derivative&#39;, &#39;cost&#39;, &#39;step&#39;, &#39;quadratic&#39;, &#39;find&#39;, &#39;local_minimum&#39;]
+
+Topic #10:
+[&#39;memory&#39;, &#39;bit&#39;, &#39;pattern&#39;, &#39;code&#39;, &#39;capacity&#39;, &#39;neuron&#39;, &#39;element&#39;, &#39;processor&#39;, &#39;size&#39;, &#39;vector&#39;, &#39;parallel&#39;, &#39;hopfield&#39;, &#39;computation&#39;, &#39;stored&#39;, &#39;connection&#39;, &#39;operation&#39;, &#39;neural_net&#39;, &#39;coding&#39;, &#39;binary&#39;, &#39;computer&#39;]
+
+Topic #11:
+[&#39;noise&#39;, &#39;equation&#39;, &#39;curve&#39;, &#39;correlation&#39;, &#39;average&#39;, &#39;eq&#39;, &#39;rate&#39;, &#39;theory&#39;, &#39;limit&#39;, &#39;solution&#39;, &#39;generalization_error&#39;, &#39;distribution&#39;, &#39;optimal&#39;, &#39;size&#39;, &#39;teacher&#39;, &#39;line&#39;, &#39;effect&#39;, &#39;random&#39;, &#39;student&#39;, &#39;find&#39;]
+
+Topic #12:
+[&#39;motion&#39;, &#39;visual&#39;, &#39;response&#39;, &#39;stimulus&#39;, &#39;cell&#39;, &#39;map&#39;, &#39;direction&#39;, &#39;receptive_field&#39;, &#39;activity&#39;, &#39;spatial&#39;, &#39;orientation&#39;, &#39;eye&#39;, &#39;location&#39;, &#39;unit&#39;, &#39;field&#39;, &#39;target&#39;, &#39;center&#39;, &#39;velocity&#39;, &#39;position&#39;, &#39;pattern&#39;]
+
+Topic #13:
+[&#39;variable&#39;, &#39;mixture&#39;, &#39;cluster&#39;, &#39;clustering&#39;, &#39;step&#39;, &#39;component&#39;, &#39;em&#39;, &#39;expert&#39;, &#39;hidden&#39;, &#39;likelihood&#39;, &#39;structure&#39;, &#39;mean_field&#39;, &#39;approximation&#39;, &#39;probability&#39;, &#39;em_algorithm&#39;, &#39;missing&#39;, &#39;mi&#39;, &#39;xi&#39;, &#39;log_likelihood&#39;, &#39;binary&#39;]
+
+Topic #14:
+[&#39;bound&#39;, &#39;class&#39;, &#39;theorem&#39;, &#39;approximation&#39;, &#39;proof&#39;, &#39;polynomial&#39;, &#39;loss&#39;, &#39;linear&#39;, &#39;complexity&#39;, &#39;xi&#39;, &#39;theory&#39;, &#39;threshold&#39;, &#39;defined&#39;, &#39;constant&#39;, &#39;size&#39;, &#39;condition&#39;, &#39;hypothesis&#39;, &#39;bounded&#39;, &#39;definition&#39;, &#39;assume&#39;]
+
+Topic #15:
+[&#39;dynamic&#39;, &#39;state&#39;, &#39;phase&#39;, &#39;module&#39;, &#39;behavior&#39;, &#39;recurrent&#39;, &#39;attractor&#39;, &#39;feedback&#39;, &#39;trajectory&#39;, &#39;neural&#39;, &#39;control&#39;, &#39;delay&#39;, &#39;equation&#39;, &#39;oscillation&#39;, &#39;fixed_point&#39;, &#39;oscillator&#39;, &#39;connection&#39;, &#39;motor&#39;, &#39;stable&#39;, &#39;stability&#39;]
+
+Topic #16:
+[&#39;unit&#39;, &#39;layer&#39;, &#39;hidden_unit&#39;, &#39;net&#39;, &#39;training&#39;, &#39;pattern&#39;, &#39;architecture&#39;, &#39;activation&#39;, &#39;trained&#39;, &#39;hidden_layer&#39;, &#39;back_propagation&#39;, &#39;connection&#39;, &#39;task&#39;, &#39;hidden&#39;, &#39;learn&#39;, &#39;simulation&#39;, &#39;backpropagation&#39;, &#39;target&#39;, &#39;epoch&#39;, &#39;step&#39;]
+
+Topic #17:
+[&#39;node&#39;, &#39;sequence&#39;, &#39;tree&#39;, &#39;graph&#39;, &#39;structure&#39;, &#39;state&#39;, &#39;symbol&#39;, &#39;string&#39;, &#39;path&#39;, &#39;length&#39;, &#39;level&#39;, &#39;machine&#39;, &#39;link&#39;, &#39;step&#39;, &#39;edge&#39;, &#39;language&#39;, &#39;grammar&#39;, &#39;local&#39;, &#39;markov&#39;, &#39;recurrent&#39;]
+
+Topic #18:
+[&#39;circuit&#39;, &#39;chip&#39;, &#39;current&#39;, &#39;analog&#39;, &#39;voltage&#39;, &#39;neuron&#39;, &#39;design&#39;, &#39;implementation&#39;, &#39;device&#39;, &#39;synapse&#39;, &#39;digital&#39;, &#39;neural&#39;, &#39;pulse&#39;, &#39;transistor&#39;, &#39;array&#39;, &#39;gain&#39;, &#39;line&#39;, &#39;analog_vlsi&#39;, &#39;hardware&#39;, &#39;implemented&#39;]
+
+Topic #19:
+[&#39;image&#39;, &#39;object&#39;, &#39;feature&#39;, &#39;pixel&#39;, &#39;view&#39;, &#39;region&#39;, &#39;surface&#39;, &#39;shape&#39;, &#39;visual&#39;, &#39;scale&#39;, &#39;local&#39;, &#39;contour&#39;, &#39;part&#39;, &#39;edge&#39;, &#39;representation&#39;, &#39;location&#39;, &#39;position&#39;, &#39;scene&#39;, &#39;vision&#39;, &#39;matching&#39;]
+
+Topic #20:
+[&#39;signal&#39;, &#39;filter&#39;, &#39;frequency&#39;, &#39;source&#39;, &#39;channel&#39;, &#39;noise&#39;, &#39;response&#39;, &#39;component&#39;, &#39;temporal&#39;, &#39;sound&#39;, &#39;auditory&#39;, &#39;ica&#39;, &#39;amplitude&#39;, &#39;phase&#39;, &#39;adaptation&#39;, &#39;detection&#39;, &#39;change&#39;, &#39;eeg&#39;, &#39;processing&#39;, &#39;subject&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">topics_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="n">term</span> <span class="k">for</span> <span class="n">term</span><span class="p">,</span> <span class="n">wt</span> <span class="ow">in</span> <span class="n">topic</span><span class="p">]</span> 
+                              <span class="k">for</span> <span class="n">topic</span> <span class="ow">in</span> <span class="n">topics</span><span class="p">],</span> 
+                         <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Term&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">21</span><span class="p">)],</span>
+                         <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Topic &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">best_lda_model</span><span class="o">.</span><span class="n">num_topics</span><span class="o">+</span><span class="mi">1</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span>
+<span class="n">topics_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Topic 1</th>
+      <th>Topic 2</th>
+      <th>Topic 3</th>
+      <th>Topic 4</th>
+      <th>Topic 5</th>
+      <th>Topic 6</th>
+      <th>Topic 7</th>
+      <th>Topic 8</th>
+      <th>Topic 9</th>
+      <th>Topic 10</th>
+      <th>Topic 11</th>
+      <th>Topic 12</th>
+      <th>Topic 13</th>
+      <th>Topic 14</th>
+      <th>Topic 15</th>
+      <th>Topic 16</th>
+      <th>Topic 17</th>
+      <th>Topic 18</th>
+      <th>Topic 19</th>
+      <th>Topic 20</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Term1</th>
+      <td>word</td>
+      <td>classification</td>
+      <td>training</td>
+      <td>neuron</td>
+      <td>state</td>
+      <td>rule</td>
+      <td>vector</td>
+      <td>distribution</td>
+      <td>solution</td>
+      <td>memory</td>
+      <td>noise</td>
+      <td>motion</td>
+      <td>variable</td>
+      <td>bound</td>
+      <td>dynamic</td>
+      <td>unit</td>
+      <td>node</td>
+      <td>circuit</td>
+      <td>image</td>
+      <td>signal</td>
+    </tr>
+    <tr>
+      <th>Term2</th>
+      <td>recognition</td>
+      <td>class</td>
+      <td>prediction</td>
+      <td>cell</td>
+      <td>control</td>
+      <td>representation</td>
+      <td>matrix</td>
+      <td>probability</td>
+      <td>convergence</td>
+      <td>bit</td>
+      <td>equation</td>
+      <td>visual</td>
+      <td>mixture</td>
+      <td>class</td>
+      <td>state</td>
+      <td>layer</td>
+      <td>sequence</td>
+      <td>chip</td>
+      <td>object</td>
+      <td>filter</td>
+    </tr>
+    <tr>
+      <th>Term3</th>
+      <td>training</td>
+      <td>classifier</td>
+      <td>test</td>
+      <td>spike</td>
+      <td>action</td>
+      <td>task</td>
+      <td>linear</td>
+      <td>estimate</td>
+      <td>gradient</td>
+      <td>pattern</td>
+      <td>curve</td>
+      <td>response</td>
+      <td>cluster</td>
+      <td>theorem</td>
+      <td>phase</td>
+      <td>hidden_unit</td>
+      <td>tree</td>
+      <td>current</td>
+      <td>feature</td>
+      <td>frequency</td>
+    </tr>
+    <tr>
+      <th>Term4</th>
+      <td>speech</td>
+      <td>feature</td>
+      <td>training_set</td>
+      <td>synaptic</td>
+      <td>policy</td>
+      <td>human</td>
+      <td>nonlinear</td>
+      <td>prior</td>
+      <td>constraint</td>
+      <td>code</td>
+      <td>correlation</td>
+      <td>stimulus</td>
+      <td>clustering</td>
+      <td>approximation</td>
+      <td>module</td>
+      <td>net</td>
+      <td>graph</td>
+      <td>analog</td>
+      <td>pixel</td>
+      <td>source</td>
+    </tr>
+    <tr>
+      <th>Term5</th>
+      <td>context</td>
+      <td>pattern</td>
+      <td>experiment</td>
+      <td>activity</td>
+      <td>step</td>
+      <td>structure</td>
+      <td>dimensional</td>
+      <td>gaussian</td>
+      <td>equation</td>
+      <td>capacity</td>
+      <td>average</td>
+      <td>cell</td>
+      <td>step</td>
+      <td>proof</td>
+      <td>behavior</td>
+      <td>training</td>
+      <td>structure</td>
+      <td>voltage</td>
+      <td>view</td>
+      <td>channel</td>
+    </tr>
+    <tr>
+      <th>Term6</th>
+      <td>hmm</td>
+      <td>training</td>
+      <td>selection</td>
+      <td>response</td>
+      <td>controller</td>
+      <td>feature</td>
+      <td>mapping</td>
+      <td>sample</td>
+      <td>rate</td>
+      <td>neuron</td>
+      <td>eq</td>
+      <td>map</td>
+      <td>component</td>
+      <td>polynomial</td>
+      <td>recurrent</td>
+      <td>pattern</td>
+      <td>state</td>
+      <td>neuron</td>
+      <td>region</td>
+      <td>noise</td>
+    </tr>
+    <tr>
+      <th>Term7</th>
+      <td>sequence</td>
+      <td>character</td>
+      <td>trained</td>
+      <td>firing</td>
+      <td>environment</td>
+      <td>similarity</td>
+      <td>dimension</td>
+      <td>density</td>
+      <td>iteration</td>
+      <td>element</td>
+      <td>rate</td>
+      <td>direction</td>
+      <td>em</td>
+      <td>loss</td>
+      <td>attractor</td>
+      <td>architecture</td>
+      <td>symbol</td>
+      <td>design</td>
+      <td>surface</td>
+      <td>response</td>
+    </tr>
+    <tr>
+      <th>Term8</th>
+      <td>state</td>
+      <td>face</td>
+      <td>table</td>
+      <td>stimulus</td>
+      <td>reinforcement_learning</td>
+      <td>search</td>
+      <td>transformation</td>
+      <td>bayesian</td>
+      <td>optimization</td>
+      <td>processor</td>
+      <td>theory</td>
+      <td>receptive_field</td>
+      <td>expert</td>
+      <td>linear</td>
+      <td>feedback</td>
+      <td>activation</td>
+      <td>string</td>
+      <td>implementation</td>
+      <td>shape</td>
+      <td>component</td>
+    </tr>
+    <tr>
+      <th>Term9</th>
+      <td>speaker</td>
+      <td>test</td>
+      <td>regression</td>
+      <td>pattern</td>
+      <td>task</td>
+      <td>subject</td>
+      <td>component</td>
+      <td>estimation</td>
+      <td>energy</td>
+      <td>size</td>
+      <td>limit</td>
+      <td>activity</td>
+      <td>hidden</td>
+      <td>complexity</td>
+      <td>trajectory</td>
+      <td>trained</td>
+      <td>path</td>
+      <td>device</td>
+      <td>visual</td>
+      <td>temporal</td>
+    </tr>
+    <tr>
+      <th>Term10</th>
+      <td>frame</td>
+      <td>training_set</td>
+      <td>average</td>
+      <td>synapsis</td>
+      <td>robot</td>
+      <td>instance</td>
+      <td>local</td>
+      <td>variance</td>
+      <td>minimum</td>
+      <td>vector</td>
+      <td>solution</td>
+      <td>spatial</td>
+      <td>likelihood</td>
+      <td>xi</td>
+      <td>neural</td>
+      <td>hidden_layer</td>
+      <td>length</td>
+      <td>synapse</td>
+      <td>scale</td>
+      <td>sound</td>
+    </tr>
+    <tr>
+      <th>Term11</th>
+      <td>letter</td>
+      <td>recognition</td>
+      <td>query</td>
+      <td>effect</td>
+      <td>trajectory</td>
+      <td>learned</td>
+      <td>map</td>
+      <td>log</td>
+      <td>update</td>
+      <td>parallel</td>
+      <td>generalization_error</td>
+      <td>orientation</td>
+      <td>structure</td>
+      <td>theory</td>
+      <td>control</td>
+      <td>back_propagation</td>
+      <td>level</td>
+      <td>digital</td>
+      <td>local</td>
+      <td>auditory</td>
+    </tr>
+    <tr>
+      <th>Term12</th>
+      <td>speech_recognition</td>
+      <td>digit</td>
+      <td>measure</td>
+      <td>threshold</td>
+      <td>optimal</td>
+      <td>knowledge</td>
+      <td>operator</td>
+      <td>approximation</td>
+      <td>optimal</td>
+      <td>hopfield</td>
+      <td>distribution</td>
+      <td>eye</td>
+      <td>mean_field</td>
+      <td>threshold</td>
+      <td>delay</td>
+      <td>connection</td>
+      <td>machine</td>
+      <td>neural</td>
+      <td>contour</td>
+      <td>ica</td>
+    </tr>
+    <tr>
+      <th>Term13</th>
+      <td>phoneme</td>
+      <td>distance</td>
+      <td>cross_validation</td>
+      <td>neural</td>
+      <td>goal</td>
+      <td>connectionist</td>
+      <td>distance</td>
+      <td>estimator</td>
+      <td>gradient_descent</td>
+      <td>computation</td>
+      <td>optimal</td>
+      <td>location</td>
+      <td>approximation</td>
+      <td>defined</td>
+      <td>equation</td>
+      <td>task</td>
+      <td>link</td>
+      <td>pulse</td>
+      <td>part</td>
+      <td>amplitude</td>
+    </tr>
+    <tr>
+      <th>Term14</th>
+      <td>mlp</td>
+      <td>database</td>
+      <td>technique</td>
+      <td>et_al</td>
+      <td>reward</td>
+      <td>domain</td>
+      <td>basis</td>
+      <td>entropy</td>
+      <td>constant</td>
+      <td>stored</td>
+      <td>size</td>
+      <td>unit</td>
+      <td>probability</td>
+      <td>constant</td>
+      <td>oscillation</td>
+      <td>hidden</td>
+      <td>step</td>
+      <td>transistor</td>
+      <td>edge</td>
+      <td>phase</td>
+    </tr>
+    <tr>
+      <th>Term15</th>
+      <td>feature</td>
+      <td>sample</td>
+      <td>time_series</td>
+      <td>neuronal</td>
+      <td>change</td>
+      <td>role</td>
+      <td>pca</td>
+      <td>posterior</td>
+      <td>derivative</td>
+      <td>connection</td>
+      <td>teacher</td>
+      <td>field</td>
+      <td>em_algorithm</td>
+      <td>size</td>
+      <td>fixed_point</td>
+      <td>learn</td>
+      <td>edge</td>
+      <td>array</td>
+      <td>representation</td>
+      <td>adaptation</td>
+    </tr>
+    <tr>
+      <th>Term16</th>
+      <td>experiment</td>
+      <td>error_rate</td>
+      <td>application</td>
+      <td>inhibitory</td>
+      <td>td</td>
+      <td>level</td>
+      <td>structure</td>
+      <td>kernel</td>
+      <td>cost</td>
+      <td>operation</td>
+      <td>line</td>
+      <td>target</td>
+      <td>missing</td>
+      <td>condition</td>
+      <td>oscillator</td>
+      <td>simulation</td>
+      <td>language</td>
+      <td>gain</td>
+      <td>location</td>
+      <td>detection</td>
+    </tr>
+    <tr>
+      <th>Term17</th>
+      <td>vowel</td>
+      <td>rate</td>
+      <td>expert</td>
+      <td>simulation</td>
+      <td>agent</td>
+      <td>theory</td>
+      <td>rule</td>
+      <td>noise</td>
+      <td>step</td>
+      <td>neural_net</td>
+      <td>effect</td>
+      <td>center</td>
+      <td>mi</td>
+      <td>hypothesis</td>
+      <td>connection</td>
+      <td>backpropagation</td>
+      <td>grammar</td>
+      <td>line</td>
+      <td>position</td>
+      <td>change</td>
+    </tr>
+    <tr>
+      <th>Term18</th>
+      <td>trained</td>
+      <td>size</td>
+      <td>rbf</td>
+      <td>firing_rate</td>
+      <td>trial</td>
+      <td>category</td>
+      <td>projection</td>
+      <td>true</td>
+      <td>quadratic</td>
+      <td>coding</td>
+      <td>random</td>
+      <td>velocity</td>
+      <td>xi</td>
+      <td>bounded</td>
+      <td>motor</td>
+      <td>target</td>
+      <td>local</td>
+      <td>analog_vlsi</td>
+      <td>scene</td>
+      <td>eeg</td>
+    </tr>
+    <tr>
+      <th>Term19</th>
+      <td>hybrid</td>
+      <td>nearest_neighbor</td>
+      <td>test_set</td>
+      <td>excitatory</td>
+      <td>position</td>
+      <td>position</td>
+      <td>inverse</td>
+      <td>stochastic</td>
+      <td>find</td>
+      <td>binary</td>
+      <td>student</td>
+      <td>position</td>
+      <td>log_likelihood</td>
+      <td>definition</td>
+      <td>stable</td>
+      <td>epoch</td>
+      <td>markov</td>
+      <td>hardware</td>
+      <td>vision</td>
+      <td>processing</td>
+    </tr>
+    <tr>
+      <th>Term20</th>
+      <td>segmentation</td>
+      <td>trained</td>
+      <td>bias</td>
+      <td>current</td>
+      <td>current</td>
+      <td>note</td>
+      <td>principal_component</td>
+      <td>statistic</td>
+      <td>local_minimum</td>
+      <td>computer</td>
+      <td>find</td>
+      <td>pattern</td>
+      <td>binary</td>
+      <td>assume</td>
+      <td>stability</td>
+      <td>step</td>
+      <td>recurrent</td>
+      <td>implemented</td>
+      <td>matching</td>
+      <td>subject</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_colwidth&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">topics_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">term</span> <span class="k">for</span> <span class="n">term</span><span class="p">,</span> <span class="n">wt</span> <span class="ow">in</span> <span class="n">topic</span><span class="p">])</span>  
+                              <span class="k">for</span> <span class="n">topic</span> <span class="ow">in</span> <span class="n">topics</span><span class="p">],</span>
+                         <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Terms per Topic&#39;</span><span class="p">],</span>
+                         <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Topic&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">best_lda_model</span><span class="o">.</span><span class="n">num_topics</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+                         <span class="p">)</span>
+<span class="n">topics_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/Alvin/.local/lib/python3.7/site-packages/ipykernel_launcher.py:1: FutureWarning: Passing a negative integer is deprecated in version 1.0 and will not be supported in future version. Instead, use None to not limit the column width.
+  &quot;&quot;&quot;Entry point for launching an IPython kernel.
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Terms per Topic</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Topic1</th>
+      <td>word, recognition, training, speech, context, hmm, sequence, state, speaker, frame, letter, speech_recognition, phoneme, mlp, feature, experiment, vowel, trained, hybrid, segmentation</td>
+    </tr>
+    <tr>
+      <th>Topic2</th>
+      <td>classification, class, classifier, feature, pattern, training, character, face, test, training_set, recognition, digit, distance, database, sample, error_rate, rate, size, nearest_neighbor, trained</td>
+    </tr>
+    <tr>
+      <th>Topic3</th>
+      <td>training, prediction, test, training_set, experiment, selection, trained, table, regression, average, query, measure, cross_validation, technique, time_series, application, expert, rbf, test_set, bias</td>
+    </tr>
+    <tr>
+      <th>Topic4</th>
+      <td>neuron, cell, spike, synaptic, activity, response, firing, stimulus, pattern, synapsis, effect, threshold, neural, et_al, neuronal, inhibitory, simulation, firing_rate, excitatory, current</td>
+    </tr>
+    <tr>
+      <th>Topic5</th>
+      <td>state, control, action, policy, step, controller, environment, reinforcement_learning, task, robot, trajectory, optimal, goal, reward, change, td, agent, trial, position, current</td>
+    </tr>
+    <tr>
+      <th>Topic6</th>
+      <td>rule, representation, task, human, structure, feature, similarity, search, subject, instance, learned, knowledge, connectionist, domain, role, level, theory, category, position, note</td>
+    </tr>
+    <tr>
+      <th>Topic7</th>
+      <td>vector, matrix, linear, nonlinear, dimensional, mapping, dimension, transformation, component, local, map, operator, distance, basis, pca, structure, rule, projection, inverse, principal_component</td>
+    </tr>
+    <tr>
+      <th>Topic8</th>
+      <td>distribution, probability, estimate, prior, gaussian, sample, density, bayesian, estimation, variance, log, approximation, estimator, entropy, posterior, kernel, noise, true, stochastic, statistic</td>
+    </tr>
+    <tr>
+      <th>Topic9</th>
+      <td>solution, convergence, gradient, constraint, equation, rate, iteration, optimization, energy, minimum, update, optimal, gradient_descent, constant, derivative, cost, step, quadratic, find, local_minimum</td>
+    </tr>
+    <tr>
+      <th>Topic10</th>
+      <td>memory, bit, pattern, code, capacity, neuron, element, processor, size, vector, parallel, hopfield, computation, stored, connection, operation, neural_net, coding, binary, computer</td>
+    </tr>
+    <tr>
+      <th>Topic11</th>
+      <td>noise, equation, curve, correlation, average, eq, rate, theory, limit, solution, generalization_error, distribution, optimal, size, teacher, line, effect, random, student, find</td>
+    </tr>
+    <tr>
+      <th>Topic12</th>
+      <td>motion, visual, response, stimulus, cell, map, direction, receptive_field, activity, spatial, orientation, eye, location, unit, field, target, center, velocity, position, pattern</td>
+    </tr>
+    <tr>
+      <th>Topic13</th>
+      <td>variable, mixture, cluster, clustering, step, component, em, expert, hidden, likelihood, structure, mean_field, approximation, probability, em_algorithm, missing, mi, xi, log_likelihood, binary</td>
+    </tr>
+    <tr>
+      <th>Topic14</th>
+      <td>bound, class, theorem, approximation, proof, polynomial, loss, linear, complexity, xi, theory, threshold, defined, constant, size, condition, hypothesis, bounded, definition, assume</td>
+    </tr>
+    <tr>
+      <th>Topic15</th>
+      <td>dynamic, state, phase, module, behavior, recurrent, attractor, feedback, trajectory, neural, control, delay, equation, oscillation, fixed_point, oscillator, connection, motor, stable, stability</td>
+    </tr>
+    <tr>
+      <th>Topic16</th>
+      <td>unit, layer, hidden_unit, net, training, pattern, architecture, activation, trained, hidden_layer, back_propagation, connection, task, hidden, learn, simulation, backpropagation, target, epoch, step</td>
+    </tr>
+    <tr>
+      <th>Topic17</th>
+      <td>node, sequence, tree, graph, structure, state, symbol, string, path, length, level, machine, link, step, edge, language, grammar, local, markov, recurrent</td>
+    </tr>
+    <tr>
+      <th>Topic18</th>
+      <td>circuit, chip, current, analog, voltage, neuron, design, implementation, device, synapse, digital, neural, pulse, transistor, array, gain, line, analog_vlsi, hardware, implemented</td>
+    </tr>
+    <tr>
+      <th>Topic19</th>
+      <td>image, object, feature, pixel, view, region, surface, shape, visual, scale, local, contour, part, edge, representation, location, position, scene, vision, matching</td>
+    </tr>
+    <tr>
+      <th>Topic20</th>
+      <td>signal, filter, frequency, source, channel, noise, response, component, temporal, sound, auditory, ica, amplitude, phase, adaptation, detection, change, eeg, processing, subject</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="interpreting-topic-model-results">
+<h3>Interpreting Topic Model Results<a class="headerlink" href="#interpreting-topic-model-results" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tm_results</span> <span class="o">=</span> <span class="n">best_lda_model</span><span class="p">[</span><span class="n">bow_corpus</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corpus_topics</span> <span class="o">=</span> <span class="p">[</span><span class="nb">sorted</span><span class="p">(</span><span class="n">topics</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">record</span><span class="p">:</span> <span class="o">-</span><span class="n">record</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span> 
+                     <span class="k">for</span> <span class="n">topics</span> <span class="ow">in</span> <span class="n">tm_results</span><span class="p">]</span>
+<span class="n">corpus_topics</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(8, 0.2286752707313455),
+ (9, 0.219922860109776),
+ (16, 0.20199731453507883),
+ (11, 0.22351903724452743),
+ (15, 0.448782535684299)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corpus_topic_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">corpus_topic_df</span><span class="p">[</span><span class="s1">&#39;Document&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">papers</span><span class="p">))</span>
+<span class="n">corpus_topic_df</span><span class="p">[</span><span class="s1">&#39;Dominant Topic&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">corpus_topics</span><span class="p">]</span>
+<span class="n">corpus_topic_df</span><span class="p">[</span><span class="s1">&#39;Contribution %&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">corpus_topics</span><span class="p">]</span>
+<span class="n">corpus_topic_df</span><span class="p">[</span><span class="s1">&#39;Topic Desc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">topics_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="s1">&#39;Terms per Topic&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">corpus_topics</span><span class="p">]</span>
+<span class="n">corpus_topic_df</span><span class="p">[</span><span class="s1">&#39;Paper&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">papers</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Dominant topics distribution across corpus.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># pd.set_option(&#39;display.max_colwidth&#39;, 200)</span>
+<span class="c1"># topic_stats_df = corpus_topic_df.groupby(&#39;Dominant Topic&#39;).agg({</span>
+<span class="c1">#                                                 &#39;Dominant Topic&#39;: {</span>
+<span class="c1">#                                                     &#39;Doc Count&#39;: np.size,</span>
+<span class="c1">#                                                     &#39;% Total Docs&#39;: np.size }</span>
+<span class="c1">#                                               })</span>
+<span class="c1"># topic_stats_df = topic_stats_df[&#39;Dominant Topic&#39;].reset_index()</span>
+<span class="c1"># topic_stats_df[&#39;% Total Docs&#39;] = topic_stats_df[&#39;% Total Docs&#39;].apply(lambda row: round((row*100) / len(papers), 2))</span>
+<span class="c1"># topic_stats_df[&#39;Topic Desc&#39;] = [topics_df.iloc[t][&#39;Terms per Topic&#39;] for t in range(len(topic_stats_df))]</span>
+<span class="c1"># topic_stats_df</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Dominant topics in specific papers</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_colwidth&#39;</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="p">(</span><span class="n">corpus_topic_df</span><span class="p">[</span><span class="n">corpus_topic_df</span><span class="p">[</span><span class="s1">&#39;Document&#39;</span><span class="p">]</span>
+                 <span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="mi">681</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">392</span><span class="p">,</span> <span class="mi">1622</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> 
+                        <span class="mi">906</span><span class="p">,</span> <span class="mi">996</span><span class="p">,</span> <span class="mi">503</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">733</span><span class="p">])])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Document</th>
+      <th>Dominant Topic</th>
+      <th>Contribution %</th>
+      <th>Topic Desc</th>
+      <th>Paper</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>9</th>
+      <td>9</td>
+      <td>4</td>
+      <td>27.44</td>
+      <td>neuron, cell, spike, synaptic, activity, response, firing, stimulus, pattern, synapsis, effect, threshold, neural, et_al, neuronal, inhibitory, simulation, firing_rate, excitatory, current</td>
+      <td>367 \nSCHEMA FOR MOTOR CONTROL \nUTILIZING A NETWORK MODEL OF THE CEREBELLUM \nJames C. Houk, Ph.D. \nNorthwestern University Medical School, Chicago, Illinois \n60201 \nABSTRACT \nThis paper outl...</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>13</td>
+      <td>18</td>
+      <td>67.04</td>
+      <td>circuit, chip, current, analog, voltage, neuron, design, implementation, device, synapse, digital, neural, pulse, transistor, array, gain, line, analog_vlsi, hardware, implemented</td>
+      <td>564 \nPROGRAMMABLE SYNAPTIC CHIP FOR \nELECTRONIC NEURAL NETWORKS \nA. Moopenn, H. Langenbacher, A.P. Thakoor, and S.K. Khanna \nJet Propulsion Laboratory \nCalifornia Institute of Technology \nPa...</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>17</td>
+      <td>16</td>
+      <td>18.68</td>
+      <td>unit, layer, hidden_unit, net, training, pattern, architecture, activation, trained, hidden_layer, back_propagation, connection, task, hidden, learn, simulation, backpropagation, target, epoch, step</td>
+      <td>348 \nMinkowski-r Back-Propagation: Learning in Connectionist \nModels with Non-Euclidian Error Signals \nStephen Jos6 Hanson and David J. Burr \nBell Communications Research \nMorristown, New Jer...</td>
+    </tr>
+    <tr>
+      <th>392</th>
+      <td>392</td>
+      <td>5</td>
+      <td>40.82</td>
+      <td>state, control, action, policy, step, controller, environment, reinforcement_learning, task, robot, trajectory, optimal, goal, reward, change, td, agent, trial, position, current</td>
+      <td>Learning Trajectory and Force Control \nof an Artificial Muscle Arm \nby Parallel-hierarchical Neural Network Model \nMasazumi Katayama Mitsuo Kawato \nCognitive Processes Department \nATR Auditor...</td>
+    </tr>
+    <tr>
+      <th>503</th>
+      <td>503</td>
+      <td>14</td>
+      <td>77.50</td>
+      <td>bound, class, theorem, approximation, proof, polynomial, loss, linear, complexity, xi, theory, threshold, defined, constant, size, condition, hypothesis, bounded, definition, assume</td>
+      <td>Polynomial Uniform Convergence of \nRelative Frequencies to Probabilities \nAlberto Bertoni, Paola Campadelll;' Anna Morpurgo, Sandra Panlzza \nDipartimento di Scienze dell'Informazione \nUniversi...</td>
+    </tr>
+    <tr>
+      <th>681</th>
+      <td>681</td>
+      <td>18</td>
+      <td>40.43</td>
+      <td>circuit, chip, current, analog, voltage, neuron, design, implementation, device, synapse, digital, neural, pulse, transistor, array, gain, line, analog_vlsi, hardware, implemented</td>
+      <td>Visual Motion Computation in Analog \nVLSI using Pulses \nRahul Sarpeshkar, Wyeth Bair and Christof Koch \nComputation and Neural Systems Program \nCalifornia Institute of Technology \nPasadena, C...</td>
+    </tr>
+    <tr>
+      <th>733</th>
+      <td>733</td>
+      <td>4</td>
+      <td>28.12</td>
+      <td>neuron, cell, spike, synaptic, activity, response, firing, stimulus, pattern, synapsis, effect, threshold, neural, et_al, neuronal, inhibitory, simulation, firing_rate, excitatory, current</td>
+      <td>Foraging in an Uncertain Environment Using \nPredictive Hebbian Learning \nP. Read Montague ; Peter Dayan, and Terrence J. Sejnowski \nComputational Neurobiology Lab, The Salk Institute, \n10010 ...</td>
+    </tr>
+    <tr>
+      <th>906</th>
+      <td>906</td>
+      <td>19</td>
+      <td>35.45</td>
+      <td>image, object, feature, pixel, view, region, surface, shape, visual, scale, local, contour, part, edge, representation, location, position, scene, vision, matching</td>
+      <td>Correlation and Interpolation Networks for \nReal-time Expression Analysis/Synthesis. \nTrevor Darrell, Irfan Essa, Alex Pentland \nPerceptual Computing Group \nMIT Media Lab \nAbstract \nWe descr...</td>
+    </tr>
+    <tr>
+      <th>996</th>
+      <td>996</td>
+      <td>15</td>
+      <td>38.69</td>
+      <td>dynamic, state, phase, module, behavior, recurrent, attractor, feedback, trajectory, neural, control, delay, equation, oscillation, fixed_point, oscillator, connection, motor, stable, stability</td>
+      <td>Dynamics of Attention as Near \nSaddle-Node Bifurcation Behavior \nHiroyuki Nakahara* \nGeneral Systems Studies \nUniversity of Tokyo \n3-8-1 Komaba, Meguro \nTokyo 153, Japan \nn akahar a@vermeer...</td>
+    </tr>
+    <tr>
+      <th>1622</th>
+      <td>1622</td>
+      <td>8</td>
+      <td>37.00</td>
+      <td>distribution, probability, estimate, prior, gaussian, sample, density, bayesian, estimation, variance, log, approximation, estimator, entropy, posterior, kernel, noise, true, stochastic, statistic</td>
+      <td>Probabilistic methods for Support Vector \nMachines \nPeter Sollich \nDepartment of Mathematics, King's College London \nStrand, London WC2R 2LS, U.K. Email: peter.sollich@kcl.ac.uk \nAbstract \nI...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Relevant papers per topic based on dominance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corpus_topic_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Dominant Topic&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> 
+                                                <span class="n">topic_set</span><span class="p">:</span> <span class="p">(</span><span class="n">topic_set</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Contribution %&#39;</span><span class="p">],</span> 
+                                                                                         <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>Document</th>
+      <th>Dominant Topic</th>
+      <th>Contribution %</th>
+      <th>Topic Desc</th>
+      <th>Paper</th>
+    </tr>
+    <tr>
+      <th>Dominant Topic</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="5" valign="top">1</th>
+      <th>1135</th>
+      <td>1135</td>
+      <td>1</td>
+      <td>71.51</td>
+      <td>word, recognition, training, speech, context, hmm, sequence, state, speaker, frame, letter, speech_recognition, phoneme, mlp, feature, experiment, vowel, trained, hybrid, segmentation</td>
+      <td>Context-Dependent Classes in a Hybrid \nRecurrent Network-HMM Speech \nRecognition System \nDan Kershaw Tony Robinson Mike Hochberg \nCambridge University Engineering Department, \nTrumpington Str...</td>
+    </tr>
+    <tr>
+      <th>635</th>
+      <td>635</td>
+      <td>1</td>
+      <td>71.48</td>
+      <td>word, recognition, training, speech, context, hmm, sequence, state, speaker, frame, letter, speech_recognition, phoneme, mlp, feature, experiment, vowel, trained, hybrid, segmentation</td>
+      <td>Connected Letter Recognition with a \nMulti-State Time Delay Neural Network \nHermann Hild and Alex Waibel \nSchool of Computer Science \nCarnegie Mellon University \nPittsburgh, PA 15213-3891, US...</td>
+    </tr>
+    <tr>
+      <th>532</th>
+      <td>532</td>
+      <td>1</td>
+      <td>68.61</td>
+      <td>word, recognition, training, speech, context, hmm, sequence, state, speaker, frame, letter, speech_recognition, phoneme, mlp, feature, experiment, vowel, trained, hybrid, segmentation</td>
+      <td>Multi-State Time Delay Neural Networks \nfor Continuous Speech Recognition \nPatrick Haffner \nCNET Lannion A TSS/RCP \n22301 LANNION, FRANCE \nhaffnerlannion.cnet. fr \nAlex Waibel \nCarnegie Me...</td>
+    </tr>
+    <tr>
+      <th>612</th>
+      <td>612</td>
+      <td>1</td>
+      <td>66.65</td>
+      <td>word, recognition, training, speech, context, hmm, sequence, state, speaker, frame, letter, speech_recognition, phoneme, mlp, feature, experiment, vowel, trained, hybrid, segmentation</td>
+      <td>Context-Dependent Multiple \nDistribution Phonetic Modeling with \nMLPs \nMichael Cohen \nSKI International \nMenlo Prk, CA 94025 \nHoracio Franco \nSKI International \nNelson Morgan \nIntl. Comp...</td>
+    </tr>
+    <tr>
+      <th>651</th>
+      <td>651</td>
+      <td>1</td>
+      <td>64.78</td>
+      <td>word, recognition, training, speech, context, hmm, sequence, state, speaker, frame, letter, speech_recognition, phoneme, mlp, feature, experiment, vowel, trained, hybrid, segmentation</td>
+      <td>Modeling Consistency in a Speaker Independent \nContinuous Speech Recognition System \nYochai Konig, Nelson Morgan, Chuck Wooters \nInternational Computer Science Institute \n1947 Center Street, S...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th rowspan="5" valign="top">20</th>
+      <th>1284</th>
+      <td>1284</td>
+      <td>20</td>
+      <td>18.90</td>
+      <td>signal, filter, frequency, source, channel, noise, response, component, temporal, sound, auditory, ica, amplitude, phase, adaptation, detection, change, eeg, processing, subject</td>
+      <td>Viewpoint invariant face recognition using \nindependent component analysis and \nattractor networks \nMarian Stewart Bartlett \nUniversity of California San Diego \nThe Salk Institute \nLa Jolla,...</td>
+    </tr>
+    <tr>
+      <th>312</th>
+      <td>312</td>
+      <td>20</td>
+      <td>16.67</td>
+      <td>signal, filter, frequency, source, channel, noise, response, component, temporal, sound, auditory, ica, amplitude, phase, adaptation, detection, change, eeg, processing, subject</td>
+      <td>A Theory for Neural Networks with Time Delays \nBert de Vries \nDepartment of Electrical Engineering \nUniversity of Florida, CSE 447 \nGainesville, FL 32611 \nJose C. Principe \nDepartment of Ele...</td>
+    </tr>
+    <tr>
+      <th>567</th>
+      <td>567</td>
+      <td>20</td>
+      <td>16.53</td>
+      <td>signal, filter, frequency, source, channel, noise, response, component, temporal, sound, auditory, ica, amplitude, phase, adaptation, detection, change, eeg, processing, subject</td>
+      <td>Modeling Applications with the Focused Gamma Net \nJose C. Principe, Bert de Vries, Jyh-Ming Kuo and Pedro Guedes de Oliveira* \nDepartment of Electrical Engineering \nUniversity of Florida, CSE 4...</td>
+    </tr>
+    <tr>
+      <th>158</th>
+      <td>158</td>
+      <td>20</td>
+      <td>14.95</td>
+      <td>signal, filter, frequency, source, channel, noise, response, component, temporal, sound, auditory, ica, amplitude, phase, adaptation, detection, change, eeg, processing, subject</td>
+      <td>436 \nSIMULATION AND MEASUREMENT OF \nTHE ELECTRIC FIELDS GENERATED \nBY WEAKLY ELECTRIC FISH \nBrian Rasnow 1, Christopher Assad 2, Mark E. Nelson 3 and James M. Bower 3 \nDivisions of Physics 1,...</td>
+    </tr>
+    <tr>
+      <th>257</th>
+      <td>257</td>
+      <td>20</td>
+      <td>13.29</td>
+      <td>signal, filter, frequency, source, channel, noise, response, component, temporal, sound, auditory, ica, amplitude, phase, adaptation, detection, change, eeg, processing, subject</td>
+      <td>542 Kassebaum, Tenorio and Schaefers \nThe Cocktail Party Problem: \nSpeech/Data Signal Separation Comparison \nbetween Backpropagation and SONN \nJohn Kassebaum \njakec.ecn.purdue.edu \nManoel F...</td>
+    </tr>
+  </tbody>
+</table>
+<p>1740 rows × 5 columns</p>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="predicting-topics-for-new-paper">
+<h3>Predicting Topics for New Paper<a class="headerlink" href="#predicting-topics-for-new-paper" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">glob</span>
+<span class="c1"># papers manually downloaded from NIPS 16</span>
+<span class="c1"># https://papers.nips.cc/book/advances-in-neural-information-processing-systems-29-2016</span>
+
+<span class="n">new_paper_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;test_data/nips16*.txt&#39;</span><span class="p">)</span>
+<span class="n">new_papers</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">fn</span> <span class="ow">in</span> <span class="n">new_paper_files</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r+&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">new_papers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+              
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total New Papers:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_papers</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total New Papers: 4
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">text_preprocessing_pipeline</span><span class="p">(</span><span class="n">documents</span><span class="p">,</span> <span class="n">normalizer_fn</span><span class="p">,</span> <span class="n">bigram_model</span><span class="p">):</span>
+    <span class="n">norm_docs</span> <span class="o">=</span> <span class="n">normalizer_fn</span><span class="p">(</span><span class="n">documents</span><span class="p">)</span>
+    <span class="n">norm_docs_bigrams</span> <span class="o">=</span> <span class="n">bigram_model</span><span class="p">[</span><span class="n">norm_docs</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">norm_docs_bigrams</span>
+
+<span class="k">def</span> <span class="nf">bow_features_pipeline</span><span class="p">(</span><span class="n">tokenized_docs</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">):</span>
+    <span class="n">paper_bow_features</span> <span class="o">=</span> <span class="p">[</span><span class="n">dictionary</span><span class="o">.</span><span class="n">doc2bow</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> 
+                              <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">tokenized_docs</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">paper_bow_features</span>
+
+<span class="n">norm_new_papers</span> <span class="o">=</span> <span class="n">text_preprocessing_pipeline</span><span class="p">(</span><span class="n">documents</span><span class="o">=</span><span class="n">new_papers</span><span class="p">,</span> <span class="n">normalizer_fn</span><span class="o">=</span><span class="n">normalize_corpus</span><span class="p">,</span> 
+                                              <span class="n">bigram_model</span><span class="o">=</span><span class="n">bigram_model</span><span class="p">)</span>
+<span class="n">norm_bow_features</span> <span class="o">=</span> <span class="n">bow_features_pipeline</span><span class="p">(</span><span class="n">tokenized_docs</span><span class="o">=</span><span class="n">norm_new_papers</span><span class="p">,</span> <span class="n">dictionary</span><span class="o">=</span><span class="n">dictionary</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">norm_new_papers</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">30</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;cooperative&#39;, &#39;graphical_model&#39;, &#39;josip&#39;, &#39;djolonga&#39;, &#39;dept_computer&#39;, &#39;science&#39;, &#39;eth&#39;, &#39;zurich&#39;, &#39;josipd&#39;, &#39;inf&#39;, &#39;ethz&#39;, &#39;ch&#39;, &#39;stefanie&#39;, &#39;jegelka&#39;, &#39;csail&#39;, &#39;mit&#39;, &#39;stefje&#39;, &#39;mit_edu&#39;, &#39;sebastian&#39;, &#39;tschiatschek&#39;, &#39;dept_computer&#39;, &#39;science&#39;, &#39;eth&#39;, &#39;zurich&#39;, &#39;stschia&#39;, &#39;inf&#39;, &#39;ethz&#39;, &#39;ch&#39;, &#39;andreas&#39;, &#39;krause&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">norm_bow_features</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">30</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(0, 1), (1, 1), (5, 1), (11, 1), (13, 1), (14, 1), (30, 1), (31, 2), (33, 4), (34, 1), (41, 3), (43, 1), (50, 1), (51, 1), (53, 1), (56, 1), (57, 2), (58, 1), (59, 6), (62, 1), (73, 7), (76, 1), (77, 4), (79, 2), (80, 1), (81, 2), (82, 2), (84, 3), (89, 5), (92, 1)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_topic_predictions</span><span class="p">(</span><span class="n">topic_model</span><span class="p">,</span> <span class="n">corpus</span><span class="p">,</span> <span class="n">topn</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">topic_predictions</span> <span class="o">=</span> <span class="n">topic_model</span><span class="p">[</span><span class="n">corpus</span><span class="p">]</span>
+    <span class="n">best_topics</span> <span class="o">=</span> <span class="p">[[(</span><span class="n">topic</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">wt</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span> 
+                        <span class="k">for</span> <span class="n">topic</span><span class="p">,</span> <span class="n">wt</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">topic_predictions</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> 
+                                                <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="o">-</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">])[:</span><span class="n">topn</span><span class="p">]]</span> 
+                            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">topic_predictions</span><span class="p">))]</span>
+    <span class="k">return</span> <span class="n">best_topics</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">topic_preds</span> <span class="o">=</span> <span class="n">get_topic_predictions</span><span class="p">(</span><span class="n">topic_model</span><span class="o">=</span><span class="n">best_lda_model</span><span class="p">,</span> 
+                                    <span class="n">corpus</span><span class="o">=</span><span class="n">norm_bow_features</span><span class="p">,</span> <span class="n">topn</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">topic_preds</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[(13, 0.212), (12, 0.207)],
+ [(4, 0.393), (13, 0.219)],
+ [(18, 0.263), (3, 0.136)],
+ [(0, 0.265), (5, 0.177)]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">results_df</span><span class="p">[</span><span class="s1">&#39;Papers&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_papers</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">results_df</span><span class="p">[</span><span class="s1">&#39;Dominant Topics&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[[</span><span class="n">topic_num</span><span class="o">+</span><span class="mi">1</span> <span class="k">for</span> <span class="n">topic_num</span><span class="p">,</span> <span class="n">wt</span> <span class="ow">in</span> <span class="n">item</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">topic_preds</span><span class="p">]</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">results_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;Papers&#39;</span><span class="p">])[</span><span class="s1">&#39;Dominant Topics&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">results_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Dominant Topics&#39;</span><span class="p">:</span> <span class="n">res</span><span class="o">.</span><span class="n">values</span><span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">results_df</span><span class="p">[</span><span class="s1">&#39;Contribution %&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">topic_wt</span> <span class="k">for</span> <span class="n">topic_list</span> <span class="ow">in</span> 
+                                        <span class="p">[[</span><span class="nb">round</span><span class="p">(</span><span class="n">wt</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> 
+                                              <span class="k">for</span> <span class="n">topic_num</span><span class="p">,</span> <span class="n">wt</span> <span class="ow">in</span> <span class="n">item</span><span class="p">]</span> 
+                                                 <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">topic_preds</span><span class="p">]</span> 
+                                    <span class="k">for</span> <span class="n">topic_wt</span> <span class="ow">in</span> <span class="n">topic_list</span><span class="p">]</span>
+
+<span class="n">results_df</span><span class="p">[</span><span class="s1">&#39;Topic Desc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">topics_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Terms per Topic&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">results_df</span><span class="p">[</span><span class="s1">&#39;Dominant Topics&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">]</span>
+<span class="n">results_df</span><span class="p">[</span><span class="s1">&#39;Paper Desc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">new_papers</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][:</span><span class="mi">200</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">results_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_colwidth&#39;</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+<span class="n">results_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Dominant Topics</th>
+      <th>Contribution %</th>
+      <th>Topic Desc</th>
+      <th>Paper Desc</th>
+    </tr>
+    <tr>
+      <th>Papers</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>14</td>
+      <td>21.2</td>
+      <td>bound, class, theorem, approximation, proof, polynomial, loss, linear, complexity, xi, theory, threshold, defined, constant, size, condition, hypothesis, bounded, definition, assume</td>
+      <td>Cooperative Graphical Models\nJosip Djolonga\nDept. of Computer Science, ETH Zurich ¨\njosipd@inf.ethz.ch\nStefanie Jegelka\nCSAIL, MIT\nstefje@mit.edu\nSebastian Tschiatschek\nDept. of Computer Science, ETH</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>13</td>
+      <td>20.7</td>
+      <td>variable, mixture, cluster, clustering, step, component, em, expert, hidden, likelihood, structure, mean_field, approximation, probability, em_algorithm, missing, mi, xi, log_likelihood, binary</td>
+      <td>Cooperative Graphical Models\nJosip Djolonga\nDept. of Computer Science, ETH Zurich ¨\njosipd@inf.ethz.ch\nStefanie Jegelka\nCSAIL, MIT\nstefje@mit.edu\nSebastian Tschiatschek\nDept. of Computer Science, ETH</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>5</td>
+      <td>39.3</td>
+      <td>state, control, action, policy, step, controller, environment, reinforcement_learning, task, robot, trajectory, optimal, goal, reward, change, td, agent, trial, position, current</td>
+      <td>PAC Reinforcement Learning with Rich Observations\nAkshay Krishnamurthy\nUniversity of Massachusetts, Amherst\nAmherst, MA, 01003\nakshay@cs.umass.edu\nAlekh Agarwal\nMicrosoft Research\nNew York, NY 10011\na</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>14</td>
+      <td>21.9</td>
+      <td>bound, class, theorem, approximation, proof, polynomial, loss, linear, complexity, xi, theory, threshold, defined, constant, size, condition, hypothesis, bounded, definition, assume</td>
+      <td>PAC Reinforcement Learning with Rich Observations\nAkshay Krishnamurthy\nUniversity of Massachusetts, Amherst\nAmherst, MA, 01003\nakshay@cs.umass.edu\nAlekh Agarwal\nMicrosoft Research\nNew York, NY 10011\na</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>19</td>
+      <td>26.3</td>
+      <td>image, object, feature, pixel, view, region, surface, shape, visual, scale, local, contour, part, edge, representation, location, position, scene, vision, matching</td>
+      <td>Automated scalable segmentation of neurons from\nmultispectral images\nUygar Sümbül\nGrossman Center for the Statistics of Mind\nand Dept. of Statistics, Columbia University\nDouglas Roossien Jr.\nUniversit</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>13.6</td>
+      <td>neuron, cell, spike, synaptic, activity, response, firing, stimulus, pattern, synapsis, effect, threshold, neural, et_al, neuronal, inhibitory, simulation, firing_rate, excitatory, current</td>
+      <td>Automated scalable segmentation of neurons from\nmultispectral images\nUygar Sümbül\nGrossman Center for the Statistics of Mind\nand Dept. of Statistics, Columbia University\nDouglas Roossien Jr.\nUniversit</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>26.5</td>
+      <td>word, recognition, training, speech, context, hmm, sequence, state, speaker, frame, letter, speech_recognition, phoneme, mlp, feature, experiment, vowel, trained, hybrid, segmentation</td>
+      <td>Unsupervised Learning of Spoken Language with\nVisual Context\nDavid Harwath, Antonio Torralba, and James R. Glass\nComputer Science and Artificial Intelligence Laboratory\nMassachusetts Institute of Tech</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>6</td>
+      <td>17.7</td>
+      <td>rule, representation, task, human, structure, feature, similarity, search, subject, instance, learned, knowledge, connectionist, domain, role, level, theory, category, position, note</td>
+      <td>Unsupervised Learning of Spoken Language with\nVisual Context\nDavid Harwath, Antonio Torralba, and James R. Glass\nComputer Science and Artificial Intelligence Laboratory\nMassachusetts Institute of Tech</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
 </div>
 <div class="section" id="document-summarization">
 <h2>Document Summarization<a class="headerlink" href="#document-summarization" title="Permalink to this headline">¶</a></h2>

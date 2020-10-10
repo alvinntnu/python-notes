@@ -13,6 +13,7 @@
     - file: python-basics/pickle
     - file: python-basics/data-visualization-1
     - file: python-basics/data-visualization-2
+    - file: python-basics/oop
     - file: python-basics/magic-r
     - file: python-basics/python-tricks
     - file: python-basics/web-applications
@@ -34,6 +35,8 @@
     - file: corpus/ckiptagger
 - file: statistical-analyses/statistical-analyses
   sections:
+    - file: statistical-analyses/descriptive-statistics
+    - file: statistical-analyses/analytic-statistics
     - file: statistical-analyses/network-analysis
     - file: statistical-analyses/network-analysis-igraph
 - file: nlp/nlp
@@ -56,4 +59,7 @@
     - file: nlp/hyperparameter-tuning
     - file: nlp/sentiment-analysis-using-bert-chinese
     - file: nlp/ktrain-tutorial-explaining-predictions
-- file: appendix/references
+- file: appendix/todo
+  sections:
+    - file: appendix/references
+

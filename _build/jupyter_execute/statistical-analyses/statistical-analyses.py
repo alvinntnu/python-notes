@@ -10,6 +10,8 @@ This section includes notes on statistical methods for different linguistic anal
 :titlesonly:
 
 
+descriptive-statistics
+analytic-statistics
 network-analysis
 network-analysis-igraph
 ```

@@ -285,6 +285,15 @@ titanic.count()
 
 titanic.median()
 
+## Generic Functions
+
+- `pandas.pivot_table()`
+- `pandas.crosstab()`
+- `pandas.cut()`
+- `pandas.qcut()`
+- `pandas.merge()`
+- `pandas.get_dummies()`
+
 ## References
 
  - [Python for Data Analysis](https://www.amazon.com/gp/product/1491957662/ref=as_li_tl_nodl?ie=UTF8&camp=1789&creative=9325&creativeASIN=1491957662&linkCode=as2&tag=ledoux-20&linkId=eff92247940c967299befaed855c580a)

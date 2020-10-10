@@ -17,6 +17,8 @@ html:
 execute:
   execute_notebooks: auto
   exclude_patterns:
+    - 'nlp/nlp-ckipnlp.ipynb'
+    - 'nlp/text-summarization.ipynb'
     - 'nlp/seq-to-seq.ipynb'
     - 'nlp/text-gen-lstm-v2.ipynb'
     - 'nlp/transfer-learning-sent-encoding.ipynb'

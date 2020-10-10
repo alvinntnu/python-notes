@@ -1,7 +1,7 @@
 # Corpus Lingustics Methods
 
 - With `nltk`, we can easily implement quite a few corpus-linguistic methods
-    - Concordance Analysis (Simple Words)
+    - Concordance Analysis (Simple Word Search)
     - Frequency Lists
     - Collocations
     - Data Analysis with R
@@ -67,6 +67,11 @@ finder.nbest(bigram_measures.pmi, 10)
 scored = finder.score_ngrams(bigram_measures.raw_freq)
 scored[:10]
 
+## Dispersion
+
+- Dispersion of a linguistic unit is also important.
+- There should be a metric that indicates how evenly distributed the linguistic unit is.
+
 ```{note}
 How to get the document frequency of the bigrams???
 ```
@@ -74,13 +79,14 @@ How to get the document frequency of the bigrams???
 unigram_freq = nltk.FreqDist(brown.words())
 bigram_freq = nltk.FreqDist('_'.join(x) for x in nltk.bigrams(brown.words()))
 
+# ngram freq list of each file in the corpus
 unigram_freq_per_file = [nltk.FreqDist(words) 
                          for words in [brown.words(fileids=f) for f in brown.fileids()]]
 bigram_freq_per_file = [nltk.FreqDist('_'.join(x) for x in nltk.bigrams(words))
                          for words in [brown.words(fileids=f) for f in brown.fileids()]]
 
 ## Function to get unigram dispersion
-def createUnigramDipsersionDist(uni_freq, uni_freq_per_file):
+def createDipsersionDist(uni_freq, uni_freq_per_file):
     len(uni_freq_per_file)
     unigram_dispersion = {}
 
@@ -93,7 +99,7 @@ def createUnigramDipsersionDist(uni_freq, uni_freq_per_file):
     return(unigram_dispersion)
 
 
-unigram_dispersion = createUnigramDipsersionDist(unigram_freq, unigram_freq_per_file)
+unigram_dispersion = createDipsersionDist(unigram_freq, unigram_freq_per_file)
 # Dictionary cannot be sliced/subset
 # Get the items() and convert to list for subsetting
 list(unigram_dispersion.items())[:20]
@@ -101,18 +107,30 @@ list(unigram_dispersion.items())[:20]
 #dict(sorted(bigram_freq.items()[:3]))
 list(bigram_freq.items())[:20]
 
-bigram_dispersion = createUnigramDipsersionDist(bigram_freq, bigram_freq_per_file)
+bigram_dispersion = createDipsersionDist(bigram_freq, bigram_freq_per_file)
 list(bigram_dispersion.items())[:20]
 
 type(unigram_freq)
 type(unigram_dispersion)
 
+:::{note}
+We can implement the Delta P dispersion metric proposed by [Gries (2008)](https://www.researchgate.net/publication/233685362_Dispersions_and_adjusted_frequencies_in_corpora).
+:::
+
 ## Delta P
+
+- This is a directional association metric.
 
 ## Inherit BigramAssocMeasures
 class AugmentedBigramAssocMeasures(BigramAssocMeasures):
     @classmethod
-    def dp_fwd(self, *marginals):
+    def raw_freq2(cls,*marginals):          
+        """Scores ngrams by their frequency"""
+        n_ii, n_io, n_oi, n_oo = cls._contingency(*marginals)
+        return n_ii
+    
+    @classmethod
+    def dp_fwd(cls, *marginals):
         """Scores bigrams using DP forward
         This may be shown with respect to a contingency table::
 
@@ -125,12 +143,12 @@ class AugmentedBigramAssocMeasures(BigramAssocMeasures):
              = n_ix        TOTAL = n_xx
         """
         
-        n_ii, n_io, n_oi, n_oo = self._contingency(*marginals)
+        n_ii, n_oi, n_io, n_oo = cls._contingency(*marginals)
 
         return (n_ii/(n_ii+n_io)) - (n_oi/(n_oi+n_oo))
 
     @classmethod
-    def dp_bwd(self, *marginals):
+    def dp_bwd(cls, *marginals):
         """Scores bigrams using DP backward
         This may be shown with respect to a contingency table::
 
@@ -143,20 +161,105 @@ class AugmentedBigramAssocMeasures(BigramAssocMeasures):
              = n_ix        TOTAL = n_xx
         """
         
-        n_ii, n_io, n_oi, n_oo = self._contingency(*marginals)
+        n_ii, n_oi, n_io, n_oo = cls._contingency(*marginals)
 
         return (n_ii/(n_ii+n_oi)) - (n_io/(n_io+n_oo))
 
 bigram_measures = AugmentedBigramAssocMeasures()
 finder = BigramCollocationFinder.from_words(brown.words())
 
-finder.apply_freq_filter(10)
+#finder.apply_freq_filter(10)
 
 bigrams_dpfwd = finder.score_ngrams(bigram_measures.dp_fwd)
 bigrams_dpfwd[:10]
 
 bigrams_dpbwd = finder.score_ngrams(bigram_measures.dp_bwd)
 bigrams_dpbwd[:10]
+
+## Checking Computation Accuracy
+
+- Check if DP is correctly computed.
+
+bigrams_rawfreq = finder.score_ngrams(bigram_measures.raw_freq2)
+
+bigrams_rawfreq[:10]
+
+unigrams_rawfreq = nltk.FreqDist(brown.words())
+
+w1f = unigrams_rawfreq['of']
+w2f = unigrams_rawfreq['the']
+w1w2 = [freq for (w1,w2),freq in bigrams_rawfreq if w1=="of" and w2=="the"][0]
+corpus_size = np.sum(list(unigrams_rawfreq.values()))
+
+"""
+        w1     _w1
+w2      w1w2   ____    w2f
+_w2     ____   ____
+        w1f            corpus_size
+"""
+
+print(w1f, w2f, w1w2,corpus_size)
+
+print('Delta P Forward for `of the`:', (w1w2/(w1f))-((w2f-w1w2)/(corpus_size-w1f)))
+print('Delta P Backward for `of the`:', (w1w2/(w2f))-((w1f-w1w2)/(corpus_size-w2f)))
+
+print([dp for (w1, w2),dp in bigrams_dpfwd if w1=="of" and w2=="the"])
+print([dp for (w1, w2),dp in bigrams_dpbwd if w1=="of" and w2=="the"])
+
+```{note}
+How to implement the delta P of trigrams?
+```
+
+# inherit Trigram
+from nltk.collocations import TrigramAssocMeasures, TrigramCollocationFinder
+class AugmentedTrigramAssocMeasures(TrigramAssocMeasures):
+    """
+    A collection of trigram association measures. Each association measure
+        is provided as a function with four arguments::
+
+            trigram_score_fn(n_iii,
+                             (n_iix, n_ixi, n_xii),
+                             (n_ixx, n_xix, n_xxi),
+                             n_xxx)
+
+        The arguments constitute the marginals of a contingency table, counting
+        the occurrences of particular events in a corpus. The letter i in the
+        suffix refers to the appearance of the word in question, while x indicates
+        the appearance of any word. Thus, for example:
+        n_iii counts (w1, w2, w3), i.e. the trigram being scored
+        n_ixx counts (w1, *, *)
+        n_xxx counts (*, *, *), i.e. any trigram
+    """
+    
+    @classmethod
+    def dp_fwd(cls, *marginals):
+        """
+        Scores trigrams using delta P forward, i.e. conditional prob of w3 given w1,w2
+        minus conditional prob of w3, in the absence of w1,w2
+        """
+        n_iii, n_oii, n_ioi, n_ooi, n_iio, n_oio, n_ioo, n_ooo = cls._contingency(*marginals)
+
+        return ((n_iii)/(n_iii+n_iio)) - ((n_ooi)/(n_ooi+n_ooo))
+    @classmethod
+    def dp_bwd(cls, *marginals):
+        """
+        Scores trigrams using delta P backward, i.e. conditional prob of w1 given w2,w3
+        minus conditional prob of w1, in the absence of w2,w3
+        """
+        n_iii, n_oii, n_ioi, n_ooi, n_iio, n_oio, n_ioo, n_ooo = cls._contingency(*marginals)
+
+        return ((n_iii)/(n_iii+n_oii)) - ((n_ioo)/(n_ioo+n_ooo))
+
+trigram_measures = AugmentedTrigramAssocMeasures()
+finder3 = TrigramCollocationFinder.from_words(brown.words())
+
+finder3.apply_freq_filter(10)
+
+finder3.nbest(trigram_measures.pmi, 10)
+
+finder3.nbest(trigram_measures.dp_fwd, 10)
+
+finder3.nbest(trigram_measures.dp_bwd,10)
 
 ## Concordance
 

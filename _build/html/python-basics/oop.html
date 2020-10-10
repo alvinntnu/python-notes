@@ -1,0 +1,736 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Object-Oriented Programming &#8212; Python Notes for Linguistics</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Magic R" href="magic-r.html" />
+    <link rel="prev" title="Data Visualization 2" href="data-visualization-2.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/ntnu03.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Python Notes for Linguistics</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="python-basics.html">
+   Python Basics
+  </a>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="jupyter-notebook.html">
+     Jupyer Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="notebook-to-slides.html">
+     Notebook to Slides
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="google-colab.html">
+     Google Colaboratory (Colab)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="google-colab-r.html">
+     Google Colab R
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="data-structure.html">
+     Data Structure
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="numpy.html">
+     Numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pandas.html">
+     Pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="program-structure.html">
+     Program Structure
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="input-output.html">
+     Input and Output
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pickle.html">
+     Object Serialization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="data-visualization-1.html">
+     Data Visualization I
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="data-visualization-2.html">
+     Data Visualization 2
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Object-Oriented Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="magic-r.html">
+     Magic R
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="python-tricks.html">
+     Python Tricks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="web-applications.html">
+     Web Applications
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="productive-tech.html">
+     Phythonic Productivity Techniques
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="miscellaneous-notes.html">
+     Miscellaneous Notes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../corpus/corpus-processing.html">
+   Corpus Linguistics with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../statistical-analyses/statistical-analyses.html">
+   Statistical Analyses
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../nlp/nlp.html">
+   Natural Language Processing with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/todo.html">
+   To-do List
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <div style="text-align:left">
+    <a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
+</div>
+
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/python-basics/oop.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/alvinntnu/python-notes/master?urlpath=tree/python-basics/oop.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/python-basics/oop.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#class">
+   Class
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#types-of-methods">
+   Types of Methods
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#class-inheritance">
+   Class Inheritance
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#special-methods">
+   Special Methods
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#property-decorator">
+   Property Decorator
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#checking-functions">
+   Checking Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#name-mangling">
+   Name Mangling
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reference">
+   Reference
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="object-oriented-programming">
+<h1>Object-Oriented Programming<a class="headerlink" href="#object-oriented-programming" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class">
+<h2>Class<a class="headerlink" href="#class" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Each class has its defined attributes and methods</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a class</span>
+<span class="k">class</span> <span class="nc">Employee</span><span class="p">:</span>
+
+    <span class="c1"># Constructor method</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">pay</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">first</span> <span class="o">=</span> <span class="n">first</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last</span> <span class="o">=</span> <span class="n">last</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">first</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="n">last</span> <span class="o">+</span> <span class="s1">&#39;@email.com&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pay</span> <span class="o">=</span> <span class="n">pay</span>
+
+    <span class="c1"># instance method</span>
+    <span class="k">def</span> <span class="nf">fullname</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">last</span><span class="p">)</span>
+
+<span class="n">emp_1</span> <span class="o">=</span> <span class="n">Employee</span><span class="p">(</span><span class="s1">&#39;Corey&#39;</span><span class="p">,</span> <span class="s1">&#39;Schafer&#39;</span><span class="p">,</span> <span class="mi">50000</span><span class="p">)</span>
+<span class="n">emp_2</span> <span class="o">=</span> <span class="n">Employee</span><span class="p">(</span><span class="s1">&#39;Test&#39;</span><span class="p">,</span> <span class="s1">&#39;Employee&#39;</span><span class="p">,</span> <span class="mi">60000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="types-of-methods">
+<h2>Types of Methods<a class="headerlink" href="#types-of-methods" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Class</strong> Method: a method bound to the class and with <code class="docutils literal notranslate"><span class="pre">cls</span></code> as the first default argument</p></li>
+<li><p><strong>Static</strong> Method: a self-contained method bound to the class</p></li>
+<li><p><strong>Instance</strong> Method: a method bound to the object instance of the class with <code class="docutils literal notranslate"><span class="pre">self</span></code> as the first default argument</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Employee</span><span class="p">:</span>
+
+    <span class="n">num_of_emps</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">raise_amt</span> <span class="o">=</span> <span class="mf">1.04</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">pay</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">first</span> <span class="o">=</span> <span class="n">first</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last</span> <span class="o">=</span> <span class="n">last</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">first</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="n">last</span> <span class="o">+</span> <span class="s1">&#39;@email.com&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pay</span> <span class="o">=</span> <span class="n">pay</span>
+
+        <span class="n">Employee</span><span class="o">.</span><span class="n">num_of_emps</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">fullname</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">last</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">apply_raise</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pay</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pay</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">raise_amt</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">set_raise_amt</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">raise_amt</span> <span class="o">=</span> <span class="n">amount</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_string</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">emp_str</span><span class="p">):</span>
+        <span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">pay</span> <span class="o">=</span> <span class="n">emp_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">pay</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">is_workday</span><span class="p">(</span><span class="n">day</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">day</span><span class="o">.</span><span class="n">weekday</span><span class="p">()</span> <span class="o">==</span> <span class="mi">5</span> <span class="ow">or</span> <span class="n">day</span><span class="o">.</span><span class="n">weekday</span><span class="p">()</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+
+<span class="n">emp_1</span> <span class="o">=</span> <span class="n">Employee</span><span class="p">(</span><span class="s1">&#39;Corey&#39;</span><span class="p">,</span> <span class="s1">&#39;Schafer&#39;</span><span class="p">,</span> <span class="mi">50000</span><span class="p">)</span>
+<span class="n">emp_2</span> <span class="o">=</span> <span class="n">Employee</span><span class="p">(</span><span class="s1">&#39;Test&#39;</span><span class="p">,</span> <span class="s1">&#39;Employee&#39;</span><span class="p">,</span> <span class="mi">60000</span><span class="p">)</span>
+
+<span class="n">Employee</span><span class="o">.</span><span class="n">set_raise_amt</span><span class="p">(</span><span class="mf">1.05</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">Employee</span><span class="o">.</span><span class="n">raise_amt</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">emp_1</span><span class="o">.</span><span class="n">raise_amt</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">emp_2</span><span class="o">.</span><span class="n">raise_amt</span><span class="p">)</span>
+
+<span class="n">emp_str_1</span> <span class="o">=</span> <span class="s1">&#39;John-Doe-70000&#39;</span>
+<span class="n">emp_str_2</span> <span class="o">=</span> <span class="s1">&#39;Steve-Smith-30000&#39;</span>
+<span class="n">emp_str_3</span> <span class="o">=</span> <span class="s1">&#39;Jane-Doe-90000&#39;</span>
+
+<span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">pay</span> <span class="o">=</span> <span class="n">emp_str_1</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+
+<span class="c1">#new_emp_1 = Employee(first, last, pay)</span>
+<span class="n">new_emp_1</span> <span class="o">=</span> <span class="n">Employee</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">emp_str_1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">new_emp_1</span><span class="o">.</span><span class="n">email</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">new_emp_1</span><span class="o">.</span><span class="n">pay</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="n">my_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">Employee</span><span class="o">.</span><span class="n">is_workday</span><span class="p">(</span><span class="n">my_date</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.05
+1.05
+1.05
+John.Doe@email.com
+70000
+True
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="class-inheritance">
+<h2>Class Inheritance<a class="headerlink" href="#class-inheritance" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>The key of OOP</p></li>
+<li><p>Extend the original class constructor methods using <code class="docutils literal notranslate"><span class="pre">super()</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Employee</span><span class="p">:</span>
+
+    <span class="n">raise_amt</span> <span class="o">=</span> <span class="mf">1.04</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">pay</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">first</span> <span class="o">=</span> <span class="n">first</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last</span> <span class="o">=</span> <span class="n">last</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">first</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="n">last</span> <span class="o">+</span> <span class="s1">&#39;@email.com&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pay</span> <span class="o">=</span> <span class="n">pay</span>
+
+    <span class="k">def</span> <span class="nf">fullname</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">last</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">apply_raise</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pay</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pay</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">raise_amt</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Developer</span><span class="p">(</span><span class="n">Employee</span><span class="p">):</span>
+    <span class="n">raise_amt</span> <span class="o">=</span> <span class="mf">1.10</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">pay</span><span class="p">,</span> <span class="n">prog_lang</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">pay</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prog_lang</span> <span class="o">=</span> <span class="n">prog_lang</span>
+
+
+<span class="k">class</span> <span class="nc">Manager</span><span class="p">(</span><span class="n">Employee</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">pay</span><span class="p">,</span> <span class="n">employees</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">pay</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">employees</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">employees</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">employees</span> <span class="o">=</span> <span class="n">employees</span>
+
+    <span class="k">def</span> <span class="nf">add_emp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">emp</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">emp</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">employees</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">employees</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">emp</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">remove_emp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">emp</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">emp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">employees</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">employees</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">emp</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">print_emps</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">emp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">employees</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--&gt;&#39;</span><span class="p">,</span> <span class="n">emp</span><span class="o">.</span><span class="n">fullname</span><span class="p">())</span>
+
+
+<span class="n">dev_1</span> <span class="o">=</span> <span class="n">Developer</span><span class="p">(</span><span class="s1">&#39;Corey&#39;</span><span class="p">,</span> <span class="s1">&#39;Schafer&#39;</span><span class="p">,</span> <span class="mi">50000</span><span class="p">,</span> <span class="s1">&#39;Python&#39;</span><span class="p">)</span>
+<span class="n">dev_2</span> <span class="o">=</span> <span class="n">Developer</span><span class="p">(</span><span class="s1">&#39;Test&#39;</span><span class="p">,</span> <span class="s1">&#39;Employee&#39;</span><span class="p">,</span> <span class="mi">60000</span><span class="p">,</span> <span class="s1">&#39;Java&#39;</span><span class="p">)</span>
+
+<span class="n">mgr_1</span> <span class="o">=</span> <span class="n">Manager</span><span class="p">(</span><span class="s1">&#39;Sue&#39;</span><span class="p">,</span> <span class="s1">&#39;Smith&#39;</span><span class="p">,</span> <span class="mi">90000</span><span class="p">,</span> <span class="p">[</span><span class="n">dev_1</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">mgr_1</span><span class="o">.</span><span class="n">email</span><span class="p">)</span>
+
+<span class="n">mgr_1</span><span class="o">.</span><span class="n">add_emp</span><span class="p">(</span><span class="n">dev_2</span><span class="p">)</span>
+<span class="n">mgr_1</span><span class="o">.</span><span class="n">remove_emp</span><span class="p">(</span><span class="n">dev_2</span><span class="p">)</span>
+
+<span class="n">mgr_1</span><span class="o">.</span><span class="n">print_emps</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sue.Smith@email.com
+--&gt; Corey Schafer
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="special-methods">
+<h2>Special Methods<a class="headerlink" href="#special-methods" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Dunder methods (double-underscore)</p></li>
+<li><p>To avoid overloading the expressions in coding</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Employee</span><span class="p">:</span>
+
+    <span class="n">raise_amt</span> <span class="o">=</span> <span class="mf">1.04</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">pay</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">first</span> <span class="o">=</span> <span class="n">first</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last</span> <span class="o">=</span> <span class="n">last</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">first</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="n">last</span> <span class="o">+</span> <span class="s1">&#39;@email.com&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pay</span> <span class="o">=</span> <span class="n">pay</span>
+
+    <span class="k">def</span> <span class="nf">fullname</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">last</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">apply_raise</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pay</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pay</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">raise_amt</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;Employee(&#39;</span><span class="si">{}</span><span class="s2">&#39;, &#39;</span><span class="si">{}</span><span class="s2">&#39;, </span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">last</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pay</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> - </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fullname</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">email</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pay</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">pay</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fullname</span><span class="p">())</span>
+
+
+<span class="n">emp_1</span> <span class="o">=</span> <span class="n">Employee</span><span class="p">(</span><span class="s1">&#39;Corey&#39;</span><span class="p">,</span> <span class="s1">&#39;Schafer&#39;</span><span class="p">,</span> <span class="mi">50000</span><span class="p">)</span>
+<span class="n">emp_2</span> <span class="o">=</span> <span class="n">Employee</span><span class="p">(</span><span class="s1">&#39;Test&#39;</span><span class="p">,</span> <span class="s1">&#39;Employee&#39;</span><span class="p">,</span> <span class="mi">60000</span><span class="p">)</span>
+
+<span class="c1"># print(emp_1 + emp_2)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">emp_1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="property-decorator">
+<h2>Property Decorator<a class="headerlink" href="#property-decorator" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;property</span></code>: make a method function like attribute-accessing</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;NAME.setter</span></code>: make a method function like class-attribute assigning</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;NAME.deleter</span></code>: make a method function like class-attribute deleting</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Employee</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">first</span> <span class="o">=</span> <span class="n">first</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last</span> <span class="o">=</span> <span class="n">last</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">email</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">.</span><span class="si">{}</span><span class="s1">@email.com&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">last</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">fullname</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">last</span><span class="p">)</span>
+    
+    <span class="nd">@fullname</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">fullname</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="n">first</span><span class="p">,</span> <span class="n">last</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">first</span> <span class="o">=</span> <span class="n">first</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last</span> <span class="o">=</span> <span class="n">last</span>
+    
+    <span class="nd">@fullname</span><span class="o">.</span><span class="n">deleter</span>
+    <span class="k">def</span> <span class="nf">fullname</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Delete Name!&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">first</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<span class="n">emp_1</span> <span class="o">=</span> <span class="n">Employee</span><span class="p">(</span><span class="s1">&#39;John&#39;</span><span class="p">,</span> <span class="s1">&#39;Smith&#39;</span><span class="p">)</span>
+<span class="n">emp_1</span><span class="o">.</span><span class="n">fullname</span> <span class="o">=</span> <span class="s2">&quot;Corey Schafer&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">emp_1</span><span class="o">.</span><span class="n">first</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">emp_1</span><span class="o">.</span><span class="n">email</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">emp_1</span><span class="o">.</span><span class="n">fullname</span><span class="p">)</span>
+
+<span class="k">del</span> <span class="n">emp_1</span><span class="o">.</span><span class="n">fullname</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Corey
+Corey.Schafer@email.com
+Corey Schafer
+Delete Name!
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="checking-functions">
+<h2>Checking Functions<a class="headerlink" href="#checking-functions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">isinstance()</span></code>: Check an instance’s type</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">issubclass()</span></code>: Check class inheritance</p></li>
+</ul>
+</div>
+<div class="section" id="name-mangling">
+<h2>Name Mangling<a class="headerlink" href="#name-mangling" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">__NAME</span></code>: Any identifier of this form within the class is textually replaced with <code class="docutils literal notranslate"><span class="pre">_classname__NAME</span></code>, where <code class="docutils literal notranslate"><span class="pre">classname</span></code> is the current class name, with leading underscore(s) stripped.</p></li>
+<li><p>This is for the purpose of creating <strong>private</strong> variables to the class.</p></li>
+</ul>
+</div>
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>This notebook is based on <a class="reference external" href="https://www.youtube.com/playlist?list=PL-osiE80TeTsqhIuOqKhwlXsIBIdSeYtc">Corey Schafer’s OOP Tutorial</a></p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./python-basics"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="data-visualization-2.html" title="previous page">Data Visualization 2</a>
+    <a class='right-next' id="next-link" href="magic-r.html" title="next page">Magic R</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alvin Chen<br/>
+        
+            &copy; Copyright 2020 Alvin Chen.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

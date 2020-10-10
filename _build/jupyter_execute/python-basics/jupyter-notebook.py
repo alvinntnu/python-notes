@@ -50,6 +50,20 @@ To include the bibliography at the end of the file):
 ```
 
 
+## Special Blocks in Jupyer Book
+
+
+- [sphinx-book-theme documentation](https://sphinx-book-theme.readthedocs.io/en/latest/reference/demo.html#admonitions)
+- `note`
+- `warning`
+- `caution`
+- `danger`
+- `error`
+- `hint`
+- `important`
+- `tip`
+- self-defined `admonition`
+
 ## Add Images/Figures
 
 - [Documentation](https://jupyterbook.org/content/figures.html)

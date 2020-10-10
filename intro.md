@@ -6,12 +6,14 @@ This notebook collects my personal python notes for linguistics. These notes are
 This notebook is being updated on a regular basis. Most of the materials here are for educational purposes only.
 
 
+
 ## Table of Contents
 
-There are three main sections in Python Notes for Linguistics:
+There are four main sections in Python Notes for Linguistics:
 
 - Python Basics
 - Corpus Linguistics with Python
+- Statistical Analyses
 - NLP with Python
 
 ## Recommended Books
