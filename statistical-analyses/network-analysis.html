@@ -57,7 +57,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Network Analysis Using Igraph" href="network-analysis-igraph.html" />
-    <link rel="prev" title="Statistical Analyses" href="statistical-analyses.html" />
+    <link rel="prev" title="Analytic Statistics" href="analytic-statistics.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -106,6 +106,16 @@
    Statistical Analyses
   </a>
   <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="descriptive-statistics.html">
+     Descriptive Statistics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="analytic-statistics.html">
+     Analytic Statistics
+    </a>
+   </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      Network Analysis
@@ -124,8 +134,8 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../appendix/references.html">
-   References
+  <a class="reference internal" href="../appendix/todo.html">
+   To-do List
   </a>
  </li>
 </ul>
@@ -315,7 +325,7 @@
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading model from cache /var/folders/n7/ltpzwx813c599nfxfb94s_640000gn/T/jieba.cache
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading model cost 0.830 seconds.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading model cost 0.796 seconds.
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Prefix dict has been built successfully.
@@ -569,6 +579,12 @@
     <span class="n">w_vocab</span> <span class="o">=</span> <span class="n">nlp_zh</span><span class="o">.</span><span class="n">vocab</span><span class="p">[</span><span class="n">w</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">w_vocab</span><span class="o">.</span><span class="n">vector</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">w_vocab</span><span class="o">.</span><span class="n">vector</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">w_vocab</span><span class="o">.</span><span class="n">is_ascii</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">w_vocab</span><span class="o">.</span><span class="n">is_punct</span> <span class="ow">and</span> <span class="n">w</span><span class="o">!=</span><span class="n">target_word</span><span class="p">:</span>
         <span class="n">word_sim</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">w</span><span class="p">,</span> <span class="n">target_word_vocab</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="n">w_vocab</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 42.6 s, sys: 761 ms, total: 43.3 s
+Wall time: 42.9 s
 </pre></div>
 </div>
 </div>
@@ -1281,7 +1297,7 @@ Wall time: 1min 9s
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="statistical-analyses.html" title="previous page">Statistical Analyses</a>
+    <a class='left-prev' id="prev-link" href="analytic-statistics.html" title="previous page">Analytic Statistics</a>
     <a class='right-next' id="next-link" href="network-analysis-igraph.html" title="next page">Network Analysis Using Igraph</a>
 
     </div>
