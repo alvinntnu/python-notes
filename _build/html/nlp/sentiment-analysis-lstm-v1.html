@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 
 <html>
@@ -6,35 +7,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sentiment Analysis with LSTM &#8212; Python Notes for Linguistics</title>
-    
-  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
-
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
-
-    
-      
-  <link rel="stylesheet"
-    href="../_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
-
-    
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
-
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
@@ -43,8 +24,8 @@
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
@@ -59,8 +40,8 @@
     <link rel="next" title="Machine Translation (Sequence-to-Sequence LSTM)" href="seq-to-seq.html" />
     <link rel="prev" title="Sentiment Analysis with Deep Learning" href="sentiment-analysis-dl.html" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
 
 
 
@@ -129,6 +110,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="text-normalization-eng.html">
      Text Normalization (English)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="text-normalization-chinese.html">
+     Chinese Text Normalization
     </a>
    </li>
    <li class="toctree-l2">
@@ -267,8 +253,7 @@
 
         <!-- Full screen (wrap in <a> to have style consistency -->
         <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                title="Fullscreen mode"><i
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
                     class="fas fa-expand"></i></button></a>
 
         <!-- Launch buttons -->
@@ -299,7 +284,6 @@
 
     <!-- Table of contents -->
     <div class="d-none d-md-block col-md-2 bd-toc show">
-        
         <div class="tocsection onthispage pt-5 pb-3">
             <i class="fas fa-list"></i> Contents
         </div>
@@ -343,7 +327,6 @@
 </ul>
 
         </nav>
-        
     </div>
 </div>
     <div id="main-content" class="row">
@@ -511,30 +494,6 @@ float32
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/10
-157/157 [==============================] - 111s 709ms/step - loss: 0.4556 - accuracy: 0.7739 - val_loss: 0.3904 - val_accuracy: 0.8310
-Epoch 2/10
-157/157 [==============================] - 112s 714ms/step - loss: 0.2479 - accuracy: 0.9057 - val_loss: 0.2884 - val_accuracy: 0.8804
-Epoch 3/10
-157/157 [==============================] - 111s 709ms/step - loss: 0.2162 - accuracy: 0.9179 - val_loss: 0.3065 - val_accuracy: 0.8748
-Epoch 4/10
-157/157 [==============================] - 122s 777ms/step - loss: 0.1547 - accuracy: 0.9423 - val_loss: 0.3361 - val_accuracy: 0.8764
-Epoch 5/10
-157/157 [==============================] - 124s 791ms/step - loss: 0.1228 - accuracy: 0.9561 - val_loss: 0.3708 - val_accuracy: 0.8800
-Epoch 6/10
-157/157 [==============================] - 119s 759ms/step - loss: 0.0934 - accuracy: 0.9685 - val_loss: 0.3716 - val_accuracy: 0.8794
-Epoch 7/10
-157/157 [==============================] - 111s 710ms/step - loss: 0.0775 - accuracy: 0.9730 - val_loss: 0.4497 - val_accuracy: 0.8748
-Epoch 8/10
-157/157 [==============================] - 124s 788ms/step - loss: 0.0839 - accuracy: 0.9705 - val_loss: 0.4725 - val_accuracy: 0.8250
-Epoch 9/10
-157/157 [==============================] - 119s 757ms/step - loss: 0.0700 - accuracy: 0.9775 - val_loss: 0.4114 - val_accuracy: 0.8686
-Epoch 10/10
-157/157 [==============================] - 118s 752ms/step - loss: 0.1145 - accuracy: 0.9603 - val_loss: 0.4440 - val_accuracy: 0.8694
-</pre></div>
-</div>
-</div>
 </div>
 </div>
 <div class="section" id="model-evaluation">
@@ -583,6 +542,32 @@ Epoch 10/10
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># model.save(&#39;../data/sent-analysis-lstm-v1.h5&#39;)</span>
 <span class="kn">import</span> <span class="nn">keras</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s1">&#39;../data/sent-analysis-lstm-v1.h5&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">OSError</span><span class="g g-Whitespace">                                   </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="n">d46bb94b5e08</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># model.save(&#39;../data/sent-analysis-lstm-v1.h5&#39;)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">keras</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s1">&#39;../data/sent-analysis-lstm-v1.h5&#39;</span><span class="p">)</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/tensorflow/python/keras/saving/save.py</span> in <span class="ni">load_model</span><span class="nt">(filepath, custom_objects, compile, options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">184</span>     <span class="n">filepath</span> <span class="o">=</span> <span class="n">path_to_string</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">185</span>     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">string_types</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">186</span>       <span class="n">loader_impl</span><span class="o">.</span><span class="n">parse_saved_model</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">187</span>       <span class="k">return</span> <span class="n">saved_model_load</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="nb">compile</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">188</span> 
+
+<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/tensorflow/python/saved_model/loader_impl.py</span> in <span class="ni">parse_saved_model</span><span class="nt">(export_dir)</span>
+<span class="g g-Whitespace">    </span><span class="mi">111</span>                   <span class="p">(</span><span class="n">export_dir</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">112</span>                    <span class="n">constants</span><span class="o">.</span><span class="n">SAVED_MODEL_FILENAME_PBTXT</span><span class="p">,</span>
+<span class="ne">--&gt; </span><span class="mi">113</span>                    <span class="n">constants</span><span class="o">.</span><span class="n">SAVED_MODEL_FILENAME_PB</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">114</span> 
+<span class="g g-Whitespace">    </span><span class="mi">115</span> 
+
+<span class="ne">OSError</span>: SavedModel file does not exist at: ../data/sent-analysis-lstm-v1.h5/{saved_model.pbtxt|saved_model.pb}
 </pre></div>
 </div>
 </div>
@@ -771,10 +756,7 @@ Actual: 0      10615   1885
       </div>
     </div>
 
-    
-  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
-
-
+    <script src="../_static/js/index.js"></script>
     
   </body>
 </html>

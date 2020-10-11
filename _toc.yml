@@ -45,6 +45,7 @@
     - file: nlp/nlp-spacy-zh
     - file: nlp/nlp-ckipnlp
     - file: nlp/text-normalization-eng
+    - file: nlp/text-normalization-chinese
     - file: nlp/sklearn
     - file: nlp/sentiment-analysis-ml
     - file: nlp/word-embeddings

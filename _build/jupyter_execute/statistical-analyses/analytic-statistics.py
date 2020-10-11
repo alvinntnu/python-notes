@@ -26,11 +26,7 @@ data = np.array([[85, 65],
 data
 
 V, p, df, expected = stats.chi2_contingency(data, correction=False)
-print("""
-Chi-square value = {}
-dF = {}
-p = {}
-""".format(V, df, p))
+print("Chi-square value = %1.2f, df = %1.2f, p = %1.2f"%(V, df, p))
 
 ## McNear Test
 
@@ -44,7 +40,7 @@ from statsmodels.sandbox.stats.runs import mcnemar
 
 crosstab = pd.crosstab(data['BEFORE'],data['AFTER'])
 x2, p = mcnemar(crosstab, correction=False)
-print('Chi-square={}, p = {}'.format(x2, p))
+print('Chi-square=%1.2f, p = %1.2f'%(x2, p))
 
 ## Independent *t*-test
 
@@ -52,5 +48,18 @@ vowels = pd.read_table(DEMO_DATA_ROOT + "/gries_sflwr/_inputfiles/04-3-2-1_f1-fr
 vowels.head()
 
 t, p = stats.ttest_ind(vowels[vowels['SEX']=='M']['HZ_F1'], vowels[vowels['SEX']=='F']['HZ_F1'])
-print("t-score={}, p={}".format(t,p))
+print("t-score=%1.2f, p=%1.2f"%(t,p))
 
+## One-way ANOVA
+
+data = pd.read_table(DEMO_DATA_ROOT + "/gries_sflwr/_inputfiles/05-2_reactiontimes.csv")
+data
+
+data = data.dropna()
+
+from statsmodels.formula.api import ols
+from statsmodels.stats.anova import anova_lm
+
+model = ols('RT ~ FAMILIARITY', data).fit()
+aov = anova_lm(model)
+print(aov)

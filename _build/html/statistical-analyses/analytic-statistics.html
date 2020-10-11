@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 
 <html>
@@ -6,35 +7,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Analytic Statistics &#8212; Python Notes for Linguistics</title>
-    
-  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
-
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
-
-    
-      
-  <link rel="stylesheet"
-    href="../_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
-
-    
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
-
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
@@ -43,8 +24,8 @@
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
@@ -59,8 +40,8 @@
     <link rel="next" title="Network Analysis" href="network-analysis.html" />
     <link rel="prev" title="Descriptive Statistics" href="descriptive-statistics.html" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
 
 
 
@@ -197,8 +178,7 @@
 
         <!-- Full screen (wrap in <a> to have style consistency -->
         <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                title="Fullscreen mode"><i
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
                     class="fas fa-expand"></i></button></a>
 
         <!-- Launch buttons -->
@@ -229,7 +209,6 @@
 
     <!-- Table of contents -->
     <div class="d-none d-md-block col-md-2 bd-toc show">
-        
         <div class="tocsection onthispage pt-5 pb-3">
             <i class="fas fa-list"></i> Contents
         </div>
@@ -259,10 +238,14 @@
    -test
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#one-way-anova">
+   One-way ANOVA
+  </a>
+ </li>
 </ul>
 
         </nav>
-        
     </div>
 </div>
     <div id="main-content" class="row">
@@ -393,18 +376,12 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">V</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">expected</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2_contingency</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">correction</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">Chi-square value = </span><span class="si">{}</span><span class="s2"></span>
-<span class="s2">dF = </span><span class="si">{}</span><span class="s2"></span>
-<span class="s2">p = </span><span class="si">{}</span><span class="s2"></span>
-<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Chi-square value = </span><span class="si">%1.2f</span><span class="s2">, df = </span><span class="si">%1.2f</span><span class="s2">, p = </span><span class="si">%1.2f</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chi-square value = 9.81913158479692
-dF = 1
-p = 0.0017270586881763651
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chi-square value = 9.82, df = 1.00, p = 0.00
 </pre></div>
 </div>
 </div>
@@ -488,12 +465,12 @@ p = 0.0017270586881763651
 
 <span class="n">crosstab</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;BEFORE&#39;</span><span class="p">],</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;AFTER&#39;</span><span class="p">])</span>
 <span class="n">x2</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">mcnemar</span><span class="p">(</span><span class="n">crosstab</span><span class="p">,</span> <span class="n">correction</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Chi-square=</span><span class="si">{}</span><span class="s1">, p = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Chi-square=</span><span class="si">%1.2f</span><span class="s1">, p = </span><span class="si">%1.2f</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chi-square=13, p = 0.0004095414537825806
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chi-square=13.00, p = 0.00
 </pre></div>
 </div>
 </div>
@@ -570,12 +547,180 @@ p = 0.0017270586881763651
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">ttest_ind</span><span class="p">(</span><span class="n">vowels</span><span class="p">[</span><span class="n">vowels</span><span class="p">[</span><span class="s1">&#39;SEX&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;M&#39;</span><span class="p">][</span><span class="s1">&#39;HZ_F1&#39;</span><span class="p">],</span> <span class="n">vowels</span><span class="p">[</span><span class="n">vowels</span><span class="p">[</span><span class="s1">&#39;SEX&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;F&#39;</span><span class="p">][</span><span class="s1">&#39;HZ_F1&#39;</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;t-score=</span><span class="si">{}</span><span class="s2">, p=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">p</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;t-score=</span><span class="si">%1.2f</span><span class="s2">, p=</span><span class="si">%1.2f</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">p</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t-score=-2.441581341316771, p=0.01610718158639349
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t-score=-2.44, p=0.02
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="one-way-anova">
+<h2>One-way ANOVA<a class="headerlink" href="#one-way-anova" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="n">DEMO_DATA_ROOT</span> <span class="o">+</span> <span class="s2">&quot;/gries_sflwr/_inputfiles/05-2_reactiontimes.csv&quot;</span><span class="p">)</span>
+<span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>CASE</th>
+      <th>RT</th>
+      <th>FREQUENCY</th>
+      <th>FAMILIARITY</th>
+      <th>IMAGEABILITY</th>
+      <th>MEANINGFULNESS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>almond</td>
+      <td>650.9947</td>
+      <td>0.693147</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ant</td>
+      <td>589.4347</td>
+      <td>1.945910</td>
+      <td>med</td>
+      <td>hi</td>
+      <td>415.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>apple</td>
+      <td>523.0493</td>
+      <td>2.302585</td>
+      <td>hi</td>
+      <td>hi</td>
+      <td>451.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>apricot</td>
+      <td>642.3342</td>
+      <td>0.693147</td>
+      <td>lo</td>
+      <td>lo</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>asparagus</td>
+      <td>696.2092</td>
+      <td>0.693147</td>
+      <td>med</td>
+      <td>lo</td>
+      <td>442.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>72</th>
+      <td>tortoise</td>
+      <td>733.0323</td>
+      <td>1.386294</td>
+      <td>lo</td>
+      <td>lo</td>
+      <td>403.0</td>
+    </tr>
+    <tr>
+      <th>73</th>
+      <td>walnut</td>
+      <td>663.5908</td>
+      <td>2.484907</td>
+      <td>med</td>
+      <td>lo</td>
+      <td>468.0</td>
+    </tr>
+    <tr>
+      <th>74</th>
+      <td>wasp</td>
+      <td>725.7056</td>
+      <td>1.098612</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>75</th>
+      <td>whale</td>
+      <td>609.9745</td>
+      <td>0.000000</td>
+      <td>med</td>
+      <td>hi</td>
+      <td>474.0</td>
+    </tr>
+    <tr>
+      <th>76</th>
+      <td>woodpecker</td>
+      <td>686.3439</td>
+      <td>0.693147</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>77 rows × 6 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+<span class="kn">from</span> <span class="nn">statsmodels.formula.api</span> <span class="kn">import</span> <span class="n">ols</span>
+<span class="kn">from</span> <span class="nn">statsmodels.stats.anova</span> <span class="kn">import</span> <span class="n">anova_lm</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">ols</span><span class="p">(</span><span class="s1">&#39;RT ~ FAMILIARITY&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">aov</span> <span class="o">=</span> <span class="n">anova_lm</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">aov</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>               df        sum_sq      mean_sq         F    PR(&gt;F)
+FAMILIARITY   2.0  16377.601187  8188.800594  4.645348  0.014654
+Residual     45.0  79325.813100  1762.795847       NaN       NaN
 </pre></div>
 </div>
 </div>
@@ -631,10 +776,7 @@ p = 0.0017270586881763651
       </div>
     </div>
 
-    
-  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
-
-
+    <script src="../_static/js/index.js"></script>
     
   </body>
 </html>
