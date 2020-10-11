@@ -270,6 +270,20 @@
     <!-- Table of contents -->
     <div class="d-none d-md-block col-md-2 bd-toc show">
         
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#text-normalization">
+   Text Normalization
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
     </div>
 </div>
     <div id="main-content" class="row">
@@ -283,6 +297,7 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span> <span class="k">as</span> <span class="n">soup</span>  <span class="c1"># HTML data structure</span>
+<span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">etree</span>
 
 <span class="c1"># extract article hyperlinks from an index page</span>
 <span class="k">def</span> <span class="nf">extractArtLinks</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
@@ -323,13 +338,212 @@
 <span class="c1"># extract article contents from  the article hyperlink</span>
 <span class="k">def</span> <span class="nf">extractArtText</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">cookies</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;over18&#39;</span><span class="p">:</span><span class="s1">&#39;1&#39;</span><span class="p">})</span>
-    <span class="n">page_soup</span> <span class="o">=</span> <span class="n">soup</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s2">&quot;lxml&quot;</span><span class="p">)</span>
+    <span class="c1">#page_soup = soup(r.text, &quot;lxml&quot;)</span>
     <span class="c1">#print(page_soup.find(&quot;div&quot;,{&quot;id&quot;:&quot;main-content&quot;}).get_text())</span>
-    <span class="n">art_text</span><span class="o">=</span><span class="n">page_soup</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;div#main-content&#39;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
-    <span class="k">return</span><span class="p">(</span><span class="n">art_text</span><span class="p">)</span>
+    <span class="c1">#art_text=page_soup.select(&#39;div#main-content&#39;, limit=1)[0].text</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+    <span class="n">html</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+    <span class="n">art_text</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s2">&quot;//div[@id=&#39;main-content&#39;]/text()[not(self::div|self::span[@class=&#39;f2&#39;])]&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">art_text</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://www.ptt.cc/bbs/Food/M.1602332821.A.6F3.html&#39;</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">cookies</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;over18&#39;</span><span class="p">:</span><span class="s1">&#39;1&#39;</span><span class="p">})</span>
+<span class="c1">#page_soup = soup(r.text, &quot;lxml&quot;)</span>
+<span class="c1">#print(page_soup.find(&quot;div&quot;,{&quot;id&quot;:&quot;main-content&quot;}).get_text())</span>
+<span class="c1">#art_text=page_soup.select(&#39;div#main-content&#39;, limit=1)[0].text</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+<span class="n">html</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+<span class="n">art_text</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s2">&quot;//div[@id=&#39;main-content&#39;]/text()[not(self::div|self::span[@class=&#39;f2&#39;])]&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">art_text</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>店家資料：起家厝
+用餐時間：2020年7月
+營業時間：每日08:00-21:00
+電話：02 2252 1637
+付現、刷卡、不用服務費
+地址：新北市板橋區松江街118號
+醬廖食被秀：
+-----------------
+我是一個想吃什麼就要吃到的人，
+
+不然我就會整個腦袋都在想著那樣東西XDD
+
+這次來起家厝就是因為我非常非常非常想吃歐姆蛋，
+
+幾年前來有吃過他們的歐姆蛋捲，印象中好像不錯，
+
+所以決定假日趕快來排隊攻略歐姆蛋捲!
+
+
+
+我們大約10點多快11點到，
+
+外面會有人候位，
+
+好險他店外有個遮蔽空間，不然在烈陽下等應該很多人會受不了
+
+
+
+
+
+店內的位子是全滿的，
+
+所以好像都不太接受訂位~
+
+要直接來現場等候才行
+
+
+
+
+
+菜單其實有蠻多頁的，
+
+我就挑出我們有點的類別就好，
+
+青醬雞肉歐姆蛋捲(240元)，附有烤麵包、德國香腸、沙拉、開胃飲品，另外還有可續杯
+的飲料
+
+
+
+
+
+另外還點了一份泰G瑪哈陵的帕尼尼(160元)
+
+
+
+
+
+我們剛好被安排在窗邊的高腳椅區，
+
+我個人很喜歡高腳椅，太低的桌子或椅子就是覺得不舒服~
+
+剛好座位旁邊就有插座，還有公仔作伴^_^
+
+飲料是早午餐附的蜂蜜檸檬跟去冰紅茶，
+
+
+
+
+
+泰G瑪哈陵帕尼尼上場~
+
+左邊的粗薯條是點帕尼尼餐點就會附的
+
+右手邊的帕尼尼需要趁熱吃!
+
+
+
+
+
+店家已經先幫忙切對半，
+
+這樣我要拍側面好方便~
+
+微辣雞肉、還有相映襯的蔬菜，另外融化的馬茲瑞拉起司
+
+趁熱吃還不錯!
+
+另外看菜單說他們每周三16:00-20:00帕尼尼第二份半價!
+
+喜歡帕尼尼的朋友可以搶購(?)吃個夠XD
+
+
+
+
+
+我心心念念的歐姆蛋捲終於來了~
+
+青醬雞肉歐姆蛋
+
+整盤看起來就是賞心悅目阿!!
+
+
+
+
+
+來一一介紹盤中內容吧~
+
+這邊是德式香腸跟蜂蜜芥末醬沙拉，
+
+這應該沒啥特別的，只要香腸有熟、沙拉沒有蟲應該都是非常合格的(標準很低XD)
+
+兩個這樣搭就是非常合，生菜中和德式香腸的鹹味，不會讓人覺得很膩~
+
+下面那個醬是楓糖漿，
+
+要來給我可愛的法式吐司用的
+
+
+
+
+
+原本歐姆蛋套餐是附一般吐司，
+
+但我個人當天想吃軟軟甜甜的法式吐司，
+
+所以我有+25元升級法式吐司~
+
+事實證明我完全升級對了，
+
+法式吐司加楓糖漿根本絕配，而且他的法式吐司真的又棉又軟~
+
+真心推薦就給他+25元升級吧XDD
+
+
+
+
+
+重點歐姆蛋捲本身相當飽滿，
+
+外面還鋪個起司片，
+
+我迫不及待來嘗一口!
+
+
+
+
+
+不太會拍切面秀，
+
+我只是想表達裏頭真的滿滿餡料，
+
+有洋蔥、雞肉塊、起司等，然後佐以青醬的蛋液，
+
+一層一層包覆起來很厚實，
+
+
+
+
+
+整體來說就是&quot;推&quot;，
+
+個人覺得餐點CP值很高、也很好吃，
+
+另外不收服務費又提供插座跟續杯飲料也很佛心，
+
+唯一唯一我覺得麻煩的點是只能現場等候，
+
+要等離峰或是有耐心排隊才能品嘗到
+
+
+--
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For CSS selector, don’t know how to set conditional criteria to select only texts under div#main-container but not those included in the child div.article-metaline and span.f2.</p>
+<p>So here I use the XPath, which requires the lxml package.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -346,7 +560,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>22
 </pre></div>
 </div>
 </div>
@@ -359,7 +573,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;push&#39;: &#39;&#39;, &#39;title&#39;: &#39;[食記] 台北車站商業午餐-【樂雅樂】&#39;, &#39;date&#39;: &#39;10/10&#39;, &#39;author&#39;: &#39;hellolego&#39;, &#39;link&#39;: &#39;/bbs/Food/M.1602332970.A.C66.html&#39;, &#39;text&#39;: &#39;作者hellolego (hellolego)看板Food標題[食記] 台北車站商業午餐-【樂雅樂】 時間Sat Oct 10 20:29:28 2020\n店家資料：樂雅樂(站前店)\n用餐時間：2020年6月\n營業時間：週一至週四07:00-21:30/ 週五至週日07:00-22:00\n電話：02 2371 3128\n付現、刷卡、一成服務費\n地址：台北市中正區許昌街19號一樓(捷運台北車站8號出口)\n醬廖食被秀：https://reurl.cc/ygDa2y\n---------------\n以前高中在北車補習的時候就看過這間樂雅樂，\n\n就在YMCA旁邊，\n\n而且全台很多分店，\n\n但直到現在都3X歲了，才來第一次造訪，\n\n\n\n\n\n我們臨時起意，所以沒有預約，\n\n現場倒是不少組客人，\n\n有些是預定席，當我們開始用餐時，人都陸陸續續到，\n\n\n\n\n\n有非常多的菜單可以選，\n\n我們光選菜就選了5分鐘，\n\n類別很多，包含漢堡排、蛋包飯、焗烤、義大利麵、排餐、咖哩飯、御膳等，\n\n我們當天是平日，所以有商業午餐，\n\n我選了蒜味雞排香酥魚餐(310元)，另外還附湯品、麵包(或白飯)、百元飲品，\n\n\n\n\n\n朋友點的是海鮮青醬義大利麵套餐(310元)，\n\n另外也有附湯品跟百元飲品(可是沒麵包)\n\n\n\n另外還有很多品項，\n\n詳細菜單就請大家到樂雅樂官網看個仔細吧\n\n\n\n坐下後不會等太久餐點就陸續登場，\n\n首先是當日例湯：奶油濃湯\n\n這款真的有濃~算是濃稠型的湯品，\n\n味道不錯、留著等等可以沾麵包(聰明)\n\n\n\n\n\n再來上桌的是剛烤好的麵包!\n\n香香軟軟，還附上有鹽奶油根本絕配，\n\n當然也可以沾上面的濃湯，口感也完全不同，\n\n\n\n\n\n我的主餐蒜味雞排香酥魚!\n\n\n\n\n\n除了有生菜沙拉加百香果醬之外，\n\n還有煎的嫩雞腿佐炸蒜片，\n\n\n\n\n\n以及肥滋滋塔塔醬的香酥魚，\n\n\n\n\n\n他的雞排跟魚排都很好吃!\n\n但因為都是比較重口味的，所以搭配清爽生菜真的很聰明，\n\n不然會太油膩(愛吃又怕胖QQ)\n\n\n\n\n\n\n\n總體而言，我們都覺得是個會再訪的餐廳，\n\n環境算乾淨舒適，餐點味道不錯且不算太貴，\n\n又有很多不同料理可以選擇，\n\n就算不是在北車周邊上班，單純要來吃飯交通也很方便喔\n\n\n--\n※ 發信站: 批踢踢實業坊(ptt.cc), 來自: 124.218.35.64 (臺灣)\n※ 文章網址: https://www.ptt.cc/bbs/Food/M.1602332970.A.C66.html\n&#39;}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;push&#39;: &#39;&#39;, &#39;title&#39;: &#39;[食記] 台北車站商業午餐-【樂雅樂】&#39;, &#39;date&#39;: &#39;10/10&#39;, &#39;author&#39;: &#39;hellolego&#39;, &#39;link&#39;: &#39;/bbs/Food/M.1602332970.A.C66.html&#39;, &#39;text&#39;: &#39;\n店家資料：樂雅樂(站前店)\n用餐時間：2020年6月\n營業時間：週一至週四07:00-21:30/ 週五至週日07:00-22:00\n電話：02 2371 3128\n付現、刷卡、一成服務費\n地址：台北市中正區許昌街19號一樓(捷運台北車站8號出口)\n醬廖食被秀：\n---------------\n以前高中在北車補習的時候就看過這間樂雅樂，\n\n就在YMCA旁邊，\n\n而且全台很多分店，\n\n但直到現在都3X歲了，才來第一次造訪，\n\n\n\n\n\n我們臨時起意，所以沒有預約，\n\n現場倒是不少組客人，\n\n有些是預定席，當我們開始用餐時，人都陸陸續續到，\n\n\n\n\n\n有非常多的菜單可以選，\n\n我們光選菜就選了5分鐘，\n\n類別很多，包含漢堡排、蛋包飯、焗烤、義大利麵、排餐、咖哩飯、御膳等，\n\n我們當天是平日，所以有商業午餐，\n\n我選了蒜味雞排香酥魚餐(310元)，另外還附湯品、麵包(或白飯)、百元飲品，\n\n\n\n\n\n朋友點的是海鮮青醬義大利麵套餐(310元)，\n\n另外也有附湯品跟百元飲品(可是沒麵包)\n\n\n\n另外還有很多品項，\n\n詳細菜單就請大家到樂雅樂官網看個仔細吧\n\n\n\n坐下後不會等太久餐點就陸續登場，\n\n首先是當日例湯：奶油濃湯\n\n這款真的有濃~算是濃稠型的湯品，\n\n味道不錯、留著等等可以沾麵包(聰明)\n\n\n\n\n\n再來上桌的是剛烤好的麵包!\n\n香香軟軟，還附上有鹽奶油根本絕配，\n\n當然也可以沾上面的濃湯，口感也完全不同，\n\n\n\n\n\n我的主餐蒜味雞排香酥魚!\n\n\n\n\n\n除了有生菜沙拉加百香果醬之外，\n\n還有煎的嫩雞腿佐炸蒜片，\n\n\n\n\n\n以及肥滋滋塔塔醬的香酥魚，\n\n\n\n\n\n他的雞排跟魚排都很好吃!\n\n但因為都是比較重口味的，所以搭配清爽生菜真的很聰明，\n\n不然會太油膩(愛吃又怕胖QQ)\n\n\n\n\n\n\n\n總體而言，我們都覺得是個會再訪的餐廳，\n\n環境算乾淨舒適，餐點味道不錯且不算太貴，\n\n又有很多不同料理可以選擇，\n\n就算不是在北車周邊上班，單純要來吃飯交通也很方便喔\n\n\n--\n&#39;}
 </pre></div>
 </div>
 </div>
@@ -371,24 +585,324 @@
       <span class="s1">&#39;date: </span><span class="si">{date:s}</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span>
       <span class="s1">&#39;author: </span><span class="si">{author:s}</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span>
       <span class="s1">&#39;link: </span><span class="si">{link:s}</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span>
-      <span class="s1">&#39;text: </span><span class="si">{text:.5}</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">all_links</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+      <span class="s1">&#39;text: </span><span class="si">{text:.20}</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">all_links</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Push:  
-title: [食記] 台北車站商業午餐-【樂雅樂】 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Push: 1 
+title: [食記] 龜山在地人的傳統美味吳氏湯包 
 date: 10/10 
-author: hellolego 
-link: /bbs/Food/M.1602332970.A.C66.html 
-text: 作者hel 
+author: albee10 
+link: /bbs/Food/M.1602334804.A.120.html 
+text: 
+   餐廳名稱：吳氏湯包
+   消費時 
 </pre></div>
 </div>
 </div>
 </div>
+<div class="section" id="text-normalization">
+<h2>Text Normalization<a class="headerlink" href="#text-normalization" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;../nlp&#39;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">text_normalizer_zh</span> <span class="k">as</span> <span class="nn">tn</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">all_links</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="s1">&#39;text&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   餐廳名稱：吳氏湯包
+   消費時間：2020/09
+   地址：333桃園市龜山區文化七路93號
+   電話：(03)327-8975
+   營業時間：05:00–13:00（週一公休）
+   每人平均價位：60
+   可否刷卡：否
+   有無包廂：否
+   推薦菜色：湯包
+
+
+      完整圖文版：
+
+
+回憶兒時父母總是帶著我們到街角的包子、饅頭店買早餐
+
+比起西式早餐、中式早點店有著一種記憶中的美味
+
+桃園龜山文華國小旁的吳氏湯包
+
+每日早晨一疊疊蒸籠沒停過的冒著縷縷白煙
+
+飲料在冰箱自取
+
+小籠包一籠10粒 ＄70
+
+不像大家印想中皮薄餡多的那種
+
+吳氏湯包是帶點麵皮感的小籠包
+
+有點像是花蓮公正包子，但皮沒那麼厚
+
+肥瘦相當的內餡，咬下多汁不乾柴
+
+沾上特製辣油非爽口～
+
+
+
+豬排抓餅蛋 ＄55
+
+抓餅煎的外酥內軟
+
+層層的北方餅感，咬起來很扎實
+
+薄薄的豬排與蛋
+
+我無法吃完一整份XD
+
+偶爾用這樣樸實的滋味喚醒慵懶的早晨
+
+也是一件幸福的事情
+
+
+
+
+--
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">raw</span> <span class="o">=</span> <span class="p">[</span><span class="n">art</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span><span class="k">for</span> <span class="n">art</span> <span class="ow">in</span> <span class="n">all_links</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">art</span><span class="p">)</span><span class="o">!=</span><span class="mi">0</span> <span class="ow">and</span> <span class="nb">len</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+<span class="n">raw_normalized</span> <span class="o">=</span> <span class="n">tn</span><span class="o">.</span><span class="n">normalize_corpus</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Building prefix dict from /Users/Alvin/GoogleDrive/_MySyncDrive/RepositoryData/data/jiaba/dict.txt.jiebatw.txt ...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading model from cache /var/folders/n7/ltpzwx813c599nfxfb94s_640000gn/T/jieba.u1b52b47246a0f2e6497af6bbe107adac.cache
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading model cost 0.619 seconds.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Prefix dict has been built successfully.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">raw</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>店家資料：起家厝
+用餐時間：2020年7月
+營業時間：每日08:00-21:00
+電話：02 2252 1637
+付現、刷卡、不用服務費
+地址：新北市板橋區松江街118號
+醬廖食被秀：
+-----------------
+我是一個想吃什麼就要吃到的人，
+
+不然我就會整個腦袋都在想著那樣東西XDD
+
+這次來起家厝就是因為我非常非常非常想吃歐姆蛋，
+
+幾年前來有吃過他們的歐姆蛋捲，印象中好像不錯，
+
+所以決定假日趕快來排隊攻略歐姆蛋捲!
+
+
+
+我們大約10點多快11點到，
+
+外面會有人候位，
+
+好險他店外有個遮蔽空間，不然在烈陽下等應該很多人會受不了
+
+
+
+
+
+店內的位子是全滿的，
+
+所以好像都不太接受訂位~
+
+要直接來現場等候才行
+
+
+
+
+
+菜單其實有蠻多頁的，
+
+我就挑出我們有點的類別就好，
+
+青醬雞肉歐姆蛋捲(240元)，附有烤麵包、德國香腸、沙拉、開胃飲品，另外還有可續杯
+的飲料
+
+
+
+
+
+另外還點了一份泰G瑪哈陵的帕尼尼(160元)
+
+
+
+
+
+我們剛好被安排在窗邊的高腳椅區，
+
+我個人很喜歡高腳椅，太低的桌子或椅子就是覺得不舒服~
+
+剛好座位旁邊就有插座，還有公仔作伴^_^
+
+飲料是早午餐附的蜂蜜檸檬跟去冰紅茶，
+
+
+
+
+
+泰G瑪哈陵帕尼尼上場~
+
+左邊的粗薯條是點帕尼尼餐點就會附的
+
+右手邊的帕尼尼需要趁熱吃!
+
+
+
+
+
+店家已經先幫忙切對半，
+
+這樣我要拍側面好方便~
+
+微辣雞肉、還有相映襯的蔬菜，另外融化的馬茲瑞拉起司
+
+趁熱吃還不錯!
+
+另外看菜單說他們每周三16:00-20:00帕尼尼第二份半價!
+
+喜歡帕尼尼的朋友可以搶購(?)吃個夠XD
+
+
+
+
+
+我心心念念的歐姆蛋捲終於來了~
+
+青醬雞肉歐姆蛋
+
+整盤看起來就是賞心悅目阿!!
+
+
+
+
+
+來一一介紹盤中內容吧~
+
+這邊是德式香腸跟蜂蜜芥末醬沙拉，
+
+這應該沒啥特別的，只要香腸有熟、沙拉沒有蟲應該都是非常合格的(標準很低XD)
+
+兩個這樣搭就是非常合，生菜中和德式香腸的鹹味，不會讓人覺得很膩~
+
+下面那個醬是楓糖漿，
+
+要來給我可愛的法式吐司用的
+
+
+
+
+
+原本歐姆蛋套餐是附一般吐司，
+
+但我個人當天想吃軟軟甜甜的法式吐司，
+
+所以我有+25元升級法式吐司~
+
+事實證明我完全升級對了，
+
+法式吐司加楓糖漿根本絕配，而且他的法式吐司真的又棉又軟~
+
+真心推薦就給他+25元升級吧XDD
+
+
+
+
+
+重點歐姆蛋捲本身相當飽滿，
+
+外面還鋪個起司片，
+
+我迫不及待來嘗一口!
+
+
+
+
+
+不太會拍切面秀，
+
+我只是想表達裏頭真的滿滿餡料，
+
+有洋蔥、雞肉塊、起司等，然後佐以青醬的蛋液，
+
+一層一層包覆起來很厚實，
+
+
+
+
+
+整體來說就是&quot;推&quot;，
+
+個人覺得餐點CP值很高、也很好吃，
+
+另外不收服務費又提供插座跟續杯飲料也很佛心，
+
+唯一唯一我覺得麻煩的點是只能現場等候，
+
+要等離峰或是有耐心排隊才能品嘗到
+
+
+--
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">raw_normalized</span><span class="p">[</span><span class="mi">13</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>餐廳 名稱 癮燒 精肉 酒 舖 消費 時間 年 月 地址 高雄市 新興區 民享街 號 電話 營業 時間 平日 假日 晚上 假日 中午 每人 平均 價位 起 可否 刷卡 可 有無 包廂 有 推薦 菜色 板腱 厚切 劍 芯 牛舌 官網 有圖 好讀 網誌 版 純 文字 版 這家 在 高雄 默默 低調 有名 的 精品 燒肉 位於 高雄 新崛江 外圍 的 民享街 不愧為 酒 舖 一 進來 就是 滿 噹噹 的 各種 酒類 也 是 啦 吃 燒烤 總是 要 小酌 一下 入門 右手 邊 就是 肉品 熟成 櫃 我 之前 看 別人 分享 的 好像 還會 有 牛舌 或是 鴨肉 之類 的 肉品 在 裡面 熟成 但 我 那天 並 沒有 看到 癮燒 提供 的 都 是 冷藏 肉 使用 日本 三大 和 牛 之 一 的 近江牛 採取 一頭 買 的 包下 整頭 牛 也 有 澳洲 和 牛 跟 美國 牛肉 店內 空間 很 舒服 並不像 一般 燒烤店 那樣 壅擠 也 沒有 燒烤店 油膩 的 炭火 味 我們 今天 是 在 二樓 的 包廂 用餐 一樓 是 一間 包廂 可 容納 最多 人 低消 二樓 為 開放 空間 跟 小 包廂 小 包箱 可 容納 人 低消 按 人數 不等 開放 空間 用餐 低消 人 用餐 時間 包廂內 有位 羊 先生 陪 我們 用餐 菜單 裡面 有個 名稱 跟 部位 的 對應 圖 高科技 服務 鈴 各面 有 不同 需求 只要 將 需要 的 面 朝上 即可 需要 服務 茶水 服務 點餐 整理 桌面 換 烤網 涼拌 蔥 塩 牛舌 很 特別 的 一道 菜 蔥油 很 像 燒臘店 的 口味 搭上 很 有 肉感 完全 不像 牛舌 彈的 口感 鹹香 開胃 很 特別 蜂蜜 芥末 籽 沙拉 松露 蒸蛋 沙拉 滿 普通 的 蒸蛋 軟嫩 上面 點綴 上 一些 鮭魚 卵 韓式 手工 泡菜 柚香 大根 這兩款 都 很 解膩 也 都 很 清爽 可口 尤其 是 柚香 大根 柚子 清香 跟 蘿蔔 脆爽 很 搭 大 推薦 王 上海 底 干貝 海膽 鮭魚 卵 基本 上 這道 是 生食 但 如果 真的 不行 的 也 能 請 店家 協助 炙燒 一下 生食 感受 完全 鮮甜 味 炙燒 的 帶點 炭火 味 都 很 美味 但 不要 大家 都 請 店家 炙燒 我 怕 造成 店家 的 困擾 和 牛握 壽司 貫 超嫩 超好 入口 超級 好吃 究好 松阪豬 來自 南投 欣 合興 農場 的 究好豬 烤 的 肉質 脆彈 且 沒有 豬 腥味 有夠 厲害 特選 厚切 牛舌 塊 自從 在 日本 吃 過厚切 的 牛舌 之後 我 就 瘋狂 迷戀 上厚切 牛舌 這款 是 澳洲 和 牛 的 牛舌 吃起來 口感 十足 且 脆彈 比薄切 更 深得 我 心 跑山 桂丁雞 腿肉 來自 嘉義 的 桂丁雞 使用 有機 穀物 飼養 雞腿肉 吃起來 軟嫩 多汁 雞皮 烤 得 金黃 酥脆 精選 蛋黃 吐司 人份 這份 是 四人 份 這個 是 招牌 之 一 烤 得 金黃 香酥 的 吐司 放上 烤 的 超嫩 的 和 牛 淋上 偏甜 的 醬汁 跟 蛋黃 整個 好 入口 醬汁 對 我 來 說 是 偏甜 一點 但是 牛肉 的 嫩 跟 香酥 的 吐司 絕對 不能 錯過 豪 野鴨 胸 鴨胸 口感 紮實 卻 不 乾 柴 特選 翼板 這份翼板 的 油花 也 超美 吃起來 軟嫩 可口 卻 不會 覺得 過於 油 醬燒 橫膈膜 口感 鮮嫩 又 有 咬 勁 搭配 癮燒 的 醬汁 是 有 口感 的 一道 劍 芯 牛舌 一天 限量 只有 三條 想要 的 務必 訂位 時 就 要 預訂 價格 為 秤斤 現切 所以 每一條 價格 都 不 太 一致 一整條 牛舌 可以 一次 品嘗到 各種 口感 前段 部分 油脂 比例 較 低 吃起來 肉味 十足 且 富有 嚼 勁 後段 部 分 油脂 比例 較 高 軟嫩 可口 紅寶石 天使 小卷 烤 的 香脆 鮮香 超 新鮮 的 小卷 板腱 厚切 重量 可以 根據 人數 決定 現在 寫 文章 的 我 看到 那個 油花 整個 口水 瘋狂 分泌 雖然 看起來 紅通通 但 吃起來 真的 入口 即化 一 咀嚼 滿口 鮮甜 味 真的 是 哇 超甜 超甜 大 推薦 日本 山藥 這個 推薦 試試 烤過 的 山藥 不像 生食 的 時候 滑 膩膩 的 多 了 綿綿 甜甜 的 口感 帶點 焦 香味 好吃 起司 雙品燒 由 麻糬 地瓜 馬鈴薯 跟 起司 組合 而成 光看 這 組合 就 知道 不可能 不 好吃 了 吧 感謝 當天 幫 我們 服務 店員 果然 好 的 肉 就是 要 讓 專業 的 來 不然 給 我們 烤 就 浪費 了 總體 來 說 沒 啥 雷品 肉 的 品質 對得起 價格 同樣 的 以 這個 價格 要 吃飽 可能 口袋 要 很 深 所以 建議 穿插 點些 飯類 或是 非 牛肉 的 肉類 會 吃 得 比較 飽 但 這餐 吃下來 雖然 口袋 破 了 大洞 但 真的 都 超級 好吃 想要 安穩 控制 預算 的 可以 採取 套餐 的 點法 推薦 有點 小 預算 又 喜歡 吃 燒肉 的 朋友 絕對 會 滿意 的
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/List_of_Unicode_characters">Unicode List</a></p></li>
+</ul>
 <div class="admonition">
 <p class="admonition-title"> Exercise</p>
 <p>How to seperate post texts from push texts?</p>
+</div>
 </div>
 </div>
 
@@ -401,16 +915,16 @@ text: 作者hel
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "ckiptagger"
+            mode: "python"
         },
         kernelOptions: {
-            kernelName: "ckiptagger",
+            kernelName: "python-notes",
             path: "./corpus"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'ckiptagger'</script>
+    <script>kernelName = 'python-notes'</script>
 
               </div>
               
