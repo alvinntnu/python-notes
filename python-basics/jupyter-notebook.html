@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 
 <html>
@@ -7,15 +6,35 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Jupyer Notebook &#8212; Python Notes for Linguistics</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
-    <link href="../_static/css/index.css" rel="stylesheet">
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
@@ -24,8 +43,8 @@
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/sphinx-book-theme.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
@@ -40,8 +59,8 @@
     <link rel="next" title="Notebook to Slides" href="notebook-to-slides.html" />
     <link rel="prev" title="Python Basics" href="python-basics.html" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="docsearch:language" content="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
 
 
 
@@ -148,6 +167,11 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="docstrings.html">
+     Docstrings Format
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="python-tricks.html">
      Python Tricks
     </a>
@@ -248,7 +272,8 @@
 
         <!-- Full screen (wrap in <a> to have style consistency -->
         <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
                     class="fas fa-expand"></i></button></a>
 
         <!-- Launch buttons -->
@@ -279,6 +304,7 @@
 
     <!-- Table of contents -->
     <div class="d-none d-md-block col-md-2 bd-toc show">
+        
         <div class="tocsection onthispage pt-5 pb-3">
             <i class="fas fa-list"></i> Contents
         </div>
@@ -360,6 +386,11 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#package-importing">
+   Package Importing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#requirements">
    Requirements
   </a>
@@ -367,6 +398,7 @@
 </ul>
 
         </nav>
+        
     </div>
 </div>
     <div id="main-content" class="row">
@@ -792,8 +824,8 @@ IRkernel::installspec()
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 13.7 ms, sys: 17.3 ms, total: 30.9 ms
-Wall time: 12.6 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 13.3 ms, sys: 17.2 ms, total: 30.5 ms
+Wall time: 12.9 s
 </pre></div>
 </div>
 </div>
@@ -806,7 +838,7 @@ Wall time: 12.6 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.54 µs ± 61.4 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.12 µs ± 21.7 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
 </pre></div>
 </div>
 </div>
@@ -837,16 +869,16 @@ Automagic is ON, % prefix IS NOT needed for line magics.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>data-structure.ipynb       notebook-to-slides.ipynb
-data-visualization-1.ipynb numpy.ipynb
-data-visualization-2.ipynb oop.ipynb
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>data-structure.ipynb       miscellaneous-notes.ipynb
+data-visualization-1.ipynb notebook-to-slides.ipynb
+data-visualization-2.ipynb numpy.ipynb
+docstrings.ipynb           oop.ipynb
 google-colab-r.ipynb       pandas.ipynb
 google-colab.ipynb         pickle.ipynb
 hello-world.ipynb          productive-tech.ipynb
 input-output.ipynb         program-structure.ipynb
 jupyter-notebook.ipynb     python-tricks.ipynb
 magic-r.ipynb              web-applications.ipynb
-miscellaneous-notes.ipynb
 </pre></div>
 </div>
 </div>
@@ -898,6 +930,19 @@ Attaching package: ‘dplyr’
 </div>
 <p>Try:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupyter</span> <span class="n">notebook</span> <span class="o">--</span><span class="n">NotebookApp</span><span class="o">.</span><span class="n">iopub_data_rate_limit</span><span class="o">=</span><span class="mf">1.0e10</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="package-importing">
+<h2>Package Importing<a class="headerlink" href="#package-importing" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Python can only import self-defined libraries in the current working directory (i.e., the directory where the script file is).</p></li>
+<li><p>To use libraries in other directories, we need to add the lib path to the system.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;../nlp&#39;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">text_normalizer_zh</span> <span class="k">as</span> <span class="nn">tn</span>
+
 </pre></div>
 </div>
 </div>
@@ -961,7 +1006,10 @@ Attaching package: ‘dplyr’
       </div>
     </div>
 
-    <script src="../_static/js/index.js"></script>
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
     
   </body>
 </html>

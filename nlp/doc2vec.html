@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 
 <html>
@@ -7,15 +6,35 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dov2Vec &#8212; Python Notes for Linguistics</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
-    <link href="../_static/css/index.css" rel="stylesheet">
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
@@ -24,8 +43,8 @@
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/sphinx-book-theme.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
@@ -40,8 +59,8 @@
     <link rel="next" title="Sentiment Analysis with Deep Learning" href="sentiment-analysis-dl.html" />
     <link rel="prev" title="Word2Vec" href="word2vec.html" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="docsearch:language" content="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
 
 
 
@@ -114,7 +133,7 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="text-normalization-chinese.html">
-     Chinese Text Normalization
+     Text Normalization (Chinese)
     </a>
    </li>
    <li class="toctree-l2">
@@ -253,7 +272,8 @@
 
         <!-- Full screen (wrap in <a> to have style consistency -->
         <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
                     class="fas fa-expand"></i></button></a>
 
         <!-- Launch buttons -->
@@ -284,6 +304,7 @@
 
     <!-- Table of contents -->
     <div class="d-none d-md-block col-md-2 bd-toc show">
+        
         <div class="tocsection onthispage pt-5 pb-3">
             <i class="fas fa-list"></i> Contents
         </div>
@@ -312,6 +333,7 @@
 </ul>
 
         </nav>
+        
     </div>
 </div>
     <div id="main-content" class="row">
@@ -420,8 +442,8 @@
   after removing the cwd from sys.path.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 10.7 s, sys: 723 ms, total: 11.5 s
-Wall time: 6.38 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 10.4 s, sys: 699 ms, total: 11.1 s
+Wall time: 6.1 s
 </pre></div>
 </div>
 </div>
@@ -455,7 +477,7 @@ Wall time: 6.38 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(0, 0.9448612928390503), (255, 0.8574570417404175), (48, 0.8450801372528076), (40, 0.8248024582862854), (272, 0.8045478463172913), (8, 0.7442786693572998), (33, 0.7010061144828796), (264, 0.6925963163375854), (10, 0.6714379787445068), (19, 0.6650924682617188)]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(0, 0.9325741529464722), (255, 0.8427528142929077), (48, 0.8263688087463379), (40, 0.8005189895629883), (272, 0.7952215671539307), (8, 0.7506988048553467), (33, 0.7055468559265137), (264, 0.6882631182670593), (19, 0.6615878343582153), (10, 0.6585317850112915)]
 </pre></div>
 </div>
 </div>
@@ -478,8 +500,8 @@ Wall time: 6.38 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(0, 0.938280463218689), (33, 0.46417415142059326), (48, 0.4470580518245697), (40, 0.445773720741272), (189, 0.40428483486175537), (264, 0.36745327711105347), (8, 0.3648000657558441), (46, 0.3642280697822571), (222, 0.33735233545303345), (9, 0.33699941635131836)]
-[(0, 0.9472522735595703), (255, 0.8471640348434448), (48, 0.8409879207611084), (40, 0.8299617767333984), (272, 0.800011396408081), (8, 0.7433926463127136), (33, 0.6989229917526245), (264, 0.6956647634506226), (19, 0.6719955205917358), (10, 0.6679914593696594)]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(0, 0.9367589950561523), (33, 0.4516494870185852), (40, 0.4502303898334503), (48, 0.42480596899986267), (8, 0.3785327970981598), (189, 0.377061665058136), (9, 0.3402150273323059), (264, 0.33383500576019287), (46, 0.32134199142456055), (7, 0.32001757621765137)]
+[(0, 0.9373463988304138), (255, 0.835442304611206), (48, 0.8195940256118774), (40, 0.800629198551178), (272, 0.7938728928565979), (8, 0.7532355785369873), (33, 0.7215935587882996), (264, 0.6925468444824219), (19, 0.676409125328064), (10, 0.6616539359092712)]
 </pre></div>
 </div>
 </div>
@@ -625,7 +647,10 @@ new south wales firefighters are hoping lighter winds will help ease their workl
       </div>
     </div>
 
-    <script src="../_static/js/index.js"></script>
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
     
   </body>
 </html>
