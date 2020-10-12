@@ -351,10 +351,9 @@
 <span class="c1">#import collections</span>
 <span class="kn">from</span> <span class="nn">nltk.tokenize.toktok</span> <span class="kn">import</span> <span class="n">ToktokTokenizer</span>
 <span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
-<span class="kn">import</span> <span class="nn">requests</span> 
+<span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">text_normalizer_zh</span> <span class="k">as</span> <span class="nn">tnz</span>
- 
 </pre></div>
 </div>
 </div>
@@ -364,89 +363,130 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load text_normalizer_zh.py</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">Notes</span>
+<span class="sd">-----</span>
+
+<span class="sd">    These functions are based on the text normalization functions </span>
+<span class="sd">    provided in Text Analytics with Python 2ed.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
 <span class="kn">import</span> <span class="nn">unicodedata</span>
 <span class="kn">import</span> <span class="nn">re</span>
-<span class="c1">#from nltk.corpus import wordnet</span>
-<span class="c1">#import collections</span>
-<span class="kn">from</span> <span class="nn">nltk.tokenize.toktok</span> <span class="kn">import</span> <span class="n">ToktokTokenizer</span>
-<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
-<span class="kn">import</span> <span class="nn">requests</span> 
+<span class="c1"># from nltk.tokenize.toktok import ToktokTokenizer</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">jieba</span>
+
+<span class="c1">## Initialize Trad Chinese dictionary</span>
+<span class="n">jieba</span><span class="o">.</span><span class="n">set_dictionary</span><span class="p">(</span><span class="s1">&#39;../../../RepositoryData/data/jiaba/dict.txt.jiebatw.txt&#39;</span><span class="p">)</span>
+
 
 <span class="c1">## Normalize unicode characters</span>
 <span class="k">def</span> <span class="nf">remove_weird_chars</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
-<span class="c1">#     ```</span>
-<span class="c1">#     (NFKD) will apply the compatibility decomposition, i.e. </span>
-<span class="c1">#     replace all compatibility characters with their equivalents. </span>
-<span class="c1">#     ```</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">unicodedata</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="s1">&#39;NFKD&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="s1">&#39;ignore&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+    <span class="c1">#     ```</span>
+    <span class="c1">#     (NFKD) will apply the compatibility decomposition, i.e.</span>
+    <span class="c1">#     replace all compatibility characters with their equivalents.</span>
+    <span class="c1">#     ```</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">unicodedata</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="s1">&#39;NFKD&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span>
+                                                      <span class="s1">&#39;ignore&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span>
+                                                          <span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">text</span>
 
 
-<span class="c1">## Remove duplicate spaces</span>
+<span class="c1">## Remove extra linebreaks</span>
 <span class="k">def</span> <span class="nf">remove_extra_linebreaks</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
     <span class="n">lines</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\n+&#39;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[\s]+&#39;</span><span class="p">,</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">lines</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span><span class="o">!=</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[\s]+&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">lines</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">])</span>
 
 
+<span class="c1">## Remove extra medial/trailing/leading spaces</span>
 <span class="k">def</span> <span class="nf">remove_extra_spaces</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">s+&quot;</span><span class="p">,</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">s+&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
 
-<span class="kn">import</span> <span class="nn">jieba</span>
-<span class="n">jieba</span><span class="o">.</span><span class="n">set_dictionary</span><span class="p">(</span><span class="s1">&#39;../../../RepositoryData/data/jiaba/dict.txt.jiebatw.txt&#39;</span><span class="p">)</span>
 
-<span class="c1">## Word Segmentation</span>
-<span class="k">def</span> <span class="nf">seg</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">return_list</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<span class="c1">## Seg the text into words</span>
+<span class="k">def</span> <span class="nf">seg</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
     <span class="n">text_seg</span> <span class="o">=</span> <span class="n">jieba</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">return_list</span><span class="p">:</span>
-        <span class="n">out</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">text_seg</span><span class="p">]</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">out</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">text_seg</span><span class="p">)</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">text_seg</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">out</span>
 
 
+<span class="c1">## Remove punctuation/symbols</span>
 <span class="k">def</span> <span class="nf">remove_symbols</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;[</span><span class="se">\u0021</span><span class="s1">-</span><span class="se">\u002f\u003a</span><span class="s1">-</span><span class="se">\u0040\u005b</span><span class="s1">-</span><span class="se">\u0060\u007b</span><span class="s1">-</span><span class="se">\u007e\u00a1</span><span class="s1">-</span><span class="se">\u00bf\u2000</span><span class="s1">-</span><span class="se">\u206f\u2013</span><span class="s1">-</span><span class="se">\u204a\u20a0</span><span class="s1">-</span><span class="se">\u20bf\u2100</span><span class="s1">-</span><span class="se">\u214f\u2150</span><span class="s1">-</span><span class="se">\u218b\u2190</span><span class="s1">-</span><span class="se">\u21ff\u2200</span><span class="s1">-</span><span class="se">\u22ff\u2300</span><span class="s1">-</span><span class="se">\u23ff\u2460</span><span class="s1">-</span><span class="se">\u24ff\u2500</span><span class="s1">-</span><span class="se">\u257f\u2580</span><span class="s1">-</span><span class="se">\u259f\u25a0</span><span class="s1">-</span><span class="se">\u25ff\u2600</span><span class="s1">-</span><span class="se">\u26ff\u2e00</span><span class="s1">-</span><span class="se">\u2e7f\u3000</span><span class="s1">-</span><span class="se">\u303f\ufe50</span><span class="s1">-</span><span class="se">\ufe6f\ufe30</span><span class="s1">-</span><span class="se">\ufe4f\ufe10</span><span class="s1">-</span><span class="se">\ufe1f\uff00</span><span class="s1">-</span><span class="se">\uffef</span><span class="s1">─◆╱]+&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">text</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    </span>
+<span class="sd">    Unicode 6.0 has 7 character categories, and each category has subcategories:</span>
+
+<span class="sd">    Letter (L): lowercase (Ll), modifier (Lm), titlecase (Lt), uppercase (Lu), other (Lo)</span>
+<span class="sd">    Mark (M): spacing combining (Mc), enclosing (Me), non-spacing (Mn)</span>
+<span class="sd">    Number (N): decimal digit (Nd), letter (Nl), other (No)</span>
+<span class="sd">    Punctuation (P): connector (Pc), dash (Pd), initial quote (Pi), final quote (Pf), open (Ps), close (Pe), other (Po)</span>
+<span class="sd">    Symbol (S): currency (Sc), modifier (Sk), math (Sm), other (So)</span>
+<span class="sd">    Separator (Z): line (Zl), paragraph (Zp), space (Zs)</span>
+<span class="sd">    Other (C): control (Cc), format (Cf), not assigned (Cn), private use (Co), surrogate (Cs)</span>
+<span class="sd">    </span>
+<span class="sd">    </span>
+<span class="sd">    There are 3 ranges reserved for private use (Co subcategory): </span>
+<span class="sd">    U+E000—U+F8FF (6,400 code points), U+F0000—U+FFFFD (65,534) and U+100000—U+10FFFD (65,534). </span>
+<span class="sd">    Surrogates (Cs subcategory) use the range U+D800—U+DFFF (2,048 code points).</span>
+<span class="sd">    </span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">## Brute-force version: list all possible unicode ranges, but this list is not complete.</span>
+    <span class="c1">#   text = re.sub(&#39;[\u0021-\u002f\u003a-\u0040\u005b-\u0060\u007b-\u007e\u00a1-\u00bf\u2000-\u206f\u2013-\u204a\u20a0-\u20bf\u2100-\u214f\u2150-\u218b\u2190-\u21ff\u2200-\u22ff\u2300-\u23ff\u2460-\u24ff\u2500-\u257f\u2580-\u259f\u25a0-\u25ff\u2600-\u26ff\u2e00-\u2e7f\u3000-\u303f\ufe50-\ufe6f\ufe30-\ufe4f\ufe10-\ufe1f\uff00-\uffef─◆╱]+&#39;,&#39;&#39;,text)</span>
+
+    <span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ch</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">text</span>
+                   <span class="k">if</span> <span class="n">unicodedata</span><span class="o">.</span><span class="n">category</span><span class="p">(</span><span class="n">ch</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="s1">&#39;S&#39;</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">text</span>
 
+
+<span class="c1">## Remove numbers</span>
 <span class="k">def</span> <span class="nf">remove_numbers</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">d+&#39;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">d+&#39;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
 
+
+<span class="c1">## Remove alphabets</span>
 <span class="k">def</span> <span class="nf">remove_alphabets</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;[a-zA-Z]+&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;[a-zA-Z]+&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">normalize_corpus</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span> <span class="n">is_remove_extra_linebreaks</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                    <span class="n">is_remove_weird_chars</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                    <span class="n">is_seg</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                    <span class="n">is_remove_symbols</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                    <span class="n">is_remove_numbers</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                    <span class="n">is_remove_alphabets</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                    <span class="n">is_return_list</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
-    
+
+<span class="c1">## Combine every step</span>
+<span class="k">def</span> <span class="nf">normalize_corpus</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span>
+                     <span class="n">is_remove_extra_linebreaks</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                     <span class="n">is_remove_weird_chars</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                     <span class="n">is_seg</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                     <span class="n">is_remove_symbols</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                     <span class="n">is_remove_numbers</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                     <span class="n">is_remove_alphabets</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
     <span class="n">normalized_corpus</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="c1"># normalize each document in the corpus</span>
     <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">corpus</span><span class="p">:</span>
-        
+
         <span class="k">if</span> <span class="n">is_remove_extra_linebreaks</span><span class="p">:</span>
             <span class="n">doc</span> <span class="o">=</span> <span class="n">remove_extra_linebreaks</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
-            
+
         <span class="k">if</span> <span class="n">is_remove_weird_chars</span><span class="p">:</span>
             <span class="n">doc</span> <span class="o">=</span> <span class="n">remove_weird_chars</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
-           
+
         <span class="k">if</span> <span class="n">is_seg</span><span class="p">:</span>
-            <span class="n">doc</span><span class="o">=</span><span class="n">seg</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">is_return_list</span><span class="p">)</span>
-            
+            <span class="n">doc</span> <span class="o">=</span> <span class="n">seg</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+
         <span class="k">if</span> <span class="n">is_remove_symbols</span><span class="p">:</span>
-            <span class="n">doc</span><span class="o">=</span><span class="n">remove_symbols</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
-            
+            <span class="n">doc</span> <span class="o">=</span> <span class="n">remove_symbols</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+
         <span class="k">if</span> <span class="n">is_remove_alphabets</span><span class="p">:</span>
-            <span class="n">doc</span><span class="o">=</span><span class="n">remove_alphabets</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
-            
+            <span class="n">doc</span> <span class="o">=</span> <span class="n">remove_alphabets</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+
         <span class="k">if</span> <span class="n">is_remove_numbers</span><span class="p">:</span>
-            <span class="n">doc</span><span class="o">=</span><span class="n">remove_numbers</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
-            
+            <span class="n">doc</span> <span class="o">=</span> <span class="n">remove_numbers</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+
         <span class="n">normalized_corpus</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">remove_extra_spaces</span><span class="p">(</span><span class="n">doc</span><span class="p">))</span>
-        
+
     <span class="k">return</span> <span class="n">normalized_corpus</span>
 </pre></div>
 </div>
@@ -463,14 +503,14 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://news.google.com/topics/CAAqJQgKIh9DQkFTRVFvSUwyMHZNRFptTXpJU0JYcG9MVlJYS0FBUAE?hl=zh-TW&amp;gl=TW&amp;ceid=TW%3Azh-Hant&#39;</span>
 <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 <span class="n">web_content</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">text</span>
-<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">web_content</span><span class="p">,</span><span class="s1">&#39;lxml&#39;</span><span class="p">)</span>
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">web_content</span><span class="p">,</span> <span class="s1">&#39;lxml&#39;</span><span class="p">)</span>
 <span class="n">title</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s1">&#39;DY5T1d&#39;</span><span class="p">)</span>
-<span class="n">first_art_link</span> <span class="o">=</span> <span class="n">title</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;href&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span><span class="s1">&#39;https://news.google.com&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">first_art_link</span> <span class="o">=</span> <span class="n">title</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;href&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;https://news.google.com&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
 <span class="c1">#print(first_art_link)</span>
 <span class="n">art_request</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">first_art_link</span><span class="p">)</span>
-<span class="n">art_request</span><span class="o">.</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf8&#39;</span>
-<span class="n">soup_art</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">art_request</span><span class="o">.</span><span class="n">text</span><span class="p">,</span><span class="s1">&#39;lxml&#39;</span><span class="p">)</span>
+<span class="n">art_request</span><span class="o">.</span><span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;utf8&#39;</span>
+<span class="n">soup_art</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">art_request</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s1">&#39;lxml&#39;</span><span class="p">)</span>
 
 <span class="n">art_content</span> <span class="o">=</span> <span class="n">soup_art</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
 <span class="n">art_texts</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">art_content</span><span class="p">]</span>
@@ -479,7 +519,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;今年國慶焰火昨晚在台南登場，湧入逾50萬人遊客，交通接駁嚴重打結，不少人在網路開轟，台南市長黃偉哲下午受訪時表示，千錯萬錯，都由他承擔，將加強檢討、改進，未來還有大型活動時，疏散計畫列為第一優先。&#39;, &#39;\n&#39;, &#39;\r\n山上花園水道博物館第70萬名遊客下午出爐，黃偉哲前往頒獎給幸運兒，對媒體詢問，國慶焰火交通疏運網路上批評聲音，黃偉哲強調，「會自我檢討」。&#39;, &#39;\n&#39;, &#39;\r\n黃偉哲說，昨晚國慶焰火100分，但地上交通以及相關設施等，遊客來得太多，是預估的2倍以上，衝擊交通，只能打70分，市政府團隊還是要努力。&#39;, &#39;\n&#39;, &#39;\r\n黃偉哲指出，昨晚的活動，警察認真維持治安，沒有重大案件，交通指揮至深夜，相當辛苦；清潔方面，環保局的同仁與志工們一樣很努力，忙到今天凌晨4點多，大家都很用心。&#39;, &#39;\n&#39;, &#39;\r\n黃偉哲表示，千錯萬錯，都是市政府，要自己改進、檢討，未來舉辦大型活動，交通疏運計畫列為第一優先，完成最妥善部署，希望做得更好。&#39;, &#39;\n                    昨天是雙十國慶日，不過有網友發現在Google搜尋「中華民國建立時間」，跳出來的時間竟然不是1912年1月1日，而是1949年12月7日，也就是中華民國政權遷往台灣的時間。                  &#39;, &#39;\n                    今年國慶焰火昨晚在台南登場，湧入逾50萬人遊客，交通接駁嚴重打結，不少人在網路開轟，台南市長黃偉哲下午受訪時表示，千錯萬...                  &#39;, &#39;\n                    前總統馬英九出席國民黨國慶升旗活動時，質疑民進黨真心誠意慶祝國慶嗎？新北市長侯友宜今天接受媒體訪問時說，中華民國「養我、...                  &#39;, &#39;\n                    國慶日剛過，蔡英文總統在臉書分享相關知識，提醒大家不要再稱禮賓人員是「金釵」。蔡總統說，今年國慶，大家可能都有看到穿著制...                  &#39;, &#39;\n                    在紐約僑界促成下，宣傳台灣觀光的形象廣告連兩年雙十節登上時報廣場大型螢幕。駐紐約辦事處長李光章形容，這為中華民國109歲...                  &#39;, &#39;\n                    台灣基進立委陳柏惟昨說，雙十正好吃霜食，祝大家「霜食節快樂」。前立委孫大千在臉書表示，擔任中華民國立委連句生日快樂都不敢...                  &#39;, &#39;\n                    波士頓市政府慶祝雙十國慶，今天循例在市府廣場升起中華民國國旗，展現對台友好。駐波士頓辦事處因應疫情改採線上慶祝，在臉書專...                  &#39;, &#39;\n                    受疫情影響，駐洛杉磯辦事處今年改在線上舉行雙十國慶活動。20多名美國政要、南加州僑領及友邦代表以視訊方式現身，祝中華民國...                  &#39;, &#39;\n                    紐約曼哈頓華埠今天歡慶中華民國109年雙十國慶，受疫情限制，活動簡化為升國旗、向國父銅像獻花及國慶茶會。雖少了封街遊行，...                  &#39;, &#39;\n                    兩岸關係為貿易環境埋下隱憂，蔡英文總統昨（10）日於國慶大會演說時，主動向陸方拋出邀請，她表示，只要北京當局有心化解對立...                  &#39;, &#39;\n                    昨天雙十國慶大會，面對新冠病毒威脅，蔡英文總統在演說時特別感謝防疫英雄，大會除由防疫英雄領唱國歌外，也安排「防疫英雄車隊...                  &#39;, &#39;\n                    針對總統蔡英文昨在國慶演說提出，兩岸的穩定是雙方共同責任，國內學者多認為蔡總統的用詞謹慎、避免刺激中國大陸，但大陸學者多...                  &#39;, &#39;\n&#39;, &#39;\n&#39;, &#39;\n&#39;, &#39;\n&#39;, &#39;\n&#39;, &#39;\n&#39;]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;新北市警新店分局今天凌晨1時許接獲報案，一名社區警衛在警衛亭聽到一聲巨響，外出查看，發現一名男子倒臥在路上；警方獲報趕往調查，發現是18歲的王姓男子，初步研判是從住家12樓頂樓墜落，現場已無呼吸心跳，經送醫急救，仍於凌晨2時許宣告不治。經了解，王目前就讀高雄海軍官校。&#39;, &#39;\n&#39;, &#39;\r\n據了解，18歲王姓男子住在新北市新店區永安街一處社區大樓，平時住校，上周四因雙十國慶返家過連假，昨天晚間10時原本應該要收假回到學校；沒想到今天凌晨1時許，卻從住家社區大樓12樓頂樓墜落至1樓馬路，頭部受到重擊當場沒有呼吸心跳，家屬聽到聲響外出查看，發現是王，當場痛哭失聲。&#39;, &#39;\n&#39;, &#39;\r\n家屬表示死者回家時並沒有異狀，連假期間還與家人有說有笑，甚至還去找表哥、表姊烤肉聊天，很難相信王會做傻事。&#39;, &#39;\n&#39;, &#39;\r\n警方趕往後，封鎖現場採證，在頂樓發現王姓男子的黑色行李袋，經鑑識人員初步勘察，現場無打鬥跡象，初步排除他殺嫌疑，也沒有發現遺書，研判為輕生可能性大，詳細原因仍有待警方進一步釐清，目前已請家屬至派出所製作筆錄調查中。&#39;, &#39;\n&#39;, &#39;\n 自殺，不能解決難題；求助，才是最好的路。求救請打1995 ( 要救救我 ) &#39;, &#39;\n&#39;, &#39;\n新北市警新店分局今天凌晨1時許接獲報案，一名社區警衛在警衛亭聽到一聲巨響，外出查看，發現一名男子倒臥在路上。記者袁志豪／翻攝&#39;, &#39;\n新北市警新店分局今天凌晨1時許接獲報案，一名社區警衛在警衛亭聽到一聲巨響，外出查看，發現一名男子倒臥在路上。記者袁志豪／翻攝新北市警新店分局今天凌晨1時許接獲報案，一名社區警衛在警衛亭聽到一聲巨響，外出查看，發現一名男子倒臥在路上。記者袁志豪／翻攝&#39;, &#39;\n                    新北市警新店分局今天凌晨1時許接獲報案，一名社區警衛在警衛亭聽到一聲巨響，外出查看，發現一名男子倒臥在路上；警方獲報趕往...                  &#39;, &#39;\n                    王姓海軍官校學生今晨在新北市新店區安和路住家墜樓身亡，海軍上午證實該名學生確就讀海軍官校一年級，目前官校正與家屬取得聯繫...                  &#39;, &#39;\n                    高雄市警仁武分局澄觀派出所所長薛冠洲今晨執行釣蝦場勤務，疑似連夜過勞引發心肌梗塞，結束勤務後返回派出所，下車時門口身體不...                  &#39;, &#39;\n                    台中市陳姓男子在今天凌晨3時許，開車行經南屯區大業路、文心路時，與騎車的張姓男子發生碰撞，張連人帶車被撞到對向車道，波及...                  &#39;, &#39;\n                    84歲陳姓老婦人昨天下午騎機車在苗栗縣竹南鎮永貞路（台13線）2段，從外車道左轉，內車道砂石車煞不住，擦撞機車後，再衝向...                  &#39;, &#39;\n                    台中市大里區中興路二段與現岱路口的有喜早餐店前，清晨5時50分發生全航客運和休旅車相撞的事故，造成休旅車左側嚴重凹陷，全...                  &#39;, &#39;\n                    十八歲陳姓女子昨天上午在花蓮鯉魚潭完成龍舟訓練後騎機車返家，疑在一處轉彎路段失控自撞路旁電線桿，頭部嚴重受創，送醫不治。...                  &#39;, &#39;\n                    彰化縣埔鹽鄉一家鎂合金工廠昨天上午發生火警，消防局出動三個分隊搶救，火勢猛烈，因鎂遇水會燃燒，消防員以泡沫救火，一小時控...                  &#39;, &#39;\n                    台東縣鹿野鄉山區、太麻里鄉金針山區昨天連傳虎頭蜂螫人意外，造成五人送醫，來自高雄市林姓女遊客最嚴重，出現頭暈、心悸症狀；...                  &#39;, &#39;\n                    和碩（4938）與景碩合資成立的軟板廠復揚科技新竹新豐廠，今日下午發生火警意外，消防單位出動16車31人前往灌救，景碩針...                  &#39;, &#39;\n                    新北市坪林區北宜公路傳落石傷人意外！68歲的丘姓男子今天下午1時許騎乘普通重機沿坪林往新店方向前進，在該路段32.5公里...                  &#39;, &#39;\n                    高雄郭姓男子今天上午與友人登上柴山秘境時，意外扭傷腳，無法獨自行走，因路線陡峭，救難器材難以進入，只好找來友人徒手背負，...                  &#39;, &#39;\n&#39;, &#39;\n&#39;, &#39;\n&#39;, &#39;\n&#39;, &#39;\n&#39;, &#39;\n&#39;]
 </pre></div>
 </div>
 </div>
@@ -500,13 +540,13 @@
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading model from cache /var/folders/n7/ltpzwx813c599nfxfb94s_640000gn/T/jieba.u1b52b47246a0f2e6497af6bbe107adac.cache
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading model cost 0.603 seconds.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading model cost 0.531 seconds.
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Prefix dict has been built successfully.
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;今年 國慶 焰火 昨晚 在 台南 登場 湧入 逾 萬人 遊客 交通 接駁 嚴重 打結 不少 人 在 網路 開轟 台南 市長 黃偉哲 下午 受訪 時 表示 千錯萬錯 都 由 他 承擔 將 加強 檢討 改進 未來 還有 大型 活動 時 疏散 計畫 列為 第一 優先 山上 花園 水道 博物館 第 萬名 遊客 下午 出爐 黃偉哲 前往 頒獎給 幸運兒 對 媒體 詢問 國慶 焰火 交通 疏運 網路 上 批評 聲音 黃偉哲 強調 會 自我 檢討 黃偉哲 說 昨晚 國慶 焰火 分 但 地上 交通 以及 相關 設施 等 遊客 來得 太多 是 預估 的 倍 以上 衝擊 交通 只能 打 分 市政府 團隊 還是 要 努力 黃偉哲 指出 昨晚 的 活動 警察 認真 維持 治安 沒有 重大 案件 交通 指揮 至 深夜 相當 辛苦 清潔 方面 環保局 的 同仁 與 志工 們 一樣 很 努力 忙 到 今天 凌晨 點多 大家 都 很 用心 黃偉哲 表示 千錯萬錯 都 是 市政府 要 自己 改進 檢討 未來 舉辦 大型 活動 交通 疏運 計畫 列為 第一 優先 完成 最 妥善 部署 希望 做 得 更 好 昨天 是 雙十國慶日 不過 有 網友 發現 在 搜尋 中華民國 建立 時間 跳出來 的 時間 竟然 不是 年 月 日 而是 年 月 日 也 就是 中華民國 政權 遷往 台灣 的 時間 今年 國慶 焰火 昨晚 在 台南 登場 湧入 逾 萬人 遊客 交通 接駁 嚴重 打結 不少 人 在 網路 開轟 台南 市長 黃偉哲 下午 受訪 時 表示 千錯萬 前總統 馬英九 出席 國民黨 國慶 升旗 活動 時 質疑 民進黨 真心誠意 慶祝 國慶 嗎 新北 市長 侯友宜 今天 接受 媒體 訪問 時 說 中華民國 養 我 國慶日 剛過 蔡英文 總統 在 臉書 分享 相關 知識 提醒 大家 不要 再稱 禮賓 人員 是 金釵 蔡 總統 說 今年 國慶 大家 可能 都 有 看到 穿著 制 在 紐約 僑界 促成 下 宣傳 台灣 觀光 的 形象 廣告 連兩年 雙十節 登上 時報 廣場 大型 螢幕 駐 紐約 辦事處 長 李光章 形容 這為 中華民國 歲 台灣 基進 立委 陳 柏惟 昨說 雙十 正好 吃霜食 祝 大家 霜 食節 快樂 前立委 孫大千 在 臉書 表示 擔任 中華民國 立委 連句 生日快樂 都 不敢 波士頓 市政府 慶祝 雙十國慶 今天 循例 在 市府 廣場 升起 中華民國 國旗 展現 對台 友好 駐 波士頓 辦事處 因應 疫情 改採 線上 慶祝 在 臉書 專 受 疫情 影響 駐 洛杉磯 辦事處 今年 改在 線上 舉行 雙十國慶 活動 多名 美國 政要 南加州 僑領 及 友邦 代表 以 視訊 方式 現身 祝 中華民國 紐約 曼哈頓 華埠 今天 歡慶 中華民國 年 雙十國慶 受 疫情 限制 活動 簡化為 升 國旗 向 國父 銅像 獻花 及 國慶 茶會 雖少 了 封街 遊行 兩岸 關係 為 貿易 環境 埋下 隱憂 蔡英文 總統 昨 日 於 國慶 大會 演說 時 主動 向 陸方 拋出 邀請 她 表示 只要 北京 當局 有心 化解 對立 昨天 雙十國慶 大會 面對 新冠 病毒 威脅 蔡英文 總統 在 演說 時 特別 感謝 防疫 英雄 大會 除 由 防疫 英雄 領唱 國歌 外 也 安排 防疫 英雄 車隊 針對 總統 蔡英文 昨在 國慶 演說 提出 兩岸 的 穩定 是 雙方 共同 責任 國內 學者 多 認為 蔡 總統 的 用詞 謹慎 避免 刺激 中國 大陸 但 大陸 學者 多&#39;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;新北 市警 新店 分局 今天 凌晨 時許 接獲 報案 一名 社區 警衛 在 警衛亭 聽到 一聲 巨響 外出 查看 發現 一名 男子 倒臥 在 路 上 警方 獲報 趕往 調查 發現 是 歲 的 王姓 男子 初步 研判 是 從 住家 樓 頂樓 墜落 現場 已 無 呼吸 心跳 經 送醫 急救 仍 於 凌晨 時許 宣告 不治 經 了解 王 目前 就讀 高雄 海軍 官校 據了解 歲 王姓 男子 住 在 新 北市 新店區 永安街 一處 社區 大樓 平時 住校 上 周四 因 雙十國慶 返家過 連假 昨天 晚間 時 原本 應該 要 收假 回到 學校 沒想到 今天 凌晨 時許 卻 從 住家 社區 大樓 樓 頂樓 墜落 至 樓 馬路 頭部 受到 重擊 當場 沒有 呼吸 心跳 家屬 聽到 聲響 外出 查看 發現 是 王 當場 痛哭失聲 家屬 表示 死者 回家 時並 沒有 異狀 連假 期間 還與 家人 有說有笑 甚至 還去 找 表哥 表姊 烤肉 聊天 很 難 相信 王會 做 傻事 警方 趕往 後 封鎖 現場 採證 在 頂樓 發現 王姓 男子 的 黑色 行李袋 經 鑑識 人員 初步 勘察 現場 無 打鬥 跡象 初步 排除 他殺 嫌疑 也 沒有 發現 遺書 研判 為 輕生 可能性 大 詳細 原因 仍 有待 警方 進一步 釐清 目前 已 請 家屬 至 派出所 製作 筆錄 調查 中 自殺 不能 解決 難題 求助 才 是 最好 的 路 求救 請 打 要 救救 我 新北 市警 新店 分局 今天 凌晨 時許 接獲 報案 一名 社區 警衛 在 警衛亭 聽到 一聲 巨響 外出 查看 發現 一名 男子 倒臥 在 路 上 記者 袁 志豪 翻攝 新北 市警 新店 分局 今天 凌晨 時許 接獲 報案 一名 社區 警衛 在 警衛亭 聽到 一聲 巨響 外出 查看 發現 一名 男子 倒臥 在 路 上 記者 袁 志豪 翻攝 新北 市警 新店 分局 今天 凌晨 時許 接獲 報案 一名 社區 警衛 在 警衛亭 聽到 一聲 巨響 外出 查看 發現 一名 男子 倒臥 在 路 上 記者 袁 志豪 翻攝 新北 市警 新店 分局 今天 凌晨 時許 接獲 報案 一名 社區 警衛 在 警衛亭 聽到 一聲 巨響 外出 查看 發現 一名 男子 倒臥 在 路 上 警方 獲報 趕往 王姓 海軍 官校 學生 今晨 在 新 北市 新店區 安和路 住家 墜樓 身亡 海軍 上午 證實 該名 學生 確 就讀 海軍 官校 一年級 目前 官校 正 與 家屬 取得 聯繫 高雄市 警 仁武 分局 澄觀 派出所 所長 薛冠洲 今晨 執行 釣蝦場 勤務 疑似 連夜 過勞 引發 心肌 梗塞 結束 勤務 後 返回 派出所 下車 時 門口 身體 不 台中市 陳姓 男子 在 今天 凌晨 時許 開車 行經 南屯區 大業路 文心路 時 與 騎車 的 張姓 男子 發生 碰撞 張連人 帶車 被 撞到 對 向 車道 波及 歲 陳姓 老婦人 昨天 下午 騎 機車 在 苗栗縣 竹南鎮 永貞路 台 線 段 從外 車道 左轉 內車道 砂石車 煞不 住 擦撞 機車 後 再 衝向 台中市 大里區 中興路 二段 與 現岱路 口 的 有喜 早餐店 前 清晨 時 分 發生 全航 客運 和 休旅車 相撞 的 事故 造成 休旅車 左側 嚴重 凹陷 全 十八歲 陳姓 女子 昨天 上午 在 花蓮 鯉魚潭 完成 龍舟 訓練 後 騎 機車 返家 疑在 一處 轉彎 路段 失控 自 撞路 旁 電線桿 頭部 嚴重 受創 送醫 不治 彰化縣 埔鹽鄉 一家 鎂合金 工廠 昨天 上午 發生 火警 消防局 出動 三個 分隊 搶救 火勢 猛烈 因鎂遇 水會 燃燒 消防員 以 泡沫 救火 一小時 控 台東縣 鹿野鄉 山區 太麻里鄉 金針 山區 昨天 連傳 虎頭蜂 螫人 意外 造成 五人 送醫 來自 高雄市 林姓 女 遊客 最 嚴重 出現 頭暈 心悸 症狀 和 碩 與 景碩 合資 成立 的 軟板廠 復 揚 科技 新竹 新豐廠 今日 下午 發生 火警 意外 消防 單位 出動 車 人 前往 灌救 景碩 針 新 北市 坪林區 北宜 公路 傳 落石 傷人 意外 歲 的 丘姓 男子 今天 下午 時許 騎乘 普通 重機 沿 坪林 往 新店 方向 前進 在 該 路段 公里 高雄 郭姓 男子 今天 上午 與 友人 登上 柴山 秘境 時 意外 扭傷 腳 無法 獨自 行走 因 路線 陡峭 救難 器材 難以 進入 只好 找來 友人 徒手 背負&#39;]
 </pre></div>
 </div>
 </div>

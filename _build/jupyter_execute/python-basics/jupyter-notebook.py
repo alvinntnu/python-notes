@@ -379,6 +379,18 @@ Try:
 jupyter notebook --NotebookApp.iopub_data_rate_limit=1.0e10
 ```
 
+## Package Importing
+
+- Python can only import self-defined libraries in the current working directory (i.e., the directory where the script file is).
+- To use libraries in other directories, we need to add the lib path to the system.
+
+```
+import sys
+sys.path.insert(1, '../nlp')
+import text_normalizer_zh as tn
+
+```
+
 ## Requirements
 
 # %load get_modules.py

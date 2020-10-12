@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 
 <html>
@@ -7,15 +6,35 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Python Tricks &#8212; Python Notes for Linguistics</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
-    <link href="../_static/css/index.css" rel="stylesheet">
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
@@ -24,8 +43,8 @@
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/sphinx-book-theme.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
@@ -38,10 +57,10 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Web Applications" href="web-applications.html" />
-    <link rel="prev" title="Magic R" href="magic-r.html" />
+    <link rel="prev" title="Docstrings Format" href="docstrings.html" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="docsearch:language" content="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
 
 
 
@@ -147,6 +166,11 @@
      Magic R
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="docstrings.html">
+     Docstrings Format
+    </a>
+   </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      Python Tricks
@@ -248,7 +272,8 @@
 
         <!-- Full screen (wrap in <a> to have style consistency -->
         <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
                     class="fas fa-expand"></i></button></a>
 
         <!-- Launch buttons -->
@@ -279,6 +304,7 @@
 
     <!-- Table of contents -->
     <div class="d-none d-md-block col-md-2 bd-toc show">
+        
         <div class="tocsection onthispage pt-5 pb-3">
             <i class="fas fa-list"></i> Contents
         </div>
@@ -331,6 +357,7 @@
 </ul>
 
         </nav>
+        
     </div>
 </div>
     <div id="main-content" class="row">
@@ -459,8 +486,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[55, 26, 57, 30, 39, 72, 83, 64, 44, 42, 78, 58, 53, 36, 24, 11, 46, 75, 79, 89]
-[11, 24, 26, 30, 36, 39, 42, 44, 46, 53, 55, 57, 58, 64, 72, 75, 78, 79, 83, 89]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[68, 56, 11, 92, 65, 91, 1, 99, 7, 34, 88, 47, 85, 39, 87, 8, 10, 88, 44, 54]
+[1, 7, 8, 10, 11, 34, 39, 44, 47, 54, 56, 65, 68, 85, 87, 88, 88, 91, 92, 99]
 </pre></div>
 </div>
 </div>
@@ -544,7 +571,7 @@ None
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;module &#39;re&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/re.py&#39;&gt;, &lt;module &#39;os&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/os.py&#39;&gt;, &lt;module &#39;operator&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/operator.py&#39;&gt;, &lt;module &#39;sys&#39; (built-in)&gt;]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;module &#39;operator&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/operator.py&#39;&gt;, &lt;module &#39;os&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/os.py&#39;&gt;, &lt;module &#39;sys&#39; (built-in)&gt;, &lt;module &#39;re&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/re.py&#39;&gt;]
 </pre></div>
 </div>
 </div>
@@ -1010,7 +1037,10 @@ None
  &#39;lzma&#39;: &lt;module &#39;lzma&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lzma.py&#39;&gt;,
  &#39;marshal&#39;: &lt;module &#39;marshal&#39; (built-in)&gt;,
  &#39;math&#39;: &lt;module &#39;math&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/math.cpython-37m-darwin.so&#39;&gt;,
- &#39;mimetypes&#39;: &lt;module &#39;mimetypes&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/mimetypes.py&#39;&gt;,
+ &#39;mimetypes&#39;: &lt;module &#39;mimetypes&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/mimetypes.py&#39;&gt;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>,
  &#39;mpl_toolkits&#39;: &lt;module &#39;mpl_toolkits&#39; (namespace)&gt;,
  &#39;ntpath&#39;: &lt;module &#39;ntpath&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/ntpath.py&#39;&gt;,
  &#39;numbers&#39;: &lt;module &#39;numbers&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/numbers.py&#39;&gt;,
@@ -1075,10 +1105,7 @@ None
  &#39;prompt_toolkit.completion.fuzzy_completer&#39;: &lt;module &#39;prompt_toolkit.completion.fuzzy_completer&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/completion/fuzzy_completer.py&#39;&gt;,
  &#39;prompt_toolkit.completion.nested&#39;: &lt;module &#39;prompt_toolkit.completion.nested&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/completion/nested.py&#39;&gt;,
  &#39;prompt_toolkit.completion.word_completer&#39;: &lt;module &#39;prompt_toolkit.completion.word_completer&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/completion/word_completer.py&#39;&gt;,
- &#39;prompt_toolkit.data_structures&#39;: 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;module &#39;prompt_toolkit.data_structures&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/data_structures.py&#39;&gt;,
+ &#39;prompt_toolkit.data_structures&#39;: &lt;module &#39;prompt_toolkit.data_structures&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/data_structures.py&#39;&gt;,
  &#39;prompt_toolkit.document&#39;: &lt;module &#39;prompt_toolkit.document&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/document.py&#39;&gt;,
  &#39;prompt_toolkit.enums&#39;: &lt;module &#39;prompt_toolkit.enums&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/enums.py&#39;&gt;,
  &#39;prompt_toolkit.eventloop&#39;: &lt;module &#39;prompt_toolkit.eventloop&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/eventloop/__init__.py&#39;&gt;,
@@ -1129,7 +1156,10 @@ None
  &#39;prompt_toolkit.layout.controls&#39;: &lt;module &#39;prompt_toolkit.layout.controls&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/layout/controls.py&#39;&gt;,
  &#39;prompt_toolkit.layout.dimension&#39;: &lt;module &#39;prompt_toolkit.layout.dimension&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/layout/dimension.py&#39;&gt;,
  &#39;prompt_toolkit.layout.dummy&#39;: &lt;module &#39;prompt_toolkit.layout.dummy&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/layout/dummy.py&#39;&gt;,
- &#39;prompt_toolkit.layout.layout&#39;: &lt;module &#39;prompt_toolkit.layout.layout&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/layout/layout.py&#39;&gt;,
+ 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;prompt_toolkit.layout.layout&#39;: &lt;module &#39;prompt_toolkit.layout.layout&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/layout/layout.py&#39;&gt;,
  &#39;prompt_toolkit.layout.margins&#39;: &lt;module &#39;prompt_toolkit.layout.margins&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/layout/margins.py&#39;&gt;,
  &#39;prompt_toolkit.layout.menus&#39;: &lt;module &#39;prompt_toolkit.layout.menus&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/layout/menus.py&#39;&gt;,
  &#39;prompt_toolkit.layout.mouse_handlers&#39;: &lt;module &#39;prompt_toolkit.layout.mouse_handlers&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/prompt_toolkit/layout/mouse_handlers.py&#39;&gt;,
@@ -1196,10 +1226,7 @@ None
  &#39;pygments.modeline&#39;: &lt;module &#39;pygments.modeline&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/pygments/modeline.py&#39;&gt;,
  &#39;pygments.plugin&#39;: &lt;module &#39;pygments.plugin&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/pygments/plugin.py&#39;&gt;,
  &#39;pygments.regexopt&#39;: &lt;module &#39;pygments.regexopt&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/pygments/regexopt.py&#39;&gt;,
- &#39;pygments.style&#39;: 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;module &#39;pygments.style&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/pygments/style.py&#39;&gt;,
+ &#39;pygments.style&#39;: &lt;module &#39;pygments.style&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/pygments/style.py&#39;&gt;,
  &#39;pygments.styles&#39;: &lt;module &#39;pygments.styles&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/pygments/styles/__init__.py&#39;&gt;,
  &#39;pygments.token&#39;: &lt;module &#39;pygments.token&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/pygments/token.py&#39;&gt;,
  &#39;pygments.unistring&#39;: &lt;module &#39;pygments.unistring&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/pygments/unistring.py&#39;&gt;,
@@ -1218,7 +1245,7 @@ None
  &#39;signal&#39;: &lt;module &#39;signal&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/signal.py&#39;&gt;,
  &#39;site&#39;: &lt;module &#39;site&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/site.py&#39;&gt;,
  &#39;six&#39;: &lt;module &#39;six&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/six.py&#39;&gt;,
- &#39;six.moves&#39;: &lt;module &#39;six.moves&#39; (&lt;six._SixMetaPathImporter object at 0x7fd0d0a3de90&gt;)&gt;,
+ &#39;six.moves&#39;: &lt;module &#39;six.moves&#39; (&lt;six._SixMetaPathImporter object at 0x7fd8d09deed0&gt;)&gt;,
  &#39;socket&#39;: &lt;module &#39;socket&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/socket.py&#39;&gt;,
  &#39;sphinxcontrib&#39;: &lt;module &#39;sphinxcontrib&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/sphinxcontrib/__init__.py&#39;&gt;,
  &#39;sqlite3&#39;: &lt;module &#39;sqlite3&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/sqlite3/__init__.py&#39;&gt;,
@@ -1302,10 +1329,7 @@ None
  &#39;xml.parsers&#39;: &lt;module &#39;xml.parsers&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/xml/parsers/__init__.py&#39;&gt;,
  &#39;xml.parsers.expat&#39;: &lt;module &#39;xml.parsers.expat&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/xml/parsers/expat.py&#39;&gt;,
  &#39;xml.parsers.expat.errors&#39;: &lt;module &#39;pyexpat.errors&#39;&gt;,
- &#39;xml.parsers.expat.model&#39;: 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;module &#39;pyexpat.model&#39;&gt;,
+ &#39;xml.parsers.expat.model&#39;: &lt;module &#39;pyexpat.model&#39;&gt;,
  &#39;zipimport&#39;: &lt;module &#39;zipimport&#39; (built-in)&gt;,
  &#39;zlib&#39;: &lt;module &#39;zlib&#39; from &#39;/Users/Alvin/opt/anaconda3/lib/python3.7/lib-dynload/zlib.cpython-37m-darwin.so&#39;&gt;,
  &#39;zmq&#39;: &lt;module &#39;zmq&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/__init__.py&#39;&gt;,
@@ -1337,7 +1361,10 @@ None
  &#39;zmq.sugar.poll&#39;: &lt;module &#39;zmq.sugar.poll&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/sugar/poll.py&#39;&gt;,
  &#39;zmq.sugar.socket&#39;: &lt;module &#39;zmq.sugar.socket&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/sugar/socket.py&#39;&gt;,
  &#39;zmq.sugar.stopwatch&#39;: &lt;module &#39;zmq.sugar.stopwatch&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/sugar/stopwatch.py&#39;&gt;,
- &#39;zmq.sugar.tracker&#39;: &lt;module &#39;zmq.sugar.tracker&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/sugar/tracker.py&#39;&gt;,
+ &#39;zmq.sugar.tracker&#39;: &lt;module &#39;zmq.sugar.tracker&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/sugar/tracker.py&#39;&gt;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>,
  &#39;zmq.sugar.version&#39;: &lt;module &#39;zmq.sugar.version&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/sugar/version.py&#39;&gt;,
  &#39;zmq.utils&#39;: &lt;module &#39;zmq.utils&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/utils/__init__.py&#39;&gt;,
  &#39;zmq.utils.constant_names&#39;: &lt;module &#39;zmq.utils.constant_names&#39; from &#39;/Users/Alvin/.local/lib/python3.7/site-packages/zmq/utils/constant_names.py&#39;&gt;,
@@ -1573,7 +1600,7 @@ lemon pear watermelon tomato
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="magic-r.html" title="previous page">Magic R</a>
+    <a class='left-prev' id="prev-link" href="docstrings.html" title="previous page">Docstrings Format</a>
     <a class='right-next' id="next-link" href="web-applications.html" title="next page">Web Applications</a>
 
     </div>
@@ -1593,7 +1620,10 @@ lemon pear watermelon tomato
       </div>
     </div>
 
-    <script src="../_static/js/index.js"></script>
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
     
   </body>
 </html>

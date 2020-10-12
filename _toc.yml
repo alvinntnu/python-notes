@@ -15,6 +15,7 @@
     - file: python-basics/data-visualization-2
     - file: python-basics/oop
     - file: python-basics/magic-r
+    - file: python-basics/docstrings
     - file: python-basics/python-tricks
     - file: python-basics/web-applications
     - file: python-basics/productive-tech
@@ -23,6 +24,7 @@
   sections:
     - file: corpus/nltk
     - file: corpus/web-crawler
+    - file: corpus/unicode
     - file: corpus/corpus-linguistics-methods
     - file: corpus/tokenization
     - file: corpus/word-cloud
