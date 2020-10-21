@@ -49,6 +49,7 @@
     - file: nlp/text-normalization-eng
     - file: nlp/text-normalization-chinese
     - file: nlp/sklearn
+    - file: nlp/naive-bayes
     - file: nlp/sentiment-analysis-ml
     - file: nlp/word-embeddings
     - file: nlp/word2vec-chinese

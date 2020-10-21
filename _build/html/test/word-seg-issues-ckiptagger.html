@@ -1,0 +1,443 @@
+
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Word Segmentation Issues &#8212; Python Notes for Linguistics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/ntnu03.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Python Notes for Linguistics</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python-basics/python-basics.html">
+   Python Basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../corpus/corpus-processing.html">
+   Corpus Linguistics with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../statistical-analyses/statistical-analyses.html">
+   Statistical Analyses
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../nlp/nlp.html">
+   Natural Language Processing with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/todo.html">
+   To-do List
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <div style="text-align:left">
+    <a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
+</div>
+
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/test/word-seg-issues-ckiptagger.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/alvinntnu/python-notes/master?urlpath=tree/test/word-seg-issues-ckiptagger.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/test/word-seg-issues-ckiptagger.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="word-segmentation-issues">
+<h1>Word Segmentation Issues<a class="headerlink" href="#word-segmentation-issues" title="Permalink to this headline">¶</a></h1>
+<div class="cell tag_hide-output tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ckiptagger</span> <span class="kn">import</span> <span class="n">data_utils</span><span class="p">,</span> <span class="n">construct_dictionary</span><span class="p">,</span> <span class="n">WS</span><span class="p">,</span> <span class="n">POS</span><span class="p">,</span> <span class="n">NER</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:526: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_qint8 = np.dtype([(&quot;qint8&quot;, np.int8, 1)])
+/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:527: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_quint8 = np.dtype([(&quot;quint8&quot;, np.uint8, 1)])
+/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:528: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_qint16 = np.dtype([(&quot;qint16&quot;, np.int16, 1)])
+/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:529: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_quint16 = np.dtype([(&quot;quint16&quot;, np.uint16, 1)])
+/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:530: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  _np_qint32 = np.dtype([(&quot;qint32&quot;, np.int32, 1)])
+/Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:535: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+  np_resource = np.dtype([(&quot;resource&quot;, np.ubyte, 1)])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set Parameter Path</span>
+<span class="n">MODEL_PATH</span> <span class="o">=</span> <span class="s1">&#39;/Users/Alvin/Dropbox/Corpus/CKIP_WordSeg/data/&#39;</span>
+<span class="n">ws</span> <span class="o">=</span> <span class="n">WS</span><span class="p">(</span><span class="n">MODEL_PATH</span><span class="p">)</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="n">POS</span><span class="p">(</span><span class="n">MODEL_PATH</span><span class="p">)</span>
+<span class="c1">#ner = NER(MODEL_PATH)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Raw text corpus </span>
+<span class="n">sentence_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;他每天開車上班，整天塞啊！&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;他每天開著車，沒客人。&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;他每天開車上班得開一小時，整天塞啊&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;這間店每天八點準時開門。&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;這小女孩很高呢！&#39;</span><span class="p">,</span><span class="s1">&#39;這小女孩很高&#39;</span>
+                <span class="s1">&#39;這小女孩好高！&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;這小女孩很愛看書&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;這本書好像是他寫的&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;這本書像是他寫的&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;他慢慢地走進教室裡&#39;</span><span class="p">,</span><span class="s1">&#39;他慢慢得走進教室裡&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;這本書看起來很有趣&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;他拿起這本書&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;這小男孩嚐看味道怎麼樣&#39;</span><span class="p">,</span><span class="s1">&#39;這小男孩嚐看看味道怎麼樣&#39;</span><span class="p">,</span> <span class="c1">## 屈折詞綴切分</span>
+                 <span class="s1">&#39;現代年輕人都吃得起高檔餐廳&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;這孩子吃到棒棒糖好開心&#39;</span><span class="p">,</span><span class="s1">&#39;這孩子吃到掉滿地&#39;</span><span class="p">,</span><span class="s1">&#39;這孩子吃到全身都是&#39;</span>
+            <span class="p">]</span>
+
+<span class="n">word_list</span> <span class="o">=</span> <span class="n">ws</span><span class="p">(</span><span class="n">sentence_list</span><span class="p">)</span>
+<span class="n">pos_list</span> <span class="o">=</span> <span class="n">pos</span><span class="p">(</span><span class="n">word_list</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">print_word_pos_sentence</span><span class="p">(</span><span class="n">word_sentence</span><span class="p">,</span> <span class="n">pos_sentence</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">word_sentence</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">pos_sentence</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">pos</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">word_sentence</span><span class="p">,</span> <span class="n">pos_sentence</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="n">pos</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\u3000</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="k">return</span>
+    
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sentence_list</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">sentence</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;==&quot;</span><span class="o">*</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">print_word_pos_sentence</span><span class="p">(</span><span class="n">word_list</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>  <span class="n">pos_list</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;他每天開車上班，整天塞啊！&#39;
+==========
+他(Nh)　每(Nes)　天(Nf)　開車(VA)　上班(VA)　，(COMMACATEGORY)　整(Neqa)　天(Nf)　塞(VC)　啊(T)　！(EXCLAMATIONCATEGORY)　
+
+
+
+&#39;他每天開著車，沒客人。&#39;
+==========
+他(Nh)　每(Nes)　天(Nf)　開(VC)　著(Di)　車(Na)　，(COMMACATEGORY)　沒(VJ)　客人(Na)　。(PERIODCATEGORY)　
+
+
+
+&#39;他每天開車上班得開一小時，整天塞啊&#39;
+==========
+他(Nh)　每(Nes)　天(Nf)　開車(VA)　上班(VA)　得(DE)　開(VC)　一(Neu)　小時(Na)　，(COMMACATEGORY)　整(Neqa)　天(Nf)　塞(VC)　啊(T)　
+
+
+
+&#39;這間店每天八點準時開門。&#39;
+==========
+這(Nep)　間(Nf)　店(Nc)　每(Nes)　天(Nf)　八點(Nd)　準時(VH)　開門(VA)　。(PERIODCATEGORY)　
+
+
+
+&#39;這小女孩很高呢！&#39;
+==========
+這(Nep)　小女孩(Na)　很(Dfa)　高(VH)　呢(T)　！(EXCLAMATIONCATEGORY)　
+
+
+
+&#39;這小女孩很高這小女孩好高！&#39;
+==========
+這(Nep)　小女孩(Na)　很(Dfa)　高(VH)　這(Nep)　小女孩(Na)　好(Dfa)　高(VH)　！(EXCLAMATIONCATEGORY)　
+
+
+
+&#39;這小女孩很愛看書&#39;
+==========
+這(Nep)　小女孩(Na)　很(Dfa)　愛(VL)　看書(VA)　
+
+
+
+&#39;這本書好像是他寫的&#39;
+==========
+這(Nep)　本(Nf)　書(Na)　好像(D)　是(SHI)　他(Nh)　寫(VC)　的(DE)　
+
+
+
+&#39;這本書像是他寫的&#39;
+==========
+這(Nep)　本(Nf)　書(Na)　像是(SHI)　他(Nh)　寫(VC)　的(DE)　
+
+
+
+&#39;他慢慢地走進教室裡&#39;
+==========
+他(Nh)　慢慢(VH)　地(DE)　走進(VCL)　教室(Nc)　裡(Ncd)　
+
+
+
+&#39;他慢慢得走進教室裡&#39;
+==========
+他(Nh)　慢慢(VH)　得(DE)　走進(VCL)　教室(Nc)　裡(Ncd)　
+
+
+
+&#39;這本書看起來很有趣&#39;
+==========
+這(Nep)　本(Nf)　書(Na)　看起來(D)　很(Dfa)　有趣(VH)　
+
+
+
+&#39;他拿起這本書&#39;
+==========
+他(Nh)　拿起(VC)　這(Nep)　本(Nf)　書(Na)　
+
+
+
+&#39;這小男孩嚐看味道怎麼樣&#39;
+==========
+這(Nep)　小(VH)　男孩(Na)　嚐看(VC)　味道(Na)　怎麼樣(VH)　
+
+
+
+&#39;這小男孩嚐看看味道怎麼樣&#39;
+==========
+這(Nep)　小(VH)　男孩(Na)　嚐(VC)　看看(Di)　味道(Na)　怎麼樣(VH)　
+
+
+
+&#39;現代年輕人都吃得起高檔餐廳&#39;
+==========
+現代(VH)　年輕人(Na)　都(D)　吃得起(VJ)　高檔(A)　餐廳(Nc)　
+
+
+
+&#39;這孩子吃到棒棒糖好開心&#39;
+==========
+這(Nep)　孩子(Na)　吃到(VC)　棒棒糖(Na)　好(Dfa)　開心(VH)　
+
+
+
+&#39;這孩子吃到掉滿地&#39;
+==========
+這(Nep)　孩子(Na)　吃到(VC)　掉滿(VH)　地(DE)　
+
+
+
+&#39;這孩子吃到全身都是&#39;
+==========
+這(Nep)　孩子(Na)　吃到(VC)　全(Neqa)　身(Na)　都(D)　是(SHI)　
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ckiptagger"
+        },
+        kernelOptions: {
+            kernelName: "ckiptagger",
+            path: "./test"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ckiptagger'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alvin Chen<br/>
+        
+            &copy; Copyright 2020 Alvin Chen.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>
