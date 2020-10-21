@@ -1,22 +1,37 @@
 Traceback (most recent call last):
-  File "/Users/Alvin/opt/anaconda3/envs/python-notes/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 56, in single_nb_execution
+  File "/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 604, in _async_poll_for_reply
+    msg = await ensure_async(self.kc.shell_channel.get_msg(timeout=new_timeout))
+  File "/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/nbclient/util.py", line 85, in ensure_async
+    result = await obj
+  File "/Users/Alvin/.local/lib/python3.7/site-packages/jupyter_client/asynchronous/channels.py", line 48, in get_msg
+    raise Empty
+_queue.Empty
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 56, in single_nb_execution
     record_timing=False,
-  File "/Users/Alvin/opt/anaconda3/envs/python-notes/lib/python3.7/site-packages/nbclient/client.py", line 1082, in execute
+  File "/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 1082, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
-  File "/Users/Alvin/opt/anaconda3/envs/python-notes/lib/python3.7/site-packages/nbclient/util.py", line 74, in wrapped
+  File "/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/nbclient/util.py", line 74, in wrapped
     return just_run(coro(*args, **kwargs))
-  File "/Users/Alvin/opt/anaconda3/envs/python-notes/lib/python3.7/site-packages/nbclient/util.py", line 53, in just_run
+  File "/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/nbclient/util.py", line 53, in just_run
     return loop.run_until_complete(coro)
-  File "/Users/Alvin/opt/anaconda3/envs/python-notes/lib/python3.7/asyncio/base_events.py", line 568, in run_until_complete
+  File "/Users/Alvin/opt/anaconda3/lib/python3.7/asyncio/base_events.py", line 583, in run_until_complete
     return future.result()
-  File "/Users/Alvin/opt/anaconda3/envs/python-notes/lib/python3.7/site-packages/nbclient/client.py", line 536, in async_execute
+  File "/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 536, in async_execute
     cell, index, execution_count=self.code_cells_executed + 1
-  File "/Users/Alvin/opt/anaconda3/envs/python-notes/lib/python3.7/site-packages/nbclient/client.py", line 827, in async_execute_cell
-    self._check_raise_for_error(cell, exec_reply)
-  File "/Users/Alvin/opt/anaconda3/envs/python-notes/lib/python3.7/site-packages/nbclient/client.py", line 735, in _check_raise_for_error
-    raise CellExecutionError.from_cell_and_msg(cell, exec_reply['content'])
-nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
-------------------
+  File "/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 811, in async_execute_cell
+    exec_reply = await self.task_poll_for_reply
+  File "/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 628, in _async_poll_for_reply
+    await self._async_handle_timeout(timeout, cell)
+  File "/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 679, in _async_handle_timeout
+    "Cell execution timed out", timeout, cell
+nbclient.exceptions.CellTimeoutError: A cell timed out while it was being executed, after 30 seconds.
+The message was: Cell execution timed out.
+Here is a preview of the cell contents:
+-------------------
 import pandas as pd
 import numpy as np
 import text_normalizer as tn
@@ -24,38 +39,5 @@ import model_evaluation_utils as meu
 import nltk
 
 np.set_printoptions(precision=2, linewidth=80)
-------------------
-
-[0;31m---------------------------------------------------------------------------[0m
-[0;31mOSError[0m                                   Traceback (most recent call last)
-[0;32m<ipython-input-1-4bbd072b5429>[0m in [0;36m<module>[0;34m[0m
-[1;32m      1[0m [0;32mimport[0m [0mpandas[0m [0;32mas[0m [0mpd[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      2[0m [0;32mimport[0m [0mnumpy[0m [0;32mas[0m [0mnp[0m[0;34m[0m[0;34m[0m[0m
-[0;32m----> 3[0;31m [0;32mimport[0m [0mtext_normalizer[0m [0;32mas[0m [0mtn[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m      4[0m [0;32mimport[0m [0mmodel_evaluation_utils[0m [0;32mas[0m [0mmeu[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      5[0m [0;32mimport[0m [0mnltk[0m[0;34m[0m[0;34m[0m[0m
-
-[0;32m~/GoogleDrive/_MySyncDrive/Repository/python-notes/nlp/text_normalizer.py[0m in [0;36m<module>[0;34m[0m
-[1;32m     15[0m [0mtokenizer[0m [0;34m=[0m [0mToktokTokenizer[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m     16[0m [0mstopword_list[0m [0;34m=[0m [0mnltk[0m[0;34m.[0m[0mcorpus[0m[0;34m.[0m[0mstopwords[0m[0;34m.[0m[0mwords[0m[0;34m([0m[0;34m'english'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0;32m---> 17[0;31m [0mnlp[0m [0;34m=[0m [0mspacy[0m[0;34m.[0m[0mload[0m[0;34m([0m[0;34m'en_core_web_lg'[0m[0;34m,[0m [0mparse[0m[0;34m=[0m[0;32mTrue[0m[0;34m,[0m [0mtag[0m[0;34m=[0m[0;32mTrue[0m[0;34m,[0m [0mentity[0m[0;34m=[0m[0;32mTrue[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m     18[0m [0;31m# nlp_vec = spacy.load('en_vectors_web_lg', parse=True, tag=True, entity=True)[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
-[1;32m     19[0m [0;34m[0m[0m
-
-[0;32m~/opt/anaconda3/lib/python3.7/site-packages/spacy/__init__.py[0m in [0;36mload[0;34m(name, **overrides)[0m
-[1;32m     28[0m     [0;32mif[0m [0mdepr_path[0m [0;32mnot[0m [0;32min[0m [0;34m([0m[0;32mTrue[0m[0;34m,[0m [0;32mFalse[0m[0;34m,[0m [0;32mNone[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m     29[0m         [0mwarnings[0m[0;34m.[0m[0mwarn[0m[0;34m([0m[0mWarnings[0m[0;34m.[0m[0mW001[0m[0;34m.[0m[0mformat[0m[0;34m([0m[0mpath[0m[0;34m=[0m[0mdepr_path[0m[0;34m)[0m[0;34m,[0m [0mDeprecationWarning[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0;32m---> 30[0;31m     [0;32mreturn[0m [0mutil[0m[0;34m.[0m[0mload_model[0m[0;34m([0m[0mname[0m[0;34m,[0m [0;34m**[0m[0moverrides[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m     31[0m [0;34m[0m[0m
-[1;32m     32[0m [0;34m[0m[0m
-
-[0;32m~/opt/anaconda3/lib/python3.7/site-packages/spacy/util.py[0m in [0;36mload_model[0;34m(name, **overrides)[0m
-[1;32m    173[0m     [0;32melif[0m [0mhasattr[0m[0;34m([0m[0mname[0m[0;34m,[0m [0;34m"exists"[0m[0;34m)[0m[0;34m:[0m  [0;31m# Path or Path-like to model data[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    174[0m         [0;32mreturn[0m [0mload_model_from_path[0m[0;34m([0m[0mname[0m[0;34m,[0m [0;34m**[0m[0moverrides[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0;32m--> 175[0;31m     [0;32mraise[0m [0mIOError[0m[0;34m([0m[0mErrors[0m[0;34m.[0m[0mE050[0m[0;34m.[0m[0mformat[0m[0;34m([0m[0mname[0m[0;34m=[0m[0mname[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m    176[0m [0;34m[0m[0m
-[1;32m    177[0m [0;34m[0m[0m
-
-[0;31mOSError[0m: [E050] Can't find model 'en_core_web_lg'. It doesn't seem to be a shortcut link, a Python package or a valid path to a data directory.
-OSError: [E050] Can't find model 'en_core_web_lg'. It doesn't seem to be a shortcut link, a Python package or a valid path to a data directory.
+-------------------
 

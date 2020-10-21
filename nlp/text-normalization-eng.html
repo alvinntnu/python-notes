@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 
 <html>
@@ -6,35 +7,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Text Normalization (English) &#8212; Python Notes for Linguistics</title>
-    
-  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
-
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
-
-    
-      
-  <link rel="stylesheet"
-    href="../_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
-
-    
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
-
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
@@ -43,8 +24,8 @@
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
@@ -59,8 +40,8 @@
     <link rel="next" title="Text Normalization (Chinese)" href="text-normalization-chinese.html" />
     <link rel="prev" title="Natural Language Processing (ckipnlp)" href="nlp-ckipnlp.html" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
 
 
 
@@ -139,6 +120,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="sklearn.html">
      Machine Learning with Sci-Kit Learn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="naive-bayes.html">
+     Naive Bayes
     </a>
    </li>
    <li class="toctree-l2">
@@ -272,8 +258,7 @@
 
         <!-- Full screen (wrap in <a> to have style consistency -->
         <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                title="Fullscreen mode"><i
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
                     class="fas fa-expand"></i></button></a>
 
         <!-- Launch buttons -->
@@ -304,7 +289,6 @@
 
     <!-- Table of contents -->
     <div class="d-none d-md-block col-md-2 bd-toc show">
-        
         <div class="tocsection onthispage pt-5 pb-3">
             <i class="fas fa-list"></i> Contents
         </div>
@@ -358,7 +342,6 @@
 </ul>
 
         </nav>
-        
     </div>
 </div>
     <div id="main-content" class="row">
@@ -397,7 +380,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b&#39;&lt;!DOCTYPE html&gt;\n&lt;html class=&quot;client-nojs&quot; lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;\n&lt;head&gt;\n&lt;meta charset=&quot;UTF-8&quot;/&gt;\n&lt;title&gt;Python (programming language) - Wikipedia&lt;/title&gt;\n&lt;script&gt;document.documentElement.className=&quot;client-js&quot;;RLCONF={&quot;wgBreakFrames&quot;:!1,&quot;wgSeparatorTransformTable&quot;:[&quot;&quot;,&quot;&quot;],&quot;wgDigitTransformTable&quot;:[&quot;&quot;,&quot;&quot;],&quot;wgDefaultDateFormat&quot;:&quot;dmy&quot;,&quot;wgMonthNames&quot;:[&quot;&quot;,&quot;January&quot;,&quot;February&quot;,&quot;March&quot;,&quot;April&quot;,&quot;May&quot;,&quot;June&quot;,&quot;July&quot;,&quot;August&quot;,&quot;September&quot;,&quot;October&quot;,&quot;November&quot;,&quot;December&quot;],&quot;wgRequestId&quot;:&quot;310357b9-6b76-4d46-b3c7-28&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b&#39;&lt;!DOCTYPE html&gt;\n&lt;html class=&quot;client-nojs&quot; lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;\n&lt;head&gt;\n&lt;meta charset=&quot;UTF-8&quot;/&gt;\n&lt;title&gt;Python (programming language) - Wikipedia&lt;/title&gt;\n&lt;script&gt;document.documentElement.className=&quot;client-js&quot;;RLCONF={&quot;wgBreakFrames&quot;:!1,&quot;wgSeparatorTransformTable&quot;:[&quot;&quot;,&quot;&quot;],&quot;wgDigitTransformTable&quot;:[&quot;&quot;,&quot;&quot;],&quot;wgDefaultDateFormat&quot;:&quot;dmy&quot;,&quot;wgMonthNames&quot;:[&quot;&quot;,&quot;January&quot;,&quot;February&quot;,&quot;March&quot;,&quot;April&quot;,&quot;May&quot;,&quot;June&quot;,&quot;July&quot;,&quot;August&quot;,&quot;September&quot;,&quot;October&quot;,&quot;November&quot;,&quot;December&quot;],&quot;wgRequestId&quot;:&quot;3845bbc1-2be3-40cd-8882-f7&#39;
 </pre></div>
 </div>
 </div>
@@ -419,10 +402,10 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>General-purpose, high-level programming language
-PythonParadigmMulti-paradigm: functional, imperative, object-oriented, structured, reflectiveDesigned byGuido van RossumDeveloperPython Software FoundationFirst appeared1990; 30 years ago (1990)[1]Stable release3.9.0
-   / 5 October 2020; 6 days ago (2020-10-05)[2]Preview release3.10.0a1
-   / 5 October 2020; 6 days ago (2020-10-05)[3]
-Typing disciplineDuck, dynamic, gradual (since 3.5)[4]OSLinux, macOS, Windows  and moreLicensePython Software Found
+PythonParadigmMulti-paradigm: functional, imperative, object-oriented, structured, reflectiveDesigned byGuido van RossumDeveloperPython Software FoundationFirst appeared1990; 30 years ago (1990)[1]Stable release3.8.5
+   / 20 July 2020; 2 months ago (2020-07-20)[2]Preview release3.9.0rc1
+   / 11 August 2020; 41 days ago (2020-08-11)[3]
+Typing disciplineDuck, dynamic, gradual (since 3.5)[4]OSLinux, macOS, Windows Vista (and newer) and moreLicensePyt
 </pre></div>
 </div>
 </div>
@@ -620,10 +603,7 @@ Typing disciplineDuck, dynamic, gradual (since 3.5)[4]OSLinux, macOS, Windows  a
       </div>
     </div>
 
-    
-  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
-
-
+    <script src="../_static/js/index.js"></script>
     
   </body>
 </html>
