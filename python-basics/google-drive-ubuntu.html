@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Python Basics &#8212; Python Notes for Linguistics</title>
+    <title>Google Drive with Ubuntu &#8212; Python Notes for Linguistics</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="../_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
@@ -37,8 +37,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Jupyer Notebook" href="jupyter-notebook.html" />
-    <link rel="prev" title="Introduction" href="../intro.html" />
+    <link rel="next" title="Phythonic Productivity Techniques" href="productive-tech.html" />
+    <link rel="prev" title="Web Applications" href="web-applications.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
@@ -73,10 +73,10 @@
 <nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
   <ul class="current nav sidenav_l1">
  <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+  <a class="reference internal" href="python-basics.html">
    Python Basics
   </a>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="jupyter-notebook.html">
      Jupyer Notebook
@@ -162,8 +162,8 @@
      Web Applications
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="google-drive-ubuntu.html">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      Google Drive with Ubuntu
     </a>
    </li>
@@ -244,9 +244,9 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/python-basics/python-basics.md"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/python-basics/google-drive-ubuntu.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
+                data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
             onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
@@ -263,6 +263,28 @@
 
         <!-- Launch buttons -->
 
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/alvinntnu/python-notes/master?urlpath=tree/python-basics/google-drive-ubuntu.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/python-basics/google-drive-ubuntu.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
     </div>
 
     <!-- Table of contents -->
@@ -271,7 +293,29 @@
             <i class="fas fa-list"></i> Contents
         </div>
         <nav id="bd-toc-nav">
-            
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#install-ocamlfuse">
+   Install Ocamlfuse
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#authorize-google-account-on-ubuntu">
+   Authorize Google Account on Ubuntu
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-a-mounting-point-in-local-machine">
+   Create a Mounting Point in Local Machine
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#benefits">
+   Benefits
+  </a>
+ </li>
+</ul>
+
         </nav>
     </div>
 </div>
@@ -280,20 +324,38 @@
         
               <div>
                 
-  <div class="section" id="python-basics">
-<h1>Python Basics<a class="headerlink" href="#python-basics" title="Permalink to this headline">¶</a></h1>
-<p>This section covers the fundamental structures and concepts of Python.</p>
+  <div class="section" id="google-drive-with-ubuntu">
+<h1>Google Drive with Ubuntu<a class="headerlink" href="#google-drive-with-ubuntu" title="Permalink to this headline">¶</a></h1>
+<p>So far Google has not released an official API for Linux with Google Drive.</p>
+<p>This note illustrates how to mount Google Drive on Ubuntu using <code class="docutils literal notranslate"><span class="pre">ocamlfuse</span></code>.</p>
+<div class="section" id="install-ocamlfuse">
+<h2>Install Ocamlfuse<a class="headerlink" href="#install-ocamlfuse" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo add-apt-repository ppa:alessandro-strada/ppa
+$ sudo apt-get update
+$ sudo apt-get install google-drive-ocamlfuse
+</pre></div>
+</div>
+</div>
+<div class="section" id="authorize-google-account-on-ubuntu">
+<h2>Authorize Google Account on Ubuntu<a class="headerlink" href="#authorize-google-account-on-ubuntu" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">google</span><span class="o">-</span><span class="n">drive</span><span class="o">-</span><span class="n">ocamlfuse</span>
+</pre></div>
+</div>
+<p>Just follow the GUI instructions to allow Ubuntu to access the Google Drive.</p>
+</div>
+<div class="section" id="create-a-mounting-point-in-local-machine">
+<h2>Create a Mounting Point in Local Machine<a class="headerlink" href="#create-a-mounting-point-in-local-machine" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mkdir ~/google-drive
+$ google-drive-ocamlfuse ~/google-drive
+</pre></div>
+</div>
+</div>
+<div class="section" id="benefits">
+<h2>Benefits<a class="headerlink" href="#benefits" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Recommended Readings</p>
-<ul>
-<li><p><a class="reference external" href="https://www.amazon.com/Lean-Python-Learn-Enough-Useful/dp/1484223845">Lean Python: Learn Just Enough Python to Build Useful Tools</a></p></li>
-<li><p><a class="reference external" href="https://www.amazon.com/Python-Tricks-Buffet-Awesome-Features-ebook/dp/B0785Q7GSY/ref=sr_1_14?dchild=1&amp;keywords=Python+Notes&amp;qid=1599971235&amp;sr=8-14">Python Tricks: A Buffet of Awesome Python Features</a></p></li>
-<li><p><a class="reference external" href="https://python.swaroopch.com/">A Byte of Python</a></p></li>
-<li><p><a class="reference external" href="https://www.stavros.io/tutorials/python/">Learn Python in 10 minutes</a></p></li>
+<li><p>To mount the Google Drive using ocamlfuse, it is easier to access the files and directories in the terminal.</p></li>
+<li><p>Plus, all filenames and directory names show up properly!</p></li>
 </ul>
-</li>
-</ul>
-<div class="toctree-wrapper compound">
 </div>
 </div>
 
@@ -309,13 +371,13 @@
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            kernelName: "python-notes",
             path: "./python-basics"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'python-notes'</script>
 
               </div>
               
@@ -325,8 +387,8 @@
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="../intro.html" title="previous page">Introduction</a>
-    <a class='right-next' id="next-link" href="jupyter-notebook.html" title="next page">Jupyer Notebook</a>
+    <a class='left-prev' id="prev-link" href="web-applications.html" title="previous page">Web Applications</a>
+    <a class='right-next' id="next-link" href="productive-tech.html" title="next page">Phythonic Productivity Techniques</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

@@ -366,6 +366,19 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;string&gt;:6: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify &#39;dtype=object&#39; when creating the ndarray
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/tensorflow/python/keras/datasets/imdb.py:159: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify &#39;dtype=object&#39; when creating the ndarray
+  x_train, y_train = np.array(xs[:idx]), np.array(labels[:idx])
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/tensorflow/python/keras/datasets/imdb.py:160: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify &#39;dtype=object&#39; when creating the ndarray
+  x_test, y_test = np.array(xs[idx:]), np.array(labels[idx:])
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -486,30 +499,6 @@ float32
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/10
-157/157 [==============================] - 111s 709ms/step - loss: 0.4556 - accuracy: 0.7739 - val_loss: 0.3904 - val_accuracy: 0.8310
-Epoch 2/10
-157/157 [==============================] - 112s 714ms/step - loss: 0.2479 - accuracy: 0.9057 - val_loss: 0.2884 - val_accuracy: 0.8804
-Epoch 3/10
-157/157 [==============================] - 111s 709ms/step - loss: 0.2162 - accuracy: 0.9179 - val_loss: 0.3065 - val_accuracy: 0.8748
-Epoch 4/10
-157/157 [==============================] - 122s 777ms/step - loss: 0.1547 - accuracy: 0.9423 - val_loss: 0.3361 - val_accuracy: 0.8764
-Epoch 5/10
-157/157 [==============================] - 124s 791ms/step - loss: 0.1228 - accuracy: 0.9561 - val_loss: 0.3708 - val_accuracy: 0.8800
-Epoch 6/10
-157/157 [==============================] - 119s 759ms/step - loss: 0.0934 - accuracy: 0.9685 - val_loss: 0.3716 - val_accuracy: 0.8794
-Epoch 7/10
-157/157 [==============================] - 111s 710ms/step - loss: 0.0775 - accuracy: 0.9730 - val_loss: 0.4497 - val_accuracy: 0.8748
-Epoch 8/10
-157/157 [==============================] - 124s 788ms/step - loss: 0.0839 - accuracy: 0.9705 - val_loss: 0.4725 - val_accuracy: 0.8250
-Epoch 9/10
-157/157 [==============================] - 119s 757ms/step - loss: 0.0700 - accuracy: 0.9775 - val_loss: 0.4114 - val_accuracy: 0.8686
-Epoch 10/10
-157/157 [==============================] - 118s 752ms/step - loss: 0.1145 - accuracy: 0.9603 - val_loss: 0.4440 - val_accuracy: 0.8694
-</pre></div>
-</div>
-</div>
 </div>
 </div>
 <div class="section" id="model-evaluation">
@@ -558,6 +547,32 @@ Epoch 10/10
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># model.save(&#39;../data/sent-analysis-lstm-v1.h5&#39;)</span>
 <span class="kn">import</span> <span class="nn">keras</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s1">&#39;../data/sent-analysis-lstm-v1.h5&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">OSError</span><span class="g g-Whitespace">                                   </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="n">d46bb94b5e08</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># model.save(&#39;../data/sent-analysis-lstm-v1.h5&#39;)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">keras</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s1">&#39;../data/sent-analysis-lstm-v1.h5&#39;</span><span class="p">)</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/tensorflow/python/keras/saving/save.py</span> in <span class="ni">load_model</span><span class="nt">(filepath, custom_objects, compile, options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">184</span>     <span class="n">filepath</span> <span class="o">=</span> <span class="n">path_to_string</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">185</span>     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">string_types</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">186</span>       <span class="n">loader_impl</span><span class="o">.</span><span class="n">parse_saved_model</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">187</span>       <span class="k">return</span> <span class="n">saved_model_load</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="nb">compile</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">188</span> 
+
+<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/tensorflow/python/saved_model/loader_impl.py</span> in <span class="ni">parse_saved_model</span><span class="nt">(export_dir)</span>
+<span class="g g-Whitespace">    </span><span class="mi">111</span>                   <span class="p">(</span><span class="n">export_dir</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">112</span>                    <span class="n">constants</span><span class="o">.</span><span class="n">SAVED_MODEL_FILENAME_PBTXT</span><span class="p">,</span>
+<span class="ne">--&gt; </span><span class="mi">113</span>                    <span class="n">constants</span><span class="o">.</span><span class="n">SAVED_MODEL_FILENAME_PB</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">114</span> 
+<span class="g g-Whitespace">    </span><span class="mi">115</span> 
+
+<span class="ne">OSError</span>: SavedModel file does not exist at: ../data/sent-analysis-lstm-v1.h5/{saved_model.pbtxt|saved_model.pb}
 </pre></div>
 </div>
 </div>
