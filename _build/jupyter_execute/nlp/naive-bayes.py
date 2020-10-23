@@ -7,8 +7,11 @@
 - When applying Naive Bayes to text data, we need to convert text data into numeric features.
     - bag-of-words model
     - vectorization issues
+    - Fine tune the vectorizing features for better representation of the texts
 - Applications
     - Text Classification
+- Issues
+    - Fail to consider the sequential orders of words in texts
 
 ## Loading Libraries
 

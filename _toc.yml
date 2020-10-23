@@ -18,6 +18,7 @@
     - file: python-basics/docstrings
     - file: python-basics/python-tricks
     - file: python-basics/web-applications
+    - file: python-basics/google-drive-ubuntu
     - file: python-basics/productive-tech
     - file: python-basics/miscellaneous-notes
 - file: corpus/corpus-processing
