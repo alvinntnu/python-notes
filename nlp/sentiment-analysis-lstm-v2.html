@@ -219,41 +219,6 @@
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">OSError</span><span class="g g-Whitespace">                                   </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">4</span><span class="n">bbd072b5429</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">text_normalizer</span> <span class="k">as</span> <span class="nn">tn</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">model_evaluation_utils</span> <span class="k">as</span> <span class="nn">meu</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">import</span> <span class="nn">nltk</span>
-
-<span class="o">~/</span><span class="n">GoogleDrive</span><span class="o">/</span><span class="n">_MySyncDrive</span><span class="o">/</span><span class="n">Repository</span><span class="o">/</span><span class="n">python</span><span class="o">-</span><span class="n">notes</span><span class="o">/</span><span class="n">nlp</span><span class="o">/</span><span class="n">text_normalizer</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">ToktokTokenizer</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="n">stopword_list</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">corpus</span><span class="o">.</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">17</span> <span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;en_core_web_lg&#39;</span><span class="p">,</span> <span class="n">parse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">entity</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="c1"># nlp_vec = spacy.load(&#39;en_vectors_web_lg&#39;, parse=True, tag=True, entity=True)</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span> 
-
-<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/spacy/__init__.py</span> in <span class="ni">load</span><span class="nt">(name, **overrides)</span>
-<span class="g g-Whitespace">     </span><span class="mi">28</span>     <span class="k">if</span> <span class="n">depr_path</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">29</span>         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">Warnings</span><span class="o">.</span><span class="n">W001</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">depr_path</span><span class="p">),</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">30</span>     <span class="k">return</span> <span class="n">util</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">overrides</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">31</span> 
-<span class="g g-Whitespace">     </span><span class="mi">32</span> 
-
-<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/spacy/util.py</span> in <span class="ni">load_model</span><span class="nt">(name, **overrides)</span>
-<span class="g g-Whitespace">    </span><span class="mi">173</span>     <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;exists&quot;</span><span class="p">):</span>  <span class="c1"># Path or Path-like to model data</span>
-<span class="g g-Whitespace">    </span><span class="mi">174</span>         <span class="k">return</span> <span class="n">load_model_from_path</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">overrides</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">175</span>     <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="n">Errors</span><span class="o">.</span><span class="n">E050</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">176</span> 
-<span class="g g-Whitespace">    </span><span class="mi">177</span> 
-
-<span class="ne">OSError</span>: [E050] Can&#39;t find model &#39;en_core_web_lg&#39;. It doesn&#39;t seem to be a shortcut link, a Python package or a valid path to a data directory.
-</pre></div>
-</div>
-</div>
 </div>
 <div class="section" id="load-and-normalize-data">
 <h2>Load and normalize data<a class="headerlink" href="#load-and-normalize-data" title="Permalink to this headline">¶</a></h2>
