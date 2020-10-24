@@ -52,6 +52,7 @@
     - file: nlp/sklearn
     - file: nlp/naive-bayes
     - file: nlp/sentiment-analysis-ml
+    - file: nlp/neural-network-from-scratch
     - file: nlp/word-embeddings
     - file: nlp/word2vec-chinese
     - file: nlp/word2vec
