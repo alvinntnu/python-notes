@@ -24,35 +24,6 @@ Important steps in neural network:
 import numpy as np
 import matplotlib.pylab as plt
 
-from draw_neural_net import draw_neural_net
-fig = plt.figure(figsize=(6, 6))
-ax = fig.gca()
-ax.axis('off')
-draw_neural_net(ax, .1, .9, .1, .9, [3, 4, 2])
-
-## Methods to create neural network diagram
-
-# from draw_neural_net2 import draw_neural_net3
-# fig = plt.figure(figsize=(12, 12))
-# ax = fig.gca()
-# ax.axis('off')
-# draw_neural_net3(ax, .1, .9, .1, .9, [2,2],
-#                 coefs_=[np.array([[0.4,0.5],[0.1,0.2]])],
-#                 intercepts_=[np.array([99,99])],
-#                # np=np, plt = plt,
-#                 n_iter_ = 1, loss_=0.4)
-
-
-# %load_ext tikzmagic
-
-# %%tikz -f svg
-
-# \tikzset{every node/.style={font=\sffamily,white}}
-
-# \node[fill=red] at (0,0) (a) {This};
-# \node[fill=blue] at (2,0) (b) {That};
-# \draw[->] (a) -- (b);
-
 ## Linear Algebra and Matrix
 
 - 2D matrix
@@ -159,26 +130,17 @@ plt.show()
 
 ## Forward Propagation
 
-- Given a two-layer network, with two input values $x1$ and $x2$, to get the values of the three outputs in the second layer, $y1$, $y2$, $y3$, we compute the dot product of the *X* and *W*.
+![](../images/neural-network-sample2.png)
+
+- Neural network is a model with weights for data/value transformation.
+- The input data values will be transformed according to the weights of the neural network.
+- Given a two-layer network, with two input values $x1$ and $x2$, to get the values of the three outputs in the second layer, $a_1^{(1)}$, $a_2^{(1)}$, $a_3^{(1)}$, we compute the dot product of the *X* and *W*.
     - *X* refers to the input vector/matrix
     - *W* refers to the network weights, which is a 2 x 3 matrix in the current example
-    - Each link is a weight and the network consists of a 2 x 3 Weight Matrix *W*
-- Taking the dot product of the input values *X* and the weight matrix *W* is referred to as the **forward propagation** of the network. 
-
-fig = plt.figure(figsize=(6, 6))
-ax = fig.gca()
-ax.axis('off')
-draw_neural_net(ax, .1, .7, .1, .9, [2, 3])
-
-from nnv import NNV
-
-layersList = [
-    {"title": "Input: X", "units": 2, "color": "lightBlue"},
-    {"title": "Output: Y", "units": 3, "color": "lightpink"},
-    #{"title": "Labels", "units": 2, "color": "lightpink"},
-]
-
-NNV(layersList, font_size=14).render()
+    - The weights are represented as the links in-between the first and second layers
+    - These weights can be mathematically represesnted as a 2 x 3 Matrix *W*
+- Taking the dot product of the input values *X* and the weight matrix *W* is referred to as the **forward propagation** of the network.
+- Forward propagation gives us the values of the nodes in the second layer
 
 X = np.array([1,2])
 X.shape
@@ -191,7 +153,7 @@ print(Y)
 
 ## Weights, Biases, and Activation Functions
 
-- The output of a node in the network is computed as the sum of the weighted inputs and the bias:
+- The output of a node in the network is computed as the sum of the weighted inputs and the bias. Take $a^{(1)}_1 $ for example:
 
 $$ a^{(1)}_1 = w_{11}^{(1)}x_1 + w_{12}^{(1)}x_2 + b_1$$
 
@@ -253,7 +215,30 @@ print(cross_entropy_error(np.array(y), np.array(t)))
 
 $$ E = - \frac{1}{N}\sum_n\sum_k t_{nk}\log y_{nk}$$
 
-## Stochastic Gradient Descent
+- We can revise the `cross_entropy_error()` function to work with outputs from a min-batch sample.
+
+# adjust the function to for batch sample outputs
+def cross_entropy_error(y, t):
+    if y.ndim==1:
+        t = t.reshape(1, t.size)
+        y = y.reshape(1, y.size)
+    batch_size = y.shape[0]
+    return -np.sum(t*np.log(y + 1e-7))/batch_size 
+
+- When the labels uses one-hot encoding, the function can be simplified as follows:
+
+def cross_entropy_error(y, t):
+    if y.ndim==1:
+        t = t.reshape(1, t.size)
+        y = y.reshape(1, y.size)
+    batch_size = y.shape[0]
+    # because for one-hot labels
+    # cross-entropy sums only the values of the true labels `1`
+    return -np.sum(np.log(y[np.arange(batch_size),t] + 1e-7))/batch_size
+
+## Gradient Descent
+
+
 
 ## References
 

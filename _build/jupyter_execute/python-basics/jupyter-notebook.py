@@ -363,6 +363,54 @@ library(ggplot2)
 data.frame(x = seq(1,100), y = seq(seq(1,100))) %>%
 ggplot(aes(x,y)) + geom_point()
 
+## Create Neural Network Diagram
+
+# import numpy as np
+# import matplotlib.pylab as plt
+# from draw_neural_net import draw_neural_net
+# fig = plt.figure(figsize=(6, 6))
+# ax = fig.gca()
+# ax.axis('off')
+# draw_neural_net(ax, .1, .9, .1, .9, [3, 4, 2])
+
+# fig = plt.figure(figsize=(6, 6))
+# ax = fig.gca()
+# ax.axis('off')
+# draw_neural_net(ax, .1, .7, .1, .9, [2, 3, 2])
+
+## Methods to create neural network diagram
+
+# from draw_neural_net2 import draw_neural_net3
+# fig = plt.figure(figsize=(12, 12))
+# ax = fig.gca()
+# ax.axis('off')
+# draw_neural_net3(ax, .1, .9, .1, .9, [2,2],
+#                 coefs_=[np.array([[0.4,0.5],[0.1,0.2]])],
+#                 intercepts_=[np.array([99,99])],
+#                # np=np, plt = plt,
+#                 n_iter_ = 1, loss_=0.4)
+
+
+# %load_ext tikzmagic
+
+# %%tikz -f svg
+
+# \tikzset{every node/.style={font=\sffamily,white}}
+
+# \node[fill=red] at (0,0) (a) {This};
+# \node[fill=blue] at (2,0) (b) {That};
+# \draw[->] (a) -- (b);
+
+from nnv import NNV
+
+layersList = [
+    {"title": "Input: X", "units": 2, "color": "lightBlue"},
+    {"title": "Output: Y", "units": 3, "color": "lightpink"},
+    #{"title": "Labels", "units": 2, "color": "lightpink"},
+]
+
+NNV(layersList, font_size=14).render()
+
 ## Memory Issues
 
 When seeing error messages as shown below:

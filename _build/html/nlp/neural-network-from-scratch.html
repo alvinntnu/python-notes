@@ -335,8 +335,8 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#stochastic-gradient-descent">
-   Stochastic Gradient Descent
+  <a class="reference internal nav-link" href="#gradient-descent">
+   Gradient Descent
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -386,57 +386,6 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">draw_neural_net</span> <span class="kn">import</span> <span class="n">draw_neural_net</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-<span class="n">draw_neural_net</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="o">.</span><span class="mi">9</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="o">.</span><span class="mi">9</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/neural-network-from-scratch_4_0.png" src="../_images/neural-network-from-scratch_4_0.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Methods to create neural network diagram</span>
-
-<span class="c1"># from draw_neural_net2 import draw_neural_net3</span>
-<span class="c1"># fig = plt.figure(figsize=(12, 12))</span>
-<span class="c1"># ax = fig.gca()</span>
-<span class="c1"># ax.axis(&#39;off&#39;)</span>
-<span class="c1"># draw_neural_net3(ax, .1, .9, .1, .9, [2,2],</span>
-<span class="c1">#                 coefs_=[np.array([[0.4,0.5],[0.1,0.2]])],</span>
-<span class="c1">#                 intercepts_=[np.array([99,99])],</span>
-<span class="c1">#                # np=np, plt = plt,</span>
-<span class="c1">#                 n_iter_ = 1, loss_=0.4)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load_ext tikzmagic</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %%tikz -f svg</span>
-
-<span class="c1"># \tikzset{every node/.style={font=\sffamily,white}}</span>
-
-<span class="c1"># \node[fill=red] at (0,0) (a) {This};</span>
-<span class="c1"># \node[fill=blue] at (2,0) (b) {That};</span>
-<span class="c1"># \draw[-&gt;] (a) -- (b);</span>
 </pre></div>
 </div>
 </div>
@@ -549,7 +498,7 @@ y_k = \frac{\exp(a_k)}{\sum_{i = 1}^{n} {a_i}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/neural-network-from-scratch_14_0.png" src="../_images/neural-network-from-scratch_14_0.png" />
+<img alt="../_images/neural-network-from-scratch_10_0.png" src="../_images/neural-network-from-scratch_10_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -562,7 +511,7 @@ y_k = \frac{\exp(a_k)}{\sum_{i = 1}^{n} {a_i}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/neural-network-from-scratch_15_0.png" src="../_images/neural-network-from-scratch_15_0.png" />
+<img alt="../_images/neural-network-from-scratch_11_0.png" src="../_images/neural-network-from-scratch_11_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -575,56 +524,27 @@ y_k = \frac{\exp(a_k)}{\sum_{i = 1}^{n} {a_i}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/neural-network-from-scratch_16_0.png" src="../_images/neural-network-from-scratch_16_0.png" />
+<img alt="../_images/neural-network-from-scratch_12_0.png" src="../_images/neural-network-from-scratch_12_0.png" />
 </div>
 </div>
 </div>
 <div class="section" id="forward-propagation">
 <h2>Forward Propagation<a class="headerlink" href="#forward-propagation" title="Permalink to this headline">¶</a></h2>
+<p><img alt="" src="../_images/neural-network-sample2.png" /></p>
 <ul class="simple">
-<li><p>Given a two-layer network, with two input values <span class="math notranslate nohighlight">\(x1\)</span> and <span class="math notranslate nohighlight">\(x2\)</span>, to get the values of the three outputs in the second layer, <span class="math notranslate nohighlight">\(y1\)</span>, <span class="math notranslate nohighlight">\(y2\)</span>, <span class="math notranslate nohighlight">\(y3\)</span>, we compute the dot product of the <em>X</em> and <em>W</em>.</p>
+<li><p>Neural network is a model with weights for data/value transformation.</p></li>
+<li><p>The input data values will be transformed according to the weights of the neural network.</p></li>
+<li><p>Given a two-layer network, with two input values <span class="math notranslate nohighlight">\(x1\)</span> and <span class="math notranslate nohighlight">\(x2\)</span>, to get the values of the three outputs in the second layer, <span class="math notranslate nohighlight">\(a_1^{(1)}\)</span>, <span class="math notranslate nohighlight">\(a_2^{(1)}\)</span>, <span class="math notranslate nohighlight">\(a_3^{(1)}\)</span>, we compute the dot product of the <em>X</em> and <em>W</em>.</p>
 <ul>
 <li><p><em>X</em> refers to the input vector/matrix</p></li>
 <li><p><em>W</em> refers to the network weights, which is a 2 x 3 matrix in the current example</p></li>
-<li><p>Each link is a weight and the network consists of a 2 x 3 Weight Matrix <em>W</em></p></li>
+<li><p>The weights are represented as the links in-between the first and second layers</p></li>
+<li><p>These weights can be mathematically represesnted as a 2 x 3 Matrix <em>W</em></p></li>
 </ul>
 </li>
 <li><p>Taking the dot product of the input values <em>X</em> and the weight matrix <em>W</em> is referred to as the <strong>forward propagation</strong> of the network.</p></li>
+<li><p>Forward propagation gives us the values of the nodes in the second layer</p></li>
 </ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-<span class="n">draw_neural_net</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="o">.</span><span class="mi">7</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="o">.</span><span class="mi">9</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/neural-network-from-scratch_19_0.png" src="../_images/neural-network-from-scratch_19_0.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nnv</span> <span class="kn">import</span> <span class="n">NNV</span>
-
-<span class="n">layersList</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Input: X&quot;</span><span class="p">,</span> <span class="s2">&quot;units&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;lightBlue&quot;</span><span class="p">},</span>
-    <span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Output: Y&quot;</span><span class="p">,</span> <span class="s2">&quot;units&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;lightpink&quot;</span><span class="p">},</span>
-    <span class="c1">#{&quot;title&quot;: &quot;Labels&quot;, &quot;units&quot;: 2, &quot;color&quot;: &quot;lightpink&quot;},</span>
-<span class="p">]</span>
-
-<span class="n">NNV</span><span class="p">(</span><span class="n">layersList</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/neural-network-from-scratch_20_0.png" src="../_images/neural-network-from-scratch_20_0.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Figure size 432x288 with 1 Axes&gt;, &lt;AxesSubplot:&gt;)
-</pre></div>
-</div>
-</div>
-</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
@@ -668,7 +588,7 @@ y_k = \frac{\exp(a_k)}{\sum_{i = 1}^{n} {a_i}}
 <div class="section" id="weights-biases-and-activation-functions">
 <h2>Weights, Biases, and Activation Functions<a class="headerlink" href="#weights-biases-and-activation-functions" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>The output of a node in the network is computed as the sum of the weighted inputs and the bias:</p></li>
+<li><p>The output of a node in the network is computed as the sum of the weighted inputs and the bias. Take <span class="math notranslate nohighlight">\(a^{(1)}_1 \)</span> for example:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[ a^{(1)}_1 = w_{11}^{(1)}x_1 + w_{12}^{(1)}x_2 + b_1\]</div>
@@ -779,9 +699,42 @@ y_k = \frac{\exp(a_k)}{\sum_{i = 1}^{n} {a_i}}
 </ul>
 <div class="math notranslate nohighlight">
 \[ E = - \frac{1}{N}\sum_n\sum_k t_{nk}\log y_{nk}\]</div>
+<ul class="simple">
+<li><p>We can revise the <code class="docutils literal notranslate"><span class="pre">cross_entropy_error()</span></code> function to work with outputs from a min-batch sample.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># adjust the function to for batch sample outputs</span>
+<span class="k">def</span> <span class="nf">cross_entropy_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">y</span><span class="o">.</span><span class="n">ndim</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+    <span class="n">batch_size</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">t</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">y</span> <span class="o">+</span> <span class="mf">1e-7</span><span class="p">))</span><span class="o">/</span><span class="n">batch_size</span> 
+</pre></div>
 </div>
-<div class="section" id="stochastic-gradient-descent">
-<h2>Stochastic Gradient Descent<a class="headerlink" href="#stochastic-gradient-descent" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+<ul class="simple">
+<li><p>When the labels uses one-hot encoding, the function can be simplified as follows:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">cross_entropy_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">y</span><span class="o">.</span><span class="n">ndim</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+    <span class="n">batch_size</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c1"># because for one-hot labels</span>
+    <span class="c1"># cross-entropy sums only the values of the true labels `1`</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">batch_size</span><span class="p">),</span><span class="n">t</span><span class="p">]</span> <span class="o">+</span> <span class="mf">1e-7</span><span class="p">))</span><span class="o">/</span><span class="n">batch_size</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="gradient-descent">
+<h2>Gradient Descent<a class="headerlink" href="#gradient-descent" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
