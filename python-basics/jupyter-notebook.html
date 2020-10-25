@@ -365,6 +365,11 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-neural-network-diagram">
+   Create Neural Network Diagram
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#memory-issues">
    Memory Issues
   </a>
@@ -807,8 +812,8 @@ IRkernel::installspec()
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 9.45 ms, sys: 11.5 ms, total: 20.9 ms
-Wall time: 12.4 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 12.3 ms, sys: 11.7 ms, total: 23.9 ms
+Wall time: 11.3 s
 </pre></div>
 </div>
 </div>
@@ -821,7 +826,7 @@ Wall time: 12.4 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.3 µs ± 74.4 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10.6 µs ± 972 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
 </pre></div>
 </div>
 </div>
@@ -901,6 +906,99 @@ R[write to console]: The following objects are masked from ‘package:base’:
 </pre></div>
 </div>
 <img alt="../_images/jupyter-notebook_21_1.png" src="../_images/jupyter-notebook_21_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="create-neural-network-diagram">
+<h2>Create Neural Network Diagram<a class="headerlink" href="#create-neural-network-diagram" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import numpy as np</span>
+<span class="c1"># import matplotlib.pylab as plt</span>
+<span class="c1"># from draw_neural_net import draw_neural_net</span>
+<span class="c1"># fig = plt.figure(figsize=(6, 6))</span>
+<span class="c1"># ax = fig.gca()</span>
+<span class="c1"># ax.axis(&#39;off&#39;)</span>
+<span class="c1"># draw_neural_net(ax, .1, .9, .1, .9, [3, 4, 2])</span>
+
+<span class="c1"># fig = plt.figure(figsize=(6, 6))</span>
+<span class="c1"># ax = fig.gca()</span>
+<span class="c1"># ax.axis(&#39;off&#39;)</span>
+<span class="c1"># draw_neural_net(ax, .1, .7, .1, .9, [2, 3, 2])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">702243819</span><span class="n">bba</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">draw_neural_net</span> <span class="kn">import</span> <span class="n">draw_neural_net</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;draw_neural_net&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Methods to create neural network diagram</span>
+
+<span class="c1"># from draw_neural_net2 import draw_neural_net3</span>
+<span class="c1"># fig = plt.figure(figsize=(12, 12))</span>
+<span class="c1"># ax = fig.gca()</span>
+<span class="c1"># ax.axis(&#39;off&#39;)</span>
+<span class="c1"># draw_neural_net3(ax, .1, .9, .1, .9, [2,2],</span>
+<span class="c1">#                 coefs_=[np.array([[0.4,0.5],[0.1,0.2]])],</span>
+<span class="c1">#                 intercepts_=[np.array([99,99])],</span>
+<span class="c1">#                # np=np, plt = plt,</span>
+<span class="c1">#                 n_iter_ = 1, loss_=0.4)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load_ext tikzmagic</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %%tikz -f svg</span>
+
+<span class="c1"># \tikzset{every node/.style={font=\sffamily,white}}</span>
+
+<span class="c1"># \node[fill=red] at (0,0) (a) {This};</span>
+<span class="c1"># \node[fill=blue] at (2,0) (b) {That};</span>
+<span class="c1"># \draw[-&gt;] (a) -- (b);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nnv</span> <span class="kn">import</span> <span class="n">NNV</span>
+
+<span class="n">layersList</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Input: X&quot;</span><span class="p">,</span> <span class="s2">&quot;units&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;lightBlue&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Output: Y&quot;</span><span class="p">,</span> <span class="s2">&quot;units&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;lightpink&quot;</span><span class="p">},</span>
+    <span class="c1">#{&quot;title&quot;: &quot;Labels&quot;, &quot;units&quot;: 2, &quot;color&quot;: &quot;lightpink&quot;},</span>
+<span class="p">]</span>
+
+<span class="n">NNV</span><span class="p">(</span><span class="n">layersList</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/jupyter-notebook_27_0.png" src="../_images/jupyter-notebook_27_0.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Figure size 432x288 with 1 Axes&gt;, &lt;AxesSubplot:&gt;)
+</pre></div>
+</div>
 </div>
 </div>
 </div>
