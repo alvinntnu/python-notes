@@ -300,6 +300,16 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#neural-network">
+   Neural Network
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#building-a-neural-network-model">
+   Building a Neural Network Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#linear-algebra-and-matrix">
    Linear Algebra and Matrix
   </a>
@@ -325,18 +335,52 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#loss-function-on-one-sample">
-   Loss Function on One Sample
+  <a class="reference internal nav-link" href="#loss-functions">
+   Loss Functions
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#loss-function-on-batch-samples">
-   Loss Function on Batch Samples
-  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#error-based-on-one-sample">
+     Error based on One Sample
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#errors-based-on-batch-samples">
+     Errors based on Batch Samples
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#gradient-descent">
    Gradient Descent
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#partial-derivative">
+     Partial Derivative
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#chain-rule-and-back-propagation">
+     Chain Rule and Back Propagation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#math-on-derivatives">
+   Math on Derivatives
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#math-on-partial-derivaites">
+   Math on Partial Derivaites
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#math-on-gradients">
+   Math on Gradients
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -379,14 +423,32 @@
 </ul>
 </li>
 </ul>
+<div class="section" id="neural-network">
+<h2>Neural Network<a class="headerlink" href="#neural-network" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Neural network is a type of machine learning algorithm modeled on human brains and nervous system.</p></li>
+<li><p>The model is believed to process information in a similar way to the human brain.</p></li>
+<li><p>A neural network often consists of a large number of elements, known as <strong>nodes</strong>, working in parallel to solve a specific problem. These nodes are often organized into different <strong>layers</strong>.</p></li>
+</ul>
 <hr class="docutils" />
 <p><img alt="" src="../_images/neural-network-sample.png" /></p>
+</div>
 <hr class="docutils" />
+<div class="section" id="building-a-neural-network-model">
+<h2>Building a Neural Network Model<a class="headerlink" href="#building-a-neural-network-model" title="Permalink to this headline">¶</a></h2>
+<p><img alt="" src="../_images/neural-network-flowchart.png" /></p>
+<ul class="simple">
+<li><p>Forward Propagation: It refers to the process of transforming the data values by moving the data through the network to get output.</p></li>
+<li><p>Calculate Total Error</p></li>
+<li><p>Calculate Gradients</p></li>
+<li><p>Update the weights</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -498,7 +560,7 @@ y_k = \frac{\exp(a_k)}{\sum_{i = 1}^{n} {a_i}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/neural-network-from-scratch_10_0.png" src="../_images/neural-network-from-scratch_10_0.png" />
+<img alt="../_images/neural-network-from-scratch_15_0.png" src="../_images/neural-network-from-scratch_15_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -511,7 +573,7 @@ y_k = \frac{\exp(a_k)}{\sum_{i = 1}^{n} {a_i}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/neural-network-from-scratch_11_0.png" src="../_images/neural-network-from-scratch_11_0.png" />
+<img alt="../_images/neural-network-from-scratch_16_0.png" src="../_images/neural-network-from-scratch_16_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -524,7 +586,7 @@ y_k = \frac{\exp(a_k)}{\sum_{i = 1}^{n} {a_i}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/neural-network-from-scratch_12_0.png" src="../_images/neural-network-from-scratch_12_0.png" />
+<img alt="../_images/neural-network-from-scratch_17_0.png" src="../_images/neural-network-from-scratch_17_0.png" />
 </div>
 </div>
 </div>
@@ -646,12 +708,21 @@ y_k = \frac{\exp(a_k)}{\sum_{i = 1}^{n} {a_i}}
 <div class="section" id="learning-and-training">
 <h2>Learning and Training<a class="headerlink" href="#learning-and-training" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Forward propagation shows how the network takes the input values and produce the output values based on the network parameters (i.e., weights).</p></li>
+<li><p>Forward propagation shows how the network takes the input values, transforms them, and produces the output values based on the network parameters (i.e., weights).</p></li>
 <li><p>The network needs to learn the weights that best produce the output values according to some loss function.</p></li>
+<li><p>The key is we compute the differences between the real outputs of the network and the target outputs. The model should aim to minimize these differences, which are commonly referred to as <strong>errors</strong> of the model.</p></li>
 </ul>
 </div>
-<div class="section" id="loss-function-on-one-sample">
-<h2>Loss Function on One Sample<a class="headerlink" href="#loss-function-on-one-sample" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="loss-functions">
+<h2>Loss Functions<a class="headerlink" href="#loss-functions" title="Permalink to this headline">¶</a></h2>
+<p><img alt="" src="../_images/neural-network-sample3.png" /></p>
+<ul class="simple">
+<li><p>If the target ouputs are numeric values, we can evaluate the errors (i.e., the differences between the actual model outputs and the target outputs) using the <strong>mean square error</strong> function.</p></li>
+<li><p>If the target outputs are labels, we can evaluate the errors (i.e., the differences between the actual model labels and the target labels) using the <strong>cross entory error</strong> function.</p></li>
+<li><p>The function used to compute the errors of the model is referred to as the <strong>loss function</strong>.</p></li>
+</ul>
+<div class="section" id="error-based-on-one-sample">
+<h3>Error based on One Sample<a class="headerlink" href="#error-based-on-one-sample" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Mean Square Error</p></li>
 </ul>
@@ -692,10 +763,10 @@ y_k = \frac{\exp(a_k)}{\sum_{i = 1}^{n} {a_i}}
 </div>
 </div>
 </div>
-<div class="section" id="loss-function-on-batch-samples">
-<h2>Loss Function on Batch Samples<a class="headerlink" href="#loss-function-on-batch-samples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="errors-based-on-batch-samples">
+<h3>Errors based on Batch Samples<a class="headerlink" href="#errors-based-on-batch-samples" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>If the training goes based on a small batch size <em>N</em>, we can compute the average loss of the batch sample:</p></li>
+<li><p>If the training is based on a sample of batch size <em>N</em>, we can compute the average loss (or total errors) of the batch sample:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[ E = - \frac{1}{N}\sum_n\sum_k t_{nk}\log y_{nk}\]</div>
@@ -733,8 +804,259 @@ y_k = \frac{\exp(a_k)}{\sum_{i = 1}^{n} {a_i}}
 </div>
 </div>
 </div>
+</div>
 <div class="section" id="gradient-descent">
 <h2>Gradient Descent<a class="headerlink" href="#gradient-descent" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>With the Loss Function, we can now perform the most important step in model training – adjusting the weights of the model.</p></li>
+<li><p>The mechanism behind the neural network training steps is that we need to figure out:</p>
+<ul>
+<li><p>how the change of a specific parameter (i.e., weight) in the model may lead to the change (i.e., decrease) of the values from the Loss Function? (i.e., How much does a change in a specific weight affect the total error?)</p></li>
+</ul>
+</li>
+<li><p>Then we would know how much of the total error each wight in the model is responsible for.</p></li>
+<li><p>These turn out to be the basis for parameter adjustments.</p></li>
+<li><p>The error that a specific weight is responsible for is referred to as the <strong>gradient</strong> of the parameter.</p></li>
+<li><p>Mathematically, the gradient of a weight is the partial derivative of a weight in relation to the loss function.</p></li>
+</ul>
+<div class="section" id="partial-derivative">
+<h3>Partial Derivative<a class="headerlink" href="#partial-derivative" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Once if we have defined the loss function for the model, we can calculate to what extent the change in weights would affect the change in loss function</p></li>
+<li><p>The partial derivative refers to how a change in a specific weight <span class="math notranslate nohighlight">\(W_1\)</span> affects the total error.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\frac{\partial E}{\partial W_1}\]</div>
+</div>
+<div class="section" id="chain-rule-and-back-propagation">
+<h3>Chain Rule and Back Propagation<a class="headerlink" href="#chain-rule-and-back-propagation" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Because there are many parameters in a network, we can compute the gradients (or partial derivatives) of all the weights using the chain rules of derivatives.</p></li>
+<li><p>Specifically, the total error is essentially broken up and distributed back through the network to every single weight with the help of chain rule:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\frac{\partial z}{\partial x} = \frac{\partial z}{\partial y}.\frac{\partial y}{\partial x}\]</div>
+<ul class="simple">
+<li><p>This process is referred to as <strong>back propagation</strong>: moving back through the network, back-propagating the total errors to every single weight, and updating the weights.</p></li>
+<li><p>The principle of weights-updating: the larger the gradient, the more the adjustments.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[W_1 = W_1 - \eta \frac{\partial E}{\partial W_1}\]</div>
+<ul class="simple">
+<li><p>The above adjustment formula suggests that the weight updates are proportional to the partial derivatives of the weight.</p></li>
+<li><p>The <strong><span class="math notranslate nohighlight">\(\eta\)</span></strong> in the formula controls the amount of adjustment, which is referred to as the <strong>learning rate</strong>.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="math-on-derivatives">
+<h2>Math on Derivatives<a class="headerlink" href="#math-on-derivatives" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Function for derivatives</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">numerical_diff</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="mf">1e-4</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">h</span><span class="p">)</span><span class="o">-</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">h</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">h</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">tangent_line</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">numerical_diff</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="c1">#print(d)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">d</span><span class="o">*</span><span class="n">x</span>
+    <span class="k">return</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">d</span><span class="o">*</span><span class="n">t</span> <span class="o">+</span> <span class="n">y</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Take the derivates of the following function when x = 5 and 10:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[y = 0.01x^2 + 0.1x\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fun_1</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">0.01</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">0.1</span><span class="o">*</span><span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot the function</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">fun_1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">tf</span> <span class="o">=</span> <span class="n">tangent_line</span><span class="p">(</span><span class="n">fun_1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">y5</span> <span class="o">=</span> <span class="n">tf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/neural-network-from-scratch_53_0.png" src="../_images/neural-network-from-scratch_53_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">numerical_diff</span><span class="p">(</span><span class="n">fun_1</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">numerical_diff</span><span class="p">(</span><span class="n">fun_1</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.1999999999990898
+0.2999999999986347
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="math-on-partial-derivaites">
+<h2>Math on Partial Derivaites<a class="headerlink" href="#math-on-partial-derivaites" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Take the partial derivatives of the following function:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ f(x_0, x_1)=x_0^2 + x_1^2 \]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## fun_2 has two variables/weights</span>
+<span class="k">def</span> <span class="nf">fun_2</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>When <span class="math notranslate nohighlight">\(x_0=3\)</span> and <span class="math notranslate nohighlight">\(x_1=4\)</span>, compute the partial derivative of <span class="math notranslate nohighlight">\(x_0\)</span>, <span class="math notranslate nohighlight">\(\frac{\partial f}{\partial x_0}\)</span></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fun_2_tmp1</span><span class="p">(</span><span class="n">x0</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x0</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="mf">4.0</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="n">numerical_diff</span><span class="p">(</span><span class="n">fun_2_tmp1</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.00000000000378
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>When <span class="math notranslate nohighlight">\(x_0=3\)</span> and <span class="math notranslate nohighlight">\(x_1=4\)</span>, compute the partial derivative of <span class="math notranslate nohighlight">\(x_1\)</span>, <span class="math notranslate nohighlight">\(\frac{\partial f}{\partial x_1}\)</span></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fun_2_tmp2</span><span class="p">(</span><span class="n">x1</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">3.0</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">x1</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="n">numerical_diff</span><span class="p">(</span><span class="n">fun_2_tmp2</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.999999999999119
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="math-on-gradients">
+<h2>Math on Gradients<a class="headerlink" href="#math-on-gradients" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>We can calculate the partial derivatives all at once,and represent them in a vector, which is referred to as <strong>gradient</strong>: <span class="math notranslate nohighlight">\((\frac{\partial f}{\partial x_0}, \frac{\partial f}{\partial x_1})\)</span></p></li>
+<li><p>Each value pair, <span class="math notranslate nohighlight">\((x_0,x_1)\)</span>, should correspond to a gradient.</p></li>
+<li><p>Intuitive understanding of the gradient:</p>
+<ul>
+<li><p>The gradient of a specific <span class="math notranslate nohighlight">\((x_0,x_1)\)</span> is a <strong>vector</strong> with the direction pointing at the <strong>global minimum</strong> of the function.</p></li>
+<li><p>The more farther the <span class="math notranslate nohighlight">\((x_0,x_1)\)</span> is way from the global minimum, the larger the gradient vector.</p></li>
+</ul>
+</li>
+<li><p>These gradients turn out to be the most important basis in neural network training.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
+
+
+<span class="k">def</span> <span class="nf">_numerical_gradient_no_batch</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="mf">1e-4</span>  <span class="c1"># 0.0001</span>
+    <span class="n">grad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
+        <span class="n">tmp_val</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">tmp_val</span><span class="p">)</span> <span class="o">+</span> <span class="n">h</span>
+        <span class="n">fxh1</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># f(x+h)</span>
+        
+        <span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp_val</span> <span class="o">-</span> <span class="n">h</span> 
+        <span class="n">fxh2</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># f(x-h)</span>
+        <span class="n">grad</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">fxh1</span> <span class="o">-</span> <span class="n">fxh2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">h</span><span class="p">)</span>
+        
+        <span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp_val</span>  <span class="c1"># 値を元に戻す</span>
+        
+    <span class="k">return</span> <span class="n">grad</span>
+
+
+<span class="k">def</span> <span class="nf">numerical_gradient</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">X</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_numerical_gradient_no_batch</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">grad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+            <span class="n">grad</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">_numerical_gradient_no_batch</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">grad</span>
+
+
+<span class="k">def</span> <span class="nf">function_2</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">tangent_line</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">numerical_gradient</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">d</span><span class="o">*</span><span class="n">x</span>
+    <span class="k">return</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">d</span><span class="o">*</span><span class="n">t</span> <span class="o">+</span> <span class="n">y</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">)</span>
+    <span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">)</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">x1</span><span class="p">)</span>
+    
+    <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">Y</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+    <span class="n">grad</span> <span class="o">=</span> <span class="n">numerical_gradient</span><span class="p">(</span><span class="n">function_2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">])</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="o">-</span><span class="n">grad</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="n">grad</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>  <span class="n">angles</span><span class="o">=</span><span class="s2">&quot;xy&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;#666666&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x0&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;x1&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/neural-network-from-scratch_64_0.png" src="../_images/neural-network-from-scratch_64_0.png" />
+</div>
+</div>
 </div>
 <div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
