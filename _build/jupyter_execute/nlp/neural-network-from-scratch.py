@@ -434,6 +434,16 @@ if __name__ == '__main__':
     plt.show()
 
 
+## Sequence Model
+
+![](../images/lstm-many2one.png)
+
+![](../images/lstm-many2many.png)
+
+- The following graph is taken from [Christopher Olah's blog post: Understanding LSTM Networks](http://colah.github.io/posts/2015-08-Understanding-LSTMs/)
+
+![](../images/colah-LSTM3-chain.png)
+
 ## References
 
 - [Deep Learning From Scratch](https://www.books.com.tw/products/0010761759)

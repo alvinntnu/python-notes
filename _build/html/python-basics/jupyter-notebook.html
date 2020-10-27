@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mycss.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -372,6 +373,11 @@
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#memory-issues">
    Memory Issues
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#other-issues">
+   Other issues
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -812,8 +818,8 @@ IRkernel::installspec()
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 12.3 ms, sys: 11.7 ms, total: 23.9 ms
-Wall time: 11.3 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 7.59 ms, sys: 10.3 ms, total: 17.9 ms
+Wall time: 11.4 s
 </pre></div>
 </div>
 </div>
@@ -826,7 +832,7 @@ Wall time: 11.3 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10.6 µs ± 972 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.86 µs ± 19.3 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
 </pre></div>
 </div>
 </div>
@@ -893,19 +899,19 @@ ggplot(aes(x,y)) + geom_point()
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R[write to console]: 
 Attaching package: ‘dplyr’
-
-
-R[write to console]: The following objects are masked from ‘package:stats’:
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R[write to console]: The following objects are masked from ‘package:stats’:
 
     filter, lag
-
-
-R[write to console]: The following objects are masked from ‘package:base’:
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R[write to console]: The following objects are masked from ‘package:base’:
 
     intersect, setdiff, setequal, union
 </pre></div>
 </div>
-<img alt="../_images/jupyter-notebook_21_1.png" src="../_images/jupyter-notebook_21_1.png" />
+<img alt="../_images/jupyter-notebook_21_3.png" src="../_images/jupyter-notebook_21_3.png" />
 </div>
 </div>
 </div>
@@ -925,20 +931,6 @@ R[write to console]: The following objects are masked from ‘package:base’:
 <span class="c1"># ax = fig.gca()</span>
 <span class="c1"># ax.axis(&#39;off&#39;)</span>
 <span class="c1"># draw_neural_net(ax, .1, .7, .1, .9, [2, 3, 2])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">702243819</span><span class="n">bba</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">draw_neural_net</span> <span class="kn">import</span> <span class="n">draw_neural_net</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;draw_neural_net&#39;
 </pre></div>
 </div>
 </div>
@@ -1015,6 +1007,28 @@ R[write to console]: The following objects are masked from ‘package:base’:
 </pre></div>
 </div>
 </div>
+<div class="section" id="other-issues">
+<h2>Other issues<a class="headerlink" href="#other-issues" title="Permalink to this headline">¶</a></h2>
+<p>If runnning into the follow issue when compiling the jupyter book:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># OMP: Error #15: Initializing libiomp5.dylib, but found libiomp5.dylib already initialized.</span>
+</pre></div>
+</div>
+<p>There are two solutions suggested on the <a class="reference external" href="https://stackoverflow.com/questions/53014306/error-15-initializing-libiomp5-dylib-but-found-libiomp5-dylib-already-initial">Stack Overflow</a>:</p>
+<ul class="simple">
+<li><p>Method 1 (Not recommended):</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;KMP_DUPLICATE_LIB_OK&quot;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;TRUE&quot;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Method 2 (Recommended!!):</p></li>
+</ul>
+<p>Install the package in the conda environment.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="n">nomkl</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="package-importing">
 <h2>Package Importing<a class="headerlink" href="#package-importing" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
@@ -1032,7 +1046,8 @@ R[write to console]: The following objects are masked from ‘package:base’:
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>numpy==1.18.1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>numpy==1.19.2
+nnv==0.0.4
 </pre></div>
 </div>
 </div>

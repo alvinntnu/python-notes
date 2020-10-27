@@ -383,6 +383,26 @@ nn_flow
 #    webshot::webshot(file = "./images/test.png", vwidth = 1024)
 ```
 
+## Neural Language Model Flowchart
+
+```{r}
+nlm_flow<-mermaid("
+graph LR
+ROOT(Corpus)-->A
+A(Tokenization)-->B(Texts to Sequences)
+B-->B1(Bigram)
+B-->B2(Trigram)
+B-->B3(Line-based)
+
+B1-->C(Create Input Sequences)
+B2-->C
+B3-->C
+C-->D(Define Model Layers)
+D-->E(Model Fitting and Predicting)
+")
+nlm_flow
+```
+
 ```{r}
  graph <- mermaid("
    gantt
@@ -403,4 +423,181 @@ nn_flow
 graph %>%
   htmltools::html_print() %>%
   webshot::webshot(file = "./images/gannt.pdf")
+```
+
+## LSTM: many to one
+
+```{r}
+G_lstm <- 'digraph G {
+rankdir = BT;
+splines=spline;
+edge[style=invis];
+ranksep= 1.4;
+graph [layout = dot]
+
+{
+node [shape=circle, color=chartreuse, style=filled, fillcolor=chartreuse];
+x0 [label=<x<sub>0</sub>>];
+x1 [label=<x<sub>1</sub>>];
+x2 [label=<x<sub>2</sub>>]; 
+x3 [label=<x<sub>3</sub>>]; 
+x4 [label=<x<sub>4</sub>>]; 
+}
+{
+node [shape=box, color=dodgerblue, style=filled, fillcolor=dodgerblue, height=1.2];
+a01 [label=<A>];
+a11 [label=<A>];
+a21 [label=<A>];
+a31 [label=<A>];
+a41 [label=<A>];
+}
+{
+node [shape=circle, color=coral1, style=filled, fillcolor=coral1];
+y [label=<y>];
+}
+
+
+{
+  rank=same;
+  x0->x1->x2->x3->x4;
+}
+{
+  rank=same;
+  a01->a11->a21->a31->a41[style=solid,headport=w, tailport=s, color=grey, pos=10]
+}
+{
+  rank=same;
+  y;
+}
+x0->a01;
+x4->a41;
+l0 [shape=plaintext, label="layer 1 (input layer)"];
+l0->x0;
+{rank=same; l0;x1};
+l1 [shape=plaintext, label="layer 2 (LSTM Cell)"];
+l1->a01;
+{rank=same; l1;a11};
+l2 [shape=plaintext, label="layer 3 (output layer)"];
+l2->y;
+{rank=same; l2;y}
+
+edge[style=solid, color=grey, pos=2];
+x0->a01[headport = s, tailport = n]
+x1->a11[headport = s, tailport = n]
+x2->a21[headport = s]
+x3->a31[headport = s]
+x4->a41[headport = s]
+
+a41->y
+
+}'
+
+grViz(G_lstm)
+
+G_lstm %>%
+  grViz %>%
+  export_svg %>% charToRaw %>% rsvg_png("./images/lstm-many2one.png", width=1600)
+```
+
+
+## LSTM: many-to-many
+
+```{r}
+G_lstm2 <- 'digraph G {
+rankdir = BT;
+splines=spline;
+edge[style=invis];
+ranksep= 1.4;
+graph [layout = dot]
+
+{
+node [shape=circle, color=chartreuse, style=filled, fillcolor=chartreuse];
+x0 [label=<x<sub>0</sub>>];
+x1 [label=<x<sub>1</sub>>];
+x2 [label=<x<sub>2</sub>>]; 
+x3 [label=<x<sub>3</sub>>]; 
+x4 [label=<x<sub>4</sub>>]; 
+}
+{
+node [shape=box, color=dodgerblue, style=filled, fillcolor=dodgerblue, height=1.2];
+a01 [label=<A>];
+a11 [label=<A>];
+a21 [label=<A>];
+a31 [label=<A>];
+a41 [label=<A>];
+}
+{
+node [shape=circle, color=coral1, style=filled, fillcolor=coral1];
+h0 [label=<h<sub>0</sub>>];
+h1 [label=<h<sub>1</sub>>];
+h2 [label=<h<sub>2</sub>>];
+h3 [label=<h<sub>3</sub>>];
+h4 [label=<h<sub>4</sub>>];
+}
+
+
+{
+  rank=same;
+  x0->x1->x2->x3->x4;
+}
+
+{
+  rank=same;
+  h0->h1->h2->h3->h4;
+}
+{
+  rank=same;
+  a01->a11->a21->a31->a41[style=solid,headport=w, tailport=e, color=grey, pos=10]
+}
+
+x0->a01->h0;
+x4->a41->h4;
+
+l0 [shape=plaintext, label="layer 1 (input layer)"];
+l0->x0;
+{rank=same; l0;x1};
+l1 [shape=plaintext, label="layer 2 (LSTM Cell)"];
+l1->a01;
+{rank=same; l1;a11};
+l2 [shape=plaintext, label="layer 3 (output layer)"];
+l2->h0;
+{rank=same; l2;h0}
+
+edge[style=solid, color=grey, pos=2];
+x0->a01->h0[headport = s, tailport = n]
+x1->a11->h1[headport = s, tailport = n]
+x2->a21->h2[headport = s]
+x3->a31->h3[headport = s]
+x4->a41->h4[headport = s]
+
+}'
+
+grViz(G_lstm2)
+
+G_lstm2 %>%
+  grViz %>%
+  export_svg %>% charToRaw %>% rsvg_png("./images/lstm-many2many.png", width=1600)
+```
+
+## LSTM Cell
+
+```{r}
+G_lstm_cell <- '
+digraph MyGraph {
+edge[style=invis];
+splines=pyline;
+rankdir=BT;
+  subgraph cluster_a {
+  style="rounded";
+    σF, σI, σO, tanh [shape=box];
+    {rank=same;σF->σI->σO->tanh;}
+    {rank=same;a->b->c->d;}
+  }
+
+  a1 -> b
+  xt -> {σF, σI, σO}[style="solid"]
+  d -> e
+}'
+
+grViz(G_lstm_cell)
 ```

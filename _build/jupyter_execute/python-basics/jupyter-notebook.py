@@ -427,6 +427,31 @@ Try:
 jupyter notebook --NotebookApp.iopub_data_rate_limit=1.0e10
 ```
 
+## Other issues
+
+If runnning into the follow issue when compiling the jupyter book:
+
+```
+# OMP: Error #15: Initializing libiomp5.dylib, but found libiomp5.dylib already initialized.
+```
+
+There are two solutions suggested on the [Stack Overflow](https://stackoverflow.com/questions/53014306/error-15-initializing-libiomp5-dylib-but-found-libiomp5-dylib-already-initial):
+
+- Method 1 (Not recommended):
+
+```
+import os
+os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
+```
+
+- Method 2 (Recommended!!):
+
+Install the package in the conda environment.
+
+```
+conda install nomkl
+```
+
 ## Package Importing
 
 - Python can only import self-defined libraries in the current working directory (i.e., the directory where the script file is).

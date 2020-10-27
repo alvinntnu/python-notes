@@ -29,6 +29,8 @@ execute:
     - 'nlp/sentiment-analysis-using-bert.ipynb'
     - 'nlp/transfer-learning-sent-encoding-chinese.ipynb'
     - 'nlp/ktrain-tutorial-explaining-predictions.ipynb'
+    - 'nlp/neural-language-model-primer.ipynb'
+    - 'nlp/neural-language-model.ipynb'
 sphinx:
   extra_extensions:
     - sphinxcontrib.bibtex

@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mycss.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -359,7 +360,9 @@ Num of Words: 879
 Num of Sents: 197
 Chang1 11312/c-00007602-1 toyplay 1996-02-07
 Num of Words: 816
-Num of Sents: 144
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Num of Sents: 144
 Chang1 11312/c-00007603-1 toyplay 1996-02-07
 Num of Words: 1294
 Num of Sents: 200
@@ -419,7 +422,9 @@ EXP :  [(&#39;id&#39;, &#39;EXP&#39;), (&#39;role&#39;, &#39;Investigator&#39;),
 ====
 CHI :  [(&#39;id&#39;, &#39;CHI&#39;), (&#39;name&#39;, &#39;志强&#39;), (&#39;role&#39;, &#39;Target_Child&#39;), (&#39;language&#39;, &#39;zho&#39;), (&#39;age&#39;, &#39;P5Y11M&#39;), (&#39;sex&#39;, &#39;male&#39;), (&#39;group&#39;, &#39;five&#39;), (&#39;SES&#39;, &#39;MC&#39;), (&#39;birthday&#39;, &#39;1990-03-28&#39;)]
 EXP :  [(&#39;id&#39;, &#39;EXP&#39;), (&#39;role&#39;, &#39;Investigator&#39;), (&#39;language&#39;, &#39;zho&#39;)]
-====
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>====
 CHI :  [(&#39;id&#39;, &#39;CHI&#39;), (&#39;name&#39;, &#39;兰欣&#39;), (&#39;role&#39;, &#39;Target_Child&#39;), (&#39;language&#39;, &#39;zho&#39;), (&#39;age&#39;, &#39;P6Y02M&#39;), (&#39;sex&#39;, &#39;female&#39;), (&#39;group&#39;, &#39;six&#39;), (&#39;SES&#39;, &#39;MC&#39;), (&#39;birthday&#39;, &#39;1989-12-24&#39;)]
 EXP :  [(&#39;id&#39;, &#39;EXP&#39;), (&#39;role&#39;, &#39;Investigator&#39;), (&#39;language&#39;, &#39;zho&#39;)]
 </pre></div>
@@ -537,18 +542,16 @@ library(dplyr)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R[write to console]: Keep up to date with changes at https://www.tidyverse.org/blog/
-
-R[write to console]: 
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R[write to console]: 
 Attaching package: ‘dplyr’
-
-
-R[write to console]: The following objects are masked from ‘package:stats’:
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R[write to console]: The following objects are masked from ‘package:stats’:
 
     filter, lag
-
-
-R[write to console]: The following objects are masked from ‘package:base’:
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R[write to console]: The following objects are masked from ‘package:base’:
 
     intersect, setdiff, setequal, union
 </pre></div>
@@ -631,34 +634,34 @@ labs(x=&quot;Child Age(Months)&quot;,y=&quot;Mean Length of Utterances (MLU)&quo
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;/Users/Alvin/GoogleDrive/_MySyncDrive/RepositoryData/data/CHILDES_NCCU/transcript/M018.cha&#39;,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;/Users/Alvin/GoogleDrive/_MySyncDrive/RepositoryData/data/CHILDES_NCCU/transcript/M010.cha&#39;,
  {&#39;UTF8&#39;: &#39;&#39;,
-  &#39;PID&#39;: &#39;11312/a-00005099-1&#39;,
+  &#39;PID&#39;: &#39;11312/a-00005091-1&#39;,
   &#39;Languages&#39;: &#39;zho, nan, eng&#39;,
-  &#39;Participants&#39;: {&#39;F&#39;: {&#39;participant_name&#39;: &#39;Participant&#39;,
+  &#39;Participants&#39;: {&#39;M1&#39;: {&#39;participant_name&#39;: &#39;Participant&#39;,
     &#39;language&#39;: &#39;zho&#39;,
     &#39;corpus&#39;: &#39;TaiwanMandarin&#39;,
-    &#39;age&#39;: &#39;49;&#39;,
-    &#39;sex&#39;: &#39;female&#39;,
-    &#39;group&#39;: &#39;&#39;,
-    &#39;SES&#39;: &#39;Asian&#39;,
-    &#39;participant_role&#39;: &#39;Participant&#39;,
-    &#39;education&#39;: &#39;&#39;,
-    &#39;custom&#39;: &#39;Wife&#39;},
-   &#39;M&#39;: {&#39;participant_name&#39;: &#39;Participant&#39;,
-    &#39;language&#39;: &#39;zho&#39;,
-    &#39;corpus&#39;: &#39;TaiwanMandarin&#39;,
-    &#39;age&#39;: &#39;50;&#39;,
+    &#39;age&#39;: &#39;24;&#39;,
     &#39;sex&#39;: &#39;male&#39;,
     &#39;group&#39;: &#39;&#39;,
     &#39;SES&#39;: &#39;Asian&#39;,
     &#39;participant_role&#39;: &#39;Participant&#39;,
     &#39;education&#39;: &#39;&#39;,
-    &#39;custom&#39;: &#39;Husband&#39;}},
+    &#39;custom&#39;: &#39;Friend&#39;},
+   &#39;M2&#39;: {&#39;participant_name&#39;: &#39;Participant&#39;,
+    &#39;language&#39;: &#39;zho&#39;,
+    &#39;corpus&#39;: &#39;TaiwanMandarin&#39;,
+    &#39;age&#39;: &#39;24;&#39;,
+    &#39;sex&#39;: &#39;male&#39;,
+    &#39;group&#39;: &#39;&#39;,
+    &#39;SES&#39;: &#39;Asian&#39;,
+    &#39;participant_role&#39;: &#39;Participant&#39;,
+    &#39;education&#39;: &#39;&#39;,
+    &#39;custom&#39;: &#39;Friend&#39;}},
   &#39;Options&#39;: &#39;CA-Unicode&#39;,
-  &#39;Media&#39;: &#39;M018, audio, unlinked&#39;,
+  &#39;Media&#39;: &#39;M010, audio, unlinked&#39;,
   &#39;Comment&#39;: &#39;Please use the slider at the left to control media playback.&#39;,
-  &#39;Date&#39;: [&#39;11-OCT-2008&#39;]})
+  &#39;Date&#39;: [&#39;25-NOV-2007&#39;]})
 </pre></div>
 </div>
 </div>
