@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mycss.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -135,6 +136,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="neural-network-from-scratch.html">
      Neural Network From Scratch
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="neural-language-model-primer.html">
+     Neural Language Model: A Start
     </a>
    </li>
    <li class="toctree-l2">
@@ -367,8 +373,8 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Word2Vec(vocab=71290, size=200, alpha=0.025)
-CPU times: user 804 ms, sys: 177 ms, total: 981 ms
-Wall time: 3.24 s
+CPU times: user 781 ms, sys: 167 ms, total: 948 ms
+Wall time: 4.49 s
 </pre></div>
 </div>
 </div>
@@ -398,7 +404,7 @@ Wall time: 3.24 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;queen&#39;, 0.5748783946037292)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;queen&#39;, 0.574878454208374)
 </pre></div>
 </div>
 </div>
@@ -411,8 +417,8 @@ Wall time: 3.24 s
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;queen&#39;, 0.8940829038619995),
- (&#39;empress&#39;, 0.8937370777130127),
- (&#39;princess&#39;, 0.8518531322479248),
+ (&#39;empress&#39;, 0.8937370181083679),
+ (&#39;princess&#39;, 0.8518531918525696),
  (&#39;emperor&#39;, 0.8512904047966003),
  (&#39;regent&#39;, 0.8473389148712158),
  (&#39;throne&#39;, 0.8459529876708984),
@@ -528,7 +534,7 @@ Wall time: 3.24 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.64496356
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6449635
 </pre></div>
 </div>
 </div>
@@ -540,7 +546,7 @@ Wall time: 3.24 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.07749185
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.077491865
 </pre></div>
 </div>
 </div>
@@ -553,7 +559,7 @@ Wall time: 3.24 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.3550364375114441
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.35503649711608887
 </pre></div>
 </div>
 </div>
@@ -584,7 +590,7 @@ Wall time: 3.24 s
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/Alvin/opt/anaconda3/envs/python-notes/lib/python3.7/site-packages/gensim/test/test_data/wordsim353.tsv
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((0.6278063835451551, 7.150967548418006e-40),
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((0.6278063885409289, 7.150954572790768e-40),
  SpearmanrResult(correlation=0.6535293499880102, pvalue=3.9626028815462023e-44),
  0.56657223796034)
 </pre></div>

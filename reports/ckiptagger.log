@@ -32,6 +32,10 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-from ckiptagger import data_utils, construct_dictionary, WS, POS, NER
+# Set Parameter Path
+MODEL_PATH = '/Users/Alvin/Dropbox/Corpus/CKIP_WordSeg/data/'
+ws = WS(MODEL_PATH)
+pos = POS(MODEL_PATH)
+ner = NER(MODEL_PATH)
 -------------------
 
