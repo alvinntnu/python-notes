@@ -1,0 +1,195 @@
+# Neural Language Model of Chinese
+
+- [How to development a word-level neural language model in keras](https://machinelearningmastery.com/how-to-develop-a-word-level-neural-language-model-in-keras/)
+- Chinese texts
+- Word-based neural language model based on:
+    - character sequences
+    - word sequences
+- Use two novels by Jing-Yong
+
+from google.colab import drive
+drive.mount('/content/drive')
+
+#import sys
+#sys.path.insert(1, '/content/drive/My Drive/_MySyncDrive/Repository/python-notes/nlp')
+import os
+os.chdir('/content/drive/My Drive/_MySyncDrive/Repository/python-notes/nlp')
+
+import string
+import text_normalizer_zh as tn
+import re
+# load doc into memory
+def load_doc(filename):
+    # open the file as read only
+    file = open(filename, 'r', encoding='utf-8')
+    # read all text
+    text = file.read()
+    # close the file
+    file.close()
+    return text
+
+
+# turn a doc into clean tokens
+def clean_doc_paras(doc):
+    # get content paragraphs only
+    paras = [p for p in doc.split(sep="\n")[7:] if p.startswith('  ')]
+    paras = [tn.remove_symbols(p) for p in paras]
+    paras = [tn.remove_extra_spaces(p) for p in paras]
+    return paras
+
+def clean_doc_lines(doc):
+    # get content paragraphs only
+    paras = [p for p in re.split("[\n，。]", doc)[7:] if p.startswith('  ')]
+    paras = [tn.remove_symbols(p) for p in paras]
+    paras = [tn.remove_extra_spaces(p) for p in paras]
+    return paras
+
+
+# save tokens to file, one dialog per line
+def save_doc(lines, filename):
+    data = '\n'.join(lines)
+    file = open(filename, 'w')
+    file.write(data)
+    file.close()
+
+# load document
+in_filename = "../../../RepositoryData/data/jingyong-part-cht-utf8.txt"
+doc=load_doc(in_filename)
+print(doc[:200])
+
+# clean document
+paras = clean_doc_lines(doc)
+print(paras[:20])
+print('Total Paragraphs: %d' % len(paras))
+print('Unique Tokens: %d' % len(set(''.join(paras))))
+
+## Line-based Language Model
+
+from numpy import array
+from keras.preprocessing.text import Tokenizer
+from keras.utils import to_categorical, plot_model
+from keras.preprocessing.sequence import pad_sequences
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.layers import LSTM
+from keras.layers import Embedding
+
+
+### Text to Sequences
+
+# prepare data
+data = '\n'.join(paras)  # collapse the entire corpus into one string
+# prepare the tokenizer on the source text
+tokenizer = Tokenizer(
+    oov_token=1, char_level=True
+)  ## specify the word id for unknown words + char_level tokenizer
+tokenizer.fit_on_texts([data])
+
+# determine the vocabulary size
+## zero index is reserved in keras as the padding token (+1) and one unknown word id
+vocab_size = len(tokenizer.word_index) + 1
+print('Vocabulary Size: %d' % vocab_size)
+
+# create paragraph-based sequences
+sequences = list()
+for line in data.split('\n'):
+    encoded = tokenizer.texts_to_sequences([line])[0]
+    ## For each line, after converting words into indexes
+    ## prepare sequences for training
+    ## given a line, w1,w2,w3,w4
+    ## create input sequences:
+    ## w1,w2
+    ## w1,w2,w3
+    ## w1,w2,w3,w4
+    for i in range(1, len(encoded)):
+        sequence = encoded[:i + 1]
+        sequences.append(sequence)
+print('Total Sequences: %d' % len(sequences))
+
+### Word ID to Texts
+
+# Creating a reverse dictionary
+reverse_word_map = dict(map(reversed, tokenizer.word_index.items()))
+# Function takes a tokenized sentence and returns the words
+def sequence_to_text(list_of_indices):
+    # Looking up words in dictionary
+    words = [reverse_word_map.get(letter) for letter in list_of_indices]
+    return(words)
+
+sequences[:10]
+
+[print(sequence_to_text(s)) for s in sequences[:10]]
+
+### Padding
+
+max_length = max([len(seq) for seq in sequences])
+sequences = pad_sequences(sequences, maxlen=max_length, padding='pre')
+print('Max Sequence Length: %d' % max_length)
+
+### Train and Test Sets
+
+# split into input and output elements
+sequences = array(sequences)
+X, y = sequences[:,:-1],sequences[:,-1]
+y = to_categorical(y, num_classes=vocab_size)
+
+### Define Model
+
+# define model
+model = Sequential()
+model.add(Embedding(vocab_size, 128, input_length=max_length-1))
+model.add(LSTM(100, return_sequences=True))  # LSTM 1
+model.add(LSTM(100))  # LSTM 2
+model.add(Dense(100, activation='relu'))
+model.add(Dense(vocab_size, activation='softmax'))
+print(model.summary())
+# compile network
+model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+### Train Model
+
+# # fit network
+# model.fit(X, y, batch_size= 256, epochs=500, verbose=1)
+
+### Save Model
+
+# from pickle import dump
+# # save the model to file
+# model.save('jing-yong-line-lm-model.h5')
+# # save the tokenizer
+# dump(tokenizer, open('jing-yong-line-lm-tokenizer.pkl', 'wb'))
+
+## Load Model
+
+import pickle
+model.load_weights('jing-yong-line-lm-model.h5')
+pickle_in = open('jing-yong-line-lm-tokenizer.pkl',
+                 "rb")
+tokenizer = pickle.load(pickle_in)
+
+### Generate Sequence
+
+# generate a sequence from a language model
+def generate_seq(model, tokenizer, max_length, seed_text, n_words):
+	in_text = seed_text
+	# generate a fixed number of words
+	for _ in range(n_words):
+		# encode the text as integer
+		encoded = tokenizer.texts_to_sequences([in_text])[0]
+		# pre-pad sequences to a fixed length
+		encoded = pad_sequences([encoded], maxlen=max_length, padding='pre')
+		# predict probabilities for each word
+		yhat = model.predict_classes(encoded, verbose=0)
+		# map predicted word index to word
+		out_word = ''
+		for word, index in tokenizer.word_index.items():
+			if index == yhat:
+				out_word = word
+				break
+		# append to input
+		in_text += ' ' + out_word
+	return in_text
+
+# evaluate model
+print(generate_seq(model, tokenizer, max_length-1, '師父', 100))
+# print(generate_seq(model, tokenizer, max_length-1, 'Jill', 4))

@@ -54,6 +54,7 @@
     - file: nlp/sentiment-analysis-ml
     - file: nlp/neural-network-from-scratch
     - file: nlp/neural-language-model-primer
+    - file: nlp/neural-language-model-zh
     - file: nlp/word-embeddings
     - file: nlp/word2vec-chinese
     - file: nlp/word2vec

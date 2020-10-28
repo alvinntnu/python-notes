@@ -31,6 +31,7 @@ execute:
     - 'nlp/ktrain-tutorial-explaining-predictions.ipynb'
     - 'nlp/neural-language-model-primer.ipynb'
     - 'nlp/neural-language-model.ipynb'
+    - 'nlp/neural-language-model-zh.ipynb'
 sphinx:
   extra_extensions:
     - sphinxcontrib.bibtex
