@@ -39,7 +39,7 @@ Please use own model path. The model files are very big. They are probably not o
 ```
 
 # Set Parameter Path
-MODEL_PATH = '/Users/Alvin/Dropbox/Corpus/CKIP_WordSeg/data/'
+MODEL_PATH = '../../../../../Dropbox/Corpus/CKIP_WordSeg/data/'
 ws = WS(MODEL_PATH)
 pos = POS(MODEL_PATH)
 ner = NER(MODEL_PATH)

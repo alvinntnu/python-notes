@@ -449,7 +449,30 @@ Typing disciplineDuck, dynamic, gradual (since 3.5)[4]OSLinux, macOS, Windows  a
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;My system keep crash ! his crash yesterday , ours crash daily&#39;
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">OSError</span><span class="g g-Whitespace">                                   </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">4</span><span class="o">-</span><span class="mi">935781</span><span class="n">cfd996</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">spacy</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1"># use spacy.load(&#39;en&#39;) if you have downloaded the language model en directly after install spacy</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;en&#39;</span><span class="p">,</span> <span class="n">parse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">entity</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;My system keeps crashing his crashed yesterday, ours crashes daily&#39;</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> 
+
+<span class="nn">~/opt/anaconda3/envs/python-notes/lib/python3.7/site-packages/spacy/__init__.py</span> in <span class="ni">load</span><span class="nt">(name, **overrides)</span>
+<span class="g g-Whitespace">     </span><span class="mi">28</span>     <span class="k">if</span> <span class="n">depr_path</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">29</span>         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">Warnings</span><span class="o">.</span><span class="n">W001</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">depr_path</span><span class="p">),</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">30</span>     <span class="k">return</span> <span class="n">util</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">overrides</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">31</span> 
+<span class="g g-Whitespace">     </span><span class="mi">32</span> 
+
+<span class="nn">~/opt/anaconda3/envs/python-notes/lib/python3.7/site-packages/spacy/util.py</span> in <span class="ni">load_model</span><span class="nt">(name, **overrides)</span>
+<span class="g g-Whitespace">    </span><span class="mi">173</span>     <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;exists&quot;</span><span class="p">):</span>  <span class="c1"># Path or Path-like to model data</span>
+<span class="g g-Whitespace">    </span><span class="mi">174</span>         <span class="k">return</span> <span class="n">load_model_from_path</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">overrides</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">175</span>     <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="n">Errors</span><span class="o">.</span><span class="n">E050</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">176</span> 
+<span class="g g-Whitespace">    </span><span class="mi">177</span> 
+
+<span class="ne">OSError</span>: [E050] Can&#39;t find model &#39;en&#39;. It doesn&#39;t seem to be a shortcut link, a Python package or a valid path to a data directory.
 </pre></div>
 </div>
 </div>
@@ -580,16 +603,16 @@ Typing disciplineDuck, dynamic, gradual (since 3.5)[4]OSLinux, macOS, Windows  a
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "ckiptagger"
+            mode: "python"
         },
         kernelOptions: {
-            kernelName: "ckiptagger",
+            kernelName: "python-notes",
             path: "./nlp"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'ckiptagger'</script>
+    <script>kernelName = 'python-notes'</script>
 
               </div>
               

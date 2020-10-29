@@ -26,10 +26,10 @@ sentiments = np.array(dataset['sentiment'])
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
 [0;32m<ipython-input-3-fd1026177b84>[0m in [0;36m<module>[0;34m[0m
-[1;32m      1[0m [0;31m# take a peek at the data[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
-[0;32m----> 2[0;31m [0mprint[0m[0;34m([0m[0mdataset[0m[0;34m.[0m[0mhead[0m[0;34m([0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m      3[0m [0mreviews[0m [0;34m=[0m [0mnp[0m[0;34m.[0m[0marray[0m[0;34m([0m[0mdataset[0m[0;34m[[0m[0;34m'review'[0m[0;34m][0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      4[0m [0msentiments[0m [0;34m=[0m [0mnp[0m[0;34m.[0m[0marray[0m[0;34m([0m[0mdataset[0m[0;34m[[0m[0;34m'sentiment'[0m[0;34m][0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      1[0m [0;31m# take a peek at the data[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 2[0;31m [0mprint[0m[0;34m([0m[0mdataset[0m[0;34m.[0m[0mhead[0m[0;34m([0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0m
+[0m[1;32m      3[0m [0mreviews[0m [0;34m=[0m [0mnp[0m[0;34m.[0m[0marray[0m[0;34m([0m[0mdataset[0m[0;34m[[0m[0;34m'review'[0m[0;34m][0m[0;34m)[0m[0;34m[0m[0m
+[1;32m      4[0m [0msentiments[0m [0;34m=[0m [0mnp[0m[0;34m.[0m[0marray[0m[0;34m([0m[0mdataset[0m[0;34m[[0m[0;34m'sentiment'[0m[0;34m][0m[0;34m)[0m[0;34m[0m[0m
 
 [0;31mNameError[0m: name 'dataset' is not defined
 NameError: name 'dataset' is not defined

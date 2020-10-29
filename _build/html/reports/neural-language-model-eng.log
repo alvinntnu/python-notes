@@ -32,8 +32,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['from numpy import array', 'from pickle import dump', 'from keras.preprocessing.text import Tokenizer', 'from keras.utils import to_categorical', 'from keras.models import Sequential']
+['# integer encode sequences of words', 'tokenizer = Tokenizer()', 'tokenizer.fit_on_texts(lines)', 'sequences = tokenizer.texts_to_sequences(lines)', '# vocabulary size']
 ...
-['', '# load', "in_filename = 'republic_sequences.txt'", 'doc = load_doc(in_filename)', "lines = doc.split('\\n')"]
+["model.compile(loss='categorical_crossentropy',", "              optimizer='adam',", "              metrics=['accuracy'])", '# fit model', 'model.fit(X, y, batch_size=512, epochs=1)']
 -------------------
 

@@ -392,14 +392,14 @@
 <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://news.google.com/topics/CAAqJQgKIh9DQkFTRVFvSUwyMHZNRFptTXpJU0JYcG9MVlJYS0FBUAE?hl=zh-TW&amp;gl=TW&amp;ceid=TW%3Azh-Hant&#39;</span>
 <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 <span class="n">web_content</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">text</span>
-<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">web_content</span><span class="p">,</span><span class="s1">&#39;lxml&#39;</span><span class="p">)</span>
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">web_content</span><span class="p">,</span><span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
 <span class="n">title</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s1">&#39;DY5T1d&#39;</span><span class="p">)</span>
 <span class="n">first_art_link</span> <span class="o">=</span> <span class="n">title</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;href&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span><span class="s1">&#39;https://news.google.com&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="c1">#print(first_art_link)</span>
 <span class="n">art_request</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">first_art_link</span><span class="p">)</span>
 <span class="n">art_request</span><span class="o">.</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf8&#39;</span>
-<span class="n">soup_art</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">art_request</span><span class="o">.</span><span class="n">text</span><span class="p">,</span><span class="s1">&#39;lxml&#39;</span><span class="p">)</span>
+<span class="n">soup_art</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">art_request</span><span class="o">.</span><span class="n">text</span><span class="p">,</span><span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
 
 <span class="n">art_content</span> <span class="o">=</span> <span class="n">soup_art</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
 <span class="n">art_texts</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">art_content</span><span class="p">]</span>
@@ -409,7 +409,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;&#39;, &#39;\n&#39;, &#39;\r\n繼進入大學校園，查封國民黨台灣省黨部一百廿四箱文件後，促轉會又將目標指向了司法院。促轉會鎖定了九份大法官解釋，要求以政治檔案條例，揭露大法官與評議相關內容，但司法院拒絕，司法院強調的是，大法官評議過程依法必須保持秘密，必須尊重大法官審判評議的權力，要回到那個時空，體會他們走過的那一條路。&#39;, &#39;\n&#39;, &#39;\n&#39;, &#39;\n&#39;, &#39;\r\n促轉條例中明訂，促轉會成立的目的在「促進轉型正義及落實自由民主憲政」，開放政治檔案固然是促轉會重要工作之一，但其目的仍在於「平復司法不法，還原歷史真相，並促進社會和解」。&#39;, &#39;立即登入！全年暢讀專屬報導&#39;, &#39;快體驗，無廣告干擾的暢讀空間&#39;, &#39;\n                    繼進入大學校園，查封國民黨台灣省黨部一百廿四箱文件後，促轉會又將目標指向了司法院。促轉會鎖定了九份大法官解釋，要求以政治檔案條例，揭露大法官與評議相關內容，但司法院拒絕...                  &#39;, &#39;\n                    專訪財長蘇建榮的這天，在開場寒暄中提到「部長的氣色真好」，得到意外的答案是「我從上任第一天就突然血壓飆高，直到現在都靠藥物壓抑血壓」。身為國家的大掌櫃，因為肩上的重責大任，財長有高血壓可以理解。而民眾心目中理想的財長，又該做到哪些事？                  &#39;, &#39;\n                    聯合報從十年前起，年年針對兩岸關係民意大調查，今年的結果頗值得玩味。在兩岸關係和戰天平量表上，由於政經、軍事、外交、社會全面趨向緊張競爭，雖然民眾多半認為兩岸開戰可能性低，但天平的指針相當大幅度地往開戰方向擺動，完全表達了民眾不樂見戰爭發生，又擔心戰爭成真的心情...                  &#39;, &#39;\n                    衛福部證實，我國已於9月18日與「新冠肺炎疫苗全球取得機制」（COVAX）簽約，10月初付訂金。消息一出，國人彷彿吃下定心丸，至少在新冠肺炎疫苗的施打上，政府已經先跟國際組織「掛號」，不致成為疫情孤兒。                  &#39;, &#39;\n                    到底是官官相護？還是擔心自己的官位不保、丟掉了烏紗帽？否則，光是一個農委會水土保持局的台中分局，就有高達10公務人員被約談，其中有1人被收押，另外3人被強制處分；若事前沒有收到半點風聲，展開內部整肅，這樣如此缺乏警覺性，主管恐怕也是失職，不然就是內幕尚未掀開。                  &#39;, &#39;\n                    最近有兩件事，政府又悄悄將黑手伸進新聞媒體，身為民主社會的「第四權」，聯合報不得不扮演「吹哨者」的角色。                  &#39;]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;政府開放進口萊克多巴胺美豬，有十一縣市擬訂定自治條例要求萊劑零檢出，本報昨天報導地方政府近日收到行政院和衛福部函文，行政院僅諮詢地方意見，衛福部卻要求地方檢討修正。衛福部次長薛瑞元昨天在立法院原本態度強硬，指地方未檢討自治條例，明年將牴觸母法直接失效，但隨後態度轉彎，說會重新發函，請地方先提意見說明。&#39;, &#39;\n&#39;, &#39;\n重新發函 請地方先提意見說明&#39;, &#39;\n衛福部日前發文至各縣市，強調地方自治條例因牴觸母法，地方政府萊克多巴胺零檢出政策將不具效力，衛福部次長薛瑞元昨一早態度強硬，但稍晚態度轉彎。記者潘俊宏／攝影&#39;, &#39;\r\n衛福部長陳時中昨天也說，最後要看立法院審查結果，才知是否與地方自治條例有所牴觸，態度轉趨保守。衛福部已火速於昨晚重新發函。&#39;, &#39;\n&#39;, &#39;\r\n根據衛福部資料，宜蘭縣、台東縣全面禁止含有萊克多巴胺的「所有肉品」，台北市、桃園市、台南市、台中市、嘉義市、基隆市、彰化縣、雲林縣、新竹縣等九縣市要求「豬肉」萊克多巴胺須零檢出。&#39;, &#39;\n&#39;, &#39;\r\n立法院昨審查農委會開放萊豬進口相關行政命令，但立委質疑，若地方堅持不調整，中央是否主動出手撤銷自治條例？薛瑞元答詢說，不會用撤銷手段，萊劑殘留容許量明年元旦才生效，目前地方訂定零檢出仍有效，但應開始檢討，否則明年牴觸母法將被公告無效。&#39;, &#39;\n&#39;, &#39;\n立委質疑 衛福部與政院不同調&#39;, &#39;\n&#39;, &#39;\r\n隨後立委林奕華質詢，指行政院發函給台中市等直轄市政府的函文僅提醒回覆意見，衛福部發給非直轄市政府的函文卻直接要求「修正」，中央步調明顯不同。薛瑞元改口表示，會重新發文給七個非直轄市政府，文字調整成與行政院一致。&#39;, &#39;\n&#39;, &#39;\r\n根據衛福部九月卅日發的函，指動物用藥殘留標準已經中央發布，「自治法規如有與該標準牴觸情形，應配合修正」。但行政院十月廿六日發的函，僅表示地方零檢出自治條例有抵制中央法規疑慮，應於一個月內提出意見說明。&#39;, &#39;\n&#39;, &#39;\r\n行政院昨重申，進口含萊克多巴胺豬肉的行政命令尚未生效，現在仍是詢問意見與溝通期，將持續溝通。&#39;, &#39;\n&#39;, &#39;\r\n但行政院也強調，發函未與衛福部不同調。政院人士表示，兩個函文意義皆相同，都是提醒地方政府自治條例有與中央牴觸的疑慮，都有建議其修正，只是一個放主旨，一個放函文後的相關建議。&#39;, &#39;\n&#39;, &#39;\n藍營痛批 對地方根本雙重標準&#39;, &#39;\n&#39;, &#39;\r\n立委江啟臣質詢，教育部、國防部等跳出來說「學童、國手、警察、軍人都不吃（萊豬）」，結果中央卻要求地方不能訂定食安自治條例，「禁止地方捍衛自己的人民」，根本雙重標準，「氣死人」，行政院是否也應比照要求教育部、國防部檢討。&#39;, &#39;\n                    政府開放進口萊克多巴胺美豬，有十一縣市擬訂定自治條例要求萊劑零檢出，本報昨天報導地方政府近日收到行政院和衛福部函文，行政...                  &#39;, &#39;\n                    行政院函文要求地方修改萊劑零檢出的食安自治條例，台中市長盧秀燕、新北市長侯友宜等藍營縣市首長重申堅持零檢出，台北市長柯文...                  &#39;, &#39;\n                    新聞部在開編採會議時，我們一定會討論新聞對象的發言是「講真的」還是「講假的」。新聞對象對記者說假話其實並不奇怪，因為這是人之常情，尤其又以政治人物為最。                  &#39;, &#39;\n                    民進黨立委林淑芬日前針對萊豬議題提案修正「學校衛生法」，明定學校禁用萊豬及其加工品，該案將在周五院會闖關。但傳出在黨團壓...                  &#39;, &#39;\n                    政府宣布明年開放進口萊克多巴胺美豬，且開放全豬，但我國並未針對豬雜碎進行專家諮議會議，稅則號列也不如開放美牛時完整。衛福...                  &#39;, &#39;\n                    萊豬進口風波不斷，地方縣市陸續在自治條例訂定「零檢出」規範。行政院日前與衛福部相繼發函「提醒」，要求零檢出的縣市可能有牴...                  &#39;, &#39;\n                    萊克多巴胺美豬叩關，雖然立法院還在審查相關行政命令，但蔡政府決定明年元旦開放的政策恐已無轉圜。各地方政府紛紛訂出自治條例...                  &#39;, &#39;\n                    國民黨縣市首長主張萊劑零檢出槓上中央，民進黨執政縣市首長態度趨保守，強調依中央規定。不過，民進黨完全執政的嘉義縣，因民進...                  &#39;, &#39;\n                    萊克多巴胺美豬叩關，雖然立法院還在審查相關行政命令，但蔡政府決定明年元旦開放的政策恐已無轉圜。各地方政府紛紛訂出自治條例...                  &#39;, &#39;\n                    針對台北市長柯文哲質疑明年元旦起，全世界含萊劑豬肉都可進口台灣一事。農委會主委陳吉仲今天晚間駁斥此說法，強調全球僅13個...                  &#39;, &#39;\n                    萊豬大戰！全台有部分縣市政府自治條例規定萊劑零檢出並制定相關罰則，行政院發公文指零檢出牴觸中央法規，屏東縣食品安全自治條...                  &#39;, &#39;\n                    新北市議會今天進行政黨質詢，新北市議員陳偉杰質疑行政院發公文給台中市政府要求檢視「食品安全衛生管理自治條例」是「殺雞儆猴...                  &#39;, &#39;\n&#39;, &#39;\n&#39;, &#39;\n&#39;, &#39;\n&#39;, &#39;\n&#39;, &#39;\n&#39;]
 </pre></div>
 </div>
 </div>
@@ -418,7 +418,7 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jieba</span>
 
-<span class="n">jieba</span><span class="o">.</span><span class="n">set_dictionary</span><span class="p">(</span><span class="s1">&#39;../../../Corpus/jiaba/dict.txt.big.txt&#39;</span><span class="p">)</span>
+<span class="n">jieba</span><span class="o">.</span><span class="n">set_dictionary</span><span class="p">(</span><span class="s1">&#39;../../../../_MySyncDrive/RepositoryData/data/jiaba/dict.txt.big.txt&#39;</span><span class="p">)</span>
 
 <span class="n">art_words</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">jieba</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">art_texts</span><span class="p">))]</span>
 <span class="c1">## Fine-tune Word Cloud</span>
@@ -426,9 +426,9 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Building prefix dict from /Users/Alvin/Dropbox/Corpus/jiaba/dict.txt.big.txt ...
-Loading model from cache /var/folders/n7/ltpzwx813c599nfxfb94s_640000gn/T/jieba.u799b9ba780e57432dfd1e51d6f89ab79.cache
-Loading model cost 1.427 seconds.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Building prefix dict from /Users/alvinchen/GoogleDrive/_MySyncDrive/RepositoryData/data/jiaba/dict.txt.big.txt ...
+Loading model from cache /var/folders/0v/47nxlfjn26536t51wxj9j6q40000gn/T/jieba.u60c9a419281c3dbb1eab685659d52c83.cache
+Loading model cost 0.965 seconds.
 Prefix dict has been built successfully.
 </pre></div>
 </div>
@@ -447,7 +447,7 @@ Prefix dict has been built successfully.
 
 
 <span class="c1">## Load stopwords</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../../../Corpus/stopwords/tomlinNTUB-chinese-stopwords.txt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../../../../_MySyncDrive/RepositoryData/data/stopwords/tomlinNTUB-chinese-stopwords.txt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">stopwords</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()]</span>
     
 <span class="c1"># Create stopwords ad hoc</span>
@@ -490,16 +490,16 @@ Prefix dict has been built successfully.
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "ckiptagger"
+            mode: "python"
         },
         kernelOptions: {
-            kernelName: "ckiptagger",
+            kernelName: "python-notes",
             path: "./corpus"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'ckiptagger'</script>
+    <script>kernelName = 'python-notes'</script>
 
               </div>
               

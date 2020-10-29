@@ -87,14 +87,14 @@ import pandas as pd
 url = 'https://news.google.com/topics/CAAqJQgKIh9DQkFTRVFvSUwyMHZNRFptTXpJU0JYcG9MVlJYS0FBUAE?hl=zh-TW&gl=TW&ceid=TW%3Azh-Hant'
 r = requests.get(url)
 web_content = r.text
-soup = BeautifulSoup(web_content,'lxml')
+soup = BeautifulSoup(web_content,'html.parser')
 title = soup.find_all('a', class_='DY5T1d')
 first_art_link = title[0]['href'].replace('.','https://news.google.com',1)
 
 #print(first_art_link)
 art_request = requests.get(first_art_link)
 art_request.encoding='utf8'
-soup_art = BeautifulSoup(art_request.text,'lxml')
+soup_art = BeautifulSoup(art_request.text,'html.parser')
 
 art_content = soup_art.find_all('p')
 art_texts = [p.text for p in art_content]
@@ -103,7 +103,7 @@ print(art_texts)
 
 import jieba
 
-jieba.set_dictionary('../../../Corpus/jiaba/dict.txt.big.txt')
+jieba.set_dictionary('../../../../_MySyncDrive/RepositoryData/data/jiaba/dict.txt.big.txt')
 
 art_words = [w for w in jieba.cut(' '.join(art_texts))]
 ## Fine-tune Word Cloud
@@ -119,7 +119,7 @@ from matplotlib import pyplot as plt
 
 
 ## Load stopwords
-with open('../../../Corpus/stopwords/tomlinNTUB-chinese-stopwords.txt') as f:
+with open('../../../../_MySyncDrive/RepositoryData/data/stopwords/tomlinNTUB-chinese-stopwords.txt') as f:
     stopwords = [w.strip() for w in f.readlines()]
     
 # Create stopwords ad hoc

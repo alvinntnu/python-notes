@@ -71,11 +71,11 @@ def edits2(word):
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mFileNotFoundError[0m                         Traceback (most recent call last)
 [0;32m<ipython-input-1-904a687ebf57>[0m in [0;36m<module>[0;34m[0m
-[1;32m      7[0m     [0;32mreturn[0m [0mre[0m[0;34m.[0m[0mfindall[0m[0;34m([0m[0;34m'[a-z]+'[0m[0;34m,[0m [0mtext[0m[0;34m.[0m[0mlower[0m[0;34m([0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      7[0m     [0;32mreturn[0m [0mre[0m[0;34m.[0m[0mfindall[0m[0;34m([0m[0;34m'[a-z]+'[0m[0;34m,[0m [0mtext[0m[0;34m.[0m[0mlower[0m[0;34m([0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0m
 [1;32m      8[0m [0;34m[0m[0m
-[0;32m----> 9[0;31m [0mWORDS[0m [0;34m=[0m [0mtokens[0m[0;34m([0m[0mopen[0m[0;34m([0m[0;34m'../data/TextAnalyticsWithPython_data/big.txt'[0m[0;34m)[0m[0;34m.[0m[0mread[0m[0;34m([0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m     10[0m [0mWORD_COUNTS[0m [0;34m=[0m [0mcollections[0m[0;34m.[0m[0mCounter[0m[0;34m([0m[0mWORDS[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m     11[0m [0;31m# top 10 words in corpus[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 9[0;31m [0mWORDS[0m [0;34m=[0m [0mtokens[0m[0;34m([0m[0mopen[0m[0;34m([0m[0;34m'../data/TextAnalyticsWithPython_data/big.txt'[0m[0;34m)[0m[0;34m.[0m[0mread[0m[0;34m([0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0m
+[0m[1;32m     10[0m [0mWORD_COUNTS[0m [0;34m=[0m [0mcollections[0m[0;34m.[0m[0mCounter[0m[0;34m([0m[0mWORDS[0m[0;34m)[0m[0;34m[0m[0m
+[1;32m     11[0m [0;31m# top 10 words in corpus[0m[0;34m[0m[0;34m[0m[0m
 
 [0;31mFileNotFoundError[0m: [Errno 2] No such file or directory: '../data/TextAnalyticsWithPython_data/big.txt'
 FileNotFoundError: [Errno 2] No such file or directory: '../data/TextAnalyticsWithPython_data/big.txt'
