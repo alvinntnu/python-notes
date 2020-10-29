@@ -818,8 +818,8 @@ IRkernel::installspec()
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 9.27 ms, sys: 11.5 ms, total: 20.8 ms
-Wall time: 11.7 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 11.6 ms, sys: 11.8 ms, total: 23.4 ms
+Wall time: 12.1 s
 </pre></div>
 </div>
 </div>
@@ -832,7 +832,7 @@ Wall time: 11.7 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.92 µs ± 266 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.95 µs ± 98.6 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
 </pre></div>
 </div>
 </div>
@@ -899,19 +899,19 @@ ggplot(aes(x,y)) + geom_point()
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R[write to console]: 
 Attaching package: ‘dplyr’
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R[write to console]: The following objects are masked from ‘package:stats’:
+
+
+R[write to console]: The following objects are masked from ‘package:stats’:
 
     filter, lag
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R[write to console]: The following objects are masked from ‘package:base’:
+
+
+R[write to console]: The following objects are masked from ‘package:base’:
 
     intersect, setdiff, setequal, union
 </pre></div>
 </div>
-<img alt="../_images/jupyter-notebook_21_3.png" src="../_images/jupyter-notebook_21_3.png" />
+<img alt="../_images/jupyter-notebook_21_1.png" src="../_images/jupyter-notebook_21_1.png" />
 </div>
 </div>
 </div>
@@ -931,6 +931,20 @@ Attaching package: ‘dplyr’
 <span class="c1"># ax = fig.gca()</span>
 <span class="c1"># ax.axis(&#39;off&#39;)</span>
 <span class="c1"># draw_neural_net(ax, .1, .7, .1, .9, [2, 3, 2])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">702243819</span><span class="n">bba</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">draw_neural_net</span> <span class="kn">import</span> <span class="n">draw_neural_net</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;draw_neural_net&#39;
 </pre></div>
 </div>
 </div>
@@ -1046,8 +1060,7 @@ Attaching package: ‘dplyr’
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>numpy==1.19.2
-nnv==0.0.4
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>numpy==1.18.1
 </pre></div>
 </div>
 </div>

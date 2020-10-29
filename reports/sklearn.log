@@ -32,10 +32,10 @@ with open(fname) as f:
 [0;31mFileNotFoundError[0m                         Traceback (most recent call last)
 [0;32m<ipython-input-2-559f8e6a4608>[0m in [0;36m<module>[0;34m[0m
 [1;32m      4[0m [0;34m[0m[0m
-[1;32m      5[0m [0mreviews[0m [0;34m=[0m [0;34m[[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
-[0;32m----> 6[0;31m [0;32mwith[0m [0mopen[0m[0;34m([0m[0mfname[0m[0;34m)[0m [0;32mas[0m [0mf[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m      7[0m     [0;32mfor[0m [0mline[0m [0;32min[0m [0mf[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      8[0m         [0mcur_review[0m [0;34m=[0m [0mjson[0m[0;34m.[0m[0mloads[0m[0;34m([0m[0mline[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      5[0m [0mreviews[0m [0;34m=[0m [0;34m[[0m[0;34m][0m[0;34m[0m[0m
+[0;32m----> 6[0;31m [0;32mwith[0m [0mopen[0m[0;34m([0m[0mfname[0m[0;34m)[0m [0;32mas[0m [0mf[0m[0;34m:[0m[0;34m[0m[0m
+[0m[1;32m      7[0m     [0;32mfor[0m [0mline[0m [0;32min[0m [0mf[0m[0;34m:[0m[0;34m[0m[0m
+[1;32m      8[0m         [0mcur_review[0m [0;34m=[0m [0mjson[0m[0;34m.[0m[0mloads[0m[0;34m([0m[0mline[0m[0;34m)[0m[0;34m[0m[0m
 
 [0;31mFileNotFoundError[0m: [Errno 2] No such file or directory: '../data/books_small_10000.json'
 FileNotFoundError: [Errno 2] No such file or directory: '../data/books_small_10000.json'

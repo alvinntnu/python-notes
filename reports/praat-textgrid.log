@@ -18,22 +18,15 @@ Traceback (most recent call last):
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
 from praatio import tgio
-tg = tgio.openTextgrid('../../../Projects/MOST-Prosody/data/2014_di702_TextGrid_Alvin/di_001.TextGrid')
+tg = tgio.openTextgrid('../../../../../Dropbox/Projects/MOST-Prosody/data/2014_di702_TextGrid_Alvin/di_001.TextGrid')
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mFileNotFoundError[0m                         Traceback (most recent call last)
-[0;32m<ipython-input-1-41495447c801>[0m in [0;36m<module>[0;34m[0m
-[1;32m      1[0m [0;32mfrom[0m [0mpraatio[0m [0;32mimport[0m [0mtgio[0m[0;34m[0m[0;34m[0m[0m
-[0;32m----> 2[0;31m [0mtg[0m [0;34m=[0m [0mtgio[0m[0;34m.[0m[0mopenTextgrid[0m[0;34m([0m[0;34m'../../../Projects/MOST-Prosody/data/2014_di702_TextGrid_Alvin/di_001.TextGrid'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m
-[0;32m~/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/praatio/tgio.py[0m in [0;36mopenTextgrid[0;34m(fnFullPath, readRaw, readAsJson)[0m
-[1;32m   1614[0m     '''
-[1;32m   1615[0m     [0;32mtry[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[0;32m-> 1616[0;31m         [0;32mwith[0m [0mio[0m[0;34m.[0m[0mopen[0m[0;34m([0m[0mfnFullPath[0m[0;34m,[0m [0;34m"r"[0m[0;34m,[0m [0mencoding[0m[0;34m=[0m[0;34m"utf-16"[0m[0;34m)[0m [0;32mas[0m [0mfd[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m   1617[0m             [0mdata[0m [0;34m=[0m [0mfd[0m[0;34m.[0m[0mread[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m   1618[0m     [0;32mexcept[0m [0mUnicodeError[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+[0;32m<ipython-input-1-d60d6a5ec58d>[0m in [0;36m<module>[0;34m[0m
+[0;32m----> 1[0;31m [0;32mfrom[0m [0mpraatio[0m [0;32mimport[0m [0mtgio[0m[0;34m[0m[0m
+[0m[1;32m      2[0m [0mtg[0m [0;34m=[0m [0mtgio[0m[0;34m.[0m[0mopenTextgrid[0m[0;34m([0m[0;34m'../../../../../Dropbox/Projects/MOST-Prosody/data/2014_di702_TextGrid_Alvin/di_001.TextGrid'[0m[0;34m)[0m[0;34m[0m[0m
 
-[0;31mFileNotFoundError[0m: [Errno 2] No such file or directory: '../../../Projects/MOST-Prosody/data/2014_di702_TextGrid_Alvin/di_001.TextGrid'
-FileNotFoundError: [Errno 2] No such file or directory: '../../../Projects/MOST-Prosody/data/2014_di702_TextGrid_Alvin/di_001.TextGrid'
+[0;31mModuleNotFoundError[0m: No module named 'praatio'
+ModuleNotFoundError: No module named 'praatio'
 

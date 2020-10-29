@@ -380,7 +380,7 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># set dictionary</span>
 
-<span class="n">jieba</span><span class="o">.</span><span class="n">set_dictionary</span><span class="p">(</span><span class="s1">&#39;../../../Corpus/jiaba/dict.txt.jiebatw.txt/&#39;</span><span class="p">)</span>
+<span class="n">jieba</span><span class="o">.</span><span class="n">set_dictionary</span><span class="p">(</span><span class="s1">&#39;../../../RepositoryData/data/jiaba/dict.txt.jiebatw.txt/&#39;</span><span class="p">)</span>
 <span class="c1">#jieba.load_userdict()</span>
 
 <span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;據《日經亞洲評論》網站報導，儘管美國總統川普發起了讓美國製造業回歸的貿易戰，但包括電動汽車製造商特斯拉在內的一些公司反而加大馬力在大陸進行生產。另據高盛近日發布的一份報告指出，半導體設備和材料以及醫療保健領域的大多數公司實際上正擴大在大陸的生產，許多美國製造業拒絕「退出中國」。&#39;</span>
@@ -397,23 +397,102 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">Exception</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="n">a432c2e1005e</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># set dictionary</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> 
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">jieba</span><span class="o">.</span><span class="n">set_dictionary</span><span class="p">(</span><span class="s1">&#39;../../../Corpus/jiaba/dict.txt.jiebatw.txt/&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1">#jieba.load_userdict()</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> 
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Building prefix dict from /Users/Alvin/GoogleDrive/_MySyncDrive/RepositoryData/data/jiaba/dict.txt.jiebatw.txt ...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading model from cache /var/folders/n7/ltpzwx813c599nfxfb94s_640000gn/T/jieba.u1b52b47246a0f2e6497af6bbe107adac.cache
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading model cost 0.570 seconds.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Prefix dict has been built successfully.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>據 《 日經 亞洲 評論 》 網站 報導 ， 儘管 美國 總統 川普 發起 了 讓 美國 製造業 回歸 的 貿易戰 ， 但 包括 電動 汽車 製造商 特斯拉 在內 的 一些 公司 反而 加大 馬力 在 大陸 進行 生產 。 另據 高盛 近日 發布 的 一份 報告 指出 ， 半導體 設備 和 材料 以及 醫療 保健 領域 的 大多數 公司 實際 上 正 擴大 在 大陸 的 生產 ， 許多 美國 製造業 拒絕 「 退出 中國 」 。
 
-<span class="nn">~/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/jieba/__init__.py</span> in <span class="ni">set_dictionary</span><span class="nt">(self, dictionary_path)</span>
-<span class="g g-Whitespace">    </span><span class="mi">511</span>             <span class="n">abs_path</span> <span class="o">=</span> <span class="n">_get_abs_path</span><span class="p">(</span><span class="n">dictionary_path</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">512</span>             <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">abs_path</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">513</span>                 <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;jieba: file does not exist: &quot;</span> <span class="o">+</span> <span class="n">abs_path</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">514</span>             <span class="bp">self</span><span class="o">.</span><span class="n">dictionary</span> <span class="o">=</span> <span class="n">abs_path</span>
-<span class="g g-Whitespace">    </span><span class="mi">515</span>             <span class="bp">self</span><span class="o">.</span><span class="n">initialized</span> <span class="o">=</span> <span class="kc">False</span>
+據 《 日經 亞洲 評論 》 網站 報導 ， 儘管 美國 總統 川普 發起 了 讓 美國 製造業 回歸 的 貿易戰 ， 但 包括 電動 汽車 製造商 特斯拉 在內 的 一 些 公司 反而 加大 馬力 在 大陸 進行 生產 。 另 據 高盛 近日 發布 的 一 份 報告 指出 ， 半導體 設備 和 材料 以及 醫療 保健 領域 的 大 多 數 公司 實際 上 正 擴大 在 大陸 的 生產 ， 許多 美國 製造業 拒絕 「 退出 中國 」 。
 
-<span class="ne">Exception</span>: jieba: file does not exist: /Users/Alvin/GoogleDrive/_MySyncDrive/Corpus/jiaba/dict.txt.jiebatw.txt
+據 《 日經 亞洲 評論 》 網站 報導 ， 儘管 美國 國總統 總統 川普 發起 了 讓美 美國 美國製 製造 製造業 造業 回歸 的 貿易 貿易戰 ， 但 包括 電動 汽車 車製 製造 製造商 商特 特斯拉 斯拉 在內 的 一 些 公司 反而 加大 大馬 馬力 在 大陸 進行 行生產 生產 。 另 據 高盛 近日 發布 的 一 份 報告 指出 ， 半導體 導體 設備 和 材料 以及 醫療 保健 領域 的 大 多 數 公司 實際 上 正 擴大 在 大陸 的 生產 ， 許多 美國 美國製 製造 製造業 造業 拒絕 「 退出 中國 」。
+
+據/x
+《/x
+日經/x
+亞洲/x
+評論/x
+》/x
+網站/x
+報導/x
+，/x
+儘管/x
+美國/x
+總統/x
+川普/x
+發起/x
+了讓/v
+美國/x
+製造業/x
+回歸/x
+的/uj
+貿易戰/x
+，/x
+但/c
+包括/v
+電動/x
+汽車/x
+製造商/x
+特斯拉/nrt
+在內/x
+的/uj
+一些/m
+公司/n
+反而/c
+加大/v
+馬力/x
+在/p
+大陸/x
+進行/x
+生產/x
+。/x
+另/r
+據/p
+高盛/nr
+近日/t
+發布/x
+的/uj
+一份/m
+報告/x
+指出/v
+，/x
+半導體/x
+設備/x
+和/c
+材料/n
+以及/c
+醫療/x
+保健/nr
+領域/x
+的/uj
+大多數/m
+公司/n
+實際/x
+上/f
+正/d
+擴大/x
+在/p
+大陸/x
+的/uj
+生產/x
+，/x
+許多/x
+美國/x
+製造業/x
+拒絕/x
+「/x
+退出/v
+中國/x
+」/x
+。/x
 </pre></div>
 </div>
 </div>
@@ -421,7 +500,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load stopwords</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../../../Corpus/stopwords/tomlinNTUB-chinese-stopwords.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../../../RepositoryData/data/stopwords/tomlinNTUB-chinese-stopwords.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">stopwords</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()]</span>
 
 <span class="n">words1</span> <span class="o">=</span> <span class="n">jieba</span><span class="o">.</span><span class="n">lcut</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">cut_all</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -494,16 +573,16 @@
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "ckiptagger"
+            mode: "python"
         },
         kernelOptions: {
-            kernelName: "ckiptagger",
+            kernelName: "python-notes",
             path: "./corpus"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'ckiptagger'</script>
+    <script>kernelName = 'python-notes'</script>
 
               </div>
               

@@ -277,25 +277,18 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">praatio</span> <span class="kn">import</span> <span class="n">tgio</span>
-<span class="n">tg</span> <span class="o">=</span> <span class="n">tgio</span><span class="o">.</span><span class="n">openTextgrid</span><span class="p">(</span><span class="s1">&#39;../../../Projects/MOST-Prosody/data/2014_di702_TextGrid_Alvin/di_001.TextGrid&#39;</span><span class="p">)</span>
+<span class="n">tg</span> <span class="o">=</span> <span class="n">tgio</span><span class="o">.</span><span class="n">openTextgrid</span><span class="p">(</span><span class="s1">&#39;../../../../../Dropbox/Projects/MOST-Prosody/data/2014_di702_TextGrid_Alvin/di_001.TextGrid&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">41495447</span><span class="n">c801</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">praatio</span> <span class="kn">import</span> <span class="n">tgio</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">tg</span> <span class="o">=</span> <span class="n">tgio</span><span class="o">.</span><span class="n">openTextgrid</span><span class="p">(</span><span class="s1">&#39;../../../Projects/MOST-Prosody/data/2014_di702_TextGrid_Alvin/di_001.TextGrid&#39;</span><span class="p">)</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">d60d6a5ec58d</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">praatio</span> <span class="kn">import</span> <span class="n">tgio</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">tg</span> <span class="o">=</span> <span class="n">tgio</span><span class="o">.</span><span class="n">openTextgrid</span><span class="p">(</span><span class="s1">&#39;../../../../../Dropbox/Projects/MOST-Prosody/data/2014_di702_TextGrid_Alvin/di_001.TextGrid&#39;</span><span class="p">)</span>
 
-<span class="nn">~/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/praatio/tgio.py</span> in <span class="ni">openTextgrid</span><span class="nt">(fnFullPath, readRaw, readAsJson)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1614</span>     <span class="s1">&#39;&#39;&#39;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1615</span><span class="s1">     try:</span>
-<span class="ne">-&gt; </span><span class="mi">1616</span><span class="s1">         with io.open(fnFullPath, &quot;r&quot;, encoding=&quot;utf-16&quot;) as fd:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1617</span><span class="s1">             data = fd.read()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1618</span><span class="s1">     except UnicodeError:</span>
-
-<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;../../../Projects/MOST-Prosody/data/2014_di702_TextGrid_Alvin/di_001.TextGrid&#39;
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;praatio&#39;
 </pre></div>
 </div>
 </div>
@@ -307,12 +300,12 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;DU&#39;: &lt;praatio.tgio.IntervalTier at 0x7fa0f8dafb00&gt;,
- &#39;PU&#39;: &lt;praatio.tgio.IntervalTier at 0x7fa0e8dd35f8&gt;,
- &#39;Hanzi&#39;: &lt;praatio.tgio.IntervalTier at 0x7fa0e8dd3ef0&gt;,
- &#39;Word&#39;: &lt;praatio.tgio.IntervalTier at 0x7fa0f8da2400&gt;,
- &#39;POS&#39;: &lt;praatio.tgio.IntervalTier at 0x7fa0f8da28d0&gt;,
- &#39;Syllable&#39;: &lt;praatio.tgio.IntervalTier at 0x7fa0f8da2668&gt;}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;DU&#39;: &lt;praatio.tgio.IntervalTier at 0x7fa96e7475f8&gt;,
+ &#39;PU&#39;: &lt;praatio.tgio.IntervalTier at 0x7fa96e7a0518&gt;,
+ &#39;Hanzi&#39;: &lt;praatio.tgio.IntervalTier at 0x7fa96e7a0ac8&gt;,
+ &#39;Word&#39;: &lt;praatio.tgio.IntervalTier at 0x7fa96e7a0630&gt;,
+ &#39;POS&#39;: &lt;praatio.tgio.IntervalTier at 0x7fa96e7a0e10&gt;,
+ &#39;Syllable&#39;: &lt;praatio.tgio.IntervalTier at 0x7fa96e747ef0&gt;}
 </pre></div>
 </div>
 </div>
@@ -977,16 +970,16 @@
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "ckiptagger"
+            mode: "python"
         },
         kernelOptions: {
-            kernelName: "ckiptagger",
+            kernelName: "python-notes",
             path: "./corpus"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'ckiptagger'</script>
+    <script>kernelName = 'python-notes'</script>
 
               </div>
               

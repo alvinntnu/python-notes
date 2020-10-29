@@ -17,17 +17,20 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply['content'])
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
+import pandas as pd
+import scipy.stats as stats
+import matplotlib.pyplot as plt
 import seaborn as sns
-
-sns.set(style='darkgrid')
+import numpy as np
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-[0;32m<ipython-input-22-77869c58e2be>[0m in [0;36m<module>[0;34m[0m
-[0;32m----> 1[0;31m [0;32mimport[0m [0mseaborn[0m [0;32mas[0m [0msns[0m[0;34m[0m[0m
-[0m[1;32m      2[0m [0;34m[0m[0m
-[1;32m      3[0m [0msns[0m[0;34m.[0m[0mset[0m[0;34m([0m[0mstyle[0m[0;34m=[0m[0;34m'darkgrid'[0m[0;34m)[0m[0;34m[0m[0m
+[0;32m<ipython-input-2-ec1447a4048a>[0m in [0;36m<module>[0;34m[0m
+[1;32m      2[0m [0;32mimport[0m [0mscipy[0m[0;34m.[0m[0mstats[0m [0;32mas[0m [0mstats[0m[0;34m[0m[0m
+[1;32m      3[0m [0;32mimport[0m [0mmatplotlib[0m[0;34m.[0m[0mpyplot[0m [0;32mas[0m [0mplt[0m[0;34m[0m[0m
+[0;32m----> 4[0;31m [0;32mimport[0m [0mseaborn[0m [0;32mas[0m [0msns[0m[0;34m[0m[0m
+[0m[1;32m      5[0m [0;32mimport[0m [0mnumpy[0m [0;32mas[0m [0mnp[0m[0;34m[0m[0m
 
 [0;31mModuleNotFoundError[0m: No module named 'seaborn'
 ModuleNotFoundError: No module named 'seaborn'

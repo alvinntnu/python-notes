@@ -17,17 +17,25 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply['content'])
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
+import matplotlib.pyplot as plt
+# # from seaborn import color_palette
+# palette = plt.get_cmap("Set3")
+# palette(11)[1]
+plt.rcParams['font.sans-serif']=["PingFang HK"]
+plt.rcParams['axes.unicode_minus']= False
 import seaborn as sns
 
-sns.set(style='darkgrid')
+palette = sns.color_palette('tab10')
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-[0;32m<ipython-input-22-77869c58e2be>[0m in [0;36m<module>[0;34m[0m
-[0;32m----> 1[0;31m [0;32mimport[0m [0mseaborn[0m [0;32mas[0m [0msns[0m[0;34m[0m[0m
-[0m[1;32m      2[0m [0;34m[0m[0m
-[1;32m      3[0m [0msns[0m[0;34m.[0m[0mset[0m[0;34m([0m[0mstyle[0m[0;34m=[0m[0;34m'darkgrid'[0m[0;34m)[0m[0;34m[0m[0m
+[0;32m<ipython-input-44-7f99be5a266a>[0m in [0;36m<module>[0;34m[0m
+[1;32m      5[0m [0mplt[0m[0;34m.[0m[0mrcParams[0m[0;34m[[0m[0;34m'font.sans-serif'[0m[0;34m][0m[0;34m=[0m[0;34m[[0m[0;34m"PingFang HK"[0m[0;34m][0m[0;34m[0m[0m
+[1;32m      6[0m [0mplt[0m[0;34m.[0m[0mrcParams[0m[0;34m[[0m[0;34m'axes.unicode_minus'[0m[0;34m][0m[0;34m=[0m [0;32mFalse[0m[0;34m[0m[0m
+[0;32m----> 7[0;31m [0;32mimport[0m [0mseaborn[0m [0;32mas[0m [0msns[0m[0;34m[0m[0m
+[0m[1;32m      8[0m [0;34m[0m[0m
+[1;32m      9[0m [0mpalette[0m [0;34m=[0m [0msns[0m[0;34m.[0m[0mcolor_palette[0m[0;34m([0m[0;34m'tab10'[0m[0;34m)[0m[0;34m[0m[0m
 
 [0;31mModuleNotFoundError[0m: No module named 'seaborn'
 ModuleNotFoundError: No module named 'seaborn'

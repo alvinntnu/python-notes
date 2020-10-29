@@ -1,15 +1,4 @@
 Traceback (most recent call last):
-  File "/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 604, in _async_poll_for_reply
-    msg = await ensure_async(self.kc.shell_channel.get_msg(timeout=new_timeout))
-  File "/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/nbclient/util.py", line 85, in ensure_async
-    result = await obj
-  File "/Users/Alvin/.local/lib/python3.7/site-packages/jupyter_client/asynchronous/channels.py", line 48, in get_msg
-    raise Empty
-_queue.Empty
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
   File "/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 56, in single_nb_execution
     record_timing=False,
   File "/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 1082, in execute
@@ -22,24 +11,49 @@ Traceback (most recent call last):
     return future.result()
   File "/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 536, in async_execute
     cell, index, execution_count=self.code_cells_executed + 1
-  File "/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 811, in async_execute_cell
-    exec_reply = await self.task_poll_for_reply
-  File "/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 628, in _async_poll_for_reply
-    await self._async_handle_timeout(timeout, cell)
-  File "/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 679, in _async_handle_timeout
-    "Cell execution timed out", timeout, cell
-nbclient.exceptions.CellTimeoutError: A cell timed out while it was being executed, after 30 seconds.
-The message was: Cell execution timed out.
-Here is a preview of the cell contents:
--------------------
+  File "/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 827, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/Users/Alvin/opt/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 735, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply['content'])
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
 import spacy
-import unicodedata
-#from contractions import CONTRACTION_MAP
-import re
-from nltk.corpus import wordnet
-import collections
-#from textblob import Word
-from nltk.tokenize.toktok import ToktokTokenizer
-from bs4 import BeautifulSoup
--------------------
+# use spacy.load('en') if you have downloaded the language model en directly after install spacy
+nlp = spacy.load('en', parse=False, tag=True, entity=False)
+text = 'My system keeps crashing his crashed yesterday, ours crashes daily'
+
+def lemmatize_text(text):
+    text = nlp(text)
+    text = ' '.join([word.lemma_ if word.lemma_ != '-PRON-' else word.text for word in text])
+    return text
+
+lemmatize_text("My system keeps crashing! his crashed yesterday, ours crashes daily")
+
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mOSError[0m                                   Traceback (most recent call last)
+[0;32m<ipython-input-4-935781cfd996>[0m in [0;36m<module>[0;34m[0m
+[1;32m      1[0m [0;32mimport[0m [0mspacy[0m[0;34m[0m[0m
+[1;32m      2[0m [0;31m# use spacy.load('en') if you have downloaded the language model en directly after install spacy[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 3[0;31m [0mnlp[0m [0;34m=[0m [0mspacy[0m[0;34m.[0m[0mload[0m[0;34m([0m[0;34m'en'[0m[0;34m,[0m [0mparse[0m[0;34m=[0m[0;32mFalse[0m[0;34m,[0m [0mtag[0m[0;34m=[0m[0;32mTrue[0m[0;34m,[0m [0mentity[0m[0;34m=[0m[0;32mFalse[0m[0;34m)[0m[0;34m[0m[0m
+[0m[1;32m      4[0m [0mtext[0m [0;34m=[0m [0;34m'My system keeps crashing his crashed yesterday, ours crashes daily'[0m[0;34m[0m[0m
+[1;32m      5[0m [0;34m[0m[0m
+
+[0;32m~/opt/anaconda3/envs/python-notes/lib/python3.7/site-packages/spacy/__init__.py[0m in [0;36mload[0;34m(name, **overrides)[0m
+[1;32m     28[0m     [0;32mif[0m [0mdepr_path[0m [0;32mnot[0m [0;32min[0m [0;34m([0m[0;32mTrue[0m[0;34m,[0m [0;32mFalse[0m[0;34m,[0m [0;32mNone[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0m
+[1;32m     29[0m         [0mwarnings[0m[0;34m.[0m[0mwarn[0m[0;34m([0m[0mWarnings[0m[0;34m.[0m[0mW001[0m[0;34m.[0m[0mformat[0m[0;34m([0m[0mpath[0m[0;34m=[0m[0mdepr_path[0m[0;34m)[0m[0;34m,[0m [0mDeprecationWarning[0m[0;34m)[0m[0;34m[0m[0m
+[0;32m---> 30[0;31m     [0;32mreturn[0m [0mutil[0m[0;34m.[0m[0mload_model[0m[0;34m([0m[0mname[0m[0;34m,[0m [0;34m**[0m[0moverrides[0m[0;34m)[0m[0;34m[0m[0m
+[0m[1;32m     31[0m [0;34m[0m[0m
+[1;32m     32[0m [0;34m[0m[0m
+
+[0;32m~/opt/anaconda3/envs/python-notes/lib/python3.7/site-packages/spacy/util.py[0m in [0;36mload_model[0;34m(name, **overrides)[0m
+[1;32m    173[0m     [0;32melif[0m [0mhasattr[0m[0;34m([0m[0mname[0m[0;34m,[0m [0;34m"exists"[0m[0;34m)[0m[0;34m:[0m  [0;31m# Path or Path-like to model data[0m[0;34m[0m[0m
+[1;32m    174[0m         [0;32mreturn[0m [0mload_model_from_path[0m[0;34m([0m[0mname[0m[0;34m,[0m [0;34m**[0m[0moverrides[0m[0;34m)[0m[0;34m[0m[0m
+[0;32m--> 175[0;31m     [0;32mraise[0m [0mIOError[0m[0;34m([0m[0mErrors[0m[0;34m.[0m[0mE050[0m[0;34m.[0m[0mformat[0m[0;34m([0m[0mname[0m[0;34m=[0m[0mname[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0m
+[0m[1;32m    176[0m [0;34m[0m[0m
+[1;32m    177[0m [0;34m[0m[0m
+
+[0;31mOSError[0m: [E050] Can't find model 'en'. It doesn't seem to be a shortcut link, a Python package or a valid path to a data directory.
+OSError: [E050] Can't find model 'en'. It doesn't seem to be a shortcut link, a Python package or a valid path to a data directory.
 
