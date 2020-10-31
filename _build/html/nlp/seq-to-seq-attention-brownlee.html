@@ -1,0 +1,588 @@
+
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sequence Prediction with Attention &#8212; Python Notes for Linguistics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mycss.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/ntnu03.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Python Notes for Linguistics</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python-basics/python-basics.html">
+   Python Basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../corpus/corpus-processing.html">
+   Corpus Linguistics with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../statistical-analyses/statistical-analyses.html">
+   Statistical Analyses
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="nlp.html">
+   Natural Language Processing with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/todo.html">
+   To-do List
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <div style="text-align:left">
+    <a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
+</div>
+
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/nlp/seq-to-seq-attention-brownlee.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/alvinntnu/python-notes/master?urlpath=tree/nlp/seq-to-seq-attention-brownlee.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/nlp/seq-to-seq-attention-brownlee.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#jason-brownlee-s-version">
+   Jason Brownlee’s version
+  </a>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="sequence-prediction-with-attention">
+<h1>Sequence Prediction with Attention<a class="headerlink" href="#sequence-prediction-with-attention" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="jason-brownlee-s-version">
+<h2>Jason Brownlee’s version<a class="headerlink" href="#jason-brownlee-s-version" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>This is based on Jason Brownlee’s tutorial <a class="reference external" href="https://machinelearningmastery.com/encoder-decoder-attention-sequence-to-sequence-prediction-keras/">How to Develop an Encoder-Decoder Model with Attention in Keras</a></p></li>
+<li><p>Jason’s tutorial is based on a custom layer developed by Zafarali Ahmed in a post titled <a class="reference external" href="https://medium.com/datalogue/attention-in-keras-1892773a4f22">“How to Visualize Your Recurrent Neural Network with Attention in Keras”</a> and his GitHub project called <a class="reference external" href="https://github.com/datalogue/keras-attention">“keras-attention“</a></p></li>
+<li><p>This tutorial is based on older versions of tensorflow and keras. Not working with the recent version.</p></li>
+<li><p>To work with this code:</p>
+<ul>
+<li><p>Use tensorflow 1</p></li>
+<li><p>Use keras 2</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">array</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">argmax</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">array_equal</span>
+<span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">LSTM</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">TimeDistributed</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">RepeatVector</span>
+<span class="kn">from</span> <span class="nn">attention_decoder</span> <span class="kn">import</span> <span class="n">AttentionDecoder</span>
+
+
+
+<span class="c1"># generate a sequence of random integers</span>
+<span class="k">def</span> <span class="nf">generate_sequence</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">n_unique</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_unique</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="p">)]</span>
+
+
+<span class="c1"># one hot encode sequence</span>
+<span class="k">def</span> <span class="nf">one_hot_encode</span><span class="p">(</span><span class="n">sequence</span><span class="p">,</span> <span class="n">n_unique</span><span class="p">):</span>
+    <span class="n">encoding</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">sequence</span><span class="p">:</span>
+        <span class="n">vector</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_unique</span><span class="p">)]</span>
+        <span class="n">vector</span><span class="p">[</span><span class="n">value</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">encoding</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">encoding</span><span class="p">)</span>
+
+
+<span class="c1"># decode a one hot encoded string</span>
+<span class="k">def</span> <span class="nf">one_hot_decode</span><span class="p">(</span><span class="n">encoded_seq</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">argmax</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span> <span class="k">for</span> <span class="n">vector</span> <span class="ow">in</span> <span class="n">encoded_seq</span><span class="p">]</span>
+
+
+<span class="c1"># prepare data for the LSTM</span>
+<span class="k">def</span> <span class="nf">get_pair</span><span class="p">(</span><span class="n">n_in</span><span class="p">,</span> <span class="n">n_out</span><span class="p">,</span> <span class="n">cardinality</span><span class="p">):</span>
+    <span class="c1"># generate random sequence</span>
+    <span class="n">sequence_in</span> <span class="o">=</span> <span class="n">generate_sequence</span><span class="p">(</span><span class="n">n_in</span><span class="p">,</span> <span class="n">cardinality</span><span class="p">)</span>
+    <span class="n">sequence_out</span> <span class="o">=</span> <span class="n">sequence_in</span><span class="p">[:</span><span class="n">n_out</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_in</span> <span class="o">-</span> <span class="n">n_out</span><span class="p">)]</span>
+    <span class="c1"># one hot encode</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">one_hot_encode</span><span class="p">(</span><span class="n">sequence_in</span><span class="p">,</span> <span class="n">cardinality</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">one_hot_encode</span><span class="p">(</span><span class="n">sequence_out</span><span class="p">,</span> <span class="n">cardinality</span><span class="p">)</span>
+    <span class="c1"># reshape as 3D</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span>
+
+
+<span class="c1"># define the encoder-decoder model</span>
+<span class="k">def</span> <span class="nf">baseline_model</span><span class="p">(</span><span class="n">n_timesteps_in</span><span class="p">,</span> <span class="n">n_features</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LSTM</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="n">n_timesteps_in</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">RepeatVector</span><span class="p">(</span><span class="n">n_timesteps_in</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LSTM</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="n">return_sequences</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">TimeDistributed</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="n">n_features</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">)))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span>
+                  <span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span>
+                  <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">model</span>
+
+
+<span class="c1"># define the encoder-decoder with attention model</span>
+<span class="k">def</span> <span class="nf">attention_model</span><span class="p">(</span><span class="n">n_timesteps_in</span><span class="p">,</span> <span class="n">n_features</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+        <span class="n">LSTM</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span>
+             <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="n">n_timesteps_in</span><span class="p">,</span> <span class="n">n_features</span><span class="p">),</span>
+             <span class="n">return_sequences</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">AttentionDecoder</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="n">n_features</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span>
+                  <span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span>
+                  <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">model</span>
+
+
+<span class="c1"># train and evaluate a model, return accuracy</span>
+<span class="k">def</span> <span class="nf">train_evaluate_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">n_timesteps_in</span><span class="p">,</span> <span class="n">n_timesteps_out</span><span class="p">,</span> <span class="n">n_features</span><span class="p">):</span>
+    <span class="c1"># train LSTM</span>
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5000</span><span class="p">):</span>
+        <span class="c1"># generate new random sequence</span>
+        <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">get_pair</span><span class="p">(</span><span class="n">n_timesteps_in</span><span class="p">,</span> <span class="n">n_timesteps_out</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span>
+        <span class="c1"># fit model for one epoch on this sequence</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># evaluate LSTM</span>
+    <span class="n">total</span><span class="p">,</span> <span class="n">correct</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">total</span><span class="p">):</span>
+        <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">get_pair</span><span class="p">(</span><span class="n">n_timesteps_in</span><span class="p">,</span> <span class="n">n_timesteps_out</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span>
+        <span class="n">yhat</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">array_equal</span><span class="p">(</span><span class="n">one_hot_decode</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">one_hot_decode</span><span class="p">(</span><span class="n">yhat</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+            <span class="n">correct</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">correct</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">total</span><span class="p">)</span> <span class="o">*</span> <span class="mf">100.0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using TensorFlow backend.
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">723060</span><span class="n">cf117d</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">argmax</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">array_equal</span>
+<span class="ne">----&gt; </span><span class="mi">5</span> <span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">LSTM</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span>
+
+<span class="o">~/</span><span class="n">opt</span><span class="o">/</span><span class="n">anaconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">ckiptagger</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> 
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">activations</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">applications</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">backend</span>
+
+<span class="o">~/</span><span class="n">opt</span><span class="o">/</span><span class="n">anaconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">ckiptagger</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="n">activations</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">six</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">warnings</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">backend</span> <span class="k">as</span> <span class="n">K</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">from</span> <span class="nn">.utils.generic_utils</span> <span class="kn">import</span> <span class="n">deserialize_keras_object</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">from</span> <span class="nn">.engine</span> <span class="kn">import</span> <span class="n">Layer</span>
+
+<span class="o">~/</span><span class="n">opt</span><span class="o">/</span><span class="n">anaconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">ckiptagger</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="n">backend</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">71</span> <span class="k">elif</span> <span class="n">_BACKEND</span> <span class="o">==</span> <span class="s1">&#39;tensorflow&#39;</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">72</span>     <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;Using TensorFlow backend.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">73</span>     <span class="kn">from</span> <span class="nn">.tensorflow_backend</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="g g-Whitespace">     </span><span class="mi">74</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">75</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown backend: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">_BACKEND</span><span class="p">))</span>
+
+<span class="o">~/</span><span class="n">opt</span><span class="o">/</span><span class="n">anaconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">ckiptagger</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="n">backend</span><span class="o">/</span><span class="n">tensorflow_backend</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">tensorflow.python.training</span> <span class="kn">import</span> <span class="n">moving_averages</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">tensorflow.python.ops</span> <span class="kn">import</span> <span class="n">tensor_array_ops</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">tensorflow.python.ops</span> <span class="kn">import</span> <span class="n">control_flow_ops</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">from</span> <span class="nn">tensorflow.python.ops</span> <span class="kn">import</span> <span class="n">functional_ops</span>
+
+<span class="o">~/</span><span class="n">opt</span><span class="o">/</span><span class="n">anaconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">ckiptagger</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">tensorflow</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span> 
+<span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="c1"># pylint: disable=g-bad-import-order</span>
+<span class="ne">---&gt; </span><span class="mi">24</span> <span class="kn">from</span> <span class="nn">tensorflow.python</span> <span class="kn">import</span> <span class="n">pywrap_tensorflow</span>  <span class="c1"># pylint: disable=unused-import</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span> 
+<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="kn">from</span> <span class="nn">tensorflow._api.v1</span> <span class="kn">import</span> <span class="n">app</span>
+
+<span class="o">~/</span><span class="n">opt</span><span class="o">/</span><span class="n">anaconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">ckiptagger</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">tensorflow</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">50</span> 
+<span class="g g-Whitespace">     </span><span class="mi">51</span> <span class="c1"># Protocol buffers</span>
+<span class="ne">---&gt; </span><span class="mi">52</span> <span class="kn">from</span> <span class="nn">tensorflow.core.framework.graph_pb2</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="g g-Whitespace">     </span><span class="mi">53</span> <span class="kn">from</span> <span class="nn">tensorflow.core.framework.node_def_pb2</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="g g-Whitespace">     </span><span class="mi">54</span> <span class="kn">from</span> <span class="nn">tensorflow.core.framework.summary_pb2</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="o">~/</span><span class="n">opt</span><span class="o">/</span><span class="n">anaconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">ckiptagger</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">tensorflow</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">framework</span><span class="o">/</span><span class="n">graph_pb2</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">sys</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">_b</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">3</span> <span class="ow">and</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;latin1&#39;</span><span class="p">))</span>
+<span class="ne">----&gt; </span><span class="mi">6</span> <span class="kn">from</span> <span class="nn">google.protobuf</span> <span class="kn">import</span> <span class="n">descriptor</span> <span class="k">as</span> <span class="n">_descriptor</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">from</span> <span class="nn">google.protobuf</span> <span class="kn">import</span> <span class="n">message</span> <span class="k">as</span> <span class="n">_message</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">from</span> <span class="nn">google.protobuf</span> <span class="kn">import</span> <span class="n">reflection</span> <span class="k">as</span> <span class="n">_reflection</span>
+
+<span class="o">~/</span><span class="n">opt</span><span class="o">/</span><span class="n">anaconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">ckiptagger</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">google</span><span class="o">/</span><span class="n">protobuf</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">35</span> <span class="k">if</span> <span class="vm">__name__</span> <span class="o">!=</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">36</span>   <span class="k">try</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">37</span>     <span class="nb">__import__</span><span class="p">(</span><span class="s1">&#39;pkg_resources&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">declare_namespace</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">38</span>   <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span>     <span class="n">__path__</span> <span class="o">=</span> <span class="nb">__import__</span><span class="p">(</span><span class="s1">&#39;pkgutil&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">extend_path</span><span class="p">(</span><span class="n">__path__</span><span class="p">,</span> <span class="vm">__name__</span><span class="p">)</span>
+
+<span class="o">~/</span><span class="n">opt</span><span class="o">/</span><span class="n">anaconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">ckiptagger</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">pkg_resources</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">   </span><span class="mi">3265</span> 
+<span class="g g-Whitespace">   </span><span class="mi">3266</span> 
+<span class="ne">-&gt; </span><span class="mi">3267</span> <span class="nd">@_call_aside</span>
+<span class="g g-Whitespace">   </span><span class="mi">3268</span> <span class="k">def</span> <span class="nf">_initialize_master_working_set</span><span class="p">():</span>
+<span class="g g-Whitespace">   </span><span class="mi">3269</span>     <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="nn">~/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/pkg_resources/__init__.py</span> in <span class="ni">_call_aside</span><span class="nt">(f, *args, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3249</span><span class="sd"> # from jaraco.functools 1.3</span>
+<span class="g g-Whitespace">   </span><span class="mi">3250</span><span class="sd"> def _call_aside(f, *args, **kwargs):</span>
+<span class="ne">-&gt; </span><span class="mi">3251</span><span class="sd">     f(*args, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3252</span><span class="sd">     return f</span>
+<span class="g g-Whitespace">   </span><span class="mi">3253</span><span class="sd"> </span>
+
+<span class="nn">~/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/pkg_resources/__init__.py</span> in <span class="ni">_initialize_master_working_set</span><span class="nt">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">3278</span><span class="sd">     at their own risk.</span>
+<span class="g g-Whitespace">   </span><span class="mi">3279</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">3280</span>     <span class="n">working_set</span> <span class="o">=</span> <span class="n">WorkingSet</span><span class="o">.</span><span class="n">_build_master</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">3281</span>     <span class="n">_declare_state</span><span class="p">(</span><span class="s1">&#39;object&#39;</span><span class="p">,</span> <span class="n">working_set</span><span class="o">=</span><span class="n">working_set</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3282</span> 
+
+<span class="nn">~/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/pkg_resources/__init__.py</span> in <span class="ni">_build_master</span><span class="nt">(cls)</span>
+<span class="g g-Whitespace">    </span><span class="mi">571</span>         <span class="n">Prepare</span> <span class="n">the</span> <span class="n">master</span> <span class="n">working</span> <span class="nb">set</span><span class="o">.</span>
+<span class="g g-Whitespace">    </span><span class="mi">572</span>         <span class="s2">&quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">573</span><span class="s2">         ws = cls()</span>
+<span class="g g-Whitespace">    </span><span class="mi">574</span><span class="s2">         try:</span>
+<span class="g g-Whitespace">    </span><span class="mi">575</span><span class="s2">             from __main__ import __requires__</span>
+
+<span class="nn">~/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/pkg_resources/__init__.py</span> in <span class="ni">__init__</span><span class="nt">(self, entries)</span>
+<span class="g g-Whitespace">    </span><span class="mi">564</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">565</span><span class="s2">         for entry in entries:</span>
+<span class="ne">--&gt; </span><span class="mi">566</span><span class="s2">             self.add_entry(entry)</span>
+<span class="g g-Whitespace">    </span><span class="mi">567</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">568</span><span class="s2">     @classmethod</span>
+
+<span class="nn">~/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/pkg_resources/__init__.py</span> in <span class="ni">add_entry</span><span class="nt">(self, entry)</span>
+<span class="g g-Whitespace">    </span><span class="mi">620</span><span class="s2">         self.entry_keys.setdefault(entry, [])</span>
+<span class="g g-Whitespace">    </span><span class="mi">621</span><span class="s2">         self.entries.append(entry)</span>
+<span class="ne">--&gt; </span><span class="mi">622</span><span class="s2">         for dist in find_distributions(entry, True):</span>
+<span class="g g-Whitespace">    </span><span class="mi">623</span><span class="s2">             self.add(dist, entry, False)</span>
+<span class="g g-Whitespace">    </span><span class="mi">624</span><span class="s2"> </span>
+
+<span class="nn">~/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/pkg_resources/__init__.py</span> in <span class="ni">find_on_path</span><span class="nt">(importer, path_item, only)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2076</span><span class="s2">         fullpath = os.path.join(path_item, entry)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2077</span><span class="s2">         factory = dist_factory(path_item, entry, only)</span>
+<span class="ne">-&gt; </span><span class="mi">2078</span><span class="s2">         for dist in factory(fullpath):</span>
+<span class="g g-Whitespace">   </span><span class="mi">2079</span><span class="s2">             yield dist</span>
+<span class="g g-Whitespace">   </span><span class="mi">2080</span><span class="s2"> </span>
+
+<span class="nn">~/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/pkg_resources/__init__.py</span> in <span class="ni">distributions_from_metadata</span><span class="nt">(path)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2141</span><span class="s2">     root = os.path.dirname(path)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2142</span><span class="s2">     if os.path.isdir(path):</span>
+<span class="ne">-&gt; </span><span class="mi">2143</span><span class="s2">         if len(os.listdir(path)) == 0:</span>
+<span class="g g-Whitespace">   </span><span class="mi">2144</span><span class="s2">             # empty metadata dir; skip</span>
+<span class="g g-Whitespace">   </span><span class="mi">2145</span><span class="s2">             return</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Versions compatible with the codes</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">keras</span> <span class="k">as</span> <span class="nn">keras</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">keras</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.13.1
+2.0.4
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># configure problem</span>
+<span class="n">n_features</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">n_timesteps_in</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">n_timesteps_out</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">n_repeats</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="c1"># evaluate encoder-decoder model</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Encoder-Decoder Model&#39;</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_repeats</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">baseline_model</span><span class="p">(</span><span class="n">n_timesteps_in</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span>
+    <span class="n">accuracy</span> <span class="o">=</span> <span class="n">train_evaluate_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">n_timesteps_in</span><span class="p">,</span> <span class="n">n_timesteps_out</span><span class="p">,</span>
+                                    <span class="n">n_features</span><span class="p">)</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">accuracy</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">accuracy</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean Accuracy: </span><span class="si">%.2f%%</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">results</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">n_repeats</span><span class="p">)))</span>
+<span class="c1"># evaluate encoder-decoder with attention model</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Encoder-Decoder With Attention Model&#39;</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_repeats</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">attention_model</span><span class="p">(</span><span class="n">n_timesteps_in</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span>
+    <span class="n">accuracy</span> <span class="o">=</span> <span class="n">train_evaluate_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">n_timesteps_in</span><span class="p">,</span> <span class="n">n_timesteps_out</span><span class="p">,</span>
+                                    <span class="n">n_features</span><span class="p">)</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">accuracy</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">accuracy</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean Accuracy: </span><span class="si">%.2f%%</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">results</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">n_repeats</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Encoder-Decoder Model
+WARNING:tensorflow:From /Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/tensorflow/python/framework/op_def_library.py:263: colocate_with (from tensorflow.python.framework.ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Colocations handled automatically by placer.
+WARNING:tensorflow:From /Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/keras/backend/tensorflow_backend.py:1150: calling reduce_sum_v1 (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+WARNING:tensorflow:From /Users/Alvin/opt/anaconda3/envs/ckiptagger/lib/python3.6/site-packages/tensorflow/python/ops/math_ops.py:3066: to_int32 (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.cast instead.
+23.0
+20.0
+26.0
+24.0
+18.0
+22.0
+24.0
+16.0
+20.0
+15.0
+Mean Accuracy: 20.80%
+Encoder-Decoder With Attention Model
+94.0
+99.0
+89.0
+91.0
+91.0
+87.0
+94.0
+97.0
+95.0
+96.0
+Mean Accuracy: 93.30%
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ckiptagger"
+        },
+        kernelOptions: {
+            kernelName: "ckiptagger",
+            path: "./nlp"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ckiptagger'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alvin Chen<br/>
+        
+            &copy; Copyright 2020 Alvin Chen.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>

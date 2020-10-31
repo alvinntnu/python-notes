@@ -35,6 +35,8 @@ In addition to books, there are many wonderful on-line resources, esp. professio
 - [Dipanzan Sarkar's articles](https://towardsdatascience.com/@dipanzan.sarkar)
 - [Python Graph Libraries](https://python-graph-gallery.com/)
 - [KGPTalkie NLP](https://kgptalkie.com/category/natural-language-processing-nlp/)
+- [Jason Brownlee's Blog: Machine Learning Mastery](https://machinelearningmastery.com/)
+- [Jay Alammar's Blog](https://jalammar.github.io/)
 
 
 ## References

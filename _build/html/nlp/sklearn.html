@@ -179,8 +179,18 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="seq-to-seq-primer.html">
+     Sequence to Sequence: Primer
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="seq-to-seq.html">
      Machine Translation (Sequence-to-Sequence LSTM)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="seq-to-seq-attention-mm.html">
+     Sequence Model with Attention (Matthew McAteer)
     </a>
    </li>
    <li class="toctree-l2">
@@ -457,20 +467,6 @@
     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">cur_review</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
         <span class="n">reviews</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Review</span><span class="p">(</span><span class="n">cur_review</span><span class="p">[</span><span class="s1">&#39;reviewText&#39;</span><span class="p">],</span> <span class="n">cur_review</span><span class="p">[</span><span class="s1">&#39;overall&#39;</span><span class="p">]))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="mi">559</span><span class="n">f8e6a4608</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> 
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">reviews</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="ne">----&gt; </span><span class="mi">6</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span>         <span class="n">cur_review</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
-
-<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;../data/books_small_10000.json&#39;
 </pre></div>
 </div>
 </div>

@@ -1,0 +1,791 @@
+
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seqeunce Model with Attention (Thushan) &#8212; Python Notes for Linguistics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mycss.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/ntnu03.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Python Notes for Linguistics</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python-basics/python-basics.html">
+   Python Basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../corpus/corpus-processing.html">
+   Corpus Linguistics with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../statistical-analyses/statistical-analyses.html">
+   Statistical Analyses
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="nlp.html">
+   Natural Language Processing with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/todo.html">
+   To-do List
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <div style="text-align:left">
+    <a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
+</div>
+
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/nlp/seq-to-seq-attention-tg.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/alvinntnu/python-notes/master?urlpath=tree/nlp/seq-to-seq-attention-tg.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/nlp/seq-to-seq-attention-tg.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="seqeunce-model-with-attention-thushan">
+<h1>Seqeunce Model with Attention (Thushan)<a class="headerlink" href="#seqeunce-model-with-attention-thushan" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Bahdanau Attention Layber developed in [https://github.com/thushv89/attention_keras]</p></li>
+<li><p>Thushan Ganegedara’s
+<a class="reference external" href="https://towardsdatascience.com/light-on-math-ml-attention-with-keras-dc8dbc1fad39">Attention in Deep Networks with Keras</a></p></li>
+<li><p>Still not working yet</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">keras</span> <span class="k">as</span> <span class="nn">keras</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">keras</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.2.0
+2.4.3
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">array</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">argmax</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">array_equal</span>
+<span class="kn">from</span> <span class="nn">keras</span> <span class="kn">import</span> <span class="n">Model</span>
+<span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">LSTM</span><span class="p">,</span> <span class="n">GRU</span><span class="p">,</span> <span class="n">Concatenate</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Attention</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">TimeDistributed</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">RepeatVector</span>
+<span class="kn">from</span> <span class="nn">keras</span> <span class="kn">import</span> <span class="n">Input</span>
+<span class="kn">from</span> <span class="nn">attention</span> <span class="kn">import</span> <span class="n">AttentionLayer</span>
+
+<span class="c1"># generate a sequence of random integers</span>
+<span class="k">def</span> <span class="nf">generate_sequence</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">n_unique</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_unique</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="p">)]</span>
+
+
+<span class="c1"># one hot encode sequence</span>
+<span class="k">def</span> <span class="nf">one_hot_encode</span><span class="p">(</span><span class="n">sequence</span><span class="p">,</span> <span class="n">n_unique</span><span class="p">):</span>
+    <span class="n">encoding</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">sequence</span><span class="p">:</span>
+        <span class="n">vector</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_unique</span><span class="p">)]</span>
+        <span class="n">vector</span><span class="p">[</span><span class="n">value</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">encoding</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">encoding</span><span class="p">)</span>
+
+
+<span class="c1"># decode a one hot encoded string</span>
+<span class="k">def</span> <span class="nf">one_hot_decode</span><span class="p">(</span><span class="n">encoded_seq</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">argmax</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span> <span class="k">for</span> <span class="n">vector</span> <span class="ow">in</span> <span class="n">encoded_seq</span><span class="p">]</span>
+
+
+<span class="c1"># prepare data for the LSTM</span>
+<span class="k">def</span> <span class="nf">get_pair</span><span class="p">(</span><span class="n">n_in</span><span class="p">,</span> <span class="n">n_out</span><span class="p">,</span> <span class="n">cardinality</span><span class="p">):</span>
+    <span class="c1"># generate random sequence</span>
+    <span class="n">sequence_in</span> <span class="o">=</span> <span class="n">generate_sequence</span><span class="p">(</span><span class="n">n_in</span><span class="p">,</span> <span class="n">cardinality</span><span class="p">)</span>
+    <span class="n">sequence_out</span> <span class="o">=</span> <span class="n">sequence_in</span><span class="p">[:</span><span class="n">n_out</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_in</span> <span class="o">-</span> <span class="n">n_out</span><span class="p">)]</span>
+    <span class="c1"># one hot encode</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">one_hot_encode</span><span class="p">(</span><span class="n">sequence_in</span><span class="p">,</span> <span class="n">cardinality</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">one_hot_encode</span><span class="p">(</span><span class="n">sequence_out</span><span class="p">,</span> <span class="n">cardinality</span><span class="p">)</span>
+    <span class="c1"># reshape as 3D</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span>
+
+
+<span class="c1"># # define the encoder-decoder model</span>
+<span class="c1"># def baseline_model(n_timesteps_in, n_features):</span>
+<span class="c1">#     model = Sequential()</span>
+<span class="c1">#     model.add(LSTM(150, input_shape=(n_timesteps_in, n_features)))</span>
+<span class="c1">#     model.add(RepeatVector(n_timesteps_in))</span>
+<span class="c1">#     model.add(LSTM(150, return_sequences=True))</span>
+<span class="c1">#     model.add(TimeDistributed(Dense(n_features, activation=&#39;softmax&#39;)))</span>
+<span class="c1">#     model.compile(loss=&#39;categorical_crossentropy&#39;,</span>
+<span class="c1">#                   optimizer=&#39;adam&#39;,</span>
+<span class="c1">#                   metrics=[&#39;accuracy&#39;])</span>
+<span class="c1">#     return model</span>
+
+
+<span class="c1"># # define the encoder-decoder with attention model</span>
+<span class="c1"># def attention_model(n_timesteps_in, n_features):</span>
+<span class="c1">#     model = Sequential()</span>
+<span class="c1">#     model.add(</span>
+<span class="c1">#         LSTM(150,</span>
+<span class="c1">#              input_shape=(n_timesteps_in, n_features),</span>
+<span class="c1">#              return_sequences=True))</span>
+<span class="c1">#     model.add(AttentionDecoder(150, n_features))</span>
+<span class="c1">#     model.compile(loss=&#39;categorical_crossentropy&#39;,</span>
+<span class="c1">#                   optimizer=&#39;adam&#39;,</span>
+<span class="c1">#                   metrics=[&#39;accuracy&#39;])</span>
+<span class="c1">#     return model</span>
+
+
+<span class="c1"># # train and evaluate a model, return accuracy</span>
+<span class="c1"># def train_evaluate_model(model, n_timesteps_in, n_timesteps_out, n_features):</span>
+<span class="c1">#     # train LSTM</span>
+<span class="c1">#     for epoch in range(5000):</span>
+<span class="c1">#         # generate new random sequence</span>
+<span class="c1">#         X, y = get_pair(n_timesteps_in, n_timesteps_out, n_features)</span>
+<span class="c1">#         # fit model for one epoch on this sequence</span>
+<span class="c1">#         model.fit(X, y, epochs=1, verbose=0)</span>
+<span class="c1">#     # evaluate LSTM</span>
+<span class="c1">#     total, correct = 100, 0</span>
+<span class="c1">#     for _ in range(total):</span>
+<span class="c1">#         X, y = get_pair(n_timesteps_in, n_timesteps_out, n_features)</span>
+<span class="c1">#         yhat = model.predict(X, verbose=0)</span>
+<span class="c1">#         if array_equal(one_hot_decode(y[0]), one_hot_decode(yhat[0])):</span>
+<span class="c1">#             correct += 1</span>
+<span class="c1">#     return float(correct) / float(total) * 100.0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_features</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">n_timesteps_in</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">n_timesteps_out</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">get_pair</span><span class="p">(</span><span class="n">n_timesteps_in</span><span class="p">,</span> <span class="n">n_timesteps_out</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">one_hot_decode</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">one_hot_decode</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[35, 32, 48, 2, 46]
+[35, 32, 0, 0, 0]
+(1, 5, 50)
+(1, 5, 50)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_pair</span><span class="p">(</span><span class="n">n_timesteps_in</span><span class="p">,</span> <span class="n">n_timesteps_out</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([[[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,
+          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0, 0, 0],
+         [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0, 0, 0]]]),
+ array([[[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,
+          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0, 0, 0],
+         [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0, 0, 0],
+         [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0, 0, 0],
+         [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0, 0, 0]]]))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batch_size</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">en_timesteps</span><span class="o">=</span><span class="mi">5</span>
+<span class="n">fr_timesteps</span><span class="o">=</span><span class="mi">2</span>
+<span class="n">en_vsize</span><span class="o">=</span><span class="mi">50</span>
+<span class="n">fr_vsize</span><span class="o">=</span><span class="mi">50</span>
+<span class="n">hidden_size</span><span class="o">=</span><span class="mi">150</span>
+
+
+<span class="n">encoder_inputs</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">batch_shape</span><span class="o">=</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span><span class="n">en_timesteps</span><span class="p">,</span> <span class="n">en_vsize</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;encoder_inputs&#39;</span><span class="p">)</span> 
+<span class="n">decoder_inputs</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">batch_shape</span><span class="o">=</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">fr_timesteps</span><span class="p">,</span> <span class="n">fr_vsize</span><span class="p">),</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;decoder_inputs&#39;</span><span class="p">)</span>
+
+<span class="c1">#encoder_inputs = X</span>
+<span class="c1">#decoder_inputs = y</span>
+
+<span class="n">encoder_gru</span> <span class="o">=</span><span class="n">GRU</span><span class="p">(</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">return_sequences</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_state</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;encoder_gru&#39;</span><span class="p">)</span> 
+<span class="n">encoder_out</span><span class="p">,</span> <span class="n">encoder_state</span> <span class="o">=</span> <span class="n">encoder_gru</span><span class="p">(</span><span class="n">encoder_inputs</span><span class="p">)</span>
+
+<span class="n">decoder_gru</span> <span class="o">=</span><span class="n">GRU</span><span class="p">(</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">return_sequences</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_state</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;decoder_gru&#39;</span><span class="p">)</span> 
+<span class="n">decoder_out</span><span class="p">,</span> <span class="n">decoder_state</span> <span class="o">=</span> <span class="n">decoder_gru</span><span class="p">(</span><span class="n">decoder_inputs</span><span class="p">,</span><span class="n">initial_state</span><span class="o">=</span><span class="n">encoder_state</span><span class="p">)</span>
+
+
+<span class="n">attn_layer</span> <span class="o">=</span> <span class="n">AttentionLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;attention_layer&#39;</span><span class="p">)</span> 
+<span class="n">attn_out</span><span class="p">,</span> <span class="n">attn_states</span> <span class="o">=</span> <span class="n">attn_layer</span><span class="p">([</span><span class="n">encoder_out</span><span class="p">,</span> <span class="n">decoder_out</span><span class="p">])</span>
+
+
+<span class="n">decoder_concat_input</span> <span class="o">=</span><span class="n">Concatenate</span><span class="p">(</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;concat_layer&#39;</span><span class="p">)([</span><span class="n">decoder_out</span><span class="p">,</span> <span class="n">attn_out</span><span class="p">])</span>
+
+<span class="n">dense</span> <span class="o">=</span><span class="n">Dense</span><span class="p">(</span><span class="n">fr_vsize</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;softmax_layer&#39;</span><span class="p">)</span> 
+<span class="n">dense_time</span> <span class="o">=</span> <span class="n">TimeDistributed</span><span class="p">(</span><span class="n">dense</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;time_distributed_layer&#39;</span><span class="p">)</span> 
+<span class="n">decoder_pred</span> <span class="o">=</span> <span class="n">dense_time</span><span class="p">(</span><span class="n">decoder_concat_input</span><span class="p">)</span>
+<span class="n">full_model</span> <span class="o">=</span><span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="n">encoder_inputs</span><span class="p">,</span> <span class="n">decoder_inputs</span><span class="p">],</span> <span class="n">outputs</span><span class="o">=</span><span class="n">decoder_pred</span><span class="p">)</span> 
+<span class="n">full_model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">full_model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;model_17&quot;
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+encoder_inputs (InputLayer)     [(1, 5, 50)]         0                                            
+__________________________________________________________________________________________________
+decoder_inputs (InputLayer)     [(1, 5, 50)]         0                                            
+__________________________________________________________________________________________________
+encoder_gru (GRU)               [(1, 5, 20), (1, 20) 4320        encoder_inputs[0][0]             
+__________________________________________________________________________________________________
+decoder_gru (GRU)               [(1, 5, 20), (1, 20) 4320        decoder_inputs[0][0]             
+                                                                 encoder_gru[0][1]                
+__________________________________________________________________________________________________
+attention_layer (AttentionLayer ((1, 5, 20), (1, 5,  820         encoder_gru[0][0]                
+                                                                 decoder_gru[0][0]                
+__________________________________________________________________________________________________
+concat_layer (Concatenate)      (1, 5, 40)           0           decoder_gru[0][0]                
+                                                                 attention_layer[0][0]            
+__________________________________________________________________________________________________
+time_distributed_layer (TimeDis (1, 5, 50)           2050        concat_layer[0][0]               
+==================================================================================================
+Total params: 11,510
+Trainable params: 11,510
+Non-trainable params: 0
+__________________________________________________________________________________________________
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">losses</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>  
+    <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">get_pair</span><span class="p">(</span><span class="n">en_timesteps</span><span class="p">,</span> <span class="n">fr_timesteps</span><span class="p">,</span><span class="n">en_vsize</span><span class="p">)</span>
+    <span class="c1">#     X = array(one_hot_decode(X[0])).reshape(1, X[0].shape[0])</span>
+    <span class="c1">#     y = array(one_hot_decode(y[0])).reshape(1,y[0].shape[0])</span>
+    <span class="c1">#     full_model.fit(X,y, epochs=1, verbose=1)</span>
+
+    <span class="c1">#     en_onehot_seq = to_categorical(</span>
+    <span class="c1">#         en_seq[bi:bi + batch_size, :], num_classes=en_vsize)</span>
+    <span class="c1">#     fr_onehot_seq = to_categorical(</span>
+    <span class="c1">#         fr_seq[bi:bi + batch_size, :], num_classes=fr_vsize)</span>
+
+<span class="c1">#     full_model.fit([X, y[:, :-1, :]], y[:, 1:, :])</span>
+    <span class="n">full_model</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">],</span><span class="n">y</span><span class="p">)</span>
+
+<span class="c1">#     l = full_model.evaluate([X, y[:, :-1, :]], y[:, 1:, :],</span>
+<span class="c1">#                             batch_size=batch_size, verbose=2)</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="n">full_model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">([</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">],</span><span class="n">y</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:Model was constructed with shape (1, 2, 50) for input Tensor(&quot;decoder_inputs_8:0&quot;, shape=(1, 2, 50), dtype=float32), but it was called on an input with incompatible shape (None, 5, 50).
+WARNING:tensorflow:Model was constructed with shape (1, 2, 50) for input Tensor(&quot;decoder_inputs_8:0&quot;, shape=(1, 2, 50), dtype=float32), but it was called on an input with incompatible shape (None, 5, 50).
+1/1 [==============================] - 0s 1ms/step - loss: 3.9449
+WARNING:tensorflow:Model was constructed with shape (1, 2, 50) for input Tensor(&quot;decoder_inputs_8:0&quot;, shape=(1, 2, 50), dtype=float32), but it was called on an input with incompatible shape (1, 5, 50).
+1/1 - 0s - loss: 3.8823
+1/1 [==============================] - 0s 1ms/step - loss: 3.8670
+1/1 - 0s - loss: 3.8179
+1/1 [==============================] - 0s 1ms/step - loss: 3.8399
+1/1 - 0s - loss: 3.7954
+1/1 [==============================] - 0s 1ms/step - loss: 3.8164
+1/1 - 0s - loss: 3.7740
+1/1 [==============================] - 0s 1ms/step - loss: 3.7681
+1/1 - 0s - loss: 3.7239
+1/1 [==============================] - 0s 1ms/step - loss: 3.7203
+1/1 - 0s - loss: 3.6791
+1/1 [==============================] - 0s 1ms/step - loss: 3.7134
+1/1 - 0s - loss: 3.6712
+1/1 [==============================] - 0s 1ms/step - loss: 3.6625
+1/1 - 0s - loss: 3.6151
+1/1 [==============================] - 0s 1ms/step - loss: 3.6326
+1/1 - 0s - loss: 3.5899
+1/1 [==============================] - 0s 1ms/step - loss: 3.5645
+1/1 - 0s - loss: 3.5149
+1/1 [==============================] - 0s 1ms/step - loss: 3.5906
+1/1 - 0s - loss: 3.5455
+1/1 [==============================] - 0s 1ms/step - loss: 3.5545
+1/1 - 0s - loss: 3.5079
+1/1 [==============================] - 0s 1ms/step - loss: 3.5286
+1/1 - 0s - loss: 3.4790
+1/1 [==============================] - 0s 998us/step - loss: 3.4656
+1/1 - 0s - loss: 3.4109
+1/1 [==============================] - 0s 1ms/step - loss: 3.2644
+1/1 - 0s - loss: 3.1910
+1/1 [==============================] - 0s 1ms/step - loss: 3.3405
+1/1 - 0s - loss: 3.2786
+1/1 [==============================] - 0s 1ms/step - loss: 3.2542
+1/1 - 0s - loss: 3.1830
+1/1 [==============================] - 0s 997us/step - loss: 3.2974
+1/1 - 0s - loss: 3.2255
+1/1 [==============================] - 0s 1ms/step - loss: 3.2412
+1/1 - 0s - loss: 3.1668
+1/1 [==============================] - 0s 1ms/step - loss: 3.1120
+1/1 - 0s - loss: 3.0221
+1/1 [==============================] - 0s 1ms/step - loss: 3.1524
+1/1 - 0s - loss: 3.0633
+1/1 [==============================] - 0s 1ms/step - loss: 2.9625
+1/1 - 0s - loss: 2.8537
+1/1 [==============================] - 0s 1ms/step - loss: 2.9257
+1/1 - 0s - loss: 2.8087
+1/1 [==============================] - 0s 1ms/step - loss: 2.8293
+1/1 - 0s - loss: 2.7010
+1/1 [==============================] - 0s 1ms/step - loss: 2.5924
+1/1 - 0s - loss: 2.4345
+1/1 [==============================] - 0s 1ms/step - loss: 2.6219
+1/1 - 0s - loss: 2.4561
+1/1 [==============================] - 0s 1ms/step - loss: 2.4069
+1/1 - 0s - loss: 2.2325
+1/1 [==============================] - 0s 2ms/step - loss: 2.3739
+1/1 - 0s - loss: 2.2001
+1/1 [==============================] - 0s 1ms/step - loss: 1.5348
+1/1 - 0s - loss: 1.3412
+1/1 [==============================] - 0s 1ms/step - loss: 1.8245
+1/1 - 0s - loss: 1.7163
+1/1 [==============================] - 0s 1ms/step - loss: 1.8248
+1/1 - 0s - loss: 1.7527
+1/1 [==============================] - 0s 1ms/step - loss: 1.8260
+1/1 - 0s - loss: 1.8128
+1/1 [==============================] - 0s 1ms/step - loss: 0.9951
+1/1 - 0s - loss: 0.9549
+1/1 [==============================] - 0s 1ms/step - loss: 1.9393
+1/1 - 0s - loss: 1.9789
+1/1 [==============================] - 0s 1ms/step - loss: 1.9344
+1/1 - 0s - loss: 1.9316
+1/1 [==============================] - 0s 1ms/step - loss: 1.8841
+1/1 - 0s - loss: 1.8376
+1/1 [==============================] - 0s 1ms/step - loss: 1.8094
+1/1 - 0s - loss: 1.7522
+1/1 [==============================] - 0s 1ms/step - loss: 2.0487
+1/1 - 0s - loss: 1.9622
+1/1 [==============================] - 0s 1ms/step - loss: 1.8776
+1/1 - 0s - loss: 1.8040
+1/1 [==============================] - 0s 1ms/step - loss: 1.7369
+1/1 - 0s - loss: 1.7029
+1/1 [==============================] - 0s 1ms/step - loss: 1.7571
+1/1 - 0s - loss: 1.7255
+1/1 [==============================] - 0s 1ms/step - loss: 1.7203
+1/1 - 0s - loss: 1.6837
+1/1 [==============================] - 0s 4ms/step - loss: 1.7629
+1/1 - 0s - loss: 1.7455
+1/1 [==============================] - 0s 990us/step - loss: 1.9071
+1/1 - 0s - loss: 1.8751
+1/1 [==============================] - 0s 1ms/step - loss: 1.8050
+1/1 - 0s - loss: 1.7917
+1/1 [==============================] - 0s 1ms/step - loss: 1.5629
+1/1 - 0s - loss: 1.5556
+1/1 [==============================] - 0s 1ms/step - loss: 1.7242
+1/1 - 0s - loss: 1.7111
+1/1 [==============================] - 0s 1ms/step - loss: 1.7466
+1/1 - 0s - loss: 1.7404
+1/1 [==============================] - 0s 1ms/step - loss: 1.7025
+1/1 - 0s - loss: 1.6961
+1/1 [==============================] - 0s 1ms/step - loss: 1.7693
+1/1 - 0s - loss: 1.7558
+1/1 [==============================] - 0s 1ms/step - loss: 1.7765
+1/1 - 0s - loss: 1.7674
+1/1 [==============================] - 0s 1ms/step - loss: 1.7690
+1/1 - 0s - loss: 1.7568
+1/1 [==============================] - 0s 1ms/step - loss: 1.0771
+1/1 - 0s - loss: 1.0654
+1/1 [==============================] - 0s 1ms/step - loss: 1.6489
+1/1 - 0s - loss: 1.6334
+1/1 [==============================] - 0s 1ms/step - loss: 1.7229
+1/1 - 0s - loss: 1.7112
+1/1 [==============================] - 0s 1ms/step - loss: 1.7794
+1/1 - 0s - loss: 1.7655
+1/1 [==============================] - 0s 1ms/step - loss: 1.6563
+1/1 - 0s - loss: 1.6404
+1/1 [==============================] - 0s 1ms/step - loss: 1.6026
+1/1 - 0s - loss: 1.5920
+1/1 [==============================] - 0s 998us/step - loss: 1.7642
+1/1 - 0s - loss: 1.7549
+1/1 [==============================] - 0s 1ms/step - loss: 1.6356
+1/1 - 0s - loss: 1.6233
+1/1 [==============================] - 0s 1ms/step - loss: 1.7930
+1/1 - 0s - loss: 1.7834
+1/1 [==============================] - 0s 997us/step - loss: 1.7527
+1/1 - 0s - loss: 1.7400
+1/1 [==============================] - 0s 1ms/step - loss: 1.6865
+1/1 - 0s - loss: 1.6780
+1/1 [==============================] - 0s 1ms/step - loss: 1.6159
+1/1 - 0s - loss: 1.6085
+1/1 [==============================] - 0s 1ms/step - loss: 1.7254
+1/1 - 0s - loss: 1.7147
+1/1 [==============================] - 0s 1ms/step - loss: 1.6632
+1/1 - 0s - loss: 1.6526
+1/1 [==============================] - 0s 1ms/step - loss: 1.6499
+1/1 - 0s - loss: 1.6415
+1/1 [==============================] - 0s 1ms/step - loss: 1.6786
+1/1 - 0s - loss: 1.6701
+1/1 [==============================] - 0s 1ms/step - loss: 1.6523
+1/1 - 0s - loss: 1.6382
+1/1 [==============================] - 0s 1ms/step - loss: 1.7632
+1/1 - 0s - loss: 1.7470
+1/1 [==============================] - 0s 1ms/step - loss: 1.6412
+1/1 - 0s - loss: 1.6300
+1/1 [==============================] - 0s 3ms/step - loss: 1.7282
+1/1 - 0s - loss: 1.7169
+1/1 [==============================] - 0s 1ms/step - loss: 1.6641
+1/1 - 0s - loss: 1.6475
+1/1 [==============================] - 0s 1ms/step - loss: 1.6276
+1/1 - 0s - loss: 1.6130
+1/1 [==============================] - 0s 1ms/step - loss: 1.7051
+1/1 - 0s - loss: 1.6836
+1/1 [==============================] - 0s 1ms/step - loss: 1.6406
+1/1 - 0s - loss: 1.6332
+1/1 [==============================] - 0s 1ms/step - loss: 1.6509
+1/1 - 0s - loss: 1.6400
+1/1 [==============================] - 0s 1ms/step - loss: 1.5158
+1/1 - 0s - loss: 1.5097
+1/1 [==============================] - 0s 1ms/step - loss: 1.5362
+1/1 - 0s - loss: 1.5272
+1/1 [==============================] - 0s 1ms/step - loss: 1.6301
+1/1 - 0s - loss: 1.6223
+1/1 [==============================] - 0s 1ms/step - loss: 1.5455
+1/1 - 0s - loss: 1.5380
+1/1 [==============================] - 0s 1ms/step - loss: 1.5628
+1/1 - 0s - loss: 1.5561
+1/1 [==============================] - 0s 1ms/step - loss: 1.5828
+1/1 - 0s - loss: 1.5739
+1/1 [==============================] - 0s 1ms/step - loss: 1.6460
+1/1 - 0s - loss: 1.6354
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1/1 [==============================] - 0s 2ms/step - loss: 1.7405
+1/1 - 0s - loss: 1.7331
+1/1 [==============================] - 0s 1ms/step - loss: 1.6193
+1/1 - 0s - loss: 1.6119
+1/1 [==============================] - 0s 1ms/step - loss: 1.7487
+1/1 - 0s - loss: 1.7346
+1/1 [==============================] - 0s 1ms/step - loss: 1.6493
+1/1 - 0s - loss: 1.6422
+1/1 [==============================] - 0s 1ms/step - loss: 1.6175
+1/1 - 0s - loss: 1.6078
+1/1 [==============================] - 0s 1ms/step - loss: 1.5665
+1/1 - 0s - loss: 1.5583
+1/1 [==============================] - 0s 1ms/step - loss: 1.6511
+1/1 - 0s - loss: 1.6393
+1/1 [==============================] - 0s 1ms/step - loss: 1.7018
+1/1 - 0s - loss: 1.6843
+1/1 [==============================] - 0s 1ms/step - loss: 1.6570
+1/1 - 0s - loss: 1.6480
+1/1 [==============================] - 0s 1ms/step - loss: 1.5758
+1/1 - 0s - loss: 1.5697
+1/1 [==============================] - 0s 1ms/step - loss: 1.6265
+1/1 - 0s - loss: 1.6195
+1/1 [==============================] - 0s 1ms/step - loss: 1.5595
+1/1 - 0s - loss: 1.5503
+1/1 [==============================] - 0s 1ms/step - loss: 1.6469
+1/1 - 0s - loss: 1.6379
+1/1 [==============================] - 0s 1ms/step - loss: 1.6371
+1/1 - 0s - loss: 1.6275
+1/1 [==============================] - 0s 1ms/step - loss: 1.5284
+1/1 - 0s - loss: 1.5204
+1/1 [==============================] - 0s 1ms/step - loss: 1.5746
+1/1 - 0s - loss: 1.5661
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">losses</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.1031419503688813
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total</span><span class="p">,</span> <span class="n">correct</span><span class="o">=</span> <span class="mi">100</span><span class="p">,</span><span class="mi">0</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">X</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">get_pair</span><span class="p">(</span><span class="n">en_timesteps</span><span class="p">,</span> <span class="n">fr_timesteps</span><span class="p">,</span><span class="n">en_vsize</span><span class="p">)</span>
+    <span class="n">yhat</span> <span class="o">=</span> <span class="n">full_model</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">],</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Expected&#39;</span><span class="p">,</span> <span class="n">one_hot_decode</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> 
+          <span class="s1">&#39;Predicted&#39;</span><span class="p">,</span> <span class="n">one_hot_decode</span><span class="p">(</span><span class="n">yhat</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:Model was constructed with shape (1, 2, 50) for input Tensor(&quot;decoder_inputs_8:0&quot;, shape=(1, 2, 50), dtype=float32), but it was called on an input with incompatible shape (None, 5, 50).
+Expected [10, 26, 0, 0, 0] Predicted [0, 0, 0, 0, 0]
+Expected [39, 41, 0, 0, 0] Predicted [0, 0, 0, 0, 0]
+Expected [35, 36, 0, 0, 0] Predicted [0, 0, 0, 0, 0]
+Expected [32, 36, 0, 0, 0] Predicted [0, 0, 0, 0, 0]
+Expected [9, 30, 0, 0, 0] Predicted [0, 0, 0, 0, 0]
+Expected [44, 38, 0, 0, 0] Predicted [0, 0, 0, 0, 0]
+Expected [0, 19, 0, 0, 0] Predicted [0, 0, 0, 0, 0]
+Expected [11, 8, 0, 0, 0] Predicted [0, 0, 0, 0, 0]
+Expected [31, 49, 0, 0, 0] Predicted [0, 0, 0, 0, 0]
+Expected [37, 37, 0, 0, 0] Predicted [0, 0, 0, 0, 0]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python-notes",
+            path: "./nlp"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python-notes'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alvin Chen<br/>
+        
+            &copy; Copyright 2020 Alvin Chen.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>
