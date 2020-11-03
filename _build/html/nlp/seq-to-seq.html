@@ -194,6 +194,16 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="seq-to-seq-attention-addition.html">
+     Seqeunce Model with Attention for Addition Learning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="seq-to-seq-attention-tg.html">
+     Seqeunce Model with Attention (Thushan)
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="text-gen-lstm-v1.html">
      Text Generation
     </a>
@@ -352,7 +362,7 @@
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Model</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Model</span>
 <span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Input</span><span class="p">,</span> <span class="n">LSTM</span><span class="p">,</span> <span class="n">Dense</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
@@ -366,7 +376,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Path to the data txt file on disk.</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Path to the data txt file on disk.</span>
 <span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;../../../RepositoryData/data/cmn.txt&#39;</span>
 
 <span class="c1"># Vectorize the data.</span>
@@ -420,7 +430,7 @@ Max sequence length for outputs: 22
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create char index dictionary</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create char index dictionary</span>
 <span class="c1">## char as the key and index as the value</span>
 <span class="n">input_token_index</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
     <span class="p">[(</span><span class="n">char</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">char</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">input_characters</span><span class="p">)])</span>
@@ -452,7 +462,7 @@ Max sequence length for outputs: 22
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># One-hot encode input and output texts</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># One-hot encode input and output texts</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">input_text</span><span class="p">,</span> <span class="n">target_text</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">input_texts</span><span class="p">,</span> <span class="n">target_texts</span><span class="p">)):</span>
     <span class="k">for</span> <span class="n">t</span><span class="p">,</span> <span class="n">char</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">input_text</span><span class="p">):</span>
         <span class="n">encoder_input_data</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">input_token_index</span><span class="p">[</span><span class="n">char</span><span class="p">]]</span> <span class="o">=</span> <span class="mf">1.</span>
@@ -472,7 +482,7 @@ Max sequence length for outputs: 22
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">## Define Model</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Define Model</span>
 
 
 <span class="c1">## Set up encoder</span>
@@ -492,7 +502,7 @@ Max sequence length for outputs: 22
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up the decoder, using `encoder_states` as initial state.</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up the decoder, using `encoder_states` as initial state.</span>
 <span class="n">decoder_inputs</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_decoder_tokens</span><span class="p">))</span> <span class="c1"># one word at a time, with vocab_size dimension,</span>
 
 <span class="c1"># We set up our decoder to return full output sequences, (i.e, `return_sequences=True`)</span>
@@ -511,7 +521,7 @@ Max sequence length for outputs: 22
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the model that will turn</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the model that will turn</span>
 <span class="c1"># `encoder_input_data` &amp; `decoder_input_data` into `decoder_target_data`</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">([</span><span class="n">encoder_inputs</span><span class="p">,</span> <span class="n">decoder_inputs</span><span class="p">],</span> <span class="n">decoder_outputs</span><span class="p">)</span>
 </pre></div>
@@ -520,7 +530,7 @@ Max sequence length for outputs: 22
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">keras.utils</span> <span class="kn">import</span> <span class="n">plot_model</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">keras.utils</span> <span class="kn">import</span> <span class="n">plot_model</span>
 <span class="kn">import</span> <span class="nn">pydot</span>
 <span class="n">plot_model</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
 </pre></div>
@@ -532,7 +542,7 @@ Max sequence length for outputs: 22
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># # Run training</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # Run training</span>
 <span class="c1"># model.compile(optimizer=&#39;rmsprop&#39;, loss=&#39;categorical_crossentropy&#39;,</span>
 <span class="c1">#               metrics=[&#39;accuracy&#39;])</span>
 <span class="c1"># model.fit([encoder_input_data, decoder_input_data], decoder_target_data,</span>
@@ -545,7 +555,7 @@ Max sequence length for outputs: 22
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save model</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save model</span>
 <span class="c1"># model.save(&#39;../data/s2s-cmn.h5&#39;)</span>
 </pre></div>
 </div>
@@ -553,12 +563,12 @@ Max sequence length for outputs: 22
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;model_1&quot;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;functional_1&quot;
 __________________________________________________________________________________________________
 Layer (type)                    Output Shape         Param #     Connected to                     
 ==================================================================================================
@@ -584,37 +594,7 @@ ________________________________________________________________________________
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># # save model</span>
-<span class="c1"># with open(&#39;../data/s2s_cmn_encoder_model.json&#39;, &#39;w&#39;, encoding=&#39;utf8&#39;) as f:</span>
-<span class="c1">#     f.write(encoder_model.to_json())</span>
-<span class="c1"># encoder_model.save_weights(&#39;../data/s2s_cmn_encoder_model_weights.h5&#39;)</span>
-
-<span class="c1"># with open(&#39;../data/s2s_cmn_decoder_model.json&#39;, &#39;w&#39;, encoding=&#39;utf8&#39;) as f:</span>
-<span class="c1">#     f.write(decoder_model.to_json())</span>
-<span class="c1"># decoder_model.save_weights(&#39;../data/s2s_cmn_decoder_model_weights.h5&#39;)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">## This solution did not work</span>
-<span class="c1"># from keras.models import model_from_json</span>
-<span class="c1"># def load_model(model_filename, model_weights_filename):</span>
-<span class="c1">#     with open(model_filename, &#39;r&#39;, encoding=&#39;utf8&#39;) as f:</span>
-<span class="c1">#         model = model_from_json(f.read())</span>
-<span class="c1">#     model.load_weights(model_weights_filename)</span>
-<span class="c1">#     return model</span>
-
-<span class="c1"># encoder_model = load_model(&#39;../data/s2s_cmn_encoder_model.json&#39;, &#39;../data/s2s_cmn_encoder_model_weights.h5&#39;)</span>
-<span class="c1"># decoder_model = load_model(&#39;../data/s2s_cmn_decoder_model.json&#39;, &#39;../data/s2s_cmn_decoder_model_weights.h5&#39;)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">## If the model is loaded via external files</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## If the model is loaded via external files</span>
 <span class="c1">## Load the encoder_model, decoder_model this way</span>
 <span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">load_model</span>
 <span class="n">model</span><span class="o">.</span><span class="n">load_weights</span><span class="p">(</span><span class="s1">&#39;../../../RepositoryData/data/s2s-cmn.h5&#39;</span><span class="p">)</span>
@@ -655,7 +635,7 @@ ________________________________________________________________________________
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reverse-lookup token index to decode sequences back to</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reverse-lookup token index to decode sequences back to</span>
 <span class="c1"># something readable.</span>
 <span class="n">reverse_input_char_index</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
     <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">char</span><span class="p">)</span> <span class="k">for</span> <span class="n">char</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">input_token_index</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
@@ -711,7 +691,7 @@ ________________________________________________________________________________
     <span class="k">return</span> <span class="n">decoded_sentence</span>
 
 
-<span class="k">for</span> <span class="n">seq_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">seq_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
     <span class="c1"># Take one sequence (part of the training set)</span>
     <span class="c1"># for trying out decoding.</span>
     <span class="n">input_seq</span> <span class="o">=</span> <span class="n">encoder_input_data</span><span class="p">[</span><span class="n">seq_index</span><span class="p">:</span> <span class="n">seq_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
@@ -762,166 +742,6 @@ Decoded sentence: 乾杯!
 -
 Input sentence: He ran.
 Decoded sentence: 他跑了。
-
--
-Input sentence: Hop in.
-Decoded sentence: 跳进来。
-
--
-Input sentence: I lost.
-Decoded sentence: 我迷失了。
-
--
-Input sentence: I quit.
-Decoded sentence: 我退出。
-
--
-Input sentence: I&#39;m OK.
-Decoded sentence: 我沒事。
-
--
-Input sentence: Listen.
-Decoded sentence: 听着。
-
--
-Input sentence: No way!
-Decoded sentence: 没门！
-
--
-Input sentence: No way!
-Decoded sentence: 没门！
-
--
-Input sentence: Really?
-Decoded sentence: 你确定？
-
--
-Input sentence: Try it.
-Decoded sentence: 试试吧。
-
--
-Input sentence: We try.
-Decoded sentence: 我们来试试。
-
--
-Input sentence: Why me?
-Decoded sentence: 为什么是我？
-
--
-Input sentence: Ask Tom.
-Decoded sentence: 去问汤姆。
-
--
-Input sentence: Be calm.
-Decoded sentence: 冷静点。
-
--
-Input sentence: Be fair.
-Decoded sentence: 公平点。
-
--
-Input sentence: Be kind.
-Decoded sentence: 友善点。
-
--
-Input sentence: Be nice.
-Decoded sentence: 和气点。
-
--
-Input sentence: Call me.
-Decoded sentence: 联系我。
-
--
-Input sentence: Call us.
-Decoded sentence: 联系我们。
-
--
-Input sentence: Come in.
-Decoded sentence: 进来。
-
--
-Input sentence: Get Tom.
-Decoded sentence: 找到汤姆。
-
--
-Input sentence: Get out!
-Decoded sentence: 滾出去！
-
--
-Input sentence: Go away!
-Decoded sentence: 滾！
-
--
-Input sentence: Go away!
-Decoded sentence: 滾！
-
--
-Input sentence: Go away.
-Decoded sentence: 走開！
-
--
-Input sentence: Goodbye!
-Decoded sentence: 告辞！
-
--
-Input sentence: Goodbye!
-Decoded sentence: 告辞！
-
--
-Input sentence: Hang on!
-Decoded sentence: 等一下！
-
--
-Input sentence: He came.
-Decoded sentence: 他来了。
-
--
-Input sentence: He runs.
-Decoded sentence: 他跑。
-
--
-Input sentence: Help me.
-Decoded sentence: 帮我一下。
-
--
-Input sentence: Hold on.
-Decoded sentence: 坚持。
-
--
-Input sentence: Hug Tom.
-Decoded sentence: 抱抱汤姆！
-
--
-Input sentence: I agree.
-Decoded sentence: 我同意。
-
--
-Input sentence: I&#39;m ill.
-Decoded sentence: 我生病了。
-
--
-Input sentence: I&#39;m old.
-Decoded sentence: 我老了。
-
--
-Input sentence: It&#39;s OK.
-Decoded sentence: 没关系。
-
--
-Input sentence: It&#39;s me.
-Decoded sentence: 是我。
-
--
-Input sentence: Join us.
-Decoded sentence: 来加入我们吧。
-
--
-Input sentence: Keep it.
-Decoded sentence: 留着吧。
-
--
-Input sentence: Kiss me.
-Decoded sentence: 吻我。
 </pre></div>
 </div>
 </div>

@@ -72,12 +72,26 @@ MAX_LEN = 130  # Since our mean length is 128.5
 X_train = pad_sequences(list_tokenized_train, maxlen=MAX_LEN)
 y_train = df['sentiment']
 
+- **Bahdanau Attention**
+
+    - The Bahdanau attention weights are parameterized by a **feed-forward network** (i.e., Dense layer) with a single hidden layer (with `hidden` units), and this network is jointly trained with other parts of of network.
+    - If we have an input sequence **x** of length *n* (i.e., $x_1$,$x_2$,...,$x_n$ ), and the encoder is an Bidirectional LSTM, the outputs of the two LSTM are concatenated into the hidden states of the input sequences, i.e., the hidden state of the $x_t$ would be: $h_i = [\overrightarrow{h_i}, \overleftarrow{h_i}]$.
+    - The context vector $\textbf c_t$ produced by the Bahdanau attention is a sum of hidden states of the input sequences, weighted by the attention weights:
+    
+        - $C_t = \sum_{i=1}^n{\alpha_{t,i}h_i}$ (context vector)
+    - And the attention weights are computed based on how well each input *x_t* and the hidden state *h_i* match each other (i.e., a simple dot product, cosine similarity based metric). The **Bahdanau** attention uses a feed-forward network with the activation function tanh to parameterize/normalize the weights.
+        - Attention Weights = $$score(x_t, h_i) = v^T\tanh(W_a[x_t;h_i])$$
+    - We can also do a simple softmax to normalize the attention weights (i.e., **Luong** Attention):
+        - Attention Weights = $$score(x_t, h_i) = \frac{\exp(score(x_t,h_i)}{\sum_{i'}^n\exp(score(x_t,h_{i'}))}$$
+
+
+
 class Attention(tf.keras.Model):
     def __init__(self, units):
         super(Attention, self).__init__()
-        self.W1 = tf.keras.layers.Dense(units)
-        self.W2 = tf.keras.layers.Dense(units)
-        self.V = tf.keras.layers.Dense(1)
+        self.W1 = tf.keras.layers.Dense(units) # input x weights
+        self.W2 = tf.keras.layers.Dense(units) # hidden states h weights
+        self.V = tf.keras.layers.Dense(1) # V
 
     def call(self, features, hidden):
         # hidden shape == (batch_size, hidden size)
@@ -89,12 +103,12 @@ class Attention(tf.keras.Model):
         # we get 1 at the last axis because we are applying score to self.V
         # the shape of the tensor before applying self.V is (batch_size, max_length, units)
         score = tf.nn.tanh(
-            self.W1(features) + self.W2(hidden_with_time_axis))
+            self.W1(features) + self.W2(hidden_with_time_axis)) ## w[x, h]
         # attention_weights shape == (batch_size, max_length, 1)
-        attention_weights = tf.nn.softmax(self.V(score), axis=1)
+        attention_weights = tf.nn.softmax(self.V(score), axis=1) ## v tanh(w[x,h])
           
         # context_vector shape after sum == (batch_size, hidden_size)
-        context_vector = attention_weights * features
+        context_vector = attention_weights * features ## attention_weights * x, right now the context_vector shape [batzh_size, max_length, hidden_size]
         context_vector = tf.reduce_sum(context_vector, axis=1)
         return context_vector, attention_weights
 
@@ -108,7 +122,7 @@ lstm = Bidirectional(LSTM(RNN_CELL_SIZE, return_sequences = True), name="bi_lstm
 
 state_h = Concatenate()([forward_h, backward_h])
 state_c = Concatenate()([forward_c, backward_c])
-context_vector, attention_weights = Attention(10)(lstm, state_h)
+context_vector, attention_weights = Attention(10)(lstm, state_h) # `lstm` the input features; `state_h` the hidden states from LSTM
 dense1 = Dense(20, activation="relu")(context_vector)
 dropout = Dropout(0.05)(dense1)
 output = Dense(1, activation="sigmoid")(dropout)

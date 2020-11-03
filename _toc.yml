@@ -64,6 +64,8 @@
     - file: nlp/seq-to-seq-primer
     - file: nlp/seq-to-seq
     - file: nlp/seq-to-seq-attention-mm
+    - file: nlp/seq-to-seq-attention-addition
+    - file: nlp/seq-to-seq-attention-tg
     - file: nlp/text-gen-lstm-v1
     - file: nlp/transfer-learning-sent-encoding
     - file: nlp/hyperparameter-tuning
