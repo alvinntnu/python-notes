@@ -38,7 +38,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Text Generation" href="text-gen-lstm-v1.html" />
+    <link rel="next" title="Seqeunce Model with Attention for Addition Learning" href="seq-to-seq-attention-addition.html" />
     <link rel="prev" title="Machine Translation (Sequence-to-Sequence LSTM)" href="seq-to-seq.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -191,6 +191,16 @@
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      Sequence Model with Attention (Matthew McAteer)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="seq-to-seq-attention-addition.html">
+     Seqeunce Model with Attention for Addition Learning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="seq-to-seq-attention-tg.html">
+     Seqeunce Model with Attention (Thushan)
     </a>
    </li>
    <li class="toctree-l2">
@@ -541,14 +551,37 @@
 </div>
 </div>
 </div>
+<ul class="simple">
+<li><p><strong>Bahdanau Attention</strong></p>
+<ul>
+<li><p>The Bahdanau attention weights are parameterized by a <strong>feed-forward network</strong> (i.e., Dense layer) with a single hidden layer (with <code class="docutils literal notranslate"><span class="pre">hidden</span></code> units), and this network is jointly trained with other parts of of network.</p></li>
+<li><p>If we have an input sequence <strong>x</strong> of length <em>n</em> (i.e., <span class="math notranslate nohighlight">\(x_1\)</span>,<span class="math notranslate nohighlight">\(x_2\)</span>,…,<span class="math notranslate nohighlight">\(x_n\)</span> ), and the encoder is an Bidirectional LSTM, the outputs of the two LSTM are concatenated into the hidden states of the input sequences, i.e., the hidden state of the <span class="math notranslate nohighlight">\(x_t\)</span> would be: <span class="math notranslate nohighlight">\(h_i = [\overrightarrow{h_i}, \overleftarrow{h_i}]\)</span>.</p></li>
+<li><p>The context vector <span class="math notranslate nohighlight">\(\textbf c_t\)</span> produced by the Bahdanau attention is a sum of hidden states of the input sequences, weighted by the attention weights:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(C_t = \sum_{i=1}^n{\alpha_{t,i}h_i}\)</span> (context vector)</p></li>
+</ul>
+</li>
+<li><p>And the attention weights are computed based on how well each input <em>x_t</em> and the hidden state <em>h_i</em> match each other (i.e., a simple dot product, cosine similarity based metric). The <strong>Bahdanau</strong> attention uses a feed-forward network with the activation function tanh to parameterize/normalize the weights.</p>
+<ul>
+<li><p>Attention Weights = $<span class="math notranslate nohighlight">\(score(x_t, h_i) = v^T\tanh(W_a[x_t;h_i])\)</span>$</p></li>
+</ul>
+</li>
+<li><p>We can also do a simple softmax to normalize the attention weights (i.e., <strong>Luong</strong> Attention):</p>
+<ul>
+<li><p>Attention Weights = $<span class="math notranslate nohighlight">\(score(x_t, h_i) = \frac{\exp(score(x_t,h_i)}{\sum_{i'}^n\exp(score(x_t,h_{i'}))}\)</span>$</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Attention</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">units</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">Attention</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">W1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">W2</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">V</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">W1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="p">)</span> <span class="c1"># input x weights</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">W2</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="p">)</span> <span class="c1"># hidden states h weights</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">V</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># V</span>
 
     <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">hidden</span><span class="p">):</span>
         <span class="c1"># hidden shape == (batch_size, hidden size)</span>
@@ -560,12 +593,12 @@
         <span class="c1"># we get 1 at the last axis because we are applying score to self.V</span>
         <span class="c1"># the shape of the tensor before applying self.V is (batch_size, max_length, units)</span>
         <span class="n">score</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">W1</span><span class="p">(</span><span class="n">features</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">W2</span><span class="p">(</span><span class="n">hidden_with_time_axis</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">W1</span><span class="p">(</span><span class="n">features</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">W2</span><span class="p">(</span><span class="n">hidden_with_time_axis</span><span class="p">))</span> <span class="c1">## w[x, h]</span>
         <span class="c1"># attention_weights shape == (batch_size, max_length, 1)</span>
-        <span class="n">attention_weights</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">V</span><span class="p">(</span><span class="n">score</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">attention_weights</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">V</span><span class="p">(</span><span class="n">score</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1">## v tanh(w[x,h])</span>
           
         <span class="c1"># context_vector shape after sum == (batch_size, hidden_size)</span>
-        <span class="n">context_vector</span> <span class="o">=</span> <span class="n">attention_weights</span> <span class="o">*</span> <span class="n">features</span>
+        <span class="n">context_vector</span> <span class="o">=</span> <span class="n">attention_weights</span> <span class="o">*</span> <span class="n">features</span> <span class="c1">## attention_weights * x, right now the context_vector shape [batzh_size, max_length, hidden_size]</span>
         <span class="n">context_vector</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">context_vector</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">context_vector</span><span class="p">,</span> <span class="n">attention_weights</span>
 </pre></div>
@@ -594,7 +627,7 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state_h</span> <span class="o">=</span> <span class="n">Concatenate</span><span class="p">()([</span><span class="n">forward_h</span><span class="p">,</span> <span class="n">backward_h</span><span class="p">])</span>
 <span class="n">state_c</span> <span class="o">=</span> <span class="n">Concatenate</span><span class="p">()([</span><span class="n">forward_c</span><span class="p">,</span> <span class="n">backward_c</span><span class="p">])</span>
-<span class="n">context_vector</span><span class="p">,</span> <span class="n">attention_weights</span> <span class="o">=</span> <span class="n">Attention</span><span class="p">(</span><span class="mi">10</span><span class="p">)(</span><span class="n">lstm</span><span class="p">,</span> <span class="n">state_h</span><span class="p">)</span>
+<span class="n">context_vector</span><span class="p">,</span> <span class="n">attention_weights</span> <span class="o">=</span> <span class="n">Attention</span><span class="p">(</span><span class="mi">10</span><span class="p">)(</span><span class="n">lstm</span><span class="p">,</span> <span class="n">state_h</span><span class="p">)</span> <span class="c1"># `lstm` the input features; `state_h` the hidden states from LSTM</span>
 <span class="n">dense1</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">)(</span><span class="n">context_vector</span><span class="p">)</span>
 <span class="n">dropout</span> <span class="o">=</span> <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.05</span><span class="p">)(</span><span class="n">dense1</span><span class="p">)</span>
 <span class="n">output</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;sigmoid&quot;</span><span class="p">)(</span><span class="n">dropout</span><span class="p">)</span>
@@ -651,7 +684,7 @@ None
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/seq-to-seq-attention-mm_12_0.png" src="../_images/seq-to-seq-attention-mm_12_0.png" />
+<img alt="../_images/seq-to-seq-attention-mm_13_0.png" src="../_images/seq-to-seq-attention-mm_13_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -757,7 +790,7 @@ Epoch 5/5
 weighted avg       0.85      0.85      0.85     25000
 </pre></div>
 </div>
-<img alt="../_images/seq-to-seq-attention-mm_16_1.png" src="../_images/seq-to-seq-attention-mm_16_1.png" />
+<img alt="../_images/seq-to-seq-attention-mm_17_1.png" src="../_images/seq-to-seq-attention-mm_17_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -819,7 +852,7 @@ weighted avg       0.85      0.85      0.85     25000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/seq-to-seq-attention-mm_17_0.png" src="../_images/seq-to-seq-attention-mm_17_0.png" />
+<img alt="../_images/seq-to-seq-attention-mm_18_0.png" src="../_images/seq-to-seq-attention-mm_18_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -869,7 +902,7 @@ weighted avg       0.85      0.85      0.85     25000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/seq-to-seq-attention-mm_18_0.png" src="../_images/seq-to-seq-attention-mm_18_0.png" />
+<img alt="../_images/seq-to-seq-attention-mm_19_0.png" src="../_images/seq-to-seq-attention-mm_19_0.png" />
 </div>
 </div>
 </div>
@@ -903,7 +936,7 @@ weighted avg       0.85      0.85      0.85     25000
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="seq-to-seq.html" title="previous page">Machine Translation (Sequence-to-Sequence LSTM)</a>
-    <a class='right-next' id="next-link" href="text-gen-lstm-v1.html" title="next page">Text Generation</a>
+    <a class='right-next' id="next-link" href="seq-to-seq-attention-addition.html" title="next page">Seqeunce Model with Attention for Addition Learning</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
