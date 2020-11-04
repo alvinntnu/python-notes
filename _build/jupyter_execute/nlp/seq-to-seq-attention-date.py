@@ -523,103 +523,104 @@ def infer_biseq2seq(encoder_model, decoder_model, test_enc_seq, enc_vsize, dec_v
 
 - Codes do not work yet. Don't know how to add encoder output states to every time step in the decoder.
 
-# def define_peekybiseq2seq(hidden_size, batch_size, enc_timesteps, enc_vsize, dec_timesteps, dec_vsize):
-#     """ Defining a seq2seq model """
+def define_peekybiseq2seq(hidden_size, batch_size, enc_timesteps, enc_vsize, dec_timesteps, dec_vsize):
+    """ Defining a seq2seq model """
 
-#     # Define an input sequence and process it.
-#     if batch_size:
-#         encoder_inputs = Input(batch_shape=(batch_size, enc_timesteps, enc_vsize), name='encoder_inputs')
-#         decoder_inputs = Input(batch_shape=(batch_size, dec_timesteps - 1, dec_vsize), name='decoder_inputs')
-#     else:
-#         encoder_inputs = Input(shape=(enc_timesteps, enc_vsize), name='encoder_inputs')
-#         if fr_timesteps:
-#             decoder_inputs = Input(shape=(dec_timesteps - 1, dec_vsize), name='decoder_inputs')
-#         else:
-#             decoder_inputs = Input(shape=(None, dec_vsize), name='decoder_inputs')
+    # Define an input sequence and process it.
+    if batch_size:
+        encoder_inputs = Input(batch_shape=(batch_size, enc_timesteps, enc_vsize), name='encoder_inputs')
+        decoder_inputs = Input(batch_shape=(batch_size, dec_timesteps - 1, dec_vsize), name='decoder_inputs')
+    else:
+        encoder_inputs = Input(shape=(enc_timesteps, enc_vsize), name='encoder_inputs')
+        if fr_timesteps:
+            decoder_inputs = Input(shape=(dec_timesteps - 1, dec_vsize), name='decoder_inputs')
+        else:
+            decoder_inputs = Input(shape=(None, dec_vsize), name='decoder_inputs')
 
-#     # Encoder GRU
-#     encoder_gru = Bidirectional(GRU(hidden_size, return_sequences=False, return_state=True, name='encoder_gru'))
-#     encoder_out, encoder_fwd_state, encoder_bwd_state = encoder_gru(encoder_inputs) # when `return_sequences=False`, the return output and state are the same
+    # Encoder GRU
+    encoder_gru = Bidirectional(GRU(hidden_size, return_sequences=False, return_state=True, name='encoder_gru'))
+    encoder_out, encoder_fwd_state, encoder_bwd_state = encoder_gru(encoder_inputs) # when `return_sequences=False`, the return output and state are the same
 
-#     encoder_concat_states = Concatenate(axis=1)([encoder_fwd_state, encoder_bwd_state])
-
-#     # Concatenate encoder_concat_states with decode_inputs
+    encoder_concat_states = Concatenate(axis=1)([encoder_fwd_state, encoder_bwd_state])
     
-#     decoder_inputs_concat = Concatenate(axis=1)([decoder_inputs, encoder_concat_states])
+    encoder_concat_states = RepeatVector(dec_timesteps-1)(encoder_concat_states)
+    # Concatenate encoder_concat_states with decode_inputs
+    
+    decoder_inputs_concat = Concatenate(axis=2)([decoder_inputs, encoder_concat_states])
 
-#     # Set up the decoder GRU, using `encoder_states` as initial state.
-#     decoder_gru = GRU(hidden_size*2+dec_vsize, return_sequences=True, return_state=True, name='decoder_gru')
-#       ## *2 because encoder output two sets of output states (forward and backward)
+    # Set up the decoder GRU, using `encoder_states` as initial state.
+    decoder_gru = GRU(hidden_size, return_sequences=True, return_state=True, name='decoder_gru')
+      ## *2 because encoder output two sets of output states (forward and backward)
 
-#     decoder_init_concat = Concatenate(axis=-1)([np.random.randn(dec_vsize), encoder_fwd_state, encoder_bwd_state])
-#     # decoder_init_concat = np.repeat(deconder_init_concat, dec_timesteps, axis=0).reshape(dec_timesteps, dec_vsize+2*hidden_size)
+    # decoder_init_concat =[np.random.randn(dec_vsize), encoder_fwd_state, encoder_bwd_state]
+    # decoder_init_concat = np.repeat(deconder_init_concat, dec_timesteps, axis=0).reshape(dec_timesteps, dec_vsize+2*hidden_size)
 
-#     decoder_out, decoder_state = decoder_gru(decoder_inputs_concat, initial_state=decoder_init_concat)
+    decoder_out, decoder_state = decoder_gru(decoder_inputs_concat)
 
-#     # Concat attention input and decoder GRU output
+    # Concat attention input and decoder GRU output
 
-#     # Dense layer
-#     dense = Dense(dec_vsize, activation='softmax', name='softmax_layer')
-#     dense_time = TimeDistributed(dense, name='time_distributed_layer')
+    # Dense layer
+    dense = Dense(dec_vsize, activation='softmax', name='softmax_layer')
+    dense_time = TimeDistributed(dense, name='time_distributed_layer')
 
-#     ### In peeky, when decoding, make use of decoder_out as well as the original encoder_fwd_state and encoder_bwd_state
-#     decoder_pred = dense_time(decoder_out)
+    ### In peeky, when decoding, make use of decoder_out as well as the original encoder_fwd_state and encoder_bwd_state
+    decoder_out_concat = Concatenate(axis=-1)([decoder_out,encoder_concat_states])
+    decoder_pred = dense_time(decoder_out_concat)
 
-#     # Full model
-#     full_model = Model(inputs=[encoder_inputs, decoder_inputs], outputs=decoder_pred)
-#     full_model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+    # Full model
+    full_model = Model(inputs=[encoder_inputs, decoder_inputs], outputs=decoder_pred)
+    full_model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
-#     full_model.summary()
+    full_model.summary()
 
-#     """ Inference model """
-#     batch_size = 1
+    """ Inference model """
+    batch_size = 1
 
-#     """ Encoder (Inference) model """
-#     encoder_inf_inputs = Input(batch_shape=(batch_size, enc_timesteps, enc_vsize), name='encoder_inf_inputs')
-#     encoder_inf_out, encoder_inf_fwd_state, encoder_inf_bwd_state = encoder_gru(encoder_inf_inputs)
-#     encoder_model = Model(inputs=encoder_inf_inputs, outputs=[encoder_inf_fwd_state, encoder_inf_bwd_state])
-#           ## This simple seq2seq model would use only the encoder last-timestep output
+    """ Encoder (Inference) model """
+    encoder_inf_inputs = Input(batch_shape=(batch_size, enc_timesteps, enc_vsize), name='encoder_inf_inputs')
+    encoder_inf_out, encoder_inf_fwd_state, encoder_inf_bwd_state = encoder_gru(encoder_inf_inputs)
+    encoder_model = Model(inputs=encoder_inf_inputs, outputs=[encoder_inf_fwd_state, encoder_inf_bwd_state])
+          ## This simple seq2seq model would use only the encoder last-timestep output
 
-#     """ Decoder (Inference) model """
-#     decoder_inf_inputs = Input(batch_shape=(batch_size, 1, dec_vsize+2*hidden_size), name='decoder_word_inputs')
-#     decoder_init_state = Input(batch_shape=(batch_size, dec_vsize+2*hidden_size), name='decoder_init') ## forward + backward output states
+    """ Decoder (Inference) model """
+    decoder_inf_inputs = Input(batch_shape=(batch_size, 1, dec_vsize+2*hidden_size), name='decoder_word_inputs')
+    decoder_inf_enc_state = Input(batch_shape=(batch_size,1, 2*hidden_size), name='decoder_inf_enc_state') ## forward + backward output states
+    decoder_inf_out, decoder_inf_state = decoder_gru(decoder_inf_inputs)#, initial_state=decoder_init_state)
+    decoder_inf_out_concat = Concatenate(axis=-1)([decoder_inf_out, decoder_inf_enc_state])
+    decoder_inf_pred = TimeDistributed(dense)(decoder_inf_out_concat) # decoding with out decoder_inf_out, and decoder_init_state `initial states`
+    decoder_model = Model(inputs=[decoder_inf_enc_state, decoder_inf_inputs],
+                          outputs=[decoder_inf_pred])
 
-#     decoder_inf_out, decoder_inf_state = decoder_gru(decoder_inf_inputs, initial_state=decoder_init_state)
-  
-#     decoder_inf_pred = TimeDistributed(dense)(decoder_inf_out) # decoding with out decoder_inf_out, and decoder_init_state `initial states`
-#     decoder_model = Model(inputs=[decoder_init_state, decoder_inf_inputs],
-#                           outputs=[decoder_inf_pred])
-
-#     return full_model, encoder_model, decoder_model
+    return full_model , encoder_model, decoder_model
 
 
-# def train_peekybiseq2seq(full_model, enc_seq, dec_seq, batch_size, n_epochs):
-#     """ Training the model """
-#     loss_epoch = []
-#     accuracy_epoch = []
-#     for ep in range(n_epochs):
-#         losses = []
-#         accuracies = []
-#         for bi in range(0, enc_seq.shape[0] - batch_size, batch_size):
+def train_peekybiseq2seq(full_model, enc_seq, dec_seq, batch_size, n_epochs):
+    """ Training the model """
+    loss_epoch = []
+    accuracy_epoch = []
+    for ep in range(n_epochs):
+        losses = []
+        accuracies = []
+        for bi in range(0, enc_seq.shape[0] - batch_size, batch_size):
 
-#             enc_onehot_seq = to_categorical(
-#                 enc_seq[bi:bi + batch_size, :], num_classes=enc_vsize)
-#             dec_onehot_seq = to_categorical(
-#                 dec_seq[bi:bi + batch_size, :], num_classes=dec_vsize)
+            enc_onehot_seq = to_categorical(
+                enc_seq[bi:bi + batch_size, :], num_classes=enc_vsize)
+            dec_onehot_seq = to_categorical(
+                dec_seq[bi:bi + batch_size, :], num_classes=dec_vsize)
 
-#             full_model.train_on_batch(
-#                 [enc_onehot_seq, dec_onehot_seq[:, :-1, :]], dec_onehot_seq[:, 1:, :])
+            full_model.train_on_batch(
+                [enc_onehot_seq, dec_onehot_seq[:, :-1, :]], dec_onehot_seq[:, 1:, :])
 
-#             l,a = full_model.evaluate([enc_onehot_seq, dec_onehot_seq[:, :-1, :]], dec_onehot_seq[:, 1:, :],
-#                                     batch_size=batch_size, verbose=0)
+            l,a = full_model.evaluate([enc_onehot_seq, dec_onehot_seq[:, :-1, :]], dec_onehot_seq[:, 1:, :],
+                                    batch_size=batch_size, verbose=0)
 
-#             losses.append(l)
-#             accuracies.append(a)
-#         if (ep + 1) % 1 == 0:
-#             print("Loss/Accuracy in epoch {}: {}/{}".format(ep + 1, np.mean(losses), np.mean(accuracies)))
-#             loss_epoch.append(np.mean(losses))
-#             accuracy_epoch.append(np.mean(accuracies))
-#     return loss_epoch, accuracy_epoch
+            losses.append(l)
+            accuracies.append(a)
+        if (ep + 1) % 1 == 0:
+            print("Loss/Accuracy in epoch {}: {}/{}".format(ep + 1, np.mean(losses), np.mean(accuracies)))
+            loss_epoch.append(np.mean(losses))
+            accuracy_epoch.append(np.mean(accuracies))
+    return loss_epoch, accuracy_epoch
 
 # def infer_peekybiseq2seq(encoder_model, decoder_model, test_enc_seq, enc_vsize, dec_vsize, dec_timesteps):
 #     """
@@ -963,16 +964,19 @@ loss_biseq2seq, accuracy_biseq2seq = train_biseq2seq(full_model_biseq2seq, enc_s
 
 - Codes do not work yet.
 
-# ##""" Defining the full model """
-# full_model_peekybiseq2seq, infer_enc_model_peekybiseq2seq, infer_dec_model_peekybiseq2seq = define_peekybiseq2seq(
-#     hidden_size=hidden_size,
-#     batch_size=batch_size,
-#     enc_timesteps=enc_timesteps,
-#     dec_timesteps=dec_timesteps,
-#     enc_vsize=enc_vsize,
-#     dec_vsize=dec_vsize)
+##""" Defining the full model """
+full_model_peekybiseq2seq, infer_enc_model_peekybiseq2seq, infer_dec_model_peekybiseq2seq  = define_peekybiseq2seq(
+    hidden_size=hidden_size,
+    batch_size=batch_size,
+    enc_timesteps=enc_timesteps,
+    dec_timesteps=dec_timesteps,
+    enc_vsize=enc_vsize,
+    dec_vsize=dec_vsize)
 
-# plot_model(full_model_peekybiseq2seq, show_shapes=True)
+plot_model(full_model_peekybiseq2seq, show_shapes=True)
+
+%%time
+loss_peekybiseq2seq, accuracy_peekybiseq2seq = train_peekybiseq2seq(full_model_peekybiseq2seq, enc_seq, dec_seq, batch_size, n_epochs)
 
 ### Training: Seq-to-seq with Attention
 
@@ -996,6 +1000,8 @@ plt.plot(range(len(accuracy_seq2seq_lstm)+1), [0]+accuracy_seq2seq_lstm,linestyl
 
 plt.plot(range(len(accuracy_seq2seq)+1), [0]+ accuracy_seq2seq, linestyle='--', marker='o', linewidth=1, label='seq-to-seq (simple GRU)')
 plt.plot(range(len(accuracy_biseq2seq)+1), [0]+accuracy_biseq2seq,linestyle='--', marker='o', linewidth=1, label='seq-to-seq (bidirect.)')
+plt.plot(range(len(accuracy_peekybiseq2seq)+1), [0]+accuracy_peekybiseq2seq,linestyle='--', marker='o', linewidth=1, label='seq-to-seq (peeky bidirect.)')
+
 plt.plot(range(len(accuracy[:5])+1), [0]+accuracy[:5], linestyle='--', marker='o', linewidth=1, label='seq-to-seq (attention)')
 plt.legend()
 plt.title('Comparing Different Sequence Models')
