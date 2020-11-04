@@ -304,7 +304,7 @@
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading model from cache /var/folders/n7/ltpzwx813c599nfxfb94s_640000gn/T/jieba.cache
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading model cost 1.079 seconds.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading model cost 0.808 seconds.
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Prefix dict has been built successfully.
@@ -558,12 +558,6 @@
     <span class="n">w_vocab</span> <span class="o">=</span> <span class="n">nlp_zh</span><span class="o">.</span><span class="n">vocab</span><span class="p">[</span><span class="n">w</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">w_vocab</span><span class="o">.</span><span class="n">vector</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">w_vocab</span><span class="o">.</span><span class="n">vector</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">w_vocab</span><span class="o">.</span><span class="n">is_ascii</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">w_vocab</span><span class="o">.</span><span class="n">is_punct</span> <span class="ow">and</span> <span class="n">w</span><span class="o">!=</span><span class="n">target_word</span><span class="p">:</span>
         <span class="n">word_sim</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">w</span><span class="p">,</span> <span class="n">target_word_vocab</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="n">w_vocab</span><span class="p">)))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 42.6 s, sys: 761 ms, total: 43.3 s
-Wall time: 42.9 s
 </pre></div>
 </div>
 </div>
