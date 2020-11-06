@@ -62,11 +62,11 @@
     - file: nlp/sentiment-analysis-dl
     - file: nlp/sentiment-analysis-lstm-v1
     - file: nlp/seq-to-seq-primer
-    - file: nlp/seq-to-seq
-    - file: nlp/seq-to-seq-attention-mm
-    - file: nlp/seq-to-seq-attention-date
+    - file: nlp/seq-to-seq-types
+    - file: nlp/seq-to-seq-m21-sentiment-attention
+    - file: nlp/seq-to-seq-machine-translation
+    - file: nlp/seq-to-seq-machine-translation-attention
     - file: nlp/seq-to-seq-attention-addition
-    - file: nlp/seq-to-seq-attention-tg
     - file: nlp/text-gen-lstm-v1
     - file: nlp/transfer-learning-sent-encoding
     - file: nlp/hyperparameter-tuning

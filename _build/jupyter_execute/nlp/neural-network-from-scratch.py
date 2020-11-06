@@ -15,6 +15,29 @@ Important steps in neural network:
     - Mini-batch
     - Stochastic gradient descent
 
+## Workflow of Neural Network
+
+<img src="../images/nn-flowchart.png" alt="Drawing" style="width: 100%;"/>
+
+- Three major variations of neural networks
+    - Multi-layer Perceptron
+    - Convolutional Neural Network
+    - Recurrent Neural Network
+- Keras Model API for model building
+    - Sequential API
+    - Functional API
+- Core Modules API
+    - Activations
+    - Optimizers
+    - Losses
+    - Metrics
+    - Initializers
+    - Regularizers
+    - Dataset
+    - Callback Modules
+    - Visualizations
+    - Utilites
+
 ## Neural Network
 
 - Neural network is a type of machine learning algorithm modeled on human brains and nervous system.
