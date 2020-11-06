@@ -10,4 +10,5 @@
 word2vec-chinese
 word2vec
 doc2vec
+transfer-learning-sent-encoding
 ```

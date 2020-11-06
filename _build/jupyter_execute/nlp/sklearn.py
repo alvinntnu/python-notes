@@ -243,3 +243,14 @@ print(clf.score(test_text_bow, test_label))
 # for r in requirements:
 #     print("{}=={}".format(*r))
 
+
+
+
+```{toctree}
+:hidden:
+:titlesonly:
+
+
+naive-bayes
+sentiment-analysis-ml
+```

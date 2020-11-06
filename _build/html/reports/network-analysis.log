@@ -32,8 +32,13 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['%%time', '', "target_word = '覺得'", 'word_sim = []', '# check each word in vocab its simi with target_Word']
-...
-['target_word_vocab = nlp_zh.vocab[target_word]', 'for w in vocab:', '    w_vocab = nlp_zh.vocab[w]', '    if w_vocab.vector is not None and np.count_nonzero(w_vocab.vector) and not w_vocab.is_ascii and not w_vocab.is_punct and w!=target_word:', '        word_sim.append((w, target_word_vocab.similarity(w_vocab)))']
+import spacy
+import numpy as np
+import pandas as pd
+import unicodedata
+nlp_zh = spacy.load('zh_core_web_lg')
+
+near_syns = ['覺得','認為','宣稱','表示','強調','顯示', '說明','指出','提出','主張']
+
 -------------------
 
