@@ -184,28 +184,28 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="seq-to-seq.html">
-     Machine Translation (Sequence-to-Sequence LSTM)
+    <a class="reference internal" href="seq-to-seq-types.html">
+     Types of Seqeunce Model
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="seq-to-seq-attention-mm.html">
-     Sequence Model with Attention (Matthew McAteer)
+    <a class="reference internal" href="seq-to-seq-m21-sentiment-attention.html">
+     Sequence Model (many-to-one) with Attention
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="seq-to-seq-attention-date.html">
-     Seqeunce Model with Attention for Automatic Date Conversion
+    <a class="reference internal" href="seq-to-seq-machine-translation.html">
+     Machine Translation (Sequence-to-Sequence)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="seq-to-seq-machine-translation-attention.html">
+     Machine Translation with Attention (Thushan)
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="seq-to-seq-attention-addition.html">
      Seqeunce Model with Attention for Addition Learning
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="seq-to-seq-attention-tg.html">
-     Seqeunce Model with Attention (Thushan)
     </a>
    </li>
    <li class="toctree-l2">
@@ -336,6 +336,11 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#workflow-of-neural-network">
+   Workflow of Neural Network
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#neural-network">
    Neural Network
   </a>
@@ -464,6 +469,39 @@
 </ul>
 </li>
 </ul>
+<div class="section" id="workflow-of-neural-network">
+<h2>Workflow of Neural Network<a class="headerlink" href="#workflow-of-neural-network" title="Permalink to this headline">¶</a></h2>
+<img alt="Drawing" src="../_images/nn-flowchart.png" />
+<ul class="simple">
+<li><p>Three major variations of neural networks</p>
+<ul>
+<li><p>Multi-layer Perceptron</p></li>
+<li><p>Convolutional Neural Network</p></li>
+<li><p>Recurrent Neural Network</p></li>
+</ul>
+</li>
+<li><p>Keras Model API for model building</p>
+<ul>
+<li><p>Sequential API</p></li>
+<li><p>Functional API</p></li>
+</ul>
+</li>
+<li><p>Core Modules API</p>
+<ul>
+<li><p>Activations</p></li>
+<li><p>Optimizers</p></li>
+<li><p>Losses</p></li>
+<li><p>Metrics</p></li>
+<li><p>Initializers</p></li>
+<li><p>Regularizers</p></li>
+<li><p>Dataset</p></li>
+<li><p>Callback Modules</p></li>
+<li><p>Visualizations</p></li>
+<li><p>Utilites</p></li>
+</ul>
+</li>
+</ul>
+</div>
 <div class="section" id="neural-network">
 <h2>Neural Network<a class="headerlink" href="#neural-network" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
@@ -601,7 +639,7 @@ y_k = \frac{\exp(a_k)}{\sum_{i = 1}^{n} {a_i}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/neural-network-from-scratch_15_0.png" src="../_images/neural-network-from-scratch_15_0.png" />
+<img alt="../_images/neural-network-from-scratch_18_0.png" src="../_images/neural-network-from-scratch_18_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -614,7 +652,7 @@ y_k = \frac{\exp(a_k)}{\sum_{i = 1}^{n} {a_i}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/neural-network-from-scratch_16_0.png" src="../_images/neural-network-from-scratch_16_0.png" />
+<img alt="../_images/neural-network-from-scratch_19_0.png" src="../_images/neural-network-from-scratch_19_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -627,7 +665,7 @@ y_k = \frac{\exp(a_k)}{\sum_{i = 1}^{n} {a_i}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/neural-network-from-scratch_17_0.png" src="../_images/neural-network-from-scratch_17_0.png" />
+<img alt="../_images/neural-network-from-scratch_20_0.png" src="../_images/neural-network-from-scratch_20_0.png" />
 </div>
 </div>
 </div>
@@ -939,7 +977,7 @@ y_k = \frac{\exp(a_k)}{\sum_{i = 1}^{n} {a_i}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/neural-network-from-scratch_53_0.png" src="../_images/neural-network-from-scratch_53_0.png" />
+<img alt="../_images/neural-network-from-scratch_56_0.png" src="../_images/neural-network-from-scratch_56_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1095,7 +1133,7 @@ y_k = \frac{\exp(a_k)}{\sum_{i = 1}^{n} {a_i}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/neural-network-from-scratch_64_0.png" src="../_images/neural-network-from-scratch_64_0.png" />
+<img alt="../_images/neural-network-from-scratch_67_0.png" src="../_images/neural-network-from-scratch_67_0.png" />
 </div>
 </div>
 </div>
