@@ -253,3 +253,12 @@ for seq_index in range(10):
     print('-')
     print('Input sentence:', input_texts[seq_index])
     print('Decoded sentence:', decoded_sentence)
+
+
+```{toctree}
+:hidden:
+:titlesonly:
+
+
+seq-to-seq-machine-translation-attention
+```

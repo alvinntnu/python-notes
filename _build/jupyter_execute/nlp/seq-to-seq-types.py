@@ -1127,3 +1127,14 @@ def test(full_model, ts_enc_text, ts_dec_text, enc_tokenizer, dec_tokenizer, bat
 
 test(full_model, ts_enc_text = ts_enc_text, ts_dec_text = ts_dec_text, 
      enc_tokenizer = enc_tokenizer, dec_tokenizer = dec_tokenizer, batch_size = batch_size)
+
+
+```{toctree}
+:hidden:
+:titlesonly:
+
+
+seq-to-seq-primer
+seq-to-seq-m21-sentiment-attention
+seq-to-seq-attention-addition
+```

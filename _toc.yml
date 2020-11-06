@@ -53,20 +53,24 @@
     - file: nlp/naive-bayes
     - file: nlp/sentiment-analysis-ml
     - file: nlp/neural-network-from-scratch
-    - file: nlp/neural-language-model-primer
-    - file: nlp/neural-language-model-zh
+      sections:
+        - file: nlp/neural-language-model-primer
+        - file: nlp/neural-language-model-zh
     - file: nlp/word-embeddings
-    - file: nlp/word2vec-chinese
-    - file: nlp/word2vec
-    - file: nlp/doc2vec
+      sections:
+        - file: nlp/word2vec-chinese
+        - file: nlp/word2vec
+        - file: nlp/doc2vec
     - file: nlp/sentiment-analysis-dl
     - file: nlp/sentiment-analysis-lstm-v1
-    - file: nlp/seq-to-seq-primer
     - file: nlp/seq-to-seq-types
-    - file: nlp/seq-to-seq-m21-sentiment-attention
+      sections:
+        - file: nlp/seq-to-seq-primer
+        - file: nlp/seq-to-seq-m21-sentiment-attention
+        - file: nlp/seq-to-seq-attention-addition
     - file: nlp/seq-to-seq-machine-translation
-    - file: nlp/seq-to-seq-machine-translation-attention
-    - file: nlp/seq-to-seq-attention-addition
+      sections:
+        - file: nlp/seq-to-seq-machine-translation-attention
     - file: nlp/text-gen-lstm-v1
     - file: nlp/transfer-learning-sent-encoding
     - file: nlp/hyperparameter-tuning
