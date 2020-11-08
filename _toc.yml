@@ -59,6 +59,7 @@
         - file: nlp/neural-language-model-primer
         - file: nlp/neural-language-model-zh
         - file: nlp/text-gen-lstm-v1
+        - file: nlp/gpt2
     - file: nlp/word-embeddings
       sections:
         - file: nlp/word2vec-chinese

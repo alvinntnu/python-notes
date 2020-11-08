@@ -81,4 +81,5 @@ print (' '.join([t for t in text if t]))
 neural-language-model-primer
 neural-language-model-zh
 text-gen-lstm-v1
+gpt2
 ```
