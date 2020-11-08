@@ -229,30 +229,6 @@
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">RuntimeError</span><span class="g g-Whitespace">                              </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="mi">323199278</span><span class="n">a06</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">G</span> <span class="o">=</span> <span class="n">snap</span><span class="o">.</span><span class="n">LoadEdgeList</span><span class="p">(</span><span class="n">snap</span><span class="o">.</span><span class="n">PNGraph</span><span class="p">,</span> <span class="s2">&quot;../../RepositoryData/data/cit-HepTh.txt&quot;</span><span class="p">)</span>
-
-<span class="nn">~/opt/anaconda3/envs/python-notes/lib/python3.7/site-packages/snap.py</span> in <span class="ni">LoadEdgeList</span><span class="nt">(tspec, *args)</span>
-<span class="g g-Whitespace">  </span><span class="mi">83399</span>     <span class="k">if</span> <span class="n">tspec</span> <span class="o">==</span> <span class="n">PUndirNet</span><span class="p">:</span> <span class="k">return</span> <span class="n">LoadEdgeList_PUndirNet</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
-<span class="g g-Whitespace">  </span><span class="mi">83400</span>     <span class="k">if</span> <span class="n">tspec</span> <span class="o">==</span> <span class="n">PDirNet</span><span class="p">:</span> <span class="k">return</span> <span class="n">LoadEdgeList_PDirNet</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
-<span class="ne">&gt; </span><span class="mi">83401</span>     <span class="k">if</span> <span class="n">tspec</span> <span class="o">==</span> <span class="n">PNGraph</span> <span class="p">:</span> <span class="k">return</span> <span class="n">LoadEdgeList_PNGraph</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
-<span class="g g-Whitespace">  </span><span class="mi">83402</span>     <span class="k">if</span> <span class="n">tspec</span> <span class="o">==</span> <span class="n">PNEANet</span> <span class="p">:</span> <span class="k">return</span> <span class="n">LoadEdgeList_PNEANet</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
-<span class="g g-Whitespace">  </span><span class="mi">83403</span>     <span class="k">if</span> <span class="n">tspec</span> <span class="o">==</span> <span class="n">PNGraphMP</span><span class="p">:</span> <span class="k">return</span> <span class="n">LoadEdgeList_PNGraphMP</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
-
-<span class="nn">~/opt/anaconda3/envs/python-notes/lib/python3.7/site-packages/snap.py</span> in <span class="ni">LoadEdgeList_PNGraph</span><span class="nt">(*args)</span>
-<span class="g g-Whitespace">  </span><span class="mi">71940</span> 
-<span class="g g-Whitespace">  </span><span class="mi">71941</span>     <span class="s2">&quot;&quot;&quot;</span>
-<span class="ne">&gt; </span><span class="mi">71942</span><span class="s2">     return _snap.LoadEdgeList_PNGraph(*args)</span>
-<span class="g g-Whitespace">  </span><span class="mi">71943</span><span class="s2"> </span>
-<span class="g g-Whitespace">  </span><span class="mi">71944</span><span class="s2"> def LoadEdgeListStr_PNGraph(*args) -&gt; &quot;TPt&lt; TNGraph &gt;&quot;:</span>
-
-<span class="ne">RuntimeError</span>: Can not open file &#39;../../RepositoryData/data/cit-HepTh.txt&#39;.
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">

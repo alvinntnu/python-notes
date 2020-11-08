@@ -333,7 +333,64 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/patterns-constructions_3_0.png" src="../_images/patterns-constructions_3_0.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Ghostscript executable isn&#39;t found.
+See http://web.mit.edu/ghostscript/www/Install.htm
+If you&#39;re using a Mac, you can try installing
+https://docs.brew.sh/Installation then `brew install ghostscript`
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>---------------------------------------------------------------------------
+LookupError                               Traceback (most recent call last)
+~/opt/anaconda3/envs/python-notes/lib/python3.7/site-packages/nltk/tree.py in _repr_png_(self)
+    805                             env_vars=[&#39;PATH&#39;],
+--&gt; 806                             verbose=False,
+    807                         )
+
+~/opt/anaconda3/envs/python-notes/lib/python3.7/site-packages/nltk/internals.py in find_binary(name, path_to_bin, env_vars, searchpath, binary_names, url, verbose)
+    696         find_binary_iter(
+--&gt; 697             name, path_to_bin, env_vars, searchpath, binary_names, url, verbose
+    698         )
+
+~/opt/anaconda3/envs/python-notes/lib/python3.7/site-packages/nltk/internals.py in find_binary_iter(name, path_to_bin, env_vars, searchpath, binary_names, url, verbose)
+    680     for file in find_file_iter(
+--&gt; 681         path_to_bin or name, env_vars, searchpath, binary_names, url, verbose
+    682     ):
+
+~/opt/anaconda3/envs/python-notes/lib/python3.7/site-packages/nltk/internals.py in find_file_iter(filename, env_vars, searchpath, file_names, url, verbose, finding_dir)
+    638         div = &#39;=&#39; * 75
+--&gt; 639         raise LookupError(&#39;\n\n%s\n%s\n%s&#39; % (div, msg, div))
+    640 
+
+LookupError: 
+
+===========================================================================
+NLTK was unable to find the gs file!
+Use software specific configuration paramaters or set the PATH environment variable.
+===========================================================================
+
+During handling of the above exception, another exception occurred:
+
+LookupError                               Traceback (most recent call last)
+~/opt/anaconda3/envs/python-notes/lib/python3.7/site-packages/IPython/core/formatters.py in __call__(self, obj)
+    343             method = get_real_method(obj, self.print_method)
+    344             if method is not None:
+--&gt; 345                 return method()
+    346             return None
+    347         else:
+
+~/opt/anaconda3/envs/python-notes/lib/python3.7/site-packages/nltk/tree.py in _repr_png_(self)
+    817                                         &quot;https://docs.brew.sh/Installation then `brew install ghostscript`&quot;)                
+    818                 print(pre_error_message, file=sys.stderr)
+--&gt; 819                 raise LookupError
+    820 
+    821             with open(out_path, &#39;rb&#39;) as sr:
+
+LookupError: 
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tree(&#39;NP&#39;, [(&#39;The&#39;, &#39;DT&#39;), (&#39;article&#39;, &#39;NN&#39;)])
+</pre></div>
+</div>
 </div>
 </div>
 <div class="cell docutils container">

@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Intutions for Types of Sequence-to-Sequence Models &#8212; Python Notes for Linguistics</title>
+    <title>Language Model &#8212; Python Notes for Linguistics</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="../_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
@@ -38,8 +38,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Types of Seqeunce Model" href="seq-to-seq-types-date.html" />
-    <link rel="prev" title="Sentiment Analysis with LSTM" href="sentiment-analysis-lstm-v1.html" />
+    <link rel="next" title="Neural Language Model: A Start" href="neural-language-model-primer.html" />
+    <link rel="prev" title="Neural Network From Scratch" href="neural-network-from-scratch.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
@@ -140,8 +140,8 @@
      Neural Network From Scratch
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="language-model.html">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      Language Model
     </a>
     <ul>
@@ -199,8 +199,8 @@
      Sentiment Analysis with LSTM
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2">
+    <a class="reference internal" href="seq-to-seq-types.html">
      Intutions for Types of Sequence-to-Sequence Models
     </a>
     <ul>
@@ -300,7 +300,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/nlp/seq-to-seq-types.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/nlp/language-model.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -324,7 +324,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/alvinntnu/python-notes/master?urlpath=tree/nlp/seq-to-seq-types.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/alvinntnu/python-notes/master?urlpath=tree/nlp/language-model.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -332,7 +332,7 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/nlp/seq-to-seq-types.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/nlp/language-model.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="../_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -351,28 +351,28 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#rnn">
-   RNN
+  <a class="reference internal nav-link" href="#training-a-trigram-language-model-using-reuters">
+   Training a Trigram Language Model using Reuters
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#lstm-vs-gru">
-   LSTM vs GRU
+  <a class="reference internal nav-link" href="#check-language-model">
+   Check Language Model
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#simple-sequence-to-sequence-model">
-   Simple Sequence-to-Sequence Model
+  <a class="reference internal nav-link" href="#text-generation-using-the-trigram-model">
+   Text Generation Using the Trigram Model
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#peeky-sequence-to-sequence">
-   Peeky Sequence-to-Sequence
+  <a class="reference internal nav-link" href="#issues-of-ngram-language-model">
+   Issues of Ngram Language Model
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#sequence-to-sequence-with-attention">
-   Sequence-to-Sequence with Attention
+  <a class="reference internal nav-link" href="#neural-language-model">
+   Neural Language Model
   </a>
  </li>
 </ul>
@@ -385,74 +385,127 @@
         
               <div>
                 
-  <div class="section" id="intutions-for-types-of-sequence-to-sequence-models">
-<h1>Intutions for Types of Sequence-to-Sequence Models<a class="headerlink" href="#intutions-for-types-of-sequence-to-sequence-models" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="rnn">
-<h2>RNN<a class="headerlink" href="#rnn" title="Permalink to this headline">¶</a></h2>
-<p><img alt="" src="../_images/s2s-rnn.png" /></p>
+  <div class="section" id="language-model">
+<h1>Language Model<a class="headerlink" href="#language-model" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li><p>Vanishing gradient problems when modeling long-distance relationships</p></li>
+<li><p>Create the traditinal ngram-based language model</p></li>
+<li><p>Codes from <a class="reference external" href="https://medium.com/analytics-vidhya/a-comprehensive-guide-to-build-your-own-language-model-in-python-5141b3917d6d">A comprehensive guide to build your own language model in python</a></p></li>
+</ul>
+<div class="section" id="training-a-trigram-language-model-using-reuters">
+<h2>Training a Trigram Language Model using Reuters<a class="headerlink" href="#training-a-trigram-language-model-using-reuters" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+
+<span class="c1"># code courtesy of https://nlpforhackers.io/language-models/</span>
+
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">reuters</span>
+<span class="kn">from</span> <span class="nn">nltk</span> <span class="kn">import</span> <span class="n">bigrams</span><span class="p">,</span> <span class="n">trigrams</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span><span class="p">,</span> <span class="n">defaultdict</span>
+
+<span class="c1"># Create a placeholder for model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="mi">0</span><span class="p">))</span>
+
+<span class="c1"># Count frequency of co-occurance  </span>
+<span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">reuters</span><span class="o">.</span><span class="n">sents</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">w3</span> <span class="ow">in</span> <span class="n">trigrams</span><span class="p">(</span><span class="n">sentence</span><span class="p">,</span> <span class="n">pad_right</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">pad_left</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="n">model</span><span class="p">[(</span><span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">)][</span><span class="n">w3</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+ 
+<span class="c1"># Let&#39;s transform the counts to probabilities</span>
+<span class="k">for</span> <span class="n">w1_w2</span> <span class="ow">in</span> <span class="n">model</span><span class="p">:</span>
+    <span class="n">total_count</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="n">w1_w2</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+    <span class="k">for</span> <span class="n">w3</span> <span class="ow">in</span> <span class="n">model</span><span class="p">[</span><span class="n">w1_w2</span><span class="p">]:</span>
+        <span class="n">model</span><span class="p">[</span><span class="n">w1_w2</span><span class="p">][</span><span class="n">w3</span><span class="p">]</span> <span class="o">/=</span> <span class="n">total_count</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 10.3 s, sys: 830 ms, total: 11.1 s
+Wall time: 11.1 s
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="check-language-model">
+<h2>Check Language Model<a class="headerlink" href="#check-language-model" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">sorted</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;the&quot;</span><span class="p">,</span><span class="s2">&quot;news&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;conference&#39;, 0.25),
+ (&#39;of&#39;, 0.125),
+ (&#39;.&#39;, 0.125),
+ (&#39;with&#39;, 0.08333333333333333),
+ (&#39;,&#39;, 0.08333333333333333),
+ (&#39;agency&#39;, 0.08333333333333333),
+ (&#39;that&#39;, 0.08333333333333333),
+ (&#39;brought&#39;, 0.041666666666666664),
+ (&#39;about&#39;, 0.041666666666666664),
+ (&#39;broke&#39;, 0.041666666666666664),
+ (&#39;on&#39;, 0.041666666666666664)]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="text-generation-using-the-trigram-model">
+<h2>Text Generation Using the Trigram Model<a class="headerlink" href="#text-generation-using-the-trigram-model" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Using the trigram model to predict the next word.</p></li>
+<li><p>The prediction is based on the predicted probability distribution of the next words: words above a predefined cut-off are randomly selected.</p></li>
+<li><p>The text generator ends when two consecutuve None’s are predicted (signaling the end of the sentence).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># code courtesy of https://nlpforhackers.io/language-models/</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="c1"># starting words</span>
+<span class="n">text</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;the&quot;</span><span class="p">,</span> <span class="s2">&quot;news&quot;</span><span class="p">]</span>
+<span class="n">sentence_finished</span> <span class="o">=</span> <span class="kc">False</span>
+ 
+<span class="k">while</span> <span class="ow">not</span> <span class="n">sentence_finished</span><span class="p">:</span>
+  <span class="c1"># select a random probability threshold  </span>
+  <span class="n">r</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+  <span class="n">accumulator</span> <span class="o">=</span> <span class="o">.</span><span class="mi">0</span>
+
+  <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">model</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:])]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+      <span class="n">accumulator</span> <span class="o">+=</span> <span class="n">model</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:])][</span><span class="n">word</span><span class="p">]</span>
+      <span class="c1"># select words that are above the probability threshold</span>
+      <span class="k">if</span> <span class="n">accumulator</span> <span class="o">&gt;=</span> <span class="n">r</span><span class="p">:</span>
+          <span class="n">text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+          <span class="k">break</span>
+
+  <span class="k">if</span> <span class="n">text</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]</span> <span class="o">==</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+      <span class="n">sentence_finished</span> <span class="o">=</span> <span class="kc">True</span>
+ 
+<span class="nb">print</span> <span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">text</span> <span class="k">if</span> <span class="n">t</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>the news conference that any rights Dixon might have to return to a faulty start this spring .
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="issues-of-ngram-language-model">
+<h2>Issues of Ngram Language Model<a class="headerlink" href="#issues-of-ngram-language-model" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>The ngram size is of key importance. The higher the order of the ngram, the better the prediction. But it comes with the issues of computation overload and data sparceness.</p></li>
+<li><p>Unseen ngrams are always a concern.</p></li>
+<li><p>Probability smoothing issues.</p></li>
 </ul>
 </div>
-<div class="section" id="lstm-vs-gru">
-<h2>LSTM vs GRU<a class="headerlink" href="#lstm-vs-gru" title="Permalink to this headline">¶</a></h2>
-<p><img alt="" src="../_images/s2s-lstm.png" />
-<img alt="" src="../_images/s2s-gru.png" /></p>
+<div class="section" id="neural-language-model">
+<h2>Neural Language Model<a class="headerlink" href="#neural-language-model" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Possible solutions to the issues of vanishing gradients</p></li>
-<li><p>Better modeling of long-term relationships</p></li>
-<li><p>GRU is a simpler version of LSTM, rendering it easier to train computationally</p></li>
-</ul>
-</div>
-<div class="section" id="simple-sequence-to-sequence-model">
-<h2>Simple Sequence-to-Sequence Model<a class="headerlink" href="#simple-sequence-to-sequence-model" title="Permalink to this headline">¶</a></h2>
-<p><img alt="" src="../_images/s2s-simple.png" /></p>
-<ul class="simple">
-<li><p>A schematic model representation of many-to-many sequence model</p></li>
-<li><p>The input and output sizes can be different</p></li>
-<li><p>A typical task is machine translation</p></li>
-<li><p>Two sequence models need to be trained: encoder and decoder</p></li>
-<li><p>Encoder:</p>
-<ul>
-<li><p>A vanilla version of the seq-to-seq model takes the <strong>last</strong> return state <span class="math notranslate nohighlight">\(h_t\)</span> of the encoder as the initial and only input for the decoder</p></li>
-<li><p>If the encoder uses the LSTM cell, the output of the encoder would be the last return state and the last memory cell, i.e., <span class="math notranslate nohighlight">\(h_t\)</span> and <span class="math notranslate nohighlight">\(c_t\)</span></p></li>
-</ul>
-</li>
-<li><p>Decoder</p>
-<ul>
-<li><p>During the training stage, the decoder takes the previous return state <span class="math notranslate nohighlight">\(h_{t-1}\)</span> and the current <span class="math notranslate nohighlight">\(Y_t\)</span> as the input for the LSTM (concatenated). This is referred to as <strong>teacher forcing</strong>.</p></li>
-<li><p>During the testing stage, the decoder would decode the output one at a time, taking the previous return state <span class="math notranslate nohighlight">\(h_{t-1}\)</span> and the previous return output <span class="math notranslate nohighlight">\(Y_{t-1}\)</span> as the inputs of the LSTM (concatenated). That is, no <strong>teacher-forcing</strong> during the testing stage.</p></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="section" id="peeky-sequence-to-sequence">
-<h2>Peeky Sequence-to-Sequence<a class="headerlink" href="#peeky-sequence-to-sequence" title="Permalink to this headline">¶</a></h2>
-<p><img alt="" src="../_images/s2s-peeky.png" /></p>
-<ul class="simple">
-<li><p>A variant of the seq-to-seq model, which makes available the last return state <span class="math notranslate nohighlight">\(h_{t}\)</span> from the encoder to every time step in the decoder.</p></li>
-<li><p>An intuitive understanding of this peeky approach is that when decoding the contexts from the source input should be made available to all decoding steps.</p></li>
-</ul>
-</div>
-<div class="section" id="sequence-to-sequence-with-attention">
-<h2>Sequence-to-Sequence with Attention<a class="headerlink" href="#sequence-to-sequence-with-attention" title="Permalink to this headline">¶</a></h2>
-<p><img alt="" src="../_images/s2s-attention.png" /></p>
-<ul class="simple">
-<li><p>Attention mechansim can be seen as much more sophisticated design of the peeky approach.</p></li>
-<li><p>The idea is that during the decoding stage, we need to consider the pairwise relationship (similarity) in-between the decoder state <span class="math notranslate nohighlight">\(h_{t}\)</span> and <strong>ALL</strong> the return states from the encoder.</p></li>
-<li><p>An intuitive understanding is as follows. When decoding the translation of <span class="math notranslate nohighlight">\(Y_{1}\)</span>, it is very likely that its translation is more relevant to some of the input words and less relevant to the others.</p></li>
-<li><p>Therefore, the attention mechanism first needs to determine the relative pairwise relationship in-between the decoder <span class="math notranslate nohighlight">\(h_{1}\)</span> and all the encoder return states in order to get the <strong>attention weights</strong>.</p></li>
-<li><p>There are many proposals regarding how to compute the attention weights. Please see a very nice review of Lilian Weng’s <a class="reference external" href="https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html">Attention? Attention!</a>.</p></li>
-<li><p>In the current Tensorflow implementation, there are three types of <a class="reference external" href="https://keras.io/api/layers/attention_layers/">Attention layers</a>:</p>
-<ul>
-<li><p>AdditiveAttention Layer: Bahdanau’s style attention <a class="reference external" href="https://arxiv.org/pdf/1409.0473.pdf">Bahdanau2015</a></p></li>
-<li><p>Attention Layer: Luong’s style attention <a class="reference external" href="https://arxiv.org/pdf/1508.4025.pdf">Luong2015</a></p></li>
-<li><p>MultiHeadAttention Layer: transformer’s style attention <a class="reference external" href="http://papers.nips.cc/paper/7181-attention-is-all-you-need.pdf">“Attention is All you Need” (Vaswani, et al., 2017)</a></p></li>
-</ul>
-</li>
-<li><p>With the attention weights, we can compute a context vector, which is like a weighted sum of the encoder return states.</p></li>
-<li><p>We then use this weighted sum, along of the decoder return state <span class="math notranslate nohighlight">\(h_{1}\)</span>, to compute the final output <span class="math notranslate nohighlight">\(Y_{1}\)</span>.</p></li>
-<li><p>This attention-mediated mechanism applies to every time step in the decoder.</p></li>
+<li><p>Neural language model based on deep learning may provide a better alternative to model the probabilistic relationships of linguistic units.</p></li>
 </ul>
 <div class="toctree-wrapper compound">
 </div>
@@ -487,8 +540,8 @@
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="sentiment-analysis-lstm-v1.html" title="previous page">Sentiment Analysis with LSTM</a>
-    <a class='right-next' id="next-link" href="seq-to-seq-types-date.html" title="next page">Types of Seqeunce Model</a>
+    <a class='left-prev' id="prev-link" href="neural-network-from-scratch.html" title="previous page">Neural Network From Scratch</a>
+    <a class='right-next' id="next-link" href="neural-language-model-primer.html" title="next page">Neural Language Model: A Start</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
