@@ -1,0 +1,566 @@
+
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Language Model &#8212; Python Notes for Linguistics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mycss.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Neural Language Model: A Start" href="neural-language-model-primer.html" />
+    <link rel="prev" title="Neural Network From Scratch" href="neural-network-from-scratch.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/ntnu03.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Python Notes for Linguistics</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python-basics/python-basics.html">
+   Python Basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../corpus/corpus-processing.html">
+   Corpus Linguistics with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../statistical-analyses/statistical-analyses.html">
+   Statistical Analyses
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="nlp.html">
+   Natural Language Processing with Python
+  </a>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="nlp-spacy.html">
+     Natural Language Processing (spaCy)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="nlp-spacy-zh.html">
+     Chinese Natural Language Processing (spaCy)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="nlp-ckipnlp.html">
+     Natural Language Processing (ckipnlp)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="text-normalization-eng.html">
+     Text Normalization (English)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="text-normalization-chinese.html">
+     Text Normalization (Chinese)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sklearn.html">
+     Machine Learning with Sci-Kit Learn
+    </a>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="naive-bayes.html">
+       Naive Bayes
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="sentiment-analysis-ml.html">
+       Sentiment Analysis with Traditional Machine Learning
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="neural-network-from-scratch.html">
+     Neural Network From Scratch
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Language Model
+    </a>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="neural-language-model-primer.html">
+       Neural Language Model: A Start
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="neural-language-model-zh.html">
+       Neural Language Model of Chinese
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="text-gen-lstm-v1.html">
+       Text Generation
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="word-embeddings.html">
+     Word Embeddings
+    </a>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="word2vec-chinese.html">
+       Word Embeddings with Chinese Texts
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="word2vec.html">
+       Word2Vec
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="doc2vec.html">
+       Dov2Vec
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="transfer-learning-sent-encoding.html">
+       Universal Sentence Embeddings
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sentiment-analysis-dl.html">
+     Sentiment Analysis with Deep Learning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sentiment-analysis-lstm-v1.html">
+     Sentiment Analysis with LSTM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="seq-to-seq-types.html">
+     Intutions for Types of Sequence-to-Sequence Models
+    </a>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="seq-to-seq-types-date.html">
+       Types of Seqeunce Model
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="seq-to-seq-m21-sentiment-attention.html">
+       Sequence Model (many-to-one) with Attention
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="seq-to-seq-attention-addition.html">
+       Seqeunce Model with Attention for Addition Learning
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="seq-to-seq-machine-translation.html">
+     Machine Translation (Sequence-to-Sequence)
+    </a>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="seq-to-seq-machine-translation-attention.html">
+       Machine Translation with Attention (Thushan)
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="hyperparameter-tuning.html">
+     Hyper-Parameter Tuning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sentiment-analysis-using-bert-chinese.html">
+     Sentiment Analysis Using BERT
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ktrain-tutorial-explaining-predictions.html">
+     Explainable AI
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/todo.html">
+   To-do List
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <div style="text-align:left">
+    <a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
+</div>
+
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/nlp/language-model.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/alvinntnu/python-notes/master?urlpath=tree/nlp/language-model.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/nlp/language-model.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#training-a-trigram-language-model-using-reuters">
+   Training a Trigram Language Model using Reuters
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#check-language-model">
+   Check Language Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#text-generation-using-the-trigram-model">
+   Text Generation Using the Trigram Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#issues-of-ngram-language-model">
+   Issues of Ngram Language Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#neural-language-model">
+   Neural Language Model
+  </a>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="language-model">
+<h1>Language Model<a class="headerlink" href="#language-model" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Create the traditinal ngram-based language model</p></li>
+<li><p>Codes from <a class="reference external" href="https://medium.com/analytics-vidhya/a-comprehensive-guide-to-build-your-own-language-model-in-python-5141b3917d6d">A comprehensive guide to build your own language model in python</a></p></li>
+</ul>
+<div class="section" id="training-a-trigram-language-model-using-reuters">
+<h2>Training a Trigram Language Model using Reuters<a class="headerlink" href="#training-a-trigram-language-model-using-reuters" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+
+<span class="c1"># code courtesy of https://nlpforhackers.io/language-models/</span>
+
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">reuters</span>
+<span class="kn">from</span> <span class="nn">nltk</span> <span class="kn">import</span> <span class="n">bigrams</span><span class="p">,</span> <span class="n">trigrams</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span><span class="p">,</span> <span class="n">defaultdict</span>
+
+<span class="c1"># Create a placeholder for model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="mi">0</span><span class="p">))</span>
+
+<span class="c1"># Count frequency of co-occurance  </span>
+<span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">reuters</span><span class="o">.</span><span class="n">sents</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">w3</span> <span class="ow">in</span> <span class="n">trigrams</span><span class="p">(</span><span class="n">sentence</span><span class="p">,</span> <span class="n">pad_right</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">pad_left</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="n">model</span><span class="p">[(</span><span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">)][</span><span class="n">w3</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+ 
+<span class="c1"># Let&#39;s transform the counts to probabilities</span>
+<span class="k">for</span> <span class="n">w1_w2</span> <span class="ow">in</span> <span class="n">model</span><span class="p">:</span>
+    <span class="n">total_count</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="n">w1_w2</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+    <span class="k">for</span> <span class="n">w3</span> <span class="ow">in</span> <span class="n">model</span><span class="p">[</span><span class="n">w1_w2</span><span class="p">]:</span>
+        <span class="n">model</span><span class="p">[</span><span class="n">w1_w2</span><span class="p">][</span><span class="n">w3</span><span class="p">]</span> <span class="o">/=</span> <span class="n">total_count</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 10.3 s, sys: 830 ms, total: 11.1 s
+Wall time: 11.1 s
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="check-language-model">
+<h2>Check Language Model<a class="headerlink" href="#check-language-model" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">sorted</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;the&quot;</span><span class="p">,</span><span class="s2">&quot;news&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;conference&#39;, 0.25),
+ (&#39;of&#39;, 0.125),
+ (&#39;.&#39;, 0.125),
+ (&#39;with&#39;, 0.08333333333333333),
+ (&#39;,&#39;, 0.08333333333333333),
+ (&#39;agency&#39;, 0.08333333333333333),
+ (&#39;that&#39;, 0.08333333333333333),
+ (&#39;brought&#39;, 0.041666666666666664),
+ (&#39;about&#39;, 0.041666666666666664),
+ (&#39;broke&#39;, 0.041666666666666664),
+ (&#39;on&#39;, 0.041666666666666664)]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="text-generation-using-the-trigram-model">
+<h2>Text Generation Using the Trigram Model<a class="headerlink" href="#text-generation-using-the-trigram-model" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Using the trigram model to predict the next word.</p></li>
+<li><p>The prediction is based on the predicted probability distribution of the next words: words above a predefined cut-off are randomly selected.</p></li>
+<li><p>The text generator ends when two consecutuve None’s are predicted (signaling the end of the sentence).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># code courtesy of https://nlpforhackers.io/language-models/</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="c1"># starting words</span>
+<span class="n">text</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;the&quot;</span><span class="p">,</span> <span class="s2">&quot;news&quot;</span><span class="p">]</span>
+<span class="n">sentence_finished</span> <span class="o">=</span> <span class="kc">False</span>
+ 
+<span class="k">while</span> <span class="ow">not</span> <span class="n">sentence_finished</span><span class="p">:</span>
+  <span class="c1"># select a random probability threshold  </span>
+  <span class="n">r</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+  <span class="n">accumulator</span> <span class="o">=</span> <span class="o">.</span><span class="mi">0</span>
+
+  <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">model</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:])]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+      <span class="n">accumulator</span> <span class="o">+=</span> <span class="n">model</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:])][</span><span class="n">word</span><span class="p">]</span>
+      <span class="c1"># select words that are above the probability threshold</span>
+      <span class="k">if</span> <span class="n">accumulator</span> <span class="o">&gt;=</span> <span class="n">r</span><span class="p">:</span>
+          <span class="n">text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+          <span class="k">break</span>
+
+  <span class="k">if</span> <span class="n">text</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]</span> <span class="o">==</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+      <span class="n">sentence_finished</span> <span class="o">=</span> <span class="kc">True</span>
+ 
+<span class="nb">print</span> <span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">text</span> <span class="k">if</span> <span class="n">t</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>the news conference that any rights Dixon might have to return to a faulty start this spring .
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="issues-of-ngram-language-model">
+<h2>Issues of Ngram Language Model<a class="headerlink" href="#issues-of-ngram-language-model" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>The ngram size is of key importance. The higher the order of the ngram, the better the prediction. But it comes with the issues of computation overload and data sparceness.</p></li>
+<li><p>Unseen ngrams are always a concern.</p></li>
+<li><p>Probability smoothing issues.</p></li>
+</ul>
+</div>
+<div class="section" id="neural-language-model">
+<h2>Neural Language Model<a class="headerlink" href="#neural-language-model" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Neural language model based on deep learning may provide a better alternative to model the probabilistic relationships of linguistic units.</p></li>
+</ul>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python-notes",
+            path: "./nlp"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python-notes'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="neural-network-from-scratch.html" title="previous page">Neural Network From Scratch</a>
+    <a class='right-next' id="next-link" href="neural-language-model-primer.html" title="next page">Neural Language Model: A Start</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alvin Chen<br/>
+        
+            &copy; Copyright 2020 Alvin Chen.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>

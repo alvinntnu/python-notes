@@ -54,8 +54,9 @@
         - file: nlp/naive-bayes
         - file: nlp/sentiment-analysis-ml
     - file: nlp/neural-network-from-scratch
-    - file: nlp/neural-language-model-primer
+    - file: nlp/language-model
       sections:
+        - file: nlp/neural-language-model-primer
         - file: nlp/neural-language-model-zh
         - file: nlp/text-gen-lstm-v1
     - file: nlp/word-embeddings

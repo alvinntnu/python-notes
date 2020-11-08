@@ -34,6 +34,8 @@ execute:
     - 'nlp/neural-language-model-zh.ipynb'
     - 'nlp/seq-to-seq-brownlee.ipynb'
     - 'nlp/*.ipynb'
+    - 'corpus/*.ipynb'
+    - '*.ipynb'
 sphinx:
   extra_extensions:
     - sphinxcontrib.bibtex

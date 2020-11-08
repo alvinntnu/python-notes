@@ -343,15 +343,6 @@
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a	 sys	 
-Variable   Type      Data/Info
-------------------------------
-a          range     range(0, 10000)
-sys        module    &lt;module &#39;sys&#39; (built-in)&gt;
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -368,33 +359,40 @@ sys        module    &lt;module &#39;sys&#39; (built-in)&gt;
  &#39;__builtin__&#39;: &lt;module &#39;builtins&#39; (built-in)&gt;,
  &#39;__builtins__&#39;: &lt;module &#39;builtins&#39; (built-in)&gt;,
  &#39;_ih&#39;: [&#39;&#39;,
-  &#39;## How to check current object sizes in Notebook\nimport sys\na = range(10000)\nprint(sys.getsizeof(a))&#39;,
-  &quot;## Get the docstring\nget_ipython().run_line_magic(&#39;pinfo&#39;, &#39;sys.getsizeof&#39;)\nget_ipython().run_line_magic(&#39;pinfo&#39;, &#39;who&#39;)&quot;,
-  &quot;get_ipython().run_line_magic(&#39;who&#39;, &#39;&#39;)\nget_ipython().run_line_magic(&#39;whos&#39;, &#39;&#39;)&quot;,
+  &quot;#import sys\na = range(10000)\n#%memusage a\nget_ipython().run_line_magic(&#39;who&#39;, &#39;&#39;)\nget_ipython().run_line_magic(&#39;whos&#39;, &#39;&#39;)&quot;,
+  &quot;#import sys\na = range(10000)\n#%memusage a\nget_ipython().run_line_magic(&#39;who&#39;, &#39;&#39;)\nget_ipython().run_line_magic(&#39;whos&#39;, &#39;&#39;)&quot;,
+  &quot;#import sys\na = range(10000)\n#%memusage a\nget_ipython().run_line_magic(&#39;who&#39;, &#39;&#39;)\nget_ipython().run_line_magic(&#39;whos&#39;, &#39;&#39;)\nglobal()&quot;,
+  &quot;#import sys\na = range(10000)\n#%memusage a\nget_ipython().run_line_magic(&#39;who&#39;, &#39;&#39;)\nget_ipython().run_line_magic(&#39;whos&#39;, &#39;&#39;)\nglobals()&quot;,
+  &quot;#import sys\na = range(10000)\n#%memusage a\nget_ipython().run_line_magic(&#39;who&#39;, &#39;&#39;)\nget_ipython().run_line_magic(&#39;whos&#39;, &#39;&#39;)\nglobals()\nlocals()&quot;,
   &#39;globals()&#39;],
- &#39;_oh&#39;: {},
- &#39;_dh&#39;: [&#39;/Users/Alvin/GoogleDrive/_MySyncDrive/Repository/python-notes/python-basics&#39;],
+ &#39;_oh&#39;: {4: {...}, 5: {...}},
+ &#39;_dh&#39;: [&#39;/Users/Alvin/Dropbox/Python/PythonTricksTheBook/PythonTricksJupyterBook&#39;],
  &#39;In&#39;: [&#39;&#39;,
-  &#39;## How to check current object sizes in Notebook\nimport sys\na = range(10000)\nprint(sys.getsizeof(a))&#39;,
-  &quot;## Get the docstring\nget_ipython().run_line_magic(&#39;pinfo&#39;, &#39;sys.getsizeof&#39;)\nget_ipython().run_line_magic(&#39;pinfo&#39;, &#39;who&#39;)&quot;,
-  &quot;get_ipython().run_line_magic(&#39;who&#39;, &#39;&#39;)\nget_ipython().run_line_magic(&#39;whos&#39;, &#39;&#39;)&quot;,
+  &quot;#import sys\na = range(10000)\n#%memusage a\nget_ipython().run_line_magic(&#39;who&#39;, &#39;&#39;)\nget_ipython().run_line_magic(&#39;whos&#39;, &#39;&#39;)&quot;,
+  &quot;#import sys\na = range(10000)\n#%memusage a\nget_ipython().run_line_magic(&#39;who&#39;, &#39;&#39;)\nget_ipython().run_line_magic(&#39;whos&#39;, &#39;&#39;)&quot;,
+  &quot;#import sys\na = range(10000)\n#%memusage a\nget_ipython().run_line_magic(&#39;who&#39;, &#39;&#39;)\nget_ipython().run_line_magic(&#39;whos&#39;, &#39;&#39;)\nglobal()&quot;,
+  &quot;#import sys\na = range(10000)\n#%memusage a\nget_ipython().run_line_magic(&#39;who&#39;, &#39;&#39;)\nget_ipython().run_line_magic(&#39;whos&#39;, &#39;&#39;)\nglobals()&quot;,
+  &quot;#import sys\na = range(10000)\n#%memusage a\nget_ipython().run_line_magic(&#39;who&#39;, &#39;&#39;)\nget_ipython().run_line_magic(&#39;whos&#39;, &#39;&#39;)\nglobals()\nlocals()&quot;,
   &#39;globals()&#39;],
- &#39;Out&#39;: {},
- &#39;get_ipython&#39;: &lt;bound method InteractiveShell.get_ipython of &lt;ipykernel.zmqshell.ZMQInteractiveShell object at 0x7f8448ad2e10&gt;&gt;,
- &#39;exit&#39;: &lt;IPython.core.autocall.ZMQExitAutocall at 0x7f84288048d0&gt;,
- &#39;quit&#39;: &lt;IPython.core.autocall.ZMQExitAutocall at 0x7f84288048d0&gt;,
- &#39;_&#39;: &#39;&#39;,
- &#39;__&#39;: &#39;&#39;,
+ &#39;Out&#39;: {4: {...}, 5: {...}},
+ &#39;get_ipython&#39;: &lt;bound method InteractiveShell.get_ipython of &lt;ipykernel.zmqshell.ZMQInteractiveShell object at 0x7ff579662588&gt;&gt;,
+ &#39;exit&#39;: &lt;IPython.core.autocall.ZMQExitAutocall at 0x7ff57969aa20&gt;,
+ &#39;quit&#39;: &lt;IPython.core.autocall.ZMQExitAutocall at 0x7ff57969aa20&gt;,
+ &#39;_&#39;: {...},
+ &#39;__&#39;: {...},
  &#39;___&#39;: &#39;&#39;,
- &#39;_i&#39;: &#39;%who\n%whos&#39;,
- &#39;_ii&#39;: &#39;## Get the docstring\n?sys.getsizeof\n?who&#39;,
- &#39;_iii&#39;: &#39;## How to check current object sizes in Notebook\nimport sys\na = range(10000)\nprint(sys.getsizeof(a))&#39;,
- &#39;_i1&#39;: &#39;## How to check current object sizes in Notebook\nimport sys\na = range(10000)\nprint(sys.getsizeof(a))&#39;,
- &#39;sys&#39;: &lt;module &#39;sys&#39; (built-in)&gt;,
+ &#39;_i&#39;: &#39;#import sys\na = range(10000)\n#%memusage a\n%who\n%whos\nglobals()\nlocals()&#39;,
+ &#39;_ii&#39;: &#39;#import sys\na = range(10000)\n#%memusage a\n%who\n%whos\nglobals()&#39;,
+ &#39;_iii&#39;: &#39;#import sys\na = range(10000)\n#%memusage a\n%who\n%whos\nglobal()&#39;,
+ &#39;_i1&#39;: &#39;#import sys\na = range(10000)\n#%memusage a\n%who\n%whos&#39;,
  &#39;a&#39;: range(0, 10000),
- &#39;_i2&#39;: &#39;## Get the docstring\n?sys.getsizeof\n?who&#39;,
- &#39;_i3&#39;: &#39;%who\n%whos&#39;,
- &#39;_i4&#39;: &#39;globals()&#39;}
+ &#39;_i2&#39;: &#39;#import sys\na = range(10000)\n#%memusage a\n%who\n%whos&#39;,
+ &#39;_i3&#39;: &#39;#import sys\na = range(10000)\n#%memusage a\n%who\n%whos\nglobal()&#39;,
+ &#39;_i4&#39;: &#39;#import sys\na = range(10000)\n#%memusage a\n%who\n%whos\nglobals()&#39;,
+ &#39;_4&#39;: {...},
+ &#39;_i5&#39;: &#39;#import sys\na = range(10000)\n#%memusage a\n%who\n%whos\nglobals()\nlocals()&#39;,
+ &#39;_5&#39;: {...},
+ &#39;_i6&#39;: &#39;globals()&#39;}
 </pre></div>
 </div>
 </div>
@@ -414,37 +412,48 @@ sys        module    &lt;module &#39;sys&#39; (built-in)&gt;
  &#39;__builtin__&#39;: &lt;module &#39;builtins&#39; (built-in)&gt;,
  &#39;__builtins__&#39;: &lt;module &#39;builtins&#39; (built-in)&gt;,
  &#39;_ih&#39;: [&#39;&#39;,
-  &#39;## How to check current object sizes in Notebook\nimport sys\na = range(10000)\nprint(sys.getsizeof(a))&#39;,
-  &quot;## Get the docstring\nget_ipython().run_line_magic(&#39;pinfo&#39;, &#39;sys.getsizeof&#39;)\nget_ipython().run_line_magic(&#39;pinfo&#39;, &#39;who&#39;)&quot;,
-  &quot;get_ipython().run_line_magic(&#39;who&#39;, &#39;&#39;)\nget_ipython().run_line_magic(&#39;whos&#39;, &#39;&#39;)&quot;,
+  &quot;#import sys\na = range(10000)\n#%memusage a\nget_ipython().run_line_magic(&#39;who&#39;, &#39;&#39;)\nget_ipython().run_line_magic(&#39;whos&#39;, &#39;&#39;)&quot;,
+  &quot;#import sys\na = range(10000)\n#%memusage a\nget_ipython().run_line_magic(&#39;who&#39;, &#39;&#39;)\nget_ipython().run_line_magic(&#39;whos&#39;, &#39;&#39;)&quot;,
+  &quot;#import sys\na = range(10000)\n#%memusage a\nget_ipython().run_line_magic(&#39;who&#39;, &#39;&#39;)\nget_ipython().run_line_magic(&#39;whos&#39;, &#39;&#39;)\nglobal()&quot;,
+  &quot;#import sys\na = range(10000)\n#%memusage a\nget_ipython().run_line_magic(&#39;who&#39;, &#39;&#39;)\nget_ipython().run_line_magic(&#39;whos&#39;, &#39;&#39;)\nglobals()&quot;,
+  &quot;#import sys\na = range(10000)\n#%memusage a\nget_ipython().run_line_magic(&#39;who&#39;, &#39;&#39;)\nget_ipython().run_line_magic(&#39;whos&#39;, &#39;&#39;)\nglobals()\nlocals()&quot;,
   &#39;globals()&#39;,
+  &#39;locals()&#39;,
   &#39;locals()&#39;],
- &#39;_oh&#39;: {4: {...}},
- &#39;_dh&#39;: [&#39;/Users/Alvin/GoogleDrive/_MySyncDrive/Repository/python-notes/python-basics&#39;],
+ &#39;_oh&#39;: {4: {...}, 5: {...}, 6: {...}, 7: {...}},
+ &#39;_dh&#39;: [&#39;/Users/Alvin/Dropbox/Python/PythonTricksTheBook/PythonTricksJupyterBook&#39;],
  &#39;In&#39;: [&#39;&#39;,
-  &#39;## How to check current object sizes in Notebook\nimport sys\na = range(10000)\nprint(sys.getsizeof(a))&#39;,
-  &quot;## Get the docstring\nget_ipython().run_line_magic(&#39;pinfo&#39;, &#39;sys.getsizeof&#39;)\nget_ipython().run_line_magic(&#39;pinfo&#39;, &#39;who&#39;)&quot;,
-  &quot;get_ipython().run_line_magic(&#39;who&#39;, &#39;&#39;)\nget_ipython().run_line_magic(&#39;whos&#39;, &#39;&#39;)&quot;,
+  &quot;#import sys\na = range(10000)\n#%memusage a\nget_ipython().run_line_magic(&#39;who&#39;, &#39;&#39;)\nget_ipython().run_line_magic(&#39;whos&#39;, &#39;&#39;)&quot;,
+  &quot;#import sys\na = range(10000)\n#%memusage a\nget_ipython().run_line_magic(&#39;who&#39;, &#39;&#39;)\nget_ipython().run_line_magic(&#39;whos&#39;, &#39;&#39;)&quot;,
+  &quot;#import sys\na = range(10000)\n#%memusage a\nget_ipython().run_line_magic(&#39;who&#39;, &#39;&#39;)\nget_ipython().run_line_magic(&#39;whos&#39;, &#39;&#39;)\nglobal()&quot;,
+  &quot;#import sys\na = range(10000)\n#%memusage a\nget_ipython().run_line_magic(&#39;who&#39;, &#39;&#39;)\nget_ipython().run_line_magic(&#39;whos&#39;, &#39;&#39;)\nglobals()&quot;,
+  &quot;#import sys\na = range(10000)\n#%memusage a\nget_ipython().run_line_magic(&#39;who&#39;, &#39;&#39;)\nget_ipython().run_line_magic(&#39;whos&#39;, &#39;&#39;)\nglobals()\nlocals()&quot;,
   &#39;globals()&#39;,
+  &#39;locals()&#39;,
   &#39;locals()&#39;],
- &#39;Out&#39;: {4: {...}},
- &#39;get_ipython&#39;: &lt;bound method InteractiveShell.get_ipython of &lt;ipykernel.zmqshell.ZMQInteractiveShell object at 0x7f8448ad2e10&gt;&gt;,
- &#39;exit&#39;: &lt;IPython.core.autocall.ZMQExitAutocall at 0x7f84288048d0&gt;,
- &#39;quit&#39;: &lt;IPython.core.autocall.ZMQExitAutocall at 0x7f84288048d0&gt;,
+ &#39;Out&#39;: {4: {...}, 5: {...}, 6: {...}, 7: {...}},
+ &#39;get_ipython&#39;: &lt;bound method InteractiveShell.get_ipython of &lt;ipykernel.zmqshell.ZMQInteractiveShell object at 0x7ff579662588&gt;&gt;,
+ &#39;exit&#39;: &lt;IPython.core.autocall.ZMQExitAutocall at 0x7ff57969aa20&gt;,
+ &#39;quit&#39;: &lt;IPython.core.autocall.ZMQExitAutocall at 0x7ff57969aa20&gt;,
  &#39;_&#39;: {...},
- &#39;__&#39;: &#39;&#39;,
- &#39;___&#39;: &#39;&#39;,
- &#39;_i&#39;: &#39;globals()&#39;,
- &#39;_ii&#39;: &#39;%who\n%whos&#39;,
- &#39;_iii&#39;: &#39;## Get the docstring\n?sys.getsizeof\n?who&#39;,
- &#39;_i1&#39;: &#39;## How to check current object sizes in Notebook\nimport sys\na = range(10000)\nprint(sys.getsizeof(a))&#39;,
- &#39;sys&#39;: &lt;module &#39;sys&#39; (built-in)&gt;,
+ &#39;__&#39;: {...},
+ &#39;___&#39;: {...},
+ &#39;_i&#39;: &#39;locals()&#39;,
+ &#39;_ii&#39;: &#39;globals()&#39;,
+ &#39;_iii&#39;: &#39;#import sys\na = range(10000)\n#%memusage a\n%who\n%whos\nglobals()\nlocals()&#39;,
+ &#39;_i1&#39;: &#39;#import sys\na = range(10000)\n#%memusage a\n%who\n%whos&#39;,
  &#39;a&#39;: range(0, 10000),
- &#39;_i2&#39;: &#39;## Get the docstring\n?sys.getsizeof\n?who&#39;,
- &#39;_i3&#39;: &#39;%who\n%whos&#39;,
- &#39;_i4&#39;: &#39;globals()&#39;,
+ &#39;_i2&#39;: &#39;#import sys\na = range(10000)\n#%memusage a\n%who\n%whos&#39;,
+ &#39;_i3&#39;: &#39;#import sys\na = range(10000)\n#%memusage a\n%who\n%whos\nglobal()&#39;,
+ &#39;_i4&#39;: &#39;#import sys\na = range(10000)\n#%memusage a\n%who\n%whos\nglobals()&#39;,
  &#39;_4&#39;: {...},
- &#39;_i5&#39;: &#39;locals()&#39;}
+ &#39;_i5&#39;: &#39;#import sys\na = range(10000)\n#%memusage a\n%who\n%whos\nglobals()\nlocals()&#39;,
+ &#39;_5&#39;: {...},
+ &#39;_i6&#39;: &#39;globals()&#39;,
+ &#39;_6&#39;: {...},
+ &#39;_i7&#39;: &#39;locals()&#39;,
+ &#39;_7&#39;: {...},
+ &#39;_i8&#39;: &#39;locals()&#39;}
 </pre></div>
 </div>
 </div>
@@ -461,6 +470,9 @@ sys        module    &lt;module &#39;sys&#39; (built-in)&gt;
  &#39;_&#39;,
  &#39;_4&#39;,
  &#39;_5&#39;,
+ &#39;_6&#39;,
+ &#39;_7&#39;,
+ &#39;_8&#39;,
  &#39;__&#39;,
  &#39;___&#39;,
  &#39;__builtin__&#39;,
@@ -478,6 +490,9 @@ sys        module    &lt;module &#39;sys&#39; (built-in)&gt;
  &#39;_i4&#39;,
  &#39;_i5&#39;,
  &#39;_i6&#39;,
+ &#39;_i7&#39;,
+ &#39;_i8&#39;,
+ &#39;_i9&#39;,
  &#39;_ih&#39;,
  &#39;_ii&#39;,
  &#39;_iii&#39;,
@@ -485,8 +500,7 @@ sys        module    &lt;module &#39;sys&#39; (built-in)&gt;
  &#39;a&#39;,
  &#39;exit&#39;,
  &#39;get_ipython&#39;,
- &#39;quit&#39;,
- &#39;sys&#39;]
+ &#39;quit&#39;]
 </pre></div>
 </div>
 </div>

@@ -245,13 +245,3 @@ print(generate_seq(model, tokenizer, max_length-1, 'Jack and', 5))
 print(generate_seq(model, tokenizer, max_length-1, 'And Jill', 3))
 print(generate_seq(model, tokenizer, max_length-1, 'fell down', 5))
 print(generate_seq(model, tokenizer, max_length-1, 'pail of', 5))
-
-
-```{toctree}
-:hidden:
-:titlesonly:
-
-
-neural-language-model-zh
-text-gen-lstm-v1
-```
