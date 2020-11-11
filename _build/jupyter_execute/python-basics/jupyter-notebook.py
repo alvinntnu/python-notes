@@ -64,6 +64,18 @@ To include the bibliography at the end of the file):
 - `tip`
 - self-defined `admonition`
 
+## Font Awesome Icons
+
+- To include icons in the markdown cell, currently I use the html version.
+
+```
+<i class="fa fa-check fa-1x" style="color:DarkTurquoise;margin-right:5px"></i>
+```
+
+- With the CSS, we can control the color and margins of the icon.
+
+- It seems that jupyterbook supports Font Awesome v4 better.
+
 ## Add Images/Figures
 
 - [Documentation](https://jupyterbook.org/content/figures.html)

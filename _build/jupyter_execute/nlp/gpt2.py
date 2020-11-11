@@ -1,7 +1,10 @@
 # Transformer-based Language Model - GPT2
 
+- This notebook runs on Google Colab.
 - Codes from [A Comprehensive Guide to Build Your Own Language Model in Python](https://medium.com/analytics-vidhya/a-comprehensive-guide-to-build-your-own-language-model-in-python-5141b3917d6d)
-- Use the OpenAI GPT-2 language model (based on Transformers)
+- Use the OpenAI GPT-2 language model (based on Transformers) to:
+  - Generate text sequences based on seed texts
+  - Convert text sequences into numerical representations
 
 !pip install transformers
 

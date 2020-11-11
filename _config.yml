@@ -1,7 +1,7 @@
 # Book settings
 title: Python Notes for Linguistics
 author: Alvin Chen
-logo: ./images/ntnu03.png
+logo: ./images/ntnu-word-2.png
 copyright: "2020 Alvin Chen"
 latex:
   latex_documents:
@@ -12,7 +12,7 @@ html:
     home_page_in_navbar: false
     extra_navbar: |
         <div style="text-align:left">
-            <a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
+        <i class="fas fa-home fa-2x" style="color:Maroon;margin-right:5px"></i><a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
         </div>
 execute:
   execute_notebooks: auto

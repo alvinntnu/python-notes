@@ -11,10 +11,18 @@ This notebook is being updated on a regular basis. Most of the materials here ar
 
 There are four main sections in Python Notes for Linguistics:
 
-- Python Basics
-- Corpus Linguistics with Python
-- Statistical Analyses
-- NLP with Python
+<i class="fa fa-check fa-1x" style="color:DarkTurquoise;margin-right:5px"></i>[Python Basics](python-basics/python-basics)
+: This section covers the fundamental concepts of the Python language.
+
+<i class="fa fa-check fa-1x" style="color:DarkTurquoise;margin-right:5px"></i>[Corpus Linguistics with Python](corpus/corpus-processing)
+: This section covers the corpus processing skills and techniques using Python.
+
+<i class="fa fa-check fa-1x" style="color:DarkTurquoise;margin-right:5px"></i> [Statistical Analyses](statistical-analyses/statistical-analyses)
+: This section covers statistical analyses using Python.
+
+<i class="fa fa-check fa-1x" style="color:DarkTurquoise;margin-right:5px"></i> [NLP with Python](nlp/nlp)
+: This section covers computational text analytics using Python.
+
 
 ## Recommended Books
 

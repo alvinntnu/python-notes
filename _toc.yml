@@ -6,6 +6,7 @@
     - file: python-basics/google-colab
     - file: python-basics/google-colab-r
     - file: python-basics/data-structure
+    - file: python-basics/regex
     - file: python-basics/numpy
     - file: python-basics/pandas
     - file: python-basics/program-structure
