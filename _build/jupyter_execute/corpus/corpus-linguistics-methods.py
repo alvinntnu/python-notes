@@ -363,3 +363,15 @@ top_n_word2_fd = nltk.FreqDist(top_n_word2).most_common(10)
 print(top_n_word2_fd)
 brown_genre_cdf2.tabulate(conditions=['adventure','editorial','fiction'],
                          samples=[w for (w, f) in top_n_word2_fd])
+
+
+```{toctree}
+:hidden:
+:titlesonly:
+
+
+lexical-bundles
+tokenization
+word-cloud
+patterns-constructions
+```

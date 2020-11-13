@@ -28,15 +28,21 @@
     - file: corpus/web-crawler
     - file: corpus/unicode
     - file: corpus/corpus-linguistics-methods
-    - file: corpus/tokenization
-    - file: corpus/word-cloud
-    - file: corpus/patterns-constructions
-    - file: corpus/bnc
-    - file: corpus/childes
-    - file: corpus/praat-textgrid
+      sections:
+        - file: corpus/lexical-bundles
+        - file: corpus/tokenization
+        - file: corpus/word-cloud
+        - file: corpus/patterns-constructions
+    - file: corpus/structured-corpus-processing
+      sections:
+        - file: corpus/bnc
+        - file: corpus/childes
+        - file: corpus/praat-textgrid
     - file: corpus/vectorizing-text
-    - file: corpus/jieba
-    - file: corpus/ckiptagger
+    - file: corpus/chinese-processing
+      sections:
+        - file: corpus/jieba
+        - file: corpus/ckiptagger
 - file: statistical-analyses/statistical-analyses
   sections:
     - file: statistical-analyses/descriptive-statistics

@@ -1,0 +1,1106 @@
+
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lexical Bundles &#8212; Python Notes for Linguistics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mycss.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tokenization" href="tokenization.html" />
+    <link rel="prev" title="Corpus Lingustics Methods" href="corpus-linguistics-methods.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/ntnu-word-2.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Python Notes for Linguistics</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python-basics/python-basics.html">
+   Python Basics
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="corpus-processing.html">
+   Corpus Linguistics with Python
+  </a>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="nltk.html">
+     Natural Language Tool-Kits (NLTK)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="web-crawler.html">
+     Web Crawler
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="unicode.html">
+     Unicode
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="reference internal" href="corpus-linguistics-methods.html">
+     Corpus Lingustics Methods
+    </a>
+    <ul class="current">
+     <li class="toctree-l3 current active">
+      <a class="current reference internal" href="#">
+       Lexical Bundles
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="tokenization.html">
+       Tokenization
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="word-cloud.html">
+       Word Cloud
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="patterns-constructions.html">
+       Patterns and Constructions
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="structured-corpus-processing.html">
+     Structured Corpus Processing
+    </a>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="bnc.html">
+       BNC-XML
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="childes.html">
+       CHILDES Corpus
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="praat-textgrid.html">
+       Praat TextGrid Data
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="vectorizing-text.html">
+     Vectorizing Texts
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="chinese-processing.html">
+     Chinese Processing
+    </a>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="jieba.html">
+       Chinese Word Segmentation (jieba)
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ckiptagger.html">
+       Chinese Word Segmentation (ckiptagger)
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../statistical-analyses/statistical-analyses.html">
+   Statistical Analyses
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../nlp/nlp.html">
+   Natural Language Processing with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/todo.html">
+   To-do List
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <div style="text-align:left">
+<i class="fas fa-home fa-2x" style="color:Maroon;margin-right:5px"></i><a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
+</div>
+
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/corpus/lexical-bundles.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/alvinntnu/python-notes/master?urlpath=tree/corpus/lexical-bundles.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/corpus/lexical-bundles.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loading-libraries">
+   Loading libraries
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#corpus-data">
+   Corpus Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Lexical Bundles
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convert-to-data-frames">
+   Convert to data frames
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#restructure-dictionary">
+   Restructure dictionary
+  </a>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="lexical-bundles">
+<h1>Lexical Bundles<a class="headerlink" href="#lexical-bundles" title="Permalink to this headline">¶</a></h1>
+<p>This section talks about how to identify recurring multiword sequences from texts, which has received a lot of attention in recent years in language studies.</p>
+<div class="section" id="loading-libraries">
+<h2>Loading libraries<a class="headerlink" href="#loading-libraries" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">reuters</span>
+<span class="kn">from</span> <span class="nn">nltk</span> <span class="kn">import</span> <span class="n">ngrams</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span><span class="p">,</span> <span class="n">defaultdict</span>
+<span class="kn">import</span> <span class="nn">re</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="corpus-data">
+<h2>Corpus Data<a class="headerlink" href="#corpus-data" title="Permalink to this headline">¶</a></h2>
+<p>In this demonstration, we use the <code class="docutils literal notranslate"><span class="pre">reuters</span></code> corpus as our data source, which has been made available in the <code class="docutils literal notranslate"><span class="pre">nltk</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## A quick look at the first five sentences</span>
+<span class="nb">print</span><span class="p">([</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sent</span><span class="p">)</span> <span class="k">for</span> <span class="n">sent</span> <span class="ow">in</span> <span class="n">reuters</span><span class="o">.</span><span class="n">sents</span><span class="p">()[:</span><span class="mi">5</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&quot;ASIAN EXPORTERS FEAR DAMAGE FROM U . S .- JAPAN RIFT Mounting trade friction between the U . S . And Japan has raised fears among many of Asia &#39; s exporting nations that the row could inflict far - reaching economic damage , businessmen and officials said .&quot;, &#39;They told Reuter correspondents in Asian capitals a U . S . Move against Japan might boost protectionist sentiment in the U . S . And lead to curbs on American imports of their products .&#39;, &quot;But some exporters said that while the conflict would hurt them in the long - run , in the short - term Tokyo &#39; s loss might be their gain .&quot;, &quot;The U . S . Has said it will impose 300 mln dlrs of tariffs on imports of Japanese electronics goods on April 17 , in retaliation for Japan &#39; s alleged failure to stick to a pact not to sell semiconductors on world markets at below cost .&quot;, &#39;Unofficial Japanese estimates put the impact of the tariffs at 10 billion dlrs and spokesmen for major electronics firms said they would virtually halt exports of products hit by the new taxes .&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>Lexical Bundles<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Lexical bundles refer to any contiguous multiword sequences from the texts. Normally, research on lexical bundles examine the multiword sequences of sizes from four- to seven-word sequences.</p>
+<p>The idea of lexical bundles is essentially the ngrams in NLP, which <code class="docutils literal notranslate"><span class="pre">N</span></code> refers to the size of the multiword sequence.</p>
+<p>To extract a meaningful set of lexical bundles, we need to consider at least two important distributional criteria:</p>
+<ul class="simple">
+<li><p><strong>Frequency</strong> of the bundle: how often does the sequence occur in the entire corpus?</p></li>
+<li><p><strong>Range</strong> of the bundle: in how many different texts/documents does the sequence occur in the entire corpus?</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Number of documents in `reuters`</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">reuters</span><span class="o">.</span><span class="n">fileids</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10788
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a placeholder for 4gram bundles statistics</span>
+<span class="n">bundles_4</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">bundles_range</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ngrams</span><span class="p">(</span><span class="n">reuters</span><span class="o">.</span><span class="n">sents</span><span class="p">()[</span><span class="mi">1</span><span class="p">],</span><span class="n">n</span><span class="o">=</span><span class="mi">4</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;They&#39;, &#39;told&#39;, &#39;Reuter&#39;, &#39;correspondents&#39;),
+ (&#39;told&#39;, &#39;Reuter&#39;, &#39;correspondents&#39;, &#39;in&#39;),
+ (&#39;Reuter&#39;, &#39;correspondents&#39;, &#39;in&#39;, &#39;Asian&#39;),
+ (&#39;correspondents&#39;, &#39;in&#39;, &#39;Asian&#39;, &#39;capitals&#39;),
+ (&#39;in&#39;, &#39;Asian&#39;, &#39;capitals&#39;, &#39;a&#39;),
+ (&#39;Asian&#39;, &#39;capitals&#39;, &#39;a&#39;, &#39;U&#39;),
+ (&#39;capitals&#39;, &#39;a&#39;, &#39;U&#39;, &#39;.&#39;),
+ (&#39;a&#39;, &#39;U&#39;, &#39;.&#39;, &#39;S&#39;),
+ (&#39;U&#39;, &#39;.&#39;, &#39;S&#39;, &#39;.&#39;),
+ (&#39;.&#39;, &#39;S&#39;, &#39;.&#39;, &#39;Move&#39;),
+ (&#39;S&#39;, &#39;.&#39;, &#39;Move&#39;, &#39;against&#39;),
+ (&#39;.&#39;, &#39;Move&#39;, &#39;against&#39;, &#39;Japan&#39;),
+ (&#39;Move&#39;, &#39;against&#39;, &#39;Japan&#39;, &#39;might&#39;),
+ (&#39;against&#39;, &#39;Japan&#39;, &#39;might&#39;, &#39;boost&#39;),
+ (&#39;Japan&#39;, &#39;might&#39;, &#39;boost&#39;, &#39;protectionist&#39;),
+ (&#39;might&#39;, &#39;boost&#39;, &#39;protectionist&#39;, &#39;sentiment&#39;),
+ (&#39;boost&#39;, &#39;protectionist&#39;, &#39;sentiment&#39;, &#39;in&#39;),
+ (&#39;protectionist&#39;, &#39;sentiment&#39;, &#39;in&#39;, &#39;the&#39;),
+ (&#39;sentiment&#39;, &#39;in&#39;, &#39;the&#39;, &#39;U&#39;),
+ (&#39;in&#39;, &#39;the&#39;, &#39;U&#39;, &#39;.&#39;),
+ (&#39;the&#39;, &#39;U&#39;, &#39;.&#39;, &#39;S&#39;),
+ (&#39;U&#39;, &#39;.&#39;, &#39;S&#39;, &#39;.&#39;),
+ (&#39;.&#39;, &#39;S&#39;, &#39;.&#39;, &#39;And&#39;),
+ (&#39;S&#39;, &#39;.&#39;, &#39;And&#39;, &#39;lead&#39;),
+ (&#39;.&#39;, &#39;And&#39;, &#39;lead&#39;, &#39;to&#39;),
+ (&#39;And&#39;, &#39;lead&#39;, &#39;to&#39;, &#39;curbs&#39;),
+ (&#39;lead&#39;, &#39;to&#39;, &#39;curbs&#39;, &#39;on&#39;),
+ (&#39;to&#39;, &#39;curbs&#39;, &#39;on&#39;, &#39;American&#39;),
+ (&#39;curbs&#39;, &#39;on&#39;, &#39;American&#39;, &#39;imports&#39;),
+ (&#39;on&#39;, &#39;American&#39;, &#39;imports&#39;, &#39;of&#39;),
+ (&#39;American&#39;, &#39;imports&#39;, &#39;of&#39;, &#39;their&#39;),
+ (&#39;imports&#39;, &#39;of&#39;, &#39;their&#39;, &#39;products&#39;),
+ (&#39;of&#39;, &#39;their&#39;, &#39;products&#39;, &#39;.&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="c1"># Count frequency of co-occurance  </span>
+<span class="k">for</span> <span class="n">fid</span> <span class="ow">in</span> <span class="n">reuters</span><span class="o">.</span><span class="n">fileids</span><span class="p">():</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">reuters</span><span class="o">.</span><span class="n">sents</span><span class="p">(</span><span class="n">fileids</span><span class="o">=</span><span class="n">fid</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">w3</span><span class="p">,</span> <span class="n">w4</span> <span class="ow">in</span> <span class="n">ngrams</span><span class="p">(</span><span class="n">sentence</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">pad_right</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">pad_left</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+            <span class="c1">## filter</span>
+            <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\w+&#39;</span><span class="p">,</span><span class="n">w1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\w+&#39;</span><span class="p">,</span><span class="n">w2</span><span class="p">)</span> <span class="ow">and</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\w+&#39;</span><span class="p">,</span><span class="n">w3</span><span class="p">)</span> <span class="ow">and</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\w+&#39;</span><span class="p">,</span> <span class="n">w4</span><span class="p">):</span>
+                <span class="n">bundles_4</span><span class="p">[(</span><span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">w3</span><span class="p">)][</span><span class="n">w4</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">temp</span><span class="p">[(</span><span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">w3</span><span class="p">)][</span><span class="n">w4</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="c1"># range value</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">temp</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">value</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">bundles_range</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">+=</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 19.1 s, sys: 1.15 s, total: 20.2 s
+Wall time: 21.8 s
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">bundles_4</span><span class="o">.</span><span class="n">items</span><span class="p">())[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[((&#39;ASIAN&#39;, &#39;EXPORTERS&#39;, &#39;FEAR&#39;),
+  defaultdict(&lt;function __main__.&lt;lambda&gt;.&lt;locals&gt;.&lt;lambda&gt;()&gt;,
+              {&#39;DAMAGE&#39;: 1})),
+ ((&#39;EXPORTERS&#39;, &#39;FEAR&#39;, &#39;DAMAGE&#39;),
+  defaultdict(&lt;function __main__.&lt;lambda&gt;.&lt;locals&gt;.&lt;lambda&gt;()&gt;, {&#39;FROM&#39;: 1})),
+ ((&#39;FEAR&#39;, &#39;DAMAGE&#39;, &#39;FROM&#39;),
+  defaultdict(&lt;function __main__.&lt;lambda&gt;.&lt;locals&gt;.&lt;lambda&gt;()&gt;, {&#39;U&#39;: 1})),
+ ((&#39;JAPAN&#39;, &#39;RIFT&#39;, &#39;Mounting&#39;),
+  defaultdict(&lt;function __main__.&lt;lambda&gt;.&lt;locals&gt;.&lt;lambda&gt;()&gt;, {&#39;trade&#39;: 1})),
+ ((&#39;RIFT&#39;, &#39;Mounting&#39;, &#39;trade&#39;),
+  defaultdict(&lt;function __main__.&lt;lambda&gt;.&lt;locals&gt;.&lt;lambda&gt;()&gt;,
+              {&#39;friction&#39;: 1}))]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">bundles_range</span><span class="o">.</span><span class="n">items</span><span class="p">())[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[((&#39;ASIAN&#39;, &#39;EXPORTERS&#39;, &#39;FEAR&#39;),
+  defaultdict(&lt;function __main__.&lt;lambda&gt;.&lt;locals&gt;.&lt;lambda&gt;()&gt;,
+              {&#39;DAMAGE&#39;: 1})),
+ ((&#39;EXPORTERS&#39;, &#39;FEAR&#39;, &#39;DAMAGE&#39;),
+  defaultdict(&lt;function __main__.&lt;lambda&gt;.&lt;locals&gt;.&lt;lambda&gt;()&gt;, {&#39;FROM&#39;: 1})),
+ ((&#39;FEAR&#39;, &#39;DAMAGE&#39;, &#39;FROM&#39;),
+  defaultdict(&lt;function __main__.&lt;lambda&gt;.&lt;locals&gt;.&lt;lambda&gt;()&gt;, {&#39;U&#39;: 1})),
+ ((&#39;JAPAN&#39;, &#39;RIFT&#39;, &#39;Mounting&#39;),
+  defaultdict(&lt;function __main__.&lt;lambda&gt;.&lt;locals&gt;.&lt;lambda&gt;()&gt;, {&#39;trade&#39;: 1})),
+ ((&#39;RIFT&#39;, &#39;Mounting&#39;, &#39;trade&#39;),
+  defaultdict(&lt;function __main__.&lt;lambda&gt;.&lt;locals&gt;.&lt;lambda&gt;()&gt;,
+              {&#39;friction&#39;: 1}))]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="convert-to-data-frames">
+<h2>Convert to data frames<a class="headerlink" href="#convert-to-data-frames" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>For more intuitive reading of the bundles data, we can create a data frame with the distributional information of each bundle type.</p></li>
+<li><p>Most importantly, we can filter and sort our bundle data nicely and easily with the functionality provided with the data frame.</p></li>
+</ul>
+<p>Create three lists:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">w1_w2_w3</span></code>: the first three words in the bundle</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">w4</span></code>: the last word in the bundle</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">freq</span></code>: freq of the bundle</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">range</span></code>: range of the bundle</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">w1_w2_w3</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">w4</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">freq</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">rangev</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">_w123</span> <span class="ow">in</span> <span class="n">bundles_4</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">_w4</span> <span class="ow">in</span> <span class="n">bundles_4</span><span class="p">[</span><span class="n">_w123</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">w1_w2_w3</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_w123</span><span class="p">))</span>
+        <span class="n">w4</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_w4</span><span class="p">)</span>
+        <span class="n">freq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bundles_4</span><span class="p">[</span><span class="n">_w123</span><span class="p">][</span><span class="n">_w4</span><span class="p">])</span>
+        <span class="n">rangev</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bundles_range</span><span class="p">[</span><span class="n">_w123</span><span class="p">][</span><span class="n">_w4</span><span class="p">])</span>
+        
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 1.19 s, sys: 81.7 ms, total: 1.27 s
+Wall time: 3.05 s
+</pre></div>
+</div>
+</div>
+</div>
+<p>Check the lengths of the four lists before combining them into a data frame.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">w1_w2_w3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">w4</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">freq</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>691190
+691190
+691190
+</pre></div>
+</div>
+</div>
+</div>
+<p>Create the bundle data frame.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bundles_df</span> <span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">w1_w2_w3</span><span class="p">,</span> <span class="n">w4</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">rangev</span><span class="p">)),</span>
+                        <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;w123&#39;</span><span class="p">,</span><span class="s1">&#39;w4&#39;</span><span class="p">,</span><span class="s1">&#39;freq&#39;</span><span class="p">,</span><span class="s1">&#39;range&#39;</span><span class="p">])</span>
+<span class="n">bundles_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>w123</th>
+      <th>w4</th>
+      <th>freq</th>
+      <th>range</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>ASIAN_EXPORTERS_FEAR</td>
+      <td>DAMAGE</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>EXPORTERS_FEAR_DAMAGE</td>
+      <td>FROM</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>FEAR_DAMAGE_FROM</td>
+      <td>U</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>JAPAN_RIFT_Mounting</td>
+      <td>trade</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>RIFT_Mounting_trade</td>
+      <td>friction</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Filter bundles whose <code class="docutils literal notranslate"><span class="pre">range</span></code> &gt;= 10 and arrange the data frame according to bundles’ <code class="docutils literal notranslate"><span class="pre">range</span></code> values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bundles_df</span><span class="p">[(</span><span class="n">bundles_df</span><span class="p">[</span><span class="s1">&#39;range&#39;</span><span class="p">]</span><span class="o">&gt;=</span><span class="mi">10</span><span class="p">)]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">&#39;range&#39;</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">])</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>w123</th>
+      <th>w4</th>
+      <th>freq</th>
+      <th>range</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>5717</th>
+      <td>Securities_and_Exchange</td>
+      <td>Commission</td>
+      <td>275</td>
+      <td>271</td>
+    </tr>
+    <tr>
+      <th>4813</th>
+      <td>said_in_a</td>
+      <td>statement</td>
+      <td>264</td>
+      <td>260</td>
+    </tr>
+    <tr>
+      <th>5714</th>
+      <td>the_Securities_and</td>
+      <td>Exchange</td>
+      <td>258</td>
+      <td>254</td>
+    </tr>
+    <tr>
+      <th>47163</th>
+      <td>3RD_QTR_NET</td>
+      <td>Shr</td>
+      <td>233</td>
+      <td>233</td>
+    </tr>
+    <tr>
+      <th>7112</th>
+      <td>The_company_said</td>
+      <td>the</td>
+      <td>230</td>
+      <td>211</td>
+    </tr>
+    <tr>
+      <th>46330</th>
+      <td>mln_Nine_mths</td>
+      <td>Shr</td>
+      <td>203</td>
+      <td>203</td>
+    </tr>
+    <tr>
+      <th>7103</th>
+      <td>The_company_said</td>
+      <td>it</td>
+      <td>213</td>
+      <td>197</td>
+    </tr>
+    <tr>
+      <th>6357</th>
+      <td>at_the_end</td>
+      <td>of</td>
+      <td>250</td>
+      <td>178</td>
+    </tr>
+    <tr>
+      <th>51576</th>
+      <td>4TH_QTR_NET</td>
+      <td>Shr</td>
+      <td>178</td>
+      <td>178</td>
+    </tr>
+    <tr>
+      <th>60176</th>
+      <td>with_the_Securities</td>
+      <td>and</td>
+      <td>162</td>
+      <td>162</td>
+    </tr>
+    <tr>
+      <th>25083</th>
+      <td>cts_prior_Pay</td>
+      <td>April</td>
+      <td>161</td>
+      <td>157</td>
+    </tr>
+    <tr>
+      <th>11887</th>
+      <td>pct_of_the</td>
+      <td>total</td>
+      <td>162</td>
+      <td>156</td>
+    </tr>
+    <tr>
+      <th>40339</th>
+      <td>QTR_LOSS_Shr</td>
+      <td>loss</td>
+      <td>142</td>
+      <td>142</td>
+    </tr>
+    <tr>
+      <th>24004</th>
+      <td>Inc_said_it</td>
+      <td>has</td>
+      <td>141</td>
+      <td>141</td>
+    </tr>
+    <tr>
+      <th>26751</th>
+      <td>1ST_QTR_NET</td>
+      <td>Shr</td>
+      <td>137</td>
+      <td>137</td>
+    </tr>
+    <tr>
+      <th>49905</th>
+      <td>QTR_JAN_31</td>
+      <td>NET</td>
+      <td>133</td>
+      <td>133</td>
+    </tr>
+    <tr>
+      <th>60168</th>
+      <td>a_filing_with</td>
+      <td>the</td>
+      <td>130</td>
+      <td>130</td>
+    </tr>
+    <tr>
+      <th>21944</th>
+      <td>said_it_expects</td>
+      <td>to</td>
+      <td>136</td>
+      <td>130</td>
+    </tr>
+    <tr>
+      <th>33141</th>
+      <td>JAN_31_NET</td>
+      <td>Shr</td>
+      <td>129</td>
+      <td>129</td>
+    </tr>
+    <tr>
+      <th>9673</th>
+      <td>The_Bank_of</td>
+      <td>England</td>
+      <td>129</td>
+      <td>126</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Identify bundles with w4 being either <code class="docutils literal notranslate"><span class="pre">in</span></code> or <code class="docutils literal notranslate"><span class="pre">to</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bundles_df</span><span class="p">[(</span><span class="n">bundles_df</span><span class="p">[</span><span class="s1">&#39;range&#39;</span><span class="p">]</span><span class="o">&gt;=</span><span class="mi">10</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">bundles_df</span><span class="p">[</span><span class="s1">&#39;w4&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;in&#39;</span><span class="p">,</span><span class="s1">&#39;to&#39;</span><span class="p">]))]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">&#39;range&#39;</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">])</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>w123</th>
+      <th>w4</th>
+      <th>freq</th>
+      <th>range</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>21944</th>
+      <td>said_it_expects</td>
+      <td>to</td>
+      <td>136</td>
+      <td>130</td>
+    </tr>
+    <tr>
+      <th>33219</th>
+      <td>said_it_agreed</td>
+      <td>to</td>
+      <td>113</td>
+      <td>111</td>
+    </tr>
+    <tr>
+      <th>42141</th>
+      <td>said_it_plans</td>
+      <td>to</td>
+      <td>84</td>
+      <td>82</td>
+    </tr>
+    <tr>
+      <th>88616</th>
+      <td>agreed_in_principle</td>
+      <td>to</td>
+      <td>75</td>
+      <td>75</td>
+    </tr>
+    <tr>
+      <th>45606</th>
+      <td>letter_of_intent</td>
+      <td>to</td>
+      <td>72</td>
+      <td>71</td>
+    </tr>
+    <tr>
+      <th>85882</th>
+      <td>it_has_agreed</td>
+      <td>to</td>
+      <td>48</td>
+      <td>48</td>
+    </tr>
+    <tr>
+      <th>60690</th>
+      <td>a_definitive_agreement</td>
+      <td>to</td>
+      <td>48</td>
+      <td>48</td>
+    </tr>
+    <tr>
+      <th>62568</th>
+      <td>cts_a_share</td>
+      <td>in</td>
+      <td>65</td>
+      <td>47</td>
+    </tr>
+    <tr>
+      <th>37697</th>
+      <td>dlrs_a_share</td>
+      <td>in</td>
+      <td>54</td>
+      <td>45</td>
+    </tr>
+    <tr>
+      <th>769</th>
+      <td>who_asked_not</td>
+      <td>to</td>
+      <td>41</td>
+      <td>40</td>
+    </tr>
+    <tr>
+      <th>1603</th>
+      <td>in_an_effort</td>
+      <td>to</td>
+      <td>38</td>
+      <td>38</td>
+    </tr>
+    <tr>
+      <th>85883</th>
+      <td>it_has_agreed</td>
+      <td>in</td>
+      <td>35</td>
+      <td>35</td>
+    </tr>
+    <tr>
+      <th>25651</th>
+      <td>will_be_used</td>
+      <td>to</td>
+      <td>34</td>
+      <td>34</td>
+    </tr>
+    <tr>
+      <th>42760</th>
+      <td>5_mln_dlrs</td>
+      <td>in</td>
+      <td>33</td>
+      <td>33</td>
+    </tr>
+    <tr>
+      <th>2215</th>
+      <td>in_the_year</td>
+      <td>to</td>
+      <td>42</td>
+      <td>33</td>
+    </tr>
+    <tr>
+      <th>29471</th>
+      <td>transaction_is_subject</td>
+      <td>to</td>
+      <td>34</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>65576</th>
+      <td>will_be_able</td>
+      <td>to</td>
+      <td>33</td>
+      <td>31</td>
+    </tr>
+    <tr>
+      <th>60148</th>
+      <td>raised_its_stake</td>
+      <td>in</td>
+      <td>31</td>
+      <td>31</td>
+    </tr>
+    <tr>
+      <th>33220</th>
+      <td>said_it_agreed</td>
+      <td>in</td>
+      <td>32</td>
+      <td>31</td>
+    </tr>
+    <tr>
+      <th>54249</th>
+      <td>dlrs_per_share</td>
+      <td>in</td>
+      <td>32</td>
+      <td>29</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="restructure-dictionary">
+<h2>Restructure dictionary<a class="headerlink" href="#restructure-dictionary" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ## filter and sort</span>
+
+<span class="c1"># ## remove ngrams with non-word characters</span>
+<span class="c1"># bundles_4_2 = {(w1,w2,w3):value for (w1,w2,w3), value in bundles_4.items() if </span>
+<span class="c1">#                re.match(r&#39;\w+&#39;,w1) and re.match(r&#39;\w+&#39;,w2) and re.match(r&#39;\w+&#39;,w3)}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># print(len(bundles_4))</span>
+<span class="c1"># print(len(bundle_4_2))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ## remove ngrams whose freq &lt; 5 and w4 with non-word characters</span>
+<span class="c1"># bundles_4_3 = {}</span>
+<span class="c1"># for w1_w2_w3 in bundles_4_2:</span>
+<span class="c1">#     bundles_4_3[w1_w2_w3] = {w4:v for w4, v in bundles_4[w1_w2_w3].items() if v &gt;= 5 and re.match(r&#39;\w+&#39;,w4)}</span>
+
+<span class="c1"># ## clean up dictionary</span>
+<span class="c1"># bundles_4_3 = {key:value for key,value in bundles_4_3.items() if len(value)!=0}</span>
+    
+<span class="c1"># print(list(bundles_4_3.items())[:5])</span>
+<span class="c1"># print(len(bundles_4_3))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#  # From raw frequencies to forward transitional probabilities</span>
+<span class="c1"># for w1_w2_w3 in bundles_4:</span>
+<span class="c1">#     total_count = float(sum(bundles_4[w1_w2_w3].values()))</span>
+<span class="c1">#     for w4 in bundles_4[w1_w2_w3]:</span>
+<span class="c1">#         bundles_4[w1_w2_w3][w4] /= total_count</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ## flatten the dictionary</span>
+<span class="c1"># bundles_4_4 = {}</span>
+<span class="c1"># for w1_w2_w3 in bundles_4_3:</span>
+<span class="c1">#     for w4 in bundles_4_3[w1_w2_w3]:</span>
+<span class="c1">#         ngram = list(w1_w2_w3)+[w4]</span>
+<span class="c1">#         bundles_4_4[tuple(ngram)] = bundles_4_3[w1_w2_w3][w4]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># sorted(bundles_4_4.items(), key=lambda x:x[1],reverse=True)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python-notes",
+            path: "./corpus"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python-notes'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="corpus-linguistics-methods.html" title="previous page">Corpus Lingustics Methods</a>
+    <a class='right-next' id="next-link" href="tokenization.html" title="next page">Tokenization</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alvin Chen<br/>
+        
+            &copy; Copyright 2020 Alvin Chen.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>
