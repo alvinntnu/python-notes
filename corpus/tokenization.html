@@ -280,7 +280,36 @@
             <i class="fas fa-list"></i> Contents
         </div>
         <nav id="bd-toc-nav">
-            
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loading-libraries">
+   Loading libraries
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sentence-tokenization">
+   Sentence Tokenization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#word-tokenization">
+   Word Tokenization
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#comparing-different-word-tokenizers">
+     Comparing different word tokenizers
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tokenization-using-regular-expressions">
+   Tokenization using regular expressions
+  </a>
+ </li>
+</ul>
+
         </nav>
     </div>
 </div>
@@ -291,10 +320,485 @@
                 
   <div class="section" id="tokenization">
 <h1>Tokenization<a class="headerlink" href="#tokenization" title="Permalink to this headline">¶</a></h1>
+<p>This notebook covers the basics of text tokenization. Tokenization is a method of breaking up a piece of text into smaller chunks, such as paragraphs, sentences, words, segments. It is usually the first step for computational text analytics as well as corpus analyses.</p>
+<p>In this notebook, we focus on English tokenization. Chinese may require an additional step, i.e., the word segmentation, which can be dealt with in later notebooks.</p>
+<div class="section" id="loading-libraries">
+<h2>Loading libraries<a class="headerlink" href="#loading-libraries" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">nltk</span></code> provides many useful tools for natural language processing and text analytics. In particular, it is a comprehensive library including many state-of-art ready-made tokenizers for use.</p>
+</div>
+<div class="section" id="sentence-tokenization">
+<h2>Sentence Tokenization<a class="headerlink" href="#sentence-tokenization" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">sent_tokenize</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">para</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;There was nothing so very remarkable in that; nor did Alice think it so very much out of the way to hear the Rabbit say to itself, “Oh dear! Oh dear! I shall be late!” (when she thought it over afterwards, it occurred to her that she ought to have wondered at this, but at the time it all seemed quite natural); but when the Rabbit actually took a watch out of its waistcoat-pocket, and looked at it, and then hurried on, Alice started to her feet, for it flashed across her mind that she had never before seen a rabbit with either a waistcoat-pocket, or a watch to take out of it, and burning with curiosity, she ran across the field after it, and fortunately was just in time to see it pop down a large rabbit-hole under the hedge.&#39;&#39;&#39;</span>
+
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sent_tokenize</span><span class="p">(</span><span class="n">para</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>There was nothing so very remarkable in that; nor did Alice think it so very much out of the way to hear the Rabbit say to itself, “Oh dear!
+
+Oh dear!
+
+I shall be late!” (when she thought it over afterwards, it occurred to her that she ought to have wondered at this, but at the time it all seemed quite natural); but when the Rabbit actually took a watch out of its waistcoat-pocket, and looked at it, and then hurried on, Alice started to her feet, for it flashed across her mind that she had never before seen a rabbit with either a waistcoat-pocket, or a watch to take out of it, and burning with curiosity, she ran across the field after it, and fortunately was just in time to see it pop down a large rabbit-hole under the hedge.
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">sent_tokenize()</span></code> function uses an instance of <code class="docutils literal notranslate"><span class="pre">PunktSentenceTokenizer</span></code> from the <code class="docutils literal notranslate"><span class="pre">ntlk.tokenize.punkt</span></code> module.</p>
+<p>To process large amount of data, it is recommended to load the pre-trained <code class="docutils literal notranslate"><span class="pre">PunktSentenceTokenizer</span></code> once, and call its <code class="docutils literal notranslate"><span class="pre">tokenizer()</span></code> method for the task.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk.data</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;tokenizers/punkt/PY3/english.pickle&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tokenizer</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">para</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;There was nothing so very remarkable in that; nor did Alice think it so very much out of the way to hear the Rabbit say to itself, “Oh dear!&#39;,
+ &#39;Oh dear!&#39;,
+ &#39;I shall be late!” (when she thought it over afterwards, it occurred to her that she ought to have wondered at this, but at the time it all seemed quite natural); but when the Rabbit actually took a watch out of its waistcoat-pocket, and looked at it, and then hurried on, Alice started to her feet, for it flashed across her mind that she had never before seen a rabbit with either a waistcoat-pocket, or a watch to take out of it, and burning with curiosity, she ran across the field after it, and fortunately was just in time to see it pop down a large rabbit-hole under the hedge.&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">nltk</span></code> also provides many pre-trained <code class="docutils literal notranslate"><span class="pre">PunktSentenceTokenizer</span></code> for other European languages.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>ls /Users/alvinchen/nltk_data/tokenizers/punkt/PY3
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>README            estonian.pickle   italian.pickle    slovene.pickle
+czech.pickle      finnish.pickle    norwegian.pickle  spanish.pickle
+danish.pickle     french.pickle     polish.pickle     swedish.pickle
+dutch.pickle      german.pickle     portuguese.pickle turkish.pickle
+english.pickle    greek.pickle      russian.pickle
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="word-tokenization">
+<h2>Word Tokenization<a class="headerlink" href="#word-tokenization" title="Permalink to this headline">¶</a></h2>
+<p>Similarly, the <code class="docutils literal notranslate"><span class="pre">word_tokenize()</span></code> function is a wrapper function that calls the <code class="docutils literal notranslate"><span class="pre">tokenize()</span></code> method on a instance of <code class="docutils literal notranslate"><span class="pre">TreebankWordTokenizer</span></code> class.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">word_tokenize</span>
+<span class="n">word_tokenize</span><span class="p">(</span><span class="n">para</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;There&#39;,
+ &#39;was&#39;,
+ &#39;nothing&#39;,
+ &#39;so&#39;,
+ &#39;very&#39;,
+ &#39;remarkable&#39;,
+ &#39;in&#39;,
+ &#39;that&#39;,
+ &#39;;&#39;,
+ &#39;nor&#39;,
+ &#39;did&#39;,
+ &#39;Alice&#39;,
+ &#39;think&#39;,
+ &#39;it&#39;,
+ &#39;so&#39;,
+ &#39;very&#39;,
+ &#39;much&#39;,
+ &#39;out&#39;,
+ &#39;of&#39;,
+ &#39;the&#39;,
+ &#39;way&#39;,
+ &#39;to&#39;,
+ &#39;hear&#39;,
+ &#39;the&#39;,
+ &#39;Rabbit&#39;,
+ &#39;say&#39;,
+ &#39;to&#39;,
+ &#39;itself&#39;,
+ &#39;,&#39;,
+ &#39;“&#39;,
+ &#39;Oh&#39;,
+ &#39;dear&#39;,
+ &#39;!&#39;,
+ &#39;Oh&#39;,
+ &#39;dear&#39;,
+ &#39;!&#39;,
+ &#39;I&#39;,
+ &#39;shall&#39;,
+ &#39;be&#39;,
+ &#39;late&#39;,
+ &#39;!&#39;,
+ &#39;”&#39;,
+ &#39;(&#39;,
+ &#39;when&#39;,
+ &#39;she&#39;,
+ &#39;thought&#39;,
+ &#39;it&#39;,
+ &#39;over&#39;,
+ &#39;afterwards&#39;,
+ &#39;,&#39;,
+ &#39;it&#39;,
+ &#39;occurred&#39;,
+ &#39;to&#39;,
+ &#39;her&#39;,
+ &#39;that&#39;,
+ &#39;she&#39;,
+ &#39;ought&#39;,
+ &#39;to&#39;,
+ &#39;have&#39;,
+ &#39;wondered&#39;,
+ &#39;at&#39;,
+ &#39;this&#39;,
+ &#39;,&#39;,
+ &#39;but&#39;,
+ &#39;at&#39;,
+ &#39;the&#39;,
+ &#39;time&#39;,
+ &#39;it&#39;,
+ &#39;all&#39;,
+ &#39;seemed&#39;,
+ &#39;quite&#39;,
+ &#39;natural&#39;,
+ &#39;)&#39;,
+ &#39;;&#39;,
+ &#39;but&#39;,
+ &#39;when&#39;,
+ &#39;the&#39;,
+ &#39;Rabbit&#39;,
+ &#39;actually&#39;,
+ &#39;took&#39;,
+ &#39;a&#39;,
+ &#39;watch&#39;,
+ &#39;out&#39;,
+ &#39;of&#39;,
+ &#39;its&#39;,
+ &#39;waistcoat-pocket&#39;,
+ &#39;,&#39;,
+ &#39;and&#39;,
+ &#39;looked&#39;,
+ &#39;at&#39;,
+ &#39;it&#39;,
+ &#39;,&#39;,
+ &#39;and&#39;,
+ &#39;then&#39;,
+ &#39;hurried&#39;,
+ &#39;on&#39;,
+ &#39;,&#39;,
+ &#39;Alice&#39;,
+ &#39;started&#39;,
+ &#39;to&#39;,
+ &#39;her&#39;,
+ &#39;feet&#39;,
+ &#39;,&#39;,
+ &#39;for&#39;,
+ &#39;it&#39;,
+ &#39;flashed&#39;,
+ &#39;across&#39;,
+ &#39;her&#39;,
+ &#39;mind&#39;,
+ &#39;that&#39;,
+ &#39;she&#39;,
+ &#39;had&#39;,
+ &#39;never&#39;,
+ &#39;before&#39;,
+ &#39;seen&#39;,
+ &#39;a&#39;,
+ &#39;rabbit&#39;,
+ &#39;with&#39;,
+ &#39;either&#39;,
+ &#39;a&#39;,
+ &#39;waistcoat-pocket&#39;,
+ &#39;,&#39;,
+ &#39;or&#39;,
+ &#39;a&#39;,
+ &#39;watch&#39;,
+ &#39;to&#39;,
+ &#39;take&#39;,
+ &#39;out&#39;,
+ &#39;of&#39;,
+ &#39;it&#39;,
+ &#39;,&#39;,
+ &#39;and&#39;,
+ &#39;burning&#39;,
+ &#39;with&#39;,
+ &#39;curiosity&#39;,
+ &#39;,&#39;,
+ &#39;she&#39;,
+ &#39;ran&#39;,
+ &#39;across&#39;,
+ &#39;the&#39;,
+ &#39;field&#39;,
+ &#39;after&#39;,
+ &#39;it&#39;,
+ &#39;,&#39;,
+ &#39;and&#39;,
+ &#39;fortunately&#39;,
+ &#39;was&#39;,
+ &#39;just&#39;,
+ &#39;in&#39;,
+ &#39;time&#39;,
+ &#39;to&#39;,
+ &#39;see&#39;,
+ &#39;it&#39;,
+ &#39;pop&#39;,
+ &#39;down&#39;,
+ &#39;a&#39;,
+ &#39;large&#39;,
+ &#39;rabbit-hole&#39;,
+ &#39;under&#39;,
+ &#39;the&#39;,
+ &#39;hedge&#39;,
+ &#39;.&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>To process large amount of data, please create an instance of <code class="docutils literal notranslate"><span class="pre">TreebankWordTokenizer</span></code> and call its <code class="docutils literal notranslate"><span class="pre">tokenize()</span></code> method for more efficient processing.</p>
+<p>We will get the same results with the following codes as above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">TreebankWordTokenizer</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">TreebankWordTokenizer</span><span class="p">()</span>
+
+<span class="n">tokenizer</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">para</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;There&#39;,
+ &#39;was&#39;,
+ &#39;nothing&#39;,
+ &#39;so&#39;,
+ &#39;very&#39;,
+ &#39;remarkable&#39;,
+ &#39;in&#39;,
+ &#39;that&#39;,
+ &#39;;&#39;,
+ &#39;nor&#39;,
+ &#39;did&#39;,
+ &#39;Alice&#39;,
+ &#39;think&#39;,
+ &#39;it&#39;,
+ &#39;so&#39;,
+ &#39;very&#39;,
+ &#39;much&#39;,
+ &#39;out&#39;,
+ &#39;of&#39;,
+ &#39;the&#39;,
+ &#39;way&#39;,
+ &#39;to&#39;,
+ &#39;hear&#39;,
+ &#39;the&#39;,
+ &#39;Rabbit&#39;,
+ &#39;say&#39;,
+ &#39;to&#39;,
+ &#39;itself&#39;,
+ &#39;,&#39;,
+ &#39;“&#39;,
+ &#39;Oh&#39;,
+ &#39;dear&#39;,
+ &#39;!&#39;,
+ &#39;Oh&#39;,
+ &#39;dear&#39;,
+ &#39;!&#39;,
+ &#39;I&#39;,
+ &#39;shall&#39;,
+ &#39;be&#39;,
+ &#39;late&#39;,
+ &#39;!&#39;,
+ &#39;”&#39;,
+ &#39;(&#39;,
+ &#39;when&#39;,
+ &#39;she&#39;,
+ &#39;thought&#39;,
+ &#39;it&#39;,
+ &#39;over&#39;,
+ &#39;afterwards&#39;,
+ &#39;,&#39;,
+ &#39;it&#39;,
+ &#39;occurred&#39;,
+ &#39;to&#39;,
+ &#39;her&#39;,
+ &#39;that&#39;,
+ &#39;she&#39;,
+ &#39;ought&#39;,
+ &#39;to&#39;,
+ &#39;have&#39;,
+ &#39;wondered&#39;,
+ &#39;at&#39;,
+ &#39;this&#39;,
+ &#39;,&#39;,
+ &#39;but&#39;,
+ &#39;at&#39;,
+ &#39;the&#39;,
+ &#39;time&#39;,
+ &#39;it&#39;,
+ &#39;all&#39;,
+ &#39;seemed&#39;,
+ &#39;quite&#39;,
+ &#39;natural&#39;,
+ &#39;)&#39;,
+ &#39;;&#39;,
+ &#39;but&#39;,
+ &#39;when&#39;,
+ &#39;the&#39;,
+ &#39;Rabbit&#39;,
+ &#39;actually&#39;,
+ &#39;took&#39;,
+ &#39;a&#39;,
+ &#39;watch&#39;,
+ &#39;out&#39;,
+ &#39;of&#39;,
+ &#39;its&#39;,
+ &#39;waistcoat-pocket&#39;,
+ &#39;,&#39;,
+ &#39;and&#39;,
+ &#39;looked&#39;,
+ &#39;at&#39;,
+ &#39;it&#39;,
+ &#39;,&#39;,
+ &#39;and&#39;,
+ &#39;then&#39;,
+ &#39;hurried&#39;,
+ &#39;on&#39;,
+ &#39;,&#39;,
+ &#39;Alice&#39;,
+ &#39;started&#39;,
+ &#39;to&#39;,
+ &#39;her&#39;,
+ &#39;feet&#39;,
+ &#39;,&#39;,
+ &#39;for&#39;,
+ &#39;it&#39;,
+ &#39;flashed&#39;,
+ &#39;across&#39;,
+ &#39;her&#39;,
+ &#39;mind&#39;,
+ &#39;that&#39;,
+ &#39;she&#39;,
+ &#39;had&#39;,
+ &#39;never&#39;,
+ &#39;before&#39;,
+ &#39;seen&#39;,
+ &#39;a&#39;,
+ &#39;rabbit&#39;,
+ &#39;with&#39;,
+ &#39;either&#39;,
+ &#39;a&#39;,
+ &#39;waistcoat-pocket&#39;,
+ &#39;,&#39;,
+ &#39;or&#39;,
+ &#39;a&#39;,
+ &#39;watch&#39;,
+ &#39;to&#39;,
+ &#39;take&#39;,
+ &#39;out&#39;,
+ &#39;of&#39;,
+ &#39;it&#39;,
+ &#39;,&#39;,
+ &#39;and&#39;,
+ &#39;burning&#39;,
+ &#39;with&#39;,
+ &#39;curiosity&#39;,
+ &#39;,&#39;,
+ &#39;she&#39;,
+ &#39;ran&#39;,
+ &#39;across&#39;,
+ &#39;the&#39;,
+ &#39;field&#39;,
+ &#39;after&#39;,
+ &#39;it&#39;,
+ &#39;,&#39;,
+ &#39;and&#39;,
+ &#39;fortunately&#39;,
+ &#39;was&#39;,
+ &#39;just&#39;,
+ &#39;in&#39;,
+ &#39;time&#39;,
+ &#39;to&#39;,
+ &#39;see&#39;,
+ &#39;it&#39;,
+ &#39;pop&#39;,
+ &#39;down&#39;,
+ &#39;a&#39;,
+ &#39;large&#39;,
+ &#39;rabbit-hole&#39;,
+ &#39;under&#39;,
+ &#39;the&#39;,
+ &#39;hedge&#39;,
+ &#39;.&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">nltk</span></code> module has implemented other more task-oriented word tokenizers, which differ in terms of their specific handling of the punctuations and contractions.</p>
+<p><img alt="" src="../_images/nltk-tokenizer-class.png" /></p>
+<div class="section" id="comparing-different-word-tokenizers">
+<h3>Comparing different word tokenizers<a class="headerlink" href="#comparing-different-word-tokenizers" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>How to process texts for a computational understanding of the text</p></li>
-<li><p>Focus on tokenization, i.e., segmenting texts into shorter yet meaningful linguistic units</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TreebankWordTokenizer</span></code> follows the Penn Treebank conventions for word tokenization.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">WordPunctTokenizer</span></code> splits all punctuations into separate tokens.</p></li>
 </ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">WordPunctTokenizer</span>
+<span class="n">wpt</span> <span class="o">=</span> <span class="n">WordPunctTokenizer</span><span class="p">()</span>
+<span class="n">tbwt</span> <span class="o">=</span> <span class="n">TreebankWordTokenizer</span><span class="p">()</span>
+
+<span class="n">sent</span> <span class="o">=</span> <span class="s2">&quot;Isn&#39;t this great? I can&#39;t tell!&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wpt</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">sent</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Isn&#39;, &quot;&#39;&quot;, &#39;t&#39;, &#39;this&#39;, &#39;great&#39;, &#39;?&#39;, &#39;I&#39;, &#39;can&#39;, &quot;&#39;&quot;, &#39;t&#39;, &#39;tell&#39;, &#39;!&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tbwt</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">sent</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Is&#39;, &quot;n&#39;t&quot;, &#39;this&#39;, &#39;great&#39;, &#39;?&#39;, &#39;I&#39;, &#39;ca&#39;, &quot;n&#39;t&quot;, &#39;tell&#39;, &#39;!&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="tokenization-using-regular-expressions">
+<h2>Tokenization using regular expressions<a class="headerlink" href="#tokenization-using-regular-expressions" title="Permalink to this headline">¶</a></h2>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -306,16 +810,16 @@
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "ckiptagger"
+            mode: "python"
         },
         kernelOptions: {
-            kernelName: "ckiptagger",
+            kernelName: "python-notes",
             path: "./corpus"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'ckiptagger'</script>
+    <script>kernelName = 'python-notes'</script>
 
               </div>
               
