@@ -363,6 +363,28 @@ grViz(G4) %>%
 export_svg %>% charToRaw %>% rsvg_png("./images/neural-network-sample3.png", width=1600)
 ```
 
+
+## Tokenizer Class Inheritance
+
+```{r}
+nltk_tokenizer_class <- 'digraph G {
+node[shape=rectangle,color=violet, style=filled, fontcolor=white]
+edge[arrowhead=none, color=grey]
+a[label = "TokenizerI"]
+b[label= "PunktWordTokenizer"]
+c[label= "TreeBankWordTokenizer"]
+d[label= "RegexpTokenizer"]
+e[label= "WordPunktTokenizer"]
+f[label= "WhitespaceTokenizer"]
+
+a->{b,c,d}
+d->{e,f}
+}'
+grViz(nltk_tokenizer_class, width="100%")
+grViz(nltk_tokenizer_class) %>%
+export_svg %>% charToRaw %>% rsvg_png("./images/nltk-tokenizer-class.png", width=1600)
+```
+
 ## Neural Network Flowchart
 
 ```{r}
