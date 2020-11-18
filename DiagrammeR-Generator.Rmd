@@ -382,7 +382,7 @@ d->{e,f}
 }'
 grViz(nltk_tokenizer_class, width="100%")
 grViz(nltk_tokenizer_class) %>%
-export_svg %>% charToRaw %>% rsvg_png("./images/nltk-tokenizer-class.png", width=1600)
+export_svg %>% charToRaw %>% rsvg_png("./images/nltk-tokenizer-class.png", width=1024)
 ```
 
 ## Neural Network Flowchart

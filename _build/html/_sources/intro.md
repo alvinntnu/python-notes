@@ -46,6 +46,21 @@ In addition to books, there are many wonderful on-line resources, esp. professio
 - [Jason Brownlee's Blog: Machine Learning Mastery](https://machinelearningmastery.com/)
 - [Jay Alammar's Blog](https://jalammar.github.io/)
 
+## YouTube Channels
+
+- [Chris McCormick AI](https://www.youtube.com/channel/UCoRX98PLOsaN8PtekB9kWrw/videos)
+- [Corey Schafer](https://www.youtube.com/channel/UCCezIgC97PvUuR4_gbFUs5g)
+- [Edureka!](https://www.youtube.com/channel/UCkw4JCwteGrDHIsyIIKo4tQ)
+- [Deeplearning.ai](https://www.youtube.com/channel/UCcIXc5mJsHVYTZR1maL5l9w)
+- [Free Code Camp](https://www.youtube.com/c/Freecodecamp/videos)
+- [Giant Neural Network](https://www.youtube.com/watch?v=ZzWaow1Rvho&list=PLxt59R_fWVzT9bDxA76AHm3ig0Gg9S3So)
+- [Tech with Tim](https://www.youtube.com/channel/UC4JX40jDee_tINbkjycV4Sg)
+- [PyData](https://www.youtube.com/user/PyDataTV/featured)
+- [Python Programmer](https://www.youtube.com/channel/UC68KSmHePPePCjW4v57VPQg)
+- [Keith Galli](https://www.youtube.com/channel/UCq6XkhO5SZ66N04IcPbqNcw)
+- [Data Science Dojo](https://www.youtube.com/c/Datasciencedojo/featured)
+- [Calculus: Single Variable by Professor Robert Ghrist](https://www.youtube.com/playlist?list=PLKc2XOQp0dMwj9zAXD5LlWpriIXIrGaNb)
+
 
 ## References
 
