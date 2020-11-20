@@ -66,3 +66,25 @@ wpt.tokenize(sent)
 tbwt.tokenize(sent)
 
 ## Tokenization using regular expressions
+
+The `nltk` also provides another flexible way for text tokenization based on regular expression.
+
+The `RegexTokenizer` class allows for text tokenization based on the self-defined regular expression patterns.
+
+The regular expression can be created/defined for either the token or the delimiter.
+
+from nltk.tokenize import RegexpTokenizer
+
+
+retok1 = RegexpTokenizer(pattern= "[a-zA-Z_'-]+")
+retok2 = RegexpTokenizer(pattern= "[a-zA-Z_-]+")
+retok3 = RegexpTokenizer(pattern= "\s+", gaps=True)
+
+
+print(retok1.tokenize(sent))
+
+See how this tokenizer deals with the apostrophe?
+
+print(retok2.tokenize(sent))
+
+print(retok3.tokenize(sent))

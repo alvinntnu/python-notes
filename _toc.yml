@@ -31,6 +31,7 @@
       sections:
         - file: corpus/lexical-bundles
         - file: corpus/tokenization
+        - file: corpus/wordnet
         - file: corpus/word-cloud
         - file: corpus/patterns-constructions
     - file: corpus/structured-corpus-processing

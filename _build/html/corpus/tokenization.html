@@ -38,7 +38,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Word Cloud" href="word-cloud.html" />
+    <link rel="next" title="WordNet" href="wordnet.html" />
     <link rel="prev" title="Lexical Bundles" href="lexical-bundles.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -111,6 +111,11 @@
      <li class="toctree-l3 current active">
       <a class="current reference internal" href="#">
        Tokenization
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="wordnet.html">
+       WordNet
       </a>
      </li>
      <li class="toctree-l3">
@@ -386,11 +391,7 @@ I shall be late!” (when she thought it over afterwards, it occurred to her tha
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>README            estonian.pickle   italian.pickle    slovene.pickle
-czech.pickle      finnish.pickle    norwegian.pickle  spanish.pickle
-danish.pickle     french.pickle     polish.pickle     swedish.pickle
-dutch.pickle      german.pickle     portuguese.pickle turkish.pickle
-english.pickle    greek.pickle      russian.pickle
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ls: /Users/alvinchen/nltk_data/tokenizers/punkt/PY3: No such file or directory
 </pre></div>
 </div>
 </div>
@@ -798,6 +799,62 @@ english.pickle    greek.pickle      russian.pickle
 </div>
 <div class="section" id="tokenization-using-regular-expressions">
 <h2>Tokenization using regular expressions<a class="headerlink" href="#tokenization-using-regular-expressions" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">nltk</span></code> also provides another flexible way for text tokenization based on regular expression.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">RegexTokenizer</span></code> class allows for text tokenization based on the self-defined regular expression patterns.</p>
+<p>The regular expression can be created/defined for either the token or the delimiter.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">RegexpTokenizer</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">retok1</span> <span class="o">=</span> <span class="n">RegexpTokenizer</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span> <span class="s2">&quot;[a-zA-Z_&#39;-]+&quot;</span><span class="p">)</span>
+<span class="n">retok2</span> <span class="o">=</span> <span class="n">RegexpTokenizer</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span> <span class="s2">&quot;[a-zA-Z_-]+&quot;</span><span class="p">)</span>
+<span class="n">retok3</span> <span class="o">=</span> <span class="n">RegexpTokenizer</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span> <span class="s2">&quot;\s+&quot;</span><span class="p">,</span> <span class="n">gaps</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">retok1</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">sent</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&quot;Isn&#39;t&quot;, &#39;this&#39;, &#39;great&#39;, &#39;I&#39;, &quot;can&#39;t&quot;, &#39;tell&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>See how this tokenizer deals with the apostrophe?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">retok2</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">sent</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Isn&#39;, &#39;t&#39;, &#39;this&#39;, &#39;great&#39;, &#39;I&#39;, &#39;can&#39;, &#39;t&#39;, &#39;tell&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">retok3</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">sent</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&quot;Isn&#39;t&quot;, &#39;this&#39;, &#39;great?&#39;, &#39;I&#39;, &quot;can&#39;t&quot;, &#39;tell!&#39;]
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 
@@ -830,7 +887,7 @@ english.pickle    greek.pickle      russian.pickle
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="lexical-bundles.html" title="previous page">Lexical Bundles</a>
-    <a class='right-next' id="next-link" href="word-cloud.html" title="next page">Word Cloud</a>
+    <a class='right-next' id="next-link" href="wordnet.html" title="next page">WordNet</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

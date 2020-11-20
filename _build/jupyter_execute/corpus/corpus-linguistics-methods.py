@@ -15,12 +15,16 @@ import nltk
 from nltk.corpus import brown
 from nltk.text import Text
 import pandas as pd
+import numpy as np
 
 brown_text = Text(brown.words())
 
 ## Collocations
 
 - Documentation [nltk.collocations](https://www.nltk.org/howto/collocations.html)
+- `nltk.collocations`: Get the `BigramCollocationFinder` which we can use to find n-grams
+- `nltk.metrics`: Get the `BigramAssocMeasures` to define collocations (It's also available in `nltk.collocations`)
+- Use `finder.nbest()` methods to select/filter collocations
 
 ## Collocations based on Text
 brown_text.collocation_list()[:10]
@@ -28,44 +32,63 @@ brown_text.collocation_list()[:10]
 
 from nltk.collocations import BigramAssocMeasures, BigramCollocationFinder
 
-bigram_measures = nltk.collocations.BigramAssocMeasures()
-finder = BigramCollocationFinder.from_words(brown.words())
+bigram_measures = nltk.collocations.BigramAssocMeasures() # measures
+finder = BigramCollocationFinder.from_words(brown.words()) # finders
 
 ## bigram collocations based on different association measures
 finder.nbest(bigram_measures.likelihood_ratio,10)
 finder.nbest(bigram_measures.pmi, 10)
 
+### Apply Filters
+
+We can create an anonymous function as a helper to remove irrelevant word tokens before collocation computation.
+
+For example, we remove:
+
+- word tokens whose char length < 3
+- word tokens that belong to the stopwords
+- word tokens that include at least one non-alphabetic char
+
 ## Apply freq-based filers for bigram collocations
 finder.apply_freq_filter(10)
 
-## Apply word filer
+## Apply word filer function
 from nltk.corpus import stopwords
 stop_words_en = stopwords.words('english')
-finder.apply_word_filter(lambda x: not x.isalpha())
 
+
+filter_stops = lambda w: len(w)<3 or w in stop_words_en or not w.isalpha()
+
+
+finder.apply_word_filter(filter_stops) # filter on word tokens
+finder.apply_freq_filter(10) # filter on bigram min frequencies 
 finder.nbest(bigram_measures.likelihood_ratio, 10)
 finder.nbest(bigram_measures.pmi, 10)
 
-## Create collocations based on tagged words
-finder = BigramCollocationFinder.from_words(
-    brown.tagged_words())
-finder.apply_word_filter(lambda x: not x[0].isalpha())
-finder.nbest(bigram_measures.pmi, 10)
+### POS Collocations
 
 ## Create collcoations based on tags only
 finder = BigramCollocationFinder.from_words(
-    t for w, t in brown.tagged_words(tagset='universal'))
-finder.nbest(bigram_measures.pmi, 10)
+    t for w, t in brown.tagged_words(tagset='universal') if t != 'X')
+finder.nbest(bigram_measures.likelihood_ratio, 10)
+
+### Collocations based on Skipped Bigrams
 
 ## Create collocations with intervneing words (gapped n-grams)
 finder = BigramCollocationFinder.from_words(brown.words(), window_size=2)
-finder.apply_word_filter(lambda x: not x.isalpha())
+finder.apply_word_filter(filter_stops)
 finder.apply_freq_filter(10)
-finder.nbest(bigram_measures.pmi, 10)
+finder.nbest(bigram_measures.likelihood_ratio, 10)
+
+### Scoring Ngrams
 
 ## Finders
 scored = finder.score_ngrams(bigram_measures.raw_freq)
 scored[:10]
+
+scored = finder.above_score(bigram_measures.pmi, min_score = 15)
+for s in scored:
+    print(s)
 
 ## Dispersion
 
@@ -372,6 +395,7 @@ brown_genre_cdf2.tabulate(conditions=['adventure','editorial','fiction'],
 
 lexical-bundles
 tokenization
+wordnet
 word-cloud
 patterns-constructions
 ```
