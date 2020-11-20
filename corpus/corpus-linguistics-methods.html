@@ -114,6 +114,11 @@
       </a>
      </li>
      <li class="toctree-l3">
+      <a class="reference internal" href="wordnet.html">
+       WordNet
+      </a>
+     </li>
+     <li class="toctree-l3">
       <a class="reference internal" href="word-cloud.html">
        Word Cloud
       </a>
@@ -290,6 +295,28 @@
   <a class="reference internal nav-link" href="#collocations">
    Collocations
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#apply-filters">
+     Apply Filters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pos-collocations">
+     POS Collocations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#collocations-based-on-skipped-bigrams">
+     Collocations based on Skipped Bigrams
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#scoring-ngrams">
+     Scoring Ngrams
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#dispersion">
@@ -357,6 +384,7 @@
 <span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">brown</span>
 <span class="kn">from</span> <span class="nn">nltk.text</span> <span class="kn">import</span> <span class="n">Text</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="n">brown_text</span> <span class="o">=</span> <span class="n">Text</span><span class="p">(</span><span class="n">brown</span><span class="o">.</span><span class="n">words</span><span class="p">())</span>
 </pre></div>
@@ -368,6 +396,9 @@
 <h2>Collocations<a class="headerlink" href="#collocations" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Documentation <a class="reference external" href="https://www.nltk.org/howto/collocations.html">nltk.collocations</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nltk.collocations</span></code>: Get the <code class="docutils literal notranslate"><span class="pre">BigramCollocationFinder</span></code> which we can use to find n-grams</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nltk.metrics</span></code>: Get the <code class="docutils literal notranslate"><span class="pre">BigramAssocMeasures</span></code> to define collocations (It’s also available in <code class="docutils literal notranslate"><span class="pre">nltk.collocations</span></code>)</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">finder.nbest()</span></code> methods to select/filter collocations</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -377,8 +408,8 @@
 
 <span class="kn">from</span> <span class="nn">nltk.collocations</span> <span class="kn">import</span> <span class="n">BigramAssocMeasures</span><span class="p">,</span> <span class="n">BigramCollocationFinder</span>
 
-<span class="n">bigram_measures</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">collocations</span><span class="o">.</span><span class="n">BigramAssocMeasures</span><span class="p">()</span>
-<span class="n">finder</span> <span class="o">=</span> <span class="n">BigramCollocationFinder</span><span class="o">.</span><span class="n">from_words</span><span class="p">(</span><span class="n">brown</span><span class="o">.</span><span class="n">words</span><span class="p">())</span>
+<span class="n">bigram_measures</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">collocations</span><span class="o">.</span><span class="n">BigramAssocMeasures</span><span class="p">()</span> <span class="c1"># measures</span>
+<span class="n">finder</span> <span class="o">=</span> <span class="n">BigramCollocationFinder</span><span class="o">.</span><span class="n">from_words</span><span class="p">(</span><span class="n">brown</span><span class="o">.</span><span class="n">words</span><span class="p">())</span> <span class="c1"># finders</span>
 </pre></div>
 </div>
 </div>
@@ -406,16 +437,30 @@
 </div>
 </div>
 </div>
+<div class="section" id="apply-filters">
+<h3>Apply Filters<a class="headerlink" href="#apply-filters" title="Permalink to this headline">¶</a></h3>
+<p>We can create an anonymous function as a helper to remove irrelevant word tokens before collocation computation.</p>
+<p>For example, we remove:</p>
+<ul class="simple">
+<li><p>word tokens whose char length &lt; 3</p></li>
+<li><p>word tokens that belong to the stopwords</p></li>
+<li><p>word tokens that include at least one non-alphabetic char</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Apply freq-based filers for bigram collocations</span>
 <span class="n">finder</span><span class="o">.</span><span class="n">apply_freq_filter</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 
-<span class="c1">## Apply word filer</span>
+<span class="c1">## Apply word filer function</span>
 <span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
 <span class="n">stop_words_en</span> <span class="o">=</span> <span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">)</span>
-<span class="n">finder</span><span class="o">.</span><span class="n">apply_word_filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">isalpha</span><span class="p">())</span>
 
+
+<span class="n">filter_stops</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">w</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)</span><span class="o">&lt;</span><span class="mi">3</span> <span class="ow">or</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">stop_words_en</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">w</span><span class="o">.</span><span class="n">isalpha</span><span class="p">()</span>
+
+
+<span class="n">finder</span><span class="o">.</span><span class="n">apply_word_filter</span><span class="p">(</span><span class="n">filter_stops</span><span class="p">)</span> <span class="c1"># filter on word tokens</span>
+<span class="n">finder</span><span class="o">.</span><span class="n">apply_freq_filter</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="c1"># filter on bigram min frequencies </span>
 <span class="n">finder</span><span class="o">.</span><span class="n">nbest</span><span class="p">(</span><span class="n">bigram_measures</span><span class="o">.</span><span class="n">likelihood_ratio</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 <span class="n">finder</span><span class="o">.</span><span class="n">nbest</span><span class="p">(</span><span class="n">bigram_measures</span><span class="o">.</span><span class="n">pmi</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 </pre></div>
@@ -426,90 +471,74 @@
  (&#39;Viet&#39;, &#39;Nam&#39;),
  (&#39;Pathet&#39;, &#39;Lao&#39;),
  (&#39;Simms&#39;, &#39;Purdew&#39;),
- (&#39;El&#39;, &#39;Paso&#39;),
- (&#39;Lo&#39;, &#39;Shu&#39;),
  (&#39;Internal&#39;, &#39;Revenue&#39;),
  (&#39;Puerto&#39;, &#39;Rico&#39;),
  (&#39;Saxon&#39;, &#39;Shore&#39;),
- (&#39;carbon&#39;, &#39;tetrachloride&#39;)]
+ (&#39;carbon&#39;, &#39;tetrachloride&#39;),
+ (&#39;unwed&#39;, &#39;mothers&#39;),
+ (&#39;Armed&#39;, &#39;Forces&#39;)]
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Create collocations based on tagged words</span>
-<span class="n">finder</span> <span class="o">=</span> <span class="n">BigramCollocationFinder</span><span class="o">.</span><span class="n">from_words</span><span class="p">(</span>
-    <span class="n">brown</span><span class="o">.</span><span class="n">tagged_words</span><span class="p">())</span>
-<span class="n">finder</span><span class="o">.</span><span class="n">apply_word_filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="ow">not</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">isalpha</span><span class="p">())</span>
-<span class="n">finder</span><span class="o">.</span><span class="n">nbest</span><span class="p">(</span><span class="n">bigram_measures</span><span class="o">.</span><span class="n">pmi</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-</pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[((&#39;A&#39;, &#39;AT-NC&#39;), (&#39;charge&#39;, &#39;NN-NC&#39;)),
- ((&#39;A&#39;, &#39;FW-IN&#39;), (&#39;quibusdam&#39;, &#39;FW-WPO&#39;)),
- ((&#39;ACTH&#39;, &#39;NP&#39;), (&#39;Gel&#39;, &#39;NN-TL&#39;)),
- ((&#39;Abner&#39;, &#39;NP&#39;), (&#39;Haynes&#39;, &#39;NP&#39;)),
- ((&#39;Ace&#39;, &#39;NN-TL&#39;), (&#39;Driver&#39;, &#39;NN-TL&#39;)),
- ((&#39;Acoustical&#39;, &#39;JJ-HL&#39;), (&#39;interferometer&#39;, &#39;NN-HL&#39;)),
- ((&#39;Actively&#39;, &#39;RB-HL&#39;), (&#39;modernizing&#39;, &#39;VBG-HL&#39;)),
- ((&#39;Ad&#39;, &#39;FW-IN-TL&#39;), (&#39;Amicam&#39;, &#39;FW-NN-TL&#39;)),
- ((&#39;Adjusted&#39;, &#39;VBN-HL&#39;), (&#39;gross&#39;, &#39;JJ-HL&#39;)),
- ((&#39;Aerobacter&#39;, &#39;NP&#39;), (&#39;aerogenes&#39;, &#39;NP&#39;))]
-</pre></div>
-</div>
-</div>
-</div>
+<div class="section" id="pos-collocations">
+<h3>POS Collocations<a class="headerlink" href="#pos-collocations" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Create collcoations based on tags only</span>
 <span class="n">finder</span> <span class="o">=</span> <span class="n">BigramCollocationFinder</span><span class="o">.</span><span class="n">from_words</span><span class="p">(</span>
-    <span class="n">t</span> <span class="k">for</span> <span class="n">w</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">brown</span><span class="o">.</span><span class="n">tagged_words</span><span class="p">(</span><span class="n">tagset</span><span class="o">=</span><span class="s1">&#39;universal&#39;</span><span class="p">))</span>
-<span class="n">finder</span><span class="o">.</span><span class="n">nbest</span><span class="p">(</span><span class="n">bigram_measures</span><span class="o">.</span><span class="n">pmi</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="n">t</span> <span class="k">for</span> <span class="n">w</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">brown</span><span class="o">.</span><span class="n">tagged_words</span><span class="p">(</span><span class="n">tagset</span><span class="o">=</span><span class="s1">&#39;universal&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">t</span> <span class="o">!=</span> <span class="s1">&#39;X&#39;</span><span class="p">)</span>
+<span class="n">finder</span><span class="o">.</span><span class="n">nbest</span><span class="p">(</span><span class="n">bigram_measures</span><span class="o">.</span><span class="n">likelihood_ratio</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;X&#39;, &#39;X&#39;),
- (&#39;PRON&#39;, &#39;VERB&#39;),
- (&#39;PRT&#39;, &#39;VERB&#39;),
- (&#39;ADP&#39;, &#39;DET&#39;),
- (&#39;DET&#39;, &#39;ADJ&#39;),
- (&#39;ADJ&#39;, &#39;NOUN&#39;),
- (&#39;.&#39;, &#39;CONJ&#39;),
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;ADP&#39;, &#39;DET&#39;),
  (&#39;DET&#39;, &#39;NOUN&#39;),
- (&#39;VERB&#39;, &#39;PRT&#39;),
- (&#39;.&#39;, &#39;PRON&#39;)]
+ (&#39;PRON&#39;, &#39;VERB&#39;),
+ (&#39;ADJ&#39;, &#39;NOUN&#39;),
+ (&#39;NOUN&#39;, &#39;.&#39;),
+ (&#39;NOUN&#39;, &#39;DET&#39;),
+ (&#39;DET&#39;, &#39;ADJ&#39;),
+ (&#39;NOUN&#39;, &#39;ADP&#39;),
+ (&#39;PRT&#39;, &#39;VERB&#39;),
+ (&#39;ADP&#39;, &#39;.&#39;)]
 </pre></div>
 </div>
 </div>
 </div>
+</div>
+<div class="section" id="collocations-based-on-skipped-bigrams">
+<h3>Collocations based on Skipped Bigrams<a class="headerlink" href="#collocations-based-on-skipped-bigrams" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Create collocations with intervneing words (gapped n-grams)</span>
 <span class="n">finder</span> <span class="o">=</span> <span class="n">BigramCollocationFinder</span><span class="o">.</span><span class="n">from_words</span><span class="p">(</span><span class="n">brown</span><span class="o">.</span><span class="n">words</span><span class="p">(),</span> <span class="n">window_size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">finder</span><span class="o">.</span><span class="n">apply_word_filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">isalpha</span><span class="p">())</span>
+<span class="n">finder</span><span class="o">.</span><span class="n">apply_word_filter</span><span class="p">(</span><span class="n">filter_stops</span><span class="p">)</span>
 <span class="n">finder</span><span class="o">.</span><span class="n">apply_freq_filter</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">finder</span><span class="o">.</span><span class="n">nbest</span><span class="p">(</span><span class="n">bigram_measures</span><span class="o">.</span><span class="n">pmi</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">finder</span><span class="o">.</span><span class="n">nbest</span><span class="p">(</span><span class="n">bigram_measures</span><span class="o">.</span><span class="n">likelihood_ratio</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;Hong&#39;, &#39;Kong&#39;),
- (&#39;Viet&#39;, &#39;Nam&#39;),
- (&#39;Pathet&#39;, &#39;Lao&#39;),
- (&#39;Simms&#39;, &#39;Purdew&#39;),
- (&#39;El&#39;, &#39;Paso&#39;),
- (&#39;Lo&#39;, &#39;Shu&#39;),
- (&#39;Internal&#39;, &#39;Revenue&#39;),
- (&#39;Puerto&#39;, &#39;Rico&#39;),
- (&#39;Saxon&#39;, &#39;Shore&#39;),
- (&#39;carbon&#39;, &#39;tetrachloride&#39;)]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;United&#39;, &#39;States&#39;),
+ (&#39;New&#39;, &#39;York&#39;),
+ (&#39;per&#39;, &#39;cent&#39;),
+ (&#39;Rhode&#39;, &#39;Island&#39;),
+ (&#39;years&#39;, &#39;ago&#39;),
+ (&#39;Los&#39;, &#39;Angeles&#39;),
+ (&#39;White&#39;, &#39;House&#39;),
+ (&#39;Peace&#39;, &#39;Corps&#39;),
+ (&#39;World&#39;, &#39;War&#39;),
+ (&#39;San&#39;, &#39;Francisco&#39;)]
 </pre></div>
 </div>
 </div>
 </div>
+</div>
+<div class="section" id="scoring-ngrams">
+<h3>Scoring Ngrams<a class="headerlink" href="#scoring-ngrams" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Finders</span>
@@ -519,17 +548,40 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[((&#39;of&#39;, &#39;the&#39;), 0.008288896237659233),
- ((&#39;in&#39;, &#39;the&#39;), 0.004776126600941102),
- ((&#39;to&#39;, &#39;the&#39;), 0.002950416468594341),
- ((&#39;on&#39;, &#39;the&#39;), 0.0019781397047172215),
- ((&#39;and&#39;, &#39;the&#39;), 0.001839489076741831),
- ((&#39;for&#39;, &#39;the&#39;), 0.0015148226994329964),
- ((&#39;to&#39;, &#39;be&#39;), 0.0014614292899021006),
- ((&#39;at&#39;, &#39;the&#39;), 0.0012969431411859538),
- ((&#39;with&#39;, &#39;the&#39;), 0.0012676628843464302),
- ((&#39;of&#39;, &#39;a&#39;), 0.0012581898600748196)]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[((&#39;United&#39;, &#39;States&#39;), 0.0003375841376792124),
+ ((&#39;New&#39;, &#39;York&#39;), 0.00025491047130879306),
+ ((&#39;per&#39;, &#39;cent&#39;), 0.00012573286760501277),
+ ((&#39;years&#39;, &#39;ago&#39;), 0.0001171210273580941),
+ ((&#39;The&#39;, &#39;first&#39;), 8.267366637041936e-05),
+ ((&#39;Rhode&#39;, &#39;Island&#39;), 7.750656222226816e-05),
+ ((&#39;could&#39;, &#39;see&#39;), 7.492301014819255e-05),
+ ((&#39;last&#39;, &#39;year&#39;), 5.856051367904705e-05),
+ ((&#39;first&#39;, &#39;time&#39;), 5.769932965435518e-05),
+ ((&#39;White&#39;, &#39;House&#39;), 5.5976961604971446e-05)]
 </pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scored</span> <span class="o">=</span> <span class="n">finder</span><span class="o">.</span><span class="n">above_score</span><span class="p">(</span><span class="n">bigram_measures</span><span class="o">.</span><span class="n">pmi</span><span class="p">,</span> <span class="n">min_score</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">scored</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;Hong&#39;, &#39;Kong&#39;)
+(&#39;Viet&#39;, &#39;Nam&#39;)
+(&#39;Pathet&#39;, &#39;Lao&#39;)
+(&#39;Simms&#39;, &#39;Purdew&#39;)
+(&#39;Internal&#39;, &#39;Revenue&#39;)
+(&#39;Puerto&#39;, &#39;Rico&#39;)
+(&#39;Saxon&#39;, &#39;Shore&#39;)
+(&#39;carbon&#39;, &#39;tetrachloride&#39;)
+(&#39;unwed&#39;, &#39;mothers&#39;)
+</pre></div>
+</div>
 </div>
 </div>
 </div>

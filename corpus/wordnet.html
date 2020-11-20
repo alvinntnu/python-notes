@@ -1,0 +1,835 @@
+
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WordNet &#8212; Python Notes for Linguistics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mycss.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Word Cloud" href="word-cloud.html" />
+    <link rel="prev" title="Tokenization" href="tokenization.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/ntnu-word-2.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Python Notes for Linguistics</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python-basics/python-basics.html">
+   Python Basics
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="corpus-processing.html">
+   Corpus Linguistics with Python
+  </a>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="nltk.html">
+     Natural Language Tool-Kits (NLTK)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="web-crawler.html">
+     Web Crawler
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="unicode.html">
+     Unicode
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="reference internal" href="corpus-linguistics-methods.html">
+     Corpus Lingustics Methods
+    </a>
+    <ul class="current">
+     <li class="toctree-l3">
+      <a class="reference internal" href="lexical-bundles.html">
+       Lexical Bundles
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="tokenization.html">
+       Tokenization
+      </a>
+     </li>
+     <li class="toctree-l3 current active">
+      <a class="current reference internal" href="#">
+       WordNet
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="word-cloud.html">
+       Word Cloud
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="patterns-constructions.html">
+       Patterns and Constructions
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="structured-corpus-processing.html">
+     Structured Corpus Processing
+    </a>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="bnc.html">
+       BNC-XML
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="childes.html">
+       CHILDES Corpus
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="praat-textgrid.html">
+       Praat TextGrid Data
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="vectorizing-text.html">
+     Vectorizing Texts
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="chinese-processing.html">
+     Chinese Processing
+    </a>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="jieba.html">
+       Chinese Word Segmentation (jieba)
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ckiptagger.html">
+       Chinese Word Segmentation (ckiptagger)
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../statistical-analyses/statistical-analyses.html">
+   Statistical Analyses
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../nlp/nlp.html">
+   Natural Language Processing with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/todo.html">
+   To-do List
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <div style="text-align:left">
+<i class="fas fa-home fa-2x" style="color:Maroon;margin-right:5px"></i><a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
+</div>
+
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/corpus/wordnet.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/alvinntnu/python-notes/master?urlpath=tree/corpus/wordnet.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/corpus/wordnet.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import">
+   Import
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#synsets">
+   Synsets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lemmas">
+   Lemmas
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#synonyms">
+   Synonyms
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#antonyms">
+   Antonyms
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#wordnet-synset-similarity">
+   Wordnet Synset Similarity
+  </a>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="wordnet">
+<h1>WordNet<a class="headerlink" href="#wordnet" title="Permalink to this headline">¶</a></h1>
+<p>WordNet is a lexical database for the English language, where word senses are connected as a systematic lexical network.</p>
+<div class="section" id="import">
+<h2>Import<a class="headerlink" href="#import" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">wordnet</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="synsets">
+<h2>Synsets<a class="headerlink" href="#synsets" title="Permalink to this headline">¶</a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">synset</span></code> has several attributes, which can be extracted via its defined methods:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">synset.name()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">synset.definition()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">synset.hypernyms()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">synset.hyponyms()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">synset.hypernym_path()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">synset.pos()</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">syn</span> <span class="o">=</span> <span class="n">wordnet</span><span class="o">.</span><span class="n">synsets</span><span class="p">(</span><span class="s1">&#39;walk&#39;</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="s1">&#39;v&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">syn</span><span class="o">.</span><span class="n">name</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">syn</span><span class="o">.</span><span class="n">definition</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>walk.v.01
+use one&#39;s feet to advance; advance by steps
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">syn</span><span class="o">.</span><span class="n">examples</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&quot;Walk, don&#39;t run!&quot;,
+ &#39;We walked instead of driving&#39;,
+ &#39;She walks with a slight limp&#39;,
+ &#39;The patient cannot walk yet&#39;,
+ &#39;Walk over to the cabinet&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">syn</span><span class="o">.</span><span class="n">hypernyms</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Synset(&#39;travel.v.01&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">syn</span><span class="o">.</span><span class="n">hypernyms</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hyponyms</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Synset(&#39;accompany.v.02&#39;),
+ Synset(&#39;advance.v.01&#39;),
+ Synset(&#39;angle.v.01&#39;),
+ Synset(&#39;ascend.v.01&#39;),
+ Synset(&#39;automobile.v.01&#39;),
+ Synset(&#39;back.v.02&#39;),
+ Synset(&#39;bang.v.04&#39;),
+ Synset(&#39;beetle.v.02&#39;),
+ Synset(&#39;betake_oneself.v.01&#39;),
+ Synset(&#39;billow.v.02&#39;),
+ Synset(&#39;bounce.v.03&#39;),
+ Synset(&#39;breeze.v.02&#39;),
+ Synset(&#39;caravan.v.01&#39;),
+ Synset(&#39;career.v.01&#39;),
+ Synset(&#39;carry.v.36&#39;),
+ Synset(&#39;circle.v.01&#39;),
+ Synset(&#39;circle.v.02&#39;),
+ Synset(&#39;circuit.v.01&#39;),
+ Synset(&#39;circulate.v.07&#39;),
+ Synset(&#39;come.v.01&#39;),
+ Synset(&#39;come.v.11&#39;),
+ Synset(&#39;crawl.v.01&#39;),
+ Synset(&#39;cruise.v.02&#39;),
+ Synset(&#39;derail.v.02&#39;),
+ Synset(&#39;descend.v.01&#39;),
+ Synset(&#39;do.v.13&#39;),
+ Synset(&#39;drag.v.04&#39;),
+ Synset(&#39;draw.v.12&#39;),
+ Synset(&#39;drive.v.02&#39;),
+ Synset(&#39;drive.v.14&#39;),
+ Synset(&#39;ease.v.01&#39;),
+ Synset(&#39;fall.v.01&#39;),
+ Synset(&#39;fall.v.15&#39;),
+ Synset(&#39;ferry.v.03&#39;),
+ Synset(&#39;float.v.01&#39;),
+ Synset(&#39;float.v.02&#39;),
+ Synset(&#39;float.v.05&#39;),
+ Synset(&#39;flock.v.01&#39;),
+ Synset(&#39;fly.v.01&#39;),
+ Synset(&#39;fly.v.06&#39;),
+ Synset(&#39;follow.v.01&#39;),
+ Synset(&#39;follow.v.04&#39;),
+ Synset(&#39;forge.v.05&#39;),
+ Synset(&#39;get_around.v.04&#39;),
+ Synset(&#39;ghost.v.01&#39;),
+ Synset(&#39;glide.v.01&#39;),
+ Synset(&#39;go_around.v.02&#39;),
+ Synset(&#39;hiss.v.02&#39;),
+ Synset(&#39;hurtle.v.01&#39;),
+ Synset(&#39;island_hop.v.01&#39;),
+ Synset(&#39;lance.v.01&#39;),
+ Synset(&#39;lurch.v.03&#39;),
+ Synset(&#39;outflank.v.01&#39;),
+ Synset(&#39;pace.v.02&#39;),
+ Synset(&#39;pan.v.01&#39;),
+ Synset(&#39;pass.v.01&#39;),
+ Synset(&#39;pass_over.v.04&#39;),
+ Synset(&#39;play.v.09&#39;),
+ Synset(&#39;plow.v.03&#39;),
+ Synset(&#39;prance.v.02&#39;),
+ Synset(&#39;precede.v.04&#39;),
+ Synset(&#39;precess.v.01&#39;),
+ Synset(&#39;proceed.v.02&#39;),
+ Synset(&#39;propagate.v.02&#39;),
+ Synset(&#39;pursue.v.02&#39;),
+ Synset(&#39;push.v.09&#39;),
+ Synset(&#39;raft.v.02&#39;),
+ Synset(&#39;repair.v.03&#39;),
+ Synset(&#39;retreat.v.02&#39;),
+ Synset(&#39;retrograde.v.02&#39;),
+ Synset(&#39;return.v.01&#39;),
+ Synset(&#39;ride.v.01&#39;),
+ Synset(&#39;ride.v.04&#39;),
+ Synset(&#39;ride.v.10&#39;),
+ Synset(&#39;rise.v.01&#39;),
+ Synset(&#39;roll.v.12&#39;),
+ Synset(&#39;round.v.01&#39;),
+ Synset(&#39;run.v.11&#39;),
+ Synset(&#39;run.v.34&#39;),
+ Synset(&#39;rush.v.01&#39;),
+ Synset(&#39;scramble.v.01&#39;),
+ Synset(&#39;seek.v.04&#39;),
+ Synset(&#39;shuttle.v.01&#39;),
+ Synset(&#39;sift.v.01&#39;),
+ Synset(&#39;ski.v.01&#39;),
+ Synset(&#39;slice_into.v.01&#39;),
+ Synset(&#39;slither.v.01&#39;),
+ Synset(&#39;snowshoe.v.01&#39;),
+ Synset(&#39;speed.v.04&#39;),
+ Synset(&#39;steamer.v.01&#39;),
+ Synset(&#39;step.v.01&#39;),
+ Synset(&#39;step.v.02&#39;),
+ Synset(&#39;step.v.06&#39;),
+ Synset(&#39;stray.v.02&#39;),
+ Synset(&#39;swap.v.02&#39;),
+ Synset(&#39;swash.v.01&#39;),
+ Synset(&#39;swim.v.01&#39;),
+ Synset(&#39;swim.v.05&#39;),
+ Synset(&#39;swing.v.03&#39;),
+ Synset(&#39;taxi.v.01&#39;),
+ Synset(&#39;trail.v.03&#39;),
+ Synset(&#39;tram.v.01&#39;),
+ Synset(&#39;transfer.v.06&#39;),
+ Synset(&#39;travel.v.04&#39;),
+ Synset(&#39;travel.v.05&#39;),
+ Synset(&#39;travel.v.06&#39;),
+ Synset(&#39;travel_by.v.01&#39;),
+ Synset(&#39;travel_purposefully.v.01&#39;),
+ Synset(&#39;travel_rapidly.v.01&#39;),
+ Synset(&#39;trundle.v.01&#39;),
+ Synset(&#39;turn.v.06&#39;),
+ Synset(&#39;walk.v.01&#39;),
+ Synset(&#39;walk.v.10&#39;),
+ Synset(&#39;weave.v.04&#39;),
+ Synset(&#39;wend.v.01&#39;),
+ Synset(&#39;wheel.v.03&#39;),
+ Synset(&#39;whine.v.01&#39;),
+ Synset(&#39;whish.v.02&#39;),
+ Synset(&#39;whisk.v.02&#39;),
+ Synset(&#39;whistle.v.02&#39;),
+ Synset(&#39;withdraw.v.01&#39;),
+ Synset(&#39;zigzag.v.01&#39;),
+ Synset(&#39;zoom.v.02&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">syn</span><span class="o">.</span><span class="n">hypernym_paths</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[Synset(&#39;travel.v.01&#39;), Synset(&#39;walk.v.01&#39;)]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">syn</span><span class="o">.</span><span class="n">pos</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;v&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="lemmas">
+<h2>Lemmas<a class="headerlink" href="#lemmas" title="Permalink to this headline">¶</a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">synset</span></code> may coreespond to more than one lemma.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">syn</span> <span class="o">=</span> <span class="n">wordnet</span><span class="o">.</span><span class="n">synsets</span><span class="p">(</span><span class="s1">&#39;walk&#39;</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="s1">&#39;n&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">syn</span><span class="o">.</span><span class="n">lemmas</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Lemma(&#39;walk.n.01.walk&#39;), Lemma(&#39;walk.n.01.walking&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Check the lemma names.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">syn</span><span class="o">.</span><span class="n">lemmas</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">l</span><span class="o">.</span><span class="n">name</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>walk
+walking
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="synonyms">
+<h2>Synonyms<a class="headerlink" href="#synonyms" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">synonyms</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">wordnet</span><span class="o">.</span><span class="n">synsets</span><span class="p">(</span><span class="s1">&#39;run&#39;</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="s1">&#39;v&#39;</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">lemmas</span><span class="p">():</span>
+        <span class="n">synonyms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">l</span><span class="o">.</span><span class="n">name</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">synonyms</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">synonyms</span><span class="p">)))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">synonyms</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>98
+52
+{&#39;turn_tail&#39;, &#39;melt_down&#39;, &#39;guide&#39;, &#39;pass&#39;, &#39;be_given&#39;, &#39;run&#39;, &#39;prevail&#39;, &#39;melt&#39;, &#39;track_down&#39;, &#39;escape&#39;, &#39;feed&#39;, &#39;incline&#39;, &#39;hightail_it&#39;, &#39;function&#39;, &#39;head_for_the_hills&#39;, &#39;move&#39;, &#39;break_away&#39;, &#39;lean&#39;, &#39;ladder&#39;, &#39;bunk&#39;, &#39;go&#39;, &#39;hunt&#39;, &#39;play&#39;, &#39;consort&#39;, &#39;range&#39;, &#39;carry&#39;, &#39;ply&#39;, &#39;campaign&#39;, &#39;scarper&#39;, &#39;scat&#39;, &#39;black_market&#39;, &#39;bleed&#39;, &#39;run_away&#39;, &#39;race&#39;, &#39;course&#39;, &#39;lam&#39;, &#39;take_to_the_woods&#39;, &#39;work&#39;, &#39;fly_the_coop&#39;, &#39;tend&#39;, &#39;execute&#39;, &#39;hunt_down&#39;, &#39;persist&#39;, &#39;endure&#39;, &#39;unravel&#39;, &#39;lead&#39;, &#39;run_for&#39;, &#39;draw&#39;, &#39;extend&#39;, &#39;operate&#39;, &#39;flow&#39;, &#39;die_hard&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="antonyms">
+<h2>Antonyms<a class="headerlink" href="#antonyms" title="Permalink to this headline">¶</a></h2>
+<p>Some lemmas have antonyms.</p>
+<p>The following examples show how to find the antonyms of <code class="docutils literal notranslate"><span class="pre">good</span></code> for its two different senses, <code class="docutils literal notranslate"><span class="pre">good.n.02</span></code> and <code class="docutils literal notranslate"><span class="pre">good.a.01</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">syn1</span> <span class="o">=</span> <span class="n">wordnet</span><span class="o">.</span><span class="n">synset</span><span class="p">(</span><span class="s1">&#39;good.n.02&#39;</span><span class="p">)</span>
+<span class="n">syn1</span><span class="o">.</span><span class="n">definition</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;moral excellence or admirableness&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ant1</span> <span class="o">=</span> <span class="n">syn1</span><span class="o">.</span><span class="n">lemmas</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">antonyms</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ant1</span><span class="o">.</span><span class="n">synset</span><span class="p">()</span><span class="o">.</span><span class="n">definition</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;the quality of being morally wrong in principle or practice&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ant1</span><span class="o">.</span><span class="n">synset</span><span class="p">()</span><span class="o">.</span><span class="n">examples</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;attempts to explain the origin of evil in the world&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">syn2</span> <span class="o">=</span> <span class="n">wordnet</span><span class="o">.</span><span class="n">synset</span><span class="p">(</span><span class="s1">&#39;good.a.01&#39;</span><span class="p">)</span>
+<span class="n">syn2</span><span class="o">.</span><span class="n">definition</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;having desirable or positive qualities especially those suitable for a thing specified&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ant2</span> <span class="o">=</span> <span class="n">syn2</span><span class="o">.</span><span class="n">lemmas</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">antonyms</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ant2</span><span class="o">.</span><span class="n">synset</span><span class="p">()</span><span class="o">.</span><span class="n">definition</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;having undesirable or negative qualities&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ant2</span><span class="o">.</span><span class="n">synset</span><span class="p">()</span><span class="o">.</span><span class="n">examples</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;a bad report card&#39;,
+ &#39;his sloppy appearance made a bad impression&#39;,
+ &#39;a bad little boy&#39;,
+ &#39;clothes in bad shape&#39;,
+ &#39;a bad cut&#39;,
+ &#39;bad luck&#39;,
+ &#39;the news was very bad&#39;,
+ &#39;the reviews were bad&#39;,
+ &#39;the pay is bad&#39;,
+ &#39;it was a bad light for reading&#39;,
+ &#39;the movie was a bad choice&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="wordnet-synset-similarity">
+<h2>Wordnet Synset Similarity<a class="headerlink" href="#wordnet-synset-similarity" title="Permalink to this headline">¶</a></h2>
+<p>With a semantic network, we can also compute the semantic similarty between two synsets based on their distance on the tree.</p>
+<p>In particular, this is possible cause all synsets are organized in a hypernym tree.</p>
+<p>The recommended distance metric is Wu-Palmer Similarity (i.e., <code class="docutils literal notranslate"><span class="pre">synset.wup_similarity()</span></code>)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s1</span> <span class="o">=</span> <span class="n">wordnet</span><span class="o">.</span><span class="n">synset</span><span class="p">(</span><span class="s1">&#39;walk.v.01&#39;</span><span class="p">)</span>
+<span class="n">s2</span> <span class="o">=</span> <span class="n">wordnet</span><span class="o">.</span><span class="n">synset</span><span class="p">(</span><span class="s1">&#39;run.v.01&#39;</span><span class="p">)</span>
+<span class="n">s3</span> <span class="o">=</span> <span class="n">wordnet</span><span class="o">.</span><span class="n">synset</span><span class="p">(</span><span class="s1">&#39;toddle.v.01&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s1</span><span class="o">.</span><span class="n">wup_similarity</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.2857142857142857
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s1</span><span class="o">.</span><span class="n">wup_similarity</span><span class="p">(</span><span class="n">s3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s1</span><span class="o">.</span><span class="n">common_hypernyms</span><span class="p">(</span><span class="n">s3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Synset(&#39;travel.v.01&#39;), Synset(&#39;walk.v.01&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s1</span><span class="o">.</span><span class="n">common_hypernyms</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Synset(&#39;travel.v.01&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Two more metrics for lexical semilarity:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">synset.path_similarity()</span></code>: Path Similarity</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">synset.lch_similarity()</span></code>: Leacock Chordorow Similarity</p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python-notes",
+            path: "./corpus"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python-notes'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="tokenization.html" title="previous page">Tokenization</a>
+    <a class='right-next' id="next-link" href="word-cloud.html" title="next page">Word Cloud</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alvin Chen<br/>
+        
+            &copy; Copyright 2020 Alvin Chen.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>
