@@ -28,7 +28,17 @@ $ mkdir ~/google-drive
 $ google-drive-ocamlfuse ~/google-drive
 ```
 
+## Mount and Unmount Drive
+
+```
+fusermount -u ~/google-drive
+```
+
 ## Benefits
 
 - To mount the Google Drive using ocamlfuse, it is easier to access the files and directories in the terminal.
 - Plus, all filenames and directory names show up properly!
+
+## References
+
+- [Mount google drive in linux using google-drive-ocamlfuse-client](https://www.tecmint.com/mount-google-drive-in-linux-using-google-drive-ocamlfuse-client/3/)
