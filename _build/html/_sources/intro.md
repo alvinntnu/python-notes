@@ -45,6 +45,7 @@ In addition to books, there are many wonderful on-line resources, esp. professio
 - [KGPTalkie NLP](https://kgptalkie.com/category/natural-language-processing-nlp/)
 - [Jason Brownlee's Blog: Machine Learning Mastery](https://machinelearningmastery.com/)
 - [Jay Alammar's Blog](https://jalammar.github.io/)
+- [Chris McCormich's Blog](https://mccormickml.com/)
 
 ## YouTube Channels
 
