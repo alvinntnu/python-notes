@@ -73,6 +73,7 @@
         - file: nlp/word2vec-chinese
         - file: nlp/word2vec
         - file: nlp/doc2vec
+        - file: nlp/word-embeddings-autoencoder
         - file: nlp/transfer-learning-sent-encoding
     - file: nlp/sentiment-analysis-dl
     - file: nlp/sentiment-analysis-lstm-v1
