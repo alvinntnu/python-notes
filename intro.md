@@ -46,6 +46,8 @@ In addition to books, there are many wonderful on-line resources, esp. professio
 - [Jason Brownlee's Blog: Machine Learning Mastery](https://machinelearningmastery.com/)
 - [Jay Alammar's Blog](https://jalammar.github.io/)
 - [Chris McCormich's Blog](https://mccormickml.com/)
+- [GLUE: General Language Understanding Evaluation Benchmark](https://gluebenchmark.com/)
+- [SuperGLUE](https://super.gluebenchmark.com/)
 
 ## YouTube Channels
 
