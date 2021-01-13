@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Transformer-based Language Model - GPT2 &#8212; Python Notes for Linguistics</title>
+    <title>Text Normalization &#8212; Python Notes for Linguistics</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="../_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
@@ -38,8 +38,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Word Embeddings" href="word-embeddings.html" />
-    <link rel="prev" title="Text Generation" href="text-gen-lstm-v1.html" />
+    <link rel="next" title="Text Normalization (English)" href="text-normalization-eng.html" />
+    <link rel="prev" title="Natural Language Processing (ckipnlp)" href="nlp-ckipnlp.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
@@ -115,8 +115,8 @@
      </li>
     </ul>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="text-normalization-intro.html">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      Text Normalization
     </a>
     <ul>
@@ -154,11 +154,11 @@
      Neural Network From Scratch
     </a>
    </li>
-   <li class="toctree-l2 current active">
+   <li class="toctree-l2">
     <a class="reference internal" href="language-model.html">
      Language Model
     </a>
-    <ul class="current">
+    <ul>
      <li class="toctree-l3">
       <a class="reference internal" href="neural-language-model-primer.html">
        Neural Language Model: A Start
@@ -174,8 +174,8 @@
        Text Generation
       </a>
      </li>
-     <li class="toctree-l3 current active">
-      <a class="current reference internal" href="#">
+     <li class="toctree-l3">
+      <a class="reference internal" href="gpt2.html">
        Transformer-based Language Model - GPT2
       </a>
      </li>
@@ -324,7 +324,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/nlp/gpt2.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/nlp/text-normalization-intro.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -348,7 +348,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/alvinntnu/python-notes/master?urlpath=tree/nlp/gpt2.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/alvinntnu/python-notes/master?urlpath=tree/nlp/text-normalization-intro.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -356,7 +356,7 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/nlp/gpt2.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/nlp/text-normalization-intro.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="../_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -373,24 +373,7 @@
             <i class="fas fa-list"></i> Contents
         </div>
         <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#text-generation-using-dpt2">
-   Text Generation Using DPT2
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#text-generation-using-gpt2">
-   Text Generation Using GPT2
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#transforming-texts-into-features">
-   Transforming Texts into Features
-  </a>
- </li>
-</ul>
-
+            
         </nav>
     </div>
 </div>
@@ -399,139 +382,9 @@
         
               <div>
                 
-  <div class="section" id="transformer-based-language-model-gpt2">
-<h1>Transformer-based Language Model - GPT2<a class="headerlink" href="#transformer-based-language-model-gpt2" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><p>This notebook runs on Google Colab.</p></li>
-<li><p>Codes from <a class="reference external" href="https://medium.com/analytics-vidhya/a-comprehensive-guide-to-build-your-own-language-model-in-python-5141b3917d6d">A Comprehensive Guide to Build Your Own Language Model in Python</a></p></li>
-<li><p>Use the OpenAI GPT-2 language model (based on Transformers) to:</p>
-<ul>
-<li><p>Generate text sequences based on seed texts</p></li>
-<li><p>Convert text sequences into numerical representations</p></li>
-</ul>
-</li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install transformers
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import required libraries</span>
-<span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">GPT2Tokenizer</span><span class="p">,</span> <span class="n">GPT2LMHeadModel</span>
-
-<span class="c1"># Load pre-trained model tokenizer (vocabulary)</span>
-<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">GPT2Tokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s1">&#39;gpt2&#39;</span><span class="p">)</span>
-
-<span class="c1"># Encode a text inputs</span>
-<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;What is the fastest car in the&quot;</span>
-<span class="n">indexed_tokens</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-
-<span class="c1"># Convert indexed tokens in a PyTorch tensor</span>
-<span class="n">tokens_tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">indexed_tokens</span><span class="p">])</span>
-
-<span class="c1"># Load pre-trained model (weights)</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">GPT2LMHeadModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s1">&#39;gpt2&#39;</span><span class="p">)</span>
-
-<span class="c1"># Set the model in evaluation mode to deactivate the DropOut modules</span>
-<span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
-
-<span class="c1"># If you have a GPU, put everything on cuda</span>
-<span class="n">tokens_tensor</span> <span class="o">=</span> <span class="n">tokens_tensor</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;cuda&#39;</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;cuda&#39;</span><span class="p">)</span>
-
-<span class="c1"># Predict all tokens</span>
-<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
-    <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">tokens_tensor</span><span class="p">)</span>
-    <span class="n">predictions</span> <span class="o">=</span> <span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-<span class="c1"># Get the predicted next sub-word</span>
-<span class="n">predicted_index</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">predictions</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
-<span class="n">predicted_text</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">indexed_tokens</span> <span class="o">+</span> <span class="p">[</span><span class="n">predicted_index</span><span class="p">])</span>
-
-<span class="c1"># Print the predicted word</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">predicted_text</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git clone https://github.com/huggingface/transformers.git
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>ls transformers/examples
-</pre></div>
-</div>
-</div>
-</div>
-<div class="section" id="text-generation-using-dpt2">
-<h2>Text Generation Using DPT2<a class="headerlink" href="#text-generation-using-dpt2" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="https://transformer.huggingface.co/">Write with Transformer</a></p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># !python transformers/examples/text-generation/run_generation.py \</span>
-<span class="c1">#     --model_type=gpt2 \</span>
-<span class="c1">#     --model_name_or_path=gpt2 \</span>
-<span class="c1">#     --length=100</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="text-generation-using-gpt2">
-<h2>Text Generation Using GPT2<a class="headerlink" href="#text-generation-using-gpt2" title="Permalink to this headline">¶</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span><span class="p">,</span> <span class="n">set_seed</span>
-<span class="n">generator</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="s1">&#39;text-generation&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s1">&#39;gpt2&#39;</span><span class="p">)</span>
-<span class="n">set_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">generator</span><span class="p">(</span><span class="s2">&quot;Hello, I&#39;m a language model,&quot;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">num_return_sequences</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">generator</span><span class="p">(</span><span class="s2">&quot;Once upon a time, &quot;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">num_return_sequences</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="transforming-texts-into-features">
-<h2>Transforming Texts into Features<a class="headerlink" href="#transforming-texts-into-features" title="Permalink to this headline">¶</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># from transformers import GPT2Tokenizer, GPT2Model</span>
-<span class="c1"># tokenizer = GPT2Tokenizer.from_pretrained(&#39;gpt2&#39;)</span>
-<span class="c1"># model = GPT2Model.from_pretrained(&#39;gpt2&#39;)</span>
-<span class="c1"># text = &quot;Replace me by any text you&#39;d like.&quot;</span>
-<span class="c1"># encoded_input = tokenizer(text, return_tensors=&#39;pt&#39;) # return tensorflow tensors</span>
-<span class="c1"># output = model(encoded_input)</span>
-
-
-<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">GPT2Tokenizer</span><span class="p">,</span> <span class="n">TFGPT2Model</span>
-<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">GPT2Tokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s1">&#39;gpt2&#39;</span><span class="p">)</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">TFGPT2Model</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s1">&#39;gpt2&#39;</span><span class="p">)</span>
-<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Replace me by any text you&#39;d like.&quot;</span>
-<span class="n">encoded_input</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s1">&#39;tf&#39;</span><span class="p">)</span>
-<span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">encoded_input</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">encoded_input</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
+  <div class="section" id="text-normalization">
+<h1>Text Normalization<a class="headerlink" href="#text-normalization" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
 </div>
 </div>
 
@@ -563,8 +416,8 @@
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="text-gen-lstm-v1.html" title="previous page">Text Generation</a>
-    <a class='right-next' id="next-link" href="word-embeddings.html" title="next page">Word Embeddings</a>
+    <a class='left-prev' id="prev-link" href="nlp-ckipnlp.html" title="previous page">Natural Language Processing (ckipnlp)</a>
+    <a class='right-next' id="next-link" href="text-normalization-eng.html" title="next page">Text Normalization (English)</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

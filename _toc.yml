@@ -52,11 +52,15 @@
     - file: statistical-analyses/network-analysis-igraph
 - file: nlp/nlp
   sections:
-    - file: nlp/nlp-spacy
-    - file: nlp/nlp-spacy-zh
-    - file: nlp/nlp-ckipnlp
-    - file: nlp/text-normalization-eng
-    - file: nlp/text-normalization-chinese
+    - file: nlp/nlp-pipeline
+      sections:
+        - file: nlp/nlp-spacy
+        - file: nlp/nlp-spacy-zh
+        - file: nlp/nlp-ckipnlp
+    - file: nlp/text-normalization-intro
+      sections:
+        - file: nlp/text-normalization-eng
+        - file: nlp/text-normalization-chinese
     - file: nlp/sklearn
       sections:
         - file: nlp/naive-bayes

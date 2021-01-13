@@ -1,0 +1,903 @@
+
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Autoencoder &#8212; Python Notes for Linguistics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mycss.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/ntnu-word-2.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Python Notes for Linguistics</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python-basics/python-basics.html">
+   Python Basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../corpus/corpus-processing.html">
+   Corpus Linguistics with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../statistical-analyses/statistical-analyses.html">
+   Statistical Analyses
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="nlp.html">
+   Natural Language Processing with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/todo.html">
+   To-do List
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <div style="text-align:left">
+<i class="fas fa-home fa-2x" style="color:Maroon;margin-right:5px"></i><a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
+</div>
+
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/nlp/autoencoder.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/alvinntnu/python-notes/master?urlpath=tree/nlp/autoencoder.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/nlp/autoencoder.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-1">
+   Model 1
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-2">
+   Model 2
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-autoencoder-for-feature-engineering-and-prediction">
+   Using Autoencoder for Feature Engineering and Prediction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="autoencoder">
+<h1>Autoencoder<a class="headerlink" href="#autoencoder" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="model-1">
+<h2>Model 1<a class="headerlink" href="#model-1" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># train autoencoder for classification with no compression in the bottleneck layer</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_classification</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Model</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Input</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">LeakyReLU</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">BatchNormalization</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.utils</span> <span class="kn">import</span> <span class="n">plot_model</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span>
+<span class="c1"># define dataset</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">n_informative</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">n_redundant</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># number of input columns</span>
+<span class="n">n_inputs</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="c1"># split into train test sets</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># scale data</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+<span class="n">t</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="c1"># define encoder</span>
+<span class="n">visible</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">n_inputs</span><span class="p">,))</span>
+<span class="c1"># encoder level 1</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">n_inputs</span><span class="o">*</span><span class="mi">2</span><span class="p">)(</span><span class="n">visible</span><span class="p">)</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">e</span><span class="p">)</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">LeakyReLU</span><span class="p">()(</span><span class="n">e</span><span class="p">)</span>
+<span class="c1"># encoder level 2</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">n_inputs</span><span class="p">)(</span><span class="n">e</span><span class="p">)</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">e</span><span class="p">)</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">LeakyReLU</span><span class="p">()(</span><span class="n">e</span><span class="p">)</span>
+<span class="c1"># bottleneck</span>
+<span class="n">n_bottleneck</span> <span class="o">=</span> <span class="n">n_inputs</span>
+<span class="n">bottleneck</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">n_bottleneck</span><span class="p">)(</span><span class="n">e</span><span class="p">)</span>
+<span class="c1"># define decoder, level 1</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">n_inputs</span><span class="p">)(</span><span class="n">bottleneck</span><span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">d</span><span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">LeakyReLU</span><span class="p">()(</span><span class="n">d</span><span class="p">)</span>
+<span class="c1"># decoder level 2</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">n_inputs</span><span class="o">*</span><span class="mi">2</span><span class="p">)(</span><span class="n">d</span><span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">d</span><span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">LeakyReLU</span><span class="p">()(</span><span class="n">d</span><span class="p">)</span>
+<span class="c1"># output layer</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">n_inputs</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)(</span><span class="n">d</span><span class="p">)</span>
+<span class="c1"># define autoencoder model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">visible</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">output</span><span class="p">)</span>
+<span class="c1"># compile autoencoder model</span>
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;mse&#39;</span><span class="p">)</span>
+<span class="c1"># plot the autoencoder</span>
+<span class="n">plot_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s1">&#39;autoencoder_no_compress.png&#39;</span><span class="p">,</span> <span class="n">show_shapes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># fit the autoencoder model to reconstruct input</span>
+<span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span><span class="n">X_test</span><span class="p">))</span>
+<span class="c1"># plot loss</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;train&#39;</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;val_loss&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="c1"># define an encoder model (without the decoder)</span>
+<span class="n">encoder</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">visible</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">bottleneck</span><span class="p">)</span>
+<span class="n">plot_model</span><span class="p">(</span><span class="n">encoder</span><span class="p">,</span> <span class="s1">&#39;encoder_no_compress.png&#39;</span><span class="p">,</span> <span class="n">show_shapes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># save the encoder to file</span>
+<span class="n">encoder</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;encoder.h5&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Failed to import pydot. You must install pydot and graphviz for `pydotprint` to work.
+Epoch 1/200
+42/42 - 0s - loss: 0.2377 - val_loss: 0.1857
+Epoch 2/200
+42/42 - 0s - loss: 0.0401 - val_loss: 0.1007
+Epoch 3/200
+42/42 - 0s - loss: 0.0255 - val_loss: 0.0526
+Epoch 4/200
+42/42 - 0s - loss: 0.0199 - val_loss: 0.0277
+Epoch 5/200
+42/42 - 0s - loss: 0.0168 - val_loss: 0.0180
+Epoch 6/200
+42/42 - 0s - loss: 0.0149 - val_loss: 0.0139
+Epoch 7/200
+42/42 - 0s - loss: 0.0138 - val_loss: 0.0104
+Epoch 8/200
+42/42 - 0s - loss: 0.0130 - val_loss: 0.0091
+Epoch 9/200
+42/42 - 0s - loss: 0.0126 - val_loss: 0.0074
+Epoch 10/200
+42/42 - 0s - loss: 0.0106 - val_loss: 0.0067
+Epoch 11/200
+42/42 - 0s - loss: 0.0102 - val_loss: 0.0066
+Epoch 12/200
+42/42 - 0s - loss: 0.0101 - val_loss: 0.0056
+Epoch 13/200
+42/42 - 0s - loss: 0.0092 - val_loss: 0.0059
+Epoch 14/200
+42/42 - 0s - loss: 0.0092 - val_loss: 0.0081
+Epoch 15/200
+42/42 - 0s - loss: 0.0088 - val_loss: 0.0045
+Epoch 16/200
+42/42 - 0s - loss: 0.0083 - val_loss: 0.0045
+Epoch 17/200
+42/42 - 0s - loss: 0.0074 - val_loss: 0.0049
+Epoch 18/200
+42/42 - 0s - loss: 0.0078 - val_loss: 0.0044
+Epoch 19/200
+42/42 - 0s - loss: 0.0076 - val_loss: 0.0039
+Epoch 20/200
+42/42 - 0s - loss: 0.0076 - val_loss: 0.0072
+Epoch 21/200
+42/42 - 0s - loss: 0.0085 - val_loss: 0.0051
+Epoch 22/200
+42/42 - 0s - loss: 0.0074 - val_loss: 0.0037
+Epoch 23/200
+42/42 - 0s - loss: 0.0068 - val_loss: 0.0042
+Epoch 24/200
+42/42 - 0s - loss: 0.0069 - val_loss: 0.0040
+Epoch 25/200
+42/42 - 0s - loss: 0.0066 - val_loss: 0.0058
+Epoch 26/200
+42/42 - 0s - loss: 0.0064 - val_loss: 0.0039
+Epoch 27/200
+42/42 - 0s - loss: 0.0066 - val_loss: 0.0027
+Epoch 28/200
+42/42 - 0s - loss: 0.0063 - val_loss: 0.0053
+Epoch 29/200
+42/42 - 0s - loss: 0.0063 - val_loss: 0.0028
+Epoch 30/200
+42/42 - 0s - loss: 0.0065 - val_loss: 0.0037
+Epoch 31/200
+42/42 - 0s - loss: 0.0059 - val_loss: 0.0033
+Epoch 32/200
+42/42 - 0s - loss: 0.0059 - val_loss: 0.0031
+Epoch 33/200
+42/42 - 0s - loss: 0.0059 - val_loss: 0.0030
+Epoch 34/200
+42/42 - 0s - loss: 0.0061 - val_loss: 0.0031
+Epoch 35/200
+42/42 - 0s - loss: 0.0059 - val_loss: 0.0033
+Epoch 36/200
+42/42 - 0s - loss: 0.0062 - val_loss: 0.0036
+Epoch 37/200
+42/42 - 0s - loss: 0.0059 - val_loss: 0.0033
+Epoch 38/200
+42/42 - 0s - loss: 0.0055 - val_loss: 0.0021
+Epoch 39/200
+42/42 - 0s - loss: 0.0055 - val_loss: 0.0028
+Epoch 40/200
+42/42 - 0s - loss: 0.0052 - val_loss: 0.0023
+Epoch 41/200
+42/42 - 0s - loss: 0.0052 - val_loss: 0.0036
+Epoch 42/200
+42/42 - 0s - loss: 0.0051 - val_loss: 0.0040
+Epoch 43/200
+42/42 - 0s - loss: 0.0053 - val_loss: 0.0037
+Epoch 44/200
+42/42 - 0s - loss: 0.0054 - val_loss: 0.0039
+Epoch 45/200
+42/42 - 0s - loss: 0.0052 - val_loss: 0.0034
+Epoch 46/200
+42/42 - 0s - loss: 0.0058 - val_loss: 0.0030
+Epoch 47/200
+42/42 - 0s - loss: 0.0053 - val_loss: 0.0052
+Epoch 48/200
+42/42 - 0s - loss: 0.0054 - val_loss: 0.0025
+Epoch 49/200
+42/42 - 0s - loss: 0.0050 - val_loss: 0.0034
+Epoch 50/200
+42/42 - 0s - loss: 0.0053 - val_loss: 0.0033
+Epoch 51/200
+42/42 - 0s - loss: 0.0052 - val_loss: 0.0025
+Epoch 52/200
+42/42 - 0s - loss: 0.0053 - val_loss: 0.0022
+Epoch 53/200
+42/42 - 0s - loss: 0.0052 - val_loss: 0.0022
+Epoch 54/200
+42/42 - 0s - loss: 0.0051 - val_loss: 0.0025
+Epoch 55/200
+42/42 - 0s - loss: 0.0049 - val_loss: 0.0022
+Epoch 56/200
+42/42 - 0s - loss: 0.0056 - val_loss: 0.0028
+Epoch 57/200
+42/42 - 0s - loss: 0.0051 - val_loss: 0.0031
+Epoch 58/200
+42/42 - 0s - loss: 0.0048 - val_loss: 0.0018
+Epoch 59/200
+42/42 - 0s - loss: 0.0053 - val_loss: 0.0032
+Epoch 60/200
+42/42 - 0s - loss: 0.0050 - val_loss: 0.0020
+Epoch 61/200
+42/42 - 0s - loss: 0.0048 - val_loss: 0.0021
+Epoch 62/200
+42/42 - 0s - loss: 0.0045 - val_loss: 0.0028
+Epoch 63/200
+42/42 - 0s - loss: 0.0047 - val_loss: 0.0022
+Epoch 64/200
+42/42 - 0s - loss: 0.0045 - val_loss: 0.0025
+Epoch 65/200
+42/42 - 0s - loss: 0.0050 - val_loss: 0.0021
+Epoch 66/200
+42/42 - 0s - loss: 0.0051 - val_loss: 0.0023
+Epoch 67/200
+42/42 - 0s - loss: 0.0046 - val_loss: 0.0041
+Epoch 68/200
+42/42 - 0s - loss: 0.0048 - val_loss: 0.0040
+Epoch 69/200
+42/42 - 0s - loss: 0.0048 - val_loss: 0.0020
+Epoch 70/200
+42/42 - 0s - loss: 0.0047 - val_loss: 0.0025
+Epoch 71/200
+42/42 - 0s - loss: 0.0053 - val_loss: 0.0030
+Epoch 72/200
+42/42 - 0s - loss: 0.0047 - val_loss: 0.0031
+Epoch 73/200
+42/42 - 0s - loss: 0.0045 - val_loss: 0.0026
+Epoch 74/200
+42/42 - 0s - loss: 0.0044 - val_loss: 0.0030
+Epoch 75/200
+42/42 - 0s - loss: 0.0047 - val_loss: 0.0028
+Epoch 76/200
+42/42 - 0s - loss: 0.0042 - val_loss: 0.0018
+Epoch 77/200
+42/42 - 0s - loss: 0.0043 - val_loss: 0.0023
+Epoch 78/200
+42/42 - 0s - loss: 0.0045 - val_loss: 0.0017
+Epoch 79/200
+42/42 - 0s - loss: 0.0046 - val_loss: 0.0028
+Epoch 80/200
+42/42 - 0s - loss: 0.0046 - val_loss: 0.0024
+Epoch 81/200
+42/42 - 0s - loss: 0.0047 - val_loss: 0.0024
+Epoch 82/200
+42/42 - 0s - loss: 0.0050 - val_loss: 0.0023
+Epoch 83/200
+42/42 - 0s - loss: 0.0044 - val_loss: 0.0019
+Epoch 84/200
+42/42 - 0s - loss: 0.0043 - val_loss: 0.0016
+Epoch 85/200
+42/42 - 0s - loss: 0.0041 - val_loss: 0.0026
+Epoch 86/200
+42/42 - 0s - loss: 0.0050 - val_loss: 0.0020
+Epoch 87/200
+42/42 - 0s - loss: 0.0041 - val_loss: 0.0023
+Epoch 88/200
+42/42 - 0s - loss: 0.0041 - val_loss: 0.0031
+Epoch 89/200
+42/42 - 0s - loss: 0.0042 - val_loss: 0.0026
+Epoch 90/200
+42/42 - 0s - loss: 0.0043 - val_loss: 0.0028
+Epoch 91/200
+42/42 - 0s - loss: 0.0042 - val_loss: 0.0015
+Epoch 92/200
+42/42 - 0s - loss: 0.0044 - val_loss: 0.0016
+Epoch 93/200
+42/42 - 0s - loss: 0.0046 - val_loss: 0.0026
+Epoch 94/200
+42/42 - 0s - loss: 0.0042 - val_loss: 0.0019
+Epoch 95/200
+42/42 - 0s - loss: 0.0040 - val_loss: 0.0012
+Epoch 96/200
+42/42 - 0s - loss: 0.0044 - val_loss: 0.0025
+Epoch 97/200
+42/42 - 0s - loss: 0.0042 - val_loss: 0.0023
+Epoch 98/200
+42/42 - 0s - loss: 0.0042 - val_loss: 0.0018
+Epoch 99/200
+42/42 - 0s - loss: 0.0045 - val_loss: 0.0030
+Epoch 100/200
+42/42 - 0s - loss: 0.0041 - val_loss: 0.0020
+Epoch 101/200
+42/42 - 0s - loss: 0.0047 - val_loss: 0.0021
+Epoch 102/200
+42/42 - 0s - loss: 0.0047 - val_loss: 0.0027
+Epoch 103/200
+42/42 - 0s - loss: 0.0041 - val_loss: 0.0019
+Epoch 104/200
+42/42 - 0s - loss: 0.0042 - val_loss: 0.0031
+Epoch 105/200
+42/42 - 0s - loss: 0.0045 - val_loss: 0.0023
+Epoch 106/200
+42/42 - 0s - loss: 0.0044 - val_loss: 0.0016
+Epoch 107/200
+42/42 - 0s - loss: 0.0043 - val_loss: 0.0018
+Epoch 108/200
+42/42 - 0s - loss: 0.0042 - val_loss: 0.0018
+Epoch 109/200
+42/42 - 0s - loss: 0.0038 - val_loss: 0.0017
+Epoch 110/200
+42/42 - 0s - loss: 0.0039 - val_loss: 0.0026
+Epoch 111/200
+42/42 - 0s - loss: 0.0037 - val_loss: 0.0012
+Epoch 112/200
+42/42 - 0s - loss: 0.0038 - val_loss: 0.0015
+Epoch 113/200
+42/42 - 0s - loss: 0.0036 - val_loss: 0.0021
+Epoch 114/200
+42/42 - 0s - loss: 0.0043 - val_loss: 0.0028
+Epoch 115/200
+42/42 - 0s - loss: 0.0039 - val_loss: 0.0021
+Epoch 116/200
+42/42 - 0s - loss: 0.0041 - val_loss: 0.0014
+Epoch 117/200
+42/42 - 0s - loss: 0.0037 - val_loss: 0.0022
+Epoch 118/200
+42/42 - 0s - loss: 0.0038 - val_loss: 0.0028
+Epoch 119/200
+42/42 - 0s - loss: 0.0044 - val_loss: 0.0014
+Epoch 120/200
+42/42 - 0s - loss: 0.0039 - val_loss: 0.0018
+Epoch 121/200
+42/42 - 0s - loss: 0.0041 - val_loss: 0.0019
+Epoch 122/200
+42/42 - 0s - loss: 0.0038 - val_loss: 0.0014
+Epoch 123/200
+42/42 - 0s - loss: 0.0040 - val_loss: 0.0034
+Epoch 124/200
+42/42 - 0s - loss: 0.0039 - val_loss: 0.0019
+Epoch 125/200
+42/42 - 0s - loss: 0.0036 - val_loss: 0.0011
+Epoch 126/200
+42/42 - 0s - loss: 0.0040 - val_loss: 0.0015
+Epoch 127/200
+42/42 - 0s - loss: 0.0042 - val_loss: 0.0022
+Epoch 128/200
+42/42 - 0s - loss: 0.0038 - val_loss: 0.0011
+Epoch 129/200
+42/42 - 0s - loss: 0.0042 - val_loss: 0.0027
+Epoch 130/200
+42/42 - 0s - loss: 0.0038 - val_loss: 0.0022
+Epoch 131/200
+42/42 - 0s - loss: 0.0038 - val_loss: 0.0025
+Epoch 132/200
+42/42 - 0s - loss: 0.0036 - val_loss: 0.0019
+Epoch 133/200
+42/42 - 0s - loss: 0.0038 - val_loss: 0.0036
+Epoch 134/200
+42/42 - 0s - loss: 0.0044 - val_loss: 0.0030
+Epoch 135/200
+42/42 - 0s - loss: 0.0041 - val_loss: 0.0019
+Epoch 136/200
+42/42 - 0s - loss: 0.0037 - val_loss: 0.0019
+Epoch 137/200
+42/42 - 0s - loss: 0.0034 - val_loss: 0.0015
+Epoch 138/200
+42/42 - 0s - loss: 0.0039 - val_loss: 0.0019
+Epoch 139/200
+42/42 - 0s - loss: 0.0035 - val_loss: 0.0019
+Epoch 140/200
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>42/42 - 0s - loss: 0.0038 - val_loss: 0.0019
+Epoch 141/200
+42/42 - 0s - loss: 0.0037 - val_loss: 0.0019
+Epoch 142/200
+42/42 - 0s - loss: 0.0040 - val_loss: 0.0018
+Epoch 143/200
+42/42 - 0s - loss: 0.0037 - val_loss: 0.0015
+Epoch 144/200
+42/42 - 0s - loss: 0.0040 - val_loss: 0.0018
+Epoch 145/200
+42/42 - 0s - loss: 0.0039 - val_loss: 0.0015
+Epoch 146/200
+42/42 - 0s - loss: 0.0039 - val_loss: 0.0025
+Epoch 147/200
+42/42 - 0s - loss: 0.0038 - val_loss: 0.0010
+Epoch 148/200
+42/42 - 0s - loss: 0.0036 - val_loss: 0.0012
+Epoch 149/200
+42/42 - 0s - loss: 0.0043 - val_loss: 0.0021
+Epoch 150/200
+42/42 - 0s - loss: 0.0036 - val_loss: 0.0029
+Epoch 151/200
+42/42 - 0s - loss: 0.0036 - val_loss: 0.0021
+Epoch 152/200
+42/42 - 0s - loss: 0.0037 - val_loss: 0.0016
+Epoch 153/200
+42/42 - 0s - loss: 0.0036 - val_loss: 0.0013
+Epoch 154/200
+42/42 - 0s - loss: 0.0035 - val_loss: 0.0013
+Epoch 155/200
+42/42 - 0s - loss: 0.0032 - val_loss: 0.0012
+Epoch 156/200
+42/42 - 0s - loss: 0.0037 - val_loss: 0.0020
+Epoch 157/200
+42/42 - 0s - loss: 0.0035 - val_loss: 0.0017
+Epoch 158/200
+42/42 - 0s - loss: 0.0034 - val_loss: 0.0012
+Epoch 159/200
+42/42 - 0s - loss: 0.0036 - val_loss: 0.0019
+Epoch 160/200
+42/42 - 0s - loss: 0.0036 - val_loss: 0.0025
+Epoch 161/200
+42/42 - 0s - loss: 0.0037 - val_loss: 0.0030
+Epoch 162/200
+42/42 - 0s - loss: 0.0038 - val_loss: 0.0014
+Epoch 163/200
+42/42 - 0s - loss: 0.0034 - val_loss: 0.0014
+Epoch 164/200
+42/42 - 0s - loss: 0.0037 - val_loss: 0.0021
+Epoch 165/200
+42/42 - 0s - loss: 0.0036 - val_loss: 0.0019
+Epoch 166/200
+42/42 - 0s - loss: 0.0037 - val_loss: 0.0016
+Epoch 167/200
+42/42 - 0s - loss: 0.0035 - val_loss: 0.0014
+Epoch 168/200
+42/42 - 0s - loss: 0.0034 - val_loss: 0.0021
+Epoch 169/200
+42/42 - 0s - loss: 0.0035 - val_loss: 0.0013
+Epoch 170/200
+42/42 - 0s - loss: 0.0034 - val_loss: 9.4864e-04
+Epoch 171/200
+42/42 - 0s - loss: 0.0036 - val_loss: 0.0012
+Epoch 172/200
+42/42 - 0s - loss: 0.0033 - val_loss: 0.0014
+Epoch 173/200
+42/42 - 0s - loss: 0.0033 - val_loss: 0.0014
+Epoch 174/200
+42/42 - 0s - loss: 0.0033 - val_loss: 0.0014
+Epoch 175/200
+42/42 - 0s - loss: 0.0034 - val_loss: 0.0011
+Epoch 176/200
+42/42 - 0s - loss: 0.0030 - val_loss: 0.0016
+Epoch 177/200
+42/42 - 0s - loss: 0.0031 - val_loss: 0.0010
+Epoch 178/200
+42/42 - 0s - loss: 0.0034 - val_loss: 0.0019
+Epoch 179/200
+42/42 - 0s - loss: 0.0035 - val_loss: 0.0015
+Epoch 180/200
+42/42 - 0s - loss: 0.0035 - val_loss: 0.0013
+Epoch 181/200
+42/42 - 0s - loss: 0.0030 - val_loss: 0.0011
+Epoch 182/200
+42/42 - 0s - loss: 0.0035 - val_loss: 0.0016
+Epoch 183/200
+42/42 - 0s - loss: 0.0034 - val_loss: 0.0010
+Epoch 184/200
+42/42 - 0s - loss: 0.0033 - val_loss: 0.0011
+Epoch 185/200
+42/42 - 0s - loss: 0.0033 - val_loss: 0.0017
+Epoch 186/200
+42/42 - 0s - loss: 0.0034 - val_loss: 0.0013
+Epoch 187/200
+42/42 - 0s - loss: 0.0031 - val_loss: 0.0018
+Epoch 188/200
+42/42 - 0s - loss: 0.0033 - val_loss: 0.0015
+Epoch 189/200
+42/42 - 0s - loss: 0.0034 - val_loss: 0.0012
+Epoch 190/200
+42/42 - 0s - loss: 0.0029 - val_loss: 0.0017
+Epoch 191/200
+42/42 - 0s - loss: 0.0030 - val_loss: 0.0016
+Epoch 192/200
+42/42 - 0s - loss: 0.0030 - val_loss: 0.0012
+Epoch 193/200
+42/42 - 0s - loss: 0.0033 - val_loss: 0.0016
+Epoch 194/200
+42/42 - 0s - loss: 0.0030 - val_loss: 0.0014
+Epoch 195/200
+42/42 - 0s - loss: 0.0033 - val_loss: 0.0017
+Epoch 196/200
+42/42 - 0s - loss: 0.0034 - val_loss: 0.0018
+Epoch 197/200
+42/42 - 0s - loss: 0.0036 - val_loss: 0.0016
+Epoch 198/200
+42/42 - 0s - loss: 0.0033 - val_loss: 0.0019
+Epoch 199/200
+42/42 - 0s - loss: 0.0031 - val_loss: 0.0014
+Epoch 200/200
+42/42 - 0s - loss: 0.0031 - val_loss: 0.0017
+</pre></div>
+</div>
+<img alt="../_images/autoencoder_3_2.png" src="../_images/autoencoder_3_2.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Failed to import pydot. You must install pydot and graphviz for `pydotprint` to work.
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="model-2">
+<h2>Model 2<a class="headerlink" href="#model-2" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># train autoencoder for classification with no compression in the bottleneck layer</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_classification</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Model</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Input</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">LeakyReLU</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">BatchNormalization</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.utils</span> <span class="kn">import</span> <span class="n">plot_model</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span>
+<span class="c1"># define dataset</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">n_informative</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">n_redundant</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># number of input columns</span>
+<span class="n">n_inputs</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="c1"># split into train test sets</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># scale data</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+<span class="n">t</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="c1"># define encoder</span>
+<span class="n">visible</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">n_inputs</span><span class="p">,))</span>
+<span class="c1"># encoder level 1</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">n_inputs</span><span class="o">*</span><span class="mi">2</span><span class="p">)(</span><span class="n">visible</span><span class="p">)</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">e</span><span class="p">)</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">LeakyReLU</span><span class="p">()(</span><span class="n">e</span><span class="p">)</span>
+<span class="c1"># encoder level 2</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">n_inputs</span><span class="p">)(</span><span class="n">e</span><span class="p">)</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">e</span><span class="p">)</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">LeakyReLU</span><span class="p">()(</span><span class="n">e</span><span class="p">)</span>
+<span class="c1"># bottleneck</span>
+<span class="n">n_bottleneck</span> <span class="o">=</span> <span class="n">n_inputs</span>
+<span class="n">bottleneck</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">n_bottleneck</span><span class="p">)(</span><span class="n">e</span><span class="p">)</span>
+<span class="c1"># define decoder, level 1</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">n_inputs</span><span class="p">)(</span><span class="n">bottleneck</span><span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">d</span><span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">LeakyReLU</span><span class="p">()(</span><span class="n">d</span><span class="p">)</span>
+<span class="c1"># decoder level 2</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">n_inputs</span><span class="o">*</span><span class="mi">2</span><span class="p">)(</span><span class="n">d</span><span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">d</span><span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">LeakyReLU</span><span class="p">()(</span><span class="n">d</span><span class="p">)</span>
+<span class="c1"># output layer</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">n_inputs</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)(</span><span class="n">d</span><span class="p">)</span>
+<span class="c1"># define autoencoder model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">visible</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">output</span><span class="p">)</span>
+<span class="c1"># compile autoencoder model</span>
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;mse&#39;</span><span class="p">)</span>
+<span class="c1"># plot the autoencoder</span>
+<span class="n">plot_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s1">&#39;autoencoder_no_compress.png&#39;</span><span class="p">,</span> <span class="n">show_shapes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># fit the autoencoder model to reconstruct input</span>
+<span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span><span class="n">X_test</span><span class="p">))</span>
+<span class="c1"># plot loss</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;train&#39;</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;val_loss&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="c1"># define an encoder model (without the decoder)</span>
+<span class="n">encoder</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">visible</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">bottleneck</span><span class="p">)</span>
+<span class="n">plot_model</span><span class="p">(</span><span class="n">encoder</span><span class="p">,</span> <span class="s1">&#39;encoder_no_compress.png&#39;</span><span class="p">,</span> <span class="n">show_shapes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># save the encoder to file</span>
+<span class="n">encoder</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;encoder.h5&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="using-autoencoder-for-feature-engineering-and-prediction">
+<h2>Using Autoencoder for Feature Engineering and Prediction<a class="headerlink" href="#using-autoencoder-for-feature-engineering-and-prediction" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># evaluate logistic regression on encoded input</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_classification</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">LabelEncoder</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">load_model</span>
+<span class="c1"># define dataset</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">n_informative</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">n_redundant</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># split into train test sets</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># scale data</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+<span class="n">t</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="c1"># load the model from file</span>
+<span class="n">encoder</span> <span class="o">=</span> <span class="n">load_model</span><span class="p">(</span><span class="s1">&#39;encoder.h5&#39;</span><span class="p">)</span>
+<span class="c1"># encode the train data</span>
+<span class="n">X_train_encode</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="c1"># encode the test data</span>
+<span class="n">X_test_encode</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="c1"># define the model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
+<span class="c1"># fit the model on the training set</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_encode</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="c1"># make predictions on the test set</span>
+<span class="n">yhat</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_encode</span><span class="p">)</span>
+<span class="c1"># calculate classification accuracy</span>
+<span class="n">acc</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">yhat</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">acc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:No training configuration found in the save file, so the model was *not* compiled. Compile it manually.
+0.9151515151515152
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/alvinchen/opt/anaconda3/envs/python-notes/lib/python3.7/site-packages/sklearn/linear_model/_logistic.py:940: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  extra_warning_msg=_LOGISTIC_SOLVER_CONVERGENCE_MSG)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://machinelearningmastery.com/autoencoder-for-classification/">Autoencoder Feature Extraction for Classification</a></p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python-notes",
+            path: "./nlp"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python-notes'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alvin Chen<br/>
+        
+            &copy; Copyright 2020 Alvin Chen.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>
