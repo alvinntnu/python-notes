@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Language Model &#8212; Python Notes for Linguistics</title>
+    <title>Natural Language Processing: A Primer &#8212; Python Notes for Linguistics</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="../_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
@@ -38,8 +38,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Neural Language Model: A Start" href="neural-language-model-primer.html" />
-    <link rel="prev" title="Neural Network From Scratch" href="neural-network-from-scratch.html" />
+    <link rel="next" title="NLP Pipeline" href="nlp-pipeline.html" />
+    <link rel="prev" title="Natural Language Processing with Python" href="nlp.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
@@ -93,8 +93,8 @@
    Natural Language Processing with Python
   </a>
   <ul class="current">
-   <li class="toctree-l2">
-    <a class="reference internal" href="nlp-primer.html">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      Natural Language Processing: A Primer
     </a>
     <ul>
@@ -159,8 +159,8 @@
      Neural Network From Scratch
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2">
+    <a class="reference internal" href="language-model.html">
      Language Model
     </a>
     <ul>
@@ -329,7 +329,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/nlp/language-model.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/nlp/nlp-primer.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -353,7 +353,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/alvinntnu/python-notes/master?urlpath=tree/nlp/language-model.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/alvinntnu/python-notes/master?urlpath=tree/nlp/nlp-primer.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -361,7 +361,7 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/nlp/language-model.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/nlp/nlp-primer.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="../_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -380,28 +380,50 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#training-a-trigram-language-model-using-reuters">
-   Training a Trigram Language Model using Reuters
+  <a class="reference internal nav-link" href="#nlp-applications">
+   NLP Applications
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#check-language-model">
-   Check Language Model
+  <a class="reference internal nav-link" href="#nlp-tasks-and-language-blocks">
+   NLP Tasks and Language Blocks
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#text-generation-using-the-trigram-model">
-   Text Generation Using the Trigram Model
+  <a class="reference internal nav-link" href="#nlp-challenges">
+   NLP Challenges
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#issues-of-ngram-language-model">
-   Issues of Ngram Language Model
+  <a class="reference internal nav-link" href="#artificial-intelligence-machine-learning-deep-learning-and-nlp">
+   Artificial Intelligence, Machine Learning, Deep Learning and NLP
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#heuristics-based-nlp">
+     Heuristics-based NLP
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#machine-learning-for-nlp">
+     Machine Learning for NLP
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#deep-learning-for-nlp">
+     Deep Learning for NLP
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#deep-learning-is-not-everything">
+   Deep Learning is NOT Everything
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#neural-language-model">
-   Neural Language Model
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
   </a>
  </li>
 </ul>
@@ -414,127 +436,154 @@
         
               <div>
                 
-  <div class="section" id="language-model">
-<h1>Language Model<a class="headerlink" href="#language-model" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="natural-language-processing-a-primer">
+<h1>Natural Language Processing: A Primer<a class="headerlink" href="#natural-language-processing-a-primer" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li><p>Create the traditinal ngram-based language model</p></li>
-<li><p>Codes from <a class="reference external" href="https://medium.com/analytics-vidhya/a-comprehensive-guide-to-build-your-own-language-model-in-python-5141b3917d6d">A comprehensive guide to build your own language model in python</a></p></li>
+<li><p>Computational Linguistics is a very active subject in linguistics.</p></li>
+<li><p>Natural Language Processing (NLP): It is a sub-field of computer science that deals with methods to analyze, model, and understand human language.</p></li>
 </ul>
-<div class="section" id="training-a-trigram-language-model-using-reuters">
-<h2>Training a Trigram Language Model using Reuters<a class="headerlink" href="#training-a-trigram-language-model-using-reuters" title="Permalink to this headline">¶</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
-
-<span class="c1"># code courtesy of https://nlpforhackers.io/language-models/</span>
-
-<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">reuters</span>
-<span class="kn">from</span> <span class="nn">nltk</span> <span class="kn">import</span> <span class="n">bigrams</span><span class="p">,</span> <span class="n">trigrams</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span><span class="p">,</span> <span class="n">defaultdict</span>
-
-<span class="c1"># Create a placeholder for model</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="mi">0</span><span class="p">))</span>
-
-<span class="c1"># Count frequency of co-occurance  </span>
-<span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">reuters</span><span class="o">.</span><span class="n">sents</span><span class="p">():</span>
-    <span class="k">for</span> <span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">w3</span> <span class="ow">in</span> <span class="n">trigrams</span><span class="p">(</span><span class="n">sentence</span><span class="p">,</span> <span class="n">pad_right</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">pad_left</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="n">model</span><span class="p">[(</span><span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">)][</span><span class="n">w3</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
- 
-<span class="c1"># Let&#39;s transform the counts to probabilities</span>
-<span class="k">for</span> <span class="n">w1_w2</span> <span class="ow">in</span> <span class="n">model</span><span class="p">:</span>
-    <span class="n">total_count</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="n">w1_w2</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
-    <span class="k">for</span> <span class="n">w3</span> <span class="ow">in</span> <span class="n">model</span><span class="p">[</span><span class="n">w1_w2</span><span class="p">]:</span>
-        <span class="n">model</span><span class="p">[</span><span class="n">w1_w2</span><span class="p">][</span><span class="n">w3</span><span class="p">]</span> <span class="o">/=</span> <span class="n">total_count</span>
-</pre></div>
+<div class="section" id="nlp-applications">
+<h2>NLP Applications<a class="headerlink" href="#nlp-applications" title="Permalink to this headline">¶</a></h2>
+<p><img alt="nlp-apps" src="../_images/nlp-apps.png" /></p>
 </div>
+<div class="section" id="nlp-tasks-and-language-blocks">
+<h2>NLP Tasks and Language Blocks<a class="headerlink" href="#nlp-tasks-and-language-blocks" title="Permalink to this headline">¶</a></h2>
+<p><img alt="lg-blocks" src="../_images/lg-blocks.png" /></p>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 10.3 s, sys: 830 ms, total: 11.1 s
-Wall time: 11.1 s
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="check-language-model">
-<h2>Check Language Model<a class="headerlink" href="#check-language-model" title="Permalink to this headline">¶</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">sorted</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;the&quot;</span><span class="p">,</span><span class="s2">&quot;news&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;conference&#39;, 0.25),
- (&#39;of&#39;, 0.125),
- (&#39;.&#39;, 0.125),
- (&#39;with&#39;, 0.08333333333333333),
- (&#39;,&#39;, 0.08333333333333333),
- (&#39;agency&#39;, 0.08333333333333333),
- (&#39;that&#39;, 0.08333333333333333),
- (&#39;brought&#39;, 0.041666666666666664),
- (&#39;about&#39;, 0.041666666666666664),
- (&#39;broke&#39;, 0.041666666666666664),
- (&#39;on&#39;, 0.041666666666666664)]
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="text-generation-using-the-trigram-model">
-<h2>Text Generation Using the Trigram Model<a class="headerlink" href="#text-generation-using-the-trigram-model" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="nlp-challenges">
+<h2>NLP Challenges<a class="headerlink" href="#nlp-challenges" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Using the trigram model to predict the next word.</p></li>
-<li><p>The prediction is based on the predicted probability distribution of the next words: words above a predefined cut-off are randomly selected.</p></li>
-<li><p>The text generator ends when two consecutuve None’s are predicted (signaling the end of the sentence).</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># code courtesy of https://nlpforhackers.io/language-models/</span>
-<span class="kn">import</span> <span class="nn">random</span>
-
-<span class="c1"># starting words</span>
-<span class="n">text</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;the&quot;</span><span class="p">,</span> <span class="s2">&quot;news&quot;</span><span class="p">]</span>
-<span class="n">sentence_finished</span> <span class="o">=</span> <span class="kc">False</span>
- 
-<span class="k">while</span> <span class="ow">not</span> <span class="n">sentence_finished</span><span class="p">:</span>
-  <span class="c1"># select a random probability threshold  </span>
-  <span class="n">r</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
-  <span class="n">accumulator</span> <span class="o">=</span> <span class="o">.</span><span class="mi">0</span>
-
-  <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">model</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:])]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-      <span class="n">accumulator</span> <span class="o">+=</span> <span class="n">model</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:])][</span><span class="n">word</span><span class="p">]</span>
-      <span class="c1"># select words that are above the probability threshold</span>
-      <span class="k">if</span> <span class="n">accumulator</span> <span class="o">&gt;=</span> <span class="n">r</span><span class="p">:</span>
-          <span class="n">text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
-          <span class="k">break</span>
-
-  <span class="k">if</span> <span class="n">text</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]</span> <span class="o">==</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
-      <span class="n">sentence_finished</span> <span class="o">=</span> <span class="kc">True</span>
- 
-<span class="nb">print</span> <span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">text</span> <span class="k">if</span> <span class="n">t</span><span class="p">]))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>the news conference that any rights Dixon might have to return to a faulty start this spring .
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="issues-of-ngram-language-model">
-<h2>Issues of Ngram Language Model<a class="headerlink" href="#issues-of-ngram-language-model" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>The ngram size is of key importance. The higher the order of the ngram, the better the prediction. But it comes with the issues of computation overload and data sparceness.</p></li>
-<li><p>Unseen ngrams are always a concern.</p></li>
-<li><p>Probability smoothing issues.</p></li>
+<li><p>Ambiguity</p></li>
+<li><p>Creativity</p></li>
+<li><p>Diversity</p></li>
+<li><p>Common Knowledge (Context)</p></li>
 </ul>
 </div>
-<div class="section" id="neural-language-model">
-<h2>Neural Language Model<a class="headerlink" href="#neural-language-model" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="artificial-intelligence-machine-learning-deep-learning-and-nlp">
+<h2>Artificial Intelligence, Machine Learning, Deep Learning and NLP<a class="headerlink" href="#artificial-intelligence-machine-learning-deep-learning-and-nlp" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Neural language model based on deep learning may provide a better alternative to model the probabilistic relationships of linguistic units.</p></li>
+<li><p><strong>Artificial Intelligence</strong> is a branch of computer sceience that aims to build systems that can perform taskes that require human intelligence.</p></li>
+<li><p><strong>Machine Learning</strong> is a branch of AI that deals with the development of algorithms that can learn to perform tasks automatically based on large number of examples, without requiring handcrafted rules.</p></li>
+<li><p><strong>Deep Learning</strong> is a branch of machine learning that is based on the artificial neural network architectures.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Approaches to NLP</p>
+<ul>
+<li><p>Heuristics-based NLP</p></li>
+<li><p>Machine Learning NLP</p></li>
+<li><p>Deep Learning for NLP</p></li>
+</ul>
+</li>
+</ul>
+<div class="section" id="heuristics-based-nlp">
+<h3>Heuristics-based NLP<a class="headerlink" href="#heuristics-based-nlp" title="Permalink to this headline">¶</a></h3>
+<p>Examples:</p>
+<ul class="simple">
+<li><p>Dictionary-based sentiment analysis</p></li>
+<li><p>WordNet for lexical relations</p></li>
+<li><p>Common sense world knowledge (Open Mind Common Sense, Ontoloty)</p></li>
+<li><p>Regular Expressions</p></li>
+<li><p>Context-free grammar</p></li>
+</ul>
+<p>Strengths:</p>
+<ul class="simple">
+<li><p>Rules based on domain-specific knowledge can efficiently reduce the mistakes that are sometimes very expensive.</p></li>
+</ul>
+</div>
+<div class="section" id="machine-learning-for-nlp">
+<h3>Machine Learning for NLP<a class="headerlink" href="#machine-learning-for-nlp" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Types of machine learning:</p>
+<ul>
+<li><p>Supervised vs. Unsupervised</p></li>
+<li><p>Classification vs. Regression</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>Three common steps for machine learning</p>
+<ul>
+<li><p>extracting features from texts</p></li>
+<li><p>using the feature representation to learn a model</p></li>
+<li><p>evaluating and improving the model</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>Common methods:</p>
+<ul>
+<li><p>Naive Bayes</p></li>
+<li><p>Support Vector Machine</p></li>
+<li><p>Hidden Markov Model</p></li>
+<li><p>Conditional Random Field</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="deep-learning-for-nlp">
+<h3>Deep Learning for NLP<a class="headerlink" href="#deep-learning-for-nlp" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Sequence Models</p>
+<ul>
+<li><p>Recurrent Neural Network (RNN)</p></li>
+<li><p>Long-Term Short-Term Memory (LSTM)</p></li>
+</ul>
+</li>
+<li><p>Convolutional Neural Network (CNN)</p></li>
+</ul>
+<ul class="simple">
+<li><p>Transformers</p>
+<ul>
+<li><p>The state-of-the-art model in major NLP tasks</p></li>
+<li><p>It models the textual context in a non-sequential mannwer.</p></li>
+<li><p>Given a word in the input, the model looks at all the words around it and represent each word with respect to its context. This is referred to as <em>self-attention</em>.</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>Transfer Learning</p>
+<ul>
+<li><p>It is a technique in AI where the knowledge gained while solving one problem is applied to a different but related problem.</p></li>
+<li><p>We can use unsupervised methods to train a transformer-based model for predicting a part of a sentence given the rest of the content.</p></li>
+<li><p>This model can encode high-level nuances of the language, which can be applied to other relevant downstream tasks.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="deep-learning-is-not-everything">
+<h2>Deep Learning is NOT Everything<a class="headerlink" href="#deep-learning-is-not-everything" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>The trend now is to leverage large transformer models and huge datasets for generic NLP tasks like language models, and then adapt these pre-trained models to smaller downstream tasks.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Challenges</p>
+<ul>
+<li><p>Overfitting on small datasets</p>
+<ul>
+<li><p>Occam’s razor</p></li>
+<li><p>Data accessibility</p></li>
+</ul>
+</li>
+<li><p>Domain adaptation</p></li>
+<li><p>Interpretable models</p></li>
+<li><p>Cost</p>
+<ul>
+<li><p>Data guzzler</p></li>
+<li><p>Specialized hardware (GPUs)</p></li>
+<li><p>Deployment and maintenance</p></li>
+</ul>
+</li>
+<li><p>On-device deployment</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Deep learning is not always the go-to solution for all industrial NLP applications.</p></li>
+<li><p>Many deep learning models are not interpretable enough to indicate the sources of empirical gains.</p></li>
 </ul>
 <div class="toctree-wrapper compound">
 </div>
@@ -569,8 +618,8 @@ Wall time: 11.1 s
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="neural-network-from-scratch.html" title="previous page">Neural Network From Scratch</a>
-    <a class='right-next' id="next-link" href="neural-language-model-primer.html" title="next page">Neural Language Model: A Start</a>
+    <a class='left-prev' id="prev-link" href="nlp.html" title="previous page">Natural Language Processing with Python</a>
+    <a class='right-next' id="next-link" href="nlp-pipeline.html" title="next page">NLP Pipeline</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
