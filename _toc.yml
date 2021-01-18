@@ -52,8 +52,9 @@
     - file: statistical-analyses/network-analysis-igraph
 - file: nlp/nlp
   sections:
-    - file: nlp/nlp-pipeline
+    - file: nlp/nlp-primer
       sections:
+        - file: nlp/nlp-pipeline
         - file: nlp/nlp-spacy
         - file: nlp/nlp-spacy-zh
         - file: nlp/nlp-ckipnlp
