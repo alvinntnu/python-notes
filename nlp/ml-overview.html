@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Language Model &#8212; Python Notes for Linguistics</title>
+    <title>Machine Learning Overview &#8212; Python Notes for Linguistics</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="../_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
@@ -38,8 +38,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Neural Language Model: A Start" href="neural-language-model-primer.html" />
-    <link rel="prev" title="Neural Network From Scratch" href="neural-network-from-scratch.html" />
+    <link rel="next" title="Machine Learning with Sklearn – Regression" href="ml-sklearn-regression.html" />
+    <link rel="prev" title="Text Normalization (Chinese)" href="text-normalization-chinese.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
@@ -137,8 +137,8 @@
      </li>
     </ul>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="ml-overview.html">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      Machine Learning Overview
     </a>
     <ul>
@@ -169,8 +169,8 @@
      Neural Network From Scratch
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2">
+    <a class="reference internal" href="language-model.html">
      Language Model
     </a>
     <ul>
@@ -339,7 +339,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/nlp/language-model.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/nlp/ml-overview.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -363,7 +363,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/alvinntnu/python-notes/master?urlpath=tree/nlp/language-model.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/alvinntnu/python-notes/master?urlpath=tree/nlp/ml-overview.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -371,7 +371,7 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/nlp/language-model.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/nlp/ml-overview.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="../_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -390,29 +390,41 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#training-a-trigram-language-model-using-reuters">
-   Training a Trigram Language Model using Reuters
+  <a class="reference internal nav-link" href="#what-is-machine-learning">
+   What is Machine Learning?
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#check-language-model">
-   Check Language Model
+  <a class="reference internal nav-link" href="#why-use-machine-learning">
+   Why use machine learning?
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#text-generation-using-the-trigram-model">
-   Text Generation Using the Trigram Model
+  <a class="reference internal nav-link" href="#types-of-machine-learning">
+   Types of Machine Learning
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#issues-of-ngram-language-model">
-   Issues of Ngram Language Model
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#neural-language-model">
-   Neural Language Model
-  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#supervised-learning">
+     Supervised Learning
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#unsupervised-learning">
+     Unsupervised Learning
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#semisupervised-learning">
+     Semisupervised Learning
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#reinforcement-learning">
+     Reinforcement Learning
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -424,129 +436,117 @@
         
               <div>
                 
-  <div class="section" id="language-model">
-<h1>Language Model<a class="headerlink" href="#language-model" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="machine-learning-overview">
+<h1>Machine Learning Overview<a class="headerlink" href="#machine-learning-overview" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-is-machine-learning">
+<h2>What is Machine Learning?<a class="headerlink" href="#what-is-machine-learning" title="Permalink to this headline">¶</a></h2>
+<p>Simply put, ML is the science of programming computers so that they can learn from data.</p>
+<blockquote class="epigraph">
+<div><p>[Machine learning is the] field of study that gives computers the ability to learn without being explicitly programmed.</p>
+<p class="attribution">—Arthur Samuel, 1959</p>
+</div></blockquote>
+<blockquote class="epigraph">
+<div><p>A computer program is said to learn from experience E with respect to some task T and some performance measure P, if its performance on T, as measured by P, improves with eexperience E.</p>
+<p class="attribution">—Tom Mitchell, 1997
+</p>
+</div></blockquote>
+</div>
+<div class="section" id="why-use-machine-learning">
+<h2>Why use machine learning?<a class="headerlink" href="#why-use-machine-learning" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Create the traditinal ngram-based language model</p></li>
-<li><p>Codes from <a class="reference external" href="https://medium.com/analytics-vidhya/a-comprehensive-guide-to-build-your-own-language-model-in-python-5141b3917d6d">A comprehensive guide to build your own language model in python</a></p></li>
+<li><p>Limitations of rules/heuristics-based systems:</p>
+<ul>
+<li><p>Rules are hard to be exhaustively listed.</p></li>
+<li><p>Tasks are simply too complex for rule generalization.</p></li>
+<li><p>The rule-based deductive approach is not helpful in discovering novel things.</p></li>
 </ul>
-<div class="section" id="training-a-trigram-language-model-using-reuters">
-<h2>Training a Trigram Language Model using Reuters<a class="headerlink" href="#training-a-trigram-language-model-using-reuters" title="Permalink to this headline">¶</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
-
-<span class="c1"># code courtesy of https://nlpforhackers.io/language-models/</span>
-
-<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">reuters</span>
-<span class="kn">from</span> <span class="nn">nltk</span> <span class="kn">import</span> <span class="n">bigrams</span><span class="p">,</span> <span class="n">trigrams</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span><span class="p">,</span> <span class="n">defaultdict</span>
-
-<span class="c1"># Create a placeholder for model</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="mi">0</span><span class="p">))</span>
-
-<span class="c1"># Count frequency of co-occurance  </span>
-<span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">reuters</span><span class="o">.</span><span class="n">sents</span><span class="p">():</span>
-    <span class="k">for</span> <span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">w3</span> <span class="ow">in</span> <span class="n">trigrams</span><span class="p">(</span><span class="n">sentence</span><span class="p">,</span> <span class="n">pad_right</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">pad_left</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="n">model</span><span class="p">[(</span><span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">)][</span><span class="n">w3</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
- 
-<span class="c1"># Let&#39;s transform the counts to probabilities</span>
-<span class="k">for</span> <span class="n">w1_w2</span> <span class="ow">in</span> <span class="n">model</span><span class="p">:</span>
-    <span class="n">total_count</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="n">w1_w2</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
-    <span class="k">for</span> <span class="n">w3</span> <span class="ow">in</span> <span class="n">model</span><span class="p">[</span><span class="n">w1_w2</span><span class="p">]:</span>
-        <span class="n">model</span><span class="p">[</span><span class="n">w1_w2</span><span class="p">][</span><span class="n">w3</span><span class="p">]</span> <span class="o">/=</span> <span class="n">total_count</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 10.3 s, sys: 830 ms, total: 11.1 s
-Wall time: 11.1 s
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="check-language-model">
-<h2>Check Language Model<a class="headerlink" href="#check-language-model" title="Permalink to this headline">¶</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">sorted</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;the&quot;</span><span class="p">,</span><span class="s2">&quot;news&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;conference&#39;, 0.25),
- (&#39;of&#39;, 0.125),
- (&#39;.&#39;, 0.125),
- (&#39;with&#39;, 0.08333333333333333),
- (&#39;,&#39;, 0.08333333333333333),
- (&#39;agency&#39;, 0.08333333333333333),
- (&#39;that&#39;, 0.08333333333333333),
- (&#39;brought&#39;, 0.041666666666666664),
- (&#39;about&#39;, 0.041666666666666664),
- (&#39;broke&#39;, 0.041666666666666664),
- (&#39;on&#39;, 0.041666666666666664)]
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="text-generation-using-the-trigram-model">
-<h2>Text Generation Using the Trigram Model<a class="headerlink" href="#text-generation-using-the-trigram-model" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>Using the trigram model to predict the next word.</p></li>
-<li><p>The prediction is based on the predicted probability distribution of the next words: words above a predefined cut-off are randomly selected.</p></li>
-<li><p>The text generator ends when two consecutuve None’s are predicted (signaling the end of the sentence).</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># code courtesy of https://nlpforhackers.io/language-models/</span>
-<span class="kn">import</span> <span class="nn">random</span>
-
-<span class="c1"># starting words</span>
-<span class="n">text</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;the&quot;</span><span class="p">,</span> <span class="s2">&quot;news&quot;</span><span class="p">]</span>
-<span class="n">sentence_finished</span> <span class="o">=</span> <span class="kc">False</span>
- 
-<span class="k">while</span> <span class="ow">not</span> <span class="n">sentence_finished</span><span class="p">:</span>
-  <span class="c1"># select a random probability threshold  </span>
-  <span class="n">r</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
-  <span class="n">accumulator</span> <span class="o">=</span> <span class="o">.</span><span class="mi">0</span>
-
-  <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">model</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:])]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-      <span class="n">accumulator</span> <span class="o">+=</span> <span class="n">model</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:])][</span><span class="n">word</span><span class="p">]</span>
-      <span class="c1"># select words that are above the probability threshold</span>
-      <span class="k">if</span> <span class="n">accumulator</span> <span class="o">&gt;=</span> <span class="n">r</span><span class="p">:</span>
-          <span class="n">text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
-          <span class="k">break</span>
-
-  <span class="k">if</span> <span class="n">text</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]</span> <span class="o">==</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
-      <span class="n">sentence_finished</span> <span class="o">=</span> <span class="kc">True</span>
- 
-<span class="nb">print</span> <span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">text</span> <span class="k">if</span> <span class="n">t</span><span class="p">]))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>the news conference that any rights Dixon might have to return to a faulty start this spring .
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="issues-of-ngram-language-model">
-<h2>Issues of Ngram Language Model<a class="headerlink" href="#issues-of-ngram-language-model" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>The ngram size is of key importance. The higher the order of the ngram, the better the prediction. But it comes with the issues of computation overload and data sparceness.</p></li>
-<li><p>Unseen ngrams are always a concern.</p></li>
-<li><p>Probability smoothing issues.</p></li>
+</li>
 </ul>
 </div>
-<div class="section" id="neural-language-model">
-<h2>Neural Language Model<a class="headerlink" href="#neural-language-model" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="types-of-machine-learning">
+<h2>Types of Machine Learning<a class="headerlink" href="#types-of-machine-learning" title="Permalink to this headline">¶</a></h2>
+<p>We can categorize ML into four types according to the amount and type of supervision it gets during training:</p>
 <ul class="simple">
-<li><p>Neural language model based on deep learning may provide a better alternative to model the probabilistic relationships of linguistic units.</p></li>
+<li><p>Supervised Learning</p></li>
+<li><p>Unsupervised Learning</p></li>
+<li><p>Semisupervised Learning</p></li>
+<li><p>Reinforcement Learning</p></li>
+</ul>
+<div class="section" id="supervised-learning">
+<h3>Supervised Learning<a class="headerlink" href="#supervised-learning" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>The data we feed to the ML algorithm includes the desired solutions, i.e., labels.</p>
+<ul>
+<li><p>Classification task (e.g., spam filter): the target is a categorical label.</p></li>
+<li><p>Regression task (e.g., car price prediction): the target is a numeric value.</p></li>
+</ul>
+</li>
+<li><p>Classification and regression are two sides of the coin.</p>
+<ul>
+<li><p>We can sometimes utilize regression algorithms for classification.</p></li>
+<li><p>A classic example is Logistic Regression.</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>Examples of Supervised Learning</p>
+<ul>
+<li><p>K-Nearest Neighbors</p></li>
+<li><p>Linear Regression</p></li>
+<li><p>Logistic Regression</p></li>
+<li><p>Support Vector Machines (SVMs)</p></li>
+<li><p>Decision Trees and Random Forests</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="unsupervised-learning">
+<h3>Unsupervised Learning<a class="headerlink" href="#unsupervised-learning" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>The data is unlabeled. We are more interested in the underlying grouping patterns of the data.</p>
+<ul>
+<li><p>Clustering</p></li>
+<li><p>Anomaly/Novelty detection</p></li>
+<li><p>Dimensionality reduction</p></li>
+<li><p>Association learning</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>Examples of Unsupervised Learning</p>
+<ul>
+<li><p>Clustering</p>
+<ul>
+<li><p>K-means</p></li>
+<li><p>Hierarchical Clustering</p></li>
+</ul>
+</li>
+<li><p>Dimensionality reduction</p>
+<ul>
+<li><p>Principal Component Analysis</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="semisupervised-learning">
+<h3>Semisupervised Learning<a class="headerlink" href="#semisupervised-learning" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>It’s a combination of supervised and unsupervised learning.</p></li>
+<li><p>For example, we start with unlabeled training data and use unsupervised learning to find groups. Users then label these groups with meaningful labels and then transform the task into a supervised learning.</p></li>
+<li><p>A classific example is the photo-hosting service (e.g., face tagging).</p></li>
+</ul>
+</div>
+<div class="section" id="reinforcement-learning">
+<h3>Reinforcement Learning<a class="headerlink" href="#reinforcement-learning" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>This type of learning is often used in robots.</p></li>
+<li><p>The learning system, called an Agent, will learn based on its observation of the environment. During the learning process, the agent will select and perform actions, and get rewards or penalties in return. Through this trial-and-error process, it will figure the most optimal strategy (i.e., policy) for the target task.</p></li>
+<li><p>A classific example is DeepMind’s AlphaGo.</p></li>
 </ul>
 <div class="toctree-wrapper compound">
+</div>
 </div>
 </div>
 </div>
@@ -579,8 +579,8 @@ Wall time: 11.1 s
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="neural-network-from-scratch.html" title="previous page">Neural Network From Scratch</a>
-    <a class='right-next' id="next-link" href="neural-language-model-primer.html" title="next page">Neural Language Model: A Start</a>
+    <a class='left-prev' id="prev-link" href="text-normalization-chinese.html" title="previous page">Text Normalization (Chinese)</a>
+    <a class='right-next' id="next-link" href="ml-sklearn-regression.html" title="next page">Machine Learning with Sklearn – Regression</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
