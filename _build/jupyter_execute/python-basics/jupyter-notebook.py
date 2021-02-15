@@ -121,6 +121,9 @@ $ git-ghp -n -p -f _build/html
     ```
     $ ghp-import -n -p -f _/build/html
     ```
+    
+- Updates of GitHub: Password-based authentication for Git is deprecated, and using a PAT is more secure. Check [Creating a personal access token](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token)
+ 
 
 ## Publish Jupyter-book on Github
 
