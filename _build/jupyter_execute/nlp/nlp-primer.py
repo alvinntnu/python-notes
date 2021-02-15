@@ -101,6 +101,15 @@ Strengths:
 
 - Many deep learning models are not interpretable enough to indicate the sources of empirical gains.
 
+## References
+
+- Chapter 1 of Practical Natural Language Processing. {cite}`vajjala2020`
+
+```{bibliography} ../book.bib
+:filter: docname in docnames
+:style: unsrt
+```
+
 
 ```{toctree}
 :hidden:

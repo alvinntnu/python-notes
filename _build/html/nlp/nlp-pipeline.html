@@ -138,10 +138,20 @@
     </ul>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="sklearn.html">
-     Machine Learning with Sci-Kit Learn
+    <a class="reference internal" href="ml-overview.html">
+     Machine Learning Overview
     </a>
     <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ml-sklearn-regression.html">
+       Machine Learning with Sklearn – Regression
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ml-sklearn-classification.html">
+       Machine Learning with Sci-Kit Learn
+      </a>
+     </li>
      <li class="toctree-l3">
       <a class="reference internal" href="naive-bayes.html">
        Naive Bayes
@@ -507,6 +517,45 @@
   <a class="reference internal nav-link" href="#evaluation">
    Evaluation
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#why-evaluation">
+     Why evaluation?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#intrinsic-vs-extrinsic-evaluation">
+     Intrinsic vs. Extrinsic Evaluation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#general-principles">
+     General Principles
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#common-intrinsic-metrics">
+     Common Intrinsic Metrics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#post-modeling-phases">
+   Post-Modeling Phases
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Post-Modeling Phases
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
  </li>
 </ul>
 
@@ -617,7 +666,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;目前設定&#39;, &#39;目前設定&#39;, &#39;目前設定&#39;, &#39;近日桃園市議員王浩宇罷免案投票通過，給了國民黨打了強心針，將下一個目標轉移到高雄市議員黃捷的罷免投票上。而先前曾說若王浩宇、黃捷和自己被罷免，就請全台吃雞排的台灣基進黨陳柏惟，今（17日）卻反悔稱時空背景不一樣。對此，宅神朱學恒則於臉書發文，恥笑：「打賭都不敢是要怎麼打仗啦！」&#39;, &#39;先前陳柏惟尚未成為立委時，曾貼出自己與王浩宇、黃捷的合照，發布雞排祭品文打賭，「2020三個都罷免成功，我請全台灣人吃雞排」。然而近日桃園市立委王浩與罷免成功，不少網友紛紛向立委陳柏惟討先前打賭的雞排，卻遭陳柏惟以「當年時空背景不一樣」迴避。&#39;, &#39;對此，今宅神朱學恒則於臉書發文嗆：「台派連嗆賭都這麼沒種不敢面對，我們也只能繼續笑他了。打賭都不敢是要怎麼打仗啦（恥笑）」。不少網友也紛紛留言開酸：「時空背景不同的時候....過幾年就變舔共仔」、「不是1打35？」、「果然是雙標之術就是時空背景啊~」、「原來他講的話都是開玩笑。那麼抗中保台屆時也會是他口中的開玩笑」、「他不光是3Q還很軟Q」等等。&#39;, &#39;點選關鍵字看更多 :&#39;, &#39;說明文字&#39;]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;衛福部立桃園醫院群聚感染九人確診，中央流行疫情指揮中心昨證實，院內六、七、九、十樓出現確診案例，為高風險區，昨起啟動「清空醫院」計畫，今將二百廿名患者依風險移至他院的專責隔離病房；，院方已採紅、黃、綠區醫護分艙分流管制，其中，三、六、七、十三樓加護病房及內科病房「紅區」全面管制醫護進出。&#39;, &#39;\n&#39;, &#39;\r\n一名曾參與過SARS防疫核心的感染症專家擔憂，和平醫院封院前，許多患者趕著自行轉院或出院，導致部分醫院淪陷，這次如果沒有妥善處裡，恐怕悲劇重新上演。建議先清空另一間醫院病房，再接受整批住院患者，才能確保感控。&#39;, &#39;\n&#39;, &#39;\r\n部桃不願具名的內科醫師表示，目前內科系門診已全部停診，只留一名醫師待命，各病房患者將陸續清空，全院非紅區內科病房還收治病患兩百多人，由完全未接觸、非紅區的十多名醫師率護士輪流照護，並嚴格禁止進入紅區。&#39;, &#39;\n&#39;, &#39;\r\n指揮中心擴大匡列院內員工，累計三五三名醫院員工需隔離十四天，其中不少人必須集中檢疫或回院隔離，專家指出，這猶如當年SARS和平醫院封院，召回所有醫護人員回院，相關員工勢必承受極大身心壓力，衛福部必須正視這個問題。&#39;, &#39;\n&#39;, &#39;\r\n專家指出，目前兩百多名住院患者雖然檢驗結果為陰性，但考量潛伏期，無法保證零確診；若分散到多家未清空的醫院，風險很大，只要一個環節出錯，就可能把疫情帶進人更多的醫院和社區。&#39;, &#39;\n&#39;, &#39;\r\n專家說，和平醫院封院前，許多患者趕著自行轉院或出院，導致部分醫院淪陷；這次清空桃園醫院前自行轉院或出院患者，均具有潛在風險，將成為疫情最令人擔憂之處。醫護感染院內足跡 圖／聯合報提供&#39;, &#39;\n ▪【最新數據】德國又現新毒株！沖繩發布緊急事態 \n ▪【數據圖表】新冠肺炎最終章何時登場 365天疫情數據解析  ▪【QA測驗】2020疫情肆虐 你的生活變什麼樣？ ▪【疫苗專題】全球新冠疫苗爭奪戰開跑 台灣起步早為何還落後？  ▪【疫情專題】新冠肺炎給出一記重拳 全球航空業到底有多慘？&#39;, &#39;\n                    部桃院內群聚感染事件昨天再添四名確診個案，分別為護理師、住院病患外籍看護，及兩名與染疫醫護（案八六三）同住家人，其中一人...                  &#39;, &#39;\n                    行政院昨宣布停辦今年台灣燈會。交通部長林佳龍前天對今年舉辦台灣燈會仍有信心，強調「沒有停辦的問題」，但昨在行政院長蘇貞昌...                  &#39;, &#39;\n                    部立桃園醫院已有六名醫護染疫，甚至已擴散到其家人，累計九人確診，為防院內感染持續擴大，陸軍六軍團三三化學兵群昨天派出約二...                  &#39;, &#39;\n                    衛福部立桃園醫院群聚感染九人確診，中央流行疫情指揮中心昨證實，院內六、七、九、十樓出現確診案例，為高風險區，昨起啟動「清...                  &#39;, &#39;\n                    部立桃園醫院群聚事件愈演愈烈，昨天新增4名確診個案，分別為護理師、住院病患外籍看護及兩名與染疫醫護（案863）同住家人。短短8天9人確診，指揮中心指揮官陳時中在記者會只保守地說「疫情至少發展到二波」，但發言人莊人祥會後坦承，「已經進入第四波傳播」...                  &#39;, &#39;\n                    台灣燈會決定停辦，新竹市長林智堅昨表示，為嚴肅面對疫情，上周起就積極與中央討論，最後決議停辦，這對新竹市政府及交通部觀光...                  &#39;]
 </pre></div>
 </div>
 </div>
@@ -936,6 +985,83 @@ good
 </div>
 <div class="section" id="evaluation">
 <h2>Evaluation<a class="headerlink" href="#evaluation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="why-evaluation">
+<h3>Why evaluation?<a class="headerlink" href="#why-evaluation" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>We need to know how <em>good</em> the model we’ve built is – “Goodness”</p></li>
+<li><p>Factors relating to the evaluation methods</p>
+<ul>
+<li><p>model building</p></li>
+<li><p>deployment</p></li>
+<li><p>production</p></li>
+</ul>
+</li>
+<li><p>ML metrics vs. business metrics</p></li>
+</ul>
+</div>
+<div class="section" id="intrinsic-vs-extrinsic-evaluation">
+<h3>Intrinsic vs. Extrinsic Evaluation<a class="headerlink" href="#intrinsic-vs-extrinsic-evaluation" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Take spam-classification system as an example</p></li>
+<li><p>Intrinsic:</p>
+<ul>
+<li><p>the precision and recall of the spam classification/prediction</p></li>
+</ul>
+</li>
+<li><p>Extrinsic:</p>
+<ul>
+<li><p>the amount of time users spent on a spam email</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="general-principles">
+<h3>General Principles<a class="headerlink" href="#general-principles" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Do intrinsic evaluation before extrinsic.</p></li>
+<li><p>Extrinsic evaluation is more expensive because it often invovles project stakeholders outside the AI team.</p></li>
+<li><p>Only when we get consistently good results in intrinsic evaluation should we go for extrinsic evaluation.</p></li>
+<li><p>Bad results in intrinsic often implies bad results in extrinsic as well.</p></li>
+</ul>
+</div>
+<div class="section" id="common-intrinsic-metrics">
+<h3>Common Intrinsic Metrics<a class="headerlink" href="#common-intrinsic-metrics" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Principles for Evaluation Metrics Selection</p></li>
+<li><p>Data type of the labels (ground truths)</p>
+<ul>
+<li><p>Binary (e.g., sentiment)</p></li>
+<li><p>Ordinal (e.g., informational retrieval)</p></li>
+<li><p>Categorical (e.g., POS tags)</p></li>
+<li><p>Textual (e.g., named entity, machine translation, text generation)</p></li>
+</ul>
+</li>
+<li><p>Automatic vs. Human Evalation</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="post-modeling-phases">
+<h2>Post-Modeling Phases<a class="headerlink" href="#post-modeling-phases" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>Post-Modeling Phases<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Deployment of the model in a  production environment (e.g., web service)</p></li>
+<li><p>Monitoring system performance on a regular basis</p></li>
+<li><p>Updating system with new-coming data</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Chapter 2 of Practical Natural Language Processing. <a class="bibtex reference internal" href="nlp-primer.html#vajjala2020" id="id2">[5]</a></p></li>
+</ul>
+<p id="bibtex-bibliography-nlp/nlp-pipeline-0"><dl class="citation">
+<dt class="bibtex label" id="vajjala2020"><span class="brackets"><a class="fn-backref" href="#id2">5</a></span></dt>
+<dd><p>Sowmya Vajjala, Bodhisattwa Majumder, Anuj Gupta, and Harshit Surana. <em>Practical Natural Language Processing: A Comprehensive Guide to Building Real-World NLP Systems</em>. O’Reilly Media, 2020.</p>
+</dd>
+</dl>
+</p>
 </div>
 </div>
 

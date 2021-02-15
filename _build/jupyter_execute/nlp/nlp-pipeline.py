@@ -1,4 +1,5 @@
-# NLP Pipeline
+ 
+ # NLP Pipeline
 
 ## A General NLP Pipeline
 
@@ -223,3 +224,56 @@ for w,p in zip(words,poss):
     - Reapply heuristics
 
 ## Evaluation
+
+### Why evaluation?
+
+- We need to know how *good* the model we've built is -- "Goodness"
+- Factors relating to the evaluation methods
+    - model building
+    - deployment
+    - production
+- ML metrics vs. business metrics
+
+
+### Intrinsic vs. Extrinsic Evaluation
+
+- Take spam-classification system as an example
+- Intrinsic:
+    - the precision and recall of the spam classification/prediction
+- Extrinsic:
+    - the amount of time users spent on a spam email
+    
+
+### General Principles
+
+- Do intrinsic evaluation before extrinsic.
+- Extrinsic evaluation is more expensive because it often invovles project stakeholders outside the AI team.
+- Only when we get consistently good results in intrinsic evaluation should we go for extrinsic evaluation.
+- Bad results in intrinsic often implies bad results in extrinsic as well.
+
+### Common Intrinsic Metrics
+
+- Principles for Evaluation Metrics Selection
+- Data type of the labels (ground truths)
+    - Binary (e.g., sentiment)
+    - Ordinal (e.g., informational retrieval)
+    - Categorical (e.g., POS tags)
+    - Textual (e.g., named entity, machine translation, text generation)
+- Automatic vs. Human Evalation
+
+## Post-Modeling Phases
+
+### Post-Modeling Phases
+
+- Deployment of the model in a  production environment (e.g., web service)
+- Monitoring system performance on a regular basis
+- Updating system with new-coming data
+
+## References
+
+- Chapter 2 of Practical Natural Language Processing. {cite}`vajjala2020`
+
+```{bibliography} ../book.bib
+:filter: docname in docnames
+:style: unsrt
+```

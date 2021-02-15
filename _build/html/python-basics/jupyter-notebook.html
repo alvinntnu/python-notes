@@ -386,6 +386,16 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pip-command">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     pip
+    </span>
+   </code>
+   Command
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#other-issues">
    Other issues
   </a>
@@ -818,6 +828,7 @@ IRkernel::installspec()
 <li><p>Install rpy2 using the updated gcc <code class="docutils literal notranslate"><span class="pre">env</span> <span class="pre">CC=/usr/local/Cellar/gcc/10.2.0/bin/gcc-10</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">rpy2</span></code></p></li>
 </ul>
 </li>
+<li><p>Useful Webinar: <a class="reference external" href="https://rstudio.com/resources/webinars/rstudio-a-single-home-for-r-and-python/">A Single Home for Python and R</a></p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1041,6 +1052,22 @@ R[write to console]: The following objects are masked from ‘package:base’:
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupyter</span> <span class="n">notebook</span> <span class="o">--</span><span class="n">NotebookApp</span><span class="o">.</span><span class="n">iopub_data_rate_limit</span><span class="o">=</span><span class="mf">1.0e10</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="pip-command">
+<h2><code class="docutils literal notranslate"><span class="pre">pip</span></code> Command<a class="headerlink" href="#pip-command" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">pip</span></code> is a great tool to manage python packages.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">--version</span></code>: Check current <code class="docutils literal notranslate"><span class="pre">pip</span></code> version</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--upgrade</span> <span class="pre">pip</span></code>: Update <code class="docutils literal notranslate"><span class="pre">pip</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">XX</span></code>: Install package XX</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-U</span> <span class="pre">XX</span></code>: Update package XX</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">uninstall</span> <span class="pre">XX</span></code>: Uninstall package XX</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-v</span> <span class="pre">XX==1.0</span></code>: Install package of specific version</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">list</span></code>: List all packages installed</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">requirements.txt</span></code>: Install several packages all at once</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">freeze</span> <span class="pre">&gt;</span> <span class="pre">requirements.txt</span></code>: Save all installed packages into a list</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">show</span> <span class="pre">XXX</span></code>: show version information of specific package (XX)</p></li>
+</ul>
 </div>
 <div class="section" id="other-issues">
 <h2>Other issues<a class="headerlink" href="#other-issues" title="Permalink to this headline">¶</a></h2>

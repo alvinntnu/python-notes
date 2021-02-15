@@ -350,6 +350,7 @@ $ jupyter nbextension enable <nbextension require path>
     - Install Homebrew
     - Install ggc with `brew install gcc`
     - Install rpy2 using the updated gcc `env CC=/usr/local/Cellar/gcc/10.2.0/bin/gcc-10 pip install rpy2`
+- Useful Webinar: [A Single Home for Python and R](https://rstudio.com/resources/webinars/rstudio-a-single-home-for-r-and-python/)
 
 %run hello-world.ipynb
 
@@ -438,6 +439,22 @@ Try:
 ```
 jupyter notebook --NotebookApp.iopub_data_rate_limit=1.0e10
 ```
+
+## `pip` Command
+
+`pip` is a great tool to manage python packages.
+
+- `pip --version`: Check current `pip` version
+- `pip install --upgrade pip`: Update `pip`
+- `pip install XX`: Install package XX
+- `pip install -U XX`: Update package XX
+- `pip uninstall XX`: Uninstall package XX
+- `pip install -v XX==1.0`: Install package of specific version
+- `pip list`: List all packages installed
+- `pip install -r requirements.txt`: Install several packages all at once
+- `pip freeze > requirements.txt`: Save all installed packages into a list
+- `pip show XXX`: show version information of specific package (XX)
+
 
 ## Other issues
 

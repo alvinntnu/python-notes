@@ -62,8 +62,10 @@
       sections:
         - file: nlp/text-normalization-eng
         - file: nlp/text-normalization-chinese
-    - file: nlp/sklearn
+    - file: nlp/ml-overview
       sections:
+        - file: nlp/ml-sklearn-regression
+        - file: nlp/ml-sklearn-classification
         - file: nlp/naive-bayes
         - file: nlp/sentiment-analysis-ml
     - file: nlp/neural-network-from-scratch

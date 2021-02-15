@@ -1,0 +1,1888 @@
+
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Machine Learning with Sklearn – Regression &#8212; Python Notes for Linguistics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mycss.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Machine Learning with Sci-Kit Learn" href="ml-sklearn-classification.html" />
+    <link rel="prev" title="Machine Learning Overview" href="ml-overview.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/ntnu-word-2.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Python Notes for Linguistics</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../python-basics/python-basics.html">
+   Python Basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../corpus/corpus-processing.html">
+   Corpus Linguistics with Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../statistical-analyses/statistical-analyses.html">
+   Statistical Analyses
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="nlp.html">
+   Natural Language Processing with Python
+  </a>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="nlp-primer.html">
+     Natural Language Processing: A Primer
+    </a>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="nlp-pipeline.html">
+       NLP Pipeline
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="nlp-spacy.html">
+       Natural Language Processing (spaCy)
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="nlp-spacy-zh.html">
+       Chinese Natural Language Processing (spaCy)
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="nlp-ckipnlp.html">
+       Natural Language Processing (ckipnlp)
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="text-normalization-intro.html">
+     Text Normalization
+    </a>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="text-normalization-eng.html">
+       Text Normalization (English)
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="text-normalization-chinese.html">
+       Text Normalization (Chinese)
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="reference internal" href="ml-overview.html">
+     Machine Learning Overview
+    </a>
+    <ul class="current">
+     <li class="toctree-l3 current active">
+      <a class="current reference internal" href="#">
+       Machine Learning with Sklearn – Regression
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="ml-sklearn-classification.html">
+       Machine Learning with Sci-Kit Learn
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="naive-bayes.html">
+       Naive Bayes
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="sentiment-analysis-ml.html">
+       Sentiment Analysis with Traditional Machine Learning
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="neural-network-from-scratch.html">
+     Neural Network From Scratch
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="language-model.html">
+     Language Model
+    </a>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="neural-language-model-primer.html">
+       Neural Language Model: A Start
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="neural-language-model-zh.html">
+       Neural Language Model of Chinese
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="text-gen-lstm-v1.html">
+       Text Generation
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gpt2.html">
+       Transformer-based Language Model - GPT2
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="word-embeddings.html">
+     Word Embeddings
+    </a>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="word2vec-chinese.html">
+       Word Embeddings with Chinese Texts
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="word2vec.html">
+       Word2Vec
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="doc2vec.html">
+       Dov2Vec
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="word-embeddings-autoencoder.html">
+       Generate Text Embeddings Using AutoEncoder
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="transfer-learning-sent-encoding.html">
+       Universal Sentence Embeddings
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sentiment-analysis-dl.html">
+     Sentiment Analysis with Deep Learning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sentiment-analysis-lstm-v1.html">
+     Sentiment Analysis with LSTM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="seq-to-seq-types.html">
+     Intutions for Types of Sequence-to-Sequence Models
+    </a>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="seq-to-seq-types-date.html">
+       Types of Seqeunce Model
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="seq-to-seq-m21-sentiment-attention.html">
+       Sequence Model (many-to-one) with Attention
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="seq-to-seq-attention-addition.html">
+       Seqeunce Model with Attention for Addition Learning
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="seq-to-seq-machine-translation.html">
+     Machine Translation (Sequence-to-Sequence)
+    </a>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="seq-to-seq-machine-translation-attention.html">
+       Machine Translation with Attention (Thushan)
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="hyperparameter-tuning.html">
+     Hyper-Parameter Tuning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sentiment-analysis-using-bert-chinese.html">
+     Sentiment Analysis Using BERT
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ktrain-tutorial-explaining-predictions.html">
+     Explainable AI
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/todo.html">
+   To-do List
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <div style="text-align:left">
+<i class="fas fa-home fa-2x" style="color:Maroon;margin-right:5px"></i><a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
+</div>
+
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/nlp/ml-sklearn-regression.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/alvinntnu/python-notes/master?urlpath=tree/nlp/ml-sklearn-regression.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/nlp/ml-sklearn-regression.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data">
+   Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualization">
+   Visualization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#train-test-split">
+   Train-Test Split
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#simple-random-sampling">
+     Simple random sampling
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stratified-random-sampling">
+     Stratified Random Sampling
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exploring-training-data">
+   Exploring Training Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#preparing-data-for-ml">
+   Preparing Data for ML
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#na-values">
+     NA values
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-type-conversion">
+     Data Type Conversion
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#feature-scaling">
+     Feature Scaling
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#transformation-pipelines">
+     Transformation Pipelines
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#select-and-train-a-model">
+   Select and Train a Model
+  </a>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="machine-learning-with-sklearn-regression">
+<h1>Machine Learning with Sklearn – Regression<a class="headerlink" href="#machine-learning-with-sklearn-regression" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="data">
+<h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">house</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../../../RepositoryData/data/hands-on-ml/housing.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">house</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>longitude</th>
+      <th>latitude</th>
+      <th>housing_median_age</th>
+      <th>total_rooms</th>
+      <th>total_bedrooms</th>
+      <th>population</th>
+      <th>households</th>
+      <th>median_income</th>
+      <th>median_house_value</th>
+      <th>ocean_proximity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-122.23</td>
+      <td>37.88</td>
+      <td>41.0</td>
+      <td>880.0</td>
+      <td>129.0</td>
+      <td>322.0</td>
+      <td>126.0</td>
+      <td>8.3252</td>
+      <td>452600.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-122.22</td>
+      <td>37.86</td>
+      <td>21.0</td>
+      <td>7099.0</td>
+      <td>1106.0</td>
+      <td>2401.0</td>
+      <td>1138.0</td>
+      <td>8.3014</td>
+      <td>358500.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-122.24</td>
+      <td>37.85</td>
+      <td>52.0</td>
+      <td>1467.0</td>
+      <td>190.0</td>
+      <td>496.0</td>
+      <td>177.0</td>
+      <td>7.2574</td>
+      <td>352100.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-122.25</td>
+      <td>37.85</td>
+      <td>52.0</td>
+      <td>1274.0</td>
+      <td>235.0</td>
+      <td>558.0</td>
+      <td>219.0</td>
+      <td>5.6431</td>
+      <td>341300.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-122.25</td>
+      <td>37.85</td>
+      <td>52.0</td>
+      <td>1627.0</td>
+      <td>280.0</td>
+      <td>565.0</td>
+      <td>259.0</td>
+      <td>3.8462</td>
+      <td>342200.0</td>
+      <td>NEAR BAY</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">house</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 20640 entries, 0 to 20639
+Data columns (total 10 columns):
+ #   Column              Non-Null Count  Dtype  
+---  ------              --------------  -----  
+ 0   longitude           20640 non-null  float64
+ 1   latitude            20640 non-null  float64
+ 2   housing_median_age  20640 non-null  float64
+ 3   total_rooms         20640 non-null  float64
+ 4   total_bedrooms      20433 non-null  float64
+ 5   population          20640 non-null  float64
+ 6   households          20640 non-null  float64
+ 7   median_income       20640 non-null  float64
+ 8   median_house_value  20640 non-null  float64
+ 9   ocean_proximity     20640 non-null  object 
+dtypes: float64(9), object(1)
+memory usage: 1.6+ MB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">house</span><span class="p">[</span><span class="s1">&#39;ocean_proximity&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;1H OCEAN     9136
+INLAND        6551
+NEAR OCEAN    2658
+NEAR BAY      2290
+ISLAND           5
+Name: ocean_proximity, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">house</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>longitude</th>
+      <th>latitude</th>
+      <th>housing_median_age</th>
+      <th>total_rooms</th>
+      <th>total_bedrooms</th>
+      <th>population</th>
+      <th>households</th>
+      <th>median_income</th>
+      <th>median_house_value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>20640.000000</td>
+      <td>20640.000000</td>
+      <td>20640.000000</td>
+      <td>20640.000000</td>
+      <td>20433.000000</td>
+      <td>20640.000000</td>
+      <td>20640.000000</td>
+      <td>20640.000000</td>
+      <td>20640.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>-119.569704</td>
+      <td>35.631861</td>
+      <td>28.639486</td>
+      <td>2635.763081</td>
+      <td>537.870553</td>
+      <td>1425.476744</td>
+      <td>499.539680</td>
+      <td>3.870671</td>
+      <td>206855.816909</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>2.003532</td>
+      <td>2.135952</td>
+      <td>12.585558</td>
+      <td>2181.615252</td>
+      <td>421.385070</td>
+      <td>1132.462122</td>
+      <td>382.329753</td>
+      <td>1.899822</td>
+      <td>115395.615874</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>-124.350000</td>
+      <td>32.540000</td>
+      <td>1.000000</td>
+      <td>2.000000</td>
+      <td>1.000000</td>
+      <td>3.000000</td>
+      <td>1.000000</td>
+      <td>0.499900</td>
+      <td>14999.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>-121.800000</td>
+      <td>33.930000</td>
+      <td>18.000000</td>
+      <td>1447.750000</td>
+      <td>296.000000</td>
+      <td>787.000000</td>
+      <td>280.000000</td>
+      <td>2.563400</td>
+      <td>119600.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>-118.490000</td>
+      <td>34.260000</td>
+      <td>29.000000</td>
+      <td>2127.000000</td>
+      <td>435.000000</td>
+      <td>1166.000000</td>
+      <td>409.000000</td>
+      <td>3.534800</td>
+      <td>179700.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>-118.010000</td>
+      <td>37.710000</td>
+      <td>37.000000</td>
+      <td>3148.000000</td>
+      <td>647.000000</td>
+      <td>1725.000000</td>
+      <td>605.000000</td>
+      <td>4.743250</td>
+      <td>264725.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>-114.310000</td>
+      <td>41.950000</td>
+      <td>52.000000</td>
+      <td>39320.000000</td>
+      <td>6445.000000</td>
+      <td>35682.000000</td>
+      <td>6082.000000</td>
+      <td>15.000100</td>
+      <td>500001.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="visualization">
+<h2>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">house</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ml-sklearn-regression_8_0.png" src="../_images/ml-sklearn-regression_8_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="train-test-split">
+<h2>Train-Test Split<a class="headerlink" href="#train-test-split" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="simple-random-sampling">
+<h3>Simple random sampling<a class="headerlink" href="#simple-random-sampling" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">house</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16512
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4128
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="stratified-random-sampling">
+<h3>Stratified Random Sampling<a class="headerlink" href="#stratified-random-sampling" title="Permalink to this headline">¶</a></h3>
+<p>The sampling should consider the income distributions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">house</span><span class="p">[</span><span class="s1">&#39;income_cat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">house</span><span class="p">[</span><span class="s1">&#39;median_income&#39;</span><span class="p">],</span>
+                            <span class="n">bins</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">],</span>
+                            <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">house</span><span class="p">[</span><span class="s1">&#39;income_cat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
+</pre></div>
+</div>
+<img alt="../_images/ml-sklearn-regression_17_1.png" src="../_images/ml-sklearn-regression_17_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">StratifiedShuffleSplit</span>
+
+<span class="n">splitter</span> <span class="o">=</span> <span class="n">StratifiedShuffleSplit</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">train_index</span><span class="p">,</span> <span class="n">test_index</span> <span class="ow">in</span> <span class="n">splitter</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">house</span><span class="p">,</span> <span class="n">house</span><span class="p">[</span><span class="s1">&#39;income_cat&#39;</span><span class="p">]):</span>
+    <span class="n">train_strat</span> <span class="o">=</span> <span class="n">house</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">train_index</span><span class="p">]</span>
+    <span class="n">test_strat</span> <span class="o">=</span> <span class="n">house</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_strat</span><span class="p">[</span><span class="s1">&#39;income_cat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">train_strat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3    0.350594
+2    0.318859
+4    0.176296
+5    0.114402
+1    0.039850
+Name: income_cat, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_strat</span><span class="p">[</span><span class="s1">&#39;income_cat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">test_strat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3    0.350533
+2    0.318798
+4    0.176357
+5    0.114583
+1    0.039729
+Name: income_cat, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">set_</span> <span class="ow">in</span> <span class="p">(</span><span class="n">train_strat</span><span class="p">,</span> <span class="n">test_strat</span><span class="p">):</span>
+    <span class="n">set_</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;income_cat&quot;</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="exploring-training-data">
+<h2>Exploring Training Data<a class="headerlink" href="#exploring-training-data" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_strat</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;scatter&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;longitude&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;latitude&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span>
+                <span class="n">s</span><span class="o">=</span><span class="n">train_strat</span><span class="p">[</span><span class="s2">&quot;population&quot;</span><span class="p">]</span><span class="o">/</span><span class="mi">100</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;population&quot;</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span>
+                <span class="n">c</span><span class="o">=</span><span class="s2">&quot;median_house_value&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s2">&quot;jet&quot;</span><span class="p">),</span><span class="n">colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1">## size: population</span>
+<span class="c1">## color: median house value</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb45b976470&gt;
+</pre></div>
+</div>
+<img alt="../_images/ml-sklearn-regression_24_1.png" src="../_images/ml-sklearn-regression_24_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="preparing-data-for-ml">
+<h2>Preparing Data for ML<a class="headerlink" href="#preparing-data-for-ml" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Wrap things in functions</p>
+<ul>
+<li><p>Allow you to reproduce the same transformations easily on any dataset</p></li>
+<li><p>Build a self-defined library of transformation functions</p></li>
+<li><p>Allow you to apply the same transformation to new data in live system</p></li>
+<li><p>Allow you to experiment with different transformations easily</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">housing</span> <span class="o">=</span> <span class="n">train_strat</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;median_house_value&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">housing_labels</span> <span class="o">=</span> <span class="n">train_strat</span><span class="p">[</span><span class="s2">&quot;median_house_value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">housing</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>longitude</th>
+      <th>latitude</th>
+      <th>housing_median_age</th>
+      <th>total_rooms</th>
+      <th>total_bedrooms</th>
+      <th>population</th>
+      <th>households</th>
+      <th>median_income</th>
+      <th>ocean_proximity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>17606</th>
+      <td>-121.89</td>
+      <td>37.29</td>
+      <td>38.0</td>
+      <td>1568.0</td>
+      <td>351.0</td>
+      <td>710.0</td>
+      <td>339.0</td>
+      <td>2.7042</td>
+      <td>&lt;1H OCEAN</td>
+    </tr>
+    <tr>
+      <th>18632</th>
+      <td>-121.93</td>
+      <td>37.05</td>
+      <td>14.0</td>
+      <td>679.0</td>
+      <td>108.0</td>
+      <td>306.0</td>
+      <td>113.0</td>
+      <td>6.4214</td>
+      <td>&lt;1H OCEAN</td>
+    </tr>
+    <tr>
+      <th>14650</th>
+      <td>-117.20</td>
+      <td>32.77</td>
+      <td>31.0</td>
+      <td>1952.0</td>
+      <td>471.0</td>
+      <td>936.0</td>
+      <td>462.0</td>
+      <td>2.8621</td>
+      <td>NEAR OCEAN</td>
+    </tr>
+    <tr>
+      <th>3230</th>
+      <td>-119.61</td>
+      <td>36.31</td>
+      <td>25.0</td>
+      <td>1847.0</td>
+      <td>371.0</td>
+      <td>1460.0</td>
+      <td>353.0</td>
+      <td>1.8839</td>
+      <td>INLAND</td>
+    </tr>
+    <tr>
+      <th>3555</th>
+      <td>-118.59</td>
+      <td>34.23</td>
+      <td>17.0</td>
+      <td>6592.0</td>
+      <td>1525.0</td>
+      <td>4459.0</td>
+      <td>1463.0</td>
+      <td>3.0347</td>
+      <td>&lt;1H OCEAN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>6563</th>
+      <td>-118.13</td>
+      <td>34.20</td>
+      <td>46.0</td>
+      <td>1271.0</td>
+      <td>236.0</td>
+      <td>573.0</td>
+      <td>210.0</td>
+      <td>4.9312</td>
+      <td>INLAND</td>
+    </tr>
+    <tr>
+      <th>12053</th>
+      <td>-117.56</td>
+      <td>33.88</td>
+      <td>40.0</td>
+      <td>1196.0</td>
+      <td>294.0</td>
+      <td>1052.0</td>
+      <td>258.0</td>
+      <td>2.0682</td>
+      <td>INLAND</td>
+    </tr>
+    <tr>
+      <th>13908</th>
+      <td>-116.40</td>
+      <td>34.09</td>
+      <td>9.0</td>
+      <td>4855.0</td>
+      <td>872.0</td>
+      <td>2098.0</td>
+      <td>765.0</td>
+      <td>3.2723</td>
+      <td>INLAND</td>
+    </tr>
+    <tr>
+      <th>11159</th>
+      <td>-118.01</td>
+      <td>33.82</td>
+      <td>31.0</td>
+      <td>1960.0</td>
+      <td>380.0</td>
+      <td>1356.0</td>
+      <td>356.0</td>
+      <td>4.0625</td>
+      <td>&lt;1H OCEAN</td>
+    </tr>
+    <tr>
+      <th>15775</th>
+      <td>-122.45</td>
+      <td>37.77</td>
+      <td>52.0</td>
+      <td>3095.0</td>
+      <td>682.0</td>
+      <td>1269.0</td>
+      <td>639.0</td>
+      <td>3.5750</td>
+      <td>NEAR BAY</td>
+    </tr>
+  </tbody>
+</table>
+<p>16512 rows × 9 columns</p>
+</div></div></div>
+</div>
+<div class="section" id="na-values">
+<h3>NA values<a class="headerlink" href="#na-values" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.impute</span> <span class="kn">import</span> <span class="n">SimpleImputer</span>
+
+<span class="n">imputer</span> <span class="o">=</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s2">&quot;median&quot;</span><span class="p">)</span>
+
+<span class="n">housing_num</span> <span class="o">=</span> <span class="n">housing</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;ocean_proximity&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">imputer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">housing_num</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SimpleImputer(add_indicator=False, copy=True, fill_value=None,
+              missing_values=nan, strategy=&#39;median&#39;, verbose=0)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">imputer</span><span class="o">.</span><span class="n">statistics_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-118.51  ,   34.26  ,   29.    , 2119.5   ,  433.    , 1164.    ,
+        408.    ,    3.5409])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">housing_num</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>longitude             -118.5100
+latitude                34.2600
+housing_median_age      29.0000
+total_rooms           2119.5000
+total_bedrooms         433.0000
+population            1164.0000
+households             408.0000
+median_income            3.5409
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">imputer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">housing_num</span><span class="p">)</span>
+<span class="n">housing_tr</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">housing_num</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="n">housing_tr</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>longitude</th>
+      <th>latitude</th>
+      <th>housing_median_age</th>
+      <th>total_rooms</th>
+      <th>total_bedrooms</th>
+      <th>population</th>
+      <th>households</th>
+      <th>median_income</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-121.89</td>
+      <td>37.29</td>
+      <td>38.0</td>
+      <td>1568.0</td>
+      <td>351.0</td>
+      <td>710.0</td>
+      <td>339.0</td>
+      <td>2.7042</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-121.93</td>
+      <td>37.05</td>
+      <td>14.0</td>
+      <td>679.0</td>
+      <td>108.0</td>
+      <td>306.0</td>
+      <td>113.0</td>
+      <td>6.4214</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-117.20</td>
+      <td>32.77</td>
+      <td>31.0</td>
+      <td>1952.0</td>
+      <td>471.0</td>
+      <td>936.0</td>
+      <td>462.0</td>
+      <td>2.8621</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-119.61</td>
+      <td>36.31</td>
+      <td>25.0</td>
+      <td>1847.0</td>
+      <td>371.0</td>
+      <td>1460.0</td>
+      <td>353.0</td>
+      <td>1.8839</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-118.59</td>
+      <td>34.23</td>
+      <td>17.0</td>
+      <td>6592.0</td>
+      <td>1525.0</td>
+      <td>4459.0</td>
+      <td>1463.0</td>
+      <td>3.0347</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>16507</th>
+      <td>-118.13</td>
+      <td>34.20</td>
+      <td>46.0</td>
+      <td>1271.0</td>
+      <td>236.0</td>
+      <td>573.0</td>
+      <td>210.0</td>
+      <td>4.9312</td>
+    </tr>
+    <tr>
+      <th>16508</th>
+      <td>-117.56</td>
+      <td>33.88</td>
+      <td>40.0</td>
+      <td>1196.0</td>
+      <td>294.0</td>
+      <td>1052.0</td>
+      <td>258.0</td>
+      <td>2.0682</td>
+    </tr>
+    <tr>
+      <th>16509</th>
+      <td>-116.40</td>
+      <td>34.09</td>
+      <td>9.0</td>
+      <td>4855.0</td>
+      <td>872.0</td>
+      <td>2098.0</td>
+      <td>765.0</td>
+      <td>3.2723</td>
+    </tr>
+    <tr>
+      <th>16510</th>
+      <td>-118.01</td>
+      <td>33.82</td>
+      <td>31.0</td>
+      <td>1960.0</td>
+      <td>380.0</td>
+      <td>1356.0</td>
+      <td>356.0</td>
+      <td>4.0625</td>
+    </tr>
+    <tr>
+      <th>16511</th>
+      <td>-122.45</td>
+      <td>37.77</td>
+      <td>52.0</td>
+      <td>3095.0</td>
+      <td>682.0</td>
+      <td>1269.0</td>
+      <td>639.0</td>
+      <td>3.5750</td>
+    </tr>
+  </tbody>
+</table>
+<p>16512 rows × 8 columns</p>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="data-type-conversion">
+<h3>Data Type Conversion<a class="headerlink" href="#data-type-conversion" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Categorical to Ordinal</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">OrdinalEncoder</span>
+<span class="n">ordinal_encoder</span> <span class="o">=</span> <span class="n">OrdinalEncoder</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ocean_proximity_cat</span> <span class="o">=</span> <span class="n">housing</span><span class="p">[[</span><span class="s2">&quot;ocean_proximity&quot;</span><span class="p">]]</span>
+<span class="n">ocean_proximity_cat</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ocean_proximity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>17606</th>
+      <td>&lt;1H OCEAN</td>
+    </tr>
+    <tr>
+      <th>18632</th>
+      <td>&lt;1H OCEAN</td>
+    </tr>
+    <tr>
+      <th>14650</th>
+      <td>NEAR OCEAN</td>
+    </tr>
+    <tr>
+      <th>3230</th>
+      <td>INLAND</td>
+    </tr>
+    <tr>
+      <th>3555</th>
+      <td>&lt;1H OCEAN</td>
+    </tr>
+    <tr>
+      <th>19480</th>
+      <td>INLAND</td>
+    </tr>
+    <tr>
+      <th>8879</th>
+      <td>&lt;1H OCEAN</td>
+    </tr>
+    <tr>
+      <th>13685</th>
+      <td>INLAND</td>
+    </tr>
+    <tr>
+      <th>4937</th>
+      <td>&lt;1H OCEAN</td>
+    </tr>
+    <tr>
+      <th>4861</th>
+      <td>&lt;1H OCEAN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ocean_proximity_ordinal</span> <span class="o">=</span> <span class="n">ordinal_encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">ocean_proximity_cat</span><span class="p">)</span>
+<span class="n">ocean_proximity_ordinal</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.],
+       [0.],
+       [4.],
+       [1.],
+       [0.],
+       [1.],
+       [0.],
+       [1.],
+       [0.],
+       [0.]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ordinal_encoder</span><span class="o">.</span><span class="n">categories_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([&#39;&lt;1H OCEAN&#39;, &#39;INLAND&#39;, &#39;ISLAND&#39;, &#39;NEAR BAY&#39;, &#39;NEAR OCEAN&#39;],
+       dtype=object)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">ocean_proximity_oridinal</span><span class="p">)</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0    7276
+1.0    5263
+4.0    2124
+3.0    1847
+2.0       2
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>One-hot encoding</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">OneHotEncoder</span>
+<span class="n">onehot_encoder</span> <span class="o">=</span> <span class="n">OneHotEncoder</span><span class="p">()</span>
+<span class="n">ocean_proximity_onehot</span> <span class="o">=</span> <span class="n">onehot_encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">ocean_proximity_cat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ocean_proximity_onehot</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;16512x5 sparse matrix of type &#39;&lt;class &#39;numpy.float64&#39;&gt;&#39;
+	with 16512 stored elements in Compressed Sparse Row format&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ocean_proximity_onehot</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1., 0., 0., 0., 0.],
+       [1., 0., 0., 0., 0.],
+       [0., 0., 0., 0., 1.],
+       ...,
+       [0., 1., 0., 0., 0.],
+       [1., 0., 0., 0., 0.],
+       [0., 0., 0., 1., 0.]])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="feature-scaling">
+<h3>Feature Scaling<a class="headerlink" href="#feature-scaling" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span><span class="p">,</span> <span class="n">MinMaxScaler</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">standard_scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">minmax_scaler</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+
+<span class="n">housing_num_minmax</span> <span class="o">=</span> <span class="n">minmax_scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">housing_num</span><span class="p">)</span>
+<span class="n">housing_num_standard</span> <span class="o">=</span> <span class="n">standard_scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">housing_num</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">housing_num_minmax</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.24501992, 0.50478215, 0.7254902 , ..., 0.01981558, 0.06292009,
+        0.15201859],
+       [0.24103586, 0.47927736, 0.25490196, ..., 0.00849239, 0.02072442,
+        0.40837368],
+       [0.71215139, 0.02444208, 0.58823529, ..., 0.02614984, 0.08588499,
+        0.1629081 ],
+       ...,
+       [0.79183267, 0.16471838, 0.15686275, ..., 0.05871801, 0.14245706,
+        0.19119736],
+       [0.6314741 , 0.1360255 , 0.58823529, ..., 0.03792147, 0.0660941 ,
+        0.24569316],
+       [0.18924303, 0.55579171, 1.        , ..., 0.03548306, 0.11893204,
+        0.21207294]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">housing_num_standard</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-1.15604281,  0.77194962,  0.74333089, ..., -0.63621141,
+        -0.42069842, -0.61493744],
+       [-1.17602483,  0.6596948 , -1.1653172 , ..., -0.99833135,
+        -1.02222705,  1.33645936],
+       [ 1.18684903, -1.34218285,  0.18664186, ..., -0.43363936,
+        -0.0933178 , -0.5320456 ],
+       ...,
+       [ 1.58648943, -0.72478134, -1.56295222, ...,  0.60790363,
+         0.71315642, -0.3167053 ],
+       [ 0.78221312, -0.85106801,  0.18664186, ..., -0.05717804,
+        -0.37545069,  0.09812139],
+       [-1.43579109,  0.99645926,  1.85670895, ..., -0.13515931,
+         0.3777909 , -0.15779865]])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="transformation-pipelines">
+<h3>Transformation Pipelines<a class="headerlink" href="#transformation-pipelines" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+
+<span class="n">num_pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+    <span class="p">(</span><span class="s1">&#39;imputer&#39;</span><span class="p">,</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s2">&quot;median&quot;</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s1">&#39;standardizer&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span>
+<span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">housing_num_tr</span> <span class="o">=</span> <span class="n">num_pipeline</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">housing_num</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">housing_num_tr</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-1.15604281,  0.77194962,  0.74333089, ..., -0.63621141,
+        -0.42069842, -0.61493744],
+       [-1.17602483,  0.6596948 , -1.1653172 , ..., -0.99833135,
+        -1.02222705,  1.33645936],
+       [ 1.18684903, -1.34218285,  0.18664186, ..., -0.43363936,
+        -0.0933178 , -0.5320456 ],
+       ...,
+       [ 1.58648943, -0.72478134, -1.56295222, ...,  0.60790363,
+         0.71315642, -0.3167053 ],
+       [ 0.78221312, -0.85106801,  0.18664186, ..., -0.05717804,
+        -0.37545069,  0.09812139],
+       [-1.43579109,  0.99645926,  1.85670895, ..., -0.13515931,
+         0.3777909 , -0.15779865]])
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Handle all columns all at once</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.compose</span> <span class="kn">import</span> <span class="n">ColumnTransformer</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_columns</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">housing_num</span><span class="p">)</span>
+<span class="n">cat_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ocean_proximity&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">full_pipeline</span> <span class="o">=</span> <span class="n">ColumnTransformer</span><span class="p">([</span>
+    <span class="p">(</span><span class="s1">&#39;num&#39;</span><span class="p">,</span> <span class="n">num_pipeline</span><span class="p">,</span> <span class="n">num_columns</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="n">OneHotEncoder</span><span class="p">(),</span> <span class="n">cat_columns</span><span class="p">)</span>
+<span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">housing_prepared</span> <span class="o">=</span> <span class="n">full_pipeline</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">housing</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The output of the <code class="docutils literal notranslate"><span class="pre">full_pipeline</span></code> includes more columns than the original data frame <code class="docutils literal notranslate"><span class="pre">housing</span></code>. This is due to the one-hot encoding  transformation.</p>
+</div>
+</div>
+</div>
+<div class="section" id="select-and-train-a-model">
+<h2>Select and Train a Model<a class="headerlink" href="#select-and-train-a-model" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Linear Regresssion</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+
+<span class="n">lin_reg</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">lin_reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">housing_prepared</span><span class="p">,</span> <span class="n">housing_labels</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
+
+<span class="n">housing_predictions</span> <span class="o">=</span> <span class="n">lin_reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">housing_prepared</span><span class="p">)</span>
+
+<span class="n">lin_mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">housing_labels</span><span class="p">,</span> <span class="n">housing_predictions</span><span class="p">)</span>
+<span class="n">lin_rmes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">lin_mse</span><span class="p">)</span>
+<span class="n">lin_rmes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>69055.57008288472
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Decision Tree</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
+<span class="n">tree_reg</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">()</span>
+<span class="n">tree_reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">housing_prepared</span><span class="p">,</span> <span class="n">housing_labels</span><span class="p">)</span>
+
+<span class="n">tree_mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">housing_labels</span><span class="p">,</span> <span class="n">tree_reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">housing_prepared</span><span class="p">))</span>
+<span class="n">tree_rmes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">tree_mse</span><span class="p">)</span>
+<span class="n">tree_rmes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Cross Validation to check over/under-fitting</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>CV for Decision Tree</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tree_scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">tree_reg</span><span class="p">,</span> <span class="n">housing_prepared</span><span class="p">,</span> <span class="n">housing_labels</span><span class="p">,</span>
+                             <span class="n">scoring</span><span class="o">=</span><span class="s2">&quot;neg_mean_squared_error&quot;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">tree_rmse_cv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="n">tree_scores</span><span class="p">)</span>
+<span class="n">tree_rmse_cv</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([67139.82432539, 67382.97266737, 73570.81763384, 68716.64962785,
+       67808.75573625, 75295.66005943, 66336.18100097, 69901.7711193 ,
+       69017.19332426, 69541.31134573])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">display_cv_scores</span><span class="p">(</span><span class="n">scores</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Scores:&#39;</span><span class="p">,</span> <span class="n">scores</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean:&#39;</span><span class="p">,</span> <span class="n">scores</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Standard deviation:&#39;</span><span class="p">,</span> <span class="n">scores</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_cv_scores</span><span class="p">(</span><span class="n">tree_rmse_cv</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scores: [67139.82432539 67382.97266737 73570.81763384 68716.64962785
+ 67808.75573625 75295.66005943 66336.18100097 69901.7711193
+ 69017.19332426 69541.31134573]
+Mean: 69471.1136840389
+Standard deviation: 2721.856830394127
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>CV for Linear Regression</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">linreg_scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">lin_reg</span><span class="p">,</span> <span class="n">housing_prepared</span><span class="p">,</span> <span class="n">housing_labels</span><span class="p">,</span>
+                                <span class="n">scoring</span><span class="o">=</span><span class="s2">&quot;neg_mean_squared_error&quot;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">linreg_rmse_cv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="n">linreg_scores</span><span class="p">)</span>
+<span class="n">display_cv_scores</span><span class="p">(</span><span class="n">linreg_rmse_cv</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scores: [67452.77701485 67389.76532656 68361.84864912 74651.7801139
+ 68314.56738182 71640.79787192 65361.14176205 68571.62738037
+ 72475.91110732 68098.06828865]
+Mean: 69231.82848965636
+Standard deviation: 2656.3702353976896
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>CV for Random Forest</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span>
+<span class="n">forest_reg</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">()</span>
+<span class="n">forest_scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">forest_reg</span><span class="p">,</span> <span class="n">housing_prepared</span><span class="p">,</span> <span class="n">housing_labels</span><span class="p">,</span>
+                               <span class="n">scoring</span><span class="o">=</span><span class="s2">&quot;neg_mean_squared_error&quot;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">forest_rmse_cv</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="n">forest_scores</span><span class="p">)</span>
+<span class="n">display_cv_scores</span><span class="p">(</span><span class="n">forest_rmse_cv</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scores: [47632.49179689 46373.11835198 49272.19573687 50147.15388662
+ 49036.42363423 53397.31601372 48902.61322735 50348.23351741
+ 51248.22704525 49552.02150292]
+Mean: 49590.979471321756
+Standard deviation: 1821.8742073775495
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ul class="simple">
+<li><p>Try different ML algorithms first, before spending too much time tweaking the hyperparameters of one single algorithm.</p></li>
+<li><p>The first goal is to shortlist a few (2 to 5) promising models.</p></li>
+</ul>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python-notes",
+            path: "./nlp"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python-notes'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="ml-overview.html" title="previous page">Machine Learning Overview</a>
+    <a class='right-next' id="next-link" href="ml-sklearn-classification.html" title="next page">Machine Learning with Sci-Kit Learn</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alvin Chen<br/>
+        
+            &copy; Copyright 2020 Alvin Chen.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>
