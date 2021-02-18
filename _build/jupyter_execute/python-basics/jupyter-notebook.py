@@ -448,7 +448,7 @@ jupyter notebook --NotebookApp.iopub_data_rate_limit=1.0e10
 `pip` is a great tool to manage python packages.
 
 - `pip --version`: Check current `pip` version
-- `pip install --upgrade pip`: Update `pip`
+- `pip install --upgrade XXX`: Update `XXX`
 - `pip install XX`: Install package XX
 - `pip install -U XX`: Update package XX
 - `pip uninstall XX`: Uninstall package XX
