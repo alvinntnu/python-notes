@@ -35,3 +35,7 @@ jupyter nbconvert my-nb-slide.ipynb --to slides --post serve
 ```
 
 - With *rise* library, we can run a live notebook slide by directly using the notebook file (`alt + r`)
+
+## Other settings
+
+- To customize RISE, use the `Nbextensions` in Jupyter. Under `Nbextensions`, find `rise` tab.
