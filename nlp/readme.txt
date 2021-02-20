@@ -1,0 +1,2 @@
+- The scripts in NLP folder are for ENC2045 course.
+- All the updates will be made in ENC2045 project. No more updates for the scripts in nlp/
