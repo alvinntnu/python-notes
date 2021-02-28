@@ -159,6 +159,22 @@ American_dates = ["7/31/1976", "02.15.1970", "11-31-1986", "04/01.2020"]
 print(American_dates)
 print([re.sub(r'(\d+)(\D)(\d+)(\D)(\d+)', r'\3\2\1\4\5', date) for date in American_dates])
 
+- In `re.sub(repl, string)`, the `repl` argument can be a function. If `repl` is a function, it is called for every non-overlapping occurrence of pattern. The function takes a single match object argument, and returns the replacement string.
+
+s = "This is a simple sentence."
+
+pat_vowels = re.compile(r'[aeiou]')
+
+def replaceVowels(m):
+    c = m.group(0)
+    c2 = ""
+    if c in "ie":
+        c2 = "F"
+    else:
+        c2 = "B"
+    return c2
+pat_vowels.sub(replaceVowels, s)
+
 ## References
 
 - [Python regular expression cheatsheet](https://learnbyexample.github.io/python-regex-cheatsheet/)

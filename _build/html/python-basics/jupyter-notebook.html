@@ -819,6 +819,7 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">M</span></code>: Merge multiple cells</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Y</span></code>: Change cell to code</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">M</span></code>: Change cell to markdown</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Ctrl</span></code> + <code class="docutils literal notranslate"><span class="pre">/</span></code>: Uncomment and comment code chunk</p></li>
 </ul>
 </div>
 <div class="section" id="citation">
@@ -924,7 +925,12 @@ $ git push origin master
 </div>
 </li>
 <li><p>Updates of GitHub: Password-based authentication for Git is deprecated, and using a PAT is more secure. Check <a class="reference external" href="https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token">Creating a personal access token</a></p></li>
+<li><p>To skip specific directories in GIT, create a <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> file and list all the directory names.</p></li>
+<li><p>To remove a directory from GIT but not local:</p></li>
 </ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git rm -r --cached XXX
+</pre></div>
+</div>
 </div>
 <div class="section" id="publish-jupyter-book-on-github">
 <h2>Publish Jupyter-book on Github<a class="headerlink" href="#publish-jupyter-book-on-github" title="Permalink to this headline">¶</a></h2>

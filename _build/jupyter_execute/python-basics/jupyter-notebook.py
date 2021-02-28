@@ -27,6 +27,7 @@
 - `Shift + M`: Merge multiple cells
 - `Y`: Change cell to code
 - `M`: Change cell to markdown
+- `Ctrl` + `/`: Uncomment and comment code chunk
 
 ## Citation
 
@@ -123,7 +124,13 @@ $ git-ghp -n -p -f _build/html
     ```
     
 - Updates of GitHub: Password-based authentication for Git is deprecated, and using a PAT is more secure. Check [Creating a personal access token](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token)
- 
+
+- To skip specific directories in GIT, create a `.gitignore` file and list all the directory names.
+
+- To remove a directory from GIT but not local:
+```
+$ git rm -r --cached XXX
+```
 
 ## Publish Jupyter-book on Github
 
