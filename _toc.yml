@@ -26,6 +26,7 @@
   sections:
     - file: corpus/nltk
     - file: corpus/web-crawler
+    - file: corpus/web-crawler-dcard
     - file: corpus/unicode
     - file: corpus/corpus-linguistics-methods
       sections:
