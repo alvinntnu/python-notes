@@ -263,6 +263,35 @@ Sometimes, the pre-existing conda environment does not work properly. An easy so
 !conda update -n base -c defaults conda
 ```
 
+- Use the following python snippet to check if the notebook is using the exact conda environment:
+
+```
+import sys
+sys.executable
+```
+
+- Windows Issues
+
+    - create the conda environment
+    - activate the conda environment
+    - install the `ipykernel` in the conda environment
+    - deactivate the conda environment
+    - install `nb_conda_kernels`
+
+```
+$ conda create --name python-notes python=3.7
+$ conda activate python-notes
+$ conda install ipykernel
+$ conda deactivate
+$ conda install nb_conda_kernels
+$ python -m nb_conda_kernels list
+$ jupyter notebook
+```
+
+Now, you should be able to see your conda kernel in Jupyter notebook. 
+
+And remember to use Anaconda Powershell Prompt to activate your `python-notes` conda environment before installing any packages.
+
 
 (nbextensions)=
 
