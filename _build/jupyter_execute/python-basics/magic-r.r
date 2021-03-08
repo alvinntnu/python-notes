@@ -26,6 +26,15 @@
     
     %% R -i DUMP_PYTHON_OBJECTS_FOR_R
     ```
+    
+    - Some other parameters
+    
+    ```
+    %%R -i df -w 5 -h 5 --units in -r 200
+    # import df from global environment
+    # make default figure size 5 by 5 inches with 200 dpi resolution
+
+    ```
 
 
 ## Running R codes in Notebook

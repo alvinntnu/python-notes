@@ -842,9 +842,9 @@
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!pip install spacy==2.3
-!spacy download zh_core_web_lg
-!pip install skater
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install <span class="nv">spacy</span><span class="o">==</span><span class="m">2</span>.3
+<span class="o">!</span>spacy download zh_core_web_lg
+<span class="o">!</span>pip install skater
 </pre></div>
 </div>
 </div>
@@ -942,7 +942,7 @@ Requirement already satisfied: toolz&gt;=0.7.3; extra == &quot;array&quot; in /u
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
 <span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/gdrive/&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -958,7 +958,7 @@ Requirement already satisfied: toolz&gt;=0.7.3; extra == &quot;array&quot; in /u
 <h2>Loading Libraries<a class="headerlink" href="#loading-libraries" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">keras</span>
 <span class="kn">import</span> <span class="nn">spacy</span>
@@ -974,7 +974,6 @@ Requirement already satisfied: toolz&gt;=0.7.3; extra == &quot;array&quot; in /u
 <span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">make_pipeline</span><span class="p">,</span> <span class="n">TransformerMixin</span>
 <span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="kn">import</span> <span class="n">BaseEstimator</span>
 <span class="kn">from</span> <span class="nn">skater.core.local_interpretation.lime.lime_text</span> <span class="kn">import</span> <span class="n">LimeTextExplainer</span>
-
 </pre></div>
 </div>
 </div>
@@ -984,14 +983,14 @@ Requirement already satisfied: toolz&gt;=0.7.3; extra == &quot;array&quot; in /u
 <h2>Loading Dataset<a class="headerlink" href="#loading-dataset" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/content/gdrive/My Drive/ColabData/marc_movie_review_metadata.csv&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/content/gdrive/My Drive/ColabData/marc_movie_review_metadata.csv&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1083,8 +1082,7 @@ Requirement already satisfied: toolz&gt;=0.7.3; extra == &quot;array&quot; in /u
 <h2>Train-Test Split<a class="headerlink" href="#train-test-split" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
-<span class="n">reviews</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;reviews_sentiword_seg&#39;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reviews</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;reviews_sentiword_seg&#39;</span><span class="p">])</span>
 <span class="n">sentiments</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;rating&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -1092,7 +1090,7 @@ Requirement already satisfied: toolz&gt;=0.7.3; extra == &quot;array&quot; in /u
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">reviews_train</span><span class="p">,</span> <span class="n">reviews_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">reviews</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reviews_train</span><span class="p">,</span> <span class="n">reviews_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">reviews</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
 <span class="n">sentiments_train</span><span class="p">,</span> <span class="n">sentiments_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">sentiments</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1100,7 +1098,7 @@ Requirement already satisfied: toolz&gt;=0.7.3; extra == &quot;array&quot; in /u
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">reviews</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">reviews</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">sentiments</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -1139,7 +1137,7 @@ Requirement already satisfied: toolz&gt;=0.7.3; extra == &quot;array&quot; in /u
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">## Text/Label Transformation</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Text/Label Transformation</span>
 <span class="n">wt</span> <span class="o">=</span> <span class="n">WhitespaceTokenizer</span><span class="p">()</span>
 <span class="n">reviews_train_tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">wt</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">reviews_train</span><span class="p">]</span>
 <span class="n">reviews_train_tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -1152,7 +1150,7 @@ Requirement already satisfied: toolz&gt;=0.7.3; extra == &quot;array&quot; in /u
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">reviews_test_tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">wt</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">reviews_test</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reviews_test_tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">wt</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">reviews_test</span><span class="p">]</span>
 <span class="n">sentiments_test_categorical</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">sentiments_test</span><span class="p">)</span>
 <span class="n">sentiments_test_onehot</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">to_categorical</span><span class="p">(</span><span class="n">sentiments_test_categorical</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 </pre></div>
@@ -1168,7 +1166,7 @@ Requirement already satisfied: toolz&gt;=0.7.3; extra == &quot;array&quot; in /u
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sentiment Class Label Map:&#39;</span><span class="p">,</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sentiment Class Label Map:&#39;</span><span class="p">,</span> 
       <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">le</span><span class="o">.</span><span class="n">classes_</span><span class="p">,</span> <span class="n">le</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">le</span><span class="o">.</span><span class="n">classes_</span><span class="p">))))</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sample Test Label Transformation:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">+</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">35</span><span class="p">,</span>
@@ -1194,7 +1192,7 @@ One-hot Encodings:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">time</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
 <span class="c1">## Training Word Embeddings</span>
 <span class="n">w2v_num_features</span> <span class="o">=</span> <span class="mi">300</span>
 <span class="n">w2v_model</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Word2Vec</span><span class="p">(</span><span class="n">reviews_train_tokens</span><span class="p">,</span>
@@ -1215,7 +1213,7 @@ Wall time: 3.87 s
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">## This model uses the document word vector averaging scheme</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## This model uses the document word vector averaging scheme</span>
 <span class="c1">## Use the average word vector representations to represent one document (movie reivew)</span>
 
 <span class="k">def</span> <span class="nf">averaged_word2vec_vectorizer</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">num_features</span><span class="p">):</span>
@@ -1243,7 +1241,7 @@ Wall time: 3.87 s
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># generate averaged word vector features from word2vec model</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># generate averaged word vector features from word2vec model</span>
 <span class="n">avg_wv_train_features</span> <span class="o">=</span> <span class="n">averaged_word2vec_vectorizer</span><span class="p">(</span><span class="n">corpus</span><span class="o">=</span><span class="n">reviews_train_tokens</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">w2v_model</span><span class="p">,</span>
                                                      <span class="n">num_features</span><span class="o">=</span><span class="n">w2v_num_features</span><span class="p">)</span>
 <span class="n">avg_wv_test_features</span> <span class="o">=</span> <span class="n">averaged_word2vec_vectorizer</span><span class="p">(</span><span class="n">corpus</span><span class="o">=</span><span class="n">reviews_test_tokens</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">w2v_model</span><span class="p">,</span>
@@ -1254,7 +1252,7 @@ Wall time: 3.87 s
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Self-Trained Word2Vec model:&gt; Train features shape:&#39;</span><span class="p">,</span> <span class="n">avg_wv_train_features</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="s1">&#39; Test features shape:&#39;</span><span class="p">,</span> <span class="n">avg_wv_test_features</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Self-Trained Word2Vec model:&gt; Train features shape:&#39;</span><span class="p">,</span> <span class="n">avg_wv_train_features</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="s1">&#39; Test features shape:&#39;</span><span class="p">,</span> <span class="n">avg_wv_test_features</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1266,7 +1264,7 @@ Wall time: 3.87 s
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">construct_deepnn_architecture</span><span class="p">(</span><span class="n">num_input_features</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">construct_deepnn_architecture</span><span class="p">(</span><span class="n">num_input_features</span><span class="p">):</span>
     <span class="n">dnn_model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
     <span class="n">dnn_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="n">num_input_features</span><span class="p">,),</span> <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;glorot_uniform&#39;</span><span class="p">))</span>
     <span class="n">dnn_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">BatchNormalization</span><span class="p">())</span> <span class="c1"># improve  stability of the network.</span>
@@ -1318,7 +1316,7 @@ Wall time: 3.87 s
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">w2v_num_features</span> <span class="o">=</span> <span class="mi">300</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w2v_num_features</span> <span class="o">=</span> <span class="mi">300</span>
 <span class="n">w2v_dnn</span> <span class="o">=</span> <span class="n">construct_deepnn_architecture</span><span class="p">(</span><span class="n">num_input_features</span><span class="o">=</span><span class="n">w2v_num_features</span><span class="p">)</span>
 <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="n">history</span><span class="o">=</span><span class="n">w2v_dnn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">avg_wv_train_features</span><span class="p">,</span> <span class="n">sentiments_train_onehot</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> 
@@ -1536,7 +1534,7 @@ Epoch 100/100
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># functions from Text Analytics with Python book</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># functions from Text Analytics with Python book</span>
 <span class="k">def</span> <span class="nf">get_metrics</span><span class="p">(</span><span class="n">true_labels</span><span class="p">,</span> <span class="n">predicted_labels</span><span class="p">):</span>
     
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Accuracy:&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span>
@@ -1602,7 +1600,7 @@ Epoch 100/100
 <h3>Evaluation<a class="headerlink" href="#evaluation" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">w2v_dnn</span><span class="o">.</span><span class="n">predict_classes</span><span class="p">(</span><span class="n">avg_wv_test_features</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">w2v_dnn</span><span class="o">.</span><span class="n">predict_classes</span><span class="p">(</span><span class="n">avg_wv_test_features</span><span class="p">)</span>
 <span class="n">predictions</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span> 
 <span class="n">display_model_performance_metrics</span><span class="p">(</span><span class="n">true_labels</span><span class="o">=</span><span class="n">sentiments_test</span><span class="p">,</span> <span class="n">predicted_labels</span><span class="o">=</span><span class="n">predictions</span><span class="p">,</span> 
                                       <span class="n">classes</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;positive&#39;</span><span class="p">,</span> <span class="s1">&#39;negative&#39;</span><span class="p">])</span> 
@@ -1654,8 +1652,7 @@ Actual: positive        226       86
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
-<span class="n">nlp_vec</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;zh_core_web_lg&#39;</span><span class="p">,</span> <span class="n">parse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">entity</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nlp_vec</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;zh_core_web_lg&#39;</span><span class="p">,</span> <span class="n">parse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">entity</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1670,7 +1667,7 @@ Prefix dict has been built successfully.
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">## feature engineering with GloVe model</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## feature engineering with GloVe model</span>
 <span class="n">train_nlp</span> <span class="o">=</span> <span class="p">[</span><span class="n">nlp_vec</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">reviews_train</span><span class="p">]</span>
 <span class="n">train_glove_features</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">item</span><span class="o">.</span><span class="n">vector</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">train_nlp</span><span class="p">])</span>
 
@@ -1682,7 +1679,7 @@ Prefix dict has been built successfully.
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># nlp_vec(&#39;word&#39;).vector # convert a word into embeddings</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># nlp_vec(&#39;word&#39;).vector # convert a word into embeddings</span>
 <span class="c1"># nlp_vec(&#39;this is a word&#39;).vector # convert a sentence into embeddings by taking averages of word embeddings</span>
 </pre></div>
 </div>
@@ -1690,7 +1687,7 @@ Prefix dict has been built successfully.
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Word2Vec model:&gt; Train features shape:&#39;</span><span class="p">,</span> <span class="n">avg_wv_train_features</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="s1">&#39; Test features shape:&#39;</span><span class="p">,</span> <span class="n">avg_wv_test_features</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Word2Vec model:&gt; Train features shape:&#39;</span><span class="p">,</span> <span class="n">avg_wv_train_features</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="s1">&#39; Test features shape:&#39;</span><span class="p">,</span> <span class="n">avg_wv_test_features</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;GloVe model:&gt; Train features shape:&#39;</span><span class="p">,</span> <span class="n">train_glove_features</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="s1">&#39; Test features shape:&#39;</span><span class="p">,</span> <span class="n">test_glove_features</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1704,7 +1701,7 @@ GloVe model:&gt; Train features shape: (2560, 300)  Test features shape: (640, 3
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">w2v_num_features</span> <span class="o">=</span> <span class="mi">300</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w2v_num_features</span> <span class="o">=</span> <span class="mi">300</span>
 <span class="n">w2v_dnn_glove</span> <span class="o">=</span> <span class="n">construct_deepnn_architecture</span><span class="p">(</span><span class="n">num_input_features</span><span class="o">=</span><span class="n">w2v_num_features</span><span class="p">)</span>
 <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="n">history2</span><span class="o">=</span><span class="n">w2v_dnn_glove</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_glove_features</span><span class="p">,</span> <span class="n">sentiments_train_onehot</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> 
@@ -1924,7 +1921,7 @@ Epoch 100/100
 <h3>Evaluation<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">w2v_dnn_glove</span><span class="o">.</span><span class="n">predict_classes</span><span class="p">(</span><span class="n">test_glove_features</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">w2v_dnn_glove</span><span class="o">.</span><span class="n">predict_classes</span><span class="p">(</span><span class="n">test_glove_features</span><span class="p">)</span>
 <span class="n">predictions</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span> 
 <span class="n">display_model_performance_metrics</span><span class="p">(</span><span class="n">true_labels</span><span class="o">=</span><span class="n">sentiments_test</span><span class="p">,</span> <span class="n">predicted_labels</span><span class="o">=</span><span class="n">predictions</span><span class="p">,</span> 
                                       <span class="n">classes</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;positive&#39;</span><span class="p">,</span> <span class="s1">&#39;negative&#39;</span><span class="p">])</span> 
@@ -1972,7 +1969,7 @@ Actual: positive        248       64
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">reviews_train</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">reviews_train</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">reviews_train_tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -1988,7 +1985,7 @@ Actual: positive        248       64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">## Prepare data for LSTM format</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Prepare data for LSTM format</span>
 
 <span class="c1">## Convert reviews/text_train_tokens into index</span>
 
@@ -2011,7 +2008,6 @@ Actual: positive        248       64
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Vocabulary Size:&#39;</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Examples of vocabulary map:&#39;</span><span class="p">,</span>
       <span class="nb">dict</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">vocab_map</span><span class="o">.</span><span class="n">items</span><span class="p">())[:</span><span class="mi">20</span><span class="p">]))</span>
-
 </pre></div>
 </div>
 </div>
@@ -2024,7 +2020,7 @@ Examples of vocabulary map: {&#39;花&#39;: 1, &#39;了&#39;: 2, &#39;280&#39;: 
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">## Padding</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Padding</span>
 
 <span class="kn">from</span> <span class="nn">keras.preprocessing</span> <span class="kn">import</span> <span class="n">sequence</span>
 
@@ -2060,8 +2056,7 @@ Test Review Shape: (640, 519)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
-<span class="n">EMBEDDING_DIM</span> <span class="o">=</span> <span class="mi">128</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">EMBEDDING_DIM</span> <span class="o">=</span> <span class="mi">128</span>
 <span class="n">LSTM_DIM</span><span class="o">=</span><span class="mi">64</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
 <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Embedding</span><span class="p">(</span><span class="n">input_dim</span><span class="o">=</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">output_dim</span><span class="o">=</span><span class="n">EMBEDDING_DIM</span><span class="p">,</span> <span class="n">input_length</span><span class="o">=</span><span class="n">max_len</span><span class="p">))</span>
@@ -2109,14 +2104,14 @@ Epoch 10/10
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">save_weights</span><span class="p">(</span><span class="s1">&#39;/content/gdrive/My Drive/ColabData/marc-sent-analysis-lstm-self.h5&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">save_weights</span><span class="p">(</span><span class="s1">&#39;/content/gdrive/My Drive/ColabData/marc-sent-analysis-lstm-self.h5&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">history3</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">history3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2129,7 +2124,7 @@ Epoch 10/10
 <h3>Evaluation<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_classes</span><span class="p">(</span><span class="n">reviews_test_ids</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_classes</span><span class="p">(</span><span class="n">reviews_test_ids</span><span class="p">)</span>
 <span class="n">predictions</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span> 
 <span class="n">display_model_performance_metrics</span><span class="p">(</span><span class="n">true_labels</span><span class="o">=</span><span class="n">sentiments_test</span><span class="p">,</span> <span class="n">predicted_labels</span><span class="o">=</span><span class="n">predictions</span><span class="p">,</span> 
                                       <span class="n">classes</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;positive&#39;</span><span class="p">,</span> <span class="s1">&#39;negative&#39;</span><span class="p">])</span> 
@@ -2180,7 +2175,7 @@ Actual: positive        279       33
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">## Extract spacy GloVe word vector</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Extract spacy GloVe word vector</span>
 
 <span class="n">glove_word_vectors</span> <span class="o">=</span> <span class="n">nlp_vec</span><span class="o">.</span><span class="n">vocab</span><span class="o">.</span><span class="n">vectors</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Spacy GloVe word vectors Shape: (vocab_size, embedding_dim)&#39;</span><span class="p">,</span><span class="n">glove_word_vectors</span><span class="o">.</span><span class="n">shape</span>   <span class="p">)</span>
@@ -2195,7 +2190,7 @@ Actual: positive        279       33
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># vocab_map[&#39;好看&#39;]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># vocab_map[&#39;好看&#39;]</span>
 <span class="n">nlp_vec</span><span class="p">(</span><span class="s1">&#39;好看&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">vector</span>
 <span class="nb">type</span><span class="p">(</span><span class="n">vocab_map</span><span class="p">)</span>
 </pre></div>
@@ -2209,7 +2204,7 @@ Actual: positive        279       33
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">## Prepare GloVe Word Embedding Matrix for training</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Prepare GloVe Word Embedding Matrix for training</span>
 <span class="n">embedding_dim_glove</span> <span class="o">=</span> <span class="mi">300</span>
 <span class="n">embedding_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">embedding_dim_glove</span><span class="p">))</span>
 <span class="k">for</span> <span class="n">w</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">vocab_map</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -2229,7 +2224,7 @@ Actual: positive        279       33
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">EMBEDDING_DIM</span> <span class="o">=</span> <span class="mi">128</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">EMBEDDING_DIM</span> <span class="o">=</span> <span class="mi">128</span>
 <span class="n">LSTM_DIM</span><span class="o">=</span><span class="mi">64</span>
 <span class="n">model4</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
 <span class="n">model4</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Embedding</span><span class="p">(</span><span class="n">input_dim</span><span class="o">=</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">output_dim</span><span class="o">=</span><span class="n">embedding_dim_glove</span><span class="p">,</span> <span class="n">input_length</span><span class="o">=</span><span class="n">max_len</span><span class="p">))</span>
@@ -2239,7 +2234,6 @@ Actual: positive        279       33
 <span class="n">model4</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;binary_crossentropy&#39;</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="s2">&quot;adam&quot;</span><span class="p">,</span>
               <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
 <span class="n">model4</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
-
 </pre></div>
 </div>
 </div>
@@ -2267,7 +2261,7 @@ _________________________________________________________________
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">## Set the embedding layer</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Set the embedding layer</span>
 <span class="c1">## And freeze this layer</span>
 
 <span class="n">model4</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_weights</span><span class="p">([</span><span class="n">embedding_matrix</span><span class="p">])</span>
@@ -2278,7 +2272,7 @@ _________________________________________________________________
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">batch_size</span><span class="o">=</span><span class="mi">100</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batch_size</span><span class="o">=</span><span class="mi">100</span>
 <span class="n">history4</span><span class="o">=</span><span class="n">model4</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">reviews_train_ids</span><span class="p">,</span> <span class="n">sentiments_train_categorical</span><span class="p">,</span>
           <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
           <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -2315,14 +2309,14 @@ Epoch 10/10
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model4</span><span class="o">.</span><span class="n">save_weights</span><span class="p">(</span><span class="s1">&#39;/content/gdrive/My Drive/ColabData/marc-sent-analysis-lstm-glove.h5&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model4</span><span class="o">.</span><span class="n">save_weights</span><span class="p">(</span><span class="s1">&#39;/content/gdrive/My Drive/ColabData/marc-sent-analysis-lstm-glove.h5&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">history4</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">history4</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2335,7 +2329,7 @@ Epoch 10/10
 <h3>Evaluation<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">model4</span><span class="o">.</span><span class="n">predict_classes</span><span class="p">(</span><span class="n">reviews_test_ids</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">model4</span><span class="o">.</span><span class="n">predict_classes</span><span class="p">(</span><span class="n">reviews_test_ids</span><span class="p">)</span>
 <span class="n">predictions</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span> 
 <span class="n">display_model_performance_metrics</span><span class="p">(</span><span class="n">true_labels</span><span class="o">=</span><span class="n">sentiments_test</span><span class="p">,</span> <span class="n">predicted_labels</span><span class="o">=</span><span class="n">predictions</span><span class="p">,</span> 
                                       <span class="n">classes</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;positive&#39;</span><span class="p">,</span> <span class="s1">&#39;negative&#39;</span><span class="p">])</span> 
@@ -2384,7 +2378,7 @@ Actual: positive        265       47
 <h3>Preparing Data<a class="headerlink" href="#preparing-data" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#load df</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#load df</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/content/gdrive/My Drive/ColabData/marc_movie_review_metadata.csv&#39;</span><span class="p">)</span>
 <span class="c1"># split train-test</span>
 
@@ -2418,7 +2412,7 @@ Actual: positive        265       47
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">reviews_train_tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">reviews_train</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reviews_train_tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">reviews_train</span><span class="p">]</span>
 <span class="n">maxlen_train</span> <span class="o">=</span> <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">reviews_train_tokens</span><span class="p">]))</span>
 <span class="n">vocab</span><span class="o">=</span><span class="nb">set</span><span class="p">([</span><span class="n">token</span> <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">reviews_train_tokens</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">text</span><span class="p">])</span>
 <span class="n">vocab_size_train</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">)</span>
@@ -2438,7 +2432,7 @@ Actual: positive        265       47
 <h3>Building Pipeline for New Test Data<a class="headerlink" href="#building-pipeline-for-new-test-data" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vocab_size</span><span class="o">=</span><span class="n">vocab_size_train</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vocab_size</span><span class="o">=</span><span class="n">vocab_size_train</span>
 <span class="n">maxlen</span><span class="o">=</span><span class="n">maxlen_train</span>
 
 <span class="c1">## Building pipeline</span>
@@ -2503,14 +2497,13 @@ Actual: positive        265       47
 
 <span class="c1">#lstm_pipeline = make_pipeline(sequencer, model4)</span>
 <span class="c1">#classes = [&#39;negative&#39;, &#39;positive&#39; ]</span>
-
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sequencer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">reviews_train</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sequencer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">reviews_train</span><span class="p">)</span>
 <span class="n">x1</span><span class="o">=</span><span class="n">sequencer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">reviews_train</span><span class="p">)</span>
 <span class="n">padder</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
 <span class="n">x2</span><span class="o">=</span><span class="n">padder</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
@@ -2561,8 +2554,7 @@ Glove embedding layer shape for training: (9268, 300)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
-<span class="n">max_features</span> <span class="o">=</span> <span class="n">vocab_size</span><span class="o">+</span><span class="mi">1</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">max_features</span> <span class="o">=</span> <span class="n">vocab_size</span><span class="o">+</span><span class="mi">1</span>
 <span class="k">def</span> <span class="nf">create_model</span><span class="p">(</span><span class="n">max_features</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">,</span> <span class="n">max_len</span><span class="p">,</span> <span class="n">lstm_dim</span><span class="p">,</span> <span class="n">embedding_matrix</span><span class="p">):</span>
   <span class="n">model4</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
   <span class="n">model4</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Embedding</span><span class="p">(</span><span class="n">input_dim</span><span class="o">=</span><span class="n">max_features</span><span class="p">,</span> <span class="n">output_dim</span><span class="o">=</span><span class="n">embedding_dim</span><span class="p">,</span> <span class="n">input_length</span><span class="o">=</span><span class="n">max_len</span><span class="p">))</span>
@@ -2591,14 +2583,14 @@ Glove embedding layer shape for training: (9268, 300)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">sequencer</span><span class="p">,</span> <span class="n">padder</span><span class="p">,</span> <span class="n">sklearn_lstm</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">sequencer</span><span class="p">,</span> <span class="n">padder</span><span class="p">,</span> <span class="n">sklearn_lstm</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">reviews_train</span><span class="p">,</span> <span class="n">sentiments_train</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">reviews_train</span><span class="p">,</span> <span class="n">sentiments_train</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2641,7 +2633,7 @@ Epoch 10/10
 <h3>Save Fitted Pipeline<a class="headerlink" href="#save-fitted-pipeline" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># from sklearn.externals import joblib</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># from sklearn.externals import joblib</span>
 <span class="c1"># print(pipeline.named_steps.keys())</span>
 <span class="c1"># # Save the Keras model first: /content/gdrive/My Drive/ColabData/</span>
 <span class="c1"># pipeline.named_steps[&#39;kerasclassifier&#39;].model.save(&#39;/content/gdrive/My Drive/ColabData/marc-keras_model.h5&#39;)</span>
@@ -2663,7 +2655,7 @@ Epoch 10/10
 <h3>Load Trained Model<a class="headerlink" href="#load-trained-model" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.externals</span> <span class="kn">import</span> <span class="n">joblib</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.externals</span> <span class="kn">import</span> <span class="n">joblib</span>
 <span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">load_model</span>
 <span class="c1"># Load the pipeline first:</span>
 <span class="n">pipeline</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;/content/gdrive/My Drive/ColabData/marc-sklearn_pipeline.pkl&#39;</span><span class="p">)</span>
@@ -2692,7 +2684,7 @@ Epoch 10/10
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Computing predictions on test set...&#39;</span><span class="p">)</span>
 <span class="n">y_preds</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">reviews_test</span><span class="p">)</span>
 
@@ -2722,7 +2714,7 @@ Test accuracy: 86.72 %
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">textwrap</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">textwrap</span>
 <span class="c1"># We choose a sample from test set</span>
 <span class="n">idx</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="n">text_sample</span> <span class="o">=</span> <span class="n">reviews_test</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
@@ -2763,13 +2755,13 @@ True class: negative
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">import</span> <span class="nn">matplotlib</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 
 <span class="c1">#import matplotlib as plt</span>
 <span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span><span class="o">=</span><span class="mi">300</span>
-<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
 <span class="kn">from</span> <span class="nn">lime.lime_text</span> <span class="kn">import</span> <span class="n">LimeTextExplainer</span>
 
@@ -39905,8 +39897,7 @@ True class: negative
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
-<span class="n">weights</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">(</span><span class="n">explanation</span><span class="o">.</span><span class="n">as_list</span><span class="p">())</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weights</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">(</span><span class="n">explanation</span><span class="o">.</span><span class="n">as_list</span><span class="p">())</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
 <span class="n">lime_weights</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;words&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">weights</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="s1">&#39;weights&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">weights</span><span class="o">.</span><span class="n">values</span><span class="p">())})</span>
@@ -39944,7 +39935,7 @@ findfont: Font family [&#39;Source Han Sans&#39;] not found. Falling back to Dej
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># !wget -O taipei_sans_tc_beta.ttf https://drive.google.com/uc?id=1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_&amp;export=download</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># !wget -O taipei_sans_tc_beta.ttf https://drive.google.com/uc?id=1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_&amp;export=download</span>
 <span class="c1"># !mv taipei_sans_tc_beta.ttf /usr/local/lib/python3.6/dist-packages/matplotlib//mpl-data/fonts/ttf</span>
 </pre></div>
 </div>
@@ -39959,14 +39950,14 @@ findfont: Font family [&#39;Source Han Sans&#39;] not found. Falling back to Dej
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># pipeline.predict_proba(reviews_test[:1])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># pipeline.predict_proba(reviews_test[:1])</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skater.core.local_interpretation.lime.lime_text</span> <span class="kn">import</span> <span class="n">LimeTextExplainer</span> <span class="k">as</span> <span class="n">LimeTextExplainer2</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skater.core.local_interpretation.lime.lime_text</span> <span class="kn">import</span> <span class="n">LimeTextExplainer</span> <span class="k">as</span> <span class="n">LimeTextExplainer2</span>
 <span class="n">classes</span><span class="o">=</span><span class="n">pipeline</span><span class="o">.</span><span class="n">classes_</span>
 
 
@@ -39994,8 +39985,8 @@ findfont: Font family [&#39;Source Han Sans&#39;] not found. Falling back to Dej
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>import lime
-!pip install lime
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">lime</span>
+<span class="o">!</span>pip install lime
 </pre></div>
 </div>
 </div>
@@ -40026,7 +40017,7 @@ Requirement already satisfied: toolz&gt;=0.7.3; extra == &quot;array&quot; in /u
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">doc_index</span> <span class="o">=</span> <span class="mi">100</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">doc_index</span> <span class="o">=</span> <span class="mi">100</span> 
 <span class="n">interpret_classification_model_prediction</span><span class="p">(</span><span class="n">doc_index</span><span class="o">=</span><span class="n">doc_index</span><span class="p">,</span> <span class="n">norm_corpus</span><span class="o">=</span><span class="n">reviews_test</span><span class="p">,</span>
                                          <span class="n">corpus</span><span class="o">=</span><span class="n">reviews_test</span><span class="p">,</span> 
                                           <span class="n">prediction_labels</span><span class="o">=</span><span class="n">sentiments_test</span><span class="p">,</span>
