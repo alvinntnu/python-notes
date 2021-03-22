@@ -90,6 +90,20 @@ scored = finder.above_score(bigram_measures.pmi, min_score = 15)
 for s in scored:
     print(s)
 
+### Retrieve n-grams
+
+:::{note}
+
+The `*` is the unpack the nested list and take each element as the input of the function call.
+So we can use `*` to unlist a nested list. (Similar to `unlist()` in R.
+:::
+
+def compute_ngrams(sequence, n):
+    return list(zip(*(sequence[index:] for index in range(n))))
+
+print(compute_ngrams([1,2,3,4], 2))
+print(compute_ngrams([1,2,3,4,5],3))
+
 ## Dispersion
 
 - Dispersion of a linguistic unit is also important.

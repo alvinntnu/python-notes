@@ -35,6 +35,8 @@
     # make default figure size 5 by 5 inches with 200 dpi resolution
 
     ```
+    
+    - Other parameters for rmagic, see [this post](https://ipython.org/ipython-doc/2/config/extensions/rmagic.html)
 
 
 ## Running R codes in Notebook
