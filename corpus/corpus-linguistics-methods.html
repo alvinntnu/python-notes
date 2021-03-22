@@ -700,6 +700,11 @@
      Scoring Ngrams
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#retrieve-n-grams">
+     Retrieve n-grams
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -965,6 +970,31 @@
 (&#39;Saxon&#39;, &#39;Shore&#39;)
 (&#39;carbon&#39;, &#39;tetrachloride&#39;)
 (&#39;unwed&#39;, &#39;mothers&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="retrieve-n-grams">
+<h3>Retrieve n-grams<a class="headerlink" href="#retrieve-n-grams" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">*</span></code> is the unpack the nested list and take each element as the input of the function call.
+So we can use <code class="docutils literal notranslate"><span class="pre">*</span></code> to unlist a nested list. (Similar to <code class="docutils literal notranslate"><span class="pre">unlist()</span></code> in R.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compute_ngrams</span><span class="p">(</span><span class="n">sequence</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">sequence</span><span class="p">[</span><span class="n">index</span><span class="p">:]</span> <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">compute_ngrams</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">compute_ngrams</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(1, 2), (2, 3), (3, 4)]
+[(1, 2, 3), (2, 3, 4), (3, 4, 5)]
 </pre></div>
 </div>
 </div>
