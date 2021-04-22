@@ -28,8 +28,9 @@ df.head(10)
 
 ## Change DPI for higher resolution in notebook
 %matplotlib inline
-matplotlib.rcParams['figure.dpi']= 80
 
+matplotlib.rcParams['figure.dpi'] = 150
+matplotlib.rcParams['savefig.dpi'] = 150
 # Change DPI when saving graphs in files
 # matplotlib.rc("savefig", dpi=dpi)
 
@@ -247,7 +248,12 @@ fig.text(0.0, 0.5, 'Common Y', va='center', rotation='vertical', fontsize=14)
 - Figure-level functions (Generic)
 - Axex-level functions (Specific)
 
+## Change the DPI
+
 import seaborn as sns
+sns.set(rc={"figure.dpi":300, 'savefig.dpi':300})
+sns.set_context('notebook')
+sns.set_style("ticks")
 
 sns.set(style='darkgrid')
 
