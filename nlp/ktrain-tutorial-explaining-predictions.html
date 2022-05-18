@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Explainable AI &#8212; Python Notes for Linguistics</title>
     
-  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -19,14 +20,10 @@
 
     
       
-  <link rel="stylesheet"
-    href="../_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -35,39 +32,42 @@
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="To-do List" href="../appendix/todo.html" />
     <link rel="prev" title="Sentiment Analysis Using BERT" href="sentiment-analysis-using-bert-chinese.html" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
 
-
-
+    <!-- Google Analytics -->
+    
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
     
 
     <div class="container-xl">
@@ -76,25 +76,81 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="../index.html">
-  
-  <img src="../_static/ntnu-word-2.png" class="logo" alt="logo">
-  
-  
-  <h1 class="site-logo" id="site-title">Python Notes for Linguistics</h1>
-  
-</a>
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/ntnu-word-2.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Python Notes for Linguistics</h1>
+      
+    </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form>
-<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <ul class="current nav sidenav_l1">
- <li class="toctree-l1 collapsible-parent">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Python Basics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../python-basics/python-basics.html">
    Python Basics
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python-basics/data-structure.html">
+     Data Structure
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python-basics/program-structure.html">
+     Program Structure
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python-basics/regex.html">
+     Regular Expression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python-basics/input-output.html">
+     Input and Output
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python-basics/oop.html">
+     Object-Oriented Programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../python-basics/docstrings.html">
+     Docstrings Format
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python-basics/jupyter.html">
+   Jupyter
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../python-basics/jupyter-notebook.html">
      Jupyer Notebook
@@ -115,16 +171,18 @@
      Google Colab R
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../python-basics/data-structure.html">
-     Data Structure
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../python-basics/regex.html">
-     Regular Expression
-    </a>
-   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python-basics/data-science.html">
+   Data Science Tools
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../python-basics/numpy.html">
      Numpy
@@ -133,16 +191,6 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../python-basics/pandas.html">
      Pandas
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../python-basics/program-structure.html">
-     Program Structure
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../python-basics/input-output.html">
-     Input and Output
     </a>
    </li>
    <li class="toctree-l2">
@@ -160,19 +208,21 @@
      Data Visualization 2
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../python-basics/oop.html">
-     Object-Oriented Programming
-    </a>
-   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python-basics/advanced-skills.html">
+   Advanced Skills
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../python-basics/magic-r.html">
      Magic R
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../python-basics/docstrings.html">
-     Docstrings Format
     </a>
    </li>
    <li class="toctree-l2">
@@ -201,382 +251,418 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Corpus Processing with Python
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
   <a class="reference internal" href="../corpus/corpus-processing.html">
    Corpus Linguistics with Python
   </a>
-  <ul class="collapse-ul">
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../corpus/nltk.html">
+   Natural Language Tool-Kits (NLTK)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../corpus/web-crawler.html">
+   Web Crawler
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../corpus/web-crawler-dcard.html">
+   Web Crawler (Dcard)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../corpus/unicode.html">
+   Unicode
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../corpus/corpus-linguistics-methods.html">
+   Corpus Lingustics Methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../corpus/nltk.html">
-     Natural Language Tool-Kits (NLTK)
+    <a class="reference internal" href="../corpus/lexical-bundles.html">
+     Lexical Bundles
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../corpus/web-crawler.html">
-     Web Crawler
+    <a class="reference internal" href="../corpus/tokenization.html">
+     Tokenization
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../corpus/web-crawler-dcard.html">
-     Web Crawler (Dcard)
+    <a class="reference internal" href="../corpus/wordnet.html">
+     WordNet
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../corpus/unicode.html">
-     Unicode
+    <a class="reference internal" href="../corpus/word-cloud.html">
+     Word Cloud
     </a>
    </li>
-   <li class="toctree-l2 collapsible-parent">
-    <a class="reference internal" href="../corpus/corpus-linguistics-methods.html">
-     Corpus Lingustics Methods
+   <li class="toctree-l2">
+    <a class="reference internal" href="../corpus/patterns-constructions.html">
+     Patterns and Constructions
     </a>
-    <ul class="collapse-ul">
-     <li class="toctree-l3">
-      <a class="reference internal" href="../corpus/lexical-bundles.html">
-       Lexical Bundles
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../corpus/tokenization.html">
-       Tokenization
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../corpus/wordnet.html">
-       WordNet
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../corpus/word-cloud.html">
-       Word Cloud
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../corpus/patterns-constructions.html">
-       Patterns and Constructions
-      </a>
-     </li>
-    </ul>
-    <i class="fas fa-chevron-down">
-    </i>
    </li>
-   <li class="toctree-l2 collapsible-parent">
-    <a class="reference internal" href="../corpus/structured-corpus-processing.html">
-     Structured Corpus Processing
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../corpus/structured-corpus-processing.html">
+   Structured Corpus Processing
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../corpus/bnc.html">
+     BNC-XML
     </a>
-    <ul class="collapse-ul">
-     <li class="toctree-l3">
-      <a class="reference internal" href="../corpus/bnc.html">
-       BNC-XML
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../corpus/childes.html">
-       CHILDES Corpus
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../corpus/praat-textgrid.html">
-       Praat TextGrid Data
-      </a>
-     </li>
-    </ul>
-    <i class="fas fa-chevron-down">
-    </i>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../corpus/childes.html">
+     CHILDES Corpus
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../corpus/praat-textgrid.html">
+     Praat TextGrid Data
+    </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../corpus/vectorizing-text.html">
      Vectorizing Texts
     </a>
    </li>
-   <li class="toctree-l2 collapsible-parent">
-    <a class="reference internal" href="../corpus/chinese-processing.html">
-     Chinese Processing
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../corpus/chinese-processing.html">
+   Chinese Processing
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../corpus/jieba.html">
+     Chinese Word Segmentation (jieba)
     </a>
-    <ul class="collapse-ul">
-     <li class="toctree-l3">
-      <a class="reference internal" href="../corpus/jieba.html">
-       Chinese Word Segmentation (jieba)
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../corpus/ckiptagger.html">
-       Chinese Word Segmentation (ckiptagger)
-      </a>
-     </li>
-    </ul>
-    <i class="fas fa-chevron-down">
-    </i>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../corpus/ckiptagger.html">
+     Chinese Word Segmentation (ckiptagger)
+    </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Statistics with Python
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
   <a class="reference internal" href="../statistical-analyses/statistical-analyses.html">
    Statistical Analyses
   </a>
-  <ul class="collapse-ul">
-   <li class="toctree-l2">
-    <a class="reference internal" href="../statistical-analyses/descriptive-statistics.html">
-     Descriptive Statistics
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../statistical-analyses/analytic-statistics.html">
-     Analytic Statistics
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../statistical-analyses/network-analysis.html">
-     Network Analysis
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../statistical-analyses/network-analysis-igraph.html">
-     Network Analysis Using Igraph
-    </a>
-   </li>
-  </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 current active collapsible-parent">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../statistical-analyses/descriptive-statistics.html">
+   Descriptive Statistics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../statistical-analyses/analytic-statistics.html">
+   Analytic Statistics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../statistical-analyses/network-analysis.html">
+   Network Analysis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../statistical-analyses/network-analysis-igraph.html">
+   Network Analysis Using Igraph
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  NLP with Python
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
   <a class="reference internal" href="nlp.html">
    Natural Language Processing with Python
   </a>
-  <ul class="current collapse-ul">
-   <li class="toctree-l2 collapsible-parent">
-    <a class="reference internal" href="nlp-primer.html">
-     Natural Language Processing: A Primer
-    </a>
-    <ul class="collapse-ul">
-     <li class="toctree-l3">
-      <a class="reference internal" href="nlp-pipeline.html">
-       NLP Pipeline
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="nlp-spacy.html">
-       Natural Language Processing (spaCy)
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="nlp-spacy-zh.html">
-       Chinese Natural Language Processing (spaCy)
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="nlp-ckipnlp.html">
-       Natural Language Processing (ckipnlp)
-      </a>
-     </li>
-    </ul>
-    <i class="fas fa-chevron-down">
-    </i>
-   </li>
-   <li class="toctree-l2 collapsible-parent">
-    <a class="reference internal" href="text-normalization-intro.html">
-     Text Normalization
-    </a>
-    <ul class="collapse-ul">
-     <li class="toctree-l3">
-      <a class="reference internal" href="text-normalization-eng.html">
-       Text Normalization (English)
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="text-normalization-chinese.html">
-       Text Normalization (Chinese)
-      </a>
-     </li>
-    </ul>
-    <i class="fas fa-chevron-down">
-    </i>
-   </li>
-   <li class="toctree-l2 collapsible-parent">
-    <a class="reference internal" href="ml-overview.html">
-     Machine Learning Overview
-    </a>
-    <ul class="collapse-ul">
-     <li class="toctree-l3">
-      <a class="reference internal" href="ml-sklearn-regression.html">
-       Machine Learning with Sklearn – Regression
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="ml-sklearn-classification.html">
-       Machine Learning with Sci-Kit Learn
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="naive-bayes.html">
-       Naive Bayes
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="sentiment-analysis-ml.html">
-       Sentiment Analysis with Traditional Machine Learning
-      </a>
-     </li>
-    </ul>
-    <i class="fas fa-chevron-down">
-    </i>
-   </li>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="nlp-primer.html">
+   Natural Language Processing: A Primer
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="neural-network-from-scratch.html">
-     Neural Network From Scratch
-    </a>
-   </li>
-   <li class="toctree-l2 collapsible-parent">
-    <a class="reference internal" href="language-model.html">
-     Language Model
-    </a>
-    <ul class="collapse-ul">
-     <li class="toctree-l3">
-      <a class="reference internal" href="neural-language-model-primer.html">
-       Neural Language Model: A Start
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="neural-language-model-zh.html">
-       Neural Language Model of Chinese
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="text-gen-lstm-v1.html">
-       Text Generation
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="gpt2.html">
-       Transformer-based Language Model - GPT2
-      </a>
-     </li>
-    </ul>
-    <i class="fas fa-chevron-down">
-    </i>
-   </li>
-   <li class="toctree-l2 collapsible-parent">
-    <a class="reference internal" href="word-embeddings.html">
-     Word Embeddings
-    </a>
-    <ul class="collapse-ul">
-     <li class="toctree-l3">
-      <a class="reference internal" href="word2vec-chinese.html">
-       Word Embeddings with Chinese Texts
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="word2vec.html">
-       Word2Vec
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="doc2vec.html">
-       Dov2Vec
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="word-embeddings-autoencoder.html">
-       Generate Text Embeddings Using AutoEncoder
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="transfer-learning-sent-encoding.html">
-       Universal Sentence Embeddings
-      </a>
-     </li>
-    </ul>
-    <i class="fas fa-chevron-down">
-    </i>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="sentiment-analysis-dl.html">
-     Sentiment Analysis with Deep Learning
+    <a class="reference internal" href="nlp-pipeline.html">
+     NLP Pipeline
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="sentiment-analysis-lstm-v1.html">
-     Sentiment Analysis with LSTM
-    </a>
-   </li>
-   <li class="toctree-l2 collapsible-parent">
-    <a class="reference internal" href="seq-to-seq-types.html">
-     Intutions for Types of Sequence-to-Sequence Models
-    </a>
-    <ul class="collapse-ul">
-     <li class="toctree-l3">
-      <a class="reference internal" href="seq-to-seq-types-date.html">
-       Types of Seqeunce Model
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="seq-to-seq-m21-sentiment-attention.html">
-       Sequence Model (many-to-one) with Attention
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="seq-to-seq-attention-addition.html">
-       Seqeunce Model with Attention for Addition Learning
-      </a>
-     </li>
-    </ul>
-    <i class="fas fa-chevron-down">
-    </i>
-   </li>
-   <li class="toctree-l2 collapsible-parent">
-    <a class="reference internal" href="seq-to-seq-machine-translation.html">
-     Machine Translation (Sequence-to-Sequence)
-    </a>
-    <ul class="collapse-ul">
-     <li class="toctree-l3">
-      <a class="reference internal" href="seq-to-seq-machine-translation-attention.html">
-       Machine Translation with Attention (Thushan)
-      </a>
-     </li>
-    </ul>
-    <i class="fas fa-chevron-down">
-    </i>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="hyperparameter-tuning.html">
-     Hyper-Parameter Tuning
+    <a class="reference internal" href="nlp-spacy.html">
+     Natural Language Processing (spaCy)
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="sentiment-analysis-using-bert-chinese.html">
-     Sentiment Analysis Using BERT
+    <a class="reference internal" href="nlp-spacy-zh.html">
+     Chinese Natural Language Processing (spaCy)
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     Explainable AI
+   <li class="toctree-l2">
+    <a class="reference internal" href="nlp-ckipnlp.html">
+     Natural Language Processing (ckipnlp)
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="text-normalization-intro.html">
+   Text Normalization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="text-normalization-eng.html">
+     Text Normalization (English)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="text-normalization-chinese.html">
+     Text Normalization (Chinese)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="ml-overview.html">
+   Machine Learning Overview
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ml-sklearn-regression.html">
+     Machine Learning with Sklearn – Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ml-sklearn-classification.html">
+     Machine Learning with Sci-Kit Learn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="naive-bayes.html">
+     Naive Bayes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="sentiment-analysis-ml.html">
+   Sentiment Analysis with Traditional Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="neural-network-from-scratch.html">
+   Neural Network From Scratch
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="language-model.html">
+   Language Model
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="neural-language-model-primer.html">
+     Neural Language Model: A Start
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="neural-language-model-zh.html">
+     Neural Language Model of Chinese
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="text-gen-lstm-v1.html">
+     Text Generation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="gpt2.html">
+     Transformer-based Language Model - GPT2
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="word-embeddings.html">
+   Word Embeddings
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="word2vec.html">
+     Word2Vec
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="doc2vec.html">
+     Dov2Vec
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="word-embeddings-autoencoder.html">
+     Generate Text Embeddings Using AutoEncoder
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="transfer-learning-sent-encoding.html">
+   Universal Sentence Embeddings
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="sentiment-analysis-dl.html">
+   Sentiment Analysis with Deep Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="sentiment-analysis-lstm-v1.html">
+   Sentiment Analysis with LSTM
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="seq-to-seq-types.html">
+   Intutions for Types of Sequence-to-Sequence Models
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="seq-to-seq-types-date.html">
+     Types of Seqeunce Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="seq-to-seq-m21-sentiment-attention.html">
+     Sequence Model (many-to-one) with Attention
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="seq-to-seq-attention-addition.html">
+     Seqeunce Model with Attention for Addition Learning
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="seq-to-seq-machine-translation.html">
+   Machine Translation (Sequence-to-Sequence)
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="seq-to-seq-machine-translation-attention.html">
+     Machine Translation with Attention (Thushan)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="hyperparameter-tuning.html">
+   Hyper-Parameter Tuning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="sentiment-analysis-using-bert-chinese.html">
+   Sentiment Analysis Using BERT
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Explainable AI
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendix
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
   <a class="reference internal" href="../appendix/todo.html">
    To-do List
   </a>
-  <ul class="collapse-ul">
-   <li class="toctree-l2">
-    <a class="reference internal" href="../appendix/references.html">
-     References
-    </a>
-   </li>
-  </ul>
-  <i class="fas fa-chevron-down">
-  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/references.html">
+   References
+  </a>
  </li>
 </ul>
 
+    </div>
 </nav> <!-- To handle the deprecated key -->
 
 <div class="navbar_extra_footer">
@@ -595,21 +681,21 @@
           
 <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="row topbar fixed-top container-xl">
-    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
-    </div>
-    <div class="col pl-2 topbar-main">
-        
-        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-            <i class="fas fa-bars"></i>
-            <i class="fas fa-arrow-left"></i>
-            <i class="fas fa-arrow-up"></i>
-        </button>
-        
-        
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
             class="fas fa-download"></i></button>
@@ -623,20 +709,20 @@
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
-        <!-- Source interaction buttons -->
+            <!-- Source interaction buttons -->
 
+            <!-- Full screen (wrap in <a> to have style consistency -->
 
-        <!-- Full screen (wrap in <a> to have style consistency -->
-        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                title="Fullscreen mode"><i
-                    class="fas fa-expand"></i></button></a>
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
 
-        <!-- Launch buttons -->
+            <!-- Launch buttons -->
 
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
@@ -660,16 +746,16 @@
     </div>
 </div>
 
-    </div>
-
-    <!-- Table of contents -->
-    <div class="d-none d-md-block col-md-2 bd-toc show">
-        
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> Contents
         </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#preparation-on-colab">
    Preparation on Colab
@@ -752,16 +838,114 @@
  </li>
 </ul>
 
-        </nav>
-        
+            </nav>
+        </div>
     </div>
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Explainable AI</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#preparation-on-colab">
+   Preparation on Colab
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#working-directory">
+   Working Directory
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#autoreload">
+   Autoreload
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview-explainable-ai-in-ktrain">
+   Overview: Explainable AI in
+   <em>
+    ktrain
+   </em>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#three-types-of-prediction">
+   Three Types of Prediction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sentiment-analysis-using-bert">
+   Sentiment Analysis Using BERT
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data">
+     Data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#train-test-split">
+     Train-Test Split
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#define-model">
+     Define Model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fitting-model">
+     Fitting Model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#saving-model">
+     Saving Model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#prediction">
+     Prediction
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#logistic-regression">
+   Logistic Regression
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#regression">
+   Regression
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
-  <div class="section" id="explainable-ai">
+  <div class="tex2jax_ignore mathjax_ignore section" id="explainable-ai">
 <h1>Explainable AI<a class="headerlink" href="#explainable-ai" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><p>This notebook runs on Google Colab</p></li>
@@ -2397,36 +2581,42 @@ Weights from best epoch have been loaded into model.
 
               </div>
               
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="sentiment-analysis-using-bert-chinese.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Sentiment Analysis Using BERT</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../appendix/todo.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">To-do List</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
         </div>
     </div>
+    <footer class="footer">
+  <p>
     
+      By Alvin Chen<br/>
     
-    <div class='prev-next-bottom'>
-        
-    <a class='left-prev' id="prev-link" href="sentiment-analysis-using-bert-chinese.html" title="previous page">Sentiment Analysis Using BERT</a>
-    <a class='right-next' id="next-link" href="../appendix/todo.html" title="next page">To-do List</a>
-
-    </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By Alvin Chen<br/>
-        
-            &copy; Copyright 2020 Alvin Chen.<br/>
-      </p>
-    </div>
-  </footer>
+        &copy; Copyright 2020 Alvin Chen.<br/>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-    
-  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
-
-
-    
   </body>
 </html>

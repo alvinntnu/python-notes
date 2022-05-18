@@ -1,10 +1,16 @@
-Introduction
-============================
+# Introduction
 
-This notebook collects my personal python notes for linguistics. These notes are based on many different sources. Please note that these notes may have not been organized in a very systematic way.
+```python
+from datetime import date
+print("Last updated: " + date.today().strftime("%B %d, %Y"))
+```
 
-This notebook is being updated on a regular basis. Most of the materials here are for educational purposes only.
+```{admonition} My Personal Python Notes!
+:class: tip
 
+This notebook collects my personal Python notes for linguistics. These notes are based on many different sources. Please note that these notes may have not been organized in a very systematic way. This notebook is being updated on a regular basis. Most of the materials here are for educational purposes only.
+
+```
 
 
 ## Table of Contents
