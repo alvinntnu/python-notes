@@ -1,19 +1,37 @@
-# Network Analysis
+#!/usr/bin/env python
+# coding: utf-8
+
+# # Network Analysis
+
+# In[1]:
+
 
 DEMO_DATA_ROOT = "../../../RepositoryData/data"
+
+
+# In[2]:
+
 
 # from google.colab import drive
 # drive.mount('/content/drive')
 
-## Word Similarities from Embeddings
 
-If necessary, install `spacy` and the Chinese language model `zh_core_web_lg` (glove embeddings). 
+# ## Word Similarities from Embeddings
+
+# If necessary, install `spacy` and the Chinese language model `zh_core_web_lg` (glove embeddings). 
+
+# In[3]:
+
 
 # !pip install spacy==2.3
 # !spacy download zh_core_web_lg
 # !pip install pyvis
 
-Load the packages.
+
+# Load the packages.
+
+# In[19]:
+
 
 import spacy
 import numpy as np
@@ -24,13 +42,20 @@ nlp_zh = spacy.load('zh_core_web_lg')
 near_syns = ['覺得','認為','宣稱','表示','強調','顯示', '說明','指出','提出','主張']
 
 
-Inspect the word vectors matrix from the spacy model.
+# Inspect the word vectors matrix from the spacy model.
+
+# In[12]:
+
 
 glove_word_vectors = nlp_zh.vocab.vectors
 print('Spacy GloVe word vectors Shape: (vocab_size, embedding_dim)',glove_word_vectors.shape)
 len(glove_word_vectors)
 
-Pairwise similarities of the words in the near-syns
+
+# Pairwise similarities of the words in the near-syns
+
+# In[24]:
+
 
 w1 = nlp_zh.vocab['認為']
 w2 = nlp_zh.vocab['覺得']
@@ -51,44 +76,50 @@ pd.DataFrame(data= np.round(pairwise_similarity(near_syns, nlp_zh),2),
              index=near_syns,
              columns=near_syns)
 
-To reduce the computation cost, extract the vocabulary of the Chinense model by excluding:
-- ascii characters
-- digits
-- punctuations
 
-And also, consider only two-character words.
+# To reduce the computation cost, extract the vocabulary of the Chinense model by excluding:
+# - ascii characters
+# - digits
+# - punctuations
+# 
+# And also, consider only two-character words.
+
+# In[34]:
+
 
 vocab = list(nlp_zh.vocab.strings)
 #vocab = [w.text for w in nlp_zh.vocab if np.count_nonzero(w.vector) and not w.is_ascii and not w.is_punct]
 print(len(vocab))
 print(vocab[20000:20200])
 
-For each near-syn, we should find the word similarities between the near-syn and all the other words in the NLP vocabulary.
 
-Take the first near-syn for example.
+# For each near-syn, we should find the word similarities between the near-syn and all the other words in the NLP vocabulary.
+# 
+# Take the first near-syn for example.
 
-%%time
+# In[39]:
 
-target_word = '覺得'
-word_sim = []
-# check each word in vocab its simi with target_Word
 
-target_word_vocab = nlp_zh.vocab[target_word]
-for w in vocab:
-    w_vocab = nlp_zh.vocab[w]
-    if w_vocab.vector is not None and np.count_nonzero(w_vocab.vector) and not w_vocab.is_ascii and not w_vocab.is_punct and w!=target_word:
-        word_sim.append((w, target_word_vocab.similarity(w_vocab)))
+get_ipython().run_cell_magic('time', '', "\ntarget_word = '覺得'\nword_sim = []\n# check each word in vocab its simi with target_Word\n\ntarget_word_vocab = nlp_zh.vocab[target_word]\nfor w in vocab:\n    w_vocab = nlp_zh.vocab[w]\n    if w_vocab.vector is not None and np.count_nonzero(w_vocab.vector) and not w_vocab.is_ascii and not w_vocab.is_punct and w!=target_word:\n        word_sim.append((w, target_word_vocab.similarity(w_vocab)))\n")
 
-Extract the top 10 words that are similar to the first near syn.
+
+# Extract the top 10 words that are similar to the first near syn.
+
+# In[40]:
+
 
 sorted(word_sim, key=lambda x:x[1], reverse=True)[:10]
 
-Each `vocab` has several properties defined in *spacy* that are useful for filtering irrelevant words before computing the word similarities
 
-```{note}
-The Chinese spacy language model does not seem to include the word probability information.
+# Each `vocab` has several properties defined in *spacy* that are useful for filtering irrelevant words before computing the word similarities
+# 
+# ```{note}
+# The Chinese spacy language model does not seem to include the word probability information.
+# 
+# ```
 
-```
+# In[41]:
+
 
 #w.is_lower == word.is_lower and w.prob >= -15
 w1 = nlp_zh.vocab['覺得']
@@ -98,10 +129,14 @@ print(w2.is_ascii)
 print(w2.is_currency)
 print(w2.is_punct)
 
-Define functions to extract top-N similar words
 
-- Functions taken from [this SO discussion thread](https://stackoverflow.com/questions/57697374/list-most-similar-words-in-spacy-in-pretrained-model)
-- Deal with the computation efficiency problems (big matrices)
+# Define functions to extract top-N similar words
+# 
+# - Functions taken from [this SO discussion thread](https://stackoverflow.com/questions/57697374/list-most-similar-words-in-spacy-in-pretrained-model)
+# - Deal with the computation efficiency problems (big matrices)
+
+# In[48]:
+
 
 import numba
 from numba import jit
@@ -122,6 +157,9 @@ def cosine_similarity_numba(u:np.ndarray, v:np.ndarray):
     return cos_theta
 
 
+# In[49]:
+
+
 ## Efficient version
 def most_similar_v1(word, topn=5):
   word = nlp_zh.vocab[str(word)]
@@ -136,6 +174,9 @@ def most_similar_v1(word, topn=5):
     
     
   return [(w.text,w.similarity(word)) for w in by_similarity[:topn+1] if w.text != word.text]
+
+
+# In[50]:
 
 
 ## Naive version
@@ -154,52 +195,80 @@ def most_similar_v2(word, topn=5):
 
 
 
-Test the time needed in different versions
+# Test the time needed in different versions
 
-%%time
-most_similar_v1("覺得", topn=3)
+# In[51]:
 
-%%time
-most_similar_v2("覺得", topn=3)
 
-## Defining Nodes for the Network
+get_ipython().run_cell_magic('time', '', 'most_similar_v1("覺得", topn=3)\n')
 
-- Extract top 1000 similar words for each near-syn
-- These top 1000 context words will form the basis for the nodes of the network
 
-%%time
-near_syn_topn = dict([(w, most_similar_v1(w, topn=1000)) for w in near_syns])
+# In[52]:
 
-Top 10 similar words for each synonym in the list.
 
-For example, the top 10 similar words for 覺得:
+get_ipython().run_cell_magic('time', '', 'most_similar_v2("覺得", topn=3)\n')
+
+
+# ## Defining Nodes for the Network
+
+# - Extract top 1000 similar words for each near-syn
+# - These top 1000 context words will form the basis for the nodes of the network
+
+# In[53]:
+
+
+get_ipython().run_cell_magic('time', '', 'near_syn_topn = dict([(w, most_similar_v1(w, topn=1000)) for w in near_syns])\n')
+
+
+# Top 10 similar words for each synonym in the list.
+# 
+# For example, the top 10 similar words for 覺得:
+
+# In[55]:
+
 
 near_syn_topn[near_syns[0]][:10]
 
-Convert the tuples into a list, which is easier to be imported into the graph structure.
+
+# Convert the tuples into a list, which is easier to be imported into the graph structure.
+
+# In[56]:
+
 
 near_syn_topn_list = []
 for w, s in near_syn_topn.items():
     for s_w, s_s in s:
         near_syn_topn_list.append((w, s_w, s_s))
 
+
+# In[57]:
+
+
 print(near_syn_topn_list[:10])
 print(len(near_syn_topn_list))
+
+
+# In[58]:
+
 
 import pandas as pd
 df = pd.DataFrame(near_syn_topn_list,columns=['w1','w2','sim'])
 df[df['sim']>0.6]
 
-## Define Connections in-between Nodes
 
-- While context nodes have already had connections (i.e., edges) to the key nodes (i.e., near-syns), these context nodes may themselves be inter-connected due to their semantic similarity
-- We again utilize the `spacy` language model to determine their semantic similarities.
-- These similarities serve as the basis for the edges of the network
+# ## Define Connections in-between Nodes
 
-We first identify all potential nodes for the network and then compute their pairwise similarities based on `spacy` Glove embeddings.
+# - While context nodes have already had connections (i.e., edges) to the key nodes (i.e., near-syns), these context nodes may themselves be inter-connected due to their semantic similarity
+# - We again utilize the `spacy` language model to determine their semantic similarities.
+# - These similarities serve as the basis for the edges of the network
 
-- `nodes_id`: include all the possible nodes of the graph.
-- `edges_df`: include all the context-key and context-context edges of the graph.
+# We first identify all potential nodes for the network and then compute their pairwise similarities based on `spacy` Glove embeddings.
+# 
+# - `nodes_id`: include all the possible nodes of the graph.
+# - `edges_df`: include all the context-key and context-context edges of the graph.
+
+# In[63]:
+
 
 WORD_SIMILARITY_CUTOFF = 0.65 # collexemes and target words
 df2 = df[df['sim'] > WORD_SIMILARITY_CUTOFF]
@@ -208,6 +277,10 @@ nodes_id = list(set(list(df2['w2'].values) + list(df2['w1'].values)))
 # nodes_similarities = pairwise_similarity(nodes_id, nlp_zh)
 # nodes_similarities_df = pd.DataFrame(nodes_similarities, index=nodes_id,columns=nodes_id)
 # nodes_similarities_df
+
+
+# In[64]:
+
 
 ## Creating nodes pairwise similarity matrix
 print(len(nodes_id))
@@ -232,19 +305,27 @@ for i in range(m):
 edges_df = pd.DataFrame(distances_flat, columns=['w1','w2','sim'])
 print(edges_df.shape)
 
-We then combine the context-key edges with the context-context edges. These edges are the final edges for the graph.
+
+# We then combine the context-key edges with the context-context edges. These edges are the final edges for the graph.
+
+# In[66]:
+
 
 edges_df = edges_df.append(df2).drop_duplicates()
 print(edges_df.shape)
 edges_df.loc[100:120,:]
 
-## Creating a Network
 
-- We use `networkx` to first create a graph and compute relevant node-level metrics, e.g., centralities.
-- We then create two data frames for aesthetic specification of the graph:
-  - `nodes_df`
-  - `edges_df`
-- We use `pyvis` to visualizae the network
+# ## Creating a Network
+
+# - We use `networkx` to first create a graph and compute relevant node-level metrics, e.g., centralities.
+# - We then create two data frames for aesthetic specification of the graph:
+#   - `nodes_df`
+#   - `edges_df`
+# - We use `pyvis` to visualizae the network
+
+# In[68]:
+
 
 import networkx as nx
 from pyvis.network import Network
@@ -253,13 +334,21 @@ from pyvis.network import Network
 #from scipy.spatial.distance import cosine
 #G = nx.Graph()
 
+
+# In[69]:
+
+
 ## A function to rescale metrics for plotting
 def myRescaler(x):
     x = np.array(x)
     y = np.interp(x, (x.min(), x.max()), (5, 20))
     return list(y)
 
-Create `nodes_df`.
+
+# Create `nodes_df`.
+
+# In[70]:
+
 
 G= nx.from_pandas_edgelist(edges_df, 'w1','w2','sim')
 
@@ -273,9 +362,12 @@ nodes_df['color'] = ['lightpink' if nodes_df.loc[i,'group']=='KEY' else 'lightbl
 nodes_df['borderWidthSelected'] = list(np.repeat(20.0, nodes_df.shape[0]))
 
 
-## Visualizing a Network
+# ## Visualizing a Network
 
-Plotting the network using `pyvis`.
+# Plotting the network using `pyvis`.
+
+# In[71]:
+
 
 Gvis = Network("768px","1600px", notebook=False,heading="Semantic Network")
 # # Gvis.from_nx(G)
@@ -331,9 +423,14 @@ Gvis.set_options("""
 
 
 
+# In[76]:
+
+
 Gvis.show(DEMO_DATA_ROOT + '/reporting_verbs_chinese_Gvis.html')
 edges_df.to_pickle(DEMO_DATA_ROOT+'/reporting_verbs_chinese_edges_df.pickle')
 
-## References
 
-- [`vis.js` Documentation](https://visjs.github.io/vis-network/docs/network/index.html)
+# ## References
+# 
+# - [`vis.js` Documentation](https://visjs.github.io/vis-network/docs/network/index.html)
+# 

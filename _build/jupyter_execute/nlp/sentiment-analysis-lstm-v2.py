@@ -1,4 +1,10 @@
-# Import necessary depencencies
+#!/usr/bin/env python
+# coding: utf-8
+
+# # Import necessary depencencies
+
+# In[1]:
+
 
 import pandas as pd
 import numpy as np
@@ -8,12 +14,20 @@ import nltk
 
 np.set_printoptions(precision=2, linewidth=80)
 
-## Load and normalize data
+
+# ## Load and normalize data
+
+# In[1]:
+
 
 # # Deep Learn with Python Version
 # from keras.datasets import imdb
 
 # (train_data, train_labels), (test_data, test_labels) = imdb.load_data(num_words=10000)
+
+
+# In[2]:
+
 
 dataset = pd.read_csv(r'movie_reviews.csv')
 
@@ -37,12 +51,20 @@ stop_words.remove('not')
 norm_train_reviews = tn.normalize_corpus(train_reviews, stopwords=stop_words)
 norm_test_reviews = tn.normalize_corpus(test_reviews, stopwords=stop_words)
 
-# Tokenize train & test datasets
+
+# # Tokenize train & test datasets
+
+# In[4]:
+
 
 tokenized_train = [tn.tokenizer.tokenize(text) for text in norm_train_reviews]
 tokenized_test = [tn.tokenizer.tokenize(text) for text in norm_test_reviews]
 
-# Build Vocabulary Mapping (word to index)
+
+# # Build Vocabulary Mapping (word to index)
+
+# In[93]:
+
 
 from collections import Counter
 
@@ -57,7 +79,11 @@ vocab_size = len(vocab_map)
 print('Vocabulary Size:', vocab_size)
 print('Sample slice of vocabulary map:', dict(list(vocab_map.items())[10:20]))
 
-# Encode and Pad datasets & Encode prediction class labels
+
+# # Encode and Pad datasets & Encode prediction class labels
+
+# In[94]:
+
 
 from keras.preprocessing import sequence
 from sklearn.preprocessing import LabelEncoder
@@ -89,7 +115,11 @@ test_y = le.transform(test_sentiments)
 print('Max length of train review vectors:', max_len)
 print('Train review vectors shape:', train_X.shape, ' Test review vectors shape:', test_X.shape)
 
-# Build the LSTM Model Architecture
+
+# # Build the LSTM Model Architecture
+
+# In[5]:
+
 
 from keras.models import Sequential
 from keras.layers import Dense, Embedding, Dropout, SpatialDropout1D
@@ -107,9 +137,17 @@ model.add(Dense(1, activation="sigmoid"))
 model.compile(loss="binary_crossentropy", optimizer="adam",
               metrics=["accuracy"])
 
+
+# In[6]:
+
+
 print(model.summary())
 
-# Visualize model architecture
+
+# # Visualize model architecture
+
+# In[8]:
+
 
 from IPython.display import SVG
 from keras.utils.vis_utils import model_to_dot
@@ -117,16 +155,29 @@ from keras.utils.vis_utils import model_to_dot
 SVG(model_to_dot(model, show_shapes=True, show_layer_names=False, 
                  rankdir='TB').create(prog='dot', format='svg'))
 
-# Train the model
+
+# # Train the model
+
+# In[74]:
+
 
 batch_size = 100
 model.fit(train_X, train_y, epochs=5, batch_size=batch_size, 
           shuffle=True, validation_split=0.1, verbose=1)
 
-# Predict and Evaluate Model Performance
+
+# # Predict and Evaluate Model Performance
+
+# In[75]:
+
 
 pred_test = model.predict_classes(test_X)
 predictions = le.inverse_transform(pred_test.flatten())
 
+
+# In[81]:
+
+
 meu.display_model_performance_metrics(true_labels=test_sentiments, predicted_labels=predictions, 
                                       classes=['positive', 'negative'])  
+

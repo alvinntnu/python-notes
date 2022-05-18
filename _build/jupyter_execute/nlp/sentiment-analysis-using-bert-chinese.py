@@ -1,17 +1,26 @@
-# Sentiment Analysis Using BERT
+#!/usr/bin/env python
+# coding: utf-8
 
-- This notebook runs on Google Colab
-- Using `ktrain` for modeling
-  - The ktrain library is a lightweight wrapper for tf.keras in TensorFlow 2, which is "designed to make deep learning and AI more accessible and easier to apply for beginners and domain experts".
-- Easy to implement BERT-like pre-trained language models
-- This notebook works on sentiment analysis of Chinese movie reviews, which is a small dataset. I would like to see to what extent the transformers are effective when dealing with relatively smaller training set. This in turn shows us the powerful advantages of transfer learning. 
+# # Sentiment Analysis Using BERT
 
-## Installing ktrain
+# - This notebook runs on Google Colab
+# - Using `ktrain` for modeling
+#   - The ktrain library is a lightweight wrapper for tf.keras in TensorFlow 2, which is "designed to make deep learning and AI more accessible and easier to apply for beginners and domain experts".
+# - Easy to implement BERT-like pre-trained language models
+# - This notebook works on sentiment analysis of Chinese movie reviews, which is a small dataset. I would like to see to what extent the transformers are effective when dealing with relatively smaller training set. This in turn shows us the powerful advantages of transfer learning. 
 
-!pip install ktrain
+# ## Installing ktrain
+
+# In[1]:
 
 
-## Importing Libraries
+get_ipython().system('pip install ktrain')
+
+
+# ## Importing Libraries
+
+# In[2]:
+
 
 import tensorflow as tf
 import pandas as pd
@@ -20,23 +29,35 @@ import ktrain
 from ktrain import text
 import tensorflow as tf
 
+
+# In[ ]:
+
+
 tf.__version__
 
-## Clone Git Repository for Data
+
+# ## Clone Git Repository for Data
+
+# In[ ]:
+
 
 ## Will need this if data is available on GitHub
 # !git clone https://github.com/laxmimerit/IMDB-Movie-Reviews-Large-Dataset-50k.git
 
-## Data Preparation
 
-- Mount the Google Drive first (manually via the tabs on the left of Google Colab
+# ## Data Preparation
 
-- The default path of the input data csv file is:
+# - Mount the Google Drive first (manually via the tabs on the left of Google Colab
+# 
+# - The default path of the input data csv file is:
+# 
+# ```
+# GOOGLE_DRIVE_ROOT/ColabData/marc_movie_review_metadata.csv
+# ```
+# - In BERT, there is no need to do word segmentation. The model takes in the raw reviews as the input.
 
-```
-GOOGLE_DRIVE_ROOT/ColabData/marc_movie_review_metadata.csv
-```
-- In BERT, there is no need to do word segmentation. The model takes in the raw reviews as the input.
+# In[221]:
+
 
 ## loading the train dataset
 ## change the path if necessary
@@ -44,9 +65,16 @@ data = pd.read_csv('/content/drive/My Drive/ColabData/marc_movie_review_metadata
 data = data.rename(columns={'reviews':'Reviews', 'rating':'Sentiment'})
 data.head()
 
+
+# In[21]:
+
+
 from sklearn.model_selection import train_test_split
 
 data_train, data_test = train_test_split(data, test_size=0.1)
+
+
+# In[22]:
 
 
 ## dimension of the dataset
@@ -60,16 +88,20 @@ data_train.tail()
 #printing head rows of test dataset
 data_test.head()
 
-## Train-Test Split
 
-Models supported by transformers library for tensorflow 2:
+# ## Train-Test Split
 
-- **BERT**: bert-base-uncased, bert-large-uncased,bert-base-multilingual-uncased, and others.
-- **DistilBERT**: distilbert-base-uncased distilbert-base-multilingual-cased, distilbert-base-german-cased, and others
-- **ALBERT**: albert-base-v2, albert-large-v2, and others
-- **RoBERTa**: roberta-base, roberta-large, roberta-large-mnli
-- **XLM**: xlm-mlm-xnli15–1024, xlm-mlm-100–1280, and others
-- **XLNet**: xlnet-base-cased, xlnet-large-cased
+# Models supported by transformers library for tensorflow 2:
+# 
+# - **BERT**: bert-base-uncased, bert-large-uncased,bert-base-multilingual-uncased, and others.
+# - **DistilBERT**: distilbert-base-uncased distilbert-base-multilingual-cased, distilbert-base-german-cased, and others
+# - **ALBERT**: albert-base-v2, albert-large-v2, and others
+# - **RoBERTa**: roberta-base, roberta-large, roberta-large-mnli
+# - **XLM**: xlm-mlm-xnli15–1024, xlm-mlm-100–1280, and others
+# - **XLNet**: xlnet-base-cased, xlnet-large-cased
+# 
+
+# In[25]:
 
 
 # text.texts_from_df return two tuples
@@ -85,31 +117,51 @@ Models supported by transformers library for tensorflow 2:
                                                                    lang = 'zh-*',
                                                                    preprocess_mode = 'bert') # or distilbert
 
+
+# In[28]:
+
+
 ## size of data
 print(X_train[0].shape, y_train.shape)
 print(X_test[0].shape, y_test.shape)
 
-## Define Model
+
+# ## Define Model
+
+# In[29]:
+
 
 ## use 'distilbert' if you want
 model = text.text_classifier(name = 'bert', # or distilbert
                              train_data = (X_train, y_train),
                              preproc = preproc)
 
-## Define Learner
+
+# ## Define Learner
+
+# In[30]:
+
 
 #here we have taken batch size as 6 as from the documentation it is recommend to use this with maxlen as 500
 learner = ktrain.get_learner(model=model, train_data=(X_train, y_train),
                    val_data = (X_test, y_test),
                    batch_size = 6)
 
-## Estimate Learning Rate (Optional)
 
-- A nice artilce on how to interpret learning rate plots. See [Keras Learning Rate Finder](https://www.pyimagesearch.com/2019/08/05/keras-learning-rate-finder/).
+# ## Estimate Learning Rate (Optional)
+# 
+# - A nice artilce on how to interpret learning rate plots. See [Keras Learning Rate Finder](https://www.pyimagesearch.com/2019/08/05/keras-learning-rate-finder/).
+
+# In[31]:
+
 
 learner.lr_find(show_plot=True, max_epochs=2)
 
-## Fit and Save Model
+
+# ## Fit and Save Model
+
+# In[32]:
+
 
 #Essentially fit is a very basic training loop, whereas fit one cycle uses the one cycle policy callback
 
@@ -118,9 +170,16 @@ predictor = ktrain.get_predictor(learner.model, preproc)
 predictor.save('/content/drive/My Drive/ColabData/bert-ch-marc')
 
 
-## Evaluation
+# ## Evaluation
+
+# In[47]:
+
 
 y_pred=predictor.predict(data_test['Reviews'].values)
+
+
+# In[55]:
+
 
 # classification report
 
@@ -128,32 +187,58 @@ from sklearn.metrics import classification_report
 print(classification_report(y_true, y_pred))
 
 
+# In[48]:
+
+
 y_true = data_test['Sentiment'].values
 # Confusion Matrix
 from sklearn.metrics import confusion_matrix
 confusion_matrix(y_true, y_pred)
 
+
+# In[49]:
+
+
 # Accuracy
 from sklearn.metrics import accuracy_score
 accuracy_score(y_true, y_pred)
+
+
+# In[50]:
+
 
 # Recall
 from sklearn.metrics import recall_score
 recall_score(y_true, y_pred, average=None)
 
+
+# In[ ]:
+
+
 # Precision
 from sklearn.metrics import precision_score
 precision_score(y_true, y_pred, average=None)
+
+
+# In[ ]:
+
 
 # F1
 from sklearn.metrics import f1_score
 f1_score(y_test, y_pred, average=None)
 
 
+# In[202]:
+
+
 ## AUC-ROC Curve
 y_pred_proba = predictor.predict(data_test['Reviews'].values, return_proba=True)
 print(predictor.get_classes()) # probability of each class
 print(y_pred_proba[:5,])
+
+
+# In[208]:
+
 
 y_true_binary = [1 if label=='positive' else 0 for label in y_true]
 y_pred_proba_positive = y_pred_proba[:,1]
@@ -190,6 +275,9 @@ plt.xlabel('False Positive Rate')
 plt.show()
 
 
+# In[219]:
+
+
 # ## ggplot2 version
 # ## prettier?
 
@@ -217,9 +305,16 @@ g = (
 g
 
 
+# In[220]:
+
+
 # g.save('/content/drive/My Drive/ColabData/ggplot-roc.png', width=12, height=10, dpi=300)
 
-## Prediction and Deployment
+
+# ## Prediction and Deployment
+
+# In[224]:
+
 
 #sample dataset to test on
 
@@ -233,35 +328,59 @@ data = ['前面好笑看到後面真的很好哭！推薦！',
         '看完之後覺得新不如舊，還是大雄的恐龍好看，不管是劇情還是做畫，都是大雄的恐龍好，而且大雄的新恐龍做畫有點崩壞，是有沒有好好審查啊!以一部50周年慶的電影來說有點丟臉，自從藤子不二雄過世後，哆啦A夢的電影就一直表現平平，沒有以前的那份感動。']
 
 
+# In[225]:
+
+
 predictor.predict(data)
+
+
+# In[226]:
+
 
 #return_proba = True means it will give the prediction probabilty for each class
 
 predictor.predict(data, return_proba=True)
 
+
+# In[227]:
+
+
 #classes available
 
 predictor.get_classes()
 
+
+# In[ ]:
+
+
 ## zip for furture deployment
 # !zip -r /content/bert.zip /content/bert
 
-## Deploy Model
+
+# ## Deploy Model
+
+# In[37]:
+
 
 # #loading the model
 
 predictor_load = ktrain.load_predictor('/content/drive/My Drive/ColabData/bert-ch-marc')
 
+
+# In[39]:
+
+
 # #predicting the data
 
 predictor_load.predict(data)
 
-## References
 
-- [`ktrain` module](https://github.com/amaiya/ktrain)
-- [Sentiment Classification Using Bert](https://kgptalkie.com/sentiment-classification-using-bert/)
-- [當Bert遇上Keras：這可能是Bert最簡單的打開姿勢](http://www.ipshop.xyz/15376.html)
-- [進擊的 BERT：NLP 界的巨人之力與遷移學習](https://leemeng.tw/attack_on_bert_transfer_learning_in_nlp.html)
-- [Text Classification with Hugging Face Transformers in TensorFlow 2 (Without Tears)](https://towardsdatascience.com/text-classification-with-hugging-face-transformers-in-tensorflow-2-without-tears-ee50e4f3e7ed)
-- [Huggingface Transformers](https://github.com/huggingface/transformers)
-- [Huggingface Pre-trained Models](https://huggingface.co/transformers/pretrained_models.html)
+# ## References
+# 
+# - [`ktrain` module](https://github.com/amaiya/ktrain)
+# - [Sentiment Classification Using Bert](https://kgptalkie.com/sentiment-classification-using-bert/)
+# - [當Bert遇上Keras：這可能是Bert最簡單的打開姿勢](http://www.ipshop.xyz/15376.html)
+# - [進擊的 BERT：NLP 界的巨人之力與遷移學習](https://leemeng.tw/attack_on_bert_transfer_learning_in_nlp.html)
+# - [Text Classification with Hugging Face Transformers in TensorFlow 2 (Without Tears)](https://towardsdatascience.com/text-classification-with-hugging-face-transformers-in-tensorflow-2-without-tears-ee50e4f3e7ed)
+# - [Huggingface Transformers](https://github.com/huggingface/transformers)
+# - [Huggingface Pre-trained Models](https://huggingface.co/transformers/pretrained_models.html)

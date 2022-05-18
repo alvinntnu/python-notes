@@ -1,11 +1,25 @@
-# Vectorizing Texts
+#!/usr/bin/env python
+# coding: utf-8
 
-- Feature engineering for text represenation
+# # Vectorizing Texts
+# 
+# - Feature engineering for text represenation
+
+# In[1]:
+
 
 import nltk
 from nltk.corpus import brown
 
+
+# In[2]:
+
+
 brown.categories()
+
+
+# In[3]:
+
 
 corpus_id = brown.fileids(categories=['reviews','fiction','humor'])
 corpus_text = [' '.join(w) for w in [brown.words(fileids=cid) for cid in corpus_id]]
@@ -17,6 +31,10 @@ print(len(corpus_id))
 print(len(corpus_cat))
 type(corpus_id)
 
+
+# In[4]:
+
+
 import numpy as np
 import pandas as pd
 import re
@@ -26,10 +44,18 @@ assert len(corpus_text)==len(corpus_cat)
 corpus_df = pd.DataFrame({'Text': corpus_text, 'Category': corpus_cat, 'ID': corpus_id})
 corpus_df
 
+
+# In[5]:
+
+
 ## Clean up texts
 wpt = nltk.WordPunctTokenizer()
 stop_words = nltk.corpus.stopwords.words('english')
 print(stop_words)
+
+
+# In[6]:
+
 
 ## function
 def normalize_text(text):
@@ -50,7 +76,11 @@ normalize_corpus= np.vectorize(normalize_text)
 corpus_norm = normalize_corpus(corpus_text)
 corpus_norm[1][:200]
 
-## Bag of Words
+
+# ## Bag of Words
+
+# In[7]:
+
 
 from sklearn.feature_extraction.text import CountVectorizer
 cv = CountVectorizer(min_df=0.2, max_df=1.)
@@ -67,12 +97,16 @@ vocab = cv.get_feature_names()
 boa_unigram = pd.DataFrame(cv_matrix, columns=vocab)
 boa_unigram
 
-## More Complex Bag-of-Words
 
-- Filter features based on word classes
-- Include n-gram features
+# ## More Complex Bag-of-Words
+# 
+# - Filter features based on word classes
+# - Include n-gram features
 
-## Bag of N-grams Model
+# ## Bag of N-grams Model
+
+# In[8]:
+
 
 ## N-grams
 
@@ -82,7 +116,11 @@ cv_ngram_matrix = cv_ngram.fit_transform(corpus_norm)
 boa_ngram = pd.DataFrame(cv_ngram_matrix.toarray(),columns = cv_ngram.get_feature_names())
 boa_ngram.head()
 
-## TF-IDF Model
+
+# ## TF-IDF Model
+
+# In[9]:
+
 
 from sklearn.feature_extraction.text import TfidfTransformer
 tf = TfidfTransformer(norm = 'l2', use_idf=True)
@@ -91,11 +129,19 @@ tf_matrix = tf.fit_transform(cv_matrix)
 tfidf_unigram = pd.DataFrame(tf_matrix.toarray(), columns = cv.get_feature_names())
 tfidf_unigram
 
+
+# In[10]:
+
+
 tf_matrix2 = tf.fit_transform(cv_ngram_matrix)
 tfidf_ngram = pd.DataFrame(tf_matrix2.toarray(), columns = cv_ngram.get_feature_names())
 tfidf_ngram
 
-- We can also create TF-IDF model directly from corpus
+
+# - We can also create TF-IDF model directly from corpus
+
+# In[11]:
+
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 
@@ -107,24 +153,34 @@ tv_matrix = tv.fit_transform(corpus_norm)
 tfidf_ngram2 = pd.DataFrame(tv_matrix.toarray(), columns=tv.get_feature_names())
 tfidf_ngram2
 
-## Document Similarity
 
-- Cluster analysis with R seems more intuitive to me
+# ## Document Similarity
+# 
+# - Cluster analysis with R seems more intuitive to me
+
+# In[12]:
+
 
 from sklearn.metrics.pairwise import cosine_similarity
 similarity_matrix = cosine_similarity(tv_matrix)
 similarity_df = pd.DataFrame(similarity_matrix)
 similarity_df
 
-%load_ext rpy2.ipython
 
-%%R -i similarity_matrix
-library(dplyr)
-#library(ggplot2)
+# In[13]:
 
-head(similarity_matrix)
-hclust(as.dist(similarity_matrix),method="ward.D2") %>%
-plot
+
+get_ipython().run_line_magic('load_ext', 'rpy2.ipython')
+
+
+# In[14]:
+
+
+get_ipython().run_cell_magic('R', '-i similarity_matrix', 'library(dplyr)\n#library(ggplot2)\n\nhead(similarity_matrix)\nhclust(as.dist(similarity_matrix),method="ward.D2") %>%\nplot\n')
+
+
+# In[15]:
+
 
 from scipy.cluster.hierarchy import dendrogram, linkage
 Z = linkage(similarity_matrix, 'ward')
@@ -133,3 +189,4 @@ pd.DataFrame(Z)
 # but to draw dendrogram?
 dendrogram(Z)
 # Don't like the graph in python
+

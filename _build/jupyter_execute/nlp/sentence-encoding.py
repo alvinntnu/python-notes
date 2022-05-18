@@ -1,29 +1,47 @@
-# Universal Sentence Embeddings
+#!/usr/bin/env python
+# coding: utf-8
 
-- This is based on Ch 10 of Text Analytics with Python by Dipanjan Sarkar
+# # Universal Sentence Embeddings
 
-## Loading Libaries
+# - This is based on Ch 10 of Text Analytics with Python by Dipanjan Sarkar
+
+# ## Loading Libaries
+
+# In[1]:
+
 
 import tensorflow as tf
 import tensorflow_hub as hub
 import numpy as np
 import pandas as pd
 
+
+# In[2]:
+
+
 ## Check GPU if any
 # tf.test.is_gpu_available()
 tf.test.gpu_device_name()
 tf.config.list_physical_devices('GPU')
 
-## Data
 
-- The original [IMDB Large Movie Review Dataset](http://ai.stanford.edu/~amaas/data/sentiment/)
-    - The original data include each text as an independent text file
-- [Sarkar's repository](https://github.com/dipanjanS/data_science_for_all/tree/master/tds_deep_transfer_learning_nlp_classification) for csv file
+# ## Data
+# 
+# - The original [IMDB Large Movie Review Dataset](http://ai.stanford.edu/~amaas/data/sentiment/)
+#     - The original data include each text as an independent text file
+# - [Sarkar's repository](https://github.com/dipanjanS/data_science_for_all/tree/master/tds_deep_transfer_learning_nlp_classification) for csv file
+
+# In[3]:
+
 
 # import tarfile
 # tar = tarfile.open("../data/movie_review.tar.gz")
 # tar.extractall(path="../data/stanford-movie-review/")
 # tar.close()
+
+
+# In[4]:
+
 
 # import os
 # import tarfile
@@ -37,20 +55,40 @@ tf.config.list_physical_devices('GPU')
 # tar.extractall(path='../data/', members=csv_files(tar))
 # tar.close()
 
+
+# In[5]:
+
+
 dataset = pd.read_csv('../data/data_science_for_all-master/tds_deep_transfer_learning_nlp_classification/movie_reviews.csv.bz2',
                      compression='bz2')
 dataset.info()
 
+
+# In[6]:
+
+
 dataset.dtypes
+
+
+# In[7]:
+
 
 ## Recode sentiment
 
 dataset['sentiment'] = [1 if sentiment=='positive' else 0 for sentiment in dataset['sentiment'].values]
 dataset.head()
 
+
+# In[8]:
+
+
 dataset.dtypes
 
-## Train, Validation, and Test Sets Splitting
+
+# ## Train, Validation, and Test Sets Splitting
+
+# In[9]:
+
 
 ## Method 1 sklearn
 # from sklearn.model_selection import train_test_split
@@ -59,16 +97,24 @@ dataset.dtypes
 ## Method 2 numpy
 train, validate, test = np.split(dataset.sample(frac=1), [int(.6*len(dataset)), int(.7*len(dataset))])
 
+
+# In[10]:
+
+
 train.shape, validate.shape, test.shape
 train.head()
 
-## Text Wranlging
 
-- Text preprocessing usually takes care of:
-    - unnecessary html tags
-    - non-ASCII characters in English texts (e.g., accented characters)
-    - contraction issues
-    - special characters (unicode)
+# ## Text Wranlging
+# 
+# - Text preprocessing usually takes care of:
+#     - unnecessary html tags
+#     - non-ASCII characters in English texts (e.g., accented characters)
+#     - contraction issues
+#     - special characters (unicode)
+
+# In[11]:
+
 
 ## libaries for text pre-processing
 ## !pip3 install contractions
@@ -76,6 +122,9 @@ import contractions
 from bs4 import BeautifulSoup
 import unicodedata
 import re
+
+
+# In[19]:
 
 
 ## Functions for Text Preprocessing
@@ -119,41 +168,67 @@ def pre_process_document(document):
 # vectorize function
 pre_process_corpus = np.vectorize(pre_process_document)
 
+
+# In[20]:
+
+
 pre_process_corpus(train['review'].values[0])
 
-%%time
-train_reviews = pre_process_corpus(train['review'].values)
-train_sentiments = train['sentiment'].values
-val_reviews = pre_process_corpus(validate['review'].values)
-val_sentiments = validate['sentiment'].values
-test_reviews = pre_process_corpus(test['review'].values)
-test_sentiments = test['sentiment'].values
 
-## Data Ingestion Functions for tensorflow
+# In[21]:
+
+
+get_ipython().run_cell_magic('time', '', "train_reviews = pre_process_corpus(train['review'].values)\ntrain_sentiments = train['sentiment'].values\nval_reviews = pre_process_corpus(validate['review'].values)\nval_sentiments = validate['sentiment'].values\ntest_reviews = pre_process_corpus(test['review'].values)\ntest_sentiments = test['sentiment'].values\n")
+
+
+# ## Data Ingestion Functions for tensorflow
+
+# In[28]:
+
 
 # Training input on the whole training set with no limit on training epochs.
 train_input_fn = tf.compat.v1.estimator.inputs.numpy_input_fn(
     {'sentence': train_reviews}, train_sentiments, 
     batch_size=256, num_epochs=None, shuffle=True)
 
+
+# In[29]:
+
+
 # Prediction on the whole training set. 
 predict_train_input_fn = tf.compat.v1.estimator.inputs.numpy_input_fn(
     {'sentence': train_reviews}, train_sentiments, shuffle=False)
+
+
+# In[31]:
+
 
 # Prediction on the whole validation set. 
 predict_val_input_fn = tf.compat.v1.estimator.inputs.numpy_input_fn(
     {'sentence': val_reviews}, val_sentiments, shuffle=False)
 
+
+# In[32]:
+
+
 # Prediction on the test set.
 predict_test_input_fn = tf.compat.v1.estimator.inputs.numpy_input_fn(
     {'sentence': test_reviews}, test_sentiments, shuffle=False)
 
-## Universal Sentence Encoder
+
+# ## Universal Sentence Encoder
+
+# In[33]:
+
 
 embedding_feature = hub.text_embedding_column(
     key='sentence', 
     module_spec="https://tfhub.dev/google/universal-sentence-encoder/2",
     trainable=False)
+
+
+# In[37]:
+
 
 dnn = tf.estimator.DNNClassifier(
     hidden_units=[512,128],
@@ -162,6 +237,10 @@ dnn = tf.estimator.DNNClassifier(
     activation_fn=tf.nn.relu,
     dropout=0.1,
     optimizer=tf.optimizers.Adagrad(learning_rate=0.005))
+
+
+# In[ ]:
+
 
 tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
 import time
@@ -179,8 +258,17 @@ for step in range(0, TOTAL_STEPS+1, STEP_SIZE):
     print('Eval Metrics (Train):', dnn.evaluate(input_fn=predict_train_input_fn))
     print('Eval Metrics (Validation):', dnn.evaluate(input_fn=predict_val_input_fn))
 
-## Model Evaluation
+
+# ## Model Evaluation
+
+# In[ ]:
+
 
 dnn.evaluate(input_fn=predict_train_input_fn)
 
+
+# In[ ]:
+
+
 dnn.evaluate(input_fn=predict_test_input_fn)
+

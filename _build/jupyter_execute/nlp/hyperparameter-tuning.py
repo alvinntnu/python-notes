@@ -1,20 +1,26 @@
-# Hyper-Parameter Tuning
+#!/usr/bin/env python
+# coding: utf-8
 
+# # Hyper-Parameter Tuning
+# 
+# 
 
+# There are two important techniques to fine-tune the hyperparameters of the model: Grid Search and Cross Validation.
+# 
+# - Grid Search
+#   - Define a few parameter values and experiment all these values in modeling. Use `sklearn.model_selection.GridSearchCV` to find the best parameter settings.
+# - Cross Validation
+#   - Fine-tune the parameters using cross-validation. Common CV methods include `sklearn.model_selection.StratifiedKFold`, `sklearn_model_selection.ShuffleSplit`, `LeaveOneOut`.
+# 
+# Both mothods can make use of the `pipeline` in sklearn to streamline the processing of training and validation.
 
-There are two important techniques to fine-tune the hyperparameters of the model: Grid Search and Cross Validation.
+# ## SVM Model
+# 
+# - This example is from the officient `sklearn` documentation
+# - A classic SVM model with train and test split
 
-- Grid Search
-  - Define a few parameter values and experiment all these values in modeling. Use `sklearn.model_selection.GridSearchCV` to find the best parameter settings.
-- Cross Validation
-  - Fine-tune the parameters using cross-validation. Common CV methods include `sklearn.model_selection.StratifiedKFold`, `sklearn_model_selection.ShuffleSplit`, `LeaveOneOut`.
+# In[1]:
 
-Both mothods can make use of the `pipeline` in sklearn to streamline the processing of training and validation.
-
-## SVM Model
-
-- This example is from the officient `sklearn` documentation
-- A classic SVM model with train and test split
 
 ## Normal SVM model
 import numpy as np
@@ -38,13 +44,16 @@ clf = svm.SVC(kernel='linear', C=1).fit(X_train, y_train)
 clf.score(X_test, y_test)
 
 
-## Default K-fold Cross Validation
+# ## Default K-fold Cross Validation
+# 
+# - We can easily use the `cross_val_score()` to do the K-fold cross validation for a specific training model (without shuffling)
+# 
+# :::{note}
+# By default, `train_test_split` returns a random split.
+# :::
 
-- We can easily use the `cross_val_score()` to do the K-fold cross validation for a specific training model (without shuffling)
+# In[2]:
 
-:::{note}
-By default, `train_test_split` returns a random split.
-:::
 
 ## Cross-validation
 
@@ -55,14 +64,17 @@ print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
 
 
 
-## GridSearchCV and Fine-Tuning Hyper-Parameters
+# ## GridSearchCV and Fine-Tuning Hyper-Parameters
+# 
+# - Important steps:
+#   - Define SVM classifier
+#   - Define a set of parameter values to experiment
+#   - Use `GridSearchCV` to find the best parameter settings
+#   - `GridSearchCV` by default implements cross-validation methods to find the optimal parameter settings.
+#   - In other words, we can specify our own more sophisticated CV methods in `GridSearchCV`.
 
-- Important steps:
-  - Define SVM classifier
-  - Define a set of parameter values to experiment
-  - Use `GridSearchCV` to find the best parameter settings
-  - `GridSearchCV` by default implements cross-validation methods to find the optimal parameter settings.
-  - In other words, we can specify our own more sophisticated CV methods in `GridSearchCV`.
+# In[3]:
+
 
 from sklearn import svm, datasets
 from sklearn.model_selection import GridSearchCV
@@ -82,18 +94,22 @@ import pandas as pd
 cv_results_df=pd.DataFrame(clf.cv_results_)
 cv_results_df
 
-## Cross-validation, Hyper-Parameter Tuning, and Pipeline
 
-- Common cross validation methods:
-  - `StratifiedKFold`: Split data into train and validation sets by preserving the percentage of samples of each class
-  - `ShuffleSplit`: Split data into train and validation sets by first shuffling the data and then splitting
-  - `StratifiedShuffleSplit`: Stratified + Shuffled
-  - `LeaveOneOut`: Creating train sets by taking all samples execept one, which is left out for validation
-- Important Steps
-  - Define all preprocessing methods as Tranasformer
-  - Create a pipeline
-  - Define a cross-validation method
-  - Use `cross_val_score()` to fine the best parameter settings by feeding the pipeline and the CV method
+# ## Cross-validation, Hyper-Parameter Tuning, and Pipeline
+
+# - Common cross validation methods:
+#   - `StratifiedKFold`: Split data into train and validation sets by preserving the percentage of samples of each class
+#   - `ShuffleSplit`: Split data into train and validation sets by first shuffling the data and then splitting
+#   - `StratifiedShuffleSplit`: Stratified + Shuffled
+#   - `LeaveOneOut`: Creating train sets by taking all samples execept one, which is left out for validation
+# - Important Steps
+#   - Define all preprocessing methods as Tranasformer
+#   - Create a pipeline
+#   - Define a cross-validation method
+#   - Use `cross_val_score()` to fine the best parameter settings by feeding the pipeline and the CV method
+
+# In[4]:
+
 
 from sklearn.pipeline import make_pipeline
 from sklearn import preprocessing
@@ -111,11 +127,15 @@ shuffsplit = ShuffleSplit(n_splits=5, test_size=0.1, random_state=7)
 print('K-fold CV:', cross_val_score(clf, X, y, cv=kfold))
 print('Shuffle CV:', cross_val_score(clf, X, y, cv=shuffsplit))
 
-## Deep Learning Example
 
-- This is based on [GridSearchCV with keras](https://www.kaggle.com/shujunge/gridsearchcv-with-keras)
+# ## Deep Learning Example
+# 
+# - This is based on [GridSearchCV with keras](https://www.kaggle.com/shujunge/gridsearchcv-with-keras)
 
-## MNIST Dataset
+# ## MNIST Dataset
+
+# In[5]:
+
 
 import numpy as np
 import os
@@ -132,20 +152,28 @@ X_test = X_test.astype('float32')
 X_train /= 255
 X_test /= 255
 
+
+# In[6]:
+
+
 ## Convert y labels (integers) into binary class matrix
 from keras.utils import np_utils
 Y_train = np_utils.to_categorical(y_train, nb_classes)
 Y_test = np_utils.to_categorical(y_test, nb_classes)
 print(Y_train[:5,])
 
-## Hyper-Parameter Tuning Using Grid Search
 
-In this example, we aim to fine-tune the following hyper-parameters of the deep neural network:
+# ## Hyper-Parameter Tuning Using Grid Search
 
-- `optimizer`
-- `kernel_initializer` of the Dense layer
+# In this example, we aim to fine-tune the following hyper-parameters of the deep neural network:
+# 
+# - `optimizer`
+# - `kernel_initializer` of the Dense layer
+# 
+# We can fine-tune other common parameters like epochs and batch-sizes.
 
-We can fine-tune other common parameters like epochs and batch-sizes.
+# In[7]:
+
 
 def create_model(optimizer='rmsprop', init='glorot_uniform'):
     model = Sequential()
@@ -159,6 +187,10 @@ def create_model(optimizer='rmsprop', init='glorot_uniform'):
     model.add(Activation('softmax')) # This special "softmax" a
     model.compile(loss='binary_crossentropy', optimizer=optimizer, metrics=['accuracy']) 
     return model
+
+
+# In[8]:
+
 
 from keras.wrappers.scikit_learn import KerasClassifier
 from sklearn.model_selection import GridSearchCV
@@ -174,6 +206,9 @@ grid_result = grid.fit(X_train, Y_train)
 print("total time:",time()-start)
 
 
+# In[9]:
+
+
 ## The Best Model
 print("Best: %f using %s" % (grid_result.best_score_, grid_result.best_params_))
 
@@ -183,12 +218,19 @@ results = pd.DataFrame(grid_result.cv_results_)
 results
 
 
-## K-fold Validation
+# ## K-fold Validation
 
-- Similar to shuffle split?
+# - Similar to shuffle split?
+
+# In[10]:
+
 
 np.random.seed(7)
 seed=12
+
+
+# In[11]:
+
 
 def create_model():
     model = Sequential()
@@ -218,9 +260,12 @@ print("total time:",time()-start)
 
 
 
-## Shuffle Split Cross Validation
+# ## Shuffle Split Cross Validation
+# 
+# - Shuffle but not stratified
 
-- Shuffle but not stratified
+# In[12]:
+
 
 ## Shuffle Split
 start=time()
@@ -230,17 +275,24 @@ print("K-fold Results: %.2f%% (%.2f%%)" % (results.mean()*100, results.std()*100
 print("total time:",time()-start)
 
 
-## Stratified K-Fold Validation
+# ## Stratified K-Fold Validation
+# 
 
+# - Stratified but not shuffled
+# - Stratified cross-validation gives poor results. No idea why? 
 
-- Stratified but not shuffled
-- Stratified cross-validation gives poor results. No idea why? 
+# In[13]:
+
 
 print(Y_train[:4,])
 print(y_train[:4])
 from collections import Counter
 
 Counter(y_train)
+
+
+# In[14]:
+
 
 ## Stratified Shuffle
 from sklearn.model_selection import StratifiedKFold
@@ -250,10 +302,14 @@ results = cross_val_score(model2, X_train, y_train, cv=sk)
 print("Stratified K-fold Results: %.2f%% (%.2f%%)" % (results.mean()*100, results.std()*100))
 print("total time:",time()-start)
 
-## Stratified Shuffle Split
 
-- A mix of `StratifiedKFold` and `ShuffleSplit`, which returns stratified randomized folds
-- The folds are made by preserving the percentage of samples for each class.
+# ## Stratified Shuffle Split
+# 
+# - A mix of `StratifiedKFold` and `ShuffleSplit`, which returns stratified randomized folds
+# - The folds are made by preserving the percentage of samples for each class.
+
+# In[15]:
+
 
 ## Stratified Shuffle
 from sklearn.model_selection import StratifiedShuffleSplit
@@ -264,10 +320,13 @@ print("Stratified Shuffle Results: %.2f%% (%.2f%%)" % (results.mean()*100, resul
 print("total time:",time()-start)
 
 
-## GridSearchCV and Cross-Validation
+# ## GridSearchCV and Cross-Validation
+# 
+# - We perform the `GridSearchCV` to find the optimal optimizers
+# - We determine the best parameter values based on stratified shuffled 5-fold cross validation
 
-- We perform the `GridSearchCV` to find the optimal optimizers
-- We determine the best parameter values based on stratified shuffled 5-fold cross validation
+# In[16]:
+
 
 def create_model():
     model = Sequential()
@@ -299,6 +358,9 @@ grid_result = grid.fit(X_train, Y_train)
 print("total time:",time()-start)
 
 
+# In[17]:
+
+
 ## The Best Model
 print("Best: %f using %s" % (grid_result.best_score_, grid_result.best_params_))
 
@@ -307,14 +369,18 @@ import pandas as pd
 results = pd.DataFrame(grid_result.cv_results_)
 results
 
-## References
 
-- [`GridSearchCV` documentation](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV)
-- [Cross-validation: evaluating estimator performance](https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation)
-- [Scoring Parameters](https://scikit-learn.org/stable/modules/model_evaluation.html#scoring-parameter)
-- [GridSearchCV with keras](https://www.kaggle.com/shujunge/gridsearchcv-with-keras)
+# ## References
+# 
+# - [`GridSearchCV` documentation](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV)
+# - [Cross-validation: evaluating estimator performance](https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation)
+# - [Scoring Parameters](https://scikit-learn.org/stable/modules/model_evaluation.html#scoring-parameter)
+# - [GridSearchCV with keras](https://www.kaggle.com/shujunge/gridsearchcv-with-keras)
 
-## Requirements
+# ## Requirements
+
+# In[18]:
+
 
 # %run ./get_modules.py
 import pkg_resources
@@ -356,3 +422,4 @@ for m in pkg_resources.working_set:
 
 for r in requirements:
     print("{}=={}".format(*r))
+

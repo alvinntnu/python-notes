@@ -1,11 +1,17 @@
-# Machine Learning with Sci-Kit Learn
+#!/usr/bin/env python
+# coding: utf-8
 
-- Based on [Keith Galli's sklearn tutorial](https://github.com/KeithGalli/sklearn)
+# # Machine Learning with Sci-Kit Learn
+# 
+# - Based on [Keith Galli's sklearn tutorial](https://github.com/KeithGalli/sklearn)
 
-## Data Class
+# ## Data Class
+# 
+# - Create a Review class for each token of the data
+# - This also demonstrates how Object-Oriented language works with the class
 
-- Create a Review class for each token of the data
-- This also demonstrates how Object-Oriented language works with the class
+# In[1]:
+
 
 import random
 
@@ -42,7 +48,11 @@ class ReviewContainer:
         self.reviews = negative + positive_shrunk
         random.shuffle(self.reviews)
 
-## Data Loading
+
+# ## Data Loading
+
+# In[2]:
+
 
 import json
 
@@ -54,26 +64,46 @@ with open(fname) as f:
         cur_review = json.loads(line)
         reviews.append(Review(cur_review['reviewText'], cur_review['overall']))
 
+
+# In[3]:
+
+
 print('Number of Reviews: {}'.format(len(reviews)))
 print('Sample Text of Doc 1:')
 print('-'*30)
 print(reviews[0].text)
+
+
+# In[4]:
+
 
 ## Check Sentiment Distribution of the Current Dataset
 from collections import Counter
 sentiment_distr = Counter([r.get_sentiment() for r in reviews])
 print(sentiment_distr)
 
-## Splitting Data into Train and Test Sets
+
+# ## Splitting Data into Train and Test Sets
+
+# In[5]:
+
 
 from sklearn.model_selection import train_test_split
 train, test = train_test_split(reviews, test_size = 0.33, random_state=42)
+
+
+# In[6]:
+
 
 ## Sentiment Distrubtion for Train and Test
 print(Counter([r.get_sentiment() for r in train]))
 print(Counter([r.get_sentiment() for r in test]))
 
-## Balance the Classes
+
+# ## Balance the Classes
+
+# In[7]:
+
 
 train_container = ReviewContainer(train)
 test_container = ReviewContainer(test)
@@ -88,7 +118,10 @@ print(Counter([r.get_sentiment() for r in test_container.reviews]))
 
 
 
-## Train and Test Data and Labels
+# ## Train and Test Data and Labels
+
+# In[8]:
+
 
 train_text = train_container.get_text()
 train_label = train_container.get_sentiment()
@@ -99,14 +132,18 @@ test_label = test_container.get_sentiment()
 # print(train_label.count(Sentiment.NEGATIVE))
 print(Counter(train_label))
 
-## Vectorization: Bag-of-Words Model
 
-:::{admonition,important}
+# ## Vectorization: Bag-of-Words Model
 
-- Always split the data into train and test first before vectorizing the texts
-- Otherwise, you would leak information to the training process, which may lead to over-fitting
-- When vectorizing the texts, `fit_transform()` the train and `transform()` the test
-:::
+# :::{admonition,important}
+# 
+# - Always split the data into train and test first before vectorizing the texts
+# - Otherwise, you would leak information to the training process, which may lead to over-fitting
+# - When vectorizing the texts, `fit_transform()` the train and `transform()` the test
+# :::
+
+# In[9]:
+
 
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 
@@ -114,24 +151,40 @@ tfidf_vec = TfidfVectorizer()
 train_text_bow = tfidf_vec.fit_transform(train_text) # fit train
 test_text_bow = tfidf_vec.transform(test_text) # transform test
 
+
+# In[10]:
+
+
 print(train_text_bow.shape)
 print(test_text_bow.shape)
 print(type(train_text_bow))
 print(train_text_bow[0])
 
-## Classification Models
 
-### Support Vector Machine (SVM)
+# ## Classification Models
+
+# ### Support Vector Machine (SVM)
+
+# In[11]:
+
 
 from sklearn import svm
 
 model_svm = svm.SVC(kernel='linear')
 model_svm.fit(train_text_bow, train_label)
 
+
+# In[12]:
+
+
 model_svm.predict(test_text_bow[:10])
 #print(model_svm.score(test_text_bow, test_label))
 
-### Decision Tree
+
+# ### Decision Tree
+
+# In[13]:
+
 
 from sklearn.tree import DecisionTreeClassifier
 
@@ -140,7 +193,11 @@ model_dec.fit(train_text_bow, train_label)
 
 model_dec.predict(test_text_bow[:10])
 
-### Naive Bayes
+
+# ### Naive Bayes
+
+# In[14]:
+
 
 from sklearn.naive_bayes import GaussianNB
 model_gnb = GaussianNB()
@@ -148,7 +205,11 @@ model_gnb.fit(train_text_bow.toarray(), train_label)
 
 model_gnb.predict(test_text_bow[:10].toarray())
 
-### Logistic Regression
+
+# ### Logistic Regression
+
+# In[15]:
+
 
 from sklearn.linear_model import LogisticRegression
 
@@ -157,7 +218,11 @@ model_lg.fit(train_text_bow, train_label)
 
 model_lg.predict(test_text_bow[:10].toarray())
 
-## Evaluation
+
+# ## Evaluation
+
+# In[16]:
+
 
 #Mean Accuracy
 print(model_svm.score(test_text_bow, test_label))
@@ -165,10 +230,18 @@ print(model_dec.score(test_text_bow, test_label))
 print(model_gnb.score(test_text_bow.toarray(), test_label))
 print(model_lg.score(test_text_bow, test_label))
 
+
+# In[17]:
+
+
 # F1
 from sklearn.metrics import f1_score
 
 f1_score(test_label, model_svm.predict(test_text_bow), average=None, labels = [Sentiment.POSITIVE, Sentiment.NEGATIVE])
+
+
+# In[18]:
+
 
 ## try a whole new self-created review:)
 new_review =['This book looks soso like the content but the cover is weird',
@@ -177,7 +250,11 @@ new_review =['This book looks soso like the content but the cover is weird',
 new_review_bow = tfidf_vec.transform(new_review)
 model_svm.predict(new_review_bow)
 
-## Tuning Model
+
+# ## Tuning Model
+
+# In[19]:
+
 
 from sklearn.model_selection import GridSearchCV
 
@@ -187,12 +264,24 @@ svc = svm.SVC()
 clf = GridSearchCV(svc, parameters, cv=5)
 clf.fit(train_text_bow, train_label)
 
+
+# In[20]:
+
+
 sorted(clf.cv_results_.keys())
 print(clf.best_params_)
 
+
+# In[21]:
+
+
 print(clf.score(test_text_bow, test_label))
 
-## Saving Model
+
+# ## Saving Model
+# 
+
+# In[22]:
 
 
 #  import pickle
@@ -201,6 +290,10 @@ print(clf.score(test_text_bow, test_label))
 #     pickle.dump(clf, f)
 # with open('../ml-sent-svm.pkl' 'rb') as f:
 #     loaded_svm = pickle.load(f)
+
+
+# In[ ]:
+
 
 # import pkg_resources
 # import types
@@ -228,7 +321,15 @@ print(clf.score(test_text_bow, test_label))
 
 #         yield name
 
+
+# In[ ]:
+
+
 # get_imports()
+
+
+# In[29]:
+
 
 # imports = list(set(get_imports()))
 
@@ -242,4 +343,10 @@ print(clf.score(test_text_bow, test_label))
 
 # for r in requirements:
 #     print("{}=={}".format(*r))
+
+
+# In[ ]:
+
+
+
 

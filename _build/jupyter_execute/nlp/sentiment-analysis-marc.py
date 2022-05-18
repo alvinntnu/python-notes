@@ -1,38 +1,50 @@
-# Sentiment Analysis of Yahoo! Movie reviews
+#!/usr/bin/env python
+# coding: utf-8
 
-- Using Marc's thesis dataset (Chinese Yahoo Movie Reviews)
-- Important Steps
-  - Loading the CSV dataset
-  - Tokenize into words (texts have been segmented)
-  - Split train-test
-  - One-hot encoding of texts
-  - Define model
-  - Train the model
-  - Evaluate the model
+# # Sentiment Analysis of Yahoo! Movie reviews
+# 
+# - Using Marc's thesis dataset (Chinese Yahoo Movie Reviews)
+# - Important Steps
+#   - Loading the CSV dataset
+#   - Tokenize into words (texts have been segmented)
+#   - Split train-test
+#   - One-hot encoding of texts
+#   - Define model
+#   - Train the model
+#   - Evaluate the model
 
-## Setting Colab Environment
+# ## Setting Colab Environment
+# 
+# - Setting Spacy Language Model
+#   - For some reason, the Chiense language model is not available in the most recent spacy 2.4. Reinstall spacy 2.3 `!pip install spacy==2.3`
+#   - Download the language model using terminal `!spacy download zh_core_web_lg`
+#   - Restart the colab runtime
+#   - Ready to go!
+# - Install a package `skater`
 
-- Setting Spacy Language Model
-  - For some reason, the Chiense language model is not available in the most recent spacy 2.4. Reinstall spacy 2.3 `!pip install spacy==2.3`
-  - Download the language model using terminal `!spacy download zh_core_web_lg`
-  - Restart the colab runtime
-  - Ready to go!
-- Install a package `skater`
-
-!pip install spacy==2.3
-!spacy download zh_core_web_lg
-!pip install skater
+# In[1]:
 
 
-## Google Drive Access
+get_ipython().system('pip install spacy==2.3')
+get_ipython().system('spacy download zh_core_web_lg')
+get_ipython().system('pip install skater')
 
-- After running the code cell, visit the URL and copy-paste the code back here
+
+# ## Google Drive Access
+# 
+# - After running the code cell, visit the URL and copy-paste the code back here
+
+# In[2]:
+
 
 from google.colab import drive
 drive.mount('/content/gdrive/')
 
 
-## Loading Libraries
+# ## Loading Libraries
+
+# In[3]:
+
 
 import pandas as pd
 import numpy as np
@@ -53,32 +65,54 @@ from skater.core.local_interpretation.lime.lime_text import LimeTextExplainer
 
 
 
-## Loading Dataset
+# ## Loading Dataset
+
+# In[4]:
+
 
 df = pd.read_csv('/content/gdrive/My Drive/ColabData/marc_movie_review_metadata.csv')
 
+
+# In[5]:
+
+
 df.head()
 
-## Train-Test Split
+
+# ## Train-Test Split
+
+# In[ ]:
 
 
 reviews = np.array(df['reviews_sentiword_seg'])
 sentiments = np.array(df['rating'])
 
+
+# In[ ]:
+
+
 reviews_train, reviews_test = train_test_split(reviews, test_size = 0.2, random_state=123)
 sentiments_train, sentiments_test = train_test_split(sentiments, test_size=0.2, random_state=123)
+
+
+# In[ ]:
+
 
 print(reviews[:10])
 print(sentiments[:10])
 
-## Data Transformation
 
-- There are two versions of the review text data:
-  - reviews_train: List of segmented texts from csv
-  - reviews_train/test_tokens: List of word tokens of each text
-- There are two versions of the sentiment labels:
-  - sentiments_train/test_categorical: the numerical representation of the nominal variable for sentiment labels (e.g., positive = 1, negative = 0)
-  - sentiments_train/test_onehot: the one-hot encoding version of the sentiment labels (e.g., positive = [0,1], negative = [1,0])
+# ## Data Transformation
+# 
+# - There are two versions of the review text data:
+#   - reviews_train: List of segmented texts from csv
+#   - reviews_train/test_tokens: List of word tokens of each text
+# - There are two versions of the sentiment labels:
+#   - sentiments_train/test_categorical: the numerical representation of the nominal variable for sentiment labels (e.g., positive = 1, negative = 0)
+#   - sentiments_train/test_onehot: the one-hot encoding version of the sentiment labels (e.g., positive = [0,1], negative = [1,0])
+
+# In[ ]:
+
 
 ## Text/Label Transformation
 wt = WhitespaceTokenizer()
@@ -89,14 +123,21 @@ sentiments_train_categorical = le.fit_transform(sentiments_train)
 sentiments_train_onehot = keras.utils.to_categorical(sentiments_train_categorical, 2)
 
 
+# In[ ]:
+
+
 reviews_test_tokens = [wt.tokenize(text) for text in reviews_test]
 sentiments_test_categorical = le.fit_transform(sentiments_test)
 sentiments_test_onehot = keras.utils.to_categorical(sentiments_test_categorical, 2)
 
-## Model 1
 
-- Four-Layered Fully Connected Neural Network 
-- Self-trained Embeddings using skip-gram (based on the train data)
+# ## Model 1
+# 
+# - Four-Layered Fully Connected Neural Network 
+# - Self-trained Embeddings using skip-gram (based on the train data)
+
+# In[ ]:
+
 
 print('Sentiment Class Label Map:', 
       dict(zip(le.classes_, le.transform(le.classes_))))
@@ -106,15 +147,15 @@ print('Sample Test Label Transformation:\n'+'='*35,
       '\nEncoded Labels:',sentiments_test_categorical[:3],
       '\nOne-hot Encodings:\n', sentiments_test_onehot[:3])
 
-%%time
-## Training Word Embeddings
-w2v_num_features = 300
-w2v_model = gensim.models.Word2Vec(reviews_train_tokens,
-                                   size=w2v_num_features,
-                                   window=5,
-                                   min_count=0,
-                                   sg= 1, # 1 for skipgram, 0 for CBOW
-                                   workers=16)
+
+# In[ ]:
+
+
+get_ipython().run_cell_magic('time', '', '## Training Word Embeddings\nw2v_num_features = 300\nw2v_model = gensim.models.Word2Vec(reviews_train_tokens,\n                                   size=w2v_num_features,\n                                   window=5,\n                                   min_count=0,\n                                   sg= 1, # 1 for skipgram, 0 for CBOW\n                                   workers=16)\n')
+
+
+# In[ ]:
+
 
 ## This model uses the document word vector averaging scheme
 ## Use the average word vector representations to represent one document (movie reivew)
@@ -139,13 +180,25 @@ def averaged_word2vec_vectorizer(corpus, model, num_features):
                     for tokenized_sentence in corpus]
     return np.array(features)
 
+
+# In[ ]:
+
+
 # generate averaged word vector features from word2vec model
 avg_wv_train_features = averaged_word2vec_vectorizer(corpus=reviews_train_tokens, model=w2v_model,
                                                      num_features=w2v_num_features)
 avg_wv_test_features = averaged_word2vec_vectorizer(corpus=reviews_test_tokens, model=w2v_model,
                                                     num_features=w2v_num_features)
 
+
+# In[ ]:
+
+
 print('Self-Trained Word2Vec model:> Train features shape:', avg_wv_train_features.shape, ' Test features shape:', avg_wv_test_features.shape)
+
+
+# In[ ]:
+
 
 def construct_deepnn_architecture(num_input_features):
     dnn_model = Sequential()
@@ -194,12 +247,20 @@ def plot(history):
     plt.legend()
     plt.show()
 
+
+# In[ ]:
+
+
 w2v_num_features = 300
 w2v_dnn = construct_deepnn_architecture(num_input_features=w2v_num_features)
 batch_size = 100
 history=w2v_dnn.fit(avg_wv_train_features, sentiments_train_onehot, epochs=100, batch_size=batch_size, 
             shuffle=True, validation_split=0.1, verbose=1)
 plot(history)
+
+
+# In[ ]:
+
 
 # functions from Text Analytics with Python book
 def get_metrics(true_labels, predicted_labels):
@@ -260,7 +321,11 @@ def display_model_performance_metrics(true_labels, predicted_labels, classes=[1,
                              classes=classes)
 from sklearn import metrics
 
-### Evaluation
+
+# ### Evaluation
+
+# In[ ]:
+
 
 y_pred = w2v_dnn.predict_classes(avg_wv_test_features)
 predictions = le.inverse_transform(y_pred) 
@@ -268,15 +333,22 @@ display_model_performance_metrics(true_labels=sentiments_test, predicted_labels=
                                       classes=['positive', 'negative']) 
 
 
-## Model 2
+# 
+# ## Model 2
+# 
+# - Four-layered fully-connected neural network
+# - Using pretrained GloVe Chinese embeddings provided in spacy
+# - Install the `zh_core_web_lg` before using it (See the beginning of the code)
+# - Spacy is able to convert a word (text or sentence or word) into word embeddings
 
-- Four-layered fully-connected neural network
-- Using pretrained GloVe Chinese embeddings provided in spacy
-- Install the `zh_core_web_lg` before using it (See the beginning of the code)
-- Spacy is able to convert a word (text or sentence or word) into word embeddings
+# In[ ]:
 
 
 nlp_vec = spacy.load('zh_core_web_lg', parse=False, tag=False, entity=False)
+
+
+# In[ ]:
+
 
 ## feature engineering with GloVe model
 train_nlp = [nlp_vec(item) for item in reviews_train]
@@ -285,11 +357,23 @@ train_glove_features = np.array([item.vector for item in train_nlp])
 test_nlp = [nlp_vec(item) for item in reviews_test]
 test_glove_features = np.array([item.vector for item in test_nlp])
 
+
+# In[ ]:
+
+
 # nlp_vec('word').vector # convert a word into embeddings
 # nlp_vec('this is a word').vector # convert a sentence into embeddings by taking averages of word embeddings
 
+
+# In[ ]:
+
+
 print('Word2Vec model:> Train features shape:', avg_wv_train_features.shape, ' Test features shape:', avg_wv_test_features.shape)
 print('GloVe model:> Train features shape:', train_glove_features.shape, ' Test features shape:', test_glove_features.shape)
+
+
+# In[ ]:
+
 
 w2v_num_features = 300
 w2v_dnn_glove = construct_deepnn_architecture(num_input_features=w2v_num_features)
@@ -298,7 +382,11 @@ history2=w2v_dnn_glove.fit(train_glove_features, sentiments_train_onehot, epochs
             shuffle=True, validation_split=0.1, verbose=1)
 plot(history2)
 
-### Evaluation
+
+# ### Evaluation
+
+# In[ ]:
+
 
 y_pred = w2v_dnn_glove.predict_classes(test_glove_features)
 predictions = le.inverse_transform(y_pred) 
@@ -306,15 +394,26 @@ display_model_performance_metrics(true_labels=sentiments_test, predicted_labels=
                                       classes=['positive', 'negative']) 
 
 
+# In[ ]:
 
-## Model 3
 
-- LSTM
-- Self-trained embedding layer
-- After the first few epochs, the model shows over-fitting problems
+
+
+
+# ## Model 3
+# 
+# - LSTM
+# - Self-trained embedding layer
+# - After the first few epochs, the model shows over-fitting problems
+
+# In[ ]:
+
 
 print(reviews_train[0])
 print(reviews_train_tokens[0])
+
+
+# In[ ]:
 
 
 ## Prepare data for LSTM format
@@ -343,6 +442,9 @@ print('Examples of vocabulary map:',
 
 
 
+# In[ ]:
+
+
 ## Padding
 
 from keras.preprocessing import sequence
@@ -368,6 +470,9 @@ print('Train Review Shape:', reviews_train_ids.shape,
 ## LSTM uses the le.transform categorical version of labels
 
 
+# In[ ]:
+
+
 EMBEDDING_DIM = 128
 LSTM_DIM=64
 model = Sequential()
@@ -386,30 +491,54 @@ history3=model.fit(reviews_train_ids, sentiments_train_categorical,
           verbose=1,
           epochs=10)
 
+
+# In[ ]:
+
+
 model.save_weights('/content/gdrive/My Drive/ColabData/marc-sent-analysis-lstm-self.h5')
+
+
+# In[ ]:
+
 
 plot(history3)
 
-### Evaluation
+
+# ### Evaluation
+
+# In[ ]:
+
 
 y_pred = model.predict_classes(reviews_test_ids)
 predictions = le.inverse_transform(y_pred) 
 display_model_performance_metrics(true_labels=sentiments_test, predicted_labels=predictions, 
                                       classes=['positive', 'negative']) 
 
-## Model 4
 
-- LSTM
-- Using pre-trained word embeddings (GloVe)
+# ## Model 4
+# 
+# - LSTM
+# - Using pre-trained word embeddings (GloVe)
+
+# In[ ]:
+
 
 ## Extract spacy GloVe word vector
 
 glove_word_vectors = nlp_vec.vocab.vectors
 print('Spacy GloVe word vectors Shape: (vocab_size, embedding_dim)',glove_word_vectors.shape   )
 
+
+# In[ ]:
+
+
 # vocab_map['好看']
 nlp_vec('好看').vector
 type(vocab_map)
+
+
+# In[ ]:
+
 
 ## Prepare GloVe Word Embedding Matrix for training
 embedding_dim_glove = 300
@@ -420,6 +549,10 @@ for w, i in vocab_map.items():
     embedding_matrix[i]=cur_w_embedding_vector
 
 print('Glove embedding layer shape for training:', embedding_matrix.shape)
+
+
+# In[ ]:
+
 
 EMBEDDING_DIM = 128
 LSTM_DIM=64
@@ -434,11 +567,18 @@ model4.summary()
 
 
 
+# In[ ]:
+
+
 ## Set the embedding layer
 ## And freeze this layer
 
 model4.layers[0].set_weights([embedding_matrix])
 model4.layers[0].trainable=False
+
+
+# In[ ]:
+
 
 batch_size=100
 history4=model4.fit(reviews_train_ids, sentiments_train_categorical,
@@ -448,20 +588,36 @@ history4=model4.fit(reviews_train_ids, sentiments_train_categorical,
           verbose=1,
           epochs=10)
 
+
+# In[ ]:
+
+
 model4.save_weights('/content/gdrive/My Drive/ColabData/marc-sent-analysis-lstm-glove.h5')
+
+
+# In[ ]:
+
 
 plot(history4)
 
-### Evaluation
+
+# ### Evaluation
+
+# In[ ]:
+
 
 y_pred = model4.predict_classes(reviews_test_ids)
 predictions = le.inverse_transform(y_pred) 
 display_model_performance_metrics(true_labels=sentiments_test, predicted_labels=predictions, 
                                       classes=['positive', 'negative']) 
 
-## Interpreting Models
 
-### Preparing Data
+# ## Interpreting Models
+
+# ### Preparing Data
+
+# In[ ]:
+
 
 #load df
 df = pd.read_csv('/content/gdrive/My Drive/ColabData/marc_movie_review_metadata.csv')
@@ -486,10 +642,13 @@ sentiments_test_categorical = le.fit_transform(sentiments_test)
 sentiments_test_onehot = keras.utils.to_categorical(sentiments_test_categorical, 2)
 
 
-### Train Data Parameters
+# ### Train Data Parameters
+# 
+# - vocabulary size
+# - max text length
 
-- vocabulary size
-- max text length
+# In[ ]:
+
 
 reviews_train_tokens = [r.split(" ") for r in reviews_train]
 maxlen_train = print(np.max([len(t) for t in reviews_train_tokens]))
@@ -497,7 +656,11 @@ vocab=set([token for text in reviews_train_tokens for token in text])
 vocab_size_train=len(vocab)
 print(vocab_size)
 
-### Building Pipeline for New Test Data
+
+# ### Building Pipeline for New Test Data
+
+# In[ ]:
+
 
 vocab_size=vocab_size_train
 maxlen=maxlen_train
@@ -567,6 +730,9 @@ padder = Padder(maxlen)
 
 
 
+# In[ ]:
+
+
 sequencer.fit(reviews_train)
 x1=sequencer.transform(reviews_train)
 padder.fit(x1)
@@ -598,6 +764,9 @@ for w, i in word_index.items():
 print('Glove embedding layer shape for training:', embedding_matrix.shape)
 
 
+# In[ ]:
+
+
 max_features = vocab_size+1
 def create_model(max_features, embedding_dim, max_len, lstm_dim, embedding_matrix):
   model4 = Sequential()
@@ -622,11 +791,23 @@ sklearn_lstm = KerasClassifier(build_fn=create_model,
                                lstm_dim=64,
                                embedding_matrix = embedding_matrix)
 
+
+# In[ ]:
+
+
 pipeline = make_pipeline(sequencer, padder, sklearn_lstm)
+
+
+# In[ ]:
+
 
 pipeline.fit(reviews_train, sentiments_train)
 
-### Save Fitted Pipeline
+
+# ### Save Fitted Pipeline
+
+# In[ ]:
+
 
 # from sklearn.externals import joblib
 # print(pipeline.named_steps.keys())
@@ -639,9 +820,13 @@ pipeline.fit(reviews_train, sentiments_train)
 # # Finally, save the pipeline:
 # joblib.dump(pipeline, '/content/gdrive/My Drive/ColabData/marc-sklearn_pipeline.pkl')
 
-### Prediction
 
-### Load Trained Model
+# ### Prediction
+
+# ### Load Trained Model
+
+# In[ ]:
+
 
 from sklearn.externals import joblib
 from keras.models import load_model
@@ -656,20 +841,27 @@ pipeline.named_steps['kerasclassifier'].model = load_model('/content/gdrive/My D
 #                                      classes=['positive', 'negative']) 
 
 
+# In[ ]:
+
+
 from sklearn import metrics
 print('Computing predictions on test set...')
 y_preds = pipeline.predict(reviews_test)
 
 print('Test accuracy: {:.2f} %'.format(100*metrics.accuracy_score(y_preds, sentiments_test)))
 
-### Interpretation
 
-- Using LIME to interpret the importance of the features in relatio to the model prediction
-- Identify important words that may have great contribution to the model prediction
+# ### Interpretation
+# 
+# - Using LIME to interpret the importance of the features in relatio to the model prediction
+# - Identify important words that may have great contribution to the model prediction
 
-#### Version 1
+# #### Version 1
+# 
+# - Based on [LIME of words: interpreting Recurrent Neural Networks predictions](https://data4thought.com/deep-lime.html)
 
-- Based on [LIME of words: interpreting Recurrent Neural Networks predictions](https://data4thought.com/deep-lime.html)
+# In[ ]:
+
 
 import textwrap
 # We choose a sample from test set
@@ -686,13 +878,17 @@ print('Probability(negative) =', pipeline.predict_proba([text_sample])[0,0])
 print('Predicted class: %s' % pipeline.predict([text_sample]))
 print('True class: %s' % sentiments_test[idx])
 
+
+# In[ ]:
+
+
 import seaborn as sns
 import matplotlib
 from matplotlib import pyplot as plt
 
 #import matplotlib as plt
 matplotlib.rcParams['figure.dpi']=300
-%matplotlib inline
+get_ipython().run_line_magic('matplotlib', 'inline')
 from collections import OrderedDict
 from lime.lime_text import LimeTextExplainer
 
@@ -702,6 +898,8 @@ explanation = explainer.explain_instance(text_sample,
                                          num_features=10)
 explanation.show_in_notebook(text=True)
 
+
+# In[ ]:
 
 
 weights = OrderedDict(explanation.as_list())
@@ -726,15 +924,26 @@ sns.barplot(x="weights", y="words", data=lime_weights);
 plt.yticks(rotation=0, FontProperties=getChineseFont())
 plt.title('Review ID-{}: features weights given by LIME'.format(idx));
 
+
+# In[ ]:
+
+
 # !wget -O taipei_sans_tc_beta.ttf https://drive.google.com/uc?id=1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_&export=download
 # !mv taipei_sans_tc_beta.ttf /usr/local/lib/python3.6/dist-packages/matplotlib//mpl-data/fonts/ttf
 
-#### Version 2
 
-- Based on Text Analytics with Python Ch 9
-- The `lime` on Colab is outdated. Re-install the most recent `lime` to make sure that Chinese texts pop out properly.
+# #### Version 2
+# 
+# - Based on Text Analytics with Python Ch 9
+# - The `lime` on Colab is outdated. Re-install the most recent `lime` to make sure that Chinese texts pop out properly.
+
+# In[ ]:
+
 
 # pipeline.predict_proba(reviews_test[:1])
+
+
+# In[ ]:
 
 
 from skater.core.local_interpretation.lime.lime_text import LimeTextExplainer as LimeTextExplainer2
@@ -760,11 +969,20 @@ def interpret_classification_model_prediction(doc_index, norm_corpus, corpus,
                                      labels=[1])
     exp.show_in_notebook(text=True)
 
+
+# In[ ]:
+
+
 import lime
-!pip install lime
+get_ipython().system('pip install lime')
+
+
+# In[ ]:
+
 
 doc_index = 100 
 interpret_classification_model_prediction(doc_index=doc_index, norm_corpus=reviews_test,
                                          corpus=reviews_test, 
                                           prediction_labels=sentiments_test,
                                           explainer_obj = explainer2)
+

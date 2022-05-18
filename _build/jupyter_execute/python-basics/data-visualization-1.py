@@ -1,6 +1,12 @@
-# Data Visualization I
+#!/usr/bin/env python
+# coding: utf-8
 
-## Preparing Datasets
+# # Data Visualization I
+
+# ## Preparing Datasets
+
+# In[1]:
+
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -16,18 +22,20 @@ print(df.dtypes)
 df.head(10)
 
 
-## Matlibplot
+# ## Matlibplot
+# 
 
+# ### Resolution
+# 
+# - We can increase the dpi of the matplotlib parameters to get image of higher resolution in notebook
+# - The dpi setting has to GO before the magic inline command because the magic inline commened resets the dpi to default
+# 
 
-### Resolution
-
-- We can increase the dpi of the matplotlib parameters to get image of higher resolution in notebook
-- The dpi setting has to GO before the magic inline command because the magic inline commened resets the dpi to default
-
+# In[2]:
 
 
 ## Change DPI for higher resolution in notebook
-%matplotlib inline
+get_ipython().run_line_magic('matplotlib', 'inline')
 
 matplotlib.rcParams['figure.dpi'] = 150
 matplotlib.rcParams['savefig.dpi'] = 150
@@ -35,33 +43,56 @@ matplotlib.rcParams['savefig.dpi'] = 150
 # matplotlib.rc("savefig", dpi=dpi)
 
 
-### Matplotlib Style
+# ### Matplotlib Style
+
+# In[3]:
+
 
 # available style
 print(plt.style.available)
 
+
+# In[4]:
+
+
 # choose one style
 plt.style.use('fivethirtyeight')
 
-### Matplotlib Chinese Issues
+
+# ### Matplotlib Chinese Issues
+
+# In[5]:
+
 
 ## Setting Chinese Fonts
 ## Permanent Setting Version
 plt.rcParams['font.sans-serif']=["PingFang HK"]
 plt.rcParams['axes.unicode_minus']= False
 
-### Plotting
 
+# ### Plotting
+# 
+# 
+
+# In[6]:
 
 
 ## Simple X and Y
 plt.plot(df['x'], df['y1'])
 plt.show()
 
+
+# In[7]:
+
+
 ## Simple X and two Y's
 plt.plot(df['x'], df['y1'])
 plt.plot(df['x'], df['y2'])
 plt.show()
+
+
+# In[8]:
+
 
 ## Adding legends
 ## Simple X and two Y's
@@ -71,6 +102,10 @@ plt.legend()
 plt.tight_layout()
 plt.show()
 
+
+# In[9]:
+
+
 ## Save graphs
 ## Simple X and two Y's
 plt.plot(df['x'], df['y1'], label="資料1")
@@ -79,6 +114,10 @@ plt.legend()
 plt.tight_layout()
 plt.savefig('plot.png')
 plt.show()
+
+
+# In[10]:
+
 
 ## Add x/y labels and title
 ## Simple X and two Y's
@@ -91,11 +130,19 @@ plt.title("漂亮的圖")
 plt.tight_layout()
 plt.show()
 
-### Bar Plots
+
+# ### Bar Plots
+
+# In[11]:
+
 
 ## Normal bar plot
 plt.bar(df['x'], df['y3'])
 plt.show()
+
+
+# In[12]:
+
 
 ## Sort bars according to values
 
@@ -103,15 +150,27 @@ df_sorted = df.sort_values(['y3','y2'], ascending=True)
 print(df_sorted.dtypes)
 df_sorted
 
+
+# In[13]:
+
+
 plt.bar('x', 'y3', data=df_sorted)
 plt.show()
+
+
+# In[14]:
+
 
 ## Horizontal Bars
 plt.bar('x', 'y4', data=df.sort_values('y4'))
 plt.tight_layout()
 plt.show()
 
-### Pie Chart
+
+# ### Pie Chart
+
+# In[15]:
+
 
 plt.style.use("fivethirtyeight")
 
@@ -127,7 +186,11 @@ plt.title("Grading Policy")
 plt.tight_layout()
 plt.show()
 
-### Stacked Plot
+
+# ### Stacked Plot
+
+# In[16]:
+
 
 plt.style.use("fivethirtyeight")
 
@@ -149,7 +212,11 @@ plt.title("Stacked Plot")
 plt.tight_layout()
 plt.show()
 
-### Histogram
+
+# ### Histogram
+
+# In[17]:
+
 
 import random
 import numpy as np
@@ -176,7 +243,10 @@ plt.tight_layout()
 
 plt.show()
 
-### Scatter Plot
+
+# ### Scatter Plot
+
+# In[18]:
 
 
 plt.figure(figsize=(7,5), dpi=300)
@@ -198,10 +268,17 @@ plt.ylim((0,13))
 plt.show()
 
 
-### Complex Graphs
+# ### Complex Graphs
+# 
+
+# In[19]:
 
 
 df
+
+
+# In[20]:
+
 
 # create a color palette
 palette = plt.get_cmap('Set1')
@@ -219,6 +296,10 @@ plt.legend(loc=2, ncol=2)
 plt.title("Line Plot With Several Values", loc='left', fontsize=12, fontweight=0, color='orange')
 plt.xlabel("Time")
 plt.ylabel("Score")
+
+
+# In[21]:
+
 
 import matplotlib.pyplot as plt
 plt.style.use('ggplot')
@@ -239,14 +320,18 @@ fig.suptitle("Facet Grids", fontsize=14, fontweight=0, color='black', style='ita
 fig.text(0.5, 0.0, 'Common X', ha='center', fontsize=14)
 fig.text(0.0, 0.5, 'Common Y', va='center', rotation='vertical', fontsize=14)
 
-## Seaborn Module
 
-![](../images/seaborn-func.png)
+# ## Seaborn Module
+# 
+# ![](../images/seaborn-func.png)
 
-### Two Types of Functions
+# ### Two Types of Functions
+# 
+# - Figure-level functions (Generic)
+# - Axex-level functions (Specific)
 
-- Figure-level functions (Generic)
-- Axex-level functions (Specific)
+# In[ ]:
+
 
 ## Change the DPI
 
@@ -255,24 +340,54 @@ sns.set(rc={"figure.dpi":300, 'savefig.dpi':300})
 sns.set_context('notebook')
 sns.set_style("ticks")
 
+
+# In[22]:
+
+
 sns.set(style='darkgrid')
+
+
+# In[23]:
+
 
 penguins = sns.load_dataset('penguins')
 penguins.head()
+
+
+# In[24]:
+
 
 # histogram
 print(sns.__version__) # seaborn>=0.11.0
 sns.displot(data=penguins, x="flipper_length_mm", hue="species", multiple="stack")
 
 
+# In[25]:
+
+
 sns.displot(data=penguins, x="flipper_length_mm", hue="species", multiple="stack")
 
+
+# In[26]:
+
+
 sns.displot(data=penguins, x="flipper_length_mm", hue="species", col="species")
+
+
+# In[27]:
+
 
 ## kernel density plot
 sns.kdeplot(data=penguins, x='flipper_length_mm', hue='species', multiple="stack")
 
+
+# In[28]:
+
+
 sns.displot(data=penguins, x="flipper_length_mm", hue="species", multiple="stack", kind="kde")
+
+
+# In[29]:
 
 
 tips = sns.load_dataset("tips")
@@ -280,71 +395,117 @@ tips = sns.load_dataset("tips")
 g = sns.relplot(data=tips, x="total_bill", y="tip")
 g.ax.axline(xy1=(10,2), slope=.2, color="b", dashes=(5,2))
 
+
+# In[30]:
+
+
 g = sns.relplot(data=penguins, x="flipper_length_mm", y="bill_length_mm", col="sex")
 g.set_axis_labels("Flipper length (mm)", "Bill length (mm)")
 
+
+# In[31]:
+
+
 sns.catplot(data=penguins, x='species', y='flipper_length_mm', kind="box")
 
-- `jointplot()`: plots the relationship or joint distribution of two variables while adding marginal axes that show the univariate distribution of each one separately
+
+# - `jointplot()`: plots the relationship or joint distribution of two variables while adding marginal axes that show the univariate distribution of each one separately
+
+# In[32]:
+
 
 sns.jointplot(data=penguins, x="flipper_length_mm", y="bill_length_mm", hue="species")
 
-- `pairplot()`: visualizes every pairwise combination of variables simultaneously in a data frame
+
+# - `pairplot()`: visualizes every pairwise combination of variables simultaneously in a data frame
+# 
+
+# In[33]:
 
 
 sns.pairplot(data=penguins, hue="species")
 
-### Long-format vs. Wide-format Data
+
+# ### Long-format vs. Wide-format Data
+
+# In[34]:
+
 
 flights = sns.load_dataset("flights")
 flights.head()
 
+
+# In[35]:
+
+
 sns.relplot(data=flights, x="year", y="passengers", hue="month", kind="line")
 
 
+# In[36]:
+
+
 sns.relplot(data=flights, x="month", y="passengers", hue="year", kind="line")
+
+
+# In[37]:
+
 
 flights_wide = flights.pivot(index="year", columns="month", values="passengers")
 flights_wide.head()
 
 
+# In[38]:
+
+
 print(type(flights_wide))
+
+
+# In[39]:
+
 
 sns.catplot(data=flights_wide, kind="box")
 
-## Chinese Fonts Issues
 
-- Find system-compatible Chinese fonts using the terminal command:
+# ## Chinese Fonts Issues
 
-```
-!fc-list :lang=zh
-```
+# - Find system-compatible Chinese fonts using the terminal command:
+# 
+# ```
+# !fc-list :lang=zh
+# ```
+# 
+# - Define the font to be used as well as the font properties in Python:
+# 
+# ```
+# from matplotlib import rcParams
+# from matplotlib.font_manager import FontProperties
+# import matplotlib.pyplot as plt
+# # rcParams['axes.unicode_minus']=False
+# myfont = FontProperties(fname='/Library/Fonts/Songti.ttc',
+#  size=15)
+# plt.title('圖表標題', fontproperties=myfont)
+# plt.ylabel('Y軸標題', fontproperties=myfont)
+# plt.legend(('分類一', '分類二', '分類三'), loc='best', prop=myfont)
+# ```
+# 
+# - For a permanent solution, please read references.
+#     - Modify the setting file in matplotlib: `matplotlib.matplotlib_fname()` to get the file path
+#     - It's similar to: `/Users/YOUR_NAME/opt/anaconda3/lib/python3.7/site-packages/matplotlib/mpl-data/matplotlibrc`
+#     - Two important parameters: `font.family` and `font.serif`
+#     - Add the font name under `font.serif`. My case: `Source Han Sans`
+#     
 
-- Define the font to be used as well as the font properties in Python:
+# In[40]:
 
-```
-from matplotlib import rcParams
-from matplotlib.font_manager import FontProperties
-import matplotlib.pyplot as plt
-# rcParams['axes.unicode_minus']=False
-myfont = FontProperties(fname='/Library/Fonts/Songti.ttc',
- size=15)
-plt.title('圖表標題', fontproperties=myfont)
-plt.ylabel('Y軸標題', fontproperties=myfont)
-plt.legend(('分類一', '分類二', '分類三'), loc='best', prop=myfont)
-```
-
-- For a permanent solution, please read references.
-    - Modify the setting file in matplotlib: `matplotlib.matplotlib_fname()` to get the file path
-    - It's similar to: `/Users/YOUR_NAME/opt/anaconda3/lib/python3.7/site-packages/matplotlib/mpl-data/matplotlibrc`
-    - Two important parameters: `font.family` and `font.serif`
-    - Add the font name under `font.serif`. My case: `Source Han Sans`
-    
 
 ## One can set the font preference permanently
 ## in the setting file
 import matplotlib
 matplotlib.matplotlib_fname()
+
+
+# In[41]:
+
 
 from matplotlib import rcParams
 from matplotlib.font_manager import FontProperties
@@ -360,6 +521,10 @@ plt.title('圖表標題', fontproperties=getChineseFont(20))
 plt.ylabel('Y軸標題', fontproperties=getChineseFont(12))
 plt.legend(('分類一', '分類二', '分類三'), loc='best', prop=getChineseFont())
 
+
+# In[42]:
+
+
 ## Permanent Setting Version
 plt.rcParams['font.sans-serif']=["PingFang HK"]
 plt.rcParams['axes.unicode_minus']= False
@@ -370,6 +535,10 @@ plt.ylabel("y軸標題")
 plt.xlabel("x軸標題")
 plt.show()
 
+
+# In[43]:
+
+
 ## Seaborn
 sns.set(font=['san-serif'])
 sns.set_style("whitegrid",{"font.sans-serif":["PingFang HK"]})
@@ -377,17 +546,21 @@ cities_counter = [('好棒', 285), ('給我', 225), ('不要', 163), ('細柔', 
 sns.set_color_codes("pastel")
 sns.barplot(x=[k for k, _ in cities_counter[:10]], y=[v for _, v in cities_counter[:10]])
 
-## References
 
-- [Python Graph Gallery](https://python-graph-gallery.com/)
-- [Corey Schafer's YouTube matplotlib tutorial](https://youtu.be/UO98lJQ3QGI)
-- [Matplotlib colormaps](https://matplotlib.org/3.1.1/tutorials/colors/colormaps.html)
-- [解決Python 3 Matplotlib與Seaborn視覺化套件中文顯示問題](https://medium.com/marketingdatascience/%E8%A7%A3%E6%B1%BApython-3-matplotlib%E8%88%87seaborn%E8%A6%96%E8%A6%BA%E5%8C%96%E5%A5%97%E4%BB%B6%E4%B8%AD%E6%96%87%E9%A1%AF%E7%A4%BA%E5%95%8F%E9%A1%8C-f7b3773a889b)
-- [Day 11 : Google Colab 實用奧步篇 ( 連結硬碟、繪圖中文顯示問題 )](https://ithelp.ithome.com.tw/articles/10234373?sc=hot)
-- [Souce Han Sans (open-source)](https://github.com/adobe-fonts/source-han-sans)
-- [Seaborn Documentation](https://seaborn.pydata.org/tutorial/function_overview.html)
+# ## References
+# 
+# - [Python Graph Gallery](https://python-graph-gallery.com/)
+# - [Corey Schafer's YouTube matplotlib tutorial](https://youtu.be/UO98lJQ3QGI)
+# - [Matplotlib colormaps](https://matplotlib.org/3.1.1/tutorials/colors/colormaps.html)
+# - [解決Python 3 Matplotlib與Seaborn視覺化套件中文顯示問題](https://medium.com/marketingdatascience/%E8%A7%A3%E6%B1%BApython-3-matplotlib%E8%88%87seaborn%E8%A6%96%E8%A6%BA%E5%8C%96%E5%A5%97%E4%BB%B6%E4%B8%AD%E6%96%87%E9%A1%AF%E7%A4%BA%E5%95%8F%E9%A1%8C-f7b3773a889b)
+# - [Day 11 : Google Colab 實用奧步篇 ( 連結硬碟、繪圖中文顯示問題 )](https://ithelp.ithome.com.tw/articles/10234373?sc=hot)
+# - [Souce Han Sans (open-source)](https://github.com/adobe-fonts/source-han-sans)
+# - [Seaborn Documentation](https://seaborn.pydata.org/tutorial/function_overview.html)
 
-## Requirements
+# ## Requirements
+
+# In[44]:
+
 
 # %run ./get_modules.py
 import pkg_resources
@@ -429,3 +602,4 @@ for m in pkg_resources.working_set:
 
 for r in requirements:
     print("{}=={}".format(*r))
+

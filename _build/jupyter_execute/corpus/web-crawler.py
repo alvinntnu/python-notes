@@ -1,8 +1,14 @@
-# Web Crawler
+#!/usr/bin/env python
+# coding: utf-8
 
-Collect text data from the PTT forum, process the article texts, and finally create a word cloud for a quick overview of the topics in these collected texts.
+# # Web Crawler
 
-## Crawling Data from PTT
+# Collect text data from the PTT forum, process the article texts, and finally create a word cloud for a quick overview of the topics in these collected texts.
+
+# ## Crawling Data from PTT
+
+# In[1]:
+
 
 import requests
 from bs4 import BeautifulSoup as soup  # HTML data structure
@@ -74,6 +80,10 @@ def extractArtText(url):
     )
     return ''.join(list(art_text))
 
+
+# In[2]:
+
+
 ## Debug Use
 
 # url = 'https://www.ptt.cc/bbs/Food/M.1602332821.A.6F3.html'
@@ -88,11 +98,15 @@ def extractArtText(url):
 
 # print(''.join(list(art_text)))
 
-```{note}
-For CSS selector, don't know how to set conditional criteria to select only texts under div#main-container but not those included in the child div.article-metaline and span.f2.
 
-So here I use the XPath, which requires the lxml package.
-```
+# ```{note}
+# For CSS selector, don't know how to set conditional criteria to select only texts under div#main-container but not those included in the child div.article-metaline and span.f2.
+# 
+# So here I use the XPath, which requires the lxml package.
+# ```
+
+# In[3]:
+
 
 # main()
 num_of_index_page = 5
@@ -104,8 +118,16 @@ for page in range(1, num_of_index_page):
     url = findPrevIndex(url)
 len(all_links)
 
+
+# In[4]:
+
+
 type(all_links[2])
 print(all_links[2])
+
+
+# In[5]:
+
 
 print('Push: {push:s} \n'
       'title: {title:s} \n'
@@ -114,32 +136,68 @@ print('Push: {push:s} \n'
       'link: {link:s} \n'
       'text: {text:.20} \n'.format(**all_links[3]))
 
-## Text Normalization
+
+# ## Text Normalization
+
+# In[6]:
+
 
 import sys
 sys.path.insert(1, '../nlp')
 import text_normalizer_zh as tn
 
+
+# In[7]:
+
+
 print(all_links[3]['text'])
+
+
+# In[8]:
+
 
 raw = [art['text'] for art in all_links if len(art) != 0 and len is not None]
 raw_normalized = tn.normalize_corpus(raw)
+
+
+# In[9]:
+
 
 import pandas as pd
 
 corpus_df = pd.DataFrame({"raw": raw, "normalized": raw_normalized})
 
+
+# In[10]:
+
+
 corpus_df.head(2)
+
+
+# In[11]:
+
 
 raw[5]
 
+
+# In[12]:
+
+
 raw_normalized[4]
 
-- [Unicode List](https://en.wikipedia.org/wiki/List_of_Unicode_characters)
-- [Unicode Categories](https://unicodebook.readthedocs.io/unicode.html)
+
+# - [Unicode List](https://en.wikipedia.org/wiki/List_of_Unicode_characters)
+# - [Unicode Categories](https://unicodebook.readthedocs.io/unicode.html)
+
+# In[13]:
+
 
 text = raw[0]
 text
+
+
+# In[14]:
+
 
 import unicodedata
 
@@ -147,7 +205,11 @@ result = ''.join(ch for ch in text
                  if unicodedata.category(ch)[0] not in ['P', 'S'])
 result
 
-## Word Cloud
+
+# ## Word Cloud
+
+# In[15]:
+
 
 from collections import Counter
 import imageio
@@ -155,12 +217,20 @@ from nltk.tokenize import WhitespaceTokenizer
 from wordcloud import WordCloud, ImageColorGenerator
 from matplotlib import pyplot as plt
 
+
+# In[16]:
+
+
 ## Check font paths
 ## !fc-list :lang=zh
 
 ws = WhitespaceTokenizer()
 
 tokens = [ws.tokenize(text) for text in raw_normalized]
+
+
+# In[17]:
+
 
 from collections import Counter
 
@@ -180,6 +250,10 @@ for tfpd in tokens_freq_per_doc:
     tokens_df.update(tfpd.keys())
 
 print(tokens_df)
+
+
+# In[18]:
+
 
 ## Load stopwords
 with open(
@@ -212,6 +286,8 @@ plt.tight_layout(pad=1)
 plt.show()
 #plt.savefig('../data/twp-wordcloud2.png', facecolor='k', bbox_inches='tight')
 
-:::{admonition} Exercise
-How to seperate post texts from push texts?
-:::
+
+# :::{admonition} Exercise
+# How to seperate post texts from push texts?
+# :::
+# 

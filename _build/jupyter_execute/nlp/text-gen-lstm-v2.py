@@ -1,16 +1,30 @@
-# Text Generation
+#!/usr/bin/env python
+# coding: utf-8
 
-- Deep-learning Language model
-- Generative model
-- Based on Chp 8 Deep Learning with Python
+# # Text Generation
+# 
+# - Deep-learning Language model
+# - Generative model
+# - Based on Chp 8 Deep Learning with Python
+
+# In[1]:
+
 
 import keras
 import numpy as np
+
+
+# In[2]:
+
 
 ## Download texts
 path = '../data/t8.shakespeare.txt'
 text = open(path).read().lower()
 print('Corpus Length:', len(text))
+
+
+# In[3]:
+
 
 ## Creating sequences for training
 maxlen = 60 # 60 characters as one sequence at a time
@@ -22,11 +36,19 @@ for i in range(0, len(text) - maxlen, step):
     next_chars.append(text[i + maxlen]) # target word
 print('Number of sequences:', len(sentences))
 
+
+# In[4]:
+
+
 ## Creating char mapping dictionary
 chars = sorted(list(set(text))) # dict of chars
 print('Unique characters:', len(chars))
 # create a map of each character and its corresponding numeric index in `chars`
 char_indices = dict((char, chars.index(char)) for char in chars)
+
+
+# In[5]:
+
 
 ## Vectorizing sequences
 print('Vectorization...')
@@ -38,6 +60,10 @@ for i, sentence in enumerate(sentences):
         x[i, t, char_indices[char]]=1 # i-th sentence, t-th character, one-hot position
     y[i, char_indices[next_chars[i]]]=1 # i-th sentence, the target word one-hot position
 
+
+# In[6]:
+
+
 # ## Building Network
 # from keras import layers
 # model = keras.models.Sequential()
@@ -48,6 +74,10 @@ for i, sentence in enumerate(sentences):
 # optimizer = keras.optimizers.RMSprop(lr=0.001)
 # model.compile(loss='categorical_crossentropy', optimizer=optimizer)
 
+
+# In[7]:
+
+
 ## After the training, a function to sample the next char given the model prediction
 def sample(preds, temperature = 1.0):
     preds = np.asarray(preds).astype('float64')
@@ -57,16 +87,31 @@ def sample(preds, temperature = 1.0):
     probas = np.random.multinomial(1, preds, 1)
     return np.argmax(probas)
 
+
+# In[8]:
+
+
 ## Model Training
 # history = model.fit(x, y, batch_size=128, epochs = 10)
+
+
+# In[9]:
 
 
 ## Save model
 # model.save('../data/text-gen-lstm-shakespear.h5')
 
+
+# In[10]:
+
+
 # print(history.history.keys())
 # loss_values = history.history['loss']
 # epochs = range(1, len(loss_values)+1)
+
+
+# In[11]:
+
 
 # import seaborn as sns
 # import pandas as pd
@@ -76,8 +121,16 @@ def sample(preds, temperature = 1.0):
 # sns.set(style='darkgrid')
 # sns.relplot(data=hist_df,x='epochs', y='loss_values', kind='line')
 
+
+# In[12]:
+
+
 from keras.models import load_model
 model = load_model('../data/text-gen-lstm-shakespear.h5')
+
+
+# In[13]:
+
 
 ## Generating Texts
 import random
@@ -86,6 +139,10 @@ import sys
 
 start_index = random.randint(0, len(text)-maxlen-1)
 generated_text = text[start_index:start_index+maxlen]
+
+
+# In[ ]:
+
 
 print('--Generating with seed: "'+ generated_text + '"')
 for temperature in [0.2, 0.5, 1.0, 1.2]:
@@ -106,3 +163,4 @@ for temperature in [0.2, 0.5, 1.0, 1.2]:
         generated_text = generated_text[1:] # get rid of the first char
         sys.stdout.write(next_char)
     
+

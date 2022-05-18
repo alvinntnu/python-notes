@@ -1,10 +1,16 @@
-# Sentiment Analysis with Traditional Machine Learning
+#!/usr/bin/env python
+# coding: utf-8
 
-- This note is based on Text Analytics with Python Ch9 Sentiment Analysis by Dipanjan Sarkar
-- Logistic Regression
-- Support Vector Machine (SVM)
+# # Sentiment Analysis with Traditional Machine Learning
+# 
+# - This note is based on Text Analytics with Python Ch9 Sentiment Analysis by Dipanjan Sarkar
+# - Logistic Regression
+# - Support Vector Machine (SVM)
 
-## Import necessary depencencies
+# ## Import necessary depencencies
+
+# In[195]:
+
 
 import pandas as pd
 import numpy as np
@@ -14,19 +20,34 @@ import nltk
 
 np.set_printoptions(precision=2, linewidth=80)
 
-## Load and normalize data
 
-%%time
-dataset = pd.read_csv('../data/movie_reviews.csv')
+# ## Load and normalize data
+
+# In[196]:
+
+
+get_ipython().run_cell_magic('time', '', "dataset = pd.read_csv('../data/movie_reviews.csv')\n")
+
+
+# In[197]:
+
 
 # take a peek at the data
 print(dataset.head())
 reviews = np.array(dataset['review'])
 sentiments = np.array(dataset['sentiment'])
 
+
+# In[198]:
+
+
 type(reviews)
 reviews.shape
 sentiments.shape
+
+
+# In[199]:
+
 
 # build train and test datasets
 train_reviews = reviews[:35000]
@@ -34,13 +55,21 @@ train_sentiments = sentiments[:35000]
 test_reviews = reviews[35000:]
 test_sentiments = sentiments[35000:]
 
+
+# In[200]:
+
+
 reviews[0][:100]
 sentiments[0:10]
 train_reviews[0][:100]
 test_reviews[0][:100]
 test_sentiments[0]
 
-## Normalizing the Corpus
+
+# ## Normalizing the Corpus
+
+# In[201]:
+
 
 # normalize datasets
 # stop_words = nltk.corpus.stopwords.words('english')
@@ -51,44 +80,59 @@ test_sentiments[0]
 # norm_train_reviews = tn.normalize_corpus(train_reviews, stopwords=stop_words)
 # norm_test_reviews = tn.normalize_corpus(test_reviews, stopwords=stop_words)
 
+
+# In[202]:
+
+
 norm_train_reviews = train_reviews.tolist()
 norm_test_reviews = test_reviews.tolist()
 
-## Traditional Supervised Machine Learning Models
 
-- Logistic
-- SVM
+# ## Traditional Supervised Machine Learning Models
+# 
+# - Logistic
+# - SVM
 
-## Feature Engineering
+# ## Feature Engineering
 
-%%time
-from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+# In[203]:
 
-# build BOW features on train reviews
-cv = CountVectorizer(binary=False, min_df=10, max_df=0.7, ngram_range=(1,3))
-cv_train_features = cv.fit_transform(norm_train_reviews)
-# build TFIDF features on train reviews
-tv = TfidfVectorizer(use_idf=True, min_df=10, max_df=0.7, ngram_range=(1,3),
-                     sublinear_tf=True)
-tv_train_features = tv.fit_transform(norm_train_reviews)
+
+get_ipython().run_cell_magic('time', '', 'from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer\n\n# build BOW features on train reviews\ncv = CountVectorizer(binary=False, min_df=10, max_df=0.7, ngram_range=(1,3))\ncv_train_features = cv.fit_transform(norm_train_reviews)\n# build TFIDF features on train reviews\ntv = TfidfVectorizer(use_idf=True, min_df=10, max_df=0.7, ngram_range=(1,3),\n                     sublinear_tf=True)\ntv_train_features = tv.fit_transform(norm_train_reviews)\n')
+
+
+# In[204]:
+
 
 # transform test reviews into features
 cv_test_features = cv.transform(norm_test_reviews)
 tv_test_features = tv.transform(norm_test_reviews)
 
+
+# In[205]:
+
+
 print('BOW model:> Train features shape:', cv_train_features.shape, ' Test features shape:', cv_test_features.shape)
 print('TFIDF model:> Train features shape:', tv_train_features.shape, ' Test features shape:', tv_test_features.shape)
 
-## Model Training, Prediction and Performance Evaluation
+
+# ## Model Training, Prediction and Performance Evaluation
+
+# In[206]:
+
 
 from sklearn.linear_model import SGDClassifier, LogisticRegression
 
 lr = LogisticRegression(penalty='l2', max_iter=200, C=1)
 svm = SGDClassifier(loss='hinge', max_iter=200)
 
-:::{note}
-`pd.MultiIndex()` has been updated in Sarker's code. The argument `codes=` is new.
-:::
+
+# :::{note}
+# `pd.MultiIndex()` has been updated in Sarker's code. The argument `codes=` is new.
+# :::
+
+# In[207]:
+
 
 # functions from Text Analytics with Python book
 def get_metrics(true_labels, predicted_labels):
@@ -149,26 +193,29 @@ def display_model_performance_metrics(true_labels, predicted_labels, classes=[1,
                              classes=classes)
 from sklearn import metrics
 
-%%time
-# build model    
-lr.fit(cv_train_features, train_sentiments)
-# predict using model
-lr_bow_predictions = lr.predict(cv_test_features) 
 
-    
-svm.fit(cv_train_features, train_sentiments)
-svm_bow_predictions = svm.predict(cv_test_features)
-    
-# Logistic Regression model on BOW features
-# lr_bow_predictions = meu.train_predict_model(classifier=lr, 
-#                                              train_features=cv_train_features, train_labels=train_sentiments,
-#                                              test_features=cv_test_features, test_labels=test_sentiments)
+# In[208]:
+
+
+get_ipython().run_cell_magic('time', '', '# build model    \nlr.fit(cv_train_features, train_sentiments)\n# predict using model\nlr_bow_predictions = lr.predict(cv_test_features) \n\n    \nsvm.fit(cv_train_features, train_sentiments)\nsvm_bow_predictions = svm.predict(cv_test_features)\n    \n# Logistic Regression model on BOW features\n# lr_bow_predictions = meu.train_predict_model(classifier=lr, \n#                                              train_features=cv_train_features, train_labels=train_sentiments,\n#                                              test_features=cv_test_features, test_labels=test_sentiments)\n')
+
+
+# In[209]:
+
 
 display_model_performance_metrics(true_labels=test_sentiments, predicted_labels=lr_bow_predictions,
                                       classes=['positive','negative'])
 
+
+# In[210]:
+
+
 display_model_performance_metrics(true_labels=test_sentiments, predicted_labels=svm_bow_predictions,
                                       classes=['positive','negative'])
+
+
+# In[211]:
+
 
 from sklearn.metrics import confusion_matrix
 lr_bow_cm = confusion_matrix(test_sentiments, lr_bow_predictions)
@@ -176,6 +223,9 @@ svm_bow_cm = confusion_matrix(test_sentiments, svm_bow_predictions)
 # lr_bow_cm.shape[1]
 print(lr_bow_cm)
 print(svm_bow_cm)
+
+
+# In[212]:
 
 
 ## MultiIndex DataFrame demo
@@ -191,8 +241,16 @@ lr_bow_df_cm = pd.DataFrame(lr_bow_cm,
                                                  codes=[[0,0],[0,1]]))
 lr_bow_df_cm
 
+
+# In[213]:
+
+
 # pd.MultiIndex(levels=[['Predicted:'],['positive', 'negative']],
 #              codes=[[0,0],[1,0]])
+
+
+# In[214]:
+
 
 # classes=['Positive','Negative']
 # total_classes = len(classes)
@@ -200,20 +258,44 @@ lr_bow_df_cm
 # print(total_classes)
 # print(level_labels)
 
+
+# In[215]:
+
+
 svm_bow_df_cm = pd.DataFrame(svm_bow_cm, index = ['positive', 'negative'],
                   columns = ['positive', 'negative'])
 svm_bow_df_cm
 
+
+# In[216]:
+
+
 plt.figure(figsize = (10,7))
 sn.heatmap(lr_bow_df_cm, annot=True, fmt='.5g')
+
+
+# In[217]:
+
 
 plt.figure(figsize = (10,7))
 sn.heatmap(svm_bow_df_cm, annot=True, fmt='.5g')
 
+
+# In[218]:
+
+
 display_model_performance_metrics(true_labels=test_sentiments, predicted_labels=lr_bow_predictions,classes=['positive', 'negative'])
+
+
+# In[219]:
+
 
 display_model_performance_metrics(true_labels=test_sentiments, predicted_labels=svm_bow_predictions,classes=['positive', 'negative'])
     
+
+
+# In[220]:
+
 
 # Logistic Regression model on TF-IDF features
 # lr_tfidf_predictions = meu.train_predict_model(classifier=lr, 
@@ -222,11 +304,19 @@ display_model_performance_metrics(true_labels=test_sentiments, predicted_labels=
 #meu.display_model_performance_metrics(true_labels=test_sentiments, predicted_labels=lr_tfidf_predictions,
 #                                      classes=['positive', 'negative'])
 
+
+# In[221]:
+
+
 # svm_bow_predictions = meu.train_predict_model(classifier=svm, 
 #                                              train_features=cv_train_features, train_labels=train_sentiments,
 #                                              test_features=cv_test_features, test_labels=test_sentiments)
 # meu.display_model_performance_metrics(true_labels=test_sentiments, predicted_labels=svm_bow_predictions,
 #                                       classes=['positive', 'negative'])
+
+
+# In[222]:
+
 
 # svm_tfidf_predictions = meu.train_predict_model(classifier=svm, 
 #                                                 train_features=tv_train_features, train_labels=train_sentiments,
@@ -234,9 +324,13 @@ display_model_performance_metrics(true_labels=test_sentiments, predicted_labels=
 # # meu.display_model_performance_metrics(true_labels=test_sentiments, predicted_labels=svm_tfidf_predictions,
 #                                       classes=['positive', 'negative'])
 
-## Explaining Model (LIME)
 
-- See [LIME Documentationb](https://github.com/marcotcr/lime)
+# ## Explaining Model (LIME)
+# 
+# - See [LIME Documentationb](https://github.com/marcotcr/lime)
+
+# In[223]:
+
 
 from lime import lime_text
 from sklearn.pipeline import make_pipeline
@@ -245,8 +339,16 @@ from sklearn.pipeline import make_pipeline
 c = make_pipeline(cv, lr)
 print(c.predict_proba([norm_test_reviews[0]]))
 
+
+# In[224]:
+
+
 from lime.lime_text import LimeTextExplainer
 explainer = LimeTextExplainer(class_names=['positive','negative'])
+
+
+# In[225]:
+
 
 idx = 200
 exp = explainer.explain_instance(norm_test_reviews[idx], c.predict_proba, num_features=6)
@@ -255,7 +357,15 @@ print('Probability(negative) =', c.predict_proba([norm_test_reviews[idx]])[0,1])
 
 print('True class: %s' % test_sentiments[idx])
 
+
+# In[226]:
+
+
 exp.as_list()
+
+
+# In[227]:
+
 
 print('Original prediction:', lr.predict_proba(cv_test_features[idx])[0,1])
 tmp = cv_test_features[idx].copy()
@@ -264,11 +374,23 @@ tmp[0,cv.vocabulary_['see']] = 0
 print('Prediction removing some features:', lr.predict_proba(tmp)[0,1])
 print('Difference:', lr.predict_proba(tmp)[0,1] - lr.predict_proba(cv_test_features[idx])[0,1])
 
+
+# In[228]:
+
+
 fig = exp.as_pyplot_figure()
+
+
+# In[229]:
+
 
 exp.show_in_notebook(text=True)
 
-## SVM
+
+# ## SVM
+
+# In[230]:
+
 
 from sklearn.calibration import CalibratedClassifierCV 
 calibrator = CalibratedClassifierCV(svm, cv='prefit')
@@ -279,6 +401,9 @@ print(c2.predict_proba([norm_test_reviews[0]]))
 
 
 
+# In[231]:
+
+
 idx = 200
 exp = explainer.explain_instance(norm_test_reviews[idx], c2.predict_proba, num_features=6)
 print('Document id: %d' % idx)
@@ -286,7 +411,15 @@ print('Probability(negative) =', c2.predict_proba([norm_test_reviews[idx]])[0,1]
 
 print('True class: %s' % test_sentiments[idx])
 
+
+# In[232]:
+
+
 exp.as_list()
+
+
+# In[233]:
+
 
 print('Original prediction:', svm2.predict_proba(cv_test_features[idx])[0,1])
 tmp = cv_test_features[idx].copy()
@@ -295,6 +428,15 @@ tmp[0,cv.vocabulary_['well']] = 0
 print('Prediction removing some features:', svm2.predict_proba(tmp)[0,1])
 print('Difference:', svm2.predict_proba(tmp)[0,1] - lr.predict_proba(cv_test_features[idx])[0,1])
 
+
+# In[234]:
+
+
 fig = exp.as_pyplot_figure()
 
+
+# In[235]:
+
+
 exp.show_in_notebook(text=True)
+

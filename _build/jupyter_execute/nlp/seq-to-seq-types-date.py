@@ -1,40 +1,66 @@
-# Types of Seqeunce Model 
+#!/usr/bin/env python
+# coding: utf-8
 
-- Create different types of seq-to-seq models to learn date conversion
-- This is based on Chapter 8 of [Deep Learning 2: 用 Python 進行自然語言處理的基礎理論實作](https://www.tenlong.com.tw/products/9789865020675).
-- Implement Different Types of Sequence-to-Sequence Models
-    - Simple Sequence-to-sequence (LSTM encoder and decoder)
-    - Simple Sequence-to-sequence (GRU encoder and decoder)
-    - Bidirectional Sequence-to-sequence
-    - Peeky Directional Sequence-to-sequence
-    - Sequence Model with Attention
-- Compare the performance and learning efficiencies of these models
-- This notebook uses two types of Attention layers:
-  - The first type is the default `keras.layers.Attention` (Luong attention) and `keras.layers.AdditiveAttention` (Bahdanau attention). (But these layers have ONLY been implemented in Tensorflow-nightly.
-  - The second type is developed by Thushan.
-    - Bahdanau Attention Layber developed in [Thushan](https://github.com/thushv89/attention_keras)
-    - Thushan Ganegedara's
-    [Attention in Deep Networks with Keras](https://towardsdatascience.com/light-on-math-ml-attention-with-keras-dc8dbc1fad39)
+# # Types of Seqeunce Model 
+# 
+# - Create different types of seq-to-seq models to learn date conversion
+# - This is based on Chapter 8 of [Deep Learning 2: 用 Python 進行自然語言處理的基礎理論實作](https://www.tenlong.com.tw/products/9789865020675).
+# - Implement Different Types of Sequence-to-Sequence Models
+#     - Simple Sequence-to-sequence (LSTM encoder and decoder)
+#     - Simple Sequence-to-sequence (GRU encoder and decoder)
+#     - Bidirectional Sequence-to-sequence
+#     - Peeky Directional Sequence-to-sequence
+#     - Sequence Model with Attention
+# - Compare the performance and learning efficiencies of these models
+# - This notebook uses two types of Attention layers:
+#   - The first type is the default `keras.layers.Attention` (Luong attention) and `keras.layers.AdditiveAttention` (Bahdanau attention). (But these layers have ONLY been implemented in Tensorflow-nightly.
+#   - The second type is developed by Thushan.
+#     - Bahdanau Attention Layber developed in [Thushan](https://github.com/thushv89/attention_keras)
+#     - Thushan Ganegedara's
+#     [Attention in Deep Networks with Keras](https://towardsdatascience.com/light-on-math-ml-attention-with-keras-dc8dbc1fad39)
 
-- This notebook runs on Google Colab (It installs the nightly version of the Tensorflow becuase of the new implementation of Attention layers).
+# - This notebook runs on Google Colab (It installs the nightly version of the Tensorflow becuase of the new implementation of Attention layers).
+
+# In[1]:
+
 
 from google.colab import drive
 drive.mount('/content/drive')
 
+
+# In[2]:
+
+
 import os
 os.chdir('/content/drive/My Drive/_MySyncDrive/Repository/python-notes/nlp')
 
-%pwd
 
-!pip install tf-nightly
+# In[3]:
+
+
+get_ipython().run_line_magic('pwd', '')
+
+
+# In[4]:
+
+
+get_ipython().system('pip install tf-nightly')
+
+
+# In[5]:
+
 
 import tensorflow, keras
 print(tensorflow.__version__)
 print(keras.__version__)
 
-## Functions
 
-### Data Preparation
+# ## Functions
+
+# ### Data Preparation
+
+# In[6]:
+
 
 import re
 import keras
@@ -105,7 +131,11 @@ def preprocess_data(enc_tokenizer, dec_tokenizer, enc_text, dec_text):
     dec_seq = pad_sequences(dec_seq, padding='post', maxlen = dec_timesteps)
     return enc_seq, dec_seq
 
-### Model Definition: Simple Seq-to-Seq (LSTM)
+
+# ### Model Definition: Simple Seq-to-Seq (LSTM)
+
+# In[7]:
+
 
 def define_seq2seq_lstm(hidden_size, batch_size, enc_timesteps, enc_vsize, dec_timesteps, dec_vsize):
     """ Defining a seq2seq model """
@@ -237,7 +267,10 @@ def train_seq2seq_lstm(full_model, enc_seq, dec_seq, batch_size, n_epochs):
 #     return dec_text
 
 
-### Model Definition: Simple Seq-to-seq (GRU)
+# ### Model Definition: Simple Seq-to-seq (GRU)
+
+# In[8]:
+
 
 def define_seq2seq(hidden_size, batch_size, enc_timesteps, enc_vsize, dec_timesteps, dec_vsize):
     """ Defining a seq2seq model """
@@ -381,7 +414,10 @@ def infer_seq2seq(encoder_model, decoder_model, test_enc_seq, enc_vsize, dec_vsi
     return dec_text
 
 
-### Model Definition: Birectional Seq-to-Seq
+# ### Model Definition: Birectional Seq-to-Seq
+
+# In[9]:
+
 
 def define_biseq2seq(hidden_size, batch_size, enc_timesteps, enc_vsize, dec_timesteps, dec_vsize):
     """ Defining a seq2seq model """
@@ -526,9 +562,12 @@ def infer_biseq2seq(encoder_model, decoder_model, test_enc_seq, enc_vsize, dec_v
     return dec_text
 
 
-### Model Definition: Peeky Bidirectional Seq-to-Seq
+# ### Model Definition: Peeky Bidirectional Seq-to-Seq
+# 
+# - Codes do not work yet. Don't know how to add encoder output states to every time step in the decoder.
 
-- Codes do not work yet. Don't know how to add encoder output states to every time step in the decoder.
+# In[10]:
+
 
 def define_peekybiseq2seq(hidden_size, batch_size, enc_timesteps, enc_vsize, dec_timesteps, dec_vsize):
     """ Defining a seq2seq model """
@@ -668,7 +707,10 @@ def train_peekybiseq2seq(full_model, enc_seq, dec_seq, batch_size, n_epochs):
 #     return dec_text
 
 
-### Model Definition: Seq-to-seq with Attention
+# ### Model Definition: Seq-to-seq with Attention
+
+# In[11]:
+
 
 def define_nmt(hidden_size, batch_size, enc_timesteps, enc_vsize, dec_timesteps, dec_vsize):
     """ Defining a NMT model """
@@ -809,6 +851,9 @@ def infer_nmt(encoder_model, decoder_model, test_enc_seq, enc_vsize, dec_vsize, 
     return dec_text, attention_weights
 
 
+# In[12]:
+
+
 import matplotlib.pyplot as plt
 plt.rcParams['font.sans-serif']=["PingFang HK"]
 def plot_attention_weights(encoder_inputs, attention_weights, enc_id2word, dec_id2word, filename=None):
@@ -852,9 +897,13 @@ def plot_attention_weights(encoder_inputs, attention_weights, enc_id2word, dec_i
 #     else:
 #         plt.savefig(os.path.join(config.RESULTS_DIR, '{}'.format(filename)))
 
-## Main Program
 
-### Data Wrangling and Training
+# ## Main Program
+
+# ### Data Wrangling and Training
+
+# In[13]:
+
 
 #### hyperparameters
 batch_size = 128
@@ -892,6 +941,9 @@ dec_index2word = dict(
 
 
 
+# In[14]:
+
+
 print(enc_vsize)
 print(dec_vsize)
 print(tr_enc_text[:5])
@@ -900,7 +952,11 @@ print('Training Size: {}'.format(len(tr_enc_text)))
 print('Testing Size: {}'.format(len(ts_enc_text)))
 print('epoch: {}'.format(n_epochs))
 
-### Training: Simple Seq-to-Seq (LSTM)
+
+# ### Training: Simple Seq-to-Seq (LSTM)
+
+# In[15]:
+
 
 ###""" Defining the full model """
 full_model_seq2seq_lstm, infer_enc_model_seq2seq_lstm, infer_dec_model_seq2seq_lstm = define_seq2seq_lstm(
@@ -913,10 +969,17 @@ full_model_seq2seq_lstm, infer_enc_model_seq2seq_lstm, infer_dec_model_seq2seq_l
 #
 plot_model(full_model_seq2seq_lstm)
 
-%%time
-loss_seq2seq_lstm, accuracy_seq2seq_lstm = train_seq2seq_lstm(full_model_seq2seq_lstm, enc_seq, dec_seq, batch_size, n_epochs)
 
-### Training: Simple Seq-to-seq (GRU)
+# In[16]:
+
+
+get_ipython().run_cell_magic('time', '', 'loss_seq2seq_lstm, accuracy_seq2seq_lstm = train_seq2seq_lstm(full_model_seq2seq_lstm, enc_seq, dec_seq, batch_size, n_epochs)\n')
+
+
+# ### Training: Simple Seq-to-seq (GRU)
+# 
+
+# In[17]:
 
 
 ###""" Defining the full model """
@@ -930,8 +993,15 @@ full_model_seq2seq, infer_enc_model_seq2seq, infer_dec_model_seq2seq = define_se
 
 plot_model(full_model_seq2seq)
 
-%%time
-loss_seq2seq, accuracy_seq2seq = train_seq2seq(full_model_seq2seq, enc_seq, dec_seq, batch_size, n_epochs)
+
+# In[18]:
+
+
+get_ipython().run_cell_magic('time', '', 'loss_seq2seq, accuracy_seq2seq = train_seq2seq(full_model_seq2seq, enc_seq, dec_seq, batch_size, n_epochs)\n')
+
+
+# In[19]:
+
 
 # def translate_seq2seq(infer_enc_model, infer_dec_model, test_enc_text, 
 #               enc_vsize, dec_vsize, enc_timesteps, dec_timesteps,
@@ -949,7 +1019,11 @@ loss_seq2seq, accuracy_seq2seq = train_seq2seq(full_model_seq2seq, enc_seq, dec_
 #     print('\tFrench: {}'.format(test_dec))
 #     return test_enc_seq, test_dec, attn_weights
 
-### Training: Seq-to-seq Bidirectional
+
+# ### Training: Seq-to-seq Bidirectional
+
+# In[20]:
+
 
 ##""" Defining the full model """
 full_model_biseq2seq, infer_enc_model_biseq2seq, infer_dec_model_biseq2seq = define_biseq2seq(
@@ -962,14 +1036,21 @@ full_model_biseq2seq, infer_enc_model_biseq2seq, infer_dec_model_biseq2seq = def
 
 plot_model(full_model_biseq2seq, show_shapes=True)
 
-%%time
-loss_biseq2seq, accuracy_biseq2seq = train_biseq2seq(full_model_biseq2seq, enc_seq, dec_seq, batch_size, n_epochs)
+
+# In[21]:
 
 
+get_ipython().run_cell_magic('time', '', 'loss_biseq2seq, accuracy_biseq2seq = train_biseq2seq(full_model_biseq2seq, enc_seq, dec_seq, batch_size, n_epochs)\n')
 
-### Training: Seq-to-Seq Peeky Bidirectional 
 
-- Codes do not work yet.
+# 
+
+# ### Training: Seq-to-Seq Peeky Bidirectional 
+# 
+# - Codes do not work yet.
+
+# In[22]:
+
 
 ##""" Defining the full model """
 full_model_peekybiseq2seq, infer_enc_model_peekybiseq2seq, infer_dec_model_peekybiseq2seq  = define_peekybiseq2seq(
@@ -982,10 +1063,17 @@ full_model_peekybiseq2seq, infer_enc_model_peekybiseq2seq, infer_dec_model_peeky
 
 plot_model(full_model_peekybiseq2seq, show_shapes=True)
 
-%%time
-loss_peekybiseq2seq, accuracy_peekybiseq2seq = train_peekybiseq2seq(full_model_peekybiseq2seq, enc_seq, dec_seq, batch_size, n_epochs)
 
-### Training: Seq-to-seq with Attention
+# In[23]:
+
+
+get_ipython().run_cell_magic('time', '', 'loss_peekybiseq2seq, accuracy_peekybiseq2seq = train_peekybiseq2seq(full_model_peekybiseq2seq, enc_seq, dec_seq, batch_size, n_epochs)\n')
+
+
+# ### Training: Seq-to-seq with Attention
+
+# In[24]:
+
 
 ###""" Defining the full model """
 full_model, infer_enc_model, infer_dec_model = define_nmt(
@@ -997,10 +1085,20 @@ full_model, infer_enc_model, infer_dec_model = define_nmt(
     dec_vsize=dec_vsize)
 
 
+# In[25]:
+
+
 plot_model(full_model, show_shapes=True)
 
-%%time
-loss, accuracy = train(full_model, enc_seq, dec_seq, batch_size, n_epochs)
+
+# In[26]:
+
+
+get_ipython().run_cell_magic('time', '', 'loss, accuracy = train(full_model, enc_seq, dec_seq, batch_size, n_epochs)\n')
+
+
+# In[27]:
+
 
 plt.style.use('fivethirtyeight')
 plt.plot(range(len(accuracy_seq2seq_lstm)+1), [0]+accuracy_seq2seq_lstm,linestyle='--', marker='o', linewidth=1, label='seq-to-seq (simple LSTM)')
@@ -1017,7 +1115,11 @@ plt.ylabel('accuracy')
 plt.tight_layout()
 plt.show()
 
-### Model Saving
+
+# ### Model Saving
+
+# In[28]:
+
 
 # full_model.save('../../../RepositoryData/output/seq2seq-attention-addition/full-model.h5')
 # infer_enc_model.save('../../../RepositoryData/output/seq2seq-attention-addition/infer-enc-model.h5')
@@ -1028,16 +1130,36 @@ full_model.save('../../../RepositoryData/output/seq2seq-attention-addition/full-
 infer_enc_model.save('../../../RepositoryData/output/seq2seq-attention-addition/infer-enc-model.h5')
 infer_dec_model.save('../../../RepositoryData/output/seq2seq-attention-addition/infer-dec-model.h5')
 
-### Prediction
+
+# ### Prediction
+
+# In[29]:
+
 
 # full_model.load_weights('../../../RepositoryData/output/seq2seq-attention-addition/full-model.h5')
 # infer_enc_model.load_weights('../../../RepositoryData/output/seq2seq-attention-addition/infer-enc-model.h5')
 # infer_dec_model.load_weights('../../../RepositoryData/output/seq2seq-attention-addition/infer-dec-model.h5')
 
+
+# In[30]:
+
+
 plot_model(infer_enc_model,show_shapes=True)
+
+
+# In[31]:
+
 
 plot_model(infer_dec_model, show_shapes=True)
 
+
+# In[31]:
+
+
+
+
+
+# In[32]:
 
 
 def translate(infer_enc_model, infer_dec_model, test_enc_text, 
@@ -1056,6 +1178,10 @@ def translate(infer_enc_model, infer_dec_model, test_enc_text,
     print('\tFrench: {}'.format(test_dec))
     return test_enc_seq, test_dec, attn_weights
 
+
+# In[33]:
+
+
 test_enc_seq, test_dec, attn_weights=translate(infer_enc_model=infer_enc_model,
           infer_dec_model=infer_dec_model,
           test_enc_text=ts_enc_text[120],
@@ -1068,9 +1194,15 @@ test_enc_seq, test_dec, attn_weights=translate(infer_enc_model=infer_enc_model,
 
 
 
+# In[34]:
+
+
 """ Attention plotting """
 plot_attention_weights(test_enc_seq, attn_weights,
                        enc_index2word, dec_index2word)
+
+
+# In[35]:
 
 
 print(tr_enc_text[:5])
@@ -1078,29 +1210,10 @@ print(tr_dec_text[:5])
 
 
 
-## Evaluation on Test Data
+# ## Evaluation on Test Data
 
-%%time
+# In[36]:
 
-def test(full_model, ts_enc_text, ts_dec_text, enc_tokenizer, dec_tokenizer, batch_size):
-    # ### Getting sequence integer data
-    ts_enc_seq, ts_dec_seq = preprocess_data(enc_tokenizer, dec_tokenizer, ts_enc_text, ts_dec_text)
-    losses = []
-    accuracies = []
-    for bi in range(0, ts_enc_seq.shape[0] - batch_size, batch_size):
-        enc_onehot_seq = to_categorical(
-            ts_enc_seq[bi:bi + batch_size, :], num_classes=enc_vsize)
-        dec_onehot_seq = to_categorical(
-            ts_dec_seq[bi:bi + batch_size, :], num_classes=dec_vsize)
 
-        # full_model.train_on_batch(
-        #     [enc_onehot_seq, dec_onehot_seq[:, :-1, :]], dec_onehot_seq[:, 1:, :])
-        l,a = full_model.evaluate([enc_onehot_seq, dec_onehot_seq[:, :-1, :]], dec_onehot_seq[:, 1:, :],
-                                batch_size=batch_size, verbose=0)
-        losses.append(l)
-        accuracies.append(a)
-    print('Average Loss:{}'.format(np.mean(losses)))
-    print('Average Accuracy:{}'.format(np.mean(accuracies)))
+get_ipython().run_cell_magic('time', '', "\ndef test(full_model, ts_enc_text, ts_dec_text, enc_tokenizer, dec_tokenizer, batch_size):\n    # ### Getting sequence integer data\n    ts_enc_seq, ts_dec_seq = preprocess_data(enc_tokenizer, dec_tokenizer, ts_enc_text, ts_dec_text)\n    losses = []\n    accuracies = []\n    for bi in range(0, ts_enc_seq.shape[0] - batch_size, batch_size):\n        enc_onehot_seq = to_categorical(\n            ts_enc_seq[bi:bi + batch_size, :], num_classes=enc_vsize)\n        dec_onehot_seq = to_categorical(\n            ts_dec_seq[bi:bi + batch_size, :], num_classes=dec_vsize)\n\n        # full_model.train_on_batch(\n        #     [enc_onehot_seq, dec_onehot_seq[:, :-1, :]], dec_onehot_seq[:, 1:, :])\n        l,a = full_model.evaluate([enc_onehot_seq, dec_onehot_seq[:, :-1, :]], dec_onehot_seq[:, 1:, :],\n                                batch_size=batch_size, verbose=0)\n        losses.append(l)\n        accuracies.append(a)\n    print('Average Loss:{}'.format(np.mean(losses)))\n    print('Average Accuracy:{}'.format(np.mean(accuracies)))\n\ntest(full_model, ts_enc_text = ts_enc_text, ts_dec_text = ts_dec_text, \n     enc_tokenizer = enc_tokenizer, dec_tokenizer = dec_tokenizer, batch_size = batch_size)\n")
 
-test(full_model, ts_enc_text = ts_enc_text, ts_dec_text = ts_dec_text, 
-     enc_tokenizer = enc_tokenizer, dec_tokenizer = dec_tokenizer, batch_size = batch_size)

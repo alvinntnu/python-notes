@@ -1,16 +1,22 @@
-# Neural Language Model: A Start
+#!/usr/bin/env python
+# coding: utf-8
 
+# # Neural Language Model: A Start
+# 
 
-- [How to Develop Word-Based Neural Language Models in Python with Keras](https://machinelearningmastery.com/develop-word-based-neural-language-models-python-keras/)
-- English texts
-- Three methods to build a neural language model:
-    - bigram
-    - trigram
-    - line-based
+# - [How to Develop Word-Based Neural Language Models in Python with Keras](https://machinelearningmastery.com/develop-word-based-neural-language-models-python-keras/)
+# - English texts
+# - Three methods to build a neural language model:
+#     - bigram
+#     - trigram
+#     - line-based
 
-![](../images/neural-language-model-flowchart.png)
+# ![](../images/neural-language-model-flowchart.png)
 
-## Bigram Model
+# ## Bigram Model
+
+# In[1]:
+
 
 from numpy import array
 from keras.preprocessing.text import Tokenizer
@@ -64,6 +70,10 @@ X, y = sequences[:,0],sequences[:,1]
 # one hot encode outputs
 y = to_categorical(y, num_classes=vocab_size)
 
+
+# In[2]:
+
+
 # define model
 model = Sequential()
 model.add(Embedding(vocab_size, 10, input_length=1))
@@ -75,12 +85,24 @@ model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accur
 # fit network
 model.fit(X, y, epochs=500, verbose=2)
 
+
+# In[3]:
+
+
 plot_model(model)
+
+
+# In[4]:
+
 
 # evaluate
 print(generate_seq(model, tokenizer, 'Jack', 6))
 
-## Line-based Model
+
+# ## Line-based Model
+
+# In[5]:
+
 
 from numpy import array
 from keras.preprocessing.text import Tokenizer
@@ -143,6 +165,10 @@ for line in data.split('\n'):
         sequences.append(sequence)
 print('Total Sequences: %d' % len(sequences))
 
+
+# In[6]:
+
+
 # pad input sequences
 max_length = max([len(seq) for seq in sequences])
 sequences = pad_sequences(sequences, maxlen=max_length, padding='pre')
@@ -163,13 +189,25 @@ model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accur
 # fit network
 model.fit(X, y, epochs=500, verbose=2)
 
+
+# In[7]:
+
+
 plot_model(model)
+
+
+# In[8]:
+
 
 # evaluate model
 print(generate_seq(model, tokenizer, max_length-1, 'Jack', 4))
 print(generate_seq(model, tokenizer, max_length-1, 'Jill', 4))
 
-## Trigram Model
+
+# ## Trigram Model
+
+# In[9]:
+
 
 from numpy import array
 from keras.preprocessing.text import Tokenizer
@@ -238,10 +276,19 @@ model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accur
 # fit network
 model.fit(X, y, epochs=500, verbose=2)
 
+
+# In[10]:
+
+
 plot_model(model)
+
+
+# In[11]:
+
 
 # evaluate model
 print(generate_seq(model, tokenizer, max_length-1, 'Jack and', 5))
 print(generate_seq(model, tokenizer, max_length-1, 'And Jill', 3))
 print(generate_seq(model, tokenizer, max_length-1, 'fell down', 5))
 print(generate_seq(model, tokenizer, max_length-1, 'pail of', 5))
+

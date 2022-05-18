@@ -1,9 +1,15 @@
-# Autoencoder
+#!/usr/bin/env python
+# coding: utf-8
 
+# # Autoencoder
+# 
 
-## Introduction
+# ## Introduction
 
-## Model 1
+# ## Model 1
+# 
+
+# In[1]:
 
 
 # train autoencoder for classification with no compression in the bottleneck layer
@@ -70,7 +76,11 @@ plot_model(encoder, 'encoder_no_compress.png', show_shapes=True)
 # save the encoder to file
 encoder.save('encoder.h5')
 
-## Model 2
+
+# ## Model 2
+
+# In[ ]:
+
 
 # train autoencoder for classification with no compression in the bottleneck layer
 from sklearn.datasets import make_classification
@@ -136,7 +146,11 @@ plot_model(encoder, 'encoder_no_compress.png', show_shapes=True)
 # save the encoder to file
 encoder.save('encoder.h5')
 
-## Using Autoencoder for Feature Engineering and Prediction
+
+# ## Using Autoencoder for Feature Engineering and Prediction
+
+# In[4]:
+
 
 # evaluate logistic regression on encoded input
 from sklearn.datasets import make_classification
@@ -171,6 +185,7 @@ yhat = model.predict(X_test_encode)
 acc = accuracy_score(y_test, yhat)
 print(acc)
 
-## References
 
-- [Autoencoder Feature Extraction for Classification](https://machinelearningmastery.com/autoencoder-for-classification/)
+# ## References
+
+# - [Autoencoder Feature Extraction for Classification](https://machinelearningmastery.com/autoencoder-for-classification/)

@@ -1,6 +1,12 @@
-# Sequence to Sequence: Primer
+#!/usr/bin/env python
+# coding: utf-8
 
-- Jason Brownlee's tutorial [How to Develop an Encoder-Decoder Model for Sequence-to-Sequence Prediction in Keras](https://machinelearningmastery.com/develop-encoder-decoder-model-sequence-sequence-prediction-keras/)
+# # Sequence to Sequence: Primer
+
+# - Jason Brownlee's tutorial [How to Develop an Encoder-Decoder Model for Sequence-to-Sequence Prediction in Keras](https://machinelearningmastery.com/develop-encoder-decoder-model-sequence-sequence-prediction-keras/)
+
+# In[3]:
+
 
 from random import randint
 from numpy import array
@@ -96,6 +102,10 @@ def predict_sequence(infenc, infdec, source, n_steps, cardinality):
 def one_hot_decode(encoded_seq):
     return [argmax(vector) for vector in encoded_seq]
 
+
+# In[4]:
+
+
 # configure problem
 n_features = 50 + 1
 n_steps_in = 6
@@ -125,3 +135,4 @@ for _ in range(10):
     print(
         'X=%s y=%s, yhat=%s' %
         (one_hot_decode(X1[0]), one_hot_decode(y[0]), one_hot_decode(target)))
+

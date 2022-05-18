@@ -1,69 +1,99 @@
-# Explainable AI
+#!/usr/bin/env python
+# coding: utf-8
 
+# # Explainable AI
+# 
 
-- This notebook runs on Google Colab
-- This is based on the `ktrain` official tutorial [Explainable Ai in krain](https://nbviewer.jupyter.org/github/amaiya/ktrain/blob/master/tutorials/tutorial-A2-explaining-predictions.ipynb)
+# - This notebook runs on Google Colab
+# - This is based on the `ktrain` official tutorial [Explainable Ai in krain](https://nbviewer.jupyter.org/github/amaiya/ktrain/blob/master/tutorials/tutorial-A2-explaining-predictions.ipynb)
 
-## Preparation on Colab
+# ## Preparation on Colab
 
-- Mount Google Drive
-- Install `ktrain`
-- Set the default `DATA_ROOT` (the root directory of the data files)
+# - Mount Google Drive
+# - Install `ktrain`
+# - Set the default `DATA_ROOT` (the root directory of the data files)
+
+# In[1]:
+
 
 ## Mount Google Drive
 from google.colab import drive
 drive.mount('/content/drive')
 
+
+# In[2]:
+
+
 ## Install ktrain
-!pip install git+https://github.com/amaiya/eli5@tfkeras_0_10_1
+get_ipython().system('pip install git+https://github.com/amaiya/eli5@tfkeras_0_10_1')
 
-## Working Directory
 
-- Set the working directory to the `DATA_ROOT`
+# ## Working Directory
+# 
+# - Set the working directory to the `DATA_ROOT`
+
+# In[3]:
+
 
 ## Set DATA_ROOT
 DATA_ROOT = '/content/drive/My Drive/_MySyncDrive/RepositoryData/data'
-%cd '$DATA_ROOT'
+get_ipython().run_line_magic('cd', "'$DATA_ROOT'")
+
+
+# In[4]:
+
 
 ## Check Working Directory
-%pwd
+get_ipython().run_line_magic('pwd', '')
 
-## Autoreload
 
-%reload_ext autoreload
-%autoreload 2
-%matplotlib inline
+# ## Autoreload
+
+# In[5]:
+
+
+get_ipython().run_line_magic('reload_ext', 'autoreload')
+get_ipython().run_line_magic('autoreload', '2')
+get_ipython().run_line_magic('matplotlib', 'inline')
 import os
 os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID";
 os.environ["CUDA_VISIBLE_DEVICES"]="0" 
 
-## Overview: Explainable AI in *ktrain*
 
-- [**Explainable AI (XAI)**](https://www.darpa.mil/program/explainable-artificial-intelligence)
-- Obtain the `Predictor` with `ktrain.get_predictor`
-- In combination with text data, one can easily make predictions from the raw and unprocessed text of a document as follows:
+# ## Overview: Explainable AI in *ktrain*
+# 
+# - [**Explainable AI (XAI)**](https://www.darpa.mil/program/explainable-artificial-intelligence)
+# - Obtain the `Predictor` with `ktrain.get_predictor`
+# - In combination with text data, one can easily make predictions from the raw and unprocessed text of a document as follows:
+# 
+# ```
+# predictor = ktrain.get_predictor(learner.model, preproc=preproc)
+# predictor.predict(document_text) 
+# ```
+# - Utilize the `explain` method of `Predictor` objects to help understand how those predictions were **made**
 
-```
-predictor = ktrain.get_predictor(learner.model, preproc=preproc)
-predictor.predict(document_text) 
-```
-- Utilize the `explain` method of `Predictor` objects to help understand how those predictions were **made**
+# ## Three Types of Prediction
+# 
+# - Deep Learning Model Using BERT
+# - Classification
+# - Regression
 
-## Three Types of Prediction
+# ## Sentiment Analysis Using BERT
 
-- Deep Learning Model Using BERT
-- Classification
-- Regression
+# ### Data
+# 
+# - Marc's thesis data (Chinese movie reviews)
 
-## Sentiment Analysis Using BERT
+# In[6]:
 
-### Data
-
-- Marc's thesis data (Chinese movie reviews)
 
 # imports
 import ktrain
 from ktrain import text
+
+
+# In[7]:
+
 
 import pandas as pd
 
@@ -85,7 +115,11 @@ data_train.tail()
 #printing head rows of test dataset
 data_test.head()
 
-### Train-Test Split
+
+# ### Train-Test Split
+
+# In[8]:
+
 
 # STEP 1: load and preprocess text data
 # (x_train, y_train), (x_test, y_test), preproc = text.texts_from_df('aclImdb', 
@@ -104,7 +138,11 @@ data_test.head()
                                                                    lang = 'zh-*',
                                                                    preprocess_mode = 'bert') # or distilbert
 
-### Define Model
+
+# ### Define Model
+
+# In[9]:
+
 
 # # STEP 2: define a Keras text classification model
 # from tensorflow.keras.models import Sequential
@@ -117,6 +155,9 @@ data_test.head()
 # learner = ktrain.get_learner(model, train_data=(x_train, y_train), val_data=(x_test, y_test))
 
 
+# In[10]:
+
+
 # # STEP 2: define a text classification model
 ## use 'distilbert' if you want
 model = text.text_classifier(name = 'bert', # or distilbert
@@ -127,7 +168,10 @@ learner = ktrain.get_learner(model=model, train_data=(X_train, y_train),
                    val_data = (X_test, y_test),
                    batch_size = 6)
 
-### Fitting Model
+
+# ### Fitting Model
+
+# In[12]:
 
 
 ## STEP 3: train
@@ -135,18 +179,30 @@ learner = ktrain.get_learner(model=model, train_data=(X_train, y_train),
 # learner.autofit(0.005, 1)
 # learner.fit_onecycle(lr = 2e-5, epochs = 1)
 
-### Saving Model
+
+# ### Saving Model
+
+# In[13]:
+
 
 predictor = ktrain.get_predictor(learner.model, preproc)
 # predictor = ktrain.load_predictor('bert-ch-marc')
 
 # predictor.save('../output/bert-ch-marc')
 
-### Prediction
 
-- Invoke `view_top_losses` to view the most misclassified review in the validation set
+# ### Prediction
+
+# - Invoke `view_top_losses` to view the most misclassified review in the validation set
+
+# In[15]:
+
 
 learner.view_top_losses(n=2, preproc=preproc)
+
+
+# In[41]:
+
 
 import numpy as np
 X_test_reviews =data_test['Reviews'].values
@@ -156,25 +212,37 @@ X_test_len = [len(r) for r in X_test_reviews]
 id = X_test_len.index(np.percentile(X_test_len, 90))
 X_test_reviews[id]
 
+
+# In[42]:
+
+
 print(predictor.predict(X_test_reviews[id]))
 print(predictor.predict_proba(X_test_reviews[id]))
 print(predictor.get_classes())
 
+
+# In[43]:
+
+
 predictor.explain(X_test_reviews[id])
 
-The visualization is generated using a technique called [LIME](https://arxiv.org/abs/1602.04938).  The input is randomly perturbed to examine how the prediction changes.  This is used to infer the relative importance of different words to the final prediction using a linear interpretable model.  
 
-- The GREEN words contribute to the model prediction
-- The RED (and PINK) words detract from the model prediction (Shade of color denotes the strength or size of the coefficients in the inferred linear model)
+# The visualization is generated using a technique called [LIME](https://arxiv.org/abs/1602.04938).  The input is randomly perturbed to examine how the prediction changes.  This is used to infer the relative importance of different words to the final prediction using a linear interpretable model.  
+# 
+# - The GREEN words contribute to the model prediction
+# - The RED (and PINK) words detract from the model prediction (Shade of color denotes the strength or size of the coefficients in the inferred linear model)
+# 
+# The model prediction is **positive**. Do GREEN words give the impression of a positive feedback?
+# 
 
-The model prediction is **positive**. Do GREEN words give the impression of a positive feedback?
+# ## Logistic Regression
+# 
+# - Train a model to predict **Survival** using [Kaggle's Titatnic dataset](https://www.kaggle.com/c/titanic).
+# 
+# - After training the model, **explain** the model's prediction for a specific example.
 
+# In[4]:
 
-## Logistic Regression
-
-- Train a model to predict **Survival** using [Kaggle's Titatnic dataset](https://www.kaggle.com/c/titanic).
-
-- After training the model, **explain** the model's prediction for a specific example.
 
 ## %cd '../../RepositoryData/data'
 
@@ -201,6 +269,10 @@ model = tabular.tabular_classifier('mlp', trn) # multilayer perception (Deep Neu
 learner = ktrain.get_learner(model, train_data=trn, val_data=val, batch_size=32)
 learner.fit_onecycle(1e-3, 25)
 
+
+# In[5]:
+
+
 predictor = ktrain.get_predictor(learner.model, preproc)
 preds = predictor.predict(test_df, return_proba=True)
 df = test_df.copy()[[c for c in test_df.columns.values if c != 'Survived']]
@@ -208,18 +280,25 @@ df['Survived'] = test_df['Survived']
 df['predicted_Survived'] = np.argmax(preds, axis=1)
 df.head()
 
-- Require [shap](https://github.com/slundberg/shap) library to perform model explanation
-- take case ID35 for example
+
+# - Require [shap](https://github.com/slundberg/shap) library to perform model explanation
+# - take case ID35 for example
+
+# In[7]:
 
 
 predictor.explain(test_df, row_index=35, class_id=1)
 
-From the visualization above, we can see that:
-- his First class status (`Pclass=1`) and his higher-than-average Fare price (suggesting that he is wealthy) are pushing the model higher towards predicting **Survived**. 
-- the fact that he is a `Male` pushes the model to lower its prediction towards **NOT Survived**.
-- For these reasons, this is a border-line and uncertain prediction.
 
-## Regression
+# From the visualization above, we can see that:
+# - his First class status (`Pclass=1`) and his higher-than-average Fare price (suggesting that he is wealthy) are pushing the model higher towards predicting **Survived**. 
+# - the fact that he is a `Male` pushes the model to lower its prediction towards **NOT Survived**.
+# - For these reasons, this is a border-line and uncertain prediction.
+
+# ## Regression
+
+# In[ ]:
+
 
 import os
 # os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID";
@@ -234,6 +313,10 @@ pd.set_option('display.max_columns', None)
 import ktrain
 from ktrain import tabular
 
+
+# In[11]:
+
+
 ## loading data
 train_df = pd.read_csv('housing_price/train.csv', index_col=0)
 train_df.head()
@@ -242,26 +325,53 @@ train_df.drop(['Alley','PoolQC','MiscFeature','Fence','FireplaceQu','Utilities']
 train_df.head()
 
 
+# In[13]:
+
+
 trn, val, preproc = tabular.tabular_from_df(train_df, is_regression=True, 
                                              label_columns='SalePrice', random_state=42)
+
+
+# In[14]:
+
 
 model = tabular.tabular_regression_model('mlp', trn)
 learner = ktrain.get_learner(model, train_data=trn, val_data=val, batch_size=128)
 
+
+# In[15]:
+
+
 learner.lr_find(show_plot=True, max_epochs=16)
+
+
+# In[17]:
 
 
 ## Inspect the loss plot above
 learner.autofit(1e-1)
 
+
+# In[18]:
+
+
 learner.evaluate(test_data=val)
+
+
+# In[19]:
+
 
 predictor = ktrain.get_predictor(learner.model, preproc)
 
+
+# In[21]:
+
+
 predictor.explain(train_df, row_index=25)
 
-## References
 
-- [*ktrain* Module](https://github.com/amaiya/ktrain)
-- [Explainable AI in *ktrain*](https://nbviewer.jupyter.org/github/amaiya/ktrain/blob/master/tutorials/tutorial-A2-explaining-predictions.ipynb)
-- [*ktrain* tutorial notebook on tabular models](https://nbviewer.jupyter.org/github/amaiya/ktrain/blob/master/tutorials/tutorial-08-tabular_classification_and_regression.ipynb)
+# ## References
+# 
+# - [*ktrain* Module](https://github.com/amaiya/ktrain)
+# - [Explainable AI in *ktrain*](https://nbviewer.jupyter.org/github/amaiya/ktrain/blob/master/tutorials/tutorial-A2-explaining-predictions.ipynb)
+# - [*ktrain* tutorial notebook on tabular models](https://nbviewer.jupyter.org/github/amaiya/ktrain/blob/master/tutorials/tutorial-08-tabular_classification_and_regression.ipynb)

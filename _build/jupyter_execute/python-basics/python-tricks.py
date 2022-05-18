@@ -1,10 +1,16 @@
-# Python Tricks
+#!/usr/bin/env python
+# coding: utf-8
 
-- This notebook mostly includes useful Python tricks provided by [Dan Bader](https://dbader.org/).
-- He has a very useful book: [Python Tricks: A Buffet of Awesome Python Features](https://www.tenlong.com.tw/products/9781775093305). Highly recommended!!
-- Also, I include other tricks that came from different sources as well as many trial-and-errors. Not very organized, but always good to keep all these referneces.
+# # Python Tricks
+# 
+# - This notebook mostly includes useful Python tricks provided by [Dan Bader](https://dbader.org/).
+# - He has a very useful book: [Python Tricks: A Buffet of Awesome Python Features](https://www.tenlong.com.tw/products/9781775093305). Highly recommended!!
+# - Also, I include other tricks that came from different sources as well as many trial-and-errors. Not very organized, but always good to keep all these referneces.
 
-## Module Path
+# ## Module Path
+
+# In[4]:
+
 
 ## Find module path
 import re, os
@@ -12,7 +18,11 @@ import re, os
 print(re.__file__)
 path = os.path.abspath(re.__file__)
 
-## Sorting Iterables
+
+# ## Sorting Iterables
+
+# In[6]:
+
 
 ## convert a int List into str List
 a = [1,5,10]
@@ -32,10 +42,18 @@ f = [tuple([str(i) for i in tp]) for tp in e]
 print(e)
 print(f)
 
+
+# In[7]:
+
+
 ## How to sort a Python dict by value
 # (== get a representation sorted by value)
 xs = {'a': 4, 'b': 3, 'c': 2, 'd': 1}
 sorted(xs.items(), key=lambda x: x[1])
+
+
+# In[8]:
+
 
 ## How to sort a Python dict using operator
 import operator
@@ -43,8 +61,14 @@ sorted(xs.items(), key=operator.itemgetter(0))
 #operator.itemgette
 
 
+# In[9]:
+
+
 for item in xs.items():
     print(item)
+
+
+# In[10]:
 
 
 ## sort a list
@@ -55,6 +79,9 @@ num = [randrange(1,100) for _ in range(20)]
 print(num)
 num.sort()# this mutates the list and does not return anything
 print(num) # list is mutable
+
+
+# In[11]:
 
 
 ## sort a tuple?
@@ -68,6 +95,9 @@ type(tuple_ex_sorted)
 
 
 
+# In[12]:
+
+
 # into string 
 def convertTuple(tup, split=''): 
     str =  split.join(tup) 
@@ -75,6 +105,10 @@ def convertTuple(tup, split=''):
   
 # Driver code 
 print(convertTuple(tuple([str(i) for i in tuple_ex]), split=','))
+
+
+# In[13]:
+
 
 tuple_lexicon = [
     ('the', 'det',[23, 800]),
@@ -88,7 +122,11 @@ print(tuple_lexicon)
 print(tuple_lexicon.sort())
 print(tuple_lexicon)
 
-## Find Modules in Memory
+
+# ## Find Modules in Memory
+
+# In[ ]:
+
 
 #!pip list
 import sys
@@ -96,13 +134,21 @@ modulenames = set(sys.modules) & set(globals())
 allmodules = [sys.modules[name] for name in modulenames]
 print(allmodules)
 
+
+# In[20]:
+
+
 import sys
 import pprint
 
 # pretty print loaded modules
 pprint.pprint(sys.modules)
 
-## Format Dict Output
+
+# ## Format Dict Output
+
+# In[3]:
+
 
 ## How to output a dictionary
 my_mapping = {'a': 23, 'b': 42, 'c': 0xc0ffee}
@@ -118,15 +164,25 @@ print(json.dumps(my_mapping, indent=4, sort_keys=True))
 # json.dumps({all: 'yup'})
 
 
+# In[17]:
+
+
 import pprint
 pprint.pprint(my_mapping, depth=1)
 mPP = pprint.PrettyPrinter()
 mPP.pprint(my_mapping)
 
 
+# In[8]:
+
+
 my_mapping
 
-## Unpacking Tuples
+
+# ## Unpacking Tuples
+
+# In[4]:
+
 
 ## Unpacking function arguments
 
@@ -140,11 +196,15 @@ myfunc(*tuple_vec) # pass all necessary function arguments all at once, using a 
 myfunc(**dict_vec) # pass all necessary function arguments all at once, using a dict
 myfunc(**dict_vec2) # dict would help match which values go with which function argument!
 
- ## `filter()`
 
-- `filter(function, iterable)` is useful when you need to filter elements in a sequence by using self-defined methods (which returns either True or False.
-- If function is `None`, then the `fiter()` returns only `True` elements from the `iterable`.
-- [Source](https://www.programiz.com/python-programming/methods/built-in/filter)
+#  ## `filter()`
+
+# - `filter(function, iterable)` is useful when you need to filter elements in a sequence by using self-defined methods (which returns either True or False.
+# - If function is `None`, then the `fiter()` returns only `True` elements from the `iterable`.
+# - [Source](https://www.programiz.com/python-programming/methods/built-in/filter)
+
+# In[1]:
+
 
 # list of letters
 letters = ['a', 'b', 'd', 'e', 'i', 'j', 'o']
@@ -164,6 +224,10 @@ print('The filtered vowels are:')
 for vowel in filteredVowels:
     print(vowel)
 
+
+# In[2]:
+
+
 # random list
 randomList = [1, 'a', 0, False, True, '0']
 
@@ -173,14 +237,22 @@ print('The filtered elements are:')
 for element in filteredList:
     print(element)
 
-## Asterisk `*`
 
-That `FUNCTION(*iterable)` is passing all of the items in the `iterable` into the `function` call as separate arguments, without us even needing to know how many arguments are in the list.
+# ## Asterisk `*`
+
+# That `FUNCTION(*iterable)` is passing all of the items in the `iterable` into the `function` call as separate arguments, without us even needing to know how many arguments are in the list.
+
+# In[5]:
+
 
 fruits = ['lemon', 'pear', 'watermelon', 'tomato']
 print(fruits)
 print(fruits[0], fruits[1], fruits[2], fruits[3])
 print(*fruits)
+
+
+# In[3]:
+
 
 def transpose_list(list_of_lists):
     return [
@@ -188,13 +260,20 @@ def transpose_list(list_of_lists):
         for row in zip(*list_of_lists)
     ]
 
+
+# In[4]:
+
+
 transpose_list([[1, 4, 7], [2, 5, 8], [3, 6, 9]])
 [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 
 
-## Find Index of Specific Values in List
+# ## Find Index of Specific Values in List
 
-Four methods to identify indices of List element which are specific values.
+# Four methods to identify indices of List element which are specific values.
+
+# In[2]:
+
 
 # Python3 code to demonstrate  
 # finding indices of values 
@@ -212,6 +291,10 @@ for i in range(0, len(test_list)) :
         
 res_list
 
+
+# In[3]:
+
+
 # Python3 code to demonstrate  
 # finding indices of values 
 # using list comprehension  
@@ -228,6 +311,10 @@ res_list = [i for i in range(len(test_list)) if test_list[i] == 3]
           
 # printing resultant list  
 print ("New indices list : " + str(res_list)) 
+
+
+# In[4]:
+
 
 # Python3 code to demonstrate 
 # finding indices of values 
@@ -247,6 +334,9 @@ res_list = [i for i, value in enumerate(test_list) if value == 3]
 print ("New indices list : " + str(res_list)) 
 
 
+# In[5]:
+
+
 # Python3 code to demonstrate 
 # finding indices of values 
 # using filter() 
@@ -263,3 +353,4 @@ res_list = list(filter(lambda x: test_list[x] == 3, range(len(test_list))))
 		
 # printing resultant list 
 print ("New indices list : " + str(res_list)) 
+

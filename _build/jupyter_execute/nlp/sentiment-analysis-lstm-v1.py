@@ -1,8 +1,18 @@
-# Sentiment Analysis with LSTM
+#!/usr/bin/env python
+# coding: utf-8
+
+# # Sentiment Analysis with LSTM
+
+# In[1]:
+
 
 import numpy as np
 
-## Loading Data
+
+# ## Loading Data
+
+# In[2]:
+
 
 # Deep Learn with Python Version
 
@@ -16,8 +26,16 @@ batch_size = 128
 
 (train_data, train_labels), (test_data, test_labels) = imdb.load_data(num_words=max_features)
 
+
+# In[3]:
+
+
 print(train_data[0]) # first train doc
 print(train_labels[0]) # first train label
+
+
+# In[4]:
+
 
 # check class
 print(type(train_data))
@@ -30,13 +48,21 @@ print(train_labels.dtype)
 print(train_data.shape)
 print(test_data.shape)
 
+
+# In[5]:
+
+
 ## vectorize labels
 y_train = np.asarray(train_labels).astype('float32')
 y_test = np.asarray(test_labels).astype('float32')
 print(type(y_train))
 print(y_train.dtype)
 
-## Padding Text Length
+
+# ## Padding Text Length
+
+# In[6]:
+
 
 ## Padding Texts Lengths
 train_data = sequence.pad_sequences(train_data, maxlen=max_len)
@@ -44,7 +70,11 @@ test_data = sequence.pad_sequences(test_data, maxlen=max_len)
 print(train_data.shape)
 print(test_data.shape)
 
-## Model Defining
+
+# ## Model Defining
+
+# In[24]:
+
 
 ## Model Building
 
@@ -65,7 +95,11 @@ model.add(Dense(1, activation="sigmoid"))
 model.compile(loss="binary_crossentropy", optimizer="adam",
               metrics=["accuracy"])
 
-## Model Fitting
+
+# ## Model Fitting
+
+# In[25]:
+
 
 # ## Model fitting
 # history = model.fit(train_data, train_labels,
@@ -75,7 +109,11 @@ model.compile(loss="binary_crossentropy", optimizer="adam",
 
 ## Comment out to skip
 
-## Model Evaluation
+
+# ## Model Evaluation
+
+# In[17]:
+
 
 ## Plotting results
 def plot(history):
@@ -102,21 +140,39 @@ def plot(history):
     
 
 
+# In[1]:
+
+
 # plot(history)
 
-## Model Saving
+
+# ## Model Saving
+
+# In[25]:
+
 
 # model.save('../data/sent-analysis-lstm-v1.h5')
 import keras
 model = keras.models.load_model('../data/sent-analysis-lstm-v1.h5')
 
-## Model Prediction
+
+# ## Model Prediction
+
+# In[26]:
+
 
 ## Prediction and model performance
 pred_test = (model.predict(test_data) > 0.5).astype("int32")
 
 
+# In[27]:
+
+
 print(pred_test[:10,:])
+
+
+# In[28]:
+
 
 # functions from Text Analytics with Python book
 def get_metrics(true_labels, predicted_labels):
@@ -178,4 +234,9 @@ def display_model_performance_metrics(true_labels, predicted_labels, classes=[1,
 from sklearn import metrics
 import pandas as pd
 
+
+# In[29]:
+
+
 display_model_performance_metrics(test_labels, pred_test.flatten(), classes=[0,1])
+

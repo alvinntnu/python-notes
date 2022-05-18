@@ -1,15 +1,8 @@
-# Chinese Processing
+#!/usr/bin/env python
+# coding: utf-8
 
-Chinese processing requires one additional step, which is never trivial in text analytics. That is, the Chinese word segmentation.
+# # Chinese Processing
 
-This section talks about methods to perform Chinese word segmentation.
-
-
-```{toctree}
-:hidden:
-:titlesonly:
-
-
-jieba
-ckiptagger
-```
+# Chinese processing requires one additional step, which is never trivial in text analytics. That is, the Chinese word segmentation.
+# 
+# This section talks about methods to perform Chinese word segmentation.

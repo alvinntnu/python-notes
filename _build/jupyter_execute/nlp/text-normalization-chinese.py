@@ -1,10 +1,16 @@
-# Text Normalization (Chinese)
+#!/usr/bin/env python
+# coding: utf-8
 
-- `text_normalizer_zh.py`
-- Including functions for:
-    - word-seg chinese texts
-    - clean up texts by removing duplicate spaces and line breaks
-    - remove incompatible weird characters
+# # Text Normalization (Chinese)
+
+# - `text_normalizer_zh.py`
+# - Including functions for:
+#     - word-seg chinese texts
+#     - clean up texts by removing duplicate spaces and line breaks
+#     - remove incompatible weird characters
+
+# In[1]:
+
 
 import unicodedata
 import re
@@ -16,7 +22,11 @@ import requests
 import pandas as pd
 import text_normalizer_zh as tnz
 
-## Normalization Functions
+
+# ## Normalization Functions
+
+# In[ ]:
+
 
 # %load text_normalizer_zh.py
 """
@@ -145,9 +155,13 @@ def normalize_corpus(corpus,
 
     return normalized_corpus
 
-## Extract an Article
 
-- Grab the first article from Google news for demonstration
+# ## Extract an Article
+
+# - Grab the first article from Google news for demonstration
+
+# In[3]:
+
 
 url = 'https://news.google.com/topics/CAAqJQgKIh9DQkFTRVFvSUwyMHZNRFptTXpJU0JYcG9MVlJYS0FBUAE?hl=zh-TW&gl=TW&ceid=TW%3Azh-Hant'
 r = requests.get(url)
@@ -165,7 +179,17 @@ art_content = soup_art.find_all('p')
 art_texts = [p.text for p in art_content]
 print(art_texts)
 
-- Normalized results:
+
+# - Normalized results:
+
+# In[4]:
+
 
 tnz.normalize_corpus([' '.join(art_texts)])
+
+
+# In[ ]:
+
+
+
 

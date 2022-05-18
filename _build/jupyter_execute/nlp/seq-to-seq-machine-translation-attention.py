@@ -1,20 +1,38 @@
-# Machine Translation with Attention (Thushan)
+#!/usr/bin/env python
+# coding: utf-8
 
-- Word-based machine translation with attention seq-to-seq model
-- Bahdanau Attention Layber developed in [Thushan](https://github.com/thushv89/attention_keras)
-- Thushan Ganegedara's
-[Attention in Deep Networks with Keras](https://towardsdatascience.com/light-on-math-ml-attention-with-keras-dc8dbc1fad39)
-- This notebook implements the example of English-to-Chinese neural machine translation. (It took 14h 26min 15s to train the model on CPU)
+# # Machine Translation with Attention (Thushan)
+# 
+# - Word-based machine translation with attention seq-to-seq model
+# - Bahdanau Attention Layber developed in [Thushan](https://github.com/thushv89/attention_keras)
+# - Thushan Ganegedara's
+# [Attention in Deep Networks with Keras](https://towardsdatascience.com/light-on-math-ml-attention-with-keras-dc8dbc1fad39)
+# - This notebook implements the example of English-to-Chinese neural machine translation. (It took 14h 26min 15s to train the model on CPU)
+
+# In[1]:
+
 
 # from google.colab import drive
 # drive.mount('/content/drive')
 
+
+# In[2]:
+
+
 # import os
 # os.chdir('/content/drive/My Drive/_MySyncDrive/Repository/python-notes/nlp')
 
-%pwd
 
-## Functions
+# In[3]:
+
+
+get_ipython().run_line_magic('pwd', '')
+
+
+# ## Functions
+
+# In[4]:
+
 
 import re
 import keras
@@ -104,6 +122,10 @@ def preprocess_data(en_tokenizer, fr_tokenizer, en_text, fr_text):
     fr_timesteps = np.max([len(l) for l in fr_seq])
     fr_seq = pad_sequences(fr_seq, padding='post', maxlen = fr_timesteps)
     return en_seq, fr_seq
+
+
+# In[25]:
+
 
 def define_nmt(hidden_size, batch_size, en_timesteps, en_vsize, fr_timesteps, fr_vsize):
     """ Defining a NMT model """
@@ -229,6 +251,9 @@ def infer_nmt(encoder_model, decoder_model, test_en_seq, en_vsize, fr_vsize, fr_
     return fr_text, attention_weights
 
 
+# In[19]:
+
+
 import matplotlib.pyplot as plt
 plt.rcParams['font.sans-serif']=["PingFang HK"]
 def plot_attention_weights(encoder_inputs, attention_weights, en_id2word, fr_id2word, filename=None):
@@ -272,9 +297,13 @@ def plot_attention_weights(encoder_inputs, attention_weights, en_id2word, fr_id2
 #     else:
 #         plt.savefig(os.path.join(config.RESULTS_DIR, '{}'.format(filename)))
 
-## Main Program
 
-### Data Wrangling and Training
+# ## Main Program
+
+# ### Data Wrangling and Training
+
+# In[7]:
+
 
 #### hyperparameters
 batch_size = 128
@@ -307,6 +336,9 @@ fr_vsize = max(fr_tokenizer.index_word.keys()) + 1
 
 
 
+# In[29]:
+
+
 ###""" Defining the full model """
 full_model, infer_enc_model, infer_dec_model = define_nmt(
     hidden_size=hidden_size,
@@ -316,36 +348,66 @@ full_model, infer_enc_model, infer_dec_model = define_nmt(
     en_vsize=en_vsize,
     fr_vsize=fr_vsize)
 
+
+# In[30]:
+
+
 from keras.utils import plot_model
 plot_model(full_model, show_shapes=True)
+
+
+# In[10]:
+
 
 # %%time
 
 # train(full_model, en_seq, fr_seq, batch_size, n_epochs)
 
 
-### Model Saving
+# ### Model Saving
+
+# In[11]:
+
 
 # full_model.save('../../../RepositoryData/output/nmt-en-zh/nmt-en-zh-full-model.h5')
 # infer_enc_model.save('../../../RepositoryData/output/nmt-en-zh/nmt-en-zh-infer-enc-model.h5')
 # infer_dec_model.save('../../../RepositoryData/output/nmt-en-zh/nmt-en-zh-infer-dec-model.h5')
 
-### Prediction
+
+# ### Prediction
+
+# In[31]:
+
 
 ## load model
 full_model.load_weights('../../../RepositoryData/output/nmt-en-zh/nmt-en-zh-full-model.h5')
 infer_enc_model.load_weights('../../../RepositoryData/output/nmt-en-zh/nmt-en-zh-infer-enc-model.h5')
 infer_dec_model.load_weights('../../../RepositoryData/output/nmt-en-zh/nmt-en-zh-infer-dec-model.h5')
 
+
+# In[32]:
+
+
 plot_model(infer_enc_model,show_shapes=True)
 
+
+# In[13]:
+
+
 plot_model(infer_dec_model, show_shapes=True)
+
+
+# In[14]:
+
 
 """ Index2word """
 en_index2word = dict(
     zip(en_tokenizer.word_index.values(), en_tokenizer.word_index.keys()))
 fr_index2word = dict(
     zip(fr_tokenizer.word_index.values(), fr_tokenizer.word_index.keys()))
+
+
+# In[15]:
 
 
 def translate(infer_enc_model, infer_dec_model, test_en_text, 
@@ -364,6 +426,10 @@ def translate(infer_enc_model, infer_dec_model, test_en_text,
     print('\tFrench: {}'.format(test_fr))
     return test_en_seq, test_fr, attn_weights
 
+
+# In[16]:
+
+
 test_en_seq, test_fr, attn_weights=translate(infer_enc_model=infer_enc_model,
           infer_dec_model=infer_dec_model,
           test_en_text=ts_en_text[2],
@@ -374,6 +440,9 @@ test_en_seq, test_fr, attn_weights=translate(infer_enc_model=infer_enc_model,
           en_tokenizer=en_tokenizer,
           fr_tokenizer=fr_tokenizer)
 
+
+
+# In[36]:
 
 
 for i in range(10):
@@ -387,32 +456,23 @@ for i in range(10):
               en_tokenizer=en_tokenizer,
               fr_tokenizer=fr_tokenizer)
 
+
+# In[37]:
+
+
 ts_fr_text[:10]
+
+
+# In[22]:
+
 
 """ Attention plotting """
 plot_attention_weights(test_en_seq, attn_weights,
                        en_index2word, fr_index2word)
 
-%%time
-def test(full_model, ts_enc_text, ts_dec_text, enc_tokenizer, dec_tokenizer, enc_vsize, dec_vsize, batch_size):
-    # ### Getting sequence integer data
-    ts_enc_seq, ts_dec_seq = preprocess_data(enc_tokenizer, dec_tokenizer, ts_enc_text, ts_dec_text)
-    losses = []
-    accuracies = []
-    for bi in range(0, ts_enc_seq.shape[0] - batch_size, batch_size):
-        enc_onehot_seq = to_categorical(
-            ts_enc_seq[bi:bi + batch_size, :], num_classes=enc_vsize)
-        dec_onehot_seq = to_categorical(
-            ts_dec_seq[bi:bi + batch_size, :], num_classes=dec_vsize)
 
-        # full_model.train_on_batch(
-        #     [enc_onehot_seq, dec_onehot_seq[:, :-1, :]], dec_onehot_seq[:, 1:, :])
-        l,a = full_model.evaluate([enc_onehot_seq, dec_onehot_seq[:, :-1, :]], dec_onehot_seq[:, 1:, :],
-                                batch_size=batch_size, verbose=0)
-        losses.append(l)
-        accuracies.append(a)
-    print('Average Loss:{}'.format(np.mean(losses)))
-    print('Average Accuracy:{}'.format(np.mean(accuracies)))
+# In[34]:
 
-test(full_model, ts_enc_text = ts_en_text, ts_dec_text = ts_fr_text, 
-     enc_tokenizer = en_tokenizer, dec_tokenizer = fr_tokenizer, enc_vsize = en_vsize, dec_vsize = fr_vsize, batch_size = batch_size)
+
+get_ipython().run_cell_magic('time', '', "def test(full_model, ts_enc_text, ts_dec_text, enc_tokenizer, dec_tokenizer, enc_vsize, dec_vsize, batch_size):\n    # ### Getting sequence integer data\n    ts_enc_seq, ts_dec_seq = preprocess_data(enc_tokenizer, dec_tokenizer, ts_enc_text, ts_dec_text)\n    losses = []\n    accuracies = []\n    for bi in range(0, ts_enc_seq.shape[0] - batch_size, batch_size):\n        enc_onehot_seq = to_categorical(\n            ts_enc_seq[bi:bi + batch_size, :], num_classes=enc_vsize)\n        dec_onehot_seq = to_categorical(\n            ts_dec_seq[bi:bi + batch_size, :], num_classes=dec_vsize)\n\n        # full_model.train_on_batch(\n        #     [enc_onehot_seq, dec_onehot_seq[:, :-1, :]], dec_onehot_seq[:, 1:, :])\n        l,a = full_model.evaluate([enc_onehot_seq, dec_onehot_seq[:, :-1, :]], dec_onehot_seq[:, 1:, :],\n                                batch_size=batch_size, verbose=0)\n        losses.append(l)\n        accuracies.append(a)\n    print('Average Loss:{}'.format(np.mean(losses)))\n    print('Average Accuracy:{}'.format(np.mean(accuracies)))\n\ntest(full_model, ts_enc_text = ts_en_text, ts_dec_text = ts_fr_text, \n     enc_tokenizer = en_tokenizer, dec_tokenizer = fr_tokenizer, enc_vsize = en_vsize, dec_vsize = fr_vsize, batch_size = batch_size)\n")
+

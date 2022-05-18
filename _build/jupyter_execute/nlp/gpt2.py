@@ -1,12 +1,22 @@
-# Transformer-based Language Model - GPT2
+#!/usr/bin/env python
+# coding: utf-8
 
-- This notebook runs on Google Colab.
-- Codes from [A Comprehensive Guide to Build Your Own Language Model in Python](https://medium.com/analytics-vidhya/a-comprehensive-guide-to-build-your-own-language-model-in-python-5141b3917d6d)
-- Use the OpenAI GPT-2 language model (based on Transformers) to:
-  - Generate text sequences based on seed texts
-  - Convert text sequences into numerical representations
+# # Transformer-based Language Model - GPT2
 
-!pip install transformers
+# - This notebook runs on Google Colab.
+# - Codes from [A Comprehensive Guide to Build Your Own Language Model in Python](https://medium.com/analytics-vidhya/a-comprehensive-guide-to-build-your-own-language-model-in-python-5141b3917d6d)
+# - Use the OpenAI GPT-2 language model (based on Transformers) to:
+#   - Generate text sequences based on seed texts
+#   - Convert text sequences into numerical representations
+
+# In[ ]:
+
+
+get_ipython().system('pip install transformers')
+
+
+# In[ ]:
+
 
 # Import required libraries
 import torch
@@ -44,14 +54,26 @@ predicted_text = tokenizer.decode(indexed_tokens + [predicted_index])
 # Print the predicted word
 print(predicted_text)
 
-!git clone https://github.com/huggingface/transformers.git
 
-!ls transformers/examples
+# In[ ]:
 
-## Text Generation Using DPT2
 
-- [Write with Transformer](https://transformer.huggingface.co/)
+get_ipython().system('git clone https://github.com/huggingface/transformers.git')
 
+
+# In[ ]:
+
+
+get_ipython().system('ls transformers/examples')
+
+
+# ## Text Generation Using DPT2
+# 
+# - [Write with Transformer](https://transformer.huggingface.co/)
+# 
+# 
+
+# In[ ]:
 
 
 # !python transformers/examples/text-generation/run_generation.py \
@@ -59,7 +81,11 @@ print(predicted_text)
 #     --model_name_or_path=gpt2 \
 #     --length=100
 
-## Text Generation Using GPT2
+
+# ## Text Generation Using GPT2
+
+# In[ ]:
+
 
 from transformers import pipeline, set_seed
 generator = pipeline('text-generation', model='gpt2')
@@ -67,9 +93,16 @@ set_seed(42)
 generator("Hello, I'm a language model,", max_length=30, num_return_sequences=5)
 
 
+# In[ ]:
+
+
 generator("Once upon a time, ", max_length=30, num_return_sequences=5)
 
-## Transforming Texts into Features
+
+# ## Transforming Texts into Features
+
+# In[ ]:
+
 
 # from transformers import GPT2Tokenizer, GPT2Model
 # tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
@@ -86,3 +119,4 @@ text = "Replace me by any text you'd like."
 encoded_input = tokenizer(text, return_tensors='tf')
 output = model(encoded_input)
 print(encoded_input)
+

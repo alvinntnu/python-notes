@@ -1,9 +1,15 @@
-# Data Structure
+#!/usr/bin/env python
+# coding: utf-8
 
-- A quick overview of important data structures in Python
+# # Data Structure
+# 
+# - A quick overview of important data structures in Python
+# 
 
+# ## General Functions
 
-## General Functions
+# In[1]:
+
 
 ## Check object types
 type(23)
@@ -11,7 +17,11 @@ type('some texts')
 c = [1, 2, 'some text']
 type(c)
 
-## Basic Structures
+
+# ## Basic Structures
+
+# In[2]:
+
 
 ## Factory functions
 int(4.0)
@@ -19,6 +29,10 @@ str(4)
 list()
 tuple('international')
 dict(one=1, two=2)
+
+
+# In[3]:
+
 
 ## Operations
 
@@ -33,7 +47,11 @@ dict(one=1, two=2)
 import random
 random.randint(1,10)
 
-## `str` Object
+
+# ## `str` Object
+
+# In[4]:
+
 
 ## Sequences
 
@@ -98,10 +116,13 @@ length = 1234.5678
 'The toy is %.3f meters long' % (length)
 
 
-## List
+# ## List
+# 
+# - A List is typically a sequence of objects all having the same type, of arbitrary length
+# - Mutable
+# 
 
-- A List is typically a sequence of objects all having the same type, of arbitrary length
-- Mutable
+# In[5]:
 
 
 ## Lists
@@ -126,9 +147,13 @@ list_mixed.index('Amy')
 ## Other functions
 ## max(), min(), sum(), sorted(), reversed()
 
-## Tuples
-- A Tuple is typically a collection of objects of different types, of fixed length
-- Immutable
+
+# ## Tuples
+# - A Tuple is typically a collection of objects of different types, of fixed length
+# - Immutable
+
+# In[6]:
+
 
 ## Tuples
 
@@ -138,7 +163,11 @@ tuple_mixed = (1, 'mon', ['feb', 2])
 print(tuple_mixed)
 len(tuple_mixed)
 
-## Dictionary
+
+# ## Dictionary
+
+# In[7]:
+
 
 ## Dictionary
 
@@ -152,7 +181,11 @@ dict_days.keys()
 dict_days.values()
 dict_days.get('A','NA')
 
-## String Formatting
+
+# ## String Formatting
+
+# In[8]:
+
 
 ## Format strings
 print('Hello, {}! This is your No.{} book!'.format('Alvin',5))
@@ -165,6 +198,10 @@ table = {'John': 98, 'Mary': 30, 'Jessica': 78, 'Goerge': 89, 'Jack': 45}
 print('Jack: {0[Jack]:d}'.format(table))
 print('Jack: {Jack:d}Jessica: {Jessica:d}'.format(**table))
 
+
+# In[9]:
+
+
 # wrapping strings
 import textwrap
 sentence= '''
@@ -174,11 +211,19 @@ sentence= '''
 
 print(textwrap.fill(sentence, 20))
 
+
+# In[10]:
+
+
 ## Old string formatting
 import math
 print('The value of pi is %1.2f' % math.pi) # specify number of digits before and after .
 
-## Requirements
+
+# ## Requirements
+
+# In[11]:
+
 
 # %load get_modules.py
 import pkg_resources
@@ -220,3 +265,4 @@ for m in pkg_resources.working_set:
 
 for r in requirements:
     print("{}=={}".format(*r))
+

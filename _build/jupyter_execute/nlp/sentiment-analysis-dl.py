@@ -1,16 +1,20 @@
-# Sentiment Analysis with Deep Learning
+#!/usr/bin/env python
+# coding: utf-8
 
-## Loading Packages
+# # Sentiment Analysis with Deep Learning
 
-%%time
-import gensim
-import keras
-from keras.models import Sequential
-from keras.layers import Dropout, Activation, Dense
-from sklearn.preprocessing import LabelEncoder
-from keras.layers.normalization import BatchNormalization
+# ## Loading Packages
 
-## Preparing Data
+# In[1]:
+
+
+get_ipython().run_cell_magic('time', '', 'import gensim\nimport keras\nfrom keras.models import Sequential\nfrom keras.layers import Dropout, Activation, Dense\nfrom sklearn.preprocessing import LabelEncoder\nfrom keras.layers.normalization import BatchNormalization\n')
+
+
+# ## Preparing Data
+
+# In[2]:
+
 
 ## Data Import and Preprocessing
 import pandas as pd
@@ -40,6 +44,10 @@ test_sentiments = sentiments[35000:]
 norm_train_reviews = train_reviews
 norm_test_reviews = test_reviews
 
+
+# In[3]:
+
+
 from nltk.tokenize.toktok import ToktokTokenizer
 tokenizer = ToktokTokenizer()
 
@@ -65,16 +73,17 @@ print('Sample test label transformation:\n'+'-'*35,
       '\nActual Labels:', test_sentiments[:3], '\nEncoded Labels:', y_ts[:3], 
       '\nOne hot encoded Labels:\n', y_test[:3])
 
-## Training Word Embeddings
 
-%%time
-# build word2vec model
-w2v_num_features = 512
-w2v_model = gensim.models.Word2Vec(tokenized_train, 
-                                   size=w2v_num_features, window=150,
-                                   min_count=10, sample=1e-3, workers=16)    
+# ## Training Word Embeddings
 
-## takes 5mins
+# In[4]:
+
+
+get_ipython().run_cell_magic('time', '', '# build word2vec model\nw2v_num_features = 512\nw2v_model = gensim.models.Word2Vec(tokenized_train, \n                                   size=w2v_num_features, window=150,\n                                   min_count=10, sample=1e-3, workers=16)    \n\n## takes 5mins\n')
+
+
+# In[5]:
+
 
 ## This model uses the document word vector averaging scheme
 ## Use the average word vector representations to represent one document (movie reivew)
@@ -99,13 +108,21 @@ def averaged_word2vec_vectorizer(corpus, model, num_features):
                     for tokenized_sentence in corpus]
     return np.array(features)
 
+
+# In[6]:
+
+
 # generate averaged word vector features from word2vec model
 avg_wv_train_features = averaged_word2vec_vectorizer(corpus=tokenized_train, model=w2v_model,
                                                      num_features=w2v_num_features)
 avg_wv_test_features = averaged_word2vec_vectorizer(corpus=tokenized_test, model=w2v_model,
                                                     num_features=w2v_num_features)
 
-## Loading Pre-trained Word Embeddings
+
+# ## Loading Pre-trained Word Embeddings
+
+# In[7]:
+
 
 # %%time
 # # Use the 300-dimensional word vectors trained on the Common Crawl using the GloVe model
@@ -122,16 +139,24 @@ avg_wv_test_features = averaged_word2vec_vectorizer(corpus=tokenized_test, model
 # test_nlp = [nlp_vec(item) for item in norm_test_reviews]
 # test_glove_features = np.array([item.vector for item in test_nlp])
 
+
+# In[8]:
+
+
 # print('Word2Vec model:> Train features shape:', avg_wv_train_features.shape, ' Test features shape:', avg_wv_test_features.shape)
 # print('GloVe model:> Train features shape:', train_glove_features.shape, ' Test features shape:', test_glove_features.shape)
 
-## Building Model
 
-- A simple fully-connected 4 layer deep neural network
-    - input layer (not counted as one layer), i.e., the word embedding layer
-    - three dense hidden layers (with 512 neurons)
-    - one output layer (with 2 neurons for classification)
-- (aka. multi-layered perceptron or deep ANN)
+# ## Building Model
+# 
+# - A simple fully-connected 4 layer deep neural network
+#     - input layer (not counted as one layer), i.e., the word embedding layer
+#     - three dense hidden layers (with 512 neurons)
+#     - one output layer (with 2 neurons for classification)
+# - (aka. multi-layered perceptron or deep ANN)
+
+# In[9]:
+
 
 def construct_deepnn_architecture(num_input_features):
     dnn_model = Sequential()
@@ -157,13 +182,21 @@ def construct_deepnn_architecture(num_input_features):
                       metrics=['accuracy'])
     return dnn_model
 
+
+# In[10]:
+
+
 w2v_dnn = construct_deepnn_architecture(num_input_features=w2v_num_features)
 
-## Model Visualization
 
-- To make this work, install `pip3 install pydot`
-- and also install `!brew install graphviz` in terminal for mac
-    - that is, install [graphvis](https://graphviz.gitlab.io/download/)
+# ## Model Visualization
+# 
+# - To make this work, install `pip3 install pydot`
+# - and also install `!brew install graphviz` in terminal for mac
+#     - that is, install [graphvis](https://graphviz.gitlab.io/download/)
+# 
+
+# In[11]:
 
 
 ## Not working yet. Had a problem with the installation of graphviz on mac
@@ -174,16 +207,28 @@ w2v_dnn = construct_deepnn_architecture(num_input_features=w2v_num_features)
 # SVG(model_to_dot(w2v_dnn, show_shapes=True, show_layer_names=False, 
 #                  rankdir='TB').create(prog='dot', format='svg'))
 
-## Model Fitting
 
-### Fitting using self-trained word embeddings
+# ## Model Fitting
+
+# ### Fitting using self-trained word embeddings
+
+# In[12]:
+
 
 batch_size = 100
 w2v_dnn.fit(avg_wv_train_features, y_train, epochs=10, batch_size=batch_size, 
             shuffle=True, validation_split=0.1, verbose=1)
 
+
+# In[13]:
+
+
 y_pred = w2v_dnn.predict_classes(avg_wv_test_features)
 predictions = le.inverse_transform(y_pred) 
+
+
+# In[14]:
+
 
 # functions from Text Analytics with Python book
 def get_metrics(true_labels, predicted_labels):
@@ -244,19 +289,40 @@ def display_model_performance_metrics(true_labels, predicted_labels, classes=[1,
                              classes=classes)
 from sklearn import metrics
 
+
+# In[15]:
+
+
 display_model_performance_metrics(true_labels=test_sentiments, predicted_labels=predictions, 
                                       classes=['positive', 'negative'])  
 
-### Fitting using pre-trained word embedding model
+
+# ### Fitting using pre-trained word embedding model
+
+# In[16]:
+
 
 # glove_dnn = construct_deepnn_architecture(num_input_features=300)
+
+
+# In[17]:
+
 
 # batch_size = 100
 # glove_dnn.fit(train_glove_features, y_train, epochs=10, batch_size=batch_size, 
 #               shuffle=True, validation_split=0.1, verbose=1)
 
+
+# In[18]:
+
+
 # y_pred = glove_dnn.predict_classes(test_glove_features)
 # predictions = le.inverse_transform(y_pred) 
 
+
+# In[19]:
+
+
 # meu.display_model_performance_metrics(true_labels=test_sentiments, predicted_labels=predictions, 
 #                                       classes=['positive', 'negative'])  
+

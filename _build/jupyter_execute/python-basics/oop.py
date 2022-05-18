@@ -1,8 +1,14 @@
-# Object-Oriented Programming
+#!/usr/bin/env python
+# coding: utf-8
 
-## Class
+# # Object-Oriented Programming
 
-- Each class has its defined attributes and methods
+# ## Class
+
+# - Each class has its defined attributes and methods
+
+# In[4]:
+
 
 # Define a class
 class Employee:
@@ -22,11 +28,14 @@ emp_1 = Employee('Corey', 'Schafer', 50000)
 emp_2 = Employee('Test', 'Employee', 60000)
 
 
-## Types of Methods
+# ## Types of Methods
 
-- **Class** Method: a method bound to the class and with `cls` as the first default argument
-- **Static** Method: a self-contained method bound to the class
-- **Instance** Method: a method bound to the object instance of the class with `self` as the first default argument
+# - **Class** Method: a method bound to the class and with `cls` as the first default argument
+# - **Static** Method: a self-contained method bound to the class
+# - **Instance** Method: a method bound to the object instance of the class with `self` as the first default argument
+
+# In[1]:
+
 
 class Employee:
 
@@ -89,10 +98,14 @@ my_date = datetime.date(2016, 7, 11)
 
 print(Employee.is_workday(my_date))
 
-## Class Inheritance
 
-- The key of OOP
-- Extend the original class constructor methods using `super()`
+# ## Class Inheritance
+
+# - The key of OOP
+# - Extend the original class constructor methods using `super()`
+# 
+
+# In[2]:
 
 
 class Employee:
@@ -154,11 +167,15 @@ mgr_1.remove_emp(dev_2)
 
 mgr_1.print_emps()
 
-## Special Methods
 
+# ## Special Methods
+# 
 
-- Dunder methods (double-underscore)
-- To avoid overloading the expressions in coding
+# - Dunder methods (double-underscore)
+# - To avoid overloading the expressions in coding
+
+# In[3]:
+
 
 class Employee:
 
@@ -196,11 +213,15 @@ emp_2 = Employee('Test', 'Employee', 60000)
 
 print(len(emp_1))
 
-## Property Decorator
 
-- `@property`: make a method function like attribute-accessing
-- `@NAME.setter`: make a method function like class-attribute assigning
-- `@NAME.deleter`: make a method function like class-attribute deleting
+# ## Property Decorator
+
+# - `@property`: make a method function like attribute-accessing
+# - `@NAME.setter`: make a method function like class-attribute assigning
+# - `@NAME.deleter`: make a method function like class-attribute deleting
+
+# In[ ]:
+
 
 class Employee:
 
@@ -238,16 +259,17 @@ print(emp_1.fullname)
 
 del emp_1.fullname
 
-## Checking Functions
 
-- `isinstance()`: Check an instance's type
-- `issubclass()`: Check class inheritance
+# ## Checking Functions
 
-## Name Mangling
+# - `isinstance()`: Check an instance's type
+# - `issubclass()`: Check class inheritance
 
-- `__NAME`: Any identifier of this form within the class is textually replaced with `_classname__NAME`, where `classname` is the current class name, with leading underscore(s) stripped.
-- This is for the purpose of creating **private** variables to the class.
+# ## Name Mangling
 
-## Reference
+# - `__NAME`: Any identifier of this form within the class is textually replaced with `_classname__NAME`, where `classname` is the current class name, with leading underscore(s) stripped.
+# - This is for the purpose of creating **private** variables to the class.
 
-- This notebook is based on [Corey Schafer's OOP Tutorial](https://www.youtube.com/playlist?list=PL-osiE80TeTsqhIuOqKhwlXsIBIdSeYtc)
+# ## Reference
+# 
+# - This notebook is based on [Corey Schafer's OOP Tutorial](https://www.youtube.com/playlist?list=PL-osiE80TeTsqhIuOqKhwlXsIBIdSeYtc)

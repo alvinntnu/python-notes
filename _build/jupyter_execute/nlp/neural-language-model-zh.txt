@@ -1,12 +1,3 @@
-# Neural Language Model of Chinese
-
-- [How to development a word-level neural language model in keras](https://machinelearningmastery.com/how-to-develop-a-word-level-neural-language-model-in-keras/)
-- Chinese texts
-- Word-based neural language model based on:
-    - character sequences
-    - word sequences
-- Use two novels by Jing-Yong
-
 from google.colab import drive
 drive.mount('/content/drive')
 
@@ -63,8 +54,6 @@ print(paras[:20])
 print('Total Paragraphs: %d' % len(paras))
 print('Unique Tokens: %d' % len(set(''.join(paras))))
 
-## Line-based Language Model
-
 from numpy import array
 from keras.preprocessing.text import Tokenizer
 from keras.utils import to_categorical, plot_model
@@ -74,8 +63,6 @@ from keras.layers import Dense
 from keras.layers import LSTM
 from keras.layers import Embedding
 
-
-### Text to Sequences
 
 # prepare data
 data = '\n'.join(paras)  # collapse the entire corpus into one string
@@ -106,8 +93,6 @@ for line in data.split('\n'):
         sequences.append(sequence)
 print('Total Sequences: %d' % len(sequences))
 
-### Word ID to Texts
-
 # Creating a reverse dictionary
 reverse_word_map = dict(map(reversed, tokenizer.word_index.items()))
 # Function takes a tokenized sentence and returns the words
@@ -120,20 +105,14 @@ sequences[:10]
 
 [print(sequence_to_text(s)) for s in sequences[:10]]
 
-### Padding
-
 max_length = max([len(seq) for seq in sequences])
 sequences = pad_sequences(sequences, maxlen=max_length, padding='pre')
 print('Max Sequence Length: %d' % max_length)
-
-### Train and Test Sets
 
 # split into input and output elements
 sequences = array(sequences)
 X, y = sequences[:,:-1],sequences[:,-1]
 y = to_categorical(y, num_classes=vocab_size)
-
-### Define Model
 
 # define model
 model = Sequential()
@@ -146,12 +125,8 @@ print(model.summary())
 # compile network
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
-### Train Model
-
 # # fit network
 # model.fit(X, y, batch_size= 256, epochs=500, verbose=1)
-
-### Save Model
 
 # from pickle import dump
 # # save the model to file
@@ -159,15 +134,11 @@ model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accur
 # # save the tokenizer
 # dump(tokenizer, open('jing-yong-line-lm-tokenizer.pkl', 'wb'))
 
-## Load Model
-
 import pickle
 model.load_weights('jing-yong-line-lm-model.h5')
 pickle_in = open('jing-yong-line-lm-tokenizer.pkl',
                  "rb")
 tokenizer = pickle.load(pickle_in)
-
-### Generate Sequence
 
 # generate a sequence from a language model
 def generate_seq(model, tokenizer, max_length, seed_text, n_words):

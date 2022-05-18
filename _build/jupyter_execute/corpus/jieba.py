@@ -1,81 +1,91 @@
-# Chinese Word Segmentation (jieba)
+#!/usr/bin/env python
+# coding: utf-8
 
+# # Chinese Word Segmentation (jieba)
+# 
 
-## Important Steps
+# ## Important Steps
+# 
+# - Install `jieba` module
+# 
+# ```
+# !pip install jieba
+# ```
+# 
+# - import module
+# 
+# ```
+# import jieba
+# import jieba.analyse
+# ```
+# 
+# - initialize traditional Chinese dictionary
+#     - Download the traditional chinese dictionary from [`jieba-tw`](https://raw.githubusercontent.com/ldkrsi/jieba-zh_TW/master/jieba/dict.txt)
+#     
+# ```
+# jieba.set_dictionary(file_path)
+# ```
+# 
+# - Add own project-specific dictionary
+# 
+# ```
+# jieba.load_userdict(file_path)
+# ```
+# 
+# - Add add-hoc words to dictionary
+# 
+# ```
+# jieba.add_word(word, freq=None, tag=None)
+# ```
+# 
+# - Remove words
+# 
+# ```
+# jieba.del_word(word)
+# ```
+# 
+# - Chinese stopwords (See [林宏任老師 GitHub](https://github.com/tomlinNTUB/Python/tree/master/%E4%B8%AD%E6%96%87%E5%88%86%E8%A9%9E)
+# 
+#     - `jieba.cut()` does not interact with stopword list
+#     - `jieba.analyse.set_stop_words(file_apth)`
+# 
+# - Word segmentation
+#     - `jieba.cut()` returns a `generator` object
+#     - `jieba.lcut()` resuts a `List` object
+#     
+# ```
+# # full
+# 
+# jieba.cut(TEXT, cut_all=True)
+# jieba.lcut(TEXT, cut_all=True
+# 
+# # default
+# jieba.cut(TEXT, cut_all=False)
+# jieba.lcut(TEXT, cut_all=False)
+# ```
+# 
+# - Keyword Extraction
+#     - The module uses the TF-IDF score to extract keywords
+#     - But how documents are defined in Jieba? Eahc list element in the input is a doc?
+# 
+# ```
+# jieba.analyse.extract_tags(TEXT, topK=20, withWeight=False, allowPOS=())
+# ```
+# 
+# 
+#     
 
-- Install `jieba` module
+# ## Demonstration
 
-```
-!pip install jieba
-```
+# In[1]:
 
-- import module
-
-```
-import jieba
-import jieba.analyse
-```
-
-- initialize traditional Chinese dictionary
-    - Download the traditional chinese dictionary from [`jieba-tw`](https://raw.githubusercontent.com/ldkrsi/jieba-zh_TW/master/jieba/dict.txt)
-    
-```
-jieba.set_dictionary(file_path)
-```
-
-- Add own project-specific dictionary
-
-```
-jieba.load_userdict(file_path)
-```
-
-- Add add-hoc words to dictionary
-
-```
-jieba.add_word(word, freq=None, tag=None)
-```
-
-- Remove words
-
-```
-jieba.del_word(word)
-```
-
-- Chinese stopwords (See [林宏任老師 GitHub](https://github.com/tomlinNTUB/Python/tree/master/%E4%B8%AD%E6%96%87%E5%88%86%E8%A9%9E)
-
-    - `jieba.cut()` does not interact with stopword list
-    - `jieba.analyse.set_stop_words(file_apth)`
-
-- Word segmentation
-    - `jieba.cut()` returns a `generator` object
-    - `jieba.lcut()` resuts a `List` object
-    
-```
-# full
-
-jieba.cut(TEXT, cut_all=True)
-jieba.lcut(TEXT, cut_all=True
-
-# default
-jieba.cut(TEXT, cut_all=False)
-jieba.lcut(TEXT, cut_all=False)
-```
-
-- Keyword Extraction
-    - The module uses the TF-IDF score to extract keywords
-    - But how documents are defined in Jieba? Eahc list element in the input is a doc?
-
-```
-jieba.analyse.extract_tags(TEXT, topK=20, withWeight=False, allowPOS=())
-```
-
-
-    
-
-## Demonstration
 
 import jieba
 from jieba import posseg
+
+
+# In[4]:
+
 
 # set dictionary
 
@@ -93,6 +103,10 @@ text_pos = posseg.cut(text)
 for word, tag in text_pos:
     print(word+'/'+tag)
 
+
+# In[7]:
+
+
 # load stopwords
 with open('../../../RepositoryData/data/stopwords/tomlinNTUB-chinese-stopwords.txt', 'r') as f:
     stopwords = [w.strip() for w in f.readlines()]
@@ -104,11 +118,18 @@ print(len(words1))
 print(len(words2))
 print(words2)
 
-## Word Cloud
+
+# ## Word Cloud
+
+# In[8]:
+
 
 from collections import Counter
 
 wf = dict(sorted(Counter(words2).items(), key=lambda x:x[1], reverse=True))
+
+
+# In[10]:
 
 
 import matplotlib.pyplot as plt
@@ -125,4 +146,9 @@ plt.imshow(wc)
 plt.axis("off")
 plt.show()
 
+
+# In[ ]:
+
+
 #wc.to_file(FILE_PATH)
+

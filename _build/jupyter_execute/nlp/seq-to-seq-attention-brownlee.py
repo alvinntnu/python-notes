@@ -1,13 +1,19 @@
-# Sequence Prediction with Attention
+#!/usr/bin/env python
+# coding: utf-8
 
-## Jason Brownlee's version
+# # Sequence Prediction with Attention
 
-- This is based on Jason Brownlee's tutorial [How to Develop an Encoder-Decoder Model with Attention in Keras](https://machinelearningmastery.com/encoder-decoder-attention-sequence-to-sequence-prediction-keras/)
-- Jason's tutorial is based on a custom layer developed by Zafarali Ahmed in a post titled [“How to Visualize Your Recurrent Neural Network with Attention in Keras”](https://medium.com/datalogue/attention-in-keras-1892773a4f22) and his GitHub project called [“keras-attention“](https://github.com/datalogue/keras-attention)
-- This tutorial is based on older versions of tensorflow and keras. Not working with the recent version.
-- To work with this code:
-    - Use tensorflow 1
-    - Use keras 2
+# ## Jason Brownlee's version
+
+# - This is based on Jason Brownlee's tutorial [How to Develop an Encoder-Decoder Model with Attention in Keras](https://machinelearningmastery.com/encoder-decoder-attention-sequence-to-sequence-prediction-keras/)
+# - Jason's tutorial is based on a custom layer developed by Zafarali Ahmed in a post titled [“How to Visualize Your Recurrent Neural Network with Attention in Keras”](https://medium.com/datalogue/attention-in-keras-1892773a4f22) and his GitHub project called [“keras-attention“](https://github.com/datalogue/keras-attention)
+# - This tutorial is based on older versions of tensorflow and keras. Not working with the recent version.
+# - To work with this code:
+#     - Use tensorflow 1
+#     - Use keras 2
+
+# In[1]:
+
 
 from random import randint
 from numpy import array
@@ -100,12 +106,19 @@ def train_evaluate_model(model, n_timesteps_in, n_timesteps_out, n_features):
             correct += 1
     return float(correct) / float(total) * 100.0
 
-- Versions compatible with the codes
+
+# - Versions compatible with the codes
+
+# In[6]:
+
 
 import tensorflow as tf
 import keras as keras
 print(tf.__version__)
 print(keras.__version__)
+
+
+# In[7]:
 
 
 # configure problem
@@ -133,3 +146,4 @@ for _ in range(n_repeats):
     results.append(accuracy)
     print(accuracy)
 print('Mean Accuracy: %.2f%%' % (sum(results) / float(n_repeats)))
+

@@ -1,29 +1,55 @@
-# Seqeunce Model with Attention for Addition Learning
+#!/usr/bin/env python
+# coding: utf-8
 
-- Use seq-to-seq model to learn mathematical addition based on data
-- This is based on Chapter 7 of [Deep Learning 2用 Python 進行自然語言處理的基礎理論實作](https://www.tenlong.com.tw/products/9789865020675).
-- This notebook uses two types of Attention layers:
-  - The first type is the default `keras.layers.Attention` (Luong attention) and `keras.layers.AdditiveAttention` (Bahdanau attention). (But these layers have ONLY been implemented in Tensorflow-nightly.
-  - The second type is developed by Thushan.
-    - Bahdanau Attention Layber developed in [Thushan](https://github.com/thushv89/attention_keras)
-    - Thushan Ganegedara's
-    [Attention in Deep Networks with Keras](https://towardsdatascience.com/light-on-math-ml-attention-with-keras-dc8dbc1fad39)
+# # Seqeunce Model with Attention for Addition Learning
+# 
+# - Use seq-to-seq model to learn mathematical addition based on data
+# - This is based on Chapter 7 of [Deep Learning 2用 Python 進行自然語言處理的基礎理論實作](https://www.tenlong.com.tw/products/9789865020675).
+# - This notebook uses two types of Attention layers:
+#   - The first type is the default `keras.layers.Attention` (Luong attention) and `keras.layers.AdditiveAttention` (Bahdanau attention). (But these layers have ONLY been implemented in Tensorflow-nightly.
+#   - The second type is developed by Thushan.
+#     - Bahdanau Attention Layber developed in [Thushan](https://github.com/thushv89/attention_keras)
+#     - Thushan Ganegedara's
+#     [Attention in Deep Networks with Keras](https://towardsdatascience.com/light-on-math-ml-attention-with-keras-dc8dbc1fad39)
+
+# In[57]:
+
 
 from google.colab import drive
 drive.mount('/content/drive')
 
+
+# In[58]:
+
+
 import os
 os.chdir('/content/drive/My Drive/_MySyncDrive/Repository/python-notes/nlp')
 
-%pwd
 
-!pip install tf-nightly
+# In[59]:
+
+
+get_ipython().run_line_magic('pwd', '')
+
+
+# In[60]:
+
+
+get_ipython().system('pip install tf-nightly')
+
+
+# In[61]:
+
 
 import tensorflow, keras
 print(tensorflow.__version__)
 print(keras.__version__)
 
-## Functions
+
+# ## Functions
+
+# In[62]:
+
 
 import re
 import keras
@@ -93,6 +119,10 @@ def preprocess_data(enc_tokenizer, dec_tokenizer, enc_text, dec_text):
     dec_timesteps = np.max([len(l) for l in dec_seq])
     dec_seq = pad_sequences(dec_seq, padding='post', maxlen = dec_timesteps)
     return enc_seq, dec_seq
+
+
+# In[63]:
+
 
 def define_nmt(hidden_size, batch_size, enc_timesteps, enc_vsize, dec_timesteps, dec_vsize):
     """ Defining a NMT model """
@@ -233,6 +263,9 @@ def infer_nmt(encoder_model, decoder_model, test_enc_seq, enc_vsize, dec_vsize, 
     return dec_text, attention_weights
 
 
+# In[64]:
+
+
 import matplotlib.pyplot as plt
 plt.rcParams['font.sans-serif']=["PingFang HK"]
 def plot_attention_weights(encoder_inputs, attention_weights, enc_id2word, dec_id2word, filename=None):
@@ -276,9 +309,13 @@ def plot_attention_weights(encoder_inputs, attention_weights, enc_id2word, dec_i
 #     else:
 #         plt.savefig(os.path.join(config.RESULTS_DIR, '{}'.format(filename)))
 
-## Main Program
 
-### Data Wrangling and Training
+# ## Main Program
+
+# ### Data Wrangling and Training
+
+# In[65]:
+
 
 #### hyperparameters
 batch_size = 128
@@ -311,10 +348,17 @@ dec_vsize = max(dec_tokenizer.index_word.keys()) + 1
 
 
 
+# In[66]:
+
+
 print(enc_vsize)
 print(dec_vsize)
 print(tr_enc_text[:5])
 print(tr_dec_text[:5])
+
+
+# In[67]:
+
 
 ###""" Defining the full model """
 full_model, infer_enc_model, infer_dec_model = define_nmt(
@@ -325,11 +369,22 @@ full_model, infer_enc_model, infer_dec_model = define_nmt(
     enc_vsize=enc_vsize,
     dec_vsize=dec_vsize)
 
+
+# In[68]:
+
+
 from keras.utils import plot_model
 plot_model(full_model, show_shapes=True)
 
-%%time
-loss, accuracy = train(full_model, enc_seq, dec_seq, batch_size, n_epochs)
+
+# In[69]:
+
+
+get_ipython().run_cell_magic('time', '', 'loss, accuracy = train(full_model, enc_seq, dec_seq, batch_size, n_epochs)\n')
+
+
+# In[70]:
+
 
 plt.style.use('fivethirtyeight')
 
@@ -339,27 +394,50 @@ plt.legend()
 plt.tight_layout()
 plt.show()
 
-### Model Saving
+
+# ### Model Saving
+
+# In[71]:
+
 
 # full_model.save('../../../RepositoryData/output/seq2seq-attention-addition/full-model.h5')
 # infer_enc_model.save('../../../RepositoryData/output/seq2seq-attention-addition/infer-enc-model.h5')
 # infer_dec_model.save('../../../RepositoryData/output/seq2seq-attention-addition/infer-dec-model.h5')
 
-### Prediction
+
+# ### Prediction
+
+# In[ ]:
+
 
 full_model.load_weights('../../../RepositoryData/output/seq2seq-attention-addition/full-model.h5')
 infer_enc_model.load_weights('../../../RepositoryData/output/seq2seq-attention-addition/infer-enc-model.h5')
 infer_dec_model.load_weights('../../../RepositoryData/output/seq2seq-attention-addition/infer-dec-model.h5')
 
+
+# In[72]:
+
+
 plot_model(infer_enc_model,show_shapes=True)
 
+
+# In[73]:
+
+
 plot_model(infer_dec_model, show_shapes=True)
+
+
+# In[74]:
+
 
 """ Index2word """
 enc_index2word = dict(
     zip(enc_tokenizer.word_index.values(), enc_tokenizer.word_index.keys()))
 dec_index2word = dict(
     zip(dec_tokenizer.word_index.values(), dec_tokenizer.word_index.keys()))
+
+
+# In[75]:
 
 
 def translate(infer_enc_model, infer_dec_model, test_enc_text, 
@@ -378,6 +456,10 @@ def translate(infer_enc_model, infer_dec_model, test_enc_text,
     print('\tFrench: {}'.format(test_dec))
     return test_enc_seq, test_dec, attn_weights
 
+
+# In[76]:
+
+
 test_enc_seq, test_dec, attn_weights=translate(infer_enc_model=infer_enc_model,
           infer_dec_model=infer_dec_model,
           test_enc_text=ts_enc_text[120],
@@ -390,9 +472,15 @@ test_enc_seq, test_dec, attn_weights=translate(infer_enc_model=infer_enc_model,
 
 
 
+# In[77]:
+
+
 """ Attention plotting """
 plot_attention_weights(test_enc_seq, attn_weights,
                        enc_index2word, dec_index2word)
+
+
+# In[ ]:
 
 
 print(tr_enc_text[:5])
@@ -400,7 +488,10 @@ print(tr_dec_text[:5])
 
 
 
-## Evaluation on Test Data
+# ## Evaluation on Test Data
+
+# In[78]:
+
 
 def test(full_model, ts_enc_text, ts_dec_text, enc_tokenizer, dec_tokenizer, batch_size):
     # ### Getting sequence integer data
@@ -424,3 +515,4 @@ def test(full_model, ts_enc_text, ts_dec_text, enc_tokenizer, dec_tokenizer, bat
 
 test(full_model, ts_enc_text = ts_enc_text, ts_dec_text = ts_dec_text, 
      enc_tokenizer = enc_tokenizer, dec_tokenizer = dec_tokenizer, batch_size = batch_size)
+

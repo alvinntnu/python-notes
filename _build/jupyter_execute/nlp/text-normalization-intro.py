@@ -1,11 +1,4 @@
-# Text Normalization
+#!/usr/bin/env python
+# coding: utf-8
 
-
-```{toctree}
-:hidden:
-:titlesonly:
-
-
-text-normalization-eng
-text-normalization-chinese
-```
+# # Text Normalization

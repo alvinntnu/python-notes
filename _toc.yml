@@ -1,102 +1,122 @@
-- file: intro
-- file: python-basics/python-basics
-  sections:
-    - file: python-basics/jupyter-notebook
-    - file: python-basics/notebook-to-slides
-    - file: python-basics/google-colab
-    - file: python-basics/google-colab-r
-    - file: python-basics/data-structure
-    - file: python-basics/regex
-    - file: python-basics/numpy
-    - file: python-basics/pandas
-    - file: python-basics/program-structure
-    - file: python-basics/input-output
-    - file: python-basics/pickle
-    - file: python-basics/data-visualization-1
-    - file: python-basics/data-visualization-2
-    - file: python-basics/oop
-    - file: python-basics/magic-r
-    - file: python-basics/docstrings
-    - file: python-basics/python-tricks
-    - file: python-basics/web-applications
-    - file: python-basics/google-drive-ubuntu
-    - file: python-basics/productive-tech
-    - file: python-basics/miscellaneous-notes
-- file: corpus/corpus-processing
-  sections:
+format: jb-book
+root: intro
+parts:
+  - caption: Python Basics
+    chapters:
+    - file: python-basics/python-basics
+      sections:
+      - file: python-basics/data-structure
+      - file: python-basics/program-structure
+      - file: python-basics/regex
+      - file: python-basics/input-output
+      - file: python-basics/oop
+      - file: python-basics/docstrings
+
+ 
+    - file: python-basics/jupyter
+      sections:
+      - file: python-basics/jupyter-notebook
+      - file: python-basics/notebook-to-slides
+      - file: python-basics/google-colab
+      - file: python-basics/google-colab-r
+
+    - file: python-basics/data-science
+      sections:
+      - file: python-basics/numpy
+      - file: python-basics/pandas
+      - file: python-basics/pickle
+      - file: python-basics/data-visualization-1
+      - file: python-basics/data-visualization-2
+      
+    - file: python-basics/advanced-skills
+      sections:
+      - file: python-basics/magic-r
+      - file: python-basics/python-tricks
+      - file: python-basics/web-applications
+      - file: python-basics/google-drive-ubuntu
+      - file: python-basics/productive-tech
+      - file: python-basics/miscellaneous-notes
+      
+  - caption: Corpus Processing with Python
+    chapters:
+    - file: corpus/corpus-processing
     - file: corpus/nltk
     - file: corpus/web-crawler
     - file: corpus/web-crawler-dcard
     - file: corpus/unicode
     - file: corpus/corpus-linguistics-methods
       sections:
-        - file: corpus/lexical-bundles
-        - file: corpus/tokenization
-        - file: corpus/wordnet
-        - file: corpus/word-cloud
-        - file: corpus/patterns-constructions
+      - file: corpus/lexical-bundles
+      - file: corpus/tokenization
+      - file: corpus/wordnet
+      - file: corpus/word-cloud
+      - file: corpus/patterns-constructions
     - file: corpus/structured-corpus-processing
       sections:
-        - file: corpus/bnc
-        - file: corpus/childes
-        - file: corpus/praat-textgrid
-    - file: corpus/vectorizing-text
+      - file: corpus/bnc
+      - file: corpus/childes
+      - file: corpus/praat-textgrid
+      - file: corpus/vectorizing-text
     - file: corpus/chinese-processing
       sections:
-        - file: corpus/jieba
-        - file: corpus/ckiptagger
-- file: statistical-analyses/statistical-analyses
-  sections:
+      - file: corpus/jieba
+      - file: corpus/ckiptagger
+       
+  - caption: Statistics with Python
+    chapters:
+    - file: statistical-analyses/statistical-analyses
     - file: statistical-analyses/descriptive-statistics
     - file: statistical-analyses/analytic-statistics
     - file: statistical-analyses/network-analysis
     - file: statistical-analyses/network-analysis-igraph
-- file: nlp/nlp
-  sections:
+ 
+  - caption: NLP with Python
+    chapters:
+    - file: nlp/nlp
     - file: nlp/nlp-primer
       sections:
-        - file: nlp/nlp-pipeline
-        - file: nlp/nlp-spacy
-        - file: nlp/nlp-spacy-zh
-        - file: nlp/nlp-ckipnlp
+      - file: nlp/nlp-pipeline
+      - file: nlp/nlp-spacy
+      - file: nlp/nlp-spacy-zh
+      - file: nlp/nlp-ckipnlp
     - file: nlp/text-normalization-intro
       sections:
-        - file: nlp/text-normalization-eng
-        - file: nlp/text-normalization-chinese
+      - file: nlp/text-normalization-eng
+      - file: nlp/text-normalization-chinese
     - file: nlp/ml-overview
       sections:
-        - file: nlp/ml-sklearn-regression
-        - file: nlp/ml-sklearn-classification
-        - file: nlp/naive-bayes
-        - file: nlp/sentiment-analysis-ml
+      - file: nlp/ml-sklearn-regression
+      - file: nlp/ml-sklearn-classification
+      - file: nlp/naive-bayes
+    - file: nlp/sentiment-analysis-ml
     - file: nlp/neural-network-from-scratch
     - file: nlp/language-model
       sections:
-        - file: nlp/neural-language-model-primer
-        - file: nlp/neural-language-model-zh
-        - file: nlp/text-gen-lstm-v1
-        - file: nlp/gpt2
+      - file: nlp/neural-language-model-primer
+      - file: nlp/neural-language-model-zh
+      - file: nlp/text-gen-lstm-v1
+      - file: nlp/gpt2
     - file: nlp/word-embeddings
       sections:
-        - file: nlp/word2vec-chinese
-        - file: nlp/word2vec
-        - file: nlp/doc2vec
-        - file: nlp/word-embeddings-autoencoder
-        - file: nlp/transfer-learning-sent-encoding
+      - file: nlp/word2vec
+      - file: nlp/doc2vec
+      - file: nlp/word-embeddings-autoencoder
+    - file: nlp/transfer-learning-sent-encoding
     - file: nlp/sentiment-analysis-dl
     - file: nlp/sentiment-analysis-lstm-v1
     - file: nlp/seq-to-seq-types
       sections:
-        - file: nlp/seq-to-seq-types-date
-        - file: nlp/seq-to-seq-m21-sentiment-attention
-        - file: nlp/seq-to-seq-attention-addition
+      - file: nlp/seq-to-seq-types-date
+      - file: nlp/seq-to-seq-m21-sentiment-attention
+      - file: nlp/seq-to-seq-attention-addition
     - file: nlp/seq-to-seq-machine-translation
       sections:
-        - file: nlp/seq-to-seq-machine-translation-attention
+      - file: nlp/seq-to-seq-machine-translation-attention
     - file: nlp/hyperparameter-tuning
     - file: nlp/sentiment-analysis-using-bert-chinese
     - file: nlp/ktrain-tutorial-explaining-predictions
-- file: appendix/todo
-  sections:
-    - file: appendix/references
 
+  - caption: Appendix
+    chapters:
+    - file: appendix/todo
+    - file: appendix/references

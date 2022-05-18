@@ -1,4 +1,10 @@
-# Edit Distanced
+#!/usr/bin/env python
+# coding: utf-8
+
+# # Edit Distanced
+
+# In[1]:
+
 
 import re, collections
 
@@ -50,6 +56,10 @@ def edits2(word):
     """
     return {e2 for e1 in edits1(word) for e2 in edits1(e1)}
 
+
+# In[ ]:
+
+
 def known(words):
     """
     Return the subset of words that are actually 
@@ -57,14 +67,26 @@ def known(words):
     """
     return {w for w in words if w in WORD_COUNTS}
 
+
+# In[ ]:
+
+
 # input word
 word = 'fianlly'
 
 # zero edit distance from input word
 edits0(word)
 
+
+# In[ ]:
+
+
 # returns null set since it is not a valid word
 known(edits0(word))
+
+
+# In[ ]:
+
 
 # one edit distance from input word
 edits1(word)
@@ -84,6 +106,10 @@ candidates = (known(edits0(word)) or
               [word])
 candidates
 
+
+# In[ ]:
+
+
 def correct(word):
     """
     Get the best correct spelling for the input word
@@ -95,6 +121,10 @@ def correct(word):
                   known(edits2(word)) or 
                   [word])
     return max(candidates, key=WORD_COUNTS.get)
+
+
+# In[ ]:
+
 
 def correct_match(match):
     """
@@ -121,3 +151,4 @@ def correct_text_generic(text):
     returning the corrected text.
     """
     return re.sub('[a-zA-Z]+', correct_match, text)
+

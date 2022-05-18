@@ -1,29 +1,47 @@
-# Unicode
+#!/usr/bin/env python
+# coding: utf-8
 
-- Dealing with unicode texts can be tedious sometimes.
-- It is good to have a basic understanding of the [Unicode Character Database](https://unicodebook.readthedocs.io/index.html)
-- In particular, this notebook focuses on the Python module `unicodedata`.
+# # Unicode
 
-## Character Name
+# - Dealing with unicode texts can be tedious sometimes.
+# - It is good to have a basic understanding of the [Unicode Character Database](https://unicodebook.readthedocs.io/index.html)
+# - In particular, this notebook focuses on the Python module `unicodedata`.
+
+# ## Character Name
+
+# In[11]:
+
 
 import unicodedata
 
 print(unicodedata.name('A'))
 print(unicodedata.name('我'))
 
-## Characrer to Numbers
+
+# ## Characrer to Numbers
+
+# In[26]:
+
 
 print(unicodedata.numeric('四'))  # any character
 print(unicodedata.numeric('壹'))  # any character
 #print(unicodedata.digit('四')) # digits only
 #print(unicodedata.decimal('六'))
 
-## Look-up By Name
+
+# ## Look-up By Name
+
+# In[10]:
+
 
 print(unicodedata.lookup('CJK UNIFIED IDEOGRAPH-6211'))
 print(unicodedata.lookup('LEFT CURLY BRACKET'))
 
-## Unicode Category
+
+# ## Unicode Category
+
+# In[32]:
+
 
 print(unicodedata.category('a'))
 print(unicodedata.category('A'))
@@ -32,14 +50,18 @@ print(unicodedata.category('。'))
 print(unicodedata.category('$'))
 print(unicodedata.category('我'))
 
-## Normalization
 
-- Ways of normalization: NFD, NFC, NFKD, NFKC
-- Suggested use:**NFKC**
-- Meaning:
-    - D = Decomposition (will change the length of the original form)
-    - C = Composition 
-    - K = Compatibility (will change the original form)
+# ## Normalization
+
+# - Ways of normalization: NFD, NFC, NFKD, NFKC
+# - Suggested use:**NFKC**
+# - Meaning:
+#     - D = Decomposition (will change the length of the original form)
+#     - C = Composition 
+#     - K = Compatibility (will change the original form)
+
+# In[60]:
+
 
 ## Chinese characters with full-width English letters and punctuations
 text = '中英文abc,，。.．ＡＢＣ１２３'
@@ -47,6 +69,10 @@ print(unicodedata.normalize('NFKD', text))
 print(unicodedata.normalize('NFKC', text))  # recommended method
 print(unicodedata.normalize('NFC', text))
 print(unicodedata.normalize('NFD', text))
+
+
+# In[66]:
+
 
 text = 'English characters with full-wdiths ＡＢＣ。'
 
@@ -71,12 +97,20 @@ print(
                           text).encode('ascii',
                                        'ignore').decode('utf-8', 'ignore'))
 
+
+# In[79]:
+
+
 text = 'Klüft skräms inför på fédéral électoral große'
 
 unicodedata.normalize('NFKD', text).encode('ascii',
                                            'ignore').decode('utf-8', 'ignore')
 
-## Normalizing Texts
+
+# ## Normalizing Texts
+
+# In[105]:
+
 
 text = "中文ＣＨＩＮＥＳＥ。！＝=.= ＾o＾ 2020/5/20 alvin@gmal.cob@%&*"
 
@@ -94,6 +128,7 @@ print(''.join(
 # select Chinese chars?
 print(''.join([c for c in text if unicodedata.category(c)[:2] in ["Lo"]]))
 
-```{note}
-It seems that the unicode catetory **Lo** is good to identify Chinese characters?
-```
+
+# ```{note}
+# It seems that the unicode catetory **Lo** is good to identify Chinese characters?
+# ```

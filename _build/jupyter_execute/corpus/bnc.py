@@ -1,10 +1,16 @@
-# BNC-XML
+#!/usr/bin/env python
+# coding: utf-8
 
-- XML
-- CHILDES
-- JSON
+# # BNC-XML
+# 
+# - XML
+# - CHILDES
+# - JSON
 
-## BNC XML
+# ## BNC XML
+
+# In[11]:
+
 
 ## Read BNC XML
 import nltk
@@ -19,3 +25,4 @@ finder = BigramCollocationFinder.from_words(bnc_reader.words(fileids=list_of_fil
 scored = finder.score_ngrams(bigram_measures.raw_freq)
 
 print(scored)
+

@@ -1,5 +1,4 @@
-Corpus Linguistics with Python
-=============
+# Corpus Linguistics with Python
 
 This section includes topics on corpus linguistics with Python. 
 In particular, it will demonstrate how to perform several important corpus analyses using the Python language.

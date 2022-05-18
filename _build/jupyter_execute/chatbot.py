@@ -1,4 +1,10 @@
-# Chatbot
+#!/usr/bin/env python
+# coding: utf-8
+
+# # Chatbot
+
+# In[2]:
+
 
 import nltk
 from nltk.stem import WordNetLemmatizer
@@ -12,6 +18,10 @@ from keras.layers import Dense, Activation, Dropout
 from keras.optimizers import SGD
 import random
 
+
+# In[3]:
+
+
 words=[]
 classes = []
 documents = []
@@ -19,9 +29,21 @@ ignore_words = ['?', '!']
 data_file = open('../data/intents.json').read()
 intents = json.loads(data_file)
 
+
+# In[4]:
+
+
 intents['intents'][1].keys()
 
+
+# In[6]:
+
+
 intents['intents'][1]
+
+
+# In[19]:
+
 
 for intent in intents['intents']:
     for pattern in intent['patterns']:
@@ -36,7 +58,15 @@ for intent in intents['intents']:
         if intent['tag'] not in classes:
             classes.append(intent['tag'])
 
+
+# In[21]:
+
+
 documents[:5]
+
+
+# In[18]:
+
 
 # lemmaztize and lower each word and remove duplicates
 words = [lemmatizer.lemmatize(w.lower()) for w in words if w not in ignore_words]
@@ -49,6 +79,10 @@ print (len(documents), "documents")
 print (len(classes), "classes", classes)
 # words = all words, vocabulary
 print (len(words), "unique lemmatized words", words)
+
+
+# In[13]:
+
 
 import os
 os.mkdir('../data/chatbot/')
@@ -84,6 +118,10 @@ train_x = list(training[:,0])
 train_y = list(training[:,1])
 print("Training data created")
 
+
+# In[14]:
+
+
 # Create model - 3 layers. First layer 128 neurons, second layer 64 neurons and 3rd output layer contains number of neurons
 # equal to number of intents to predict output intent with softmax
 model = Sequential()
@@ -103,7 +141,11 @@ model.save('../data/chatbot/chatbot_model.h5', hist)
 
 print("model created")
 
-## Prediction
+
+# ## Prediction
+
+# In[16]:
+
 
 import nltk
 from nltk.stem import WordNetLemmatizer
@@ -170,7 +212,15 @@ def chatbot_response(msg):
     res = getResponse(ints, intents)
     return res
 
+
+# In[21]:
+
+
 chatbot_response('I need help')
+
+
+# In[ ]:
+
 
 # #Creating GUI with tkinter
 # import tkinter
@@ -224,3 +274,4 @@ chatbot_response('I need help')
 # SendButton.place(x=6, y=401, height=90)
 
 # base.mainloop()
+

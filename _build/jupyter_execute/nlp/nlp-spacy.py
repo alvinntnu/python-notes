@@ -1,19 +1,25 @@
-# Natural Language Processing (spaCy)
+#!/usr/bin/env python
+# coding: utf-8
 
-## Installation
+# # Natural Language Processing (spaCy)
 
-- Spacy [language models](https://spacy.io/models/en-starters)
+# ## Installation
+# 
+# - Spacy [language models](https://spacy.io/models/en-starters)
+# 
+# ```
+# # Install package
+# ## In terminal:
+# !pip install spacy
+# 
+# ## Download language model for Chinese and English
+# !spacy download en
+# !spacy download zh
+# !spacy download en_vectors_web_lg ## pretrained word vectors
+# ```
 
-```
-# Install package
-## In terminal:
-!pip install spacy
+# In[1]:
 
-## Download language model for Chinese and English
-!spacy download en
-!spacy download zh
-!spacy download en_vectors_web_lg ## pretrained word vectors
-```
 
 import spacy
 from spacy import displacy
@@ -23,21 +29,24 @@ nlp_en = spacy.load('en') ## disable=["parser"]
 doc = nlp_en('This is a sentence')
 
 
-## Linguistic Features
+# ## Linguistic Features
+# 
+# - After we parse and tag a given text, we can extract token-level information:
+#     - Text: the original word text
+#     - Lemma: the base form of the word
+#     - POS: the simple universal POS tag
+#     - Tag: the detailed POS tag
+#     - Dep: Syntactic dependency
+#     - Shape: Word shape (capitalization, punc, digits)
+#     - is alpha
+#     - is stop
+#     
+# :::{admonition,dropdown,note}
+# For more information on POS tags, see spaCy (POS tag scheme documentation)[https://spacy.io/api/annotation#pos-tagging].
+# :::
 
-- After we parse and tag a given text, we can extract token-level information:
-    - Text: the original word text
-    - Lemma: the base form of the word
-    - POS: the simple universal POS tag
-    - Tag: the detailed POS tag
-    - Dep: Syntactic dependency
-    - Shape: Word shape (capitalization, punc, digits)
-    - is alpha
-    - is stop
-    
-:::{admonition,dropdown,note}
-For more information on POS tags, see spaCy (POS tag scheme documentation)[https://spacy.io/api/annotation#pos-tagging].
-:::
+# In[2]:
+
 
 # parts of speech tagging
 for token in doc:
@@ -51,6 +60,10 @@ for token in doc:
             token.is_stop,
             )))
 
+
+# In[3]:
+
+
 ## Output in different ways
 for token in doc:
     print('%s_%s' % (token.text, token.tag_))
@@ -61,18 +74,31 @@ for token in doc:
 print(out)
 
 
+# In[4]:
+
+
 ## Check meaning of a POS tag
 spacy.explain('VBZ')
 
 
-## Visualization Linguistic Features
+# ## Visualization Linguistic Features
+
+# In[5]:
+
 
 # Visualize
 displacy.render(doc, style="dep")
 
+
+# In[6]:
+
+
 options = {"compact": True, "bg": "#09a3d5",
            "color": "white", "font": "Source Sans Pro"}
 displacy.render(doc, style="dep", options=options)
+
+
+# In[7]:
 
 
 ## longer paragraphs
@@ -88,23 +114,35 @@ options = {"compact": True, "bg": "#09a3d5",
           "distance": 120}
 displacy.render(sentence_spans, style="dep", options=options)
 
+
+# In[8]:
+
+
 colors = {"ORG": "linear-gradient(90deg, #aa9cfc, #fc9ce7)"}
 options = {"ents": ["ORG"], "colors": colors}
 
 
 displacy.render(sentence_spans[0], style="ent")
 
-## NP Chunking
+
+# ## NP Chunking
+
+# In[9]:
+
 
 for c in doc2.noun_chunks:
     print(c.text, c.root.text, c.root.dep_, c.root.head.text)
 
-## Named Entity Recognition
 
-- Text: original entity text
-- Start: index of start of entity in the Doc
-- End: index of end of entity in the Doc
-- Label: Entity label, type
+# ## Named Entity Recognition
+# 
+# - Text: original entity text
+# - Start: index of start of entity in the Doc
+# - End: index of end of entity in the Doc
+# - Label: Entity label, type
+# 
+
+# In[10]:
 
 
 for ent in doc2.ents:
@@ -112,3 +150,4 @@ for ent in doc2.ents:
          ent.start_char,
          ent.end_char,
          ent.label_)
+

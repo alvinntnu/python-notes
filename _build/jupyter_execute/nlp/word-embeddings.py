@@ -1,15 +1,5 @@
-# Word Embeddings
+#!/usr/bin/env python
+# coding: utf-8
 
-
-
-```{toctree}
-:hidden:
-:titlesonly:
-
-
-word2vec-chinese
-word2vec
-doc2vec
-word-embeddings-autoencoder
-transfer-learning-sent-encoding
-```
+# # Word Embeddings
+# 

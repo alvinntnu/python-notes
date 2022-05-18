@@ -1,52 +1,58 @@
-# Program Structure
+#!/usr/bin/env python
+# coding: utf-8
 
-- A quick overview of control sturctures in Python
+# # Program Structure
+# 
+# - A quick overview of control sturctures in Python
 
-## If- structure
+# ## If- structure
+# 
+# - Format
+# 
+# ```
+# if test:
+#     DoThis()
+# elseif test:
+#     DoThat()
+# else:
+#     pass
+# ```
 
-- Format
+# ## Types of Test
+# 
+# ```
+# # comparisons
+# a > b
+# a == b
+# a != b
+# 
+# # membership
+# a in b
+# a not in b
+# 
+# # len check
+# len(x) > 5
+# 
+# # boolean value
+# fileopen
+# not fileopen
+# 
+# # Validation
+# x.isalpha()
+# x.isdigit()
+# 
+# # Calculation
+# (a*b) > 100.0
+# ## use braces to force the calculation
+# 
+# # Combining Tests
+# and, or, not
+# ```
 
-```
-if test:
-    DoThis()
-elseif test:
-    DoThat()
-else:
-    pass
-```
+# ## For Statement
+# 
 
-## Types of Test
-
-```
-# comparisons
-a > b
-a == b
-a != b
-
-# membership
-a in b
-a not in b
-
-# len check
-len(x) > 5
-
-# boolean value
-fileopen
-not fileopen
-
-# Validation
-x.isalpha()
-x.isdigit()
-
-# Calculation
-(a*b) > 100.0
-## use braces to force the calculation
-
-# Combining Tests
-and, or, not
-```
-
-## For Statement
+# In[7]:
 
 
 names = ['Julia','Jane','Tom','Dickson','Harry']
@@ -56,25 +62,41 @@ for p in names:
         print('%s has passed %f test' % (p, tn))
     
 
+
+# In[10]:
+
+
 import itertools
 
 for (p, tn) in zip(names, tnum):
     print('%s has passed %.0f test(s)' % (p, tn))
 
-```{tip}
-Using `tqdm`in for-loop can give us a progress bar in the iteration process.
-```
+
+# ```{tip}
+# Using `tqdm`in for-loop can give us a progress bar in the iteration process.
+# ```
+
+# In[ ]:
+
 
 from tqdm import tqdm 
 for i in tqdm(range(10000)): 
 sleep(0.01) 
 
-## While Statement
+
+# ## While Statement
+
+# In[12]:
+
 
 n=5
 while n > 0:
     print(n)
     n-=1
+
+
+# In[15]:
+
 
 n=5
 
@@ -82,8 +104,11 @@ while not n < 0:
     print(n)
     n-=1
 
-## Break Statement
 
+# ## Break Statement
+# 
+
+# In[25]:
 
 
 def doCommand(s):
@@ -97,6 +122,10 @@ while True:
         doCommand(command)
 print('bye')
 
+
+# In[30]:
+
+
 while True:
     command=input('Enter your name:')
     if len(command)==0:
@@ -108,13 +137,17 @@ while True:
         doCommand(command)
 print('bye')
 
-## List Comprehensions
 
-- A *list comprehension* is a way of dynamically creating a list elements in an elegant shorthand.
+# ## List Comprehensions
+# 
+# - A *list comprehension* is a way of dynamically creating a list elements in an elegant shorthand.
+# 
+# ```
+# [expr for element in iterable if condition]
+# ```
 
-```
-[expr for element in iterable if condition]
-```
+# In[35]:
+
 
 squares = [i**2 for i in range(1,10)]
 print(squares)
@@ -126,11 +159,12 @@ text = 'This is a sample sentence long string.'
 
 print([i.upper() for i in text if i.find('a')])
 
-## Functions
 
-```
-def FUNCTION_NAME:
-    PROCDURES
-    
-    reutrn RETURN_VALUES
-```
+# ## Functions
+# 
+# ```
+# def FUNCTION_NAME:
+#     PROCDURES
+#     
+#     reutrn RETURN_VALUES
+# ```

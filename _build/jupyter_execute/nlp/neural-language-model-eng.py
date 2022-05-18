@@ -1,9 +1,15 @@
-# Neural Language Model of English
+#!/usr/bin/env python
+# coding: utf-8
 
-- [How to development a word-level neural language model in keras](https://machinelearningmastery.com/how-to-develop-a-word-level-neural-language-model-in-keras/)
-- English texts
-- Word-based neural language model based on word sequences of 50 words
-- Use the republic texts
+# # Neural Language Model of English
+# 
+# - [How to development a word-level neural language model in keras](https://machinelearningmastery.com/how-to-develop-a-word-level-neural-language-model-in-keras/)
+# - English texts
+# - Word-based neural language model based on word sequences of 50 words
+# - Use the republic texts
+
+# In[1]:
+
 
 import string
 
@@ -70,6 +76,10 @@ print('Total Sequences: %d' % len(sequences))
 out_filename = 'republic_sequences.txt'
 save_doc(sequences, out_filename)
 
+
+# In[2]:
+
+
 from numpy import array
 from pickle import dump
 from keras.preprocessing.text import Tokenizer
@@ -93,6 +103,10 @@ def load_doc(filename):
 in_filename = 'republic_sequences.txt'
 doc = load_doc(in_filename)
 lines = doc.split('\n')
+
+
+# In[3]:
+
 
 # integer encode sequences of words
 tokenizer = Tokenizer()
@@ -123,10 +137,18 @@ model.compile(loss='categorical_crossentropy',
 # fit model
 model.fit(X, y, batch_size=512, epochs=1)
 
+
+# In[ ]:
+
+
 # save the model to file
 model.save('model.h5')
 # save the tokenizer
 dump(tokenizer, open('tokenizer.pkl', 'wb'))
+
+
+# In[ ]:
+
 
 from random import randint
 from pickle import load
@@ -188,3 +210,4 @@ print(seed_text + '\n')
 # generate new text
 generated = generate_seq(model, tokenizer, seq_length, seed_text, 50)
 print(generated)
+

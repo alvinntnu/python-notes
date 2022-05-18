@@ -1,44 +1,47 @@
-# Google Drive with Ubuntu
+#!/usr/bin/env python
+# coding: utf-8
 
-So far Google has not released an official API for Linux with Google Drive.
+# # Google Drive with Ubuntu
 
-This note illustrates how to mount Google Drive on Ubuntu using `ocamlfuse`.
+# So far Google has not released an official API for Linux with Google Drive.
+# 
+# This note illustrates how to mount Google Drive on Ubuntu using `ocamlfuse`.
+# 
 
+# ## Install Ocamlfuse
 
-## Install Ocamlfuse
+# ```
+# $ sudo add-apt-repository ppa:alessandro-strada/ppa
+# $ sudo apt-get update
+# $ sudo apt-get install google-drive-ocamlfuse
+# ```
 
-```
-$ sudo add-apt-repository ppa:alessandro-strada/ppa
-$ sudo apt-get update
-$ sudo apt-get install google-drive-ocamlfuse
-```
+# ## Authorize Google Account on Ubuntu
 
-## Authorize Google Account on Ubuntu
+# ```
+# google-drive-ocamlfuse
+# ```
 
-```
-google-drive-ocamlfuse
-```
+# Just follow the GUI instructions to allow Ubuntu to access the Google Drive.
 
-Just follow the GUI instructions to allow Ubuntu to access the Google Drive.
+# ## Create a Mounting Point in Local Machine
 
-## Create a Mounting Point in Local Machine
+# ```
+# $ mkdir ~/google-drive
+# $ google-drive-ocamlfuse ~/google-drive
+# ```
 
-```
-$ mkdir ~/google-drive
-$ google-drive-ocamlfuse ~/google-drive
-```
+# ## Mount and Unmount Drive
 
-## Mount and Unmount Drive
+# ```
+# fusermount -u ~/google-drive
+# ```
 
-```
-fusermount -u ~/google-drive
-```
+# ## Benefits
 
-## Benefits
+# - To mount the Google Drive using ocamlfuse, it is easier to access the files and directories in the terminal.
+# - Plus, all filenames and directory names show up properly!
 
-- To mount the Google Drive using ocamlfuse, it is easier to access the files and directories in the terminal.
-- Plus, all filenames and directory names show up properly!
+# ## References
 
-## References
-
-- [Mount google drive in linux using google-drive-ocamlfuse-client](https://www.tecmint.com/mount-google-drive-in-linux-using-google-drive-ocamlfuse-client/3/)
+# - [Mount google drive in linux using google-drive-ocamlfuse-client](https://www.tecmint.com/mount-google-drive-in-linux-using-google-drive-ocamlfuse-client/3/)

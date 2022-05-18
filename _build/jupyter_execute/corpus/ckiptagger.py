@@ -1,48 +1,66 @@
-# Chinese Word Segmentation (ckiptagger)
+#!/usr/bin/env python
+# coding: utf-8
 
+# # Chinese Word Segmentation (ckiptagger)
+# 
+# 
+
+# In[3]:
 
 
 DEMO_DATA_ROOT="../../../RepositoryData/data"
 
-The current state-of-art Chinese segmenter for Taiwan Mandarin available is probably the [CKIP tagger](https://github.com/ckiplab/ckiptagger), created by the [Chinese Knowledge and Information Processing (CKIP)](https://ckip.iis.sinica.edu.tw/) group at the Academia Sinica.
 
-The `ckiptagger` is released as a python module.
+# The current state-of-art Chinese segmenter for Taiwan Mandarin available is probably the [CKIP tagger](https://github.com/ckiplab/ckiptagger), created by the [Chinese Knowledge and Information Processing (CKIP)](https://ckip.iis.sinica.edu.tw/) group at the Academia Sinica.
+# 
+# The `ckiptagger` is released as a python module.
+# 
+# The normal CPU version is very slow. Not sure if it is the case for GPU version.
 
-The normal CPU version is very slow. Not sure if it is the case for GPU version.
+# ## Installation
+# 
+# ```
+# !pip install ckiptagger
+# ```
+# 
+# ```{note}
+# Remember to download the model files. Very big.
+# ```
 
-## Installation
+# ## Download the Model Files
+# 
+# All NLP applications have their models behind their fancy performances. To use the tagger provided in `ckiptagger`, we need to download their pre-trained model files. 
+# 
+# Please go to the [github of CKIP tagger](https://github.com/ckiplab/ckiptagger) to download the model files, which is provided as a zipped file. (The file is very big. It takes a while.)
+# 
+# After you download the zipped file, unzip it under your working directory to the `data/` directory.
 
-```
-!pip install ckiptagger
-```
+# ## Segmenting Texts
+# 
+# The initialized word segmenter object, `ws()`, can tokenize any input **character vectors** into a list of **word vectors** of the same size.
 
-```{note}
-Remember to download the model files. Very big.
-```
+# In[4]:
 
-## Download the Model Files
-
-All NLP applications have their models behind their fancy performances. To use the tagger provided in `ckiptagger`, we need to download their pre-trained model files. 
-
-Please go to the [github of CKIP tagger](https://github.com/ckiplab/ckiptagger) to download the model files, which is provided as a zipped file. (The file is very big. It takes a while.)
-
-After you download the zipped file, unzip it under your working directory to the `data/` directory.
-
-## Segmenting Texts
-
-The initialized word segmenter object, `ws()`, can tokenize any input **character vectors** into a list of **word vectors** of the same size.
 
 from ckiptagger import data_utils, construct_dictionary, WS, POS, NER
 
-```{note}
-Please use own model path. The model files are very big. They are probably not on the Drive.
-```
+
+# ```{note}
+# Please use own model path. The model files are very big. They are probably not on the Drive.
+# ```
+
+# In[6]:
+
 
 # Set Parameter Path
 MODEL_PATH = '../../../../../Dropbox/Corpus/CKIP_WordSeg/data/'
 ws = WS(MODEL_PATH)
 pos = POS(MODEL_PATH)
 ner = NER(MODEL_PATH)
+
+
+# In[7]:
+
 
 ## Raw text corpus 
 sentence_list = ['傅達仁今將執行安樂死，卻突然爆出自己20年前遭緯來體育台封殺，他不懂自己哪裡得罪到電視台。',
@@ -62,6 +80,10 @@ pos_list = pos(word_list)
 entity_list = ner(word_list, pos_list)
     
 
+
+# In[8]:
+
+
 def print_word_pos_sentence(word_sentence, pos_sentence):
     assert len(word_sentence) == len(pos_sentence)
     for word, pos in zip(word_sentence, pos_sentence):
@@ -77,11 +99,13 @@ for i, sentence in enumerate(sentence_list):
         print(entity)
 
 
-## Define Own Dictionary
+# ## Define Own Dictionary
+# 
+# The performance of Chinese word segmenter depends highly on the dictionary. Texts in different disciplines may have very domain-specific vocabulary. To prioritize a set of words in a dictionary, we can further ensure the accuracy of the word segmentation.
+# 
+# To create a dictionary for `ckiptagger`:
 
-The performance of Chinese word segmenter depends highly on the dictionary. Texts in different disciplines may have very domain-specific vocabulary. To prioritize a set of words in a dictionary, we can further ensure the accuracy of the word segmentation.
-
-To create a dictionary for `ckiptagger`:
+# In[9]:
 
 
 word_to_weight = {
@@ -100,4 +124,5 @@ word_list_2 = ws(sentence_list,
 print(word_list)
 print(word_list_2)
 
-## Convert ckiptagger output into a Data Frame?
+
+# ## Convert ckiptagger output into a Data Frame?

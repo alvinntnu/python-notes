@@ -26,13 +26,15 @@ parse:
   myst_url_schemes          : [mailto, http, https]  # URI schemes that will be recognised as external URLs in Markdown links
 
 html:
+    comments:
+        hypothesis: true
     home_page_in_navbar: false
     extra_navbar: |
         <div style="text-align:left">
         <i class="fas fa-home fa-2x" style="color:Maroon;margin-right:5px"></i><a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
         </div>
 execute:
-  execute_notebooks: auto
+  execute_notebooks: cache
   exclude_patterns:
     - 'nlp/nlp-ckipnlp.ipynb'
     - 'nlp/text-summarization.ipynb'

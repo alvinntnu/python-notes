@@ -1,4 +1,10 @@
-# Text Normalization (English)
+#!/usr/bin/env python
+# coding: utf-8
+
+# # Text Normalization (English)
+# 
+
+# In[1]:
 
 
 import spacy
@@ -11,7 +17,11 @@ import collections
 from nltk.tokenize.toktok import ToktokTokenizer
 from bs4 import BeautifulSoup
 
-## HTML Tags
+
+# ## HTML Tags
+
+# In[12]:
+
 
 import requests
 from bs4 import BeautifulSoup
@@ -19,6 +29,10 @@ from bs4 import BeautifulSoup
 data = requests.get('https://en.wikipedia.org/wiki/Python_(programming_language)')
 content = data.content
 print(content[:500])
+
+
+# In[11]:
+
 
 def strip_html_tags(text):
     soup = BeautifulSoup(text, "html.parser")
@@ -31,9 +45,13 @@ def strip_html_tags(text):
 clean_content = strip_html_tags(content)
 print(clean_content[:500])
 
-## Stemming
 
-## Lemmatization
+# ## Stemming
+
+# ## Lemmatization
+# 
+
+# In[4]:
 
 
 import spacy
@@ -49,7 +67,10 @@ def lemmatize_text(text):
 lemmatize_text("My system keeps crashing! his crashed yesterday, ours crashes daily")
 
 
-## Contractions
+# ## Contractions
+
+# In[5]:
+
 
 from contractions import CONTRACTION_MAP
 import re
@@ -71,13 +92,21 @@ def expand_contractions(text, contraction_mapping=CONTRACTION_MAP):
     expanded_text = re.sub("'", "", expanded_text)
     return expanded_text
 
+
+# In[6]:
+
+
 expand_contractions("Y'all can't expand contractions I'd think")
 
 expand_contractions("I'm very glad he's here!")
 
-## Accented Characters (Non-ASCII)
 
-- [unicodedata dcoumentation](https://docs.python.org/3/library/unicodedata.html)
+# ## Accented Characters (Non-ASCII)
+# 
+# - [unicodedata dcoumentation](https://docs.python.org/3/library/unicodedata.html)
+
+# In[7]:
+
 
 import unicodedata
 
@@ -96,9 +125,13 @@ remove_accented_chars('Sómě Áccěntěd těxt')
 # print(unicodedata.normalize('NFKD', 'Sómě Áccěntěd těxt').encode('ascii','ignore'))
 # print(unicodedata.normalize('NFKD', 'Sómě Áccěntěd těxt').encode('ascii','ignore').decode('utf-8', 'ignore'))
 
-## Special Characters
 
-## Stopwords
+# ## Special Characters
+
+# ## Stopwords
+
+# In[8]:
+
 
 import nltk
 from nltk.tokenize.toktok import ToktokTokenizer
@@ -117,6 +150,7 @@ def remove_stopwords(text, is_lower_case=False, stopwords=stopword_list):
 
 remove_stopwords("The, and, if are stopwords, computer is not")
 
-## Redundant Whitespaces
 
-## Spelling Checks
+# ## Redundant Whitespaces
+
+# ## Spelling Checks

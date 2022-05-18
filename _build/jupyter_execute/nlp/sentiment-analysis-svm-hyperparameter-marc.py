@@ -1,31 +1,44 @@
-# Sentiment Analysis of Yahoo! Movie reviews
+#!/usr/bin/env python
+# coding: utf-8
 
-- Using Marc's thesis dataset (Chinese Yahoo Movie Reviews)
-- Important Steps
-  - Loading the CSV dataset
-  - Split train-test
-  - Define Pipeline classifier
-  - Find optimal hyper-parameters for SVM via Cross validation
-  - Model evaluation
-  - Model interpretation
+# # Sentiment Analysis of Yahoo! Movie reviews
+# 
+# - Using Marc's thesis dataset (Chinese Yahoo Movie Reviews)
+# - Important Steps
+#   - Loading the CSV dataset
+#   - Split train-test
+#   - Define Pipeline classifier
+#   - Find optimal hyper-parameters for SVM via Cross validation
+#   - Model evaluation
+#   - Model interpretation
 
-## Setting Colab Environment
+# ## Setting Colab Environment
+# 
+# - Install a package `lime` for model interpretation
 
-- Install a package `lime` for model interpretation
+# In[1]:
 
-!pip install lime
 
-## Google Drive Access
+get_ipython().system('pip install lime')
 
-- After running the code cell, visit the URL and copy-paste the code back here
+
+# ## Google Drive Access
+# 
+# - After running the code cell, visit the URL and copy-paste the code back here
+
+# In[2]:
+
 
 from google.colab import drive
 drive.mount('/content/gdrive/')
 
 
-## Loading Libraries
+# ## Loading Libraries
 
-!pip install lime
+# In[18]:
+
+
+get_ipython().system('pip install lime')
 import pandas as pd
 import numpy as np
 import keras
@@ -43,13 +56,24 @@ from collections import OrderedDict
 from lime.lime_text import LimeTextExplainer
 
 
-## Loading Dataset
+# ## Loading Dataset
+
+# In[4]:
+
 
 df = pd.read_csv('/content/gdrive/My Drive/ColabData/marc_movie_review_metadata.csv')
 
+
+# In[5]:
+
+
 df.head()
 
-## Train-Test Split
+
+# ## Train-Test Split
+
+# In[6]:
+
 
 ## train-test split
 reviews = df['reviews_sentiword_seg'].values
@@ -61,6 +85,10 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 print(X_train.shape, y_train.shape)
 print(X_test.shape,y_test.shape)
+
+
+# In[7]:
+
 
 # import nltk
 # from nltk.tokenize import WhitespaceTokenizer
@@ -82,7 +110,10 @@ print(X_test.shape,y_test.shape)
 # token_transform = ChineseTokenizer()
 
 
-## Transformers and Pipeline
+# ## Transformers and Pipeline
+
+# In[8]:
+
 
 ## Transformer: BOW
 
@@ -91,9 +122,16 @@ min_df = 5
 
 BOW_transform = CountVectorizer()
 
+
+# In[9]:
+
+
 # Estimator
 classifier_svm = svm.SVC(C=1, kernel='linear', probability=True)
 
+
+
+# In[10]:
 
 
 ## Create Pipeline
@@ -107,40 +145,44 @@ pipeline = Pipeline([
   ('clf', svm.SVC(C=1, kernel='linear'))])
 
 
-## GridSearch Cross Validation
+# ## GridSearch Cross Validation
+# 
+# The hyper-parameters investigated here include:
+# 
+# - For SVM Classifier:
+#   - C
+#   - kernel
+# - For Bag-of-Words Vectorizer:
+#   - min_df
+#   - ngram_range
 
-The hyper-parameters investigated here include:
+# In[11]:
 
-- For SVM Classifier:
-  - C
-  - kernel
-- For Bag-of-Words Vectorizer:
-  - min_df
-  - ngram_range
 
-%%time
-## Hyper-parameter Tunning
-parameters = {
-    'clf__kernel':('linear','rbf'),
-    'clf__C':[1,10],
-    'vectorizer__ngram_range':[(1,1),(1,2), (1,3)],
-    'vectorizer__min_df':[2, 5,10]
-}
+get_ipython().run_cell_magic('time', '', "## Hyper-parameter Tunning\nparameters = {\n    'clf__kernel':('linear','rbf'),\n    'clf__C':[1,10],\n    'vectorizer__ngram_range':[(1,1),(1,2), (1,3)],\n    'vectorizer__min_df':[2, 5,10]\n}\n\ncls = GridSearchCV(estimator=pipeline, param_grid = parameters)\ncls_cv_results = cls.fit(X_train, y_train)\n")
 
-cls = GridSearchCV(estimator=pipeline, param_grid = parameters)
-cls_cv_results = cls.fit(X_train, y_train)
 
-## Best Model and Model Prediction
+# ## Best Model and Model Prediction
+
+# In[12]:
+
 
 ## Find the best model from cross-validation
 
 print("Best: %f using %s" % (cls_cv_results.best_score_, cls_cv_results.best_params_))
 
 
+# In[13]:
+
+
 ## Cross validation Results
 import pandas as pd
 cv_results_df=pd.DataFrame(cls.cv_results_)
 cv_results_df
+
+
+# In[14]:
+
 
 ## Prediction based on best model
 y_preds = cross_val_predict(cls.best_estimator_, X_test, y_test)
@@ -152,17 +194,25 @@ y_preds = cross_val_predict(cls.best_estimator_, X_test, y_test)
 
 print('Test accuracy: {:.2f} %'.format(100*metrics.accuracy_score(y_preds, y_test)))
 
-## Interpretation
 
-- Using LIME to interpret the importance of the features in relatio to the model prediction
-- Identify important words that may have great contribution to the model prediction
-- Based on [LIME of words: interpreting Recurrent Neural Networks predictions](https://data4thought.com/deep-lime.html)
+# ## Interpretation
+# 
+# - Using LIME to interpret the importance of the features in relatio to the model prediction
+# - Identify important words that may have great contribution to the model prediction
+# - Based on [LIME of words: interpreting Recurrent Neural Networks predictions](https://data4thought.com/deep-lime.html)
+
+# In[15]:
+
 
 ## Refit model based on optimal parameter settings
 pipeline = Pipeline([
   ('vectorizer',CountVectorizer(ngram_range=(1,3),min_df=2)), 
   ('clf', svm.SVC(C=1, kernel='rbf', probability=True))])
 pipeline.fit(X_train, y_train)
+
+
+# In[19]:
+
 
 import textwrap
 reviews_test = X_test
@@ -185,9 +235,12 @@ print('Predicted class: %s' % pipeline.predict([text_sample]))
 print('True class: %s' % sentiments_test[idx])
 
 
+# In[25]:
+
+
 #import matplotlib as plt
 matplotlib.rcParams['figure.dpi']=300
-%matplotlib inline
+get_ipython().run_line_magic('matplotlib', 'inline')
 
 
 explainer = LimeTextExplainer(class_names=class_names)
@@ -195,6 +248,9 @@ explanation = explainer.explain_instance(text_sample,
                                          pipeline.predict_proba, 
                                          num_features=20)
 explanation.show_in_notebook(text=True)
+
+
+# In[26]:
 
 
 weights = OrderedDict(explanation.as_list())
@@ -219,5 +275,10 @@ sns.barplot(x="weights", y="words", data=lime_weights);
 plt.yticks(rotation=0, FontProperties=getChineseFont(8))
 plt.title('Review ID-{}: features weights given by LIME'.format(idx));
 
+
+# In[27]:
+
+
 # !wget -O taipei_sans_tc_beta.ttf https://drive.google.com/uc?id=1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_&export=download
 # !mv taipei_sans_tc_beta.ttf /usr/local/lib/python3.6/dist-packages/matplotlib//mpl-data/fonts/ttf
+

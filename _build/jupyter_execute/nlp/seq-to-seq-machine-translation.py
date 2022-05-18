@@ -1,15 +1,21 @@
-# Machine Translation (Sequence-to-Sequence)
+#!/usr/bin/env python
+# coding: utf-8
 
-- Character-based machine translation using seq-to-seq model
-- This is based on:
-    - [A ten-minute introduction to sequence-to-sequence learning in Keras](https://keras.io/examples/nlp/lstm_seq2seq/)
-    - [Day 18:機器翻譯(Machine Translation](https://ithelp.ithome.com.tw/articles/10194403)
-- Data: 
-    - [English to French sentence pairs](http://www.manythings.org/anki/fra-eng.zip)
-    - [Paired Datasets of Other languages](http://www.manythings.org/anki/)
-- References
-    - [Sequence to Sequence Learning with Neural Networks](https://arxiv.org/abs/1409.3215)
-    - [Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation](https://arxiv.org/abs/1406.1078)
+# # Machine Translation (Sequence-to-Sequence)
+# 
+# - Character-based machine translation using seq-to-seq model
+# - This is based on:
+#     - [A ten-minute introduction to sequence-to-sequence learning in Keras](https://keras.io/examples/nlp/lstm_seq2seq/)
+#     - [Day 18:機器翻譯(Machine Translation](https://ithelp.ithome.com.tw/articles/10194403)
+# - Data: 
+#     - [English to French sentence pairs](http://www.manythings.org/anki/fra-eng.zip)
+#     - [Paired Datasets of Other languages](http://www.manythings.org/anki/)
+# - References
+#     - [Sequence to Sequence Learning with Neural Networks](https://arxiv.org/abs/1409.3215)
+#     - [Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation](https://arxiv.org/abs/1406.1078)
+
+# In[1]:
+
 
 from keras.models import Model
 from keras.layers import Input, LSTM, Dense
@@ -19,6 +25,10 @@ batch_size = 64  # Batch size for training.
 epochs = 100  # Number of epochs to train for.
 latent_dim = 256  # Latent dimensionality of the encoding space.
 num_samples = 10000  # Number of samples to train on.
+
+
+# In[2]:
+
 
 # Path to the data txt file on disk.
 data_path = '../../../RepositoryData/data/cmn.txt'
@@ -60,6 +70,10 @@ print('Number of unique output tokens:', num_decoder_tokens)
 print('Max sequence length for inputs:', max_encoder_seq_length)
 print('Max sequence length for outputs:', max_decoder_seq_length)
 
+
+# In[3]:
+
+
 # Create char index dictionary
 ## char as the key and index as the value
 input_token_index = dict(
@@ -87,6 +101,10 @@ decoder_target_data = np.zeros(
     (len(input_texts), max_decoder_seq_length, num_decoder_tokens),
     dtype='float32')
 
+
+# In[4]:
+
+
 # One-hot encode input and output texts
 for i, (input_text, target_text) in enumerate(zip(input_texts, target_texts)):
     for t, char in enumerate(input_text):
@@ -101,6 +119,10 @@ for i, (input_text, target_text) in enumerate(zip(input_texts, target_texts)):
             decoder_target_data[i, t - 1, target_token_index[char]] = 1.
     decoder_input_data[i, t + 1:, target_token_index[' ']] = 1.
     decoder_target_data[i, t:, target_token_index[' ']] = 1.
+
+
+# In[5]:
+
 
 ## Define Model
 
@@ -117,6 +139,10 @@ encoder_states = [state_h, state_c] # concatenate the states_h and states_c from
 
 ## the encoder_states shape: [state_h + state+c, latent_dim]
 
+
+# In[6]:
+
+
 # Set up the decoder, using `encoder_states` as initial state.
 decoder_inputs = Input(shape=(None, num_decoder_tokens)) # one word at a time, with vocab_size dimension,
 
@@ -131,13 +157,25 @@ decoder_outputs, _, _ = decoder_lstm(decoder_inputs,
 decoder_dense = Dense(num_decoder_tokens, activation='softmax')
 decoder_outputs = decoder_dense(decoder_outputs)
 
+
+# In[7]:
+
+
 # Define the model that will turn
 # `encoder_input_data` & `decoder_input_data` into `decoder_target_data`
 model = Model([encoder_inputs, decoder_inputs], decoder_outputs)
 
+
+# In[9]:
+
+
 from keras.utils import plot_model
 import pydot
 plot_model(model)
+
+
+# In[ ]:
+
 
 # # Run training
 # model.compile(optimizer='rmsprop', loss='categorical_crossentropy',
@@ -147,11 +185,22 @@ plot_model(model)
 #           epochs=epochs,
 #           validation_split=0.2)
 
+
+# In[ ]:
+
+
 # Save model
 # model.save('../data/s2s-cmn.h5')
 
 
+# In[10]:
+
+
 model.summary()
+
+
+# In[11]:
+
 
 ## If the model is loaded via external files
 ## Load the encoder_model, decoder_model this way
@@ -188,6 +237,10 @@ decoder_outputs=decoder_dense(decoder_outputs)
 decoder_model = Model(
     [decoder_inputs] + decoder_states_inputs, # target sentence + encoder output h+c
     [decoder_outputs] + decoder_states) # decoder predicted char + decoder predicted h+c
+
+
+# In[12]:
+
 
 # Reverse-lookup token index to decode sequences back to
 # something readable.
@@ -254,11 +307,3 @@ for seq_index in range(10):
     print('Input sentence:', input_texts[seq_index])
     print('Decoded sentence:', decoded_sentence)
 
-
-```{toctree}
-:hidden:
-:titlesonly:
-
-
-seq-to-seq-machine-translation-attention
-```
