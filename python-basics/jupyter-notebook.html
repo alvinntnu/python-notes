@@ -854,6 +854,11 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#clear-objects">
+   Clear Objects
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#other-issues">
    Other issues
   </a>
@@ -984,6 +989,11 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#clear-objects">
+   Clear Objects
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#other-issues">
    Other issues
   </a>
@@ -1065,17 +1075,18 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="section" id="special-blocks-in-jupyer-book">
 <h2>Special Blocks in Jupyer Book<a class="headerlink" href="#special-blocks-in-jupyer-book" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p><a class="reference external" href="https://sphinx-book-theme.readthedocs.io/en/latest/reference/demo.html#admonitions">sphinx-book-theme documentation</a></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">note</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">warning</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">caution</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">danger</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">error</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">hint</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">important</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">tip</span></code></p></li>
-<li><p>self-defined <code class="docutils literal notranslate"><span class="pre">admonition</span></code></p></li>
+<li><p><a class="reference external" href="https://sphinx-book-theme.readthedocs.io/en/latest/reference/kitchen-sink/paragraph-markup.html#admonitions">sphinx-book-theme documentation</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">attention</span></code>, <code class="docutils literal notranslate"><span class="pre">caution</span></code>, <code class="docutils literal notranslate"><span class="pre">danger</span></code>, <code class="docutils literal notranslate"><span class="pre">error</span></code>, <code class="docutils literal notranslate"><span class="pre">hint</span></code>, <code class="docutils literal notranslate"><span class="pre">important</span></code>, <code class="docutils literal notranslate"><span class="pre">note</span></code>, <code class="docutils literal notranslate"><span class="pre">tip</span></code>, <code class="docutils literal notranslate"><span class="pre">warning</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">admonition</span></code> (with self-defined headings)</p></li>
+<li><p>format:</p></li>
 </ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+<span class="p">:::{</span><span class="n">admonition</span><span class="p">}</span>
+
+<span class="p">:::</span>
+
+</pre></div>
+</div>
 </div>
 <div class="section" id="font-awesome-icons">
 <h2>Font Awesome Icons<a class="headerlink" href="#font-awesome-icons" title="Permalink to this headline">¶</a></h2>
@@ -1269,7 +1280,7 @@ $ jt -t monokai (-T -N -kl)
 <ul class="simple">
 <li><p>First, create a new environment</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>! conda create --name ENV_NAME python=3.6
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>! conda create --name ENV_NAME python=3.7
 </pre></div>
 </div>
 <ul class="simple">
@@ -1598,20 +1609,6 @@ R[write to console]: The following objects are masked from ‘package:base’:
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">702243819</span><span class="n">bba</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">draw_neural_net</span> <span class="kn">import</span> <span class="n">draw_neural_net</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;draw_neural_net&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1700,6 +1697,18 @@ R[write to console]: The following objects are masked from ‘package:base’:
 <li><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">freeze</span> <span class="pre">&gt;</span> <span class="pre">requirements.txt</span></code>: Save all installed packages into a list</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">show</span> <span class="pre">XXX</span></code>: show version information of specific package (XX)</p></li>
 </ul>
+</div>
+<div class="section" id="clear-objects">
+<h2>Clear Objects<a class="headerlink" href="#clear-objects" title="Permalink to this headline">¶</a></h2>
+<p>A simple function to clear user-defined objects in the current session.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">clearspace</span><span class="p">:</span>
+    
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="other-issues">
 <h2>Other issues<a class="headerlink" href="#other-issues" title="Permalink to this headline">¶</a></h2>
