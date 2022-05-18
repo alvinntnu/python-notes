@@ -57,16 +57,19 @@
 # ## Special Blocks in Jupyer Book
 # 
 # 
-# - [sphinx-book-theme documentation](https://sphinx-book-theme.readthedocs.io/en/latest/reference/demo.html#admonitions)
-# - `note`
-# - `warning`
-# - `caution`
-# - `danger`
-# - `error`
-# - `hint`
-# - `important`
-# - `tip`
-# - self-defined `admonition`
+# - [sphinx-book-theme documentation](https://sphinx-book-theme.readthedocs.io/en/latest/reference/kitchen-sink/paragraph-markup.html#admonitions)
+# - `attention`, `caution`, `danger`, `error`, `hint`, `important`, `note`, `tip`, `warning`
+# - `admonition` (with self-defined headings)
+# - format:
+# 
+# 
+# ```
+# 
+# :::{admonition}
+# 
+# :::
+# 
+# ```
 
 # ## Font Awesome Icons
 
@@ -239,7 +242,7 @@
 # 
 # - First, create a new environment
 # ```
-# ! conda create --name ENV_NAME python=3.6
+# ! conda create --name ENV_NAME python=3.7
 # ```
 # - Activate the new envrionment
 # ```
@@ -451,7 +454,7 @@ get_ipython().run_cell_magic('R', '', 'library(dplyr)\nlibrary(ggplot2)\ndata.fr
 
 # ## Create Neural Network Diagram
 
-# In[1]:
+# In[2]:
 
 
 # import numpy as np
@@ -502,7 +505,7 @@ get_ipython().run_cell_magic('R', '', 'library(dplyr)\nlibrary(ggplot2)\ndata.fr
 # \draw[->] (a) -- (b);
 
 
-# In[2]:
+# In[3]:
 
 
 from nnv import NNV
@@ -547,6 +550,17 @@ NNV(layersList, font_size=14).render()
 # - `pip freeze > requirements.txt`: Save all installed packages into a list
 # - `pip show XXX`: show version information of specific package (XX)
 # 
+
+# ## Clear Objects
+# 
+# A simple function to clear user-defined objects in the current session.
+
+# In[ ]:
+
+
+def clearspace:
+    
+
 
 # ## Other issues
 
