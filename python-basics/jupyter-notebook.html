@@ -1703,8 +1703,11 @@ R[write to console]: The following objects are masked from ‘package:base’:
 <p>A simple function to clear user-defined objects in the current session.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">clearspace</span><span class="p">:</span>
-    
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Define clear env function</span>
+<span class="k">def</span> <span class="nf">clearKernel</span><span class="p">():</span>
+  <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">():</span>
+      <span class="k">if</span> <span class="n">element</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;__&quot;</span> <span class="o">&amp;</span> <span class="n">element</span> <span class="o">!=</span> <span class="s2">&quot;clearKernel&quot;</span><span class="p">:</span>
+          <span class="k">del</span> <span class="nb">globals</span><span class="p">()[</span><span class="n">element</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
