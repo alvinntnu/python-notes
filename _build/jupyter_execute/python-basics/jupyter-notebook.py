@@ -555,11 +555,14 @@ NNV(layersList, font_size=14).render()
 # 
 # A simple function to clear user-defined objects in the current session.
 
-# In[ ]:
+# In[4]:
 
 
-def clearspace:
-    
+## Define clear env function
+def clearKernel():
+  for element in dir():
+      if element[0:2] != "__" & element != "clearKernel":
+          del globals()[element]
 
 
 # ## Other issues

@@ -797,6 +797,21 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#list-comprehension">
+   List Comprehension
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#enumerate-and-zip">
+   Enumerate and Zip
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#map-filter-and-reduce">
+   Map, Filter, and Reduce
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#requirements">
    Requirements
   </a>
@@ -859,6 +874,21 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#string-formatting">
    String Formatting
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#list-comprehension">
+   List Comprehension
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#enumerate-and-zip">
+   Enumerate and Zip
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#map-filter-and-reduce">
+   Map, Filter, and Reduce
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -1033,7 +1063,9 @@ And A third.
 <h2>List<a class="headerlink" href="#list" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>A List is typically a sequence of objects all having the same type, of arbitrary length</p></li>
-<li><p>Mutable</p></li>
+<li><p>It is a mutable data structure.</p></li>
+<li><p>You can always append elements into the list, and it will automatically expand its size.</p></li>
+<li><p>A List can include elements of different object types.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1072,12 +1104,40 @@ John
 </div>
 </div>
 </div>
+<ul class="simple">
+<li><p>Python lists are zero-indexed (i.e., the index of the first element of the list is <strong>0</strong>.</p></li>
+<li><p>Negative indices mean counting elements from the back.</p></li>
+<li><p>Syntax for a slice of a list:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">x[-2:]</span></code>: print the last two elements of <code class="docutils literal notranslate"><span class="pre">x</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x[2:]</span></code>: print all elements starting from the third element</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x[start:end:step]</span></code>: the end is not included in the result</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="n">odd</span> <span class="o">=</span> <span class="n">x</span><span class="p">[::</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">even</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">odd</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">even</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 3, 5, 7, 9]
+[2, 4, 6, 8, 10]
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="tuples">
 <h2>Tuples<a class="headerlink" href="#tuples" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>A Tuple is typically a collection of objects of different types, of fixed length</p></li>
-<li><p>Immutable</p></li>
+<li><p>Immutable (The tuple is a read-only data structure. It cannot be modified after it is created).</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1100,9 +1160,40 @@ John
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## unpacking with tuples</span>
+<span class="k">def</span> <span class="nf">powers</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="o">**</span><span class="mi">3</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">powers</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span> <span class="o">=</span> <span class="n">powers</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2, 4, 8)
+2 4 8
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="dictionary">
 <h2>Dictionary<a class="headerlink" href="#dictionary" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Square brackets <code class="docutils literal notranslate"><span class="pre">[]</span></code> for list and curly brackets <code class="docutils literal notranslate"><span class="pre">{}</span></code> for dict.</p></li>
+<li><p>A dict is for key-value mapping, and the key must be <strong>hashable</strong>.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>From Official Python Documentation</strong></p>
+<p>An object is hashable if it has a hash value which never changes during its lifetime, and can be compared to other objects. Hashable objects which compare equal must have the same hash value.</p>
+<p>Hashability makes an object usable as a dictionary key and a set member, because these data structures use the hash value internally.</p>
+<p>All of Python’s immutable built-in objects are hashable, while no mutable containers (such as lists or dictionaries) are. Objects which are instances of user-defined classes are hashable by default; they all compare unequal, and their hash value is their id().</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Dictionary</span>
@@ -1121,6 +1212,55 @@ John
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;NA&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wordfreq</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;the&quot;</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s2">&quot;banana&quot;</span><span class="p">:</span> <span class="mi">50</span>
+<span class="p">}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">wordfreq</span><span class="p">[</span><span class="s2">&quot;the&quot;</span><span class="p">])</span>
+
+<span class="n">w</span> <span class="o">=</span> <span class="s2">&quot;hay&quot;</span>
+
+<span class="k">if</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">wordfreq</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Its freq is &quot;</span><span class="p">,</span> <span class="n">wordfreq</span><span class="p">[</span><span class="n">w</span><span class="p">])</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It is not observed in the corpus&quot;</span><span class="p">)</span>
+    
+<span class="c1">## set default values   </span>
+<span class="nb">print</span><span class="p">(</span><span class="n">wordfreq</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+
+<span class="c1">## Use keys or values</span>
+
+<span class="nb">list</span><span class="p">(</span><span class="n">wordfreq</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">wordfreq</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+<span class="c1">## items()</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">wordfreq</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+
+<span class="c1">## combine two lists</span>
+
+<span class="n">wordfreq1</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;hay&quot;</span><span class="p">:</span><span class="mi">20</span>
+<span class="p">}</span>
+
+<span class="n">newwordfreq</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">wordfreq</span><span class="o">.</span><span class="n">items</span><span class="p">())</span><span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">wordfreq1</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">newwordfreq</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100
+It is not observed in the corpus
+0
+{&#39;the&#39;: 100, &#39;name&#39;: 10, &#39;banana&#39;: 50, &#39;hay&#39;: 20}
 </pre></div>
 </div>
 </div>
@@ -1197,6 +1337,169 @@ NN）主持人直呼，這是史上最混亂總統辯論
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The value of pi is 3.14
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="list-comprehension">
+<h2>List Comprehension<a class="headerlink" href="#list-comprehension" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>A classic Pythonic way to create a list on the fly.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mul3</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">101</span><span class="p">)</span> <span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="k">3</span> == 0]
+<span class="n">mul3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[3,
+ 6,
+ 9,
+ 12,
+ 15,
+ 18,
+ 21,
+ 24,
+ 27,
+ 30,
+ 33,
+ 36,
+ 39,
+ 42,
+ 45,
+ 48,
+ 51,
+ 54,
+ 57,
+ 60,
+ 63,
+ 66,
+ 69,
+ 72,
+ 75,
+ 78,
+ 81,
+ 84,
+ 87,
+ 90,
+ 93,
+ 96,
+ 99]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="p">[[</span><span class="n">m</span><span class="o">*</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">)]</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">)]</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">table</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+[2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+[3, 6, 9, 12, 15, 18, 21, 24, 27, 30]
+[4, 8, 12, 16, 20, 24, 28, 32, 36, 40]
+[5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
+[6, 12, 18, 24, 30, 36, 42, 48, 54, 60]
+[7, 14, 21, 28, 35, 42, 49, 56, 63, 70]
+[8, 16, 24, 32, 40, 48, 56, 64, 72, 80]
+[9, 18, 27, 36, 45, 54, 63, 72, 81, 90]
+[10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="enumerate-and-zip">
+<h2>Enumerate and Zip<a class="headerlink" href="#enumerate-and-zip" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">enumerate()</span></code>: This is a handy function for loop-structure. We can get the loop index and the object from the looped structure at the same time. The result of <code class="docutils literal notranslate"><span class="pre">enumerate()</span></code> produces a tuple of the counter (default starts with zero) and the element of the list.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">zip()</span></code>: It takes elements from different lists and put them side by side.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;alpha&quot;</span><span class="p">,</span> <span class="s2">&quot;beta&quot;</span><span class="p">,</span> <span class="s2">&quot;gamma&quot;</span><span class="p">,</span> <span class="s2">&quot;delta&quot;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">n</span><span class="p">,</span><span class="n">string</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">string</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: alpha
+1: beta
+2: gamma
+3: delta
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;yellow&quot;</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;cheese&quot;</span><span class="p">,</span> <span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;pea&quot;</span><span class="p">,</span> <span class="s2">&quot;mustard&quot;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>blue cheese
+red apple
+green pea
+yellow mustard
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="map-filter-and-reduce">
+<h2>Map, Filter, and Reduce<a class="headerlink" href="#map-filter-and-reduce" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">map()</span></code>: to transform elements of a list using some function.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">filter()</span></code>: to short list the elements based on certain criteria.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">reduce()</span></code>: It scans the elements from a list and combines them using a function.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
+
+<span class="k">def</span> <span class="nf">maximum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">a</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">b</span>
+ 
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">max_x</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="n">maximum</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">max_x</span><span class="p">)</span>
+
+
+
+<span class="c1">## use reduce to </span>
+<span class="c1">## sum all positive words from a list</span>
+<span class="k">def</span> <span class="nf">concat_num</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+    
+    <span class="k">def</span> <span class="nf">pos</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span>
+    
+    <span class="n">out</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">])</span>
+    <span class="k">return</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">out</span><span class="p">))</span>
+
+<span class="n">reduce</span><span class="p">(</span><span class="n">concat_num</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30
 </pre></div>
 </div>
 </div>

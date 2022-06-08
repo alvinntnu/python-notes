@@ -119,10 +119,12 @@ length = 1234.5678
 # ## List
 # 
 # - A List is typically a sequence of objects all having the same type, of arbitrary length
-# - Mutable
+# - It is a mutable data structure.
+# - You can always append elements into the list, and it will automatically expand its size.
+# - A List can include elements of different object types.
 # 
 
-# In[5]:
+# In[2]:
 
 
 ## Lists
@@ -148,9 +150,26 @@ list_mixed.index('Amy')
 ## max(), min(), sum(), sorted(), reversed()
 
 
+# - Python lists are zero-indexed (i.e., the index of the first element of the list is **0**.
+# - Negative indices mean counting elements from the back.
+# - Syntax for a slice of a list:
+#     - `x[-2:]`: print the last two elements of `x`
+#     - `x[2:]`: print all elements starting from the third element
+#     - `x[start:end:step]`: the end is not included in the result
+
+# In[8]:
+
+
+x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+odd = x[::2]
+even = x[1::2]
+print(odd)
+print(even)
+
+
 # ## Tuples
 # - A Tuple is typically a collection of objects of different types, of fixed length
-# - Immutable
+# - Immutable (The tuple is a read-only data structure. It cannot be modified after it is created).
 
 # In[6]:
 
@@ -164,7 +183,35 @@ print(tuple_mixed)
 len(tuple_mixed)
 
 
+# In[16]:
+
+
+## unpacking with tuples
+def powers(n):
+    return n, n**2, n**3
+x = powers(2)
+print(x)
+
+a,b,c = powers(2)
+print(a, b, c)
+
+
 # ## Dictionary
+# 
+# - Square brackets `[]` for list and curly brackets `{}` for dict.
+# - A dict is for key-value mapping, and the key must be **hashable**.
+# 
+# 
+# :::{note}
+# 
+# **From Official Python Documentation**
+# 
+# An object is hashable if it has a hash value which never changes during its lifetime, and can be compared to other objects. Hashable objects which compare equal must have the same hash value.
+# 
+# Hashability makes an object usable as a dictionary key and a set member, because these data structures use the hash value internally.
+# 
+# All of Python’s immutable built-in objects are hashable, while no mutable containers (such as lists or dictionaries) are. Objects which are instances of user-defined classes are hashable by default; they all compare unequal, and their hash value is their id().
+# :::
 
 # In[7]:
 
@@ -180,6 +227,46 @@ dict_days['S']
 dict_days.keys()
 dict_days.values()
 dict_days.get('A','NA')
+
+
+# In[13]:
+
+
+wordfreq = {
+    "the":100,
+    "name": 10,
+    "banana": 50
+}
+
+print(wordfreq["the"])
+
+w = "hay"
+
+if w in wordfreq:
+    print(w)
+    print("Its freq is ", wordfreq[w])
+else:
+    print("It is not observed in the corpus")
+    
+## set default values   
+print(wordfreq.get(w, 0))
+
+## Use keys or values
+
+list(wordfreq.keys())
+list(wordfreq.values())
+
+## items()
+list(wordfreq.items())
+
+## combine two lists
+
+wordfreq1 = {
+    "hay":20
+}
+
+newwordfreq = dict(list(wordfreq.items())+ list(wordfreq1.items()))
+print(newwordfreq)
 
 
 # ## String Formatting
@@ -218,6 +305,85 @@ print(textwrap.fill(sentence, 20))
 ## Old string formatting
 import math
 print('The value of pi is %1.2f' % math.pi) # specify number of digits before and after .
+
+
+# ## List Comprehension
+# 
+# - A classic Pythonic way to create a list on the fly.
+
+# In[19]:
+
+
+mul3 = [n for n in range(1,101) if n%3 == 0]
+mul3
+
+
+# In[20]:
+
+
+table = [[m*n for n in range(1,11)] for m in range(1,11)]
+for row in table:
+    print(row)
+
+
+# ## Enumerate and Zip
+# 
+# - `enumerate()`: This is a handy function for loop-structure. We can get the loop index and the object from the looped structure at the same time. The result of `enumerate()` produces a tuple of the counter (default starts with zero) and the element of the list.
+# - `zip()`: It takes elements from different lists and put them side by side.
+
+# In[21]:
+
+
+x = ["alpha", "beta", "gamma", "delta"]
+for n,string in enumerate(x):
+    print("{}: {}".format(n, string))
+
+
+# In[22]:
+
+
+x = ["blue", "red", "green", "yellow"]
+y = ["cheese", "apple", "pea", "mustard"]
+for a, b in zip(x, y):
+    print("{} {}".format(a, b))
+
+
+# ## Map, Filter, and Reduce
+# 
+# 
+# - `map()`: to transform elements of a list using some function.
+# - `filter()`: to short list the elements based on certain criteria.
+# - `reduce()`: It scans the elements from a list and combines them using a function.
+# 
+
+# In[34]:
+
+
+from functools import reduce
+
+def maximum(a,b):
+    if a > b:
+        return a
+    else:
+        return b
+ 
+x = [-3, 10, 2, 5, -6, 12, 0, 1]
+max_x = reduce(maximum, x)
+print(max_x)
+
+
+
+## use reduce to 
+## sum all positive words from a list
+def concat_num(a,b):
+    
+    def pos(i):
+        return i > 0
+    
+    out = filter(pos, [a,b])
+    return(sum(out))
+
+reduce(concat_num, x)
 
 
 # ## Requirements
