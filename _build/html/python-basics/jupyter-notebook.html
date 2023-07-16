@@ -1,38 +1,46 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Jupyer Notebook &#8212; Python Notes for Linguistics</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mycss.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -40,13 +48,14 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -55,970 +64,434 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'python-basics/jupyter-notebook';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Notebook to Slides" href="notebook-to-slides.html" />
     <link rel="prev" title="Jupyter" href="jupyter.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/ntnu-word-2.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Python Notes for Linguistics</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Python Basics
- </span>
-</p>
+    
+    
+    <img src="../_static/ntnu-word-2.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/ntnu-word-2.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Basics</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="python-basics.html">
-   Python Basics
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="data-structure.html">
-     Data Structure
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="program-structure.html">
-     Program Structure
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="regex.html">
-     Regular Expression
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="input-output.html">
-     Input and Output
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="oop.html">
-     Object-Oriented Programming
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="docstrings.html">
-     Docstrings Format
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="jupyter.html">
-   Jupyter
-  </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul class="current">
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     Jupyer Notebook
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="notebook-to-slides.html">
-     Notebook to Slides
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="google-colab.html">
-     Google Colaboratory (Colab)
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="google-colab-r.html">
-     Google Colab R
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="data-science.html">
-   Data Science Tools
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="numpy.html">
-     Numpy
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="pandas.html">
-     Pandas
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="pickle.html">
-     Object Serialization
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="data-visualization-1.html">
-     Data Visualization I
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="data-visualization-2.html">
-     Data Visualization 2
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="advanced-skills.html">
-   Advanced Skills
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
-  <label for="toctree-checkbox-4">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="magic-r.html">
-     Magic R
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="python-tricks.html">
-     Python Tricks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="web-applications.html">
-     Web Applications
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="google-drive-ubuntu.html">
-     Google Drive with Ubuntu
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="productive-tech.html">
-     Phythonic Productivity Techniques
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="miscellaneous-notes.html">
-     Miscellaneous Notes
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="python-basics.html">Python Basics</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="data-structure.html">Data Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="program-structure.html">Program Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="regex.html">Regular Expression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input-output.html">Input and Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oop.html">Object-Oriented Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docstrings.html">Docstrings Format</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Corpus Processing with Python
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../corpus/corpus-processing.html">
-   Corpus Linguistics with Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../corpus/nltk.html">
-   Natural Language Tool-Kits (NLTK)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../corpus/web-crawler.html">
-   Web Crawler
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../corpus/web-crawler-dcard.html">
-   Web Crawler (Dcard)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../corpus/unicode.html">
-   Unicode
-  </a>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../corpus/corpus-linguistics-methods.html">
-   Corpus Lingustics Methods
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
-  <label for="toctree-checkbox-5">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../corpus/lexical-bundles.html">
-     Lexical Bundles
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../corpus/tokenization.html">
-     Tokenization
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../corpus/wordnet.html">
-     WordNet
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../corpus/word-cloud.html">
-     Word Cloud
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../corpus/patterns-constructions.html">
-     Patterns and Constructions
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../corpus/structured-corpus-processing.html">
-   Structured Corpus Processing
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
-  <label for="toctree-checkbox-6">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../corpus/bnc.html">
-     BNC-XML
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../corpus/childes.html">
-     CHILDES Corpus
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../corpus/praat-textgrid.html">
-     Praat TextGrid Data
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../corpus/vectorizing-text.html">
-     Vectorizing Texts
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../corpus/chinese-processing.html">
-   Chinese Processing
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
-  <label for="toctree-checkbox-7">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../corpus/jieba.html">
-     Chinese Word Segmentation (jieba)
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../corpus/ckiptagger.html">
-     Chinese Word Segmentation (ckiptagger)
-    </a>
-   </li>
-  </ul>
- </li>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="jupyter.html">Jupyter</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Jupyer Notebook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebook-to-slides.html">Notebook to Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="google-colab.html">Google Colaboratory (Colab)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="google-colab-r.html">Google Colab R</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Statistics with Python
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../statistical-analyses/statistical-analyses.html">
-   Statistical Analyses
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../statistical-analyses/descriptive-statistics.html">
-   Descriptive Statistics
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../statistical-analyses/analytic-statistics.html">
-   Analytic Statistics
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../statistical-analyses/network-analysis.html">
-   Network Analysis
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../statistical-analyses/network-analysis-igraph.html">
-   Network Analysis Using Igraph
-  </a>
- </li>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="data-science.html">Data Science Tools</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="numpy.html">Numpy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.html">Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pickle.html">Object Serialization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data-visualization-1.html">Data Visualization I</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data-visualization-2.html">Data Visualization 2</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  NLP with Python
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../nlp/nlp.html">
-   Natural Language Processing with Python
-  </a>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../nlp/nlp-primer.html">
-   Natural Language Processing: A Primer
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
-  <label for="toctree-checkbox-8">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/nlp-pipeline.html">
-     NLP Pipeline
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/nlp-spacy.html">
-     Natural Language Processing (spaCy)
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/nlp-spacy-zh.html">
-     Chinese Natural Language Processing (spaCy)
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/nlp-ckipnlp.html">
-     Natural Language Processing (ckipnlp)
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../nlp/text-normalization-intro.html">
-   Text Normalization
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
-  <label for="toctree-checkbox-9">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/text-normalization-eng.html">
-     Text Normalization (English)
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/text-normalization-chinese.html">
-     Text Normalization (Chinese)
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../nlp/ml-overview.html">
-   Machine Learning Overview
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
-  <label for="toctree-checkbox-10">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/ml-sklearn-regression.html">
-     Machine Learning with Sklearn – Regression
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/ml-sklearn-classification.html">
-     Machine Learning with Sci-Kit Learn
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/naive-bayes.html">
-     Naive Bayes
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../nlp/sentiment-analysis-ml.html">
-   Sentiment Analysis with Traditional Machine Learning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../nlp/neural-network-from-scratch.html">
-   Neural Network From Scratch
-  </a>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../nlp/language-model.html">
-   Language Model
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
-  <label for="toctree-checkbox-11">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/neural-language-model-primer.html">
-     Neural Language Model: A Start
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/neural-language-model-zh.html">
-     Neural Language Model of Chinese
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/text-gen-lstm-v1.html">
-     Text Generation
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/gpt2.html">
-     Transformer-based Language Model - GPT2
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../nlp/word-embeddings.html">
-   Word Embeddings
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
-  <label for="toctree-checkbox-12">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/word2vec.html">
-     Word2Vec
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/doc2vec.html">
-     Dov2Vec
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/word-embeddings-autoencoder.html">
-     Generate Text Embeddings Using AutoEncoder
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../nlp/transfer-learning-sent-encoding.html">
-   Universal Sentence Embeddings
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../nlp/sentiment-analysis-dl.html">
-   Sentiment Analysis with Deep Learning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../nlp/sentiment-analysis-lstm-v1.html">
-   Sentiment Analysis with LSTM
-  </a>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../nlp/seq-to-seq-types.html">
-   Intutions for Types of Sequence-to-Sequence Models
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
-  <label for="toctree-checkbox-13">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/seq-to-seq-types-date.html">
-     Types of Seqeunce Model
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/seq-to-seq-m21-sentiment-attention.html">
-     Sequence Model (many-to-one) with Attention
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/seq-to-seq-attention-addition.html">
-     Seqeunce Model with Attention for Addition Learning
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../nlp/seq-to-seq-machine-translation.html">
-   Machine Translation (Sequence-to-Sequence)
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
-  <label for="toctree-checkbox-14">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/seq-to-seq-machine-translation-attention.html">
-     Machine Translation with Attention (Thushan)
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../nlp/hyperparameter-tuning.html">
-   Hyper-Parameter Tuning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../nlp/sentiment-analysis-using-bert-chinese.html">
-   Sentiment Analysis Using BERT
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../nlp/ktrain-tutorial-explaining-predictions.html">
-   Explainable AI
-  </a>
- </li>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="advanced-skills.html">Advanced Skills</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="magic-r.html">Magic R</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python-tricks.html">Python Tricks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="web-applications.html">Web Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="google-drive-ubuntu.html">Google Drive with Ubuntu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="productive-tech.html">Phythonic Productivity Techniques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="miscellaneous-notes.html">Miscellaneous Notes</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Appendix
- </span>
-</p>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Corpus Processing with Python</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../appendix/todo.html">
-   To-do List
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../appendix/references.html">
-   References
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../corpus/corpus-processing.html">Corpus Linguistics with Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../corpus/nltk.html">Natural Language Tool-Kits (NLTK)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../corpus/web-crawler.html">Web Crawler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../corpus/web-crawler-dcard.html">Web Crawler (Dcard)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../corpus/unicode.html">Unicode</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../corpus/corpus-linguistics-methods.html">Corpus Lingustics Methods</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../corpus/lexical-bundles.html">Lexical Bundles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../corpus/tokenization.html">Tokenization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../corpus/wordnet.html">WordNet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../corpus/word-cloud.html">Word Cloud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../corpus/patterns-constructions.html">Patterns and Constructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../corpus/structured-corpus-processing.html">Structured Corpus Processing</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../corpus/bnc.html">BNC-XML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../corpus/childes.html">CHILDES Corpus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../corpus/praat-textgrid.html">Praat TextGrid Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../corpus/vectorizing-text.html">Vectorizing Texts</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../corpus/chinese-processing.html">Chinese Processing</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../corpus/jieba.html">Chinese Word Segmentation (jieba)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../corpus/ckiptagger.html">Chinese Word Segmentation (ckiptagger)</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics with Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../statistical-analyses/statistical-analyses.html">Statistical Analyses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../statistical-analyses/descriptive-statistics.html">Descriptive Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../statistical-analyses/analytic-statistics.html">Analytic Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../statistical-analyses/network-analysis.html">Network Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../statistical-analyses/network-analysis-igraph.html">Network Analysis Using Igraph</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">NLP with Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../nlp/nlp.html">Natural Language Processing with Python</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../nlp/nlp-primer.html">Natural Language Processing: A Primer</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/nlp-pipeline.html">NLP Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/nlp-spacy.html">Natural Language Processing (spaCy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/nlp-spacy-zh.html">Chinese Natural Language Processing (spaCy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/nlp-ckipnlp.html">Natural Language Processing (ckipnlp)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../nlp/text-normalization-intro.html">Text Normalization</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/text-normalization-eng.html">Text Normalization (English)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/text-normalization-chinese.html">Text Normalization (Chinese)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../nlp/ml-overview.html">Machine Learning Overview</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/ml-sklearn-regression.html">Machine Learning with Sklearn – Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/ml-sklearn-classification.html">Machine Learning with Sci-Kit Learn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/naive-bayes.html">Naive Bayes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../nlp/sentiment-analysis-ml.html">Sentiment Analysis with Traditional Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nlp/neural-network-from-scratch.html">Neural Network From Scratch</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../nlp/language-model.html">Language Model</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/neural-language-model-primer.html">Neural Language Model: A Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/neural-language-model-zh.html">Neural Language Model of Chinese</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/text-gen-lstm-v1.html">Text Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/gpt2.html">Transformer-based Language Model - GPT2</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../nlp/word-embeddings.html">Word Embeddings</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/word2vec.html">Word2Vec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/doc2vec.html">Dov2Vec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/word-embeddings-autoencoder.html">Generate Text Embeddings Using AutoEncoder</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../nlp/transfer-learning-sent-encoding.html">Universal Sentence Embeddings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nlp/sentiment-analysis-dl.html">Sentiment Analysis with Deep Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nlp/sentiment-analysis-lstm-v1.html">Sentiment Analysis with LSTM</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../nlp/seq-to-seq-types.html">Intutions for Types of Sequence-to-Sequence Models</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/seq-to-seq-types-date.html">Types of Seqeunce Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/seq-to-seq-m21-sentiment-attention.html">Sequence Model (many-to-one) with Attention</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/seq-to-seq-attention-addition.html">Seqeunce Model with Attention for Addition Learning</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../nlp/seq-to-seq-machine-translation.html">Machine Translation (Sequence-to-Sequence)</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/seq-to-seq-machine-translation-attention.html">Machine Translation with Attention (Thushan)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../nlp/hyperparameter-tuning.html">Hyper-Parameter Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nlp/sentiment-analysis-using-bert-chinese.html">Sentiment Analysis Using BERT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nlp/ktrain-tutorial-explaining-predictions.html">Explainable AI</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../appendix/todo.html">To-do List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/references.html">References</a></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  <div style="text-align:left">
-<i class="fas fa-home fa-2x" style="color:Maroon;margin-right:5px"></i><a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
-</div>
-
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/python-basics/jupyter-notebook.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+</nav></div>
     </div>
-</div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
-            <!-- Source interaction buttons -->
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
+<div class="sbt-scroll-pixel-helper"></div>
 
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/alvinntnu/python-notes/master?urlpath=tree/python-basics/jupyter-notebook.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/python-basics/jupyter-notebook.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
     </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/python-basics/jupyter-notebook.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
 </div>
 
-        </div>
 
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/python-basics/jupyter-notebook.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Jupyer Notebook</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#keyboard-shortcuts">
-   Keyboard Shortcuts
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#citation">
-   Citation
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#special-blocks-in-jupyer-book">
-   Special Blocks in Jupyer Book
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#font-awesome-icons">
-   Font Awesome Icons
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#add-images-figures">
-   Add Images/Figures
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#cross-reference-and-citations">
-   Cross-reference and Citations
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#build-the-book">
-   Build the book
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#publish-jupyter-book-on-github">
-   Publish Jupyter-book on Github
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#publish-the-book-as-github-pages">
-   Publish the book as Github Pages
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#change-notebook-themes">
-   Change Notebook Themes
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#use-a-specific-environment-in-notebook">
-   Use a specific environment in notebook
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#install-notebook-extensions">
-   Install Notebook Extensions
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#ipython-magic-commands">
-   IPython Magic Commands
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#hide-or-remove-content">
-   Hide or Remove Content
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#running-r-and-python-in-the-same-notebook">
-   Running R  and Python in the Same Notebook
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#create-neural-network-diagram">
-   Create Neural Network Diagram
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#memory-issues">
-   Memory Issues
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#pip-command">
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     pip
-    </span>
-   </code>
-   Command
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#clear-objects">
-   Clear Objects
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#other-issues">
-   Other issues
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#package-importing">
-   Package Importing
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#requirements">
-   Requirements
-  </a>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keyboard-shortcuts">Keyboard Shortcuts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citation">Citation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-blocks-in-jupyer-book">Special Blocks in Jupyer Book</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#font-awesome-icons">Font Awesome Icons</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-images-figures">Add Images/Figures</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-reference-and-citations">Cross-reference and Citations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-book">Build the book</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#publish-jupyter-book-on-github">Publish Jupyter-book on Github</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#publish-the-book-as-github-pages">Publish the book as Github Pages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#change-notebook-themes">Change Notebook Themes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-a-specific-environment-in-notebook">Use a specific environment in notebook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-notebook-extensions">Install Notebook Extensions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ipython-magic-commands">IPython Magic Commands</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hide-or-remove-content">Hide or Remove Content</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-r-and-python-in-the-same-notebook">Running R  and Python in the Same Notebook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-neural-network-diagram">Create Neural Network Diagram</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-issues">Memory Issues</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pip-command"><code class="docutils literal notranslate"><span class="pre">pip</span></code> Command</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clear-objects">Clear Objects</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-issues">Other issues</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#package-importing">Package Importing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements">Requirements</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Jupyer Notebook</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#keyboard-shortcuts">
-   Keyboard Shortcuts
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#citation">
-   Citation
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#special-blocks-in-jupyer-book">
-   Special Blocks in Jupyer Book
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#font-awesome-icons">
-   Font Awesome Icons
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#add-images-figures">
-   Add Images/Figures
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#cross-reference-and-citations">
-   Cross-reference and Citations
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#build-the-book">
-   Build the book
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#publish-jupyter-book-on-github">
-   Publish Jupyter-book on Github
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#publish-the-book-as-github-pages">
-   Publish the book as Github Pages
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#change-notebook-themes">
-   Change Notebook Themes
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#use-a-specific-environment-in-notebook">
-   Use a specific environment in notebook
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#install-notebook-extensions">
-   Install Notebook Extensions
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#ipython-magic-commands">
-   IPython Magic Commands
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#hide-or-remove-content">
-   Hide or Remove Content
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#running-r-and-python-in-the-same-notebook">
-   Running R  and Python in the Same Notebook
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#create-neural-network-diagram">
-   Create Neural Network Diagram
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#memory-issues">
-   Memory Issues
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#pip-command">
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     pip
-    </span>
-   </code>
-   Command
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#clear-objects">
-   Clear Objects
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#other-issues">
-   Other issues
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#package-importing">
-   Package Importing
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#requirements">
-   Requirements
-  </a>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="jupyer-notebook">
-<h1>Jupyer Notebook<a class="headerlink" href="#jupyer-notebook" title="Permalink to this headline">¶</a></h1>
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="jupyer-notebook">
+<h1>Jupyer Notebook<a class="headerlink" href="#jupyer-notebook" title="Permalink to this headline">#</a></h1>
 <ul class="simple">
 <li><p>This section includes notes on how to use <code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Notebook</span></code> as well as <code class="docutils literal notranslate"><span class="pre">jupyter-book</span></code>.</p></li>
 <li><p>Recommended Readings:</p>
@@ -1029,8 +502,8 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 </ul>
-<div class="section" id="keyboard-shortcuts">
-<h2>Keyboard Shortcuts<a class="headerlink" href="#keyboard-shortcuts" title="Permalink to this headline">¶</a></h2>
+<section id="keyboard-shortcuts">
+<h2>Keyboard Shortcuts<a class="headerlink" href="#keyboard-shortcuts" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Cmd</span> <span class="pre">+</span> <span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">P</span></code>: Look up key shortcuts</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Esc</span></code>: Get into command mode</p></li>
@@ -1052,9 +525,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p><code class="docutils literal notranslate"><span class="pre">M</span></code>: Change cell to markdown</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Ctrl</span></code> + <code class="docutils literal notranslate"><span class="pre">/</span></code>: Uncomment and comment code chunk</p></li>
 </ul>
-</div>
-<div class="section" id="citation">
-<h2>Citation<a class="headerlink" href="#citation" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="citation">
+<h2>Citation<a class="headerlink" href="#citation" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>In-text citation</p></li>
 </ul>
@@ -1071,9 +544,9 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="p">:</span><span class="n">style</span><span class="p">:</span> <span class="n">unsrt</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="special-blocks-in-jupyer-book">
-<h2>Special Blocks in Jupyer Book<a class="headerlink" href="#special-blocks-in-jupyer-book" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="special-blocks-in-jupyer-book">
+<h2>Special Blocks in Jupyer Book<a class="headerlink" href="#special-blocks-in-jupyer-book" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://sphinx-book-theme.readthedocs.io/en/latest/reference/kitchen-sink/paragraph-markup.html#admonitions">sphinx-book-theme documentation</a></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">attention</span></code>, <code class="docutils literal notranslate"><span class="pre">caution</span></code>, <code class="docutils literal notranslate"><span class="pre">danger</span></code>, <code class="docutils literal notranslate"><span class="pre">error</span></code>, <code class="docutils literal notranslate"><span class="pre">hint</span></code>, <code class="docutils literal notranslate"><span class="pre">important</span></code>, <code class="docutils literal notranslate"><span class="pre">note</span></code>, <code class="docutils literal notranslate"><span class="pre">tip</span></code>, <code class="docutils literal notranslate"><span class="pre">warning</span></code></p></li>
@@ -1087,9 +560,9 @@ const thebe_selector_output = ".output, .cell_output"
 
 </pre></div>
 </div>
-</div>
-<div class="section" id="font-awesome-icons">
-<h2>Font Awesome Icons<a class="headerlink" href="#font-awesome-icons" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="font-awesome-icons">
+<h2>Font Awesome Icons<a class="headerlink" href="#font-awesome-icons" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>To include icons in the markdown cell, currently I use the html version.</p></li>
 </ul>
@@ -1100,15 +573,15 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>With the CSS, we can control the color and margins of the icon.</p></li>
 <li><p>It seems that jupyterbook supports Font Awesome v4 better.</p></li>
 </ul>
-</div>
-<div class="section" id="add-images-figures">
-<h2>Add Images/Figures<a class="headerlink" href="#add-images-figures" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="add-images-figures">
+<h2>Add Images/Figures<a class="headerlink" href="#add-images-figures" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://jupyterbook.org/content/figures.html">Documentation</a></p></li>
 </ul>
-</div>
-<div class="section" id="cross-reference-and-citations">
-<h2>Cross-reference and Citations<a class="headerlink" href="#cross-reference-and-citations" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="cross-reference-and-citations">
+<h2>Cross-reference and Citations<a class="headerlink" href="#cross-reference-and-citations" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>Add labels before the bookmarked positions (e.g., sections):</p></li>
 </ul>
@@ -1121,9 +594,9 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>{ref}`LABEL_NAME`
 </pre></div>
 </div>
-</div>
-<div class="section" id="build-the-book">
-<h2>Build the book<a class="headerlink" href="#build-the-book" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="build-the-book">
+<h2>Build the book<a class="headerlink" href="#build-the-book" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>Open the <code class="docutils literal notranslate"><span class="pre">terminal</span></code> and traverse to the root of the book directory</p></li>
 <li><p>Build the book</p></li>
@@ -1172,9 +645,9 @@ $ git push origin master
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git rm -r --cached XXX
 </pre></div>
 </div>
-</div>
-<div class="section" id="publish-jupyter-book-on-github">
-<h2>Publish Jupyter-book on Github<a class="headerlink" href="#publish-jupyter-book-on-github" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="publish-jupyter-book-on-github">
+<h2>Publish Jupyter-book on Github<a class="headerlink" href="#publish-jupyter-book-on-github" title="Permalink to this headline">#</a></h2>
 <ul>
 <li><p>Documentations</p>
 <ul class="simple">
@@ -1219,9 +692,9 @@ $ git remote -v
 </div>
 </li>
 </ul>
-</div>
-<div class="section" id="publish-the-book-as-github-pages">
-<h2>Publish the book as Github Pages<a class="headerlink" href="#publish-the-book-as-github-pages" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="publish-the-book-as-github-pages">
+<h2>Publish the book as Github Pages<a class="headerlink" href="#publish-the-book-as-github-pages" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>Install <code class="docutils literal notranslate"><span class="pre">ghp-import</span></code></p></li>
 </ul>
@@ -1239,9 +712,9 @@ $ ghp-import -n -p -f _build/html
 <p class="admonition-title">Note</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">-n</span></code> refers to “not Jekyll”</p>
 </div>
-</div>
-<div class="section" id="change-notebook-themes">
-<h2>Change Notebook Themes<a class="headerlink" href="#change-notebook-themes" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="change-notebook-themes">
+<h2>Change Notebook Themes<a class="headerlink" href="#change-notebook-themes" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>Install <code class="docutils literal notranslate"><span class="pre">jupyterthemes</span></code></p></li>
 </ul>
@@ -1274,9 +747,9 @@ $ jt -t monokai (-T -N -kl)
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ jt -r
 </pre></div>
 </div>
-</div>
-<div class="section" id="use-a-specific-environment-in-notebook">
-<h2>Use a specific environment in notebook<a class="headerlink" href="#use-a-specific-environment-in-notebook" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="use-a-specific-environment-in-notebook">
+<h2>Use a specific environment in notebook<a class="headerlink" href="#use-a-specific-environment-in-notebook" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>First, create a new environment</p></li>
 </ul>
@@ -1352,9 +825,9 @@ $ jupyter notebook
 </div>
 <p>Now, you should be able to see your conda kernel in Jupyter notebook.</p>
 <p>And remember to use Anaconda Powershell Prompt to activate your <code class="docutils literal notranslate"><span class="pre">python-notes</span></code> conda environment before installing any packages.</p>
-</div>
-<div class="section" id="install-notebook-extensions">
-<span id="nbextensions"></span><h2>Install Notebook Extensions<a class="headerlink" href="#install-notebook-extensions" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="install-notebook-extensions">
+<span id="nbextensions"></span><h2>Install Notebook Extensions<a class="headerlink" href="#install-notebook-extensions" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://jupyter-contrib-nbextensions.readthedocs.io/en/latest/install.html">nbextensions documentation</a></p></li>
 <li><p>There are in general three steps</p>
@@ -1382,9 +855,9 @@ $ jupyter nbextension enable &lt;nbextension require path&gt;
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="ipython-magic-commands">
-<h2>IPython Magic Commands<a class="headerlink" href="#ipython-magic-commands" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="ipython-magic-commands">
+<h2>IPython Magic Commands<a class="headerlink" href="#ipython-magic-commands" title="Permalink to this headline">#</a></h2>
 <ul>
 <li><p>Magic commands from IPython</p></li>
 <li><p>Useful magic commands:</p>
@@ -1438,15 +911,15 @@ $ jupyter nbextension enable &lt;nbextension require path&gt;
 <p><span class="math notranslate nohighlight">\(P(A \mid B) = \frac{P(B \mid A) P(A)}{P(B)}\)</span></p>
 </li>
 </ul>
-</div>
-<div class="section" id="hide-or-remove-content">
-<h2>Hide or Remove Content<a class="headerlink" href="#hide-or-remove-content" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="hide-or-remove-content">
+<h2>Hide or Remove Content<a class="headerlink" href="#hide-or-remove-content" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>See <a class="reference external" href="https://jupyterbook.org/interactive/hiding.html">Jupyterbook Documentation</a></p></li>
 </ul>
-</div>
-<div class="section" id="running-r-and-python-in-the-same-notebook">
-<h2>Running R  and Python in the Same Notebook<a class="headerlink" href="#running-r-and-python-in-the-same-notebook" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="running-r-and-python-in-the-same-notebook">
+<h2>Running R  and Python in the Same Notebook<a class="headerlink" href="#running-r-and-python-in-the-same-notebook" title="Permalink to this headline">#</a></h2>
 <ul>
 <li><p>To do this, first we need to install relevant R packages to make the system default R kernel avaiable to the notebook</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># in the terminal
@@ -1535,7 +1008,7 @@ Automagic is ON, % prefix IS NOT needed for line magics.
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>ls *.ipynb
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>ls<span class="w"> </span>*.ipynb
 </pre></div>
 </div>
 </div>
@@ -1586,12 +1059,12 @@ R[write to console]: The following objects are masked from ‘package:base’:
     intersect, setdiff, setequal, union
 </pre></div>
 </div>
-<img alt="../_images/jupyter-notebook_23_1.png" src="../_images/jupyter-notebook_23_1.png" />
+<img alt="../_images/6b27306ff213626be4538eda72f35e4449a7549e67dfe874f535800eb153fcff.png" src="../_images/6b27306ff213626be4538eda72f35e4449a7549e67dfe874f535800eb153fcff.png" />
 </div>
 </div>
-</div>
-<div class="section" id="create-neural-network-diagram">
-<h2>Create Neural Network Diagram<a class="headerlink" href="#create-neural-network-diagram" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="create-neural-network-diagram">
+<h2>Create Neural Network Diagram<a class="headerlink" href="#create-neural-network-diagram" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import numpy as np</span>
@@ -1662,15 +1135,15 @@ R[write to console]: The following objects are masked from ‘package:base’:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/jupyter-notebook_29_0.png" src="../_images/jupyter-notebook_29_0.png" />
+<img alt="../_images/c7501c448a323fcdefe095797b31a64425b39e00c03544d4fd002316a230c87e.png" src="../_images/c7501c448a323fcdefe095797b31a64425b39e00c03544d4fd002316a230c87e.png" />
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Figure size 432x288 with 1 Axes&gt;, &lt;AxesSubplot:&gt;)
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="memory-issues">
-<h2>Memory Issues<a class="headerlink" href="#memory-issues" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="memory-issues">
+<h2>Memory Issues<a class="headerlink" href="#memory-issues" title="Permalink to this headline">#</a></h2>
 <p>When seeing error messages as shown below:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IOPub</span> <span class="n">data</span> <span class="n">rate</span> <span class="n">exceeded</span><span class="o">.</span>
 <span class="n">The</span> <span class="n">notebook</span> <span class="n">server</span> <span class="n">will</span> <span class="n">temporarily</span> <span class="n">stop</span> <span class="n">sending</span> <span class="n">output</span>
@@ -1681,9 +1154,9 @@ R[write to console]: The following objects are masked from ‘package:base’:
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupyter</span> <span class="n">notebook</span> <span class="o">--</span><span class="n">NotebookApp</span><span class="o">.</span><span class="n">iopub_data_rate_limit</span><span class="o">=</span><span class="mf">1.0e10</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="pip-command">
-<h2><code class="docutils literal notranslate"><span class="pre">pip</span></code> Command<a class="headerlink" href="#pip-command" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="pip-command">
+<h2><code class="docutils literal notranslate"><span class="pre">pip</span></code> Command<a class="headerlink" href="#pip-command" title="Permalink to this headline">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">pip</span></code> is a great tool to manage python packages.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">--version</span></code>: Check current <code class="docutils literal notranslate"><span class="pre">pip</span></code> version</p></li>
@@ -1697,9 +1170,9 @@ R[write to console]: The following objects are masked from ‘package:base’:
 <li><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">freeze</span> <span class="pre">&gt;</span> <span class="pre">requirements.txt</span></code>: Save all installed packages into a list</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">show</span> <span class="pre">XXX</span></code>: show version information of specific package (XX)</p></li>
 </ul>
-</div>
-<div class="section" id="clear-objects">
-<h2>Clear Objects<a class="headerlink" href="#clear-objects" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="clear-objects">
+<h2>Clear Objects<a class="headerlink" href="#clear-objects" title="Permalink to this headline">#</a></h2>
 <p>A simple function to clear user-defined objects in the current session.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1712,9 +1185,9 @@ R[write to console]: The following objects are masked from ‘package:base’:
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="other-issues">
-<h2>Other issues<a class="headerlink" href="#other-issues" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="other-issues">
+<h2>Other issues<a class="headerlink" href="#other-issues" title="Permalink to this headline">#</a></h2>
 <p>If runnning into the follow issue when compiling the jupyter book:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># OMP: Error #15: Initializing libiomp5.dylib, but found libiomp5.dylib already initialized.</span>
 </pre></div>
@@ -1734,9 +1207,9 @@ R[write to console]: The following objects are masked from ‘package:base’:
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="n">nomkl</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="package-importing">
-<h2>Package Importing<a class="headerlink" href="#package-importing" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="package-importing">
+<h2>Package Importing<a class="headerlink" href="#package-importing" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>Python can only import self-defined libraries in the current working directory (i.e., the directory where the script file is).</p></li>
 <li><p>To use libraries in other directories, we need to add the lib path to the system.</p></li>
@@ -1747,9 +1220,9 @@ R[write to console]: The following objects are masked from ‘package:base’:
 
 </pre></div>
 </div>
-</div>
-<div class="section" id="requirements">
-<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">#</a></h2>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>numpy==1.18.1
@@ -1757,8 +1230,8 @@ R[write to console]: The following objects are masked from ‘package:base’:
 </div>
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1772,7 +1245,7 @@ R[write to console]: The following objects are masked from ‘package:base’:
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python-notes",
+            name: "python-notes",
             path: "./python-basics"
         },
         predefinedOutput: true
@@ -1780,44 +1253,126 @@ R[write to console]: The following objects are masked from ‘package:base’:
     </script>
     <script>kernelName = 'python-notes'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="jupyter.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Jupyter</p>
-        </div>
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="jupyter.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Jupyter</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="notebook-to-slides.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="notebook-to-slides.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Notebook to Slides</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Alvin Chen<br/>
-    
-        &copy; Copyright 2020 Alvin Chen.<br/>
-  </p>
-</footer>
-</main>
-
-
       </div>
-    </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+</div>
 
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keyboard-shortcuts">Keyboard Shortcuts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citation">Citation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-blocks-in-jupyer-book">Special Blocks in Jupyer Book</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#font-awesome-icons">Font Awesome Icons</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-images-figures">Add Images/Figures</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-reference-and-citations">Cross-reference and Citations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-book">Build the book</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#publish-jupyter-book-on-github">Publish Jupyter-book on Github</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#publish-the-book-as-github-pages">Publish the book as Github Pages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#change-notebook-themes">Change Notebook Themes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-a-specific-environment-in-notebook">Use a specific environment in notebook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-notebook-extensions">Install Notebook Extensions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ipython-magic-commands">IPython Magic Commands</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hide-or-remove-content">Hide or Remove Content</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-r-and-python-in-the-same-notebook">Running R  and Python in the Same Notebook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-neural-network-diagram">Create Neural Network Diagram</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-issues">Memory Issues</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pip-command"><code class="docutils literal notranslate"><span class="pre">pip</span></code> Command</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clear-objects">Clear Objects</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-issues">Other issues</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#package-importing">Package Importing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements">Requirements</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alvin Chen
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2020 Alvin Chen.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

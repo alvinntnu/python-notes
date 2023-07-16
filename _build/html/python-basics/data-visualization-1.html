@@ -1,38 +1,46 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Data Visualization I &#8212; Python Notes for Linguistics</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mycss.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -40,943 +48,450 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'python-basics/data-visualization-1';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Data Visualization 2" href="data-visualization-2.html" />
     <link rel="prev" title="Object Serialization" href="pickle.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/ntnu-word-2.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Python Notes for Linguistics</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Python Basics
- </span>
-</p>
+    
+    
+    <img src="../_static/ntnu-word-2.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/ntnu-word-2.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Basics</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="python-basics.html">
-   Python Basics
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="data-structure.html">
-     Data Structure
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="program-structure.html">
-     Program Structure
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="regex.html">
-     Regular Expression
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="input-output.html">
-     Input and Output
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="oop.html">
-     Object-Oriented Programming
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="docstrings.html">
-     Docstrings Format
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="jupyter.html">
-   Jupyter
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="jupyter-notebook.html">
-     Jupyer Notebook
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="notebook-to-slides.html">
-     Notebook to Slides
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="google-colab.html">
-     Google Colaboratory (Colab)
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="google-colab-r.html">
-     Google Colab R
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="data-science.html">
-   Data Science Tools
-  </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul class="current">
-   <li class="toctree-l2">
-    <a class="reference internal" href="numpy.html">
-     Numpy
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="pandas.html">
-     Pandas
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="pickle.html">
-     Object Serialization
-    </a>
-   </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     Data Visualization I
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="data-visualization-2.html">
-     Data Visualization 2
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="advanced-skills.html">
-   Advanced Skills
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
-  <label for="toctree-checkbox-4">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="magic-r.html">
-     Magic R
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="python-tricks.html">
-     Python Tricks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="web-applications.html">
-     Web Applications
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="google-drive-ubuntu.html">
-     Google Drive with Ubuntu
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="productive-tech.html">
-     Phythonic Productivity Techniques
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="miscellaneous-notes.html">
-     Miscellaneous Notes
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="python-basics.html">Python Basics</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="data-structure.html">Data Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="program-structure.html">Program Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="regex.html">Regular Expression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input-output.html">Input and Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oop.html">Object-Oriented Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docstrings.html">Docstrings Format</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Corpus Processing with Python
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../corpus/corpus-processing.html">
-   Corpus Linguistics with Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../corpus/nltk.html">
-   Natural Language Tool-Kits (NLTK)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../corpus/web-crawler.html">
-   Web Crawler
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../corpus/web-crawler-dcard.html">
-   Web Crawler (Dcard)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../corpus/unicode.html">
-   Unicode
-  </a>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../corpus/corpus-linguistics-methods.html">
-   Corpus Lingustics Methods
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
-  <label for="toctree-checkbox-5">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../corpus/lexical-bundles.html">
-     Lexical Bundles
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../corpus/tokenization.html">
-     Tokenization
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../corpus/wordnet.html">
-     WordNet
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../corpus/word-cloud.html">
-     Word Cloud
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../corpus/patterns-constructions.html">
-     Patterns and Constructions
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../corpus/structured-corpus-processing.html">
-   Structured Corpus Processing
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
-  <label for="toctree-checkbox-6">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../corpus/bnc.html">
-     BNC-XML
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../corpus/childes.html">
-     CHILDES Corpus
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../corpus/praat-textgrid.html">
-     Praat TextGrid Data
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../corpus/vectorizing-text.html">
-     Vectorizing Texts
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../corpus/chinese-processing.html">
-   Chinese Processing
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
-  <label for="toctree-checkbox-7">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../corpus/jieba.html">
-     Chinese Word Segmentation (jieba)
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../corpus/ckiptagger.html">
-     Chinese Word Segmentation (ckiptagger)
-    </a>
-   </li>
-  </ul>
- </li>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="jupyter.html">Jupyter</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="jupyter-notebook.html">Jupyer Notebook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebook-to-slides.html">Notebook to Slides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="google-colab.html">Google Colaboratory (Colab)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="google-colab-r.html">Google Colab R</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Statistics with Python
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../statistical-analyses/statistical-analyses.html">
-   Statistical Analyses
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../statistical-analyses/descriptive-statistics.html">
-   Descriptive Statistics
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../statistical-analyses/analytic-statistics.html">
-   Analytic Statistics
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../statistical-analyses/network-analysis.html">
-   Network Analysis
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../statistical-analyses/network-analysis-igraph.html">
-   Network Analysis Using Igraph
-  </a>
- </li>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="data-science.html">Data Science Tools</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="numpy.html">Numpy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.html">Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pickle.html">Object Serialization</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Data Visualization I</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data-visualization-2.html">Data Visualization 2</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  NLP with Python
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../nlp/nlp.html">
-   Natural Language Processing with Python
-  </a>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../nlp/nlp-primer.html">
-   Natural Language Processing: A Primer
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
-  <label for="toctree-checkbox-8">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/nlp-pipeline.html">
-     NLP Pipeline
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/nlp-spacy.html">
-     Natural Language Processing (spaCy)
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/nlp-spacy-zh.html">
-     Chinese Natural Language Processing (spaCy)
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/nlp-ckipnlp.html">
-     Natural Language Processing (ckipnlp)
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../nlp/text-normalization-intro.html">
-   Text Normalization
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
-  <label for="toctree-checkbox-9">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/text-normalization-eng.html">
-     Text Normalization (English)
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/text-normalization-chinese.html">
-     Text Normalization (Chinese)
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../nlp/ml-overview.html">
-   Machine Learning Overview
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
-  <label for="toctree-checkbox-10">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/ml-sklearn-regression.html">
-     Machine Learning with Sklearn – Regression
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/ml-sklearn-classification.html">
-     Machine Learning with Sci-Kit Learn
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/naive-bayes.html">
-     Naive Bayes
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../nlp/sentiment-analysis-ml.html">
-   Sentiment Analysis with Traditional Machine Learning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../nlp/neural-network-from-scratch.html">
-   Neural Network From Scratch
-  </a>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../nlp/language-model.html">
-   Language Model
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
-  <label for="toctree-checkbox-11">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/neural-language-model-primer.html">
-     Neural Language Model: A Start
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/neural-language-model-zh.html">
-     Neural Language Model of Chinese
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/text-gen-lstm-v1.html">
-     Text Generation
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/gpt2.html">
-     Transformer-based Language Model - GPT2
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../nlp/word-embeddings.html">
-   Word Embeddings
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
-  <label for="toctree-checkbox-12">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/word2vec.html">
-     Word2Vec
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/doc2vec.html">
-     Dov2Vec
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/word-embeddings-autoencoder.html">
-     Generate Text Embeddings Using AutoEncoder
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../nlp/transfer-learning-sent-encoding.html">
-   Universal Sentence Embeddings
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../nlp/sentiment-analysis-dl.html">
-   Sentiment Analysis with Deep Learning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../nlp/sentiment-analysis-lstm-v1.html">
-   Sentiment Analysis with LSTM
-  </a>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../nlp/seq-to-seq-types.html">
-   Intutions for Types of Sequence-to-Sequence Models
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
-  <label for="toctree-checkbox-13">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/seq-to-seq-types-date.html">
-     Types of Seqeunce Model
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/seq-to-seq-m21-sentiment-attention.html">
-     Sequence Model (many-to-one) with Attention
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/seq-to-seq-attention-addition.html">
-     Seqeunce Model with Attention for Addition Learning
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../nlp/seq-to-seq-machine-translation.html">
-   Machine Translation (Sequence-to-Sequence)
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
-  <label for="toctree-checkbox-14">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../nlp/seq-to-seq-machine-translation-attention.html">
-     Machine Translation with Attention (Thushan)
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../nlp/hyperparameter-tuning.html">
-   Hyper-Parameter Tuning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../nlp/sentiment-analysis-using-bert-chinese.html">
-   Sentiment Analysis Using BERT
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../nlp/ktrain-tutorial-explaining-predictions.html">
-   Explainable AI
-  </a>
- </li>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="advanced-skills.html">Advanced Skills</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="magic-r.html">Magic R</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python-tricks.html">Python Tricks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="web-applications.html">Web Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="google-drive-ubuntu.html">Google Drive with Ubuntu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="productive-tech.html">Phythonic Productivity Techniques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="miscellaneous-notes.html">Miscellaneous Notes</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Appendix
- </span>
-</p>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Corpus Processing with Python</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../appendix/todo.html">
-   To-do List
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../appendix/references.html">
-   References
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../corpus/corpus-processing.html">Corpus Linguistics with Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../corpus/nltk.html">Natural Language Tool-Kits (NLTK)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../corpus/web-crawler.html">Web Crawler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../corpus/web-crawler-dcard.html">Web Crawler (Dcard)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../corpus/unicode.html">Unicode</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../corpus/corpus-linguistics-methods.html">Corpus Lingustics Methods</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../corpus/lexical-bundles.html">Lexical Bundles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../corpus/tokenization.html">Tokenization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../corpus/wordnet.html">WordNet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../corpus/word-cloud.html">Word Cloud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../corpus/patterns-constructions.html">Patterns and Constructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../corpus/structured-corpus-processing.html">Structured Corpus Processing</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../corpus/bnc.html">BNC-XML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../corpus/childes.html">CHILDES Corpus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../corpus/praat-textgrid.html">Praat TextGrid Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../corpus/vectorizing-text.html">Vectorizing Texts</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../corpus/chinese-processing.html">Chinese Processing</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../corpus/jieba.html">Chinese Word Segmentation (jieba)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../corpus/ckiptagger.html">Chinese Word Segmentation (ckiptagger)</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics with Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../statistical-analyses/statistical-analyses.html">Statistical Analyses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../statistical-analyses/descriptive-statistics.html">Descriptive Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../statistical-analyses/analytic-statistics.html">Analytic Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../statistical-analyses/network-analysis.html">Network Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../statistical-analyses/network-analysis-igraph.html">Network Analysis Using Igraph</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">NLP with Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../nlp/nlp.html">Natural Language Processing with Python</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../nlp/nlp-primer.html">Natural Language Processing: A Primer</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/nlp-pipeline.html">NLP Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/nlp-spacy.html">Natural Language Processing (spaCy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/nlp-spacy-zh.html">Chinese Natural Language Processing (spaCy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/nlp-ckipnlp.html">Natural Language Processing (ckipnlp)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../nlp/text-normalization-intro.html">Text Normalization</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/text-normalization-eng.html">Text Normalization (English)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/text-normalization-chinese.html">Text Normalization (Chinese)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../nlp/ml-overview.html">Machine Learning Overview</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/ml-sklearn-regression.html">Machine Learning with Sklearn – Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/ml-sklearn-classification.html">Machine Learning with Sci-Kit Learn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/naive-bayes.html">Naive Bayes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../nlp/sentiment-analysis-ml.html">Sentiment Analysis with Traditional Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nlp/neural-network-from-scratch.html">Neural Network From Scratch</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../nlp/language-model.html">Language Model</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/neural-language-model-primer.html">Neural Language Model: A Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/neural-language-model-zh.html">Neural Language Model of Chinese</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/text-gen-lstm-v1.html">Text Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/gpt2.html">Transformer-based Language Model - GPT2</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../nlp/word-embeddings.html">Word Embeddings</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/word2vec.html">Word2Vec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/doc2vec.html">Dov2Vec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/word-embeddings-autoencoder.html">Generate Text Embeddings Using AutoEncoder</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../nlp/transfer-learning-sent-encoding.html">Universal Sentence Embeddings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nlp/sentiment-analysis-dl.html">Sentiment Analysis with Deep Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nlp/sentiment-analysis-lstm-v1.html">Sentiment Analysis with LSTM</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../nlp/seq-to-seq-types.html">Intutions for Types of Sequence-to-Sequence Models</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/seq-to-seq-types-date.html">Types of Seqeunce Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/seq-to-seq-m21-sentiment-attention.html">Sequence Model (many-to-one) with Attention</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/seq-to-seq-attention-addition.html">Seqeunce Model with Attention for Addition Learning</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../nlp/seq-to-seq-machine-translation.html">Machine Translation (Sequence-to-Sequence)</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/seq-to-seq-machine-translation-attention.html">Machine Translation with Attention (Thushan)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../nlp/hyperparameter-tuning.html">Hyper-Parameter Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nlp/sentiment-analysis-using-bert-chinese.html">Sentiment Analysis Using BERT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nlp/ktrain-tutorial-explaining-predictions.html">Explainable AI</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../appendix/todo.html">To-do List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/references.html">References</a></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  <div style="text-align:left">
-<i class="fas fa-home fa-2x" style="color:Maroon;margin-right:5px"></i><a href="https://alvinchen.myftp.org/" target='_blank'>Alvin Chen's Homepage</a>
-</div>
-
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/python-basics/data-visualization-1.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+</nav></div>
     </div>
-</div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
-            <!-- Source interaction buttons -->
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
+<div class="sbt-scroll-pixel-helper"></div>
 
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/alvinntnu/python-notes/master?urlpath=tree/python-basics/data-visualization-1.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/python-basics/data-visualization-1.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
     </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/alvinntnu/python-notes/blob/master/python-basics/data-visualization-1.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
 </div>
 
-        </div>
 
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/python-basics/data-visualization-1.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Data Visualization I</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#preparing-datasets">
-   Preparing Datasets
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#matlibplot">
-   Matlibplot
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#resolution">
-     Resolution
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#matplotlib-style">
-     Matplotlib Style
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#matplotlib-chinese-issues">
-     Matplotlib Chinese Issues
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plotting">
-     Plotting
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#bar-plots">
-     Bar Plots
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#pie-chart">
-     Pie Chart
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#stacked-plot">
-     Stacked Plot
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#histogram">
-     Histogram
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#scatter-plot">
-     Scatter Plot
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#complex-graphs">
-     Complex Graphs
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#seaborn-module">
-   Seaborn Module
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#two-types-of-functions">
-     Two Types of Functions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#long-format-vs-wide-format-data">
-     Long-format vs. Wide-format Data
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#chinese-fonts-issues">
-   Chinese Fonts Issues
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#references">
-   References
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#requirements">
-   Requirements
-  </a>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-datasets">Preparing Datasets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matlibplot">Matlibplot</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resolution">Resolution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matplotlib-style">Matplotlib Style</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matplotlib-chinese-issues">Matplotlib Chinese Issues</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting">Plotting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bar-plots">Bar Plots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pie-chart">Pie Chart</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacked-plot">Stacked Plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histogram">Histogram</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plot">Scatter Plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complex-graphs">Complex Graphs</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#seaborn-module">Seaborn Module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-types-of-functions">Two Types of Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#long-format-vs-wide-format-data">Long-format vs. Wide-format Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chinese-fonts-issues">Chinese Fonts Issues</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements">Requirements</a></li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Data Visualization I</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#preparing-datasets">
-   Preparing Datasets
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#matlibplot">
-   Matlibplot
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#resolution">
-     Resolution
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#matplotlib-style">
-     Matplotlib Style
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#matplotlib-chinese-issues">
-     Matplotlib Chinese Issues
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plotting">
-     Plotting
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#bar-plots">
-     Bar Plots
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#pie-chart">
-     Pie Chart
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#stacked-plot">
-     Stacked Plot
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#histogram">
-     Histogram
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#scatter-plot">
-     Scatter Plot
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#complex-graphs">
-     Complex Graphs
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#seaborn-module">
-   Seaborn Module
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#two-types-of-functions">
-     Two Types of Functions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#long-format-vs-wide-format-data">
-     Long-format vs. Wide-format Data
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#chinese-fonts-issues">
-   Chinese Fonts Issues
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#references">
-   References
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#requirements">
-   Requirements
-  </a>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="data-visualization-i">
-<h1>Data Visualization I<a class="headerlink" href="#data-visualization-i" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="preparing-datasets">
-<h2>Preparing Datasets<a class="headerlink" href="#preparing-datasets" title="Permalink to this headline">¶</a></h2>
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="data-visualization-i">
+<h1>Data Visualization I<a class="headerlink" href="#data-visualization-i" title="Permalink to this headline">#</a></h1>
+<section id="preparing-datasets">
+<h2>Preparing Datasets<a class="headerlink" href="#preparing-datasets" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -1185,11 +700,11 @@ dtype: object
 </table>
 </div></div></div>
 </div>
-</div>
-<div class="section" id="matlibplot">
-<h2>Matlibplot<a class="headerlink" href="#matlibplot" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="resolution">
-<h3>Resolution<a class="headerlink" href="#resolution" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="matlibplot">
+<h2>Matlibplot<a class="headerlink" href="#matlibplot" title="Permalink to this headline">#</a></h2>
+<section id="resolution">
+<h3>Resolution<a class="headerlink" href="#resolution" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>We can increase the dpi of the matplotlib parameters to get image of higher resolution in notebook</p></li>
 <li><p>The dpi setting has to GO before the magic inline command because the magic inline commened resets the dpi to default</p></li>
@@ -1207,9 +722,9 @@ dtype: object
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="matplotlib-style">
-<h3>Matplotlib Style<a class="headerlink" href="#matplotlib-style" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="matplotlib-style">
+<h3>Matplotlib Style<a class="headerlink" href="#matplotlib-style" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># available style</span>
@@ -1231,9 +746,9 @@ dtype: object
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="matplotlib-chinese-issues">
-<h3>Matplotlib Chinese Issues<a class="headerlink" href="#matplotlib-chinese-issues" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="matplotlib-chinese-issues">
+<h3>Matplotlib Chinese Issues<a class="headerlink" href="#matplotlib-chinese-issues" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Setting Chinese Fonts</span>
@@ -1244,9 +759,9 @@ dtype: object
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="plotting">
-<h3>Plotting<a class="headerlink" href="#plotting" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="plotting">
+<h3>Plotting<a class="headerlink" href="#plotting" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Simple X and Y</span>
@@ -1256,7 +771,7 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/data-visualization-1_12_0.png" src="../_images/data-visualization-1_12_0.png" />
+<img alt="../_images/a1b695521e7fb062bd34142549cf763c1d0de879bf8d4dacd981011010a69b5a.png" src="../_images/a1b695521e7fb062bd34142549cf763c1d0de879bf8d4dacd981011010a69b5a.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1269,7 +784,7 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/data-visualization-1_13_0.png" src="../_images/data-visualization-1_13_0.png" />
+<img alt="../_images/ca5d4536bb2f2ec166b4ad589b3cb0928d87e9ee63b577e2f967f5987fbfa263.png" src="../_images/ca5d4536bb2f2ec166b4ad589b3cb0928d87e9ee63b577e2f967f5987fbfa263.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1285,7 +800,7 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/data-visualization-1_14_0.png" src="../_images/data-visualization-1_14_0.png" />
+<img alt="../_images/77d8093cb08b982fcbf6455a7763061de79e828cd9b24dbf5bd2345241d719b5.png" src="../_images/77d8093cb08b982fcbf6455a7763061de79e828cd9b24dbf5bd2345241d719b5.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1302,7 +817,7 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/data-visualization-1_15_0.png" src="../_images/data-visualization-1_15_0.png" />
+<img alt="../_images/77d8093cb08b982fcbf6455a7763061de79e828cd9b24dbf5bd2345241d719b5.png" src="../_images/77d8093cb08b982fcbf6455a7763061de79e828cd9b24dbf5bd2345241d719b5.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1321,12 +836,12 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/data-visualization-1_16_0.png" src="../_images/data-visualization-1_16_0.png" />
+<img alt="../_images/30f727790eb7e5b540f249a0cc04edbcb92ea76d292af0103d0334128e577a2d.png" src="../_images/30f727790eb7e5b540f249a0cc04edbcb92ea76d292af0103d0334128e577a2d.png" />
 </div>
 </div>
-</div>
-<div class="section" id="bar-plots">
-<h3>Bar Plots<a class="headerlink" href="#bar-plots" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="bar-plots">
+<h3>Bar Plots<a class="headerlink" href="#bar-plots" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Normal bar plot</span>
@@ -1336,7 +851,7 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/data-visualization-1_18_0.png" src="../_images/data-visualization-1_18_0.png" />
+<img alt="../_images/e3b01bf5f8f58996ab4250091eb2c3ed861484629ada02b1db7614cb9ae723b4.png" src="../_images/e3b01bf5f8f58996ab4250091eb2c3ed861484629ada02b1db7614cb9ae723b4.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1548,7 +1063,7 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/data-visualization-1_20_0.png" src="../_images/data-visualization-1_20_0.png" />
+<img alt="../_images/e3b01bf5f8f58996ab4250091eb2c3ed861484629ada02b1db7614cb9ae723b4.png" src="../_images/e3b01bf5f8f58996ab4250091eb2c3ed861484629ada02b1db7614cb9ae723b4.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1561,12 +1076,12 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/data-visualization-1_21_0.png" src="../_images/data-visualization-1_21_0.png" />
+<img alt="../_images/bbb157de64ef0e399c4fbb0de1837ae24bafecf5b1347f9e4bc72197e31af63d.png" src="../_images/bbb157de64ef0e399c4fbb0de1837ae24bafecf5b1347f9e4bc72197e31af63d.png" />
 </div>
 </div>
-</div>
-<div class="section" id="pie-chart">
-<h3>Pie Chart<a class="headerlink" href="#pie-chart" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="pie-chart">
+<h3>Pie Chart<a class="headerlink" href="#pie-chart" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;fivethirtyeight&quot;</span><span class="p">)</span>
@@ -1586,12 +1101,12 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/data-visualization-1_23_0.png" src="../_images/data-visualization-1_23_0.png" />
+<img alt="../_images/04e0cc7164437ec3cdfb8159dd623a96c429534ecc224774971dbcb2d59e3898.png" src="../_images/04e0cc7164437ec3cdfb8159dd623a96c429534ecc224774971dbcb2d59e3898.png" />
 </div>
 </div>
-</div>
-<div class="section" id="stacked-plot">
-<h3>Stacked Plot<a class="headerlink" href="#stacked-plot" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="stacked-plot">
+<h3>Stacked Plot<a class="headerlink" href="#stacked-plot" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;fivethirtyeight&quot;</span><span class="p">)</span>
@@ -1617,12 +1132,12 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/data-visualization-1_25_0.png" src="../_images/data-visualization-1_25_0.png" />
+<img alt="../_images/bc9c99e62c7dd30a8105421f5406ca1c01170083c4f4e99dd2343f61da8657cb.png" src="../_images/bc9c99e62c7dd30a8105421f5406ca1c01170083c4f4e99dd2343f61da8657cb.png" />
 </div>
 </div>
-</div>
-<div class="section" id="histogram">
-<h3>Histogram<a class="headerlink" href="#histogram" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="histogram">
+<h3>Histogram<a class="headerlink" href="#histogram" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
@@ -1653,12 +1168,12 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/data-visualization-1_27_0.png" src="../_images/data-visualization-1_27_0.png" />
+<img alt="../_images/8e683fd0da6152de8313f7e8cd3ab1ddb7790f7db1e23430fe87a316345b0cfe.png" src="../_images/8e683fd0da6152de8313f7e8cd3ab1ddb7790f7db1e23430fe87a316345b0cfe.png" />
 </div>
 </div>
-</div>
-<div class="section" id="scatter-plot">
-<h3>Scatter Plot<a class="headerlink" href="#scatter-plot" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="scatter-plot">
+<h3>Scatter Plot<a class="headerlink" href="#scatter-plot" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
@@ -1682,12 +1197,12 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/data-visualization-1_29_0.png" src="../_images/data-visualization-1_29_0.png" />
+<img alt="../_images/397ccd635fe7897841a11e7dd4b156f89978373ca0f416af934c6fc79a2935fc.png" src="../_images/397ccd635fe7897841a11e7dd4b156f89978373ca0f416af934c6fc79a2935fc.png" />
 </div>
 </div>
-</div>
-<div class="section" id="complex-graphs">
-<h3>Complex Graphs<a class="headerlink" href="#complex-graphs" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="complex-graphs">
+<h3>Complex Graphs<a class="headerlink" href="#complex-graphs" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
@@ -1896,7 +1411,7 @@ dtype: object
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Score&#39;)
 </pre></div>
 </div>
-<img alt="../_images/data-visualization-1_32_1.png" src="../_images/data-visualization-1_32_1.png" />
+<img alt="../_images/842fa994e967f0ce03e1bcbe5833446b50ebf597df42be446c8d42f7489ab369.png" src="../_images/842fa994e967f0ce03e1bcbe5833446b50ebf597df42be446c8d42f7489ab369.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1926,16 +1441,16 @@ dtype: object
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.0, 0.5, &#39;Common Y&#39;)
 </pre></div>
 </div>
-<img alt="../_images/data-visualization-1_33_1.png" src="../_images/data-visualization-1_33_1.png" />
+<img alt="../_images/18e18be816e0ac1adfdd780f585ec29e1a664b93d083318f7ca2e15d69e3cb23.png" src="../_images/18e18be816e0ac1adfdd780f585ec29e1a664b93d083318f7ca2e15d69e3cb23.png" />
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="seaborn-module">
-<h2>Seaborn Module<a class="headerlink" href="#seaborn-module" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="seaborn-module">
+<h2>Seaborn Module<a class="headerlink" href="#seaborn-module" title="Permalink to this headline">#</a></h2>
 <p><img alt="" src="../_images/seaborn-func.png" /></p>
-<div class="section" id="two-types-of-functions">
-<h3>Two Types of Functions<a class="headerlink" href="#two-types-of-functions" title="Permalink to this headline">¶</a></h3>
+<section id="two-types-of-functions">
+<h3>Two Types of Functions<a class="headerlink" href="#two-types-of-functions" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>Figure-level functions (Generic)</p></li>
 <li><p>Axex-level functions (Specific)</p></li>
@@ -2064,7 +1579,7 @@ dtype: object
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7fb050c132e8&gt;
 </pre></div>
 </div>
-<img alt="../_images/data-visualization-1_39_2.png" src="../_images/data-visualization-1_39_2.png" />
+<img alt="../_images/7fe6368edd235d01d4d889ffebc24978abc6de71531a58058df55b61dad16114.png" src="../_images/7fe6368edd235d01d4d889ffebc24978abc6de71531a58058df55b61dad16114.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2077,7 +1592,7 @@ dtype: object
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7fb040877860&gt;
 </pre></div>
 </div>
-<img alt="../_images/data-visualization-1_40_1.png" src="../_images/data-visualization-1_40_1.png" />
+<img alt="../_images/7fe6368edd235d01d4d889ffebc24978abc6de71531a58058df55b61dad16114.png" src="../_images/7fe6368edd235d01d4d889ffebc24978abc6de71531a58058df55b61dad16114.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2090,7 +1605,7 @@ dtype: object
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7fb050bf5eb8&gt;
 </pre></div>
 </div>
-<img alt="../_images/data-visualization-1_41_1.png" src="../_images/data-visualization-1_41_1.png" />
+<img alt="../_images/bd815c1a1e8231df501915afeb139969f9c1a5555ae8d4b23e5a90124c8b9e1f.png" src="../_images/bd815c1a1e8231df501915afeb139969f9c1a5555ae8d4b23e5a90124c8b9e1f.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2104,7 +1619,7 @@ dtype: object
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;flipper_length_mm&#39;, ylabel=&#39;Density&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/data-visualization-1_42_1.png" src="../_images/data-visualization-1_42_1.png" />
+<img alt="../_images/78acbbb82d4cb2f9f41c8e9bd7dee9f86072d8064e7f42b4c5abc3586441e9cf.png" src="../_images/78acbbb82d4cb2f9f41c8e9bd7dee9f86072d8064e7f42b4c5abc3586441e9cf.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2117,7 +1632,7 @@ dtype: object
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7fb050a358d0&gt;
 </pre></div>
 </div>
-<img alt="../_images/data-visualization-1_43_1.png" src="../_images/data-visualization-1_43_1.png" />
+<img alt="../_images/3c1f477bf1acb2fb624222989adf6d843ffda9594ad42b953870804b26270d04.png" src="../_images/3c1f477bf1acb2fb624222989adf6d843ffda9594ad42b953870804b26270d04.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2125,7 +1640,7 @@ dtype: object
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;tips&quot;</span><span class="p">)</span>
 
 <span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">)</span>
-<span class="n">g</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">axline</span><span class="p">(</span><span class="n">xy1</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">slope</span><span class="o">=.</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">dashes</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">g</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">axline</span><span class="p">(</span><span class="n">xy1</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">slope</span><span class="o">=</span><span class="mf">.2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">dashes</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -2133,7 +1648,7 @@ dtype: object
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.lines._AxLine at 0x7fb032fe64e0&gt;
 </pre></div>
 </div>
-<img alt="../_images/data-visualization-1_44_1.png" src="../_images/data-visualization-1_44_1.png" />
+<img alt="../_images/0aa657f5fcbf3f3ff0b84110c5b4bdcf2f8cb5e51239aa1cde04517b00a56995.png" src="../_images/0aa657f5fcbf3f3ff0b84110c5b4bdcf2f8cb5e51239aa1cde04517b00a56995.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2147,7 +1662,7 @@ dtype: object
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7fb0209e5c50&gt;
 </pre></div>
 </div>
-<img alt="../_images/data-visualization-1_45_1.png" src="../_images/data-visualization-1_45_1.png" />
+<img alt="../_images/e2be8e9441510f8e6e306f003461dcf73295ca7114e0fc2c8b0a3358f40f80d5.png" src="../_images/e2be8e9441510f8e6e306f003461dcf73295ca7114e0fc2c8b0a3358f40f80d5.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2160,7 +1675,7 @@ dtype: object
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7fb032f99198&gt;
 </pre></div>
 </div>
-<img alt="../_images/data-visualization-1_46_1.png" src="../_images/data-visualization-1_46_1.png" />
+<img alt="../_images/eca71d3f96131909ede249cd786fe301c18eff15dabe33fe8936db0c8feb172f.png" src="../_images/eca71d3f96131909ede249cd786fe301c18eff15dabe33fe8936db0c8feb172f.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2176,7 +1691,7 @@ dtype: object
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.JointGrid at 0x7fb020a01710&gt;
 </pre></div>
 </div>
-<img alt="../_images/data-visualization-1_48_1.png" src="../_images/data-visualization-1_48_1.png" />
+<img alt="../_images/3c4159b607a998fc5b732a00dde223226641ab2bed61ebe733361ecb71cacdee.png" src="../_images/3c4159b607a998fc5b732a00dde223226641ab2bed61ebe733361ecb71cacdee.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2192,12 +1707,12 @@ dtype: object
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7fb0408cb2b0&gt;
 </pre></div>
 </div>
-<img alt="../_images/data-visualization-1_50_1.png" src="../_images/data-visualization-1_50_1.png" />
+<img alt="../_images/22a4f37b79db0b5216b0e7b8c19a01f9aa987deb751b74caf687d2adb2685f85.png" src="../_images/22a4f37b79db0b5216b0e7b8c19a01f9aa987deb751b74caf687d2adb2685f85.png" />
 </div>
 </div>
-</div>
-<div class="section" id="long-format-vs-wide-format-data">
-<h3>Long-format vs. Wide-format Data<a class="headerlink" href="#long-format-vs-wide-format-data" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="long-format-vs-wide-format-data">
+<h3>Long-format vs. Wide-format Data<a class="headerlink" href="#long-format-vs-wide-format-data" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flights</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;flights&quot;</span><span class="p">)</span>
@@ -2274,7 +1789,7 @@ dtype: object
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7fb032dd7630&gt;
 </pre></div>
 </div>
-<img alt="../_images/data-visualization-1_53_1.png" src="../_images/data-visualization-1_53_1.png" />
+<img alt="../_images/35fd55907b2dcfaf3fa60be6cda75ea7e953517b5b608b9b82d4932c340cf661.png" src="../_images/35fd55907b2dcfaf3fa60be6cda75ea7e953517b5b608b9b82d4932c340cf661.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2287,7 +1802,7 @@ dtype: object
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7fb040fe3438&gt;
 </pre></div>
 </div>
-<img alt="../_images/data-visualization-1_54_1.png" src="../_images/data-visualization-1_54_1.png" />
+<img alt="../_images/a84c0bbc3fd8f470569ba924609e98081586842d230e23cddd9199638995ba58.png" src="../_images/a84c0bbc3fd8f470569ba924609e98081586842d230e23cddd9199638995ba58.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2447,13 +1962,13 @@ dtype: object
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7fb040fc6be0&gt;
 </pre></div>
 </div>
-<img alt="../_images/data-visualization-1_57_1.png" src="../_images/data-visualization-1_57_1.png" />
+<img alt="../_images/0638d646ed3e01ce94d73d02894fad1b07404d0c49cbc155c0fd71ced733ab55.png" src="../_images/0638d646ed3e01ce94d73d02894fad1b07404d0c49cbc155c0fd71ced733ab55.png" />
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="chinese-fonts-issues">
-<h2>Chinese Fonts Issues<a class="headerlink" href="#chinese-fonts-issues" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="chinese-fonts-issues">
+<h2>Chinese Fonts Issues<a class="headerlink" href="#chinese-fonts-issues" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>Find system-compatible Chinese fonts using the terminal command:</p></li>
 </ul>
@@ -2524,7 +2039,7 @@ dtype: object
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb033c97588&gt;
 </pre></div>
 </div>
-<img alt="../_images/data-visualization-1_61_2.png" src="../_images/data-visualization-1_61_2.png" />
+<img alt="../_images/83d152ae74a37e8f33b3d0c5e78d225e33f103eeb593c208ea2762078819a786.png" src="../_images/83d152ae74a37e8f33b3d0c5e78d225e33f103eeb593c208ea2762078819a786.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2542,7 +2057,7 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/data-visualization-1_62_0.png" src="../_images/data-visualization-1_62_0.png" />
+<img alt="../_images/1f1efbda8e0f9d2e390a0ad5057d83f93f06f0c794f976792f3a59e2929f6e2d.png" src="../_images/1f1efbda8e0f9d2e390a0ad5057d83f93f06f0c794f976792f3a59e2929f6e2d.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2560,12 +2075,12 @@ dtype: object
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
 </pre></div>
 </div>
-<img alt="../_images/data-visualization-1_63_1.png" src="../_images/data-visualization-1_63_1.png" />
+<img alt="../_images/78354d9ac5405338f7dbe5c4f5d856616fc3b3e36347eae25ca3c9903e9f7b11.png" src="../_images/78354d9ac5405338f7dbe5c4f5d856616fc3b3e36347eae25ca3c9903e9f7b11.png" />
 </div>
 </div>
-</div>
-<div class="section" id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://python-graph-gallery.com/">Python Graph Gallery</a></p></li>
 <li><p><a class="reference external" href="https://youtu.be/UO98lJQ3QGI">Corey Schafer’s YouTube matplotlib tutorial</a></p></li>
@@ -2575,9 +2090,9 @@ dtype: object
 <li><p><a class="reference external" href="https://github.com/adobe-fonts/source-han-sans">Souce Han Sans (open-source)</a></p></li>
 <li><p><a class="reference external" href="https://seaborn.pydata.org/tutorial/function_overview.html">Seaborn Documentation</a></p></li>
 </ul>
-</div>
-<div class="section" id="requirements">
-<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">#</a></h2>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>seaborn==0.11.0
@@ -2588,8 +2103,8 @@ matplotlib==3.3.2
 </div>
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -2603,7 +2118,7 @@ matplotlib==3.3.2
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python-notes",
+            name: "python-notes",
             path: "./python-basics"
         },
         predefinedOutput: true
@@ -2611,44 +2126,126 @@ matplotlib==3.3.2
     </script>
     <script>kernelName = 'python-notes'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="pickle.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Object Serialization</p>
-        </div>
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="pickle.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Object Serialization</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="data-visualization-2.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="data-visualization-2.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Data Visualization 2</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Alvin Chen<br/>
-    
-        &copy; Copyright 2020 Alvin Chen.<br/>
-  </p>
-</footer>
-</main>
-
-
       </div>
-    </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+</div>
 
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-datasets">Preparing Datasets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matlibplot">Matlibplot</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resolution">Resolution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matplotlib-style">Matplotlib Style</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matplotlib-chinese-issues">Matplotlib Chinese Issues</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting">Plotting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bar-plots">Bar Plots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pie-chart">Pie Chart</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacked-plot">Stacked Plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histogram">Histogram</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plot">Scatter Plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complex-graphs">Complex Graphs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#seaborn-module">Seaborn Module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-types-of-functions">Two Types of Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#long-format-vs-wide-format-data">Long-format vs. Wide-format Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chinese-fonts-issues">Chinese Fonts Issues</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements">Requirements</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alvin Chen
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2020 Alvin Chen.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

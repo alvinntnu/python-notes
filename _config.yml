@@ -16,7 +16,7 @@ parse:
     - colon_fence
     # - deflist
     - dollarmath
-    # - html_admonition
+    - html_admonition
     # - html_image
     - linkify
     # - replacements
@@ -60,6 +60,9 @@ bibtex_bibfiles:
 sphinx:
   extra_extensions:
     - sphinxcontrib.bibtex
+  config:
+    mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+    language: 'en'
 repository:
   url                       : https://github.com/alvinntnu/python-notes
   branch                    : master
